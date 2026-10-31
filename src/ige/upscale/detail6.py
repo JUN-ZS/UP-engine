@@ -74,7 +74,20 @@ def run_detail6(base_path, upscaled_path, masks_manifest_path, output_dir, *, ga
         raise ValueError('no writable pixels remain after protected masks')
     source = np.asarray(high, dtype=np.float32)
     low = np.asarray(high.filter(ImageFilter.GaussianBlur(1.0)), dtype=np.float32)
-    output = np.clip(source + (source - low) * (gain * alpha[:, :, None]), 0, 255).astype('uint8')
+    # PREVENT BLUE INJECTION: metal uses Y-only HF residual; other detail masks keep RGB residual.
+    from .material_chroma_guard import detail6_y_only_residual
+    metal_w = masks.get('metal', np.zeros(alpha.shape, dtype=np.float32))
+    metal_w = np.clip(metal_w, 0, 1) * (1 - (protected > 0).astype(np.float32))
+    metal_w = np.asarray(
+        Image.fromarray((metal_w * 255).astype('uint8')).filter(ImageFilter.GaussianBlur(1.0)),
+        dtype=np.float32,
+    ) / 255.0
+    other_w = np.clip(alpha - metal_w, 0, 1)
+    # if metal not in detail set, metal_w~0 and other_w~alpha (legacy RGB residual)
+    if 'metal' not in detail_names:
+        other_w = alpha
+        metal_w = np.zeros_like(alpha)
+    output = detail6_y_only_residual(source, low, metal_w, other_w, gain=gain).astype('uint8')
     out.mkdir(parents=True, exist_ok=True)
     png = out / 'DETAIL6_WORKING.png'
     Image.fromarray(output, 'RGB').save(png, format='PNG')
@@ -97,7 +110,7 @@ def run_detail6(base_path, upscaled_path, masks_manifest_path, output_dir, *, ga
     protected_ok = changed_outside == 0 and changed_protected == 0
     exact_4x = high.size == target_size
     execution_complete = exact_4x and protected_ok and size_ok
-    report = {'detail6_version':'1.0','stage_scope':'DETAIL6_PARTIAL_EXECUTION_PATH','base_sha256':file_sha(base_path),'upscaled_sha256':file_sha(upscaled_path),'dimensions':{'width':high.width,'height':high.height},'gain':gain,'methods':['D1_verified_4x_siax_master','D2_region_masked_high_frequency_residual','D4_zone_limited_detail_gain','D6_jpeg_4_4_4'],'zone_proof':zones,'jpeg_outputs':jpgs,'jpeg_bytes':sizes,'pixel_audit':{'changed_outside_effective_detail_mask':changed_outside,'changed_inside_protected_masks':changed_protected},'gates':{'exact_4x':exact_4x,'protected_pixels_preserved_on_png':protected_ok,'minimum_delivery_bytes':size_ok},'diagnostic_signals':{'hf_delta_observed':detail_delta_observed,'note':'HF energy is diagnostic only; it is not a clarity or perceptual-quality acceptance metric.'},'execution_complete':execution_complete,'visual_quality_review':'REQUIRED_NOT_RUN','final_acceptance':False,'status':'TECHNICAL_CANDIDATE_REVIEW_REQUIRED' if execution_complete else 'DETAIL6_BLOCKED_OR_FAILED','limitations':['This implements only the Siax-master, material-mask residual and 4:4:4 delivery slice of legacy DETAIL6; full GRID_CLEAN/BEAT donor selection and clarity proof are not yet imported.','HF energy change is diagnostic only and does not prove clarity or perceptual improvement.','JPEG encodes are lossy; exact pixel audit applies to the PNG only.','No padding or file inflation is used to reach a byte threshold.','Identity, topology, geometry and visual quality remain separate gates.']}
+    report = {'detail6_version':'1.0','stage_scope':'DETAIL6_PARTIAL_EXECUTION_PATH','base_sha256':file_sha(base_path),'upscaled_sha256':file_sha(upscaled_path),'dimensions':{'width':high.width,'height':high.height},'gain':gain,'methods':['D1_verified_4x_siax_master','D2_region_masked_high_frequency_residual','D2b_metal_y_only_chroma_guard_PBI','D4_zone_limited_detail_gain','D6_jpeg_4_4_4'],'zone_proof':zones,'jpeg_outputs':jpgs,'jpeg_bytes':sizes,'pixel_audit':{'changed_outside_effective_detail_mask':changed_outside,'changed_inside_protected_masks':changed_protected},'gates':{'exact_4x':exact_4x,'protected_pixels_preserved_on_png':protected_ok,'minimum_delivery_bytes':size_ok},'diagnostic_signals':{'hf_delta_observed':detail_delta_observed,'note':'HF energy is diagnostic only; it is not a clarity or perceptual-quality acceptance metric.'},'execution_complete':execution_complete,'visual_quality_review':'REQUIRED_NOT_RUN','final_acceptance':False,'status':'TECHNICAL_CANDIDATE_REVIEW_REQUIRED' if execution_complete else 'DETAIL6_BLOCKED_OR_FAILED','limitations':['This implements only the Siax-master, material-mask residual and 4:4:4 delivery slice of legacy DETAIL6; full GRID_CLEAN/BEAT donor selection and clarity proof are not yet imported.','HF energy change is diagnostic only and does not prove clarity or perceptual improvement.','JPEG encodes are lossy; exact pixel audit applies to the PNG only.','No padding or file inflation is used to reach a byte threshold.','Identity, topology, geometry and visual quality remain separate gates.']}
     report_path = out / 'DETAIL6_REPORT.json'
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     report['report_path'] = str(report_path.resolve())
