@@ -164,3 +164,55 @@ class ReadPipelineTests(unittest.TestCase):
         self.assertEqual(report["scene_graph"]["relations"][0]["predicate"], "contacts_at")
         self.assertEqual(report["scene_graph"]["relations"][0]["details"]["subject_surface"],
                          "cylindrical_end_face")
+
+
+class FakeVisualReasoner:
+    provider_id = "test.visual-reasoner"
+    model_id = "test-spatial-model"
+
+    def propose(self, image_path, *, focus):
+        from ige.read.reasoning import parse_reasoning_response
+        self.seen_path = Path(image_path)
+        self.seen_focus = focus
+        payload = {
+            "nodes": [{
+                "id": "hammer-head",
+                "label": "hammer head",
+                "semantic_type": "hammer_head",
+                "bbox_xyxy_norm": [0.2, 0.2, 0.8, 0.6],
+                "visual_evidence": "A cross-shaped metal head is visible.",
+                "uncertainty": "medium"
+            }],
+            "relations": [],
+            "uncertainties": ["The underside is hidden."]
+        }
+        return parse_reasoning_response(
+            json.dumps(payload),
+            provider_id=self.provider_id,
+            model_id=self.model_id
+        )
+
+
+class VisualReasonerPipelineTests(unittest.TestCase):
+    def test_reasoner_output_is_recorded_as_unreviewed_candidate(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            base = root / "base.png"
+            Image.new("RGB", (24, 18), (90, 100, 110)).save(base)
+            reasoner = FakeVisualReasoner()
+            output = root / "read-output"
+            report = run_read(
+                base,
+                output,
+                reasoner=reasoner,
+                reasoning_focus="Inspect the hammer head and end faces."
+            )
+            self.assertEqual(report["visual_reasoning"]["status"], "unreviewed_model_proposals")
+            self.assertEqual(report["visual_reasoning"]["nodes"][0]["status"], "candidate")
+            self.assertFalse(report["visual_reasoning"]["nodes"][0]["edit_permission"])
+            self.assertTrue((output / "preview.png").is_file())
+            self.assertTrue((output / "analysis.json").is_file())
+            self.assertFalse(reasoner.seen_path.exists(), "temporary normalized image must be removed")
+            self.assertEqual(reasoner.seen_focus, "Inspect the hammer head and end faces.")
+            stored = json.loads((output / "analysis.json").read_text(encoding="utf-8"))
+            self.assertEqual(stored["visual_reasoning"]["provider_id"], "test.visual-reasoner")

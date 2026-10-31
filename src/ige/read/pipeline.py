@@ -198,8 +198,13 @@ def run_read(
     region_mask_rows = []
     for region, mask in per_region:
         region_file = f"region-{region.region_id}.png"
-        _save_mask(mask, masks_dir / "regions" / region_file)
-        region_mask_rows.append({"id": region.region_id, "mask": f"masks/regions/{region_file}"})
+        region_mask_path = masks_dir / "regions" / region_file
+        _save_mask(mask, region_mask_path)
+        region_mask_rows.append({
+            "id": region.region_id,
+            "mask": f"masks/regions/{region_file}",
+            "sha256": _sha256(region_mask_path),
+        })
 
     proposal_rows = []
     for index, proposal in enumerate(proposals):
@@ -226,7 +231,7 @@ def run_read(
     verified_relations = sum(r.status == RelationStatus.HUMAN_VERIFIED for r in relations)
     relation_rows = [relation.to_dict() for relation in relations]
     report: dict[str, Any] = {
-        "read_version": "0.2.0",
+        "read_version": "0.3.0",
         "source": {
             "path": str(source.resolve()),
             "sha256": _sha256(source),
