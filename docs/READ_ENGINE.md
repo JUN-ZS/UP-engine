@@ -1,33 +1,42 @@
-# READ Engine v0.1 — perception before generation
+# READ Engine v0.2 — perception before generation
 
 ## Purpose
 
-READ is the first stage of UP-engine. Its job is not to make the picture prettier. Its job is to create a traceable description of the source image, propose object regions, and define exactly which pixels are permitted to change.
+READ is the first stage of UP-engine. Its job is not to make the picture prettier. Its job is to create a traceable description of the source image, propose object regions and relationships, and define exactly which pixels are permitted to change.
 
-The engine keeps three kinds of evidence separate:
+The engine keeps four kinds of evidence separate:
 
 1. **Raster facts** — source hash, display-oriented dimensions, color/luminance statistics and a deliberately simple edge-density statistic.
 2. **Model proposals** — candidate object masks returned by a segmentation provider. These are unreviewed evidence, not truth.
-3. **Human-approved regions** — polygon annotations explicitly assigned one role: editable, protected, context, or object.
+3. **Human region annotations** — region polygons with semantic identity, tags and a separate pixel permission.
+4. **Relation assertions** — typed links between annotated regions, explicitly marked candidate, human_verified or rejected.
 
-Only the third category can authorize editing.
+## Region identity is not pixel permission
 
-## v0.1 workflow
+A region has independent fields:
 
-IMAGE → EXIF NORMALIZATION → RASTER READ → OPTIONAL CONCEPT SEGMENTATION → HUMAN REGION ANNOTATION → MASKS + PREVIEW + JSON REPORT
+- semantic_type says what the region represents, e.g. garment, face, hand, hammer_head, cylindrical_end_face, hair or background.
+- permission says whether its pixels may be changed: editable or protected.
+- tags describe cross-cutting functions such as object, context, identity_anchor, contact_surface or occlusion_boundary.
 
-The source image is never overwritten. Outputs are written to a separate run directory.
+This distinction matters: armor can be an object and be editable; a hand can be an object and remain protected; a face can be an identity anchor and remain protected. These facts must not be collapsed into one mutually exclusive role.
+
+## v0.2 workflow
+
+IMAGE → EXIF NORMALIZATION → RASTER READ → OPTIONAL CONCEPT SEGMENTATION → HUMAN REGION ANNOTATION → RELATION GRAPH → MASKS + PREVIEW + JSON REPORT
+
+The source image is never overwritten. Outputs are written to a separate run directory. All annotation polygons use normalized 0..1 coordinates in the EXIF-corrected display orientation.
 
 ### Mask law
 
-Let E be the union of pixels in regions explicitly annotated with role editable.
+Let E be the union of pixels in regions explicitly annotated with permission editable.
 
 - editable.png = E
 - protected_effective.png = complement(E)
-- explicit_protected.png records only regions explicitly marked protected.
-- context.png records regions marked context.
-- unlabelled.png records pixels not covered by any human annotation.
-- object annotations are structural references, not edit permission.
+- explicit_protected.png records regions explicitly marked protected.
+- context.png records any regions tagged context.
+- objects_reference.png records any regions tagged object.
+- unlabelled.png records pixels not covered by any human region annotation.
 
 A pixel may not be both editable and explicitly protected. This is a hard error, not a warning. An empty editable mask is valid and means no pixel is currently authorized for modification.
 
@@ -35,9 +44,24 @@ A pixel may not be both editable and explicitly protected. This is a hard error,
 
 ### Model proposal law
 
-A provider returns one or more masks, prompt text and a score. Each proposal is stored under proposals/ with status unreviewed_proposal and edit_permission=false.
+A segmentation provider returns masks, prompt text and an optional score. Each proposal is stored under proposals/ with status unreviewed_proposal and edit_permission=false.
 
-A high score does not turn a proposal into an approved region. The operator must inspect the preview, correct the polygon/region annotation, and explicitly set the approved role. A model's mask may cut through a hand, weapon, hair strand, cloth fold, specular highlight or contact boundary; the mask is not a topology certificate.
+A high score does not turn a proposal into an approved region. The operator must inspect the preview, correct the polygon/region annotation, and explicitly assign permission. A model's mask may cut through a hand, weapon, hair strand, cloth fold, specular highlight or contact boundary; the mask is not a topology certificate. Missing model scores remain null; UP-engine does not invent confidence.
+
+## Typed relation graph
+
+Relations refer to region IDs and have a predicate, status, source, confidence, evidence, and optional evidence region.
+
+Supported predicates include:
+
+- part_of — a directed structural hierarchy; cycles are rejected.
+- occludes / in_front_of / behind — image-space overlap ordering.
+- touches / contacts_at — contact assertions; contacts_at requires explicit subject_surface and object_surface.
+- attached_to, aligned_with, opposes, parallel_to, perpendicular_to, same_object_as.
+
+A human_verified relation must have source human and non-empty evidence. A model cannot declare its own relation human-verified. A contacts_at relation must identify both surfaces, for example cylindrical_end_face against cylindrical_end_face; this allows the exact contact geometry to be stated instead of the vague assertion that two objects touch.
+
+Relation assertions are not inferred in v0.2. The file format is ready for human-confirmed geometry now and model-generated candidates later. A text/vision model may propose a relationship, but it must remain candidate until reviewed. The region graph does not replace a true 3D reconstruction or establish hidden surfaces from a single 2D image.
 
 ## Run without a segmentation model
 
@@ -49,9 +73,15 @@ Run raster READ and export masks from human annotations:
 
     ige read-image source.png --out runs/read-001 --regions examples/read_regions.example.json
 
-The example polygons are placeholders, not a mask fitted to your actual image. Replace them with polygons traced in the source image's display orientation.
+The example polygons are placeholders, not masks fitted to your actual image. Replace them with polygons traced in the source image's display orientation.
 
-Without a provider, READ still exports source provenance, raster metrics, human masks, an overlay preview, and an uncertainty-aware report. It does not invent semantic object labels.
+To include explicit relation assertions, supply both region and relation files:
+
+    ige read-image source.png --out runs/hammer-read --regions examples/regions_hammer_contact.example.json --relations examples/relations_hammer_contact.example.json
+
+The hammer example is a schema template only. The polygons and relation evidence must be replaced or visually verified against the actual image before any relation is marked human_verified.
+
+Without a provider, READ exports source provenance, raster metrics, human masks, relation graph, preview and an uncertainty-aware report. It does not invent semantic object labels or physical relations.
 
 ## SAM 3.1 provider candidate
 
@@ -84,20 +114,20 @@ Segmentation is not the same as understanding the physical scene. A mask alone d
 - whether a camera change has altered the apparent geometry;
 - whether a generated frame preserves the same topology as its parent.
 
-Those require a separate relation/geometry read, evidence, and explicit acceptance. v0.1 intentionally reports these dimensions as not_claimed; it does not fill them with invented relationships.
+Those require explicit relation assertions, evidence and review. v0.2 supports the relation data model but does not auto-infer it.
 
 ## Output contract
 
 A successful run creates:
 
-- analysis.json — source SHA-256, dimensions, raster metrics, region inventory, proposal inventory, policy and limitations.
+- analysis.json — source SHA-256, dimensions, raster metrics, region inventory, relation graph, proposal inventory, policy and limitations.
 - READ_REPORT.md — concise human-readable interpretation.
 - preview.png — visual overlay: editable, explicitly protected, context and proposal bounding boxes.
 - masks/editable.png — the only mask that can authorize pixel writes.
 - masks/protected_effective.png — complement of editable; default preservation mask.
 - masks/explicit_protected.png — explicitly annotated protection.
-- masks/context.png and masks/unlabelled.png.
-- masks/regions/*.png — per-annotation masks.
+- masks/context.png and masks/objects_reference.png.
+- masks/unlabelled.png and masks/regions/*.png.
 - proposals/*.png — unreviewed model candidates.
 
 The source SHA-256 and coordinate dimensions are recorded so downstream generation and compositing can verify they are operating on the same parent and pixel coordinate system.
@@ -109,17 +139,21 @@ READ must stop rather than silently degrade when:
 - the source image is missing or invalid;
 - normalized coordinates are invalid or region IDs collide;
 - editable and protected annotations overlap;
+- relation endpoints do not exist;
+- human_verified relations are not human-sourced or lack evidence;
+- a part_of relation graph contains a cycle;
+- a contacts_at relation omits the specific subject/object surfaces;
 - a provider returns masks with dimensions different from the EXIF-normalized source;
 - a non-empty output directory would be overwritten without explicit permission.
 
 There is no implicit resize of model masks. A geometric mask must not be stretched to fit because that conceals a coordinate-space error.
 
-## Known v0.1 limits
+## Known v0.2 limits
 
 - Polygon annotations are supplied as JSON; an interactive annotation UI is not included yet.
 - Raster metrics are descriptive and are not semantic understanding or image-quality scores.
 - SAM3 is an optional provider adapter and has not been benchmarked on the project's actual image set in CI.
-- Automatic object-part graphs, occlusion/contact relations, identity anchors, and temporal continuity are not yet inferred.
+- Automatic relation/occlusion/contact inference, identity embedding, camera geometry and temporal continuity are not yet implemented.
 - The generated preview is for inspection; human approval remains a separate action.
 
-The next READ increment should add a visual annotation/review surface and a typed object/relation graph, then benchmark SAM3 masks against human-corrected masks on the project's real garment, face/hair, hand/weapon, thin-boundary and hammer-contact samples.
+The next READ increment should add a visual annotation/review surface and a tested multimodal reasoner that proposes object/part/contact relations with evidence. Then benchmark SAM3 masks against human-corrected masks on the project's real garment, face/hair, hand/weapon, thin-boundary and hammer-contact samples.

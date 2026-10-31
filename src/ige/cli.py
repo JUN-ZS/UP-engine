@@ -20,6 +20,7 @@ def main() -> int:
     read.add_argument("image", type=Path)
     read.add_argument("--out", type=Path, required=True, help="new or empty output directory")
     read.add_argument("--regions", type=Path, help="human-reviewed normalized polygon annotations JSON")
+    read.add_argument("--relations", type=Path, help="human-reviewed object/geometry relations JSON")
     read.add_argument(
         "--provider", choices=("none", "sam3"), default="none",
         help="optional semantic proposal provider; proposals never authorize edits",
@@ -50,6 +51,7 @@ def main() -> int:
             args.image,
             args.out,
             regions_path=args.regions,
+            relations_path=args.relations,
             provider=segmentation_provider,
             prompts=args.prompt,
             overwrite=args.overwrite,
@@ -66,6 +68,10 @@ def main() -> int:
         print(
             f"Semantic proposals: {report['semantic_segmentation']['proposal_count']} "
             f"({report['semantic_segmentation']['status']})"
+        )
+        print(
+            f"Human-verified relations: "
+            f"{report['scene_graph']['human_verified_relation_count']}"
         )
         return 0
 

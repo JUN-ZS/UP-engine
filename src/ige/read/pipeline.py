@@ -9,8 +9,9 @@ from typing import Any
 from PIL import Image, ImageDraw, ImageOps
 import numpy as np
 
-from .annotations import RegionAnnotation, RegionRole, load_regions, rasterize_region
+from .annotations import RegionAnnotation, RegionPermission, load_regions, rasterize_region
 from .providers.base import MaskProposal, SegmentationProvider
+from .relations import RelationStatus, load_relations
 
 
 def _sha256(path: Path) -> str:
@@ -90,7 +91,9 @@ def _serialize_region(region: RegionAnnotation, mask: np.ndarray) -> dict[str, A
     return {
         "id": region.region_id,
         "label": region.label,
-        "role": region.role.value,
+        "semantic_type": region.semantic_type,
+        "permission": region.permission.value,
+        "tags": list(region.tags),
         "source": "human_annotation",
         "bbox_xyxy_pixels": _bbox(mask),
         "area_pixels": pixels,
@@ -104,15 +107,16 @@ def run_read(
     output_dir: str | Path,
     *,
     regions_path: str | Path | None = None,
+    relations_path: str | Path | None = None,
     provider: SegmentationProvider | None = None,
     prompts: list[str] | None = None,
     overwrite: bool = False,
 ) -> dict[str, Any]:
-    """Read one still image and export auditable metrics, overlays, and masks.
+    """Read one still image and export auditable metrics, masks and relation metadata.
 
-    Only human-annotated regions with role='editable' become writable. All pixels
-    outside that mask are included in the effective protected mask by default.
-    Provider masks are always proposals and never confer edit permission.
+    Semantic identity (semantic_type/tags) is separate from write permission.
+    Only human-annotated permission='editable' pixels are writable. Provider masks
+    and relation candidates never confer pixel-edit or geometry-acceptance rights.
     """
     source = Path(image_path)
     destination = Path(output_dir)
@@ -133,6 +137,8 @@ def run_read(
         raise ValueError("source image has invalid dimensions")
 
     annotations = load_regions(regions_path)
+    known_region_ids = {region.region_id for region in annotations}
+    relations = load_relations(relations_path, known_region_ids)
     editable = np.zeros((height, width), dtype=np.uint8)
     explicit_protected = np.zeros((height, width), dtype=np.uint8)
     context = np.zeros((height, width), dtype=np.uint8)
@@ -143,13 +149,13 @@ def run_read(
         mask = rasterize_region(region, width, height)
         per_region.append((region, mask))
         region_rows.append(_serialize_region(region, mask))
-        if region.role == RegionRole.EDITABLE:
+        if region.permission == RegionPermission.EDITABLE:
             editable = np.maximum(editable, mask)
-        elif region.role == RegionRole.PROTECTED:
+        else:
             explicit_protected = np.maximum(explicit_protected, mask)
-        elif region.role == RegionRole.CONTEXT:
+        if "context" in region.tags:
             context = np.maximum(context, mask)
-        elif region.role == RegionRole.OBJECT:
+        if "object" in region.tags:
             object_regions = np.maximum(object_regions, mask)
 
     overlap = (editable > 0) & (explicit_protected > 0)
@@ -186,6 +192,7 @@ def run_read(
     _save_mask(explicit_protected, masks_dir / "explicit_protected.png")
     _save_mask(effective_protected, masks_dir / "protected_effective.png")
     _save_mask(context, masks_dir / "context.png")
+    _save_mask(object_regions, masks_dir / "objects_reference.png")
     _save_mask(unlabelled, masks_dir / "unlabelled.png")
 
     region_mask_rows = []
@@ -216,8 +223,10 @@ def run_read(
     total_pixels = width * height
     editable_pixels = int(np.count_nonzero(editable))
     explicit_protected_pixels = int(np.count_nonzero(explicit_protected))
+    verified_relations = sum(r.status == RelationStatus.HUMAN_VERIFIED for r in relations)
+    relation_rows = [relation.to_dict() for relation in relations]
     report: dict[str, Any] = {
-        "read_version": "0.1.0",
+        "read_version": "0.2.0",
         "source": {
             "path": str(source.resolve()),
             "sha256": _sha256(source),
@@ -236,6 +245,22 @@ def run_read(
             "status": "unreviewed_proposals" if provider is not None else "not_run",
             "note": "Segmentation proposals are not verified scene understanding and never authorize editing.",
         },
+        "scene_graph": {
+            "nodes": [
+                {
+                    "id": region["id"],
+                    "label": region["label"],
+                    "semantic_type": region["semantic_type"],
+                    "permission": region["permission"],
+                    "tags": region["tags"],
+                }
+                for region in region_rows
+            ],
+            "relations": relation_rows,
+            "human_verified_relation_count": verified_relations,
+            "candidate_relation_count": sum(r.status == RelationStatus.CANDIDATE for r in relations),
+            "note": "Relations are human-authored or explicitly marked as candidates; no unseen relation is inferred.",
+        },
         "regions": region_rows,
         "region_masks": region_mask_rows,
         "proposals": proposal_rows,
@@ -245,19 +270,23 @@ def run_read(
             "effective_protected_pixels": total_pixels - editable_pixels,
             "unlabelled_pixels": int(np.count_nonzero(unlabelled)),
             "editable_fraction": round(editable_pixels / float(total_pixels), 8),
-            "default": "Only human-annotated editable pixels are writable; every other pixel is effectively protected.",
+            "default": "Only human-annotated permission='editable' pixels are writable; every other pixel is effectively protected.",
             "semantic_proposals_grant_permission": False,
+            "semantic_type_is_independent_of_permission": True,
         },
         "interpretation": {
             "status": "partial_read",
-            "semantic_scene_graph": "not_claimed",
-            "physical_geometry_and_occlusion": "not_claimed",
+            "semantic_scene_graph": "human_annotated_regions_and_relations" if relations else (
+                "human_annotated_regions_only" if annotations else "not_available"
+            ),
+            "physical_geometry_and_occlusion": "contains_human_verified_assertions" if verified_relations else "not_claimed",
             "human_review_required": True,
         },
         "limitations": [
             "Raster statistics describe pixel distributions only; they do not identify objects or materials.",
             "Semantic model masks are proposals. They must be visually checked and explicitly accepted as annotations.",
-            "Object contact, part connectivity, camera geometry, and occlusion order are not inferred by this stage.",
+            "Object contact, part connectivity, camera geometry, and occlusion order are not inferred by the segmentation provider.",
+            "Human-verified relation assertions are only as reliable as their supplied image evidence and annotations.",
             "Unannotated pixels are not authorized for modification.",
         ],
     }
@@ -272,22 +301,27 @@ def run_read(
         f"- Semantic proposals: {len(proposal_rows)} ({report['semantic_segmentation']['status']})",
         f"- Human editable coverage: {editable_pixels}/{total_pixels} pixels ({report['mask_policy']['editable_fraction']:.2%})",
         f"- Effective protected coverage: {total_pixels - editable_pixels}/{total_pixels} pixels",
+        f"- Human-verified relations: {verified_relations}",
         "",
         "## Mask files",
         "",
         "- preview.png: editable tint, explicit protected tint, context tint, and proposal bounding boxes.",
         "- masks/editable.png: only explicitly human-annotated editable pixels.",
-        "- masks/protected_effective.png: complement of the editable mask; safe default for preservation.",
+        "- masks/protected_effective.png: complement of editable; default preservation mask.",
         "- masks/explicit_protected.png: explicitly annotated protection.",
-        "- masks/context.png: human-annotated context areas.",
+        "- masks/context.png and masks/objects_reference.png: tagged regions.",
         "- masks/unlabelled.png: pixels not covered by any human region annotation.",
         "- proposals/: model proposal masks, always unreviewed.",
         "",
+        "## Scene graph",
+        "",
+        "analysis.json contains region nodes and typed relations. A contacts_at relation must identify the subject and object surfaces; human_verified relations require human source and evidence text. Candidate relations never become accepted facts automatically.",
+        "",
         "## Safety interpretation",
         "",
-        "No semantic model proposal is automatically accepted as editable. Review the preview and masks, then create or revise the human region annotation file. Unlabelled pixels remain protected by default.",
+        "Semantic type and pixel permission are independent. No semantic model proposal is automatically accepted as editable. Unlabelled pixels remain protected by default.",
         "",
-        "This report is a partial image read, not a claim that physical geometry, part topology, identity, or occlusion has been understood.",
+        "This report is a partial read, not a claim that all physical geometry, part topology, identity, or occlusion has been understood.",
     ]
     (destination / "READ_REPORT.md").write_text("\n".join(report_text) + "\n", encoding="utf-8")
     return report

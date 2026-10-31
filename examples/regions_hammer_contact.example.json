@@ -1,0 +1,29 @@
+{
+  "coordinate_space": "normalized_0_1",
+  "regions": [
+    {
+      "id": "hammer-left-end-face",
+      "label": "Placeholder polygon for left hammer cylindrical end face",
+      "semantic_type": "cylindrical_hammer_end_face",
+      "permission": "protected",
+      "tags": ["object", "contact_surface"],
+      "polygon": [[0.15, 0.40], [0.38, 0.38], [0.40, 0.60], [0.16, 0.62]]
+    },
+    {
+      "id": "hammer-right-end-face",
+      "label": "Placeholder polygon for right hammer cylindrical end face",
+      "semantic_type": "cylindrical_hammer_end_face",
+      "permission": "protected",
+      "tags": ["object", "contact_surface"],
+      "polygon": [[0.60, 0.38], [0.84, 0.40], [0.83, 0.62], [0.59, 0.60]]
+    },
+    {
+      "id": "contact-zone",
+      "label": "Placeholder for visually verified contact zone",
+      "semantic_type": "contact_boundary",
+      "permission": "protected",
+      "tags": ["context", "contact_evidence"],
+      "polygon": [[0.46, 0.44], [0.54, 0.44], [0.54, 0.56], [0.46, 0.56]]
+    }
+  ]
+}

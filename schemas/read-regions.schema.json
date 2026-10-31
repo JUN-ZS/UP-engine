@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/JUN-ZS/UP-engine/schemas/read-regions.schema.json",
-  "title": "Human-reviewed READ regions",
+  "title": "READ object regions with independent pixel permission",
   "type": "object",
   "required": ["coordinate_space", "regions"],
   "properties": {
@@ -10,11 +10,13 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "label", "role", "polygon"],
+        "required": ["id", "label", "semantic_type", "permission", "polygon"],
         "properties": {
           "id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+$"},
           "label": {"type": "string", "minLength": 1},
-          "role": {"enum": ["editable", "protected", "context", "object"]},
+          "semantic_type": {"type": "string", "minLength": 1},
+          "permission": {"enum": ["editable", "protected"]},
+          "tags": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
           "polygon": {
             "type": "array",
             "minItems": 3,

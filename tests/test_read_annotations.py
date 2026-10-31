@@ -14,23 +14,26 @@ class ReadAnnotationTests(unittest.TestCase):
         self.addCleanup(Path(temp.name).unlink, missing_ok=True)
         return Path(temp.name)
 
-    def test_normalized_polygon_loads(self):
+    def test_semantic_type_is_independent_of_pixel_permission(self):
         path = self._write({
             "coordinate_space": "normalized_0_1",
             "regions": [{
-                "id": "coat", "label": "coat", "role": "editable",
+                "id": "armor", "label": "silver armor", "semantic_type": "garment",
+                "permission": "editable", "tags": ["object"],
                 "polygon": [[0.1, 0.1], [0.9, 0.1], [0.9, 0.9]]
             }]
         })
-        regions = load_regions(path)
-        self.assertEqual(regions[0].region_id, "coat")
-        self.assertEqual(regions[0].role.value, "editable")
+        region = load_regions(path)[0]
+        self.assertEqual(region.semantic_type, "garment")
+        self.assertEqual(region.permission.value, "editable")
+        self.assertIn("object", region.tags)
 
     def test_out_of_range_coordinate_rejected(self):
         path = self._write({
             "coordinate_space": "normalized_0_1",
             "regions": [{
-                "id": "bad", "label": "bad", "role": "editable",
+                "id": "bad", "label": "bad", "semantic_type": "unknown",
+                "permission": "editable",
                 "polygon": [[-0.1, 0.1], [0.9, 0.1], [0.9, 0.9]]
             }]
         })
@@ -39,7 +42,8 @@ class ReadAnnotationTests(unittest.TestCase):
 
     def test_duplicate_region_ids_rejected(self):
         item = {
-            "id": "same", "label": "region", "role": "context",
+            "id": "same", "label": "region", "semantic_type": "context",
+            "permission": "protected",
             "polygon": [[0.1, 0.1], [0.9, 0.1], [0.9, 0.9]]
         }
         path = self._write({"coordinate_space": "normalized_0_1", "regions": [item, item]})
