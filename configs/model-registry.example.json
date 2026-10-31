@@ -1,7 +1,45 @@
 {
-  "registry_version": "0.5.0",
+  "registry_version": "0.6.0",
   "policy": "fail_closed",
   "models": [
+    {
+      "model_id": "xai.grok.vision",
+      "api_model_id_default": "grok-4",
+      "role": "primary_rgb_visual_reasoner",
+      "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
+      "license_status": "review_required",
+      "license": "xAI API Terms",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "xAI Responses API with input_image detail=high",
+        "endpoint": "https://api.x.ai/v1/responses",
+        "auth_env": "XAI_API_KEY",
+        "model_env": "XAI_VISION_MODEL",
+        "local_weights": false,
+        "measured_latency_seconds": null
+      },
+      "enabled": false,
+      "reason": "Active READ visual reasoner adapter. Requires XAI_API_KEY. Outputs remain unreviewed candidates. Project gold-set replay is required before enablement."
+    },
+    {
+      "model_id": "xai.grok.imagine",
+      "api_model_id_default": "grok-imagine-image-2.0",
+      "role": "candidate_image_generator_editor",
+      "supported_tasks": ["generate_candidate", "edit_candidate"],
+      "license_status": "review_required",
+      "license": "xAI API Terms",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "xAI Images edits API with b64_json persistence",
+        "endpoint": "https://api.x.ai/v1/images/edits",
+        "auth_env": "XAI_API_KEY",
+        "model_env": "XAI_IMAGINE_MODEL",
+        "local_weights": false,
+        "measured_latency_seconds": null
+      },
+      "enabled": false,
+      "reason": "Independent candidate generator. Does not authorize geometry or overwrite BASE. Registration gate is separate and may BLOCK E2E when dimensions differ."
+    },
     {
       "model_id": "meta.sam3.1",
       "role": "semantic_segmentation_proposal",
@@ -14,58 +52,53 @@
     },
     {
       "model_id": "Qwen/Qwen3.8-27B",
-      "role": "primary_open_weight_rgb_visual_reasoner_candidate",
+      "role": "deprecated_open_weight_rgb_visual_reasoner_comparison",
       "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
       "license_status": "approved",
       "license": "Apache-2.0",
       "validation_status": "untested",
       "runtime": {
-        "implementation": "Transformers AutoModelForMultimodalLM",
+        "implementation": "Transformers AutoModelForImageTextToText",
         "transformers": ">=5.8.1",
-        "checkpoint_format": "BF16",
-        "checkpoint_weight_size_gb_approx": 55.6,
-        "quantized_options": [
-          {"format": "NVFP4", "source": "NVIDIA NIM build", "artifact_size_gb_approx": 20.44, "hardware_scope": "NVIDIA NIM distribution; not a universal VRAM requirement"}
-        ],
-        "estimated_vram_gb": null,
-        "measured_latency_seconds": null,
-        "thinking_mode": "disabled for strict JSON output; thinking-mode comparison is a separate benchmark"
+        "deprecated": true,
+        "not_default": true,
+        "not_fallback": true
       },
       "enabled": false,
-      "reason": "Latest checked open-weight Qwen vision-language candidate. Public spatial scores are research context only; UP-engine requires per-case tests on its own contact/occlusion/part corpus."
+      "reason": "DEPRECATED. Retained for explicit historical comparison only. Not on the default path and never used as a silent fallback when Grok fails."
     },
     {
       "model_id": "Qwen/Qwen3.6-27B",
-      "role": "previous_generation_rgb_visual_reasoner_baseline",
+      "role": "deprecated_previous_generation_rgb_visual_reasoner_baseline",
       "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
       "license_status": "approved",
       "license": "Apache-2.0",
       "validation_status": "untested",
-      "runtime": {"checkpoint_weight_size_gb_approx": 55.6, "transformers": ">=5.8.1", "estimated_vram_gb": null, "measured_latency_seconds": null},
+      "runtime": {"deprecated": true, "not_default": true, "not_fallback": true},
       "enabled": false,
-      "reason": "Retained as a baseline to quantify whether Qwen3.8 improves UP-engine's exact geometry/contact tasks."
+      "reason": "DEPRECATED baseline comparison only."
     },
     {
       "model_id": "Qwen/Qwen3-VL-8B-Instruct",
-      "role": "older_low_parameter_rgb_visual_reasoner_baseline",
+      "role": "deprecated_older_low_parameter_rgb_visual_reasoner_baseline",
       "supported_tasks": ["read_objects", "read_relations"],
       "license_status": "approved",
       "license": "Apache-2.0",
       "validation_status": "untested",
-      "runtime": {"estimated_vram_gb": null, "measured_latency_seconds": null},
+      "runtime": {"deprecated": true, "not_default": true, "not_fallback": true},
       "enabled": false,
-      "reason": "Historical lower-parameter baseline; do not assume it has latest-generation spatial performance."
+      "reason": "DEPRECATED historical baseline."
     },
     {
       "model_id": "Qwen/Qwen3.8-35B-A3B",
-      "role": "moe_rgb_visual_reasoner_comparison",
+      "role": "deprecated_moe_rgb_visual_reasoner_comparison",
       "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
       "license_status": "approved",
       "license": "Apache-2.0",
       "validation_status": "untested",
-      "runtime": {"total_parameters_billion": 35, "active_parameters_billion": 3, "checkpoint_weight_size_gb_approx": 71.9, "estimated_vram_gb": null, "measured_latency_seconds": null},
+      "runtime": {"deprecated": true, "not_default": true, "not_fallback": true},
       "enabled": false,
-      "reason": "MoE comparison candidate. Three billion active parameters describe per-token compute, not total weight storage or memory requirement."
+      "reason": "DEPRECATED MoE comparison candidate."
     },
     {
       "model_id": "lhzzzzzy/HiSpatial-3B",
@@ -74,17 +107,19 @@
       "license_status": "review_required",
       "license": "Gemma Terms of Use",
       "validation_status": "untested",
-      "runtime": {"input": "RGB image plus metric XYZ point map", "depth_estimator": "MoGe", "checkpoint_size_approx_gb": 14, "measured_vram_gb": null, "measured_latency_seconds": null},
+      "runtime": {"input": "RGB image plus metric XYZ point map", "depth_estimator": "MoGe"},
       "enabled": false,
-      "reason": "Specialist comparison candidate. Point map is estimated and must retain uncertainty; no metric 3D claim is accepted without calibration/ground truth."
+      "reason": "Specialist comparison candidate. Still disabled."
     }
   ],
   "notes": [
     "No model is enabled by default.",
+    "Grok Vision is the active READ reasoner adapter; Qwen adapters are deprecated and disabled.",
+    "Grok failure must not fall back to Qwen.",
     "SAM proposes pixel masks; VLM proposes semantic nodes and relations; neither grants edit permission.",
-    "Checkpoint size is not peak VRAM. Measure target runtime, context, quantization and image resolution.",
+    "Grok Imagine produces unverified candidates; registration and compositor are separate UP-engine stages.",
     "Model confidence is uncalibrated and is not probability.",
     "Only human-verified relations may enter a generation packet's geometry locks.",
-    "Model benchmark reports must be replayed on UP-engine's own versioned object/contact/occlusion test set before routing enablement."
+    "API keys are environment-only (XAI_API_KEY). Never commit keys or private images."
   ]
 }

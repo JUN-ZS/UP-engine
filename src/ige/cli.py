@@ -41,14 +41,20 @@ def build_parser() -> argparse.ArgumentParser:
     )
     read.add_argument(
         "--reasoner",
-        choices=("none", "qwen"),
+        choices=("none", "grok", "qwen"),
         default="none",
-        help="optional Qwen vision-language object/part/relation proposer; proposals remain unreviewed",
+        help=(
+            "optional visual reasoner. 'grok' is the active xAI Grok Vision path. "
+            "'qwen' is deprecated and retained only for explicit comparison; never used as fallback"
+        ),
     )
     read.add_argument(
         "--reasoning-model",
         default=None,
-        help="local Hugging Face model ID (defaults to Qwen3.8-27B)",
+        help=(
+            "reasoner model ID override. For grok, defaults to XAI_VISION_MODEL or grok-4. "
+            "For deprecated qwen, defaults to Qwen3.8-27B"
+        ),
     )
     read.add_argument(
         "--reasoning-focus",
@@ -77,6 +83,28 @@ def build_parser() -> argparse.ArgumentParser:
     )
     compile_task.add_argument("--overwrite", action="store_true")
 
+    generate = sub.add_parser(
+        "generate-candidate",
+        help="call Grok Imagine to produce an unverified candidate from a generation packet + BASE",
+    )
+    generate.add_argument("packet", type=Path, help="generation_packet.json")
+    generate.add_argument("base", type=Path, help="exact original BASE image")
+    generate.add_argument("--out", type=Path, required=True, help="candidate output directory")
+    generate.add_argument("--prompt", default=None, help="optional full prompt override; otherwise packet-constrained default")
+    generate.add_argument("--model-id", default=None, help="Imagine model ID override (or XAI_IMAGINE_MODEL)")
+    generate.add_argument("--aspect-ratio", default=None, help="optional Imagine aspect_ratio, e.g. 16:9")
+    generate.add_argument("--resolution", default="2k", help="Imagine resolution: 1k or 2k")
+    generate.add_argument("--quality", default="medium", help="Imagine quality: low, medium, or auto")
+    generate.add_argument("--overwrite", action="store_true")
+
+    register = sub.add_parser(
+        "assess-registration",
+        help="measure whether a candidate matches BASE dimensions (no auto-resize)",
+    )
+    register.add_argument("base", type=Path)
+    register.add_argument("candidate", type=Path)
+    register.add_argument("--expected-base-sha256", default=None)
+
     composite = sub.add_parser(
         "composite-generation",
         help="reconstruct a registered candidate only inside its generation packet mask",
@@ -86,6 +114,11 @@ def build_parser() -> argparse.ArgumentParser:
     composite.add_argument("candidate", type=Path, help="already-registered candidate image")
     composite.add_argument("--out", type=Path, required=True, help="composited candidate PNG path")
     composite.add_argument("--model-id", help="candidate generator/model identifier for the audit")
+    composite.add_argument(
+        "--require-registration-gate",
+        action="store_true",
+        help="run registration assessment first and refuse composite if dimensions mismatch",
+    )
     composite.add_argument("--overwrite", action="store_true")
 
     return parser
@@ -112,7 +145,10 @@ def main() -> int:
             segmentation_provider = Sam3TextSegmenter()
 
         visual_reasoner = None
-        if args.reasoner == "qwen":
+        if args.reasoner == "grok":
+            from .read.providers.xai_grok import GrokSpatialReasoner
+            visual_reasoner = GrokSpatialReasoner(model_id=args.reasoning_model)
+        elif args.reasoner == "qwen":
             from .read.providers.qwen3_vl import QwenSpatialReasoner
             model_id = args.reasoning_model or QwenSpatialReasoner.DEFAULT_MODEL_ID
             visual_reasoner = QwenSpatialReasoner(model_id=model_id)
@@ -174,8 +210,50 @@ def main() -> int:
         print(f"Human geometry locks: {len(packet['geometry_locks']['relations'])}")
         return 0
 
+    if args.command == "generate-candidate":
+        from .adapters.xai_imagine import GrokImagineAdapter
+
+        adapter = GrokImagineAdapter(model_id=args.model_id)
+        artifact = adapter.generate_from_packet(
+            args.packet,
+            args.base,
+            args.out,
+            prompt=args.prompt,
+            aspect_ratio=args.aspect_ratio,
+            resolution=args.resolution,
+            quality=args.quality,
+            overwrite=args.overwrite,
+        )
+        print(f"Imagine candidate written: {artifact.candidate_path}")
+        print(f"Model: {artifact.model_id} request_id={artifact.request_id}")
+        print(f"Candidate SHA256: {artifact.candidate_sha256}")
+        print(
+            f"Size: candidate {artifact.candidate_width}x{artifact.candidate_height} | "
+            f"BASE {artifact.base_width}x{artifact.base_height}"
+        )
+        print(f"Registration quality: {artifact.registration_quality}")
+        print(f"Metadata: {artifact.metadata_path}")
+        print("Status: unverified candidate — not accepted, not pixel-preserving by claim")
+        return 0
+
+    if args.command == "assess-registration":
+        from .adapters.registration import assess_registration
+        import json as _json
+
+        report = assess_registration(
+            args.base,
+            args.candidate,
+            expected_base_sha256=args.expected_base_sha256,
+        )
+        print(_json.dumps(report.to_dict(), ensure_ascii=False, indent=2))
+        return 0 if report.allowed_for_compositor else 2
+
     if args.command == "composite-generation":
         from .reconstruction import composite_candidate
+
+        if args.require_registration_gate:
+            from .adapters.registration import require_registration_for_composite
+            require_registration_for_composite(args.base, args.candidate)
 
         audit = composite_candidate(
             args.packet,
