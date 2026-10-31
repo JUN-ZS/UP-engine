@@ -43,3 +43,6 @@ tests/test_read_annotations.py
 tests/test_read_pipeline.py
 tests/test_read_relations.py
 tests/test_router.py
+tools/read-studio/index.html
+tools/read-studio/style.css
+tools/read-studio/app.js

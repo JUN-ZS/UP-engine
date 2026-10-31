@@ -83,6 +83,29 @@ The hammer example is a schema template only. The polygons and relation evidence
 
 Without a provider, READ exports source provenance, raster metrics, human masks, relation graph, preview and an uncertainty-aware report. It does not invent semantic object labels or physical relations.
 
+
+
+## READ Studio — local polygon and relation annotation
+
+Open tools/read-studio/index.html in a modern browser, or serve the repo root:
+
+    python -m http.server 8000
+
+Open http://127.0.0.1:8000/tools/read-studio/. The page loads an image through a local browser object URL and performs no network requests or uploads. Click at least three polygon points, finish the region, then enter:
+
+- region ID and label;
+- semantic_type (what the region is);
+- permission (whether its pixels may be changed);
+- tags such as object, context, identity_anchor, contact_surface or occlusion_boundary.
+
+The UI defaults every new region to protected. It exports read_regions.json and read_relations.json. Relations can be marked candidate, human_verified or rejected; human_verified requires human source plus evidence, and contacts_at requires both surface names.
+
+Use the exports with:
+
+    ige read-image source.png --out runs/read-001 --regions read_regions.json --relations read_relations.json
+
+The example polygons in the repo are templates. Always trace the actual source image. The tool does not alter the original image and does not infer occlusion/contact automatically.
+
 ## SAM 3.1 provider candidate
 
 Meta's official SAM 3 repository documents text and visual prompts for image/video object segmentation. SAM 3 introduces open-vocabulary concept prompts; SAM 3.1 Object Multiplex was announced on 2026-03-27. Official image inference uses build_sam3_image_model, Sam3Processor, set_image, then set_text_prompt, which is the interface wrapped by the optional adapter.
@@ -150,10 +173,10 @@ There is no implicit resize of model masks. A geometric mask must not be stretch
 
 ## Known v0.2 limits
 
-- Polygon annotations are supplied as JSON; an interactive annotation UI is not included yet.
+- Region polygons and relations can be created in the local-only READ Studio under tools/read-studio/; the visual reviewer is intentionally manual and does not infer hidden geometry.
 - Raster metrics are descriptive and are not semantic understanding or image-quality scores.
 - SAM3 is an optional provider adapter and has not been benchmarked on the project's actual image set in CI.
 - Automatic relation/occlusion/contact inference, identity embedding, camera geometry and temporal continuity are not yet implemented.
 - The generated preview is for inspection; human approval remains a separate action.
 
-The next READ increment should add a visual annotation/review surface and a tested multimodal reasoner that proposes object/part/contact relations with evidence. Then benchmark SAM3 masks against human-corrected masks on the project's real garment, face/hair, hand/weapon, thin-boundary and hammer-contact samples.
+The next READ increment should add a tested multimodal reasoner that proposes object/part/contact relations with evidence, while keeping every proposal unverified until human review. Then benchmark SAM3 masks against human-corrected masks on the project's real garment, face/hair, hand/weapon, thin-boundary and hammer-contact samples.

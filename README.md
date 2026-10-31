@@ -44,6 +44,20 @@ For manually annotated contact geometry, supply a relation file as well:
 
 Example polygons are placeholders and must be redrawn for the real source image. See docs/READ_ENGINE.md for mask policy, relation status, SAM 3.1 setup and limitations.
 
+## READ Studio (local image annotation)
+
+Open `tools/read-studio/index.html` directly in a modern browser, or serve the repository root locally:
+
+    python -m http.server 8000
+
+Then open `http://127.0.0.1:8000/tools/read-studio/`. Load the BASE image, click at least three points to draw each polygon, finish the region, and assign its semantic type, tags and separate pixel permission. Add relationships such as `contacts_at`, specifying both surfaces, then export `read_regions.json` and `read_relations.json`.
+
+Run the engine with the exported files:
+
+    ige read-image source.png --out runs/read-001 --regions read_regions.json --relations read_relations.json
+
+READ Studio uses the image locally in the browser; it does not upload it or call a remote service. The original file is never changed. The tool exports annotations, not a claim that the image's physical geometry has been automatically understood.
+
 ## Current scope and explicit non-claims
 
 - READ v0.2 computes raster statistics and exports human-authored semantic regions, editable/protected masks, relation assertions and previews.

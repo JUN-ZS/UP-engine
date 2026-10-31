@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UP-engine · READ Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">UP-ENGINE / LOCAL TOOL</p>
+      <h1>READ Studio</h1>
+      <p class="subtitle">讀圖、標記物件區域、鎖定像素權限與建立幾何關係。所有操作只在本機瀏覽器進行。</p>
+    </div>
+    <label class="file-button">
+      開啟圖片
+      <input id="imageFile" type="file" accept="image/*">
+    </label>
+  </header>
+
+  <main>
+    <section class="workspace">
+      <div class="canvas-toolbar">
+        <div class="legend">
+          <span><i class="swatch editable"></i>可編輯</span>
+          <span><i class="swatch protected"></i>受保護</span>
+          <span><i class="swatch context"></i>Context</span>
+          <span><i class="swatch draft"></i>正在繪製</span>
+        </div>
+        <div class="toolbar-actions">
+          <button id="undoPoint" class="secondary" disabled>撤銷點</button>
+          <button id="cancelPolygon" class="secondary" disabled>取消多邊形</button>
+          <button id="finishPolygon" class="primary" disabled>完成區域</button>
+        </div>
+      </div>
+      <div id="canvasFrame" class="canvas-frame">
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">⌁</div>
+          <h2>先開啟一張 BASE 圖片</h2>
+          <p>在圖片上逐點點擊，建立區域多邊形。至少三個點才可完成。</p>
+        </div>
+        <canvas id="imageCanvas" hidden></canvas>
+      </div>
+      <div class="canvas-footer">
+        <span id="imageInfo">尚未載入圖片</span>
+        <span id="pointInfo">0 個繪製點</span>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">01 / REGION</p>
+            <h2>區域語義與像素權限</h2>
+          </div>
+          <span class="step">A</span>
+        </div>
+        <p class="hint">先畫多邊形，再分開定義「這是甚麼」與「可否修改」。預設受保護，不會自動授權。</p>
+        <div id="regionEditor" class="editor" hidden>
+          <label>Region ID<input id="regionId" type="text" placeholder="例如 armor-chest"></label>
+          <label>顯示名稱<input id="regionLabel" type="text" placeholder="例如 銀色胸甲"></label>
+          <label>Semantic type<input id="semanticType" type="text" placeholder="例如 garment / hand / hammer_end_face"></label>
+          <label>Pixel permission
+            <select id="permission">
+              <option value="protected" selected>protected — 不可修改</option>
+              <option value="editable">editable — 明確授權修改</option>
+            </select>
+          </label>
+          <label>Tags（逗號分隔）<input id="regionTags" type="text" placeholder="object, identity_anchor, contact_surface"></label>
+          <div class="inline-actions">
+            <button id="saveRegion" class="primary">儲存區域</button>
+            <button id="discardRegion" class="secondary">放棄</button>
+          </div>
+        </div>
+        <div id="regionEmpty" class="empty-note">尚未標記區域。按「完成區域」後填寫語義與權限。</div>
+        <ul id="regionList" class="item-list"></ul>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">02 / RELATION</p>
+            <h2>物件／幾何關係</h2>
+          </div>
+          <span class="step">B</span>
+        </div>
+        <p class="hint">關係必須指向已標記的兩個 Region。human_verified 需要人手來源及可檢查的證據。</p>
+        <div class="form-grid">
+          <label>Subject<select id="relationSubject" disabled></select></label>
+          <label>Predicate
+            <select id="relationPredicate">
+              <option value="part_of">part_of</option>
+              <option value="occludes">occludes</option>
+              <option value="in_front_of">in_front_of</option>
+              <option value="behind">behind</option>
+              <option value="touches">touches</option>
+              <option value="contacts_at">contacts_at</option>
+              <option value="attached_to">attached_to</option>
+              <option value="aligned_with">aligned_with</option>
+              <option value="opposes">opposes</option>
+              <option value="parallel_to">parallel_to</option>
+              <option value="perpendicular_to">perpendicular_to</option>
+              <option value="same_object_as">same_object_as</option>
+            </select>
+          </label>
+          <label>Object<select id="relationObject" disabled></select></label>
+          <label>Status
+            <select id="relationStatus">
+              <option value="candidate" selected>candidate</option>
+              <option value="human_verified">human_verified</option>
+              <option value="rejected">rejected</option>
+            </select>
+          </label>
+          <label>Source
+            <select id="relationSource">
+              <option value="human" selected>human</option>
+              <option value="model">model</option>
+            </select>
+          </label>
+          <label>Confidence（可留空）<input id="relationConfidence" type="number" min="0" max="1" step="0.01" placeholder="0.90"></label>
+          <label id="subjectSurfaceWrap" hidden>Subject surface<input id="subjectSurface" type="text" placeholder="cylindrical_end_face"></label>
+          <label id="objectSurfaceWrap" hidden>Object surface<input id="objectSurface" type="text" placeholder="cylindrical_end_face"></label>
+          <label>Evidence region（可選）<select id="evidenceRegion"></select></label>
+          <label class="full">Evidence / 視覺證據<textarea id="relationEvidence" rows="2" placeholder="描述在原圖中可直接檢查到的關係；確認關係時必填。"></textarea></label>
+        </div>
+        <button id="addRelation" class="primary full-button" disabled>加入關係</button>
+        <ul id="relationList" class="item-list"></ul>
+      </section>
+
+      <section class="panel export-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">03 / EXPORT</p>
+            <h2>匯出 READ 輸入檔</h2>
+          </div>
+          <span class="step">C</span>
+        </div>
+        <p class="hint">Region 與 relation 分開匯出，對應 UP-engine CLI 的 --regions 及 --relations。</p>
+        <button id="exportRegions" class="primary full-button" disabled>下載 read_regions.json</button>
+        <button id="exportRelations" class="secondary full-button" disabled>下載 read_relations.json</button>
+        <p id="status" class="status" role="status">等待圖片。</p>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <span>UP-engine · READ v0.2 Studio</span>
+    <span>Local-only · No network calls · Original image is never modified</span>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
