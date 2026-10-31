@@ -1,4 +1,4 @@
-# READ Engine v0.2 — perception before generation
+# READ Engine v0.3 — perception before generation
 
 ## Purpose
 
@@ -21,7 +21,7 @@ A region has independent fields:
 
 This distinction matters: armor can be an object and be editable; a hand can be an object and remain protected; a face can be an identity anchor and remain protected. These facts must not be collapsed into one mutually exclusive role.
 
-## v0.2 workflow
+## v0.3 workflow
 
 IMAGE → EXIF NORMALIZATION → RASTER READ → OPTIONAL CONCEPT SEGMENTATION → HUMAN REGION ANNOTATION → RELATION GRAPH → MASKS + PREVIEW + JSON REPORT
 
@@ -61,7 +61,7 @@ Supported predicates include:
 
 A human_verified relation must have source human and non-empty evidence. A model cannot declare its own relation human-verified. A contacts_at relation must identify both surfaces, for example cylindrical_end_face against cylindrical_end_face; this allows the exact contact geometry to be stated instead of the vague assertion that two objects touch.
 
-Relation assertions are not inferred in v0.2. The file format is ready for human-confirmed geometry now and model-generated candidates later. A text/vision model may propose a relationship, but it must remain candidate until reviewed. The region graph does not replace a true 3D reconstruction or establish hidden surfaces from a single 2D image.
+Model-produced relation assertions are proposals and are not inferred facts. They are stored separately from human-authored relations. The file format is ready for human-confirmed geometry now and model-generated candidates later. A text/vision model may propose a relationship, but it must remain candidate until reviewed. The region graph does not replace a true 3D reconstruction or establish hidden surfaces from a single 2D image.
 
 ## Run without a segmentation model
 
@@ -137,7 +137,7 @@ Segmentation is not the same as understanding the physical scene. A mask alone d
 - whether a camera change has altered the apparent geometry;
 - whether a generated frame preserves the same topology as its parent.
 
-Those require explicit relation assertions, evidence and review. v0.2 supports the relation data model but does not auto-infer it.
+Those require explicit relation assertions, evidence and review. v0.3 supports optional VLM candidate proposals but does not auto-verify relations.
 
 ## Output contract
 
@@ -171,12 +171,14 @@ READ must stop rather than silently degrade when:
 
 There is no implicit resize of model masks. A geometric mask must not be stretched to fit because that conceals a coordinate-space error.
 
-## Known v0.2 limits
+## Known v0.3 limits
 
 - Region polygons and relations can be created in the local-only READ Studio under tools/read-studio/; the visual reviewer is intentionally manual and does not infer hidden geometry.
 - Raster metrics are descriptive and are not semantic understanding or image-quality scores.
+- VLM outputs are unreviewed candidate nodes/relations with uncalibrated self-assessment confidence.
+- Task-specific generation packets and an external-candidate pixel-preserving compositor are available; no production image generator or automatic registration model is active yet.
 - SAM3 is an optional provider adapter and has not been benchmarked on the project's actual image set in CI.
 - Automatic relation/occlusion/contact inference, identity embedding, camera geometry and temporal continuity are not yet implemented.
 - The generated preview is for inspection; human approval remains a separate action.
 
-The next READ increment should add a tested multimodal reasoner that proposes object/part/contact relations with evidence, while keeping every proposal unverified until human review. Then benchmark SAM3 masks against human-corrected masks on the project's real garment, face/hair, hand/weapon, thin-boundary and hammer-contact samples.
+See docs/GENERATION_HANDOFF.md for the Qwen3.8-27B reasoner, earlier Qwen baselines, optional HiSpatial comparison, strict candidate contract, task-scoped mask generation, geometry-lock handoff and pixel-preserving compositor. The next increment is a visual candidate-review surface and benchmark replay on the project's actual garment, face/hair, hand/weapon, thin-boundary and hammer-contact samples.

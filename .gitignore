@@ -12,8 +12,10 @@ htmlcov/
 .env.*
 !.env.example
 outputs/
+runs/
 checkpoints/
 weights/
+models/
 private_assets/
 *.safetensors
 *.ckpt

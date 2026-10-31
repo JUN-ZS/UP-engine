@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "up-engine"
-version = "0.2.0"
+version = "0.4.0"
 description = "A contract-first, region-aware image generation and reconstruction engine"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -17,6 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = []
+vlm = ["transformers>=5.8.1"]
 
 [project.scripts]
 ige = "ige.cli:main"

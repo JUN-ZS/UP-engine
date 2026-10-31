@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/generation-packet.schema.json",
+  "title": "UP-engine generation packet with pixel authorization",
+  "type": "object",
+  "required": ["packet_version", "task_id", "objective", "base", "targets", "pixel_authorization", "geometry_locks", "acceptance_requirements", "provenance"],
+  "properties": {
+    "packet_version": {"const": "0.1.0"},
+    "task_id": {"type": "string", "minLength": 1},
+    "objective": {"type": "string", "minLength": 1},
+    "base": {
+      "type": "object",
+      "required": ["sha256", "width", "height", "orientation"],
+      "properties": {
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "orientation": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["region_id", "semantic_type", "permission"],
+        "properties": {
+          "region_id": {"type": "string", "minLength": 1},
+          "label": {"type": ["string", "null"]},
+          "semantic_type": {"type": ["string", "null"]},
+          "permission": {"const": "editable"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "pixel_authorization": {
+      "type": "object",
+      "required": ["source", "generation_mask", "generation_mask_sha256", "protected_mask", "protected_mask_sha256", "generation_pixels", "protected_pixels", "rule", "target_mask_inputs"],
+      "properties": {
+        "source": {"const": "human_region_annotation"},
+        "generation_mask": {"type": "string"},
+        "generation_mask_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "protected_mask": {"type": "string"},
+        "protected_mask_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "generation_pixels": {"type": "integer", "minimum": 1},
+        "protected_pixels": {"type": "integer", "minimum": 0},
+        "rule": {"type": "string"},
+        "target_mask_inputs": {"type": "array"}
+      },
+      "additionalProperties": false
+    },
+    "geometry_locks": {
+      "type": "object",
+      "required": ["coordinate_space", "dimensionality", "relations", "protected_region_ids", "candidate_relations_excluded", "limitation"],
+      "properties": {
+        "coordinate_space": {"const": "source_display_pixels"},
+        "dimensionality": {"const": "2d_image_plane_assertions_only"},
+        "relations": {"type": "array"},
+        "protected_region_ids": {"type": "array", "items": {"type": "string"}},
+        "candidate_relations_excluded": {"type": "array", "items": {"type": ["string", "null"]}},
+        "limitation": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "acceptance_requirements": {"type": "array", "items": {"type": "string"}},
+    "provenance": {
+      "type": "object",
+      "required": ["read_analysis_path", "read_analysis_sha256", "read_version", "model_proposals_grant_no_permission"],
+      "properties": {
+        "read_analysis_path": {"type": "string"},
+        "read_analysis_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "read_version": {"type": ["string", "null"]},
+        "model_proposals_grant_no_permission": {"const": true}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

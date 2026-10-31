@@ -1,5 +1,5 @@
 {
-  "registry_version": "0.2.0",
+  "registry_version": "0.5.0",
   "policy": "fail_closed",
   "models": [
     {
@@ -8,20 +8,83 @@
       "supported_tasks": ["read_segment"],
       "license_status": "review_required",
       "validation_status": "untested",
-      "environment": {
-        "python": ">=3.12",
-        "pytorch": ">=2.7",
-        "cuda": ">=12.6",
-        "checkpoint_access": "separate approval and authentication required"
+      "environment": {"python": ">=3.12", "pytorch": ">=2.7", "cuda": ">=12.6", "checkpoint_access": "separate approval and authentication required"},
+      "enabled": false,
+      "reason": "Open-vocabulary pixel segmentation candidate. Not a geometry validator."
+    },
+    {
+      "model_id": "Qwen/Qwen3.8-27B",
+      "role": "primary_open_weight_rgb_visual_reasoner_candidate",
+      "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
+      "license_status": "approved",
+      "license": "Apache-2.0",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "Transformers AutoModelForMultimodalLM",
+        "transformers": ">=5.8.1",
+        "checkpoint_format": "BF16",
+        "checkpoint_weight_size_gb_approx": 55.6,
+        "quantized_options": [
+          {"format": "NVFP4", "source": "NVIDIA NIM build", "artifact_size_gb_approx": 20.44, "hardware_scope": "NVIDIA NIM distribution; not a universal VRAM requirement"}
+        ],
+        "estimated_vram_gb": null,
+        "measured_latency_seconds": null,
+        "thinking_mode": "disabled for strict JSON output; thinking-mode comparison is a separate benchmark"
       },
       "enabled": false,
-      "reason": "Strong open-vocabulary segmentation candidate; do not enable until license review, hardware check, and mask benchmark."
+      "reason": "Latest checked open-weight Qwen vision-language candidate. Public spatial scores are research context only; UP-engine requires per-case tests on its own contact/occlusion/part corpus."
+    },
+    {
+      "model_id": "Qwen/Qwen3.6-27B",
+      "role": "previous_generation_rgb_visual_reasoner_baseline",
+      "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
+      "license_status": "approved",
+      "license": "Apache-2.0",
+      "validation_status": "untested",
+      "runtime": {"checkpoint_weight_size_gb_approx": 55.6, "transformers": ">=5.8.1", "estimated_vram_gb": null, "measured_latency_seconds": null},
+      "enabled": false,
+      "reason": "Retained as a baseline to quantify whether Qwen3.8 improves UP-engine's exact geometry/contact tasks."
+    },
+    {
+      "model_id": "Qwen/Qwen3-VL-8B-Instruct",
+      "role": "older_low_parameter_rgb_visual_reasoner_baseline",
+      "supported_tasks": ["read_objects", "read_relations"],
+      "license_status": "approved",
+      "license": "Apache-2.0",
+      "validation_status": "untested",
+      "runtime": {"estimated_vram_gb": null, "measured_latency_seconds": null},
+      "enabled": false,
+      "reason": "Historical lower-parameter baseline; do not assume it has latest-generation spatial performance."
+    },
+    {
+      "model_id": "Qwen/Qwen3.8-35B-A3B",
+      "role": "moe_rgb_visual_reasoner_comparison",
+      "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
+      "license_status": "approved",
+      "license": "Apache-2.0",
+      "validation_status": "untested",
+      "runtime": {"total_parameters_billion": 35, "active_parameters_billion": 3, "checkpoint_weight_size_gb_approx": 71.9, "estimated_vram_gb": null, "measured_latency_seconds": null},
+      "enabled": false,
+      "reason": "MoE comparison candidate. Three billion active parameters describe per-token compute, not total weight storage or memory requirement."
+    },
+    {
+      "model_id": "lhzzzzzy/HiSpatial-3B",
+      "role": "rgb_xyz_spatial_reasoner_candidate",
+      "supported_tasks": ["spatial_relations", "depth_order", "orientation"],
+      "license_status": "review_required",
+      "license": "Gemma Terms of Use",
+      "validation_status": "untested",
+      "runtime": {"input": "RGB image plus metric XYZ point map", "depth_estimator": "MoGe", "checkpoint_size_approx_gb": 14, "measured_vram_gb": null, "measured_latency_seconds": null},
+      "enabled": false,
+      "reason": "Specialist comparison candidate. Point map is estimated and must retain uncertainty; no metric 3D claim is accepted without calibration/ground truth."
     }
   ],
   "notes": [
     "No model is enabled by default.",
-    "Populate only after license review and benchmark evidence.",
-    "Estimated VRAM/latency must be measured on the target runtime and hardware.",
-    "Segmentation model scores do not grant pixel edit permission."
+    "SAM proposes pixel masks; VLM proposes semantic nodes and relations; neither grants edit permission.",
+    "Checkpoint size is not peak VRAM. Measure target runtime, context, quantization and image resolution.",
+    "Model confidence is uncalibrated and is not probability.",
+    "Only human-verified relations may enter a generation packet's geometry locks.",
+    "Model benchmark reports must be replayed on UP-engine's own versioned object/contact/occlusion test set before routing enablement."
   ]
 }

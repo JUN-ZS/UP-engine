@@ -12,6 +12,7 @@ import numpy as np
 from .annotations import RegionAnnotation, RegionPermission, load_regions, rasterize_region
 from .providers.base import MaskProposal, SegmentationProvider
 from .relations import RelationStatus, load_relations
+from .reasoning import ReasoningProposalSet, VisualReasoner
 
 
 def _sha256(path: Path) -> str:
@@ -64,6 +65,7 @@ def _save_preview(
     explicit_protected: np.ndarray,
     context: np.ndarray,
     proposals: list[MaskProposal],
+    reasoning: ReasoningProposalSet | None = None,
 ) -> None:
     base = image.convert("RGBA")
     overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
@@ -81,6 +83,22 @@ def _save_preview(
         box = _bbox(proposal.mask)
         if box:
             draw.rectangle(box, outline=(255, 190, 30, 230), width=max(1, round(min(base.size) / 500)))
+    if reasoning is not None:
+        line_width = max(2, round(min(base.size) / 350))
+        for node in reasoning.nodes:
+            x1, y1, x2, y2 = node.bbox_xyxy_norm
+            draw.rectangle(
+                (round(x1 * (base.width - 1)), round(y1 * (base.height - 1)),
+                 round(x2 * (base.width - 1)), round(y2 * (base.height - 1))),
+                outline=(190, 120, 255, 235), width=line_width,
+            )
+        for relation in reasoning.relations:
+            x1, y1, x2, y2 = relation.evidence_bbox_xyxy_norm
+            draw.rectangle(
+                (round(x1 * (base.width - 1)), round(y1 * (base.height - 1)),
+                 round(x2 * (base.width - 1)), round(y2 * (base.height - 1))),
+                outline=(50, 220, 245, 245), width=line_width,
+            )
     path.parent.mkdir(parents=True, exist_ok=True)
     Image.alpha_composite(base, overlay).convert("RGB").save(path, quality=92)
 
@@ -110,6 +128,8 @@ def run_read(
     relations_path: str | Path | None = None,
     provider: SegmentationProvider | None = None,
     prompts: list[str] | None = None,
+    reasoner: VisualReasoner | None = None,
+    reasoning_focus: str = "Inspect visible object parts, exact contact surfaces, occlusion boundaries and relative orientation.",
     overwrite: bool = False,
 ) -> dict[str, Any]:
     """Read one still image and export auditable metrics, masks and relation metadata.
@@ -187,6 +207,15 @@ def run_read(
             if proposal.score is not None and not 0.0 <= proposal.score <= 1.0:
                 raise ValueError(f"proposal score out of range: {proposal.score}")
 
+    reasoning_result: ReasoningProposalSet | None = None
+    if reasoner is not None:
+        normalized_input = destination / ".reasoner-input.png"
+        try:
+            image.save(normalized_input, format="PNG")
+            reasoning_result = reasoner.propose(normalized_input, focus=reasoning_focus)
+        finally:
+            normalized_input.unlink(missing_ok=True)
+
     masks_dir = destination / "masks"
     _save_mask(editable, masks_dir / "editable.png")
     _save_mask(explicit_protected, masks_dir / "explicit_protected.png")
@@ -198,8 +227,13 @@ def run_read(
     region_mask_rows = []
     for region, mask in per_region:
         region_file = f"region-{region.region_id}.png"
-        _save_mask(mask, masks_dir / "regions" / region_file)
-        region_mask_rows.append({"id": region.region_id, "mask": f"masks/regions/{region_file}"})
+        region_mask_path = masks_dir / "regions" / region_file
+        _save_mask(mask, region_mask_path)
+        region_mask_rows.append({
+            "id": region.region_id,
+            "mask": f"masks/regions/{region_file}",
+            "sha256": _sha256(region_mask_path),
+        })
 
     proposal_rows = []
     for index, proposal in enumerate(proposals):
@@ -219,14 +253,17 @@ def run_read(
             "edit_permission": False,
         })
 
-    _save_preview(image, destination / "preview.png", editable, explicit_protected, context, proposals)
+    _save_preview(
+        image, destination / "preview.png", editable, explicit_protected,
+        context, proposals, reasoning_result
+    )
     total_pixels = width * height
     editable_pixels = int(np.count_nonzero(editable))
     explicit_protected_pixels = int(np.count_nonzero(explicit_protected))
     verified_relations = sum(r.status == RelationStatus.HUMAN_VERIFIED for r in relations)
     relation_rows = [relation.to_dict() for relation in relations]
     report: dict[str, Any] = {
-        "read_version": "0.2.0",
+        "read_version": "0.3.0",
         "source": {
             "path": str(source.resolve()),
             "sha256": _sha256(source),
@@ -245,6 +282,12 @@ def run_read(
             "status": "unreviewed_proposals" if provider is not None else "not_run",
             "note": "Segmentation proposals are not verified scene understanding and never authorize editing.",
         },
+        "visual_reasoning": (
+            reasoning_result.to_dict() if reasoning_result is not None else {
+                "status": "not_run",
+                "note": "No visual reasoner was selected.",
+            }
+        ),
         "scene_graph": {
             "nodes": [
                 {
@@ -302,6 +345,8 @@ def run_read(
         f"- Human editable coverage: {editable_pixels}/{total_pixels} pixels ({report['mask_policy']['editable_fraction']:.2%})",
         f"- Effective protected coverage: {total_pixels - editable_pixels}/{total_pixels} pixels",
         f"- Human-verified relations: {verified_relations}",
+        f"- VLM region proposals: {len(reasoning_result.nodes) if reasoning_result else 0}",
+        f"- VLM relation proposals: {len(reasoning_result.relations) if reasoning_result else 0}",
         "",
         "## Mask files",
         "",
