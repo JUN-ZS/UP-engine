@@ -4,13 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "up-engine"
-version = "0.1.0"
+version = "0.2.0"
 description = "A contract-first, region-aware image generation and reconstruction engine"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "All rights reserved; no license granted" }
 authors = [{ name = "JUN-ZS" }]
-dependencies = []
+dependencies = [
+  "numpy>=1.26",
+  "Pillow>=10.0"
+]
 
 [project.optional-dependencies]
 dev = []

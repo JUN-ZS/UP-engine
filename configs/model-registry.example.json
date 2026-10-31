@@ -1,10 +1,27 @@
 {
-  "registry_version": "0.1.0",
+  "registry_version": "0.2.0",
   "policy": "fail_closed",
-  "models": [],
+  "models": [
+    {
+      "model_id": "meta.sam3.1",
+      "role": "semantic_segmentation_proposal",
+      "supported_tasks": ["read_segment"],
+      "license_status": "review_required",
+      "validation_status": "untested",
+      "environment": {
+        "python": ">=3.12",
+        "pytorch": ">=2.7",
+        "cuda": ">=12.6",
+        "checkpoint_access": "separate approval and authentication required"
+      },
+      "enabled": false,
+      "reason": "Strong open-vocabulary segmentation candidate; do not enable until license review, hardware check, and mask benchmark."
+    }
+  ],
   "notes": [
     "No model is enabled by default.",
     "Populate only after license review and benchmark evidence.",
-    "Estimated VRAM/latency must be measured on the target runtime and hardware."
+    "Estimated VRAM/latency must be measured on the target runtime and hardware.",
+    "Segmentation model scores do not grant pixel edit permission."
   ]
 }

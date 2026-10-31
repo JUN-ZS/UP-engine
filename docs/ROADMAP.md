@@ -1,6 +1,6 @@
 # Roadmap
 
-## P0 — contract-first foundation (this scaffold)
+## P0 — contract-first foundation (completed scaffold)
 
 - typed task and asset roles
 - PEEP manifest schema and validator
@@ -8,12 +8,19 @@
 - hard gates separated from soft quality
 - CI and deterministic tests
 
-## P1 — READ engine
+## P1 — READ engine (v0.2 executable; inference still partial)
 
-- segmentation and object/part graph adapters
-- boundary / occlusion graph
-- confidence and ambiguity reporting
-- mask authoring and review UI
+- [x] source provenance, EXIF orientation, raster diagnostics
+- [x] region semantic_type independent from editable/protected permission
+- [x] tagged object/context/identity-anchor/contact-surface regions
+- [x] safe mask law: editable whitelist; all other pixels effectively protected
+- [x] preview PNG, per-region masks and machine-readable READ report
+- [x] optional SAM3 text segmentation provider adapter; candidates stay unreviewed
+- [x] typed relation graph with candidate/human_verified/rejected states
+- [x] contacts_at requires both named surfaces; part_of cycles rejected
+- [ ] interactive image annotation and relation-review UI
+- [ ] VLM reasoner for candidate occlusion/contact/part relations with visual evidence
+- [ ] benchmark against human-corrected masks and relation annotations on the actual project image set
 
 ## P2 — one end-to-end reconstruction path
 

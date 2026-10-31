@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "relations": [
+    {
+      "id": "hammer-end-face-contact",
+      "subject_region_id": "hammer-left-end-face",
+      "predicate": "contacts_at",
+      "object_region_id": "hammer-right-end-face",
+      "status": "candidate",
+      "source": "human",
+      "confidence": null,
+      "evidence": "Template only: replace with evidence observed in the actual image before marking human_verified.",
+      "evidence_region_id": "contact-zone",
+      "details": {
+        "subject_surface": "cylindrical_end_face",
+        "object_surface": "cylindrical_end_face"
+      }
+    }
+  ]
+}
