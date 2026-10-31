@@ -1,0 +1,52 @@
+{
+  "diagnosis_version": "1.0",
+  "image": {
+    "sha256": "replace-with-actual-base-sha256"
+  },
+  "observations": {
+    "topology_error": {
+      "state": "absent",
+      "evidence": "",
+      "source": "human",
+      "verification": "human_verified"
+    },
+    "metal_detail_low": {
+      "state": "present",
+      "evidence": "Gold mesh weave is low-detail at target display size.",
+      "source": "human",
+      "verification": "human_verified"
+    },
+    "face_detail_low": {
+      "state": "present",
+      "evidence": "Face microdetail requires restoration.",
+      "source": "human",
+      "verification": "human_verified"
+    }
+  },
+  "references": [
+    {
+      "role": "identity_reference",
+      "asset_id": "a8b78fe5-2654-4f6f-84e3-c1dfbee61004",
+      "path": "references/a8b.png",
+      "sha256": "replace-with-actual-a8b-sha256",
+      "materialization": "local_verified"
+    },
+    {
+      "role": "armor_detail_donor",
+      "asset_id": "replace-with-real-donor-ref",
+      "path": "donors/armor_mesh.png",
+      "sha256": "replace-with-actual-donor-sha256",
+      "materialization": "local_verified"
+    }
+  ],
+  "strategy_context": {
+    "target_scale": 4,
+    "frame_count": 1,
+    "frames_registered": false,
+    "local_contrast_deficit": false,
+    "depth_map_verified": false,
+    "normal_map_verified": false,
+    "mesh_verified": false,
+    "allow_native_generative_redetail": true
+  }
+}

@@ -95,6 +95,67 @@ No model is enabled automatically. Hardware, license and project-specific qualit
 - No image-quality, identity-preservation or spatial-reasoning improvement is claimed before evaluation on the project's real gold test corpus.
 - No model weights, private images, API keys or legacy artifact dumps are included.
 
+
+
+## Grok Vision skill diagnosis (candidate-only)
+
+The skill router can now receive a first-pass image-defect diagnosis from the same xAI Grok Vision transport used by READ. It writes both a raw, provenance-bearing `diagnosis.json` and a `skill_plan.json`:
+
+    export XAI_API_KEY=...
+    ige diagnose-image BASE.png --out runs/diagnosis
+
+When a canonical identity image is available, pass it explicitly as a second ordered image:
+
+    ige diagnose-image BASE.png --out runs/diagnosis-a8b \\
+      --identity-reference references/a8b.png \\
+      --identity-reference-id a8b78fe5-2654-4f6f-84e3-c1dfbee61004
+
+Without an identity reference, `identity_drift` is forcibly recorded as `unknown`; Grok is not allowed to infer identity mismatch from the BASE image alone. All Grok observations are tagged `source=grok_vision`, `verification=candidate`, and cannot authorize a skill or geometry lock. Human review is still required before promoting any observation to `human_verified`.
+
+The diagnostic model request is wired and mock-tested; live xAI calls and project-image accuracy are **NOT RUN** until an operator supplies an API key and the project has a human-reviewed gold set.
+
+## Automatic reference resolution and skill routing
+
+UP-engine now ships an offline, provenance-pinned snapshot with 81 distinct full UUID/L artifact identifiers and 160 explicit short aliases extracted from nine legacy source documents. It indexes roles, skills, source commit/section and surrounding text context; short aliases resolve to canonical IDs only when unique. It does not pretend that a UUID means the underlying Imagine image bytes are locally available, and it is not a full binary asset archive.
+
+    ige ref-search --skill SKIN_MAT
+    ige ref-search --query "a8b face identity"
+    ige ref-search --query "metal detail" --asset-root ./reference-assets
+
+For defect-aware routing, provide an evidence-bearing diagnosis. A Grok Vision proposal may inform the diagnosis, but it must remain a candidate until a human verifies it. Raster dimensions are measured automatically; face identity, topology, metal, skin and material defects are not guessed from generic pixel statistics.
+
+    ige skill-plan source.png --diagnosis examples/skill_diagnosis.example.json --out runs/skill-plan.json
+
+A topology error blocks downstream sharpening/upscale. PATH1E, TEX4, GRID_SIAX, PIXEL_CTRL and SKIN_MAT are still documented-only until their full execution paths are imported and benchmarked. The planner reports that limitation rather than pretending to execute them.
+
+## Multi-family upscale strategy portfolio
+
+`ige skill-plan` now returns a separate `strategy_portfolio`; no additional CLI command is required. It compares 12 mechanisms rather than confusing a few migrated legacy skills with the full method space: resampling control, classical deblur/denoise/deblock, multi-scale frequency enhancement, CNN/GAN SR, Transformer SR, diffusion SR, identity-guided face repair, reference-guided SR, native generative re-detail, ROI hybrid, temporal multi-frame SR and geometry-guided SR.
+
+The portfolio is state-dependent. It considers the observed defect class, topology gate, locally verified identity/material donors, frame registration, geometry maps, masks and whether a Siax checkpoint/4x master is actually present. It lists each family's prerequisites and failure modes. A reference UUID is not a donor image; an a8b identity image is not automatically a metal/cloth texture donor. No candidate is run or accepted by this planner.
+
+See [UPSCALE_STRATEGY_PORTFOLIO.md](docs/UPSCALE_STRATEGY_PORTFOLIO.md) for the method matrix and fair-comparison protocol.
+
+## Siax 4x + DETAIL6
+
+The first DETAIL6 execution slice accepts a genuine 4x Siax master, applies region-limited residual detail with protected face/skin/eye-white masks, and exports JPEG 4:4:4. This is not yet the complete legacy DETAIL6 skill: GRID_CLEAN/BEAT donor selection and legacy clarity proof still need migration. It explicitly forbids inflating a small image to meet a megabyte target.
+
+Install the optional local runtime:
+
+    python -m pip install -e ".[upscale]"
+
+The checkpoint is not committed. Download the pinned file from the reference listed in docs/DETAIL6_AND_REF_ROUTING.md, verify its SHA-256 and review its model terms first. The mirror repository labels itself MIT, but original model terms still require review. The command requires an explicit acknowledgement:
+
+    ige upscale-siax source.png --checkpoint models/4x_NMKD-Siax_200k.pth --out runs/upscale/SIAX4X.png --confirm-model-license-review
+
+The output includes a hash-bound .upscale.json sidecar. Prepare masks at BASE or 4x dimensions; the mask manifest must provide metal/stone/text/fire detail masks (at least one) and face/skin/eye_white protection masks:
+
+    ige detail6 source.png --upscaled runs/upscale/SIAX4X.png --masks runs/masks.json --out runs/detail6 --minimum-bytes 30000000
+
+The default byte threshold is 6,000,000, matching the legacy DETAIL6 floor. Set 30,000,000 only when that delivery target is specifically required. If the content does not naturally meet it, the size gate fails; no padding or fake enlargement is applied.
+
+This partial DETAIL6 path emits a lossless working PNG, q98 and q100 JPEG 4:4:4 outputs, per-zone high-frequency diagnostics and a protected-pixel audit. HF energy is not an acceptance score; visual clarity review remains required. Exact pixel proof applies to the lossless PNG relative to the Siax master; JPEG is necessarily lossy. This stage does not certify identity, pose, topology, geometry or temporal continuity.
+
 ## Source project
 
 See docs/LEGACY_SOURCE_POLICY.md. The historical repository is not a dependency and will never be automatically pulled into this repository.

@@ -59,6 +59,28 @@ class CliParserTests(unittest.TestCase):
         self.assertEqual(composite_args.out.suffix, ".png")
         self.assertTrue(composite_args.require_registration_gate)
 
+
+        diagnose = parser.parse_args([
+            "diagnose-image", "source.png", "--out", "runs/diagnosis",
+            "--identity-reference", "a8b.png",
+            "--identity-reference-id", "a8b78fe5-2654-4f6f-84e3-c1dfbee61004",
+        ])
+        self.assertEqual(diagnose.command, "diagnose-image")
+        self.assertEqual(diagnose.identity_reference_id, "a8b78fe5-2654-4f6f-84e3-c1dfbee61004")
+        diagnose_without_identity = parser.parse_args([
+            "diagnose-image", "source.png", "--out", "runs/diagnosis-no-ref"
+        ])
+        self.assertIsNone(diagnose_without_identity.identity_reference)
+
+        refs = parser.parse_args(["ref-search", "--skill", "DETAIL6"])
+        self.assertEqual(refs.command, "ref-search")
+        plan = parser.parse_args(["skill-plan", "source.png", "--diagnosis", "diagnosis.json"])
+        self.assertEqual(plan.command, "skill-plan")
+        upscale = parser.parse_args(["upscale-siax", "source.png", "--checkpoint", "s iax.pth", "--out", "4x.png"])
+        self.assertEqual(upscale.command, "upscale-siax")
+        detail6 = parser.parse_args(["detail6", "source.png", "--upscaled", "4x.png", "--masks", "masks.json", "--out", "detail6"])
+        self.assertEqual(detail6.command, "detail6")
+
     def test_grok_model_id_can_be_overridden(self):
         args = build_parser().parse_args([
             "read-image", "source.png", "--out", "runs/read-1",

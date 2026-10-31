@@ -38,10 +38,21 @@
 
 ## P3 — legacy skill migration
 
-- donor pipeline (ZYF/ETZ/SCD)
-- garment reconstruction (TEX4/RRT/P_G)
-- object accumulation (OBA)
-- detail stack (SWP/SPM/SIAX) only after topology gate
+- [x] provenance-pinned REF snapshot: 81 UUID/L artifact IDs + 160 short aliases from 9 legacy source documents, with searchable context and unique-prefix resolution
+- [ ] full historical binary asset materialization / donor suitability validation (UUIDs and proof IDs are still metadata references, not image bytes)
+- [x] evidence-based skill planner with topology-first stop rules and candidate/human_verified distinction
+- [x] independent 12-family, state-dependent upscale strategy portfolio (candidate planner only; non-imported methods remain blocked/conditional)
+- [x] Grok Vision skill-defect diagnosis adapter + `ige diagnose-image` command (candidate-only; live API and gold-set accuracy not yet validated)
+- [x] optional Siax 4x inference adapter (pinned hash; memory-efficient uint8 output canvas and tiled 128/8 default; actual run requires optional runtime, checkpoint and license review)
+- [~] DETAIL6 partial execution path: Siax-master material-mask residual, face/skin/eye protection and q98/q100 4:4:4 exports; full GRID_CLEAN/BEAT donor selection + clarity proof still open
+- [ ] complete REF ingestion/materialization for legacy image assets (UUIDs are not local binary assets)
+- [ ] donor pipeline (ZYF/ETZ/SCD)
+- [ ] identity-protected PATH1E plate + ECC executor
+- [ ] garment reconstruction (TEX4/RRT/P_G)
+- [ ] object accumulation (OBA)
+- [ ] GRID×SIAX / SWP / SPM hybrid execution and project-specific clarity comparison
+- [ ] DETAIL6 native 4608/quality proof and human-reviewed clarity benchmark
+- [ ] PIXEL_CTRL per-pixel classification and proof
 
 ## P4 — new-image and temporal generation
 

@@ -1,0 +1,24 @@
+{
+  "diagnosis_version": "1.0",
+  "image": {},
+  "observations": {
+    "metal_detail_low": {
+      "state": "present",
+      "evidence": "Visible gold mesh weave is unresolved at the target display scale.",
+      "source": "human",
+      "verification": "human_verified"
+    },
+    "topology_error": {
+      "state": "absent",
+      "evidence": "",
+      "source": "human",
+      "verification": "human_verified"
+    },
+    "identity_drift": {
+      "state": "absent",
+      "evidence": "",
+      "source": "human",
+      "verification": "human_verified"
+    }
+  }
+}
