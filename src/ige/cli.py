@@ -151,6 +151,22 @@ def build_parser() -> argparse.ArgumentParser:
     composite.add_argument("--overwrite", action="store_true")
 
 
+
+    diagnose = sub.add_parser(
+        "diagnose-image",
+        help="ask Grok Vision to diagnose image defects and create an evidence-aware skill plan",
+    )
+    diagnose.add_argument("image", type=Path)
+    diagnose.add_argument("--out", type=Path, required=True, help="new or empty diagnosis output directory")
+    diagnose.add_argument("--identity-reference", type=Path, default=None, help="optional a8b or other canonical identity image")
+    diagnose.add_argument("--identity-reference-id", default=None, help="asset ID for the supplied identity reference")
+    diagnose.add_argument("--model-id", default=None, help="xAI vision model override; defaults to XAI_VISION_MODEL or grok-4")
+    diagnose.add_argument("--detail", choices=("low", "high", "auto"), default="high")
+    diagnose.add_argument("--focus", default="Assess structural integrity first, then identity, material detail and image-quality defects.")
+    diagnose.add_argument("--checkpoint", type=Path, default=None)
+    diagnose.add_argument("--upscaled", type=Path, default=None)
+    diagnose.add_argument("--masks", type=Path, default=None)
+
     ref_search = sub.add_parser(
         "ref-search",
         help="search the reviewed legacy reference snapshot by asset ID, role, tags or skill",
@@ -418,6 +434,53 @@ def main() -> int:
         )
         return 0
 
+
+
+    if args.command == "diagnose-image":
+        from .read.skill_diagnosis import GrokSkillDiagnoser
+        from .skill_router import plan_skills
+        import json as _json
+
+        if args.identity_reference_id and not args.identity_reference:
+            parser.error("--identity-reference-id requires --identity-reference")
+        args.out.mkdir(parents=True, exist_ok=True)
+        if any(args.out.iterdir()):
+            parser.error(f"diagnosis output directory is not empty: {args.out}")
+        diagnoser = GrokSkillDiagnoser(model_id=args.model_id, detail=args.detail)
+        diagnosis = diagnoser.diagnose(
+            args.image,
+            identity_reference=args.identity_reference,
+            identity_reference_id=args.identity_reference_id,
+            focus=args.focus,
+        )
+        diagnosis_path = args.out / "diagnosis.json"
+        diagnosis_path.write_text(
+            _json.dumps(diagnosis, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        skill_plan = plan_skills(
+            args.image,
+            diagnosis_path,
+            checkpoint_path=args.checkpoint,
+            upscaled_path=args.upscaled,
+            masks_path=args.masks,
+        )
+        plan_path = args.out / "skill_plan.json"
+        plan_path.write_text(
+            _json.dumps(skill_plan, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        present = [
+            name for name, item in diagnosis["observations"].items()
+            if item["state"] == "present"
+        ]
+        print(f"Grok diagnosis written: {diagnosis_path}")
+        print(f"Skill plan written: {plan_path}")
+        print(f"Model: {diagnosis['diagnosis_meta']['model_id']} request={diagnosis['diagnosis_meta']['request_id']}")
+        print(f"Candidate findings: {', '.join(present) if present else 'none; manual review may be needed'}")
+        print(f"Router status: {skill_plan['overall_status']}")
+        print("All Grok findings remain candidate; no skill is human-verified or finally accepted.")
+        return 0
 
     if args.command == "ref-search":
         from .references import ReferenceCatalog

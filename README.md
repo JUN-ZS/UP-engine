@@ -96,6 +96,24 @@ No model is enabled automatically. Hardware, license and project-specific qualit
 - No model weights, private images, API keys or legacy artifact dumps are included.
 
 
+
+## Grok Vision skill diagnosis (candidate-only)
+
+The skill router can now receive a first-pass image-defect diagnosis from the same xAI Grok Vision transport used by READ. It writes both a raw, provenance-bearing `diagnosis.json` and a `skill_plan.json`:
+
+    export XAI_API_KEY=...
+    ige diagnose-image BASE.png --out runs/diagnosis
+
+When a canonical identity image is available, pass it explicitly as a second ordered image:
+
+    ige diagnose-image BASE.png --out runs/diagnosis-a8b \\
+      --identity-reference references/a8b.png \\
+      --identity-reference-id a8b78fe5-2654-4f6f-84e3-c1dfbee61004
+
+Without an identity reference, `identity_drift` is forcibly recorded as `unknown`; Grok is not allowed to infer identity mismatch from the BASE image alone. All Grok observations are tagged `source=grok_vision`, `verification=candidate`, and cannot authorize a skill or geometry lock. Human review is still required before promoting any observation to `human_verified`.
+
+The diagnostic model request is wired and mock-tested; live xAI calls and project-image accuracy are **NOT RUN** until an operator supplies an API key and the project has a human-reviewed gold set.
+
 ## Automatic reference resolution and skill routing
 
 UP-engine now ships an offline, provenance-pinned metadata snapshot of key a8b, skin, PATH1E and DETAIL6 references. It indexes asset IDs, roles, skills, source commit and source section. It does not pretend that a UUID means the underlying Imagine image bytes are locally available. The seed catalog is curated, not yet a complete crawl of every historical reference.

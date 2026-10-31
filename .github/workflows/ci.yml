@@ -24,6 +24,7 @@ jobs:
       - run: ige accept-candidate --help
       - run: ige assess-registration --help
       - run: ige composite-generation --help
+      - run: ige diagnose-image --help
       - run: ige ref-search --skill DETAIL6
       - run: ige skill-plan --help
       - run: ige upscale-siax --help

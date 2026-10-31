@@ -40,6 +40,7 @@
 
 - [x] curated provenance-pinned reference metadata snapshot + REF Resolver / search CLI (initial seed only; full legacy catalog crawl remains open)
 - [x] evidence-based skill planner with topology-first stop rules and candidate/human_verified distinction
+- [x] Grok Vision skill-defect diagnosis adapter + `ige diagnose-image` command (candidate-only; live API and gold-set accuracy not yet validated)
 - [x] optional Siax 4x inference adapter (pinned hash; actual run requires optional runtime, checkpoint and license review)
 - [~] DETAIL6 partial execution path: Siax-master material-mask residual, face/skin/eye protection and q98/q100 4:4:4 exports; full GRID_CLEAN/BEAT donor selection + clarity proof still open
 - [ ] complete REF ingestion/materialization for legacy image assets (UUIDs are not local binary assets)

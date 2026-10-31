@@ -19,6 +19,8 @@ The old constitution is the source of truth for skill order and failure rules. T
 | GOU / V5 / GCS / ECC / WHOLE | Registration/reconstruction | Existing registration is dimension-only; residual/warp incomplete | Geometry acceptance |
 | DAMD / HTFC | Temporal state transitions | P4 not implemented | Single-image detail restoration |
 
+| Grok skill diagnosis | xAI Vision multi-image task adapter + `ige diagnose-image` | Code + mock tests; live API E2E NOT RUN; all findings remain candidate | Human verification or project gold benchmark |
+
 ## Provenance and execution rules
 
 - Source repository: JUN-ZS/ai-image-gen-logic-review, snapshot commit 2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e.

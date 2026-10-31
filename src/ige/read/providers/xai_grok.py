@@ -142,6 +142,68 @@ class GrokSpatialReasoner:
             model_id=self.model_id,
         )
 
+
+    def request_text(self, image_paths: list[str | Path], prompt: str) -> tuple[str, dict[str, Any]]:
+        """Send one or more ordered image references for a task-specific visual diagnosis.
+
+        The caller owns the output schema and must validate the returned text.
+        Images are sent in order; the prompt should name each image's role.
+        """
+        if not image_paths:
+            raise ValueError("at least one image is required")
+        content: list[dict[str, Any]] = []
+        image_records: list[dict[str, Any]] = []
+        for index, image_path in enumerate(image_paths):
+            source = Path(image_path)
+            if not source.is_file():
+                raise FileNotFoundError(source)
+            image_bytes = source.read_bytes()
+            if len(image_bytes) > 20 * 1024 * 1024:
+                raise GrokVisionError(f"image exceeds xAI 20 MiB limit: {source.name}")
+            mime = _guess_image_mime(source, image_bytes)
+            data_uri = f"data:{mime};base64,{base64.b64encode(image_bytes).decode('ascii')}"
+            content.append({
+                "type": "input_image",
+                "image_url": data_uri,
+                "detail": self.detail,
+            })
+            image_records.append({
+                "index": index,
+                "filename": source.name,
+                "sha256_prefix": _sha256_prefix(image_bytes),
+                "bytes": len(image_bytes),
+            })
+        content.append({"type": "input_text", "text": prompt})
+        payload = {
+            "model": self.model_id,
+            "input": [{"role": "user", "content": content}],
+            "store": False,
+        }
+        started = time.perf_counter()
+        response_body, response_headers = self._post_json(
+            self.api_base + self.RESPONSES_PATH, payload
+        )
+        latency_ms = round((time.perf_counter() - started) * 1000.0, 2)
+        request_id = (
+            response_headers.get("x-request-id")
+            or response_headers.get("X-Request-Id")
+            or response_body.get("id")
+            or response_body.get("request_id")
+        )
+        output_text = _extract_response_text(response_body)
+        metadata = {
+            "provider_id": self.provider_id,
+            "model_id": self.model_id,
+            "request_id": request_id,
+            "latency_ms": latency_ms,
+            "detail": self.detail,
+            "endpoint": self.api_base + self.RESPONSES_PATH,
+            "status": "ok",
+            "images": image_records,
+        }
+        self.last_request_meta = metadata
+        return output_text, metadata
+
     def _post_json(self, url: str, payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, str]]:
         if self._transport is not None:
             return self._transport(url, payload)

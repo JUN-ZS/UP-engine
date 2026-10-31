@@ -21,6 +21,18 @@ Topology defects are routed ahead of detail work. When topology is reported wron
 
 Raster width/height and SHA-256 are measured automatically. Semantic conditions such as face drift, garment topology, metal weave weakness or skin noise are not inferred from generic image statistics.
 
+## Grok Vision diagnosis
+
+`ige diagnose-image BASE --out RUN_DIR` uses the active Grok Vision provider to inspect structural, identity, material and image-quality issues, then runs the evidence-aware skill planner. It writes `diagnosis.json` and `skill_plan.json`.
+
+Optionally provide the canonical identity reference as a second image:
+
+```bash
+ige diagnose-image BASE.png --out runs/diagnosis-a8b --identity-reference references/a8b.png --identity-reference-id a8b78fe5-2654-4f6f-84e3-c1dfbee61004
+```
+
+Without a supplied identity reference, identity drift is forced to `unknown`. Every model finding remains `source=grok_vision`, `verification=candidate`; no finding creates permission, geometry locks or accepted skill execution. The model confidence is uncalibrated. The endpoint is mock-tested, but a live xAI request and project-image gold benchmark remain NOT RUN.
+
 ## Siax 4x inference
 
 Optional install: `python -m pip install -e .[upscale]`.

@@ -59,6 +59,19 @@ class CliParserTests(unittest.TestCase):
         self.assertEqual(composite_args.out.suffix, ".png")
         self.assertTrue(composite_args.require_registration_gate)
 
+
+        diagnose = parser.parse_args([
+            "diagnose-image", "source.png", "--out", "runs/diagnosis",
+            "--identity-reference", "a8b.png",
+            "--identity-reference-id", "a8b78fe5-2654-4f6f-84e3-c1dfbee61004",
+        ])
+        self.assertEqual(diagnose.command, "diagnose-image")
+        self.assertEqual(diagnose.identity_reference_id, "a8b78fe5-2654-4f6f-84e3-c1dfbee61004")
+        diagnose_without_identity = parser.parse_args([
+            "diagnose-image", "source.png", "--out", "runs/diagnosis-no-ref"
+        ])
+        self.assertIsNone(diagnose_without_identity.identity_reference)
+
         refs = parser.parse_args(["ref-search", "--skill", "DETAIL6"])
         self.assertEqual(refs.command, "ref-search")
         plan = parser.parse_args(["skill-plan", "source.png", "--diagnosis", "diagnosis.json"])
