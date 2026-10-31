@@ -144,5 +144,5 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
             if step["skill"] in {"SIAX4X", "GRID_SIAX", "DETAIL6", "SKIN_MAT"}:
                 step["status"] = "blocked_by_upstream_topology"
     statuses = {step["status"] for step in steps}
-    overall = "BLOCKED" if any(status.startswith("blocked") for status in statuses) else "REVIEW_REQUIRED" if "review_required" in statuses or "blocked_not_imported" in statuses else "READY_FOR_EXECUTION"
+    overall = "BLOCKED" if any(status.startswith("blocked") for status in statuses) else "REVIEW_REQUIRED" if "review_required" in statuses or "blocked_not_imported" in statuses or "insufficient_semantic_evidence" in statuses else "READY_FOR_EXECUTION"
     return {"plan_version": "1.0", "image": diagnosis["image"], "diagnosis_source": diagnosis["diagnosis_source"], "observations": diagnosis["observations"], "steps": steps, "overall_status": overall, "non_claims": ["Raster dimensions are observed; semantic defects require evidence-bearing diagnosis.", "Grok Vision candidates are not human_verified and cannot authorize irreversible skill execution.", "A reference UUID is not proof that its image bytes are locally available.", "A 4x file or large MB count alone does not prove visual quality."]}
