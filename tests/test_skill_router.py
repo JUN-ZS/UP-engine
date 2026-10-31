@@ -20,7 +20,11 @@ class SkillRouterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             image, diagnosis = self._inputs(Path(directory), {})
             plan = plan_skills(image, diagnosis)
-            self.assertEqual(plan["overall_status"], "REVIEW_REQUIRED")
+            grid = [step for step in plan["steps"] if step["skill"] == "GRID_SIAX"][0]
+            siax = [step for step in plan["steps"] if step["skill"] == "SIAX4X"][0]
+            self.assertEqual(siax["status"], "upscaled_master_available")
+            self.assertEqual(grid["status"], "blocked_not_imported")
+            self.assertEqual(plan["overall_status"], "BLOCKED")
             self.assertEqual(plan["steps"][0]["status"], "insufficient_semantic_evidence")
 
     def test_topology_error_blocks_detail_skills(self):
@@ -43,7 +47,7 @@ class SkillRouterTests(unittest.TestCase):
             self.assertEqual(plan["overall_status"], "REVIEW_REQUIRED")
             self.assertTrue(all(step["status"] == "review_required" for step in plan["steps"]))
 
-    def test_detail6_path_is_partial_and_stays_review_required(self):
+    def test_detail6_partial_path_keeps_unmigrated_grid_blocked(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             image, diagnosis = self._inputs(root, {
