@@ -22,6 +22,10 @@ class SkillRouterTests(unittest.TestCase):
             plan = plan_skills(image, diagnosis)
             self.assertEqual(plan["overall_status"], "REVIEW_REQUIRED")
             self.assertEqual(plan["steps"][0]["status"], "insufficient_semantic_evidence")
+            portfolio = plan["strategy_portfolio"]
+            self.assertEqual(portfolio["selection_mode"], "state_dependent_portfolio_not_single_fixed_method")
+            self.assertGreaterEqual(len(portfolio["strategies"]), 12)
+            self.assertTrue(all(item["execution_performed"] is False for item in portfolio["strategies"]))
 
     def test_topology_error_blocks_detail_skills(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -32,6 +36,8 @@ class SkillRouterTests(unittest.TestCase):
             image, diagnosis = self._inputs(Path(directory), observations)
             plan = plan_skills(image, diagnosis)
             self.assertEqual(plan["overall_status"], "BLOCKED")
+            strategies = {item["strategy_id"]: item for item in plan["strategy_portfolio"]["strategies"]}
+            self.assertEqual(strategies["CNN_GAN_SR"]["eligibility"], "blocked_until_topology_repaired")
             detail = [step for step in plan["steps"] if step["skill"] == "DETAIL6"][0]
             self.assertEqual(detail["status"], "blocked_by_upstream_topology")
 

@@ -7,15 +7,12 @@ import os
 
 from PIL import Image
 
-from ige.read.skill_diagnosis import GrokSkillDiagnoser, SkillDiagnosisError
+from ige.read.skill_diagnosis import GrokSkillDiagnoser, SkillDiagnosisError, SKILL_DIAGNOSIS_OBSERVATIONS
 
 
 def diagnosis_payload():
     names = (
-        "identity_drift", "topology_error", "garment_pattern_error",
-        "face_detail_low", "skin_noise", "metal_detail_low",
-        "stone_detail_low", "text_detail_low", "fire_detail_low",
-        "background_detail_low",
+        *SKILL_DIAGNOSIS_OBSERVATIONS,
     )
     observations = {}
     for name in names:
@@ -126,12 +123,7 @@ class GrokSkillDiagnosisTests(unittest.TestCase):
         report = diagnoser.diagnose(self.base)
         self.assertEqual(
             set(report["observations"]),
-            {
-                "identity_drift", "topology_error", "garment_pattern_error",
-                "face_detail_low", "skin_noise", "metal_detail_low",
-                "stone_detail_low", "text_detail_low", "fire_detail_low",
-                "background_detail_low",
-            },
+            set(SKILL_DIAGNOSIS_OBSERVATIONS),
         )
         self.assertTrue(all(item["state"] == "unknown" for item in report["observations"].values()))
 

@@ -21,6 +21,13 @@ SKILL_DIAGNOSIS_OBSERVATIONS = (
     "text_detail_low",
     "fire_detail_low",
     "background_detail_low",
+    "defocus_blur",
+    "motion_blur",
+    "compression_artifacts",
+    "jpeg_blocks",
+    "oversharpening_ringing",
+    "color_noise",
+    "low_resolution_undersampling",
 )
 
 
@@ -51,7 +58,9 @@ Return JSON only, with this exact top-level shape:
 You MUST include every observation name listed below:
 identity_drift, topology_error, garment_pattern_error, face_detail_low,
 skin_noise, metal_detail_low, stone_detail_low, text_detail_low,
-fire_detail_low, background_detail_low.
+fire_detail_low, background_detail_low, defocus_blur, motion_blur,
+compression_artifacts, jpeg_blocks, oversharpening_ringing, color_noise,
+low_resolution_undersampling.
 
 Rules:
 1. Use state=present only when the defect is directly visible and explain the visual evidence.

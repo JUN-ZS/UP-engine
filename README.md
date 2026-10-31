@@ -128,6 +128,14 @@ For defect-aware routing, provide an evidence-bearing diagnosis. A Grok Vision p
 
 A topology error blocks downstream sharpening/upscale. PATH1E, TEX4, GRID_SIAX, PIXEL_CTRL and SKIN_MAT are still documented-only until their full execution paths are imported and benchmarked. The planner reports that limitation rather than pretending to execute them.
 
+## Multi-family upscale strategy portfolio
+
+`ige skill-plan` now returns a separate `strategy_portfolio`; no additional CLI command is required. It compares 12 mechanisms rather than confusing a few migrated legacy skills with the full method space: resampling control, classical deblur/denoise/deblock, multi-scale frequency enhancement, CNN/GAN SR, Transformer SR, diffusion SR, identity-guided face repair, reference-guided SR, native generative re-detail, ROI hybrid, temporal multi-frame SR and geometry-guided SR.
+
+The portfolio is state-dependent. It considers the observed defect class, topology gate, locally verified identity/material donors, frame registration, geometry maps, masks and whether a Siax checkpoint/4x master is actually present. It lists each family's prerequisites and failure modes. A reference UUID is not a donor image; an a8b identity image is not automatically a metal/cloth texture donor. No candidate is run or accepted by this planner.
+
+See [UPSCALE_STRATEGY_PORTFOLIO.md](docs/UPSCALE_STRATEGY_PORTFOLIO.md) for the method matrix and fair-comparison protocol.
+
 ## Siax 4x + DETAIL6
 
 The first DETAIL6 execution slice accepts a genuine 4x Siax master, applies region-limited residual detail with protected face/skin/eye-white masks, and exports JPEG 4:4:4. This is not yet the complete legacy DETAIL6 skill: GRID_CLEAN/BEAT donor selection and legacy clarity proof still need migration. It explicitly forbids inflating a small image to meet a megabyte target.

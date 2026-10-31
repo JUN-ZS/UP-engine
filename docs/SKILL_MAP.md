@@ -2,6 +2,25 @@
 
 The old constitution is the source of truth for skill order and failure rules. This file records which pieces have become executable in UP-engine; a name in a map is not an implementation.
 
+## Upscale strategy layer (separate from migrated legacy skills)
+
+| Method family | Engine representation | Current status | Failure boundary |
+|---|---|---|---|
+| Resampling control | `RESAMPLE_CONTROL` | Pillow control only | Not detail recovery |
+| Classical restoration | `CLASSICAL_RESTORATION` | Not imported | Cannot recreate destroyed signal |
+| Multi-scale frequency | `MULTISCALE_FREQUENCY_ENHANCEMENT` | Not imported | May amplify noise/halos |
+| CNN/GAN SR | `CNN_GAN_SR` | Siax adapter only | Hallucinated texture risk |
+| Transformer SR | `TRANSFORMER_SR` | Not imported | Domain mismatch |
+| Diffusion SR | `DIFFUSION_SR` | Not imported | Identity/topology hallucination |
+| Identity-guided face | `IDENTITY_GUIDED_FACE_RESTORATION` | PATH1E documented-only | Alignment/identity not proved |
+| Reference-guided SR | `REFERENCE_GUIDED_SR` | Not imported | Requires actual compatible donor bytes |
+| Native generative re-detail | `NATIVE_GENERATIVE_REDETAIL` | External candidate workflow | Not pixel-faithful SR |
+| ROI hybrid | `ROI_HYBRID` | Partial foundation | Mask/seam risk |
+| Temporal multi-frame | `TEMPORAL_MULTI_FRAME_SR` | Not imported | Same-state registration required |
+| Geometry-guided SR | `GEOMETRY_GUIDED_SR` | Not imported | Estimated geometry uncertainty |
+
+This table is a strategy portfolio, not a list of 12 installed models. The separate legacy skill map below describes which procedures have actually been migrated.
+
 ## Reference and routing layer
 
 | Legacy concept | Engine implementation | Current status | Cannot substitute for |

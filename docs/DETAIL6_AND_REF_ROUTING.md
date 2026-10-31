@@ -35,6 +35,10 @@ ige diagnose-image BASE.png --out runs/diagnosis-a8b --identity-reference refere
 
 Without a supplied identity reference, identity drift is forced to `unknown`. Every model finding remains `source=grok_vision`, `verification=candidate`; no finding creates permission, geometry locks or accepted skill execution. The model confidence is uncalibrated. The endpoint is mock-tested, but a live xAI request and project-image gold benchmark remain NOT RUN.
 
+## Multi-family method selection
+
+The strategy portfolio is separate from the legacy skill map: one method family may be implemented by several models; one legacy skill may chain multiple methods. The router returns 12 candidate families, gating them by defect type, topology status, material donor availability, identity reference availability, frame registration, depth/normal/mesh availability, masks and Siax checkpoint/master state. It does not auto-run a candidate or pick a winner before comparable outputs exist. See `docs/UPSCALE_STRATEGY_PORTFOLIO.md` for details.
+
 ## Siax 4x inference
 
 Optional install: `python -m pip install -e .[upscale]`.
@@ -46,7 +50,7 @@ Checkpoint reference:
 - Mirror revision: `aadb8d07077a0818db0f43000b05442074b413be`
 - File source: https://huggingface.co/uwg/upscaler/resolve/aadb8d07077a0818db0f43000b05442074b413be/ESRGAN/4x_NMKD-Siax_200k.pth
 
-The mirror repository labels its content MIT. That label is not treated as conclusive proof of the original model's terms; the runtime requires an explicit license-review acknowledgement. The checkpoint is not committed to Git. Spandrel loads the file; the adapter requires an ESRGAN architecture and exact scale 4, then applies tile inference and writes an immutable-provenance sidecar.
+The mirror repository labels its content MIT. That label is not treated as conclusive proof of the original model's terms; the runtime requires an explicit license-review acknowledgement. The checkpoint is not committed to Git. Spandrel loads the file; the adapter requires an ESRGAN architecture and exact scale 4, then applies tile inference and writes an immutable-provenance sidecar. The output is assembled directly into a uint8 RGB canvas to avoid retaining a full 4x float32 image buffer; default tile settings are 128 pixels with an 8-pixel context pad and can be overridden.
 
 Example:
 

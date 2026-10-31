@@ -8,9 +8,10 @@ from typing import Any
 from PIL import Image, ImageOps
 
 from .references import ReferenceCatalog
+from .upscale.strategy_catalog import build_strategy_portfolio
 
 
-OBSERVATIONS = {"identity_drift", "topology_error", "garment_pattern_error", "face_detail_low", "skin_noise", "metal_detail_low", "stone_detail_low", "text_detail_low", "fire_detail_low", "background_detail_low", "detail6_requested"}
+OBSERVATIONS = {"identity_drift", "topology_error", "garment_pattern_error", "face_detail_low", "skin_noise", "metal_detail_low", "stone_detail_low", "text_detail_low", "fire_detail_low", "background_detail_low", "detail6_requested", "defocus_blur", "motion_blur", "compression_artifacts", "jpeg_blocks", "oversharpening_ringing", "color_noise", "low_resolution_undersampling"}
 VALID_STATES = {"present", "absent", "unknown"}
 
 
@@ -65,7 +66,21 @@ def load_diagnosis(path: str | Path, image_path: str | Path) -> dict[str, Any]:
         if verification not in {"human_verified", "candidate", "unverified"}:
             raise ValueError(f"observation {name}.verification is invalid")
         normalized[name] = {"state": state, "evidence": evidence, "source": source, "verification": verification}
-    return {"diagnosis_version": "1.0", "image": image_facts, "observations": normalized, "diagnosis_source": str(diagnosis_path.resolve()), "note": "Semantic defects are not inferred from raster metrics; model observations remain candidates until human-verified."}
+    references = raw.get("references", [])
+    if not isinstance(references, list) or any(not isinstance(item, dict) for item in references):
+        raise ValueError("diagnosis references must be an array of objects")
+    strategy_context = raw.get("strategy_context", {})
+    if not isinstance(strategy_context, dict):
+        raise ValueError("strategy_context must be an object")
+    return {
+        "diagnosis_version": "1.0",
+        "image": image_facts,
+        "observations": normalized,
+        "references": references,
+        "strategy_context": strategy_context,
+        "diagnosis_source": str(diagnosis_path.resolve()),
+        "note": "Semantic defects are not inferred from raster metrics; model observations remain candidates until human-verified."
+    }
 
 
 SKILL_REGISTRY: dict[str, dict[str, Any]] = {
@@ -148,4 +163,28 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
                 step["status"] = "blocked_by_upstream_topology"
     statuses = {step["status"] for step in steps}
     overall = "BLOCKED" if any(status.startswith("blocked") for status in statuses) else "REVIEW_REQUIRED" if any(status in {"review_required", "blocked_not_imported", "insufficient_semantic_evidence"} or status.startswith("partial") for status in statuses) else "READY_FOR_EXECUTION"
-    return {"plan_version": "1.0", "image": diagnosis["image"], "diagnosis_source": diagnosis["diagnosis_source"], "observations": diagnosis["observations"], "steps": steps, "overall_status": overall, "non_claims": ["Raster dimensions are observed; semantic defects require evidence-bearing diagnosis.", "Grok Vision candidates are not human_verified and cannot authorize irreversible skill execution.", "A reference UUID is not proof that its image bytes are locally available.", "A 4x file or large MB count alone does not prove visual quality."]}
+    strategy_portfolio = build_strategy_portfolio(
+        diagnosis["observations"],
+        references=diagnosis.get("references", []),
+        context=diagnosis.get("strategy_context", {}),
+        has_siax_checkpoint=bool(checkpoint_path and Path(checkpoint_path).is_file()),
+        has_4x_master=bool(upscaled_path and Path(upscaled_path).is_file()),
+        has_material_masks=bool(masks_path and Path(masks_path).is_file()),
+    )
+    return {
+        "plan_version": "1.1",
+        "image": diagnosis["image"],
+        "diagnosis_source": diagnosis["diagnosis_source"],
+        "observations": diagnosis["observations"],
+        "steps": steps,
+        "strategy_portfolio": strategy_portfolio,
+        "overall_status": overall,
+        "non_claims": [
+            "Raster dimensions are observed; semantic defects require evidence-bearing diagnosis.",
+            "Grok Vision candidates are not human_verified and cannot authorize irreversible skill execution.",
+            "A reference UUID is not proof that its image bytes are locally available.",
+            "A 4x file or large byte-size does not prove visual quality.",
+            "The strategy portfolio lists distinct method families; it does not imply every runtime is installed.",
+            "Strategy eligibility is not an empirical quality ranking."
+        ]
+    }
