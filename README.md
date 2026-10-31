@@ -50,11 +50,19 @@ Compile a task-specific generation packet:
 
 The task packet includes only the selected human-approved editable region mask; all other pixels are protected.
 
-Generate an unverified Grok Imagine candidate from the packet (persists image bytes + metadata; does not overwrite BASE):
+Primary candidate path is **HERE** (this Grok agent session + Grok Imagine tools), not the remote API:
+
+    # 1) Prepare constrained prompt + job package (default --backend here)
+    ige generate-candidate runs/task-armor/generation_packet.json source.png --out runs/task-armor/candidate
+
+    # 2) In the Grok HERE session: edit BASE with Imagine using runs/task-armor/candidate/imagine_prompt.txt
+    # 3) Ingest the produced candidate file
+    ige accept-candidate runs/task-armor/generation_packet.json source.png /path/to/here-candidate.png --out runs/task-armor/candidate --overwrite
+
+Secondary remote xAI Images API path (requires XAI_API_KEY):
 
     export XAI_API_KEY=...
-    # optional: export XAI_IMAGINE_MODEL=grok-imagine-image-2.0
-    ige generate-candidate runs/task-armor/generation_packet.json source.png --out runs/task-armor/candidate
+    ige generate-candidate runs/task-armor/generation_packet.json source.png --out runs/task-armor/candidate-api --backend xai-api
 
 Assess registration (dimension match only; no auto-resize/warp):
 

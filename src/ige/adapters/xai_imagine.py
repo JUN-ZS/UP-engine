@@ -1,4 +1,9 @@
-"""xAI Grok Imagine adapter for constrained candidate generation.
+"""xAI Grok Imagine API adapter — SECONDARY candidate generation backend.
+
+Primary backend is HERE (`here_imagine.py`): Grok agent session + Grok Imagine tools.
+This module remains available via `--backend xai-api` only.
+
+Original description: constrained candidate generation via remote xAI Images API.
 
 Imagine produces unverified candidates only. It never:
 - decides geometric correctness,
@@ -23,6 +28,7 @@ from typing import Any
 from PIL import Image, ImageOps
 
 from .base import GenerationRequest, GenerationResult
+from .imagine_prompt import nearest_supported_aspect, prompt_from_packet
 from .registration import assess_registration
 
 
@@ -89,7 +95,7 @@ class ImagineGenerationArtifact:
 
 
 class GrokImagineAdapter:
-    """Generate/edit a candidate image from a generation packet + BASE reference.
+    """SECONDARY: remote xAI API generate/edit from generation packet + BASE.
 
     Environment:
       XAI_API_KEY — required
@@ -97,7 +103,8 @@ class GrokImagineAdapter:
       XAI_API_BASE — optional, default https://api.x.ai/v1
     """
 
-    adapter_id = "xai.grok.imagine"
+    adapter_id = "xai.grok.imagine.api"
+    backend = "xai-api"
     DEFAULT_MODEL_ID = "grok-imagine-image-2.0"
     DEFAULT_API_BASE = "https://api.x.ai/v1"
     EDITS_PATH = "/images/edits"
@@ -175,28 +182,13 @@ class GrokImagineAdapter:
         if base_spec.get("height") and int(base_spec["height"]) != base_h:
             raise GrokImagineError("BASE height does not match generation packet")
 
-        objective = str(packet.get("objective") or "").strip()
-        if not objective and not (prompt and prompt.strip()):
-            raise GrokImagineError("generation packet objective is empty and no prompt was supplied")
-
-        geometry_locks = packet.get("geometry_locks", {})
-        lock_relations = geometry_locks.get("relations", []) if isinstance(geometry_locks, dict) else []
-        lock_text = _format_geometry_locks(lock_relations)
-        targets = packet.get("targets", [])
-        target_text = _format_targets(targets)
-        protected_ids = []
-        if isinstance(geometry_locks, dict):
-            protected_ids = list(geometry_locks.get("protected_region_ids") or [])
-
-        built_prompt = prompt.strip() if prompt and prompt.strip() else _default_constrained_prompt(
-            objective=objective,
-            target_text=target_text,
-            protected_region_ids=protected_ids,
-            geometry_lock_text=lock_text,
-        )
+        try:
+            built_prompt = prompt_from_packet(packet, prompt_override=prompt)
+        except ValueError as exc:
+            raise GrokImagineError(str(exc)) from exc
 
         # Prefer matching BASE aspect if caller did not force one.
-        ratio = aspect_ratio or _nearest_supported_aspect(base_w, base_h)
+        ratio = aspect_ratio or nearest_supported_aspect(base_w, base_h)
         mime, data_uri = _image_data_uri(base_path, base_bytes)
         payload = {
             "model": self.model_id,
@@ -354,96 +346,6 @@ def _extract_b64_image(body: dict[str, Any]) -> str:
     raise GrokImagineError("Imagine response did not contain b64_json image data")
 
 
-def _format_targets(targets: Any) -> str:
-    if not isinstance(targets, list) or not targets:
-        return "human-approved editable regions from generation packet"
-    parts = []
-    for item in targets:
-        if not isinstance(item, dict):
-            continue
-        rid = item.get("region_id") or "?"
-        label = item.get("label") or rid
-        semantic = item.get("semantic_type") or "object"
-        parts.append(f"{rid} ({label}, type={semantic})")
-    return "; ".join(parts) if parts else "human-approved editable regions"
 
 
-def _format_geometry_locks(relations: Any) -> str:
-    if not isinstance(relations, list) or not relations:
-        return "None supplied beyond the packet's protected-region complement."
-    lines = []
-    for relation in relations:
-        if not isinstance(relation, dict):
-            continue
-        lines.append(
-            f"- {relation.get('subject_id')} {relation.get('predicate')} "
-            f"{relation.get('object_id')}; evidence={relation.get('evidence') or relation.get('visual_evidence') or 'n/a'}"
-        )
-    return "\n".join(lines) if lines else "None."
 
-
-def _default_constrained_prompt(
-    *,
-    objective: str,
-    target_text: str,
-    protected_region_ids: list[str],
-    geometry_lock_text: str,
-) -> str:
-    protected = ", ".join(protected_region_ids) if protected_region_ids else "all non-target pixels"
-    return f"""Use the supplied BASE image as the authoritative visual reference. This is a controlled image-editing task, NOT a free redesign.
-
-TASK
-* Objective: {objective}
-* Editable regions: {target_text}
-* Protected regions: {protected}
-* Human-verified geometry constraints:
-{geometry_lock_text}
-* Required visual state: apply only the objective above.
-
-STRICT PRESERVATION RULES
-1. Preserve the original camera position, viewing angle, perspective, framing, and composition.
-2. Preserve the identity, silhouette, topology, proportions, and material identity of every object unless the task explicitly authorizes a change.
-3. Do not redesign, replace, duplicate, merge, remove, or invent objects.
-4. Do not modify protected content intentionally. The final pixel-level protection will be enforced separately by the UP-engine compositor.
-5. Do not treat uncertain or model-inferred relationships as confirmed geometry.
-6. Do not introduce extra objects, decorative elements, text, labels, watermarks, borders, or a collage.
-7. Return one full-frame candidate image. Do not return a contact sheet or multiple alternative designs.
-
-GEOMETRY RULES
-* Follow every human-verified geometry constraint exactly.
-* Physical contact must occur only at the specified surfaces.
-* Do not create false contact between nearby or crossing objects.
-* Preserve rigid-object geometry. Do not bend, melt, stretch, fuse, or deform rigid parts.
-* Do not change the camera to hide a geometry error.
-* If a requested edit cannot be represented without violating a locked constraint, prioritize the locked constraint.
-
-OUTPUT
-* Produce a single candidate image for this request.
-* Do not claim that the output is pixel-aligned, geometrically validated, or pixel-preserving.
-* The output is an unverified candidate for UP-engine registration and audit.
-"""
-
-
-def _nearest_supported_aspect(width: int, height: int) -> str | None:
-    if width <= 0 or height <= 0:
-        return None
-    value = width / float(height)
-    # Supported ratios documented by xAI Imagine API (approx matches).
-    candidates = {
-        "1:1": 1.0,
-        "16:9": 16 / 9,
-        "9:16": 9 / 16,
-        "4:3": 4 / 3,
-        "3:4": 3 / 4,
-        "3:2": 3 / 2,
-        "2:3": 2 / 3,
-        "2:1": 2.0,
-        "1:2": 0.5,
-        "21:9": 21 / 9,
-        "5:2": 2.5,
-    }
-    best = min(candidates.items(), key=lambda item: abs(item[1] - value))
-    # If far from all named ratios, omit and let API auto-select.
-    if abs(best[1] - value) / value > 0.08:
-        return None
-    return best[0]

@@ -10,7 +10,8 @@
 | UP-engine | Human confirm → Generation Contract → registration → composite → pixel audit | Relax hard gates because the model changed |
 
 **Default reasoner CLI path:** `--reasoner grok` (env `XAI_API_KEY`, optional `XAI_VISION_MODEL`, default model id `grok-4`).
-**Default Imagine path:** `ige generate-candidate` (env `XAI_API_KEY`, optional `XAI_IMAGINE_MODEL`, default `grok-imagine-image-2.0`).
+**Primary Imagine backend: HERE** — `ige generate-candidate` (default `--backend here`) prepares `imagine_job.json` + `imagine_prompt.txt`; agent uses Grok Imagine tools; then `ige accept-candidate` ingests bytes.
+**Secondary Imagine backend: xAI API** — `ige generate-candidate --backend xai-api` (env `XAI_API_KEY`, optional `XAI_IMAGINE_MODEL`, default `grok-imagine-image-2.0`).
 **Qwen:** deprecated; explicit `--reasoner qwen` only; never fallback.
 
 API references used for integration (verify on docs.x.ai at integration time):

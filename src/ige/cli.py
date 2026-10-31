@@ -85,17 +85,46 @@ def build_parser() -> argparse.ArgumentParser:
 
     generate = sub.add_parser(
         "generate-candidate",
-        help="call Grok Imagine to produce an unverified candidate from a generation packet + BASE",
+        help=(
+            "candidate generation. Default backend=here prepares a HERE Grok Imagine job "
+            "(and can ingest --candidate). Secondary backend=xai-api calls remote Images API."
+        ),
     )
     generate.add_argument("packet", type=Path, help="generation_packet.json")
     generate.add_argument("base", type=Path, help="exact original BASE image")
     generate.add_argument("--out", type=Path, required=True, help="candidate output directory")
+    generate.add_argument(
+        "--backend",
+        choices=("here", "xai-api"),
+        default="here",
+        help="primary: here (Grok Imagine in agent session). secondary: xai-api remote Images API",
+    )
+    generate.add_argument(
+        "--candidate",
+        type=Path,
+        default=None,
+        help="HERE backend only: path to a candidate image already produced by Grok Imagine tools",
+    )
     generate.add_argument("--prompt", default=None, help="optional full prompt override; otherwise packet-constrained default")
-    generate.add_argument("--model-id", default=None, help="Imagine model ID override (or XAI_IMAGINE_MODEL)")
-    generate.add_argument("--aspect-ratio", default=None, help="optional Imagine aspect_ratio, e.g. 16:9")
-    generate.add_argument("--resolution", default="2k", help="Imagine resolution: 1k or 2k")
-    generate.add_argument("--quality", default="medium", help="Imagine quality: low, medium, or auto")
+    generate.add_argument("--model-id", default=None, help="model/adapter id override")
+    generate.add_argument("--aspect-ratio", default=None, help="optional aspect_ratio hint, e.g. 16:9")
+    generate.add_argument("--resolution", default="2k", help="xai-api only: 1k or 2k")
+    generate.add_argument("--quality", default="medium", help="xai-api only: low, medium, or auto")
+    generate.add_argument("--request-id", default=None, help="optional HERE asset/request id for audit metadata")
     generate.add_argument("--overwrite", action="store_true")
+
+    accept = sub.add_parser(
+        "accept-candidate",
+        help="ingest a HERE Grok Imagine candidate into UP-engine audit layout (alias of generate-candidate --backend here --candidate)",
+    )
+    accept.add_argument("packet", type=Path)
+    accept.add_argument("base", type=Path)
+    accept.add_argument("candidate", type=Path)
+    accept.add_argument("--out", type=Path, required=True)
+    accept.add_argument("--prompt", default=None)
+    accept.add_argument("--model-id", default=None)
+    accept.add_argument("--request-id", default=None)
+    accept.add_argument("--overwrite", action="store_true")
 
     register = sub.add_parser(
         "assess-registration",
@@ -211,29 +240,95 @@ def main() -> int:
         return 0
 
     if args.command == "generate-candidate":
-        from .adapters.xai_imagine import GrokImagineAdapter
+        if args.backend == "here":
+            from .adapters.here_imagine import HereImagineAdapter
 
-        adapter = GrokImagineAdapter(model_id=args.model_id)
-        artifact = adapter.generate_from_packet(
+            adapter = HereImagineAdapter(model_id=args.model_id)
+            if args.candidate is None:
+                job = adapter.prepare_job(
+                    args.packet,
+                    args.base,
+                    args.out,
+                    prompt=args.prompt,
+                    aspect_ratio=args.aspect_ratio,
+                    overwrite=args.overwrite,
+                )
+                print(f"HERE Imagine job prepared: {job.job_path}")
+                print(f"Prompt: {job.prompt_path}")
+                print(f"BASE: {job.base_width}x{job.base_height} sha256={job.base_sha256}")
+                print(f"Status: {job.status}")
+                print("Next: generate candidate HERE with Grok Imagine tools using BASE + prompt,")
+                print("then: ige generate-candidate ... --backend here --candidate <file> --out <dir> --overwrite")
+                print("or:  ige accept-candidate <packet> <base> <candidate> --out <dir>")
+                return 0
+
+            artifact = adapter.ingest_candidate(
+                args.packet,
+                args.base,
+                args.candidate,
+                args.out,
+                prompt=args.prompt,
+                request_id=args.request_id,
+                overwrite=args.overwrite,
+            )
+            print(f"HERE candidate ingested: {artifact.candidate_path}")
+            print(f"Backend: {artifact.backend} model={artifact.model_id}")
+            print(f"Candidate SHA256: {artifact.candidate_sha256}")
+            print(
+                f"Size: candidate {artifact.candidate_width}x{artifact.candidate_height} | "
+                f"BASE {artifact.base_width}x{artifact.base_height}"
+            )
+            print(f"Registration quality: {artifact.registration_quality}")
+            print(f"Metadata: {artifact.metadata_path}")
+            print("Status: unverified candidate — not accepted, not pixel-preserving by claim")
+            return 0
+
+        if args.backend == "xai-api":
+            from .adapters.xai_imagine import GrokImagineAdapter
+
+            adapter = GrokImagineAdapter(model_id=args.model_id)
+            artifact = adapter.generate_from_packet(
+                args.packet,
+                args.base,
+                args.out,
+                prompt=args.prompt,
+                aspect_ratio=args.aspect_ratio,
+                resolution=args.resolution,
+                quality=args.quality,
+                overwrite=args.overwrite,
+            )
+            print(f"xAI API candidate written: {artifact.candidate_path}")
+            print(f"Model: {artifact.model_id} request_id={artifact.request_id}")
+            print(f"Candidate SHA256: {artifact.candidate_sha256}")
+            print(
+                f"Size: candidate {artifact.candidate_width}x{artifact.candidate_height} | "
+                f"BASE {artifact.base_width}x{artifact.base_height}"
+            )
+            print(f"Registration quality: {artifact.registration_quality}")
+            print(f"Metadata: {artifact.metadata_path}")
+            print("Status: unverified candidate — secondary xai-api backend")
+            return 0
+
+        parser.error(f"unsupported backend: {args.backend}")
+        return 2
+
+    if args.command == "accept-candidate":
+        from .adapters.here_imagine import HereImagineAdapter
+
+        adapter = HereImagineAdapter(model_id=args.model_id)
+        artifact = adapter.ingest_candidate(
             args.packet,
             args.base,
+            args.candidate,
             args.out,
             prompt=args.prompt,
-            aspect_ratio=args.aspect_ratio,
-            resolution=args.resolution,
-            quality=args.quality,
+            request_id=args.request_id,
             overwrite=args.overwrite,
         )
-        print(f"Imagine candidate written: {artifact.candidate_path}")
-        print(f"Model: {artifact.model_id} request_id={artifact.request_id}")
+        print(f"HERE candidate ingested: {artifact.candidate_path}")
         print(f"Candidate SHA256: {artifact.candidate_sha256}")
-        print(
-            f"Size: candidate {artifact.candidate_width}x{artifact.candidate_height} | "
-            f"BASE {artifact.base_width}x{artifact.base_height}"
-        )
         print(f"Registration quality: {artifact.registration_quality}")
         print(f"Metadata: {artifact.metadata_path}")
-        print("Status: unverified candidate — not accepted, not pixel-preserving by claim")
         return 0
 
     if args.command == "assess-registration":

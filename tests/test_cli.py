@@ -29,7 +29,21 @@ class CliParserTests(unittest.TestCase):
             "source.png", "--out", "runs/task-1/candidate"
         ])
         self.assertEqual(generate_args.command, "generate-candidate")
+        self.assertEqual(generate_args.backend, "here")
+        self.assertIsNone(generate_args.candidate)
         self.assertEqual(generate_args.resolution, "2k")
+
+        generate_api = parser.parse_args([
+            "generate-candidate", "packet.json", "base.png",
+            "--out", "out", "--backend", "xai-api"
+        ])
+        self.assertEqual(generate_api.backend, "xai-api")
+
+        accept = parser.parse_args([
+            "accept-candidate", "packet.json", "base.png", "cand.png",
+            "--out", "out"
+        ])
+        self.assertEqual(accept.command, "accept-candidate")
 
         register_args = parser.parse_args([
             "assess-registration", "source.png", "candidate.png"

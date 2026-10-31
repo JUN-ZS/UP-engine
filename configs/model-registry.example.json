@@ -1,12 +1,36 @@
 {
-  "registry_version": "0.6.0",
+  "registry_version": "0.6.1",
   "policy": "fail_closed",
   "models": [
+    {
+      "model_id": "grok.imagine.here",
+      "api_model_id_default": "grok-imagine-here",
+      "role": "primary_candidate_image_generator_editor",
+      "supported_tasks": [
+        "generate_candidate",
+        "edit_candidate"
+      ],
+      "license_status": "review_required",
+      "license": "xAI / Grok Imagine product terms",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "HERE Grok agent session + Grok Imagine tools; UP-engine prepares job and ingests candidate",
+        "backend": "here",
+        "primary": true,
+        "local_weights": false
+      },
+      "enabled": false,
+      "reason": "PRIMARY candidate path. Operator/agent generates with Imagine tools; engine does not auto-accept geometry."
+    },
     {
       "model_id": "xai.grok.vision",
       "api_model_id_default": "grok-4",
       "role": "primary_rgb_visual_reasoner",
-      "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
+      "supported_tasks": [
+        "read_objects",
+        "read_relations",
+        "spatial_grounding"
+      ],
       "license_status": "review_required",
       "license": "xAI API Terms",
       "validation_status": "untested",
@@ -22,10 +46,13 @@
       "reason": "Active READ visual reasoner adapter. Requires XAI_API_KEY. Outputs remain unreviewed candidates. Project gold-set replay is required before enablement."
     },
     {
-      "model_id": "xai.grok.imagine",
+      "model_id": "xai.grok.imagine.api",
       "api_model_id_default": "grok-imagine-image-2.0",
-      "role": "candidate_image_generator_editor",
-      "supported_tasks": ["generate_candidate", "edit_candidate"],
+      "role": "secondary_candidate_image_generator_editor",
+      "supported_tasks": [
+        "generate_candidate",
+        "edit_candidate"
+      ],
       "license_status": "review_required",
       "license": "xAI API Terms",
       "validation_status": "untested",
@@ -35,25 +62,38 @@
         "auth_env": "XAI_API_KEY",
         "model_env": "XAI_IMAGINE_MODEL",
         "local_weights": false,
-        "measured_latency_seconds": null
+        "measured_latency_seconds": null,
+        "primary": false,
+        "backend": "xai-api"
       },
       "enabled": false,
-      "reason": "Independent candidate generator. Does not authorize geometry or overwrite BASE. Registration gate is separate and may BLOCK E2E when dimensions differ."
+      "reason": "SECONDARY remote Images API path (--backend xai-api). Not the default."
     },
     {
       "model_id": "meta.sam3.1",
       "role": "semantic_segmentation_proposal",
-      "supported_tasks": ["read_segment"],
+      "supported_tasks": [
+        "read_segment"
+      ],
       "license_status": "review_required",
       "validation_status": "untested",
-      "environment": {"python": ">=3.12", "pytorch": ">=2.7", "cuda": ">=12.6", "checkpoint_access": "separate approval and authentication required"},
+      "environment": {
+        "python": ">=3.12",
+        "pytorch": ">=2.7",
+        "cuda": ">=12.6",
+        "checkpoint_access": "separate approval and authentication required"
+      },
       "enabled": false,
       "reason": "Open-vocabulary pixel segmentation candidate. Not a geometry validator."
     },
     {
       "model_id": "Qwen/Qwen3.8-27B",
       "role": "deprecated_open_weight_rgb_visual_reasoner_comparison",
-      "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
+      "supported_tasks": [
+        "read_objects",
+        "read_relations",
+        "spatial_grounding"
+      ],
       "license_status": "approved",
       "license": "Apache-2.0",
       "validation_status": "untested",
@@ -70,49 +110,80 @@
     {
       "model_id": "Qwen/Qwen3.6-27B",
       "role": "deprecated_previous_generation_rgb_visual_reasoner_baseline",
-      "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
+      "supported_tasks": [
+        "read_objects",
+        "read_relations",
+        "spatial_grounding"
+      ],
       "license_status": "approved",
       "license": "Apache-2.0",
       "validation_status": "untested",
-      "runtime": {"deprecated": true, "not_default": true, "not_fallback": true},
+      "runtime": {
+        "deprecated": true,
+        "not_default": true,
+        "not_fallback": true
+      },
       "enabled": false,
       "reason": "DEPRECATED baseline comparison only."
     },
     {
       "model_id": "Qwen/Qwen3-VL-8B-Instruct",
       "role": "deprecated_older_low_parameter_rgb_visual_reasoner_baseline",
-      "supported_tasks": ["read_objects", "read_relations"],
+      "supported_tasks": [
+        "read_objects",
+        "read_relations"
+      ],
       "license_status": "approved",
       "license": "Apache-2.0",
       "validation_status": "untested",
-      "runtime": {"deprecated": true, "not_default": true, "not_fallback": true},
+      "runtime": {
+        "deprecated": true,
+        "not_default": true,
+        "not_fallback": true
+      },
       "enabled": false,
       "reason": "DEPRECATED historical baseline."
     },
     {
       "model_id": "Qwen/Qwen3.8-35B-A3B",
       "role": "deprecated_moe_rgb_visual_reasoner_comparison",
-      "supported_tasks": ["read_objects", "read_relations", "spatial_grounding"],
+      "supported_tasks": [
+        "read_objects",
+        "read_relations",
+        "spatial_grounding"
+      ],
       "license_status": "approved",
       "license": "Apache-2.0",
       "validation_status": "untested",
-      "runtime": {"deprecated": true, "not_default": true, "not_fallback": true},
+      "runtime": {
+        "deprecated": true,
+        "not_default": true,
+        "not_fallback": true
+      },
       "enabled": false,
       "reason": "DEPRECATED MoE comparison candidate."
     },
     {
       "model_id": "lhzzzzzy/HiSpatial-3B",
       "role": "rgb_xyz_spatial_reasoner_candidate",
-      "supported_tasks": ["spatial_relations", "depth_order", "orientation"],
+      "supported_tasks": [
+        "spatial_relations",
+        "depth_order",
+        "orientation"
+      ],
       "license_status": "review_required",
       "license": "Gemma Terms of Use",
       "validation_status": "untested",
-      "runtime": {"input": "RGB image plus metric XYZ point map", "depth_estimator": "MoGe"},
+      "runtime": {
+        "input": "RGB image plus metric XYZ point map",
+        "depth_estimator": "MoGe"
+      },
       "enabled": false,
       "reason": "Specialist comparison candidate. Still disabled."
     }
   ],
   "notes": [
+    "Primary Imagine backend is HERE (agent + tools); xAI Images API is secondary.",
     "No model is enabled by default.",
     "Grok Vision is the active READ reasoner adapter; Qwen adapters are deprecated and disabled.",
     "Grok failure must not fall back to Qwen.",

@@ -34,3 +34,13 @@ Non-claims:
 - Adapter presence ≠ gold-set PASS.
 - API call success ≠ final_acceptance.
 - Imagine prompt text is not a permission system.
+
+## 2026-11-01 — HERE is the primary Imagine generation backend
+
+Decision:
+- Primary candidate generation backend: **HERE** (`grok.imagine.here`).
+  - Grok agent session uses Grok Imagine tools with BASE + constrained prompt from the generation packet.
+  - UP-engine prepares the job (`imagine_job.json` / `imagine_prompt.txt`) and ingests the resulting candidate.
+- Secondary backend: remote xAI Images API (`xai.grok.imagine.api`) via `--backend xai-api`.
+- Default CLI: `ige generate-candidate ...` uses `--backend here`.
+- Neither backend grants geometry lock, pixel preservation claim, or final_acceptance.

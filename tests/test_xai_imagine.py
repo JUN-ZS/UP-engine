@@ -140,6 +140,7 @@ class GrokImagineAdapterTests(unittest.TestCase):
             self.assertIn("/images/edits", url)
             self.assertEqual(payload["response_format"], "b64_json")
             self.assertEqual(payload["model"], "grok-imagine-image-2.0")
+            # secondary API path
             self.assertIn("image", payload)
             return {
                 "data": [{"b64_json": b64, "mime_type": "image/png"}],

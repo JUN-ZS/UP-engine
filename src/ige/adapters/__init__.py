@@ -1,7 +1,8 @@
-"""Optional model-provider adapters. No provider is enabled by default.
+"""Optional model-provider adapters.
 
-Active generation path: xAI Grok Imagine (see xai_imagine.py).
-Registration gate: registration.py — must pass before compositor.
+Primary candidate generation: HERE Grok Imagine (`here_imagine.py`).
+Secondary candidate generation: remote xAI Images API (`xai_imagine.py`).
+Registration gate: `registration.py` — must pass before compositor.
 """
 
 from .registration import (

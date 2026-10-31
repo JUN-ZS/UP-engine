@@ -21,6 +21,7 @@ jobs:
       - run: ige read-image --help
       - run: ige compile-generation --help
       - run: ige generate-candidate --help
+      - run: ige accept-candidate --help
       - run: ige assess-registration --help
       - run: ige composite-generation --help
       - name: Mark live xAI API E2E status
