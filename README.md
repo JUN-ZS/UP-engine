@@ -2,7 +2,7 @@
 
 A clean, independently versioned engine for **reading an image, planning a constrained edit, routing to a suitable generator, reconstructing the result, and validating what changed**.
 
-> Status: READ v0.3 prepares visual-reasoning proposals and task-specific generation packets. A deterministic pixel-preserving compositor is executable; production image generation and automatic registration are not wired in yet.
+> Status: READ v0.3 + Grok adapters. Grok Vision is the active READ reasoner path; Grok Imagine is the candidate generator adapter; registration is a separate gate. Qwen is deprecated and never used as fallback. Live xAI E2E remains NOT RUN without XAI_API_KEY and gold annotations.
 
 ## Non-negotiable design rules
 
@@ -17,7 +17,7 @@ A clean, independently versioned engine for **reading an image, planning a const
 
 INTAKE → READ → HUMAN REVIEW/LOCK → TASK-SCOPED MASK + GEOMETRY CONTRACT → MODEL ROUTE → GENERATE CANDIDATE → REGISTER → RECONSTRUCT → VALIDATE → ACCEPT/REJECT
 
-READ v0.3 adds optional Qwen3.8 visual proposals and task-specific generation packets. It does not invoke an image generator automatically.
+READ v0.3 adds optional Grok Vision visual proposals (Qwen retained only as deprecated comparison) and task-specific generation packets. `ige generate-candidate` can call Grok Imagine; outputs remain unverified candidates.
 
 ## Quick start
 
@@ -31,14 +31,18 @@ Run READ Studio in a browser to annotate the actual BASE image and export region
 
     ige read-image source.png --out runs/read-001 --regions read_regions.json --relations read_relations.json
 
-Optionally request Qwen visual object/part/relation proposals (install a compatible PyTorch build and UP-engine's VLM extra first):
+Optionally request Grok Vision object/part/relation proposals (requires XAI_API_KEY; no Transformers/Qwen import on this path):
+
+    export XAI_API_KEY=...
+    # optional: export XAI_VISION_MODEL=grok-4
+    ige read-image source.png --out runs/read-002 --regions read_regions.json --relations read_relations.json --reasoner grok
+
+These proposals are not accepted relations or edit masks. Inspect the output preview and analysis.json, then manually confirm or correct regions/relations in READ Studio. Geometry locks require human verification.
+
+Deprecated comparison only (explicit, never fallback):
 
     python -m pip install -e ".[vlm]"
-    ige read-image source.png --out runs/read-002 --regions read_regions.json --relations read_relations.json --reasoner qwen
-
-The default reasoner checkpoint is Qwen/Qwen3.8-27B. Override with --reasoning-model to compare another Qwen model. The default output mode disables thinking to preserve strict JSON; thinking-mode comparisons require their own measured test.
-
-These proposals are not accepted relations or edit masks. Inspect the output preview and analysis.json, then manually confirm or correct regions/relations in READ Studio.
+    ige read-image source.png --out runs/read-qwen --regions read_regions.json --relations read_relations.json --reasoner qwen
 
 Compile a task-specific generation packet:
 
@@ -46,31 +50,50 @@ Compile a task-specific generation packet:
 
 The task packet includes only the selected human-approved editable region mask; all other pixels are protected.
 
-Once an external generator has produced a candidate already registered to the BASE dimensions, composite it and run the pixel-diff audit:
+Primary candidate path is **HERE** (this Grok agent session + Grok Imagine tools), not the remote API:
 
-    ige composite-generation runs/task-armor/generation_packet.json source.png registered-candidate.png --out runs/task-armor/composite.png --model-id your-generator-id
+    # 1) Prepare constrained prompt + job package (default --backend here)
+    ige generate-candidate runs/task-armor/generation_packet.json source.png --out runs/task-armor/candidate
+
+    # 2) In the Grok HERE session: edit BASE with Imagine using runs/task-armor/candidate/imagine_prompt.txt
+    # 3) Ingest the produced candidate file
+    ige accept-candidate runs/task-armor/generation_packet.json source.png /path/to/here-candidate.png --out runs/task-armor/candidate --overwrite
+
+Secondary remote xAI Images API path (requires XAI_API_KEY):
+
+    export XAI_API_KEY=...
+    ige generate-candidate runs/task-armor/generation_packet.json source.png --out runs/task-armor/candidate-api --backend xai-api
+
+Assess registration (dimension match only; no auto-resize/warp):
+
+    ige assess-registration source.png runs/task-armor/candidate/candidate.png
+
+If registration allows, composite and run the pixel-diff audit:
+
+    ige composite-generation runs/task-armor/generation_packet.json source.png runs/task-armor/candidate/candidate.png --out runs/task-armor/composite.png --model-id xai.grok.imagine --require-registration-gate
 
 The strict compositor accepts PNG output only, never resizes a candidate, re-checks BASE and mask hashes, verifies the encoded result has zero changes outside the task mask, and leaves identity/pose/topology/registration gates pending. See docs/GENERATION_HANDOFF.md.
 
 ## Model roles
 
+- Grok Vision (xAI Responses API, default model env `XAI_VISION_MODEL` / `grok-4`): **active** READ object/part/relation proposer.
+- Grok Imagine (`grok-imagine-image-2.0` via `XAI_IMAGINE_MODEL`): independent candidate image editor/generator.
 - SAM 3.1: optional pixel segmentation proposal model.
-- Qwen3.8-27B: primary open-weight RGB object/part/relation candidate; BF16 weights are about 55.6GB.
-- Qwen3.6-27B and Qwen3-VL-8B: previous-generation comparison baselines.
-- Qwen3.8-35B-A3B: sparse-MoE comparison; 3B active parameters do not mean 3B weight storage.
-- HiSpatial-3B: optional RGB+XYZ spatial specialist; requires MoGe point-map estimation.
+- Qwen family: **deprecated** comparison-only local VLMs; not default; never silent fallback.
+- HiSpatial-3B: optional RGB+XYZ spatial specialist; still disabled.
 
-No model is enabled automatically. Hardware, license and project-specific quality must be checked before routing. Model candidates are not validated merely because their weights load.
+No model is enabled automatically. Hardware, license and project-specific quality must be checked before routing. Calling an API is not the same as passing pixel/geometry acceptance.
 
 ## Current scope and explicit non-claims
 
 - READ v0.3 exports source provenance, region masks, segmentation/VLM proposals, human-authored relations and a task-scoped pixel whitelist.
-- VLM outputs are strict, evidence-bearing proposals with uncalibrated confidence; they cannot self-verify relations.
+- Grok Vision / Imagine adapters are wired; live API E2E is NOT RUN unless XAI_API_KEY is present and gold annotations exist.
+- VLM outputs are strict, evidence-bearing proposals with uncalibrated confidence; they cannot self-verify relations or act as their own exam grader.
 - Generation packets preserve only human-verified relations and check original image / mask SHA-256 hashes.
+- Registration adapter reports dimension match only; size match ≠ geometric registration. Mismatch → BLOCKED, never silent resize.
 - The deterministic compositor checks pixel preservation only; geometry, registration, identity, pose and topology remain separate gates.
-- No production image-generation adapter or automatic registration model is wired in yet.
-- No image-quality, identity-preservation or spatial-reasoning improvement is claimed before evaluation on the project's real test corpus.
-- No model weights, private images or legacy artifact dumps are included.
+- No image-quality, identity-preservation or spatial-reasoning improvement is claimed before evaluation on the project's real gold test corpus.
+- No model weights, private images, API keys or legacy artifact dumps are included.
 
 ## Source project
 

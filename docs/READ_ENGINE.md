@@ -171,6 +171,12 @@ READ must stop rather than silently degrade when:
 
 There is no implicit resize of model masks. A geometric mask must not be stretched to fit because that conceals a coordinate-space error.
 
+## Grok Vision (active reasoner)
+
+Use `--reasoner grok` with `XAI_API_KEY`. Optional `XAI_VISION_MODEL` selects the image-capable Grok model ID (default `grok-4`). High-detail image input is requested. Outputs pass through the same strict JSON parser as before and are forced to candidate / source=model / edit_permission=false / geometry_lock=false.
+
+Qwen remains available only via explicit `--reasoner qwen` and is deprecated. Grok failure does not fall back to Qwen.
+
 ## Known v0.3 limits
 
 - Region polygons and relations can be created in the local-only READ Studio under tools/read-studio/; the visual reviewer is intentionally manual and does not infer hidden geometry.

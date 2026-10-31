@@ -1,4 +1,24 @@
-# Visual reasoning and generation handoff — READ v0.3
+# Visual reasoning and generation handoff — READ v0.3 + Grok adapters
+
+## Active stack (2026-11)
+
+| Component | Responsibility | Must not do |
+| --- | --- | --- |
+| Grok CLI / coding agent | Edit UP-engine, run tests, wire adapters | Claim visual geometry passed without independent audit |
+| Grok Vision | READ candidates: objects, parts, boxes, relations, uncertainty | Promote candidates to human_verified / geometry_lock |
+| Grok Imagine | Produce unverified candidate images from generation packet + BASE | Decide geometric correctness; overwrite BASE/packet |
+| UP-engine | Human confirm → Generation Contract → registration → composite → pixel audit | Relax hard gates because the model changed |
+
+**Default reasoner CLI path:** `--reasoner grok` (env `XAI_API_KEY`, optional `XAI_VISION_MODEL`, default model id `grok-4`).
+**Primary Imagine backend: HERE** — `ige generate-candidate` (default `--backend here`) prepares `imagine_job.json` + `imagine_prompt.txt`; agent uses Grok Imagine tools; then `ige accept-candidate` ingests bytes.
+**Secondary Imagine backend: xAI API** — `ige generate-candidate --backend xai-api` (env `XAI_API_KEY`, optional `XAI_IMAGINE_MODEL`, default `grok-imagine-image-2.0`).
+**Qwen:** deprecated; explicit `--reasoner qwen` only; never fallback.
+
+API references used for integration (verify on docs.x.ai at integration time):
+- Vision: `POST /v1/responses` with `input_image` + `detail: high`
+- Imagine edit: `POST /v1/images/edits` with `response_format: b64_json` (persist bytes, never URL-only)
+
+---
 
 ## Why use separate perception models
 
@@ -7,11 +27,11 @@ The image reconstruction problem contains two different prediction tasks:
 1. **Where are the pixels?** A segmentation model should propose pixel masks.
 2. **What does the scene mean?** A vision-language model should propose object/part identities and relations such as part_of, occludes, contacts_at, opposes and aligned_with.
 
-UP-engine does not ask one model to do both jobs. SAM 3.1 is the optional pixel segmentation provider. Qwen3.8-27B is the primary open-weight RGB visual reasoner candidate. Their outputs are evidence proposals and remain separate.
+UP-engine does not ask one model to do both jobs. SAM 3.1 is the optional pixel segmentation provider. Qwen3.8-27B was the previous open-weight RGB visual reasoner candidate and is now **deprecated** for the active path. Their outputs are evidence proposals and remain separate.
 
 ## Model research and routing decision
 
-### Qwen3.8-27B — primary RGB visual reasoner candidate
+### Qwen3.8-27B — DEPRECATED comparison baseline
 
 The official Qwen3.8 project describes a native vision-language model for image and video understanding, with improved multimodal reasoning and agent execution. The Qwen3.8-27B Hugging Face model card lists Apache-2.0 and a BF16 checkpoint size of approximately 55.6GB. Its public benchmark table includes spatial / embodied tasks such as ERQA; the reported ERQA score is higher than the Qwen3.6-27B result in the same table. These are upstream benchmarks, not a prediction of accuracy on the project's exact hammer-contact or garment-boundary examples.
 
@@ -20,7 +40,7 @@ Sources:
 - https://huggingface.co/Qwen/Qwen3.8-27B
 - https://huggingface.co/Qwen/Qwen3.8-35B-A3B
 
-UP-engine includes an optional local adapter for Qwen3.8-27B. It is not enabled by the model router because it has not yet been benchmarked on the project's own images. The adapter uses Transformers AutoModelForImageTextToText, requires Transformers >=5.8.1 and an independently compatible PyTorch build. The structured READ adapter disables chain-of-thought output so the result can be parsed as one strict JSON object. A separate benchmark should compare direct-output mode with thinking mode; neither is assumed superior for relation precision without measurement.
+UP-engine retains an optional local adapter for Qwen3.8-27B for explicit comparison only. It is not the default reasoner and is never used as a fallback when Grok fails. The adapter uses Transformers AutoModelForImageTextToText, requires Transformers >=5.8.1 and an independently compatible PyTorch build. The structured READ adapter disables chain-of-thought output so the result can be parsed as one strict JSON object. A separate benchmark should compare direct-output mode with thinking mode; neither is assumed superior for relation precision without measurement.
 
 The Qwen3.8-27B BF16 checkpoint is about 55.6GB on the model repository. An NVIDIA NIM NVFP4 package is listed at about 20.44GB, but that is a specific quantized distribution, not a universal peak-VRAM figure. Actual peak memory depends on runtime, image resolution, context, attention/KV cache, batch size and quantization. The user's GPU is not yet recorded, so no local execution claim is made.
 

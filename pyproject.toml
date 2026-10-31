@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "up-engine"
-version = "0.4.0"
+version = "0.5.0"
 description = "A contract-first, region-aware image generation and reconstruction engine"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -18,6 +18,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = []
 vlm = ["transformers>=5.8.1"]
+xai = []  # Grok Vision/Imagine use stdlib urllib; only XAI_API_KEY is required
+
 
 [project.scripts]
 ige = "ige.cli:main"

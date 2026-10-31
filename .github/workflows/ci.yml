@@ -20,4 +20,14 @@ jobs:
       - run: ige validate-manifest examples/peep_manifest.json
       - run: ige read-image --help
       - run: ige compile-generation --help
+      - run: ige generate-candidate --help
+      - run: ige accept-candidate --help
+      - run: ige assess-registration --help
       - run: ige composite-generation --help
+      - name: Mark live xAI API E2E status
+        run: |
+          if [ -z "${XAI_API_KEY:-}" ]; then
+            echo "xAI API E2E: NOT RUN (no XAI_API_KEY in CI secrets)"
+          else
+            echo "xAI API E2E: key present but live E2E is opt-in and not asserted green without gold annotations"
+          fi

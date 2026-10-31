@@ -1,67 +1,26 @@
 from __future__ import annotations
 
+import warnings
 from pathlib import Path
 
+from ..reasoner_prompt import REASONER_OUTPUT_SCHEMA_PROMPT
 from ..reasoning import ReasoningProposalSet, parse_reasoning_response
 
 
-OUTPUT_SCHEMA_PROMPT = """You are a visual inspection component inside a constrained image reconstruction engine.
-Propose visible objects, visible object parts and directly observable 2D relations.
-Do not write a final image prompt. Do not claim hidden 3D facts from one 2D image.
-Distinguish visible evidence from plausible assumptions. If a contact, occlusion or attachment is ambiguous, omit that relation and explain the uncertainty.
-Return only one valid JSON object. No Markdown fences or prose outside JSON.
-Coordinates are normalized 0.0 to 1.0, origin top-left, x right, y down.
-Never declare anything human-verified. Every output remains a model proposal.
-
-Return this exact top-level shape:
-{
-  "nodes": [
-    {
-      "id": "short_unique_id",
-      "label": "concise visible name",
-      "semantic_type": "person|face|hand|garment|hammer_head|cylindrical_end_face|shaft_side|hair|background|other",
-      "bbox_xyxy_norm": [0.0, 0.0, 1.0, 1.0],
-      "visual_evidence": "what is directly visible inside this box",
-      "uncertainty": "low|medium|high|unknown"
-    }
-  ],
-  "relations": [
-    {
-      "id": "short_unique_relation_id",
-      "subject_id": "node id",
-      "predicate": "part_of|occludes|in_front_of|behind|touches|contacts_at|attached_to|aligned_with|opposes|parallel_to|perpendicular_to|same_object_as",
-      "object_id": "node id",
-      "confidence": 0.0,
-      "evidence_bbox_xyxy_norm": [0.0, 0.0, 1.0, 1.0],
-      "visual_evidence": "specific visible features supporting the relation",
-      "uncertainty": "low|medium|high|unknown",
-      "details": {}
-    }
-  ],
-  "uncertainties": ["unresolved question or ambiguity"]
-}
-
-Rules:
-- Every node and relation has a normalized box, with x1 < x2 and y1 < y2.
-- Relations may only reference node IDs present in nodes.
-- For contacts_at, details must contain subject_surface and object_surface. Name actual surface types, e.g. cylindrical_end_face, shaft_side, flat_plate_face, hand_palm. Do not call generic overlap a contact.
-- For a T-shaped hammer, distinguish hammer_head, cylindrical_end_face and shaft_side where visible. Do not assert two end faces oppose/contact unless those actual faces visibly meet.
-- For occludes/in_front_of/behind, evidence_bbox should cover the visible overlap/boundary, not just an object center.
-- Confidence is an uncalibrated self-assessment, not a probability.
-- Do not infer unseen back faces, hidden joints, exact 3D angles, physical forces or camera calibration.
-- Empty arrays are acceptable. Prefer fewer defensible claims over complete guessed scene graphs.
-"""
+OUTPUT_SCHEMA_PROMPT = REASONER_OUTPUT_SCHEMA_PROMPT  # backward-compatible alias
 
 
 class QwenSpatialReasoner:
-    """Optional local Qwen3.8 (or compatible Qwen vision-language) adapter.
+    """DEPRECATED local Qwen vision-language adapter.
 
-    Install Transformers as an optional dependency and a compatible PyTorch build.
-    This class loads weights only when the user explicitly selects this adapter.
+    Retained only for historical comparison. Grok Vision is the active READ
+    reasoner. This adapter is not on the default CLI path and must never be
+    used as a silent fallback when Grok fails.
     """
 
     provider_id = "qwen.qwen3.8"
     DEFAULT_MODEL_ID = "Qwen/Qwen3.8-27B"
+    DEPRECATED = True
 
     def __init__(
         self,
@@ -69,13 +28,20 @@ class QwenSpatialReasoner:
         *,
         max_new_tokens: int = 1600,
     ) -> None:
+        warnings.warn(
+            "QwenSpatialReasoner is deprecated. Prefer --reasoner grok (xAI Grok Vision). "
+            "Qwen remains available only for explicit comparison and is not a fallback.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         try:
             from transformers import AutoProcessor, AutoModelForImageTextToText
             ModelClass = AutoModelForImageTextToText
         except ImportError as exc:
             raise RuntimeError(
                 "Qwen3.8 reasoning requires Transformers >= 5.8.1. Install UP-engine with the vlm extra "
-                "and install a compatible PyTorch build separately."
+                "and install a compatible PyTorch build separately. "
+                "Note: Qwen is deprecated; the default READ path is Grok Vision."
             ) from exc
         self.model_id = model_id
         self.max_new_tokens = max_new_tokens
@@ -103,7 +69,7 @@ class QwenSpatialReasoner:
             raise FileNotFoundError(source)
         prompt = (
             f"Inspection focus: {focus.strip() or 'whole image'}\n\n"
-            + OUTPUT_SCHEMA_PROMPT
+            + REASONER_OUTPUT_SCHEMA_PROMPT
         )
         from PIL import Image
         with Image.open(source) as opened:
