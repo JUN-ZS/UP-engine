@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/task-contract.schema.json",
+  "title": "Image Generation Task Contract",
+  "type": "object",
+  "required": ["task_id", "task_type", "objective", "assets", "invariants"],
+  "properties": {
+    "task_id": {"type": "string", "minLength": 1},
+    "task_type": {"enum": ["new_image", "edit", "retexture", "upscale", "temporal"]},
+    "objective": {"type": "string", "minLength": 1},
+    "assets": {"type": "array", "items": {"$ref": "#/$defs/asset"}},
+    "target_regions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "constraints": {"type": "object"},
+    "invariants": {"$ref": "#/$defs/invariants"}
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": ["asset_id", "role", "uri"],
+      "properties": {
+        "asset_id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["base", "identity_reference", "pose_reference", "geometry_reference", "garment_donor", "material_swatch", "context_reference", "output_candidate"]},
+        "uri": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "invariants": {
+      "type": "object",
+      "properties": {
+        "identity_locked": {"type": "boolean"},
+        "pose_locked": {"type": "boolean"},
+        "topology_locked": {"type": "boolean"},
+        "protected_regions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "allowed_regions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "expected_part_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

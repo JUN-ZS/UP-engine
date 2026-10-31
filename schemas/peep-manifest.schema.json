@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/peep-manifest.schema.json",
+  "title": "PEEP Generation Manifest",
+  "type": "object",
+  "required": ["manifest_version", "task_id", "parent_asset_id", "generation_mask", "protected_mask", "transform", "adapter_id", "output_uri"],
+  "properties": {
+    "manifest_version": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "parent_asset_id": {"type": "string", "minLength": 1},
+    "generation_mask": {"type": "string", "minLength": 1},
+    "protected_mask": {"type": "string", "minLength": 1},
+    "context_ring": {"type": ["string", "null"]},
+    "transform": {"type": "object", "required": ["kind"], "properties": {"kind": {"type": "string"}, "parameters": {"type": "object"}}, "additionalProperties": false},
+    "adapter_id": {"type": "string", "minLength": 1},
+    "seed": {"type": ["integer", "null"], "minimum": 0},
+    "output_uri": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "up-engine"
+version = "0.1.0"
+description = "A contract-first, region-aware image generation and reconstruction engine"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "All rights reserved; no license granted" }
+authors = [{ name = "JUN-ZS" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = []
+
+[project.scripts]
+ige = "ige.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
