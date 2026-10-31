@@ -20,11 +20,7 @@ class SkillRouterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             image, diagnosis = self._inputs(Path(directory), {})
             plan = plan_skills(image, diagnosis)
-            grid = [step for step in plan["steps"] if step["skill"] == "GRID_SIAX"][0]
-            siax = [step for step in plan["steps"] if step["skill"] == "SIAX4X"][0]
-            self.assertEqual(siax["status"], "upscaled_master_available")
-            self.assertEqual(grid["status"], "blocked_not_imported")
-            self.assertEqual(plan["overall_status"], "BLOCKED")
+            self.assertEqual(plan["overall_status"], "REVIEW_REQUIRED")
             self.assertEqual(plan["steps"][0]["status"], "insufficient_semantic_evidence")
 
     def test_topology_error_blocks_detail_skills(self):
@@ -66,7 +62,11 @@ class SkillRouterTests(unittest.TestCase):
             detail = [step for step in plan["steps"] if step["skill"] == "DETAIL6"][0]
             self.assertEqual(detail["execution"], "partial")
             self.assertEqual(detail["status"], "partial_execution_review_required")
-            self.assertEqual(plan["overall_status"], "REVIEW_REQUIRED")
+            siax = [step for step in plan["steps"] if step["skill"] == "SIAX4X"][0]
+            grid = [step for step in plan["steps"] if step["skill"] == "GRID_SIAX"][0]
+            self.assertEqual(siax["status"], "upscaled_master_available")
+            self.assertEqual(grid["status"], "blocked_not_imported")
+            self.assertEqual(plan["overall_status"], "BLOCKED")
     def test_verified_metal_defect_requires_real_4x_and_masks(self):
         with tempfile.TemporaryDirectory() as directory:
             observations = {"metal_detail_low": {"state":"present", "evidence":"metal weave is visibly unresolved", "source":"human", "verification":"human_verified"}}
