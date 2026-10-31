@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 import hashlib
 import json
 from typing import Any, Protocol
@@ -111,7 +112,7 @@ class VisualReasoner(Protocol):
 
     def propose(
         self,
-        image_path: str,
+        image_path: str | Path,
         *,
         focus: str,
     ) -> ReasoningProposalSet:

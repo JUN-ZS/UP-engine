@@ -20,7 +20,7 @@ Sources:
 - https://huggingface.co/Qwen/Qwen3.8-27B
 - https://huggingface.co/Qwen/Qwen3.8-35B-A3B
 
-UP-engine includes an optional local adapter for Qwen3.8-27B. It is not enabled by the model router because it has not yet been benchmarked on the project's own images. The adapter uses Transformers AutoModelForMultimodalLM, requires Transformers >=5.8.1 and an independently compatible PyTorch build. The structured READ adapter disables chain-of-thought output so the result can be parsed as one strict JSON object. A separate benchmark should compare direct-output mode with thinking mode; neither is assumed superior for relation precision without measurement.
+UP-engine includes an optional local adapter for Qwen3.8-27B. It is not enabled by the model router because it has not yet been benchmarked on the project's own images. The adapter uses Transformers AutoModelForImageTextToText, requires Transformers >=5.8.1 and an independently compatible PyTorch build. The structured READ adapter disables chain-of-thought output so the result can be parsed as one strict JSON object. A separate benchmark should compare direct-output mode with thinking mode; neither is assumed superior for relation precision without measurement.
 
 The Qwen3.8-27B BF16 checkpoint is about 55.6GB on the model repository. An NVIDIA NIM NVFP4 package is listed at about 20.44GB, but that is a specific quantized distribution, not a universal peak-VRAM figure. Actual peak memory depends on runtime, image resolution, context, attention/KV cache, batch size and quantization. The user's GPU is not yet recorded, so no local execution claim is made.
 
