@@ -70,8 +70,8 @@ def compile_generation_packet(
         raise GeometryContractError("objective must be non-empty")
 
     # Refuse stale analysis or an image that is no longer the exact READ parent.
-    base_path_value = base_image_path or source.get("path")
-    if not isinstance(base_path_value, str) or not base_path_value.strip():
+    base_path_value = base_image_path if base_image_path is not None else source.get("path")
+    if not isinstance(base_path_value, (str, Path)) or not str(base_path_value).strip():
         raise GeometryContractError("READ analysis does not record the parent image path")
     base_path = Path(base_path_value)
     if not base_path.is_file():

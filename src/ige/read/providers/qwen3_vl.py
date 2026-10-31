@@ -70,8 +70,8 @@ class QwenSpatialReasoner:
         max_new_tokens: int = 1600,
     ) -> None:
         try:
-            from transformers import AutoProcessor, AutoModelForMultimodalLM
-            ModelClass = AutoModelForMultimodalLM
+            from transformers import AutoProcessor, AutoModelForImageTextToText
+            ModelClass = AutoModelForImageTextToText
         except ImportError as exc:
             raise RuntimeError(
                 "Qwen3.8 reasoning requires Transformers >= 5.8.1. Install UP-engine with the vlm extra "
@@ -102,7 +102,7 @@ class QwenSpatialReasoner:
         if not source.is_file():
             raise FileNotFoundError(source)
         prompt = (
-            f"Inspection focus: {focus.strip() or 'whole image'}\\n\\n"
+            f"Inspection focus: {focus.strip() or 'whole image'}\n\n"
             + OUTPUT_SCHEMA_PROMPT
         )
         from PIL import Image
