@@ -75,7 +75,6 @@ def _save_preview(
         tint = Image.new("RGBA", base.size, color)
         alpha = Image.fromarray(np.asarray(mask, dtype=np.uint8), mode="L")
         overlay.alpha_composite(Image.composite(tint, Image.new("RGBA", base.size), alpha))
-    # Model proposals are outlined separately; they do not alter accepted masks.
     draw = ImageDraw.Draw(overlay)
     for proposal in proposals:
         box = _bbox(proposal.mask)
@@ -127,7 +126,7 @@ def run_read(
     with Image.open(source) as opened:
         original_format = opened.format
         original_mode = opened.mode
-        has_alpha = "A" in opened.getbands()
+        has_alpha = "A" in opened.getbands() or "transparency" in opened.info
         image = ImageOps.exif_transpose(opened).convert("RGB")
     width, height = image.size
     if width < 1 or height < 1:
@@ -164,6 +163,8 @@ def run_read(
     unlabelled = np.where(annotated_union > 0, 0, 255).astype(np.uint8)
 
     provider_prompts = [p.strip() for p in (prompts or []) if p and p.strip()]
+    if provider is None and provider_prompts:
+        raise ValueError("text prompts were supplied without a segmentation provider")
     proposals: list[MaskProposal] = []
     provider_id = None
     if provider is not None:
@@ -177,7 +178,7 @@ def run_read(
                     f"provider proposal {proposal.proposal_id!r} has shape {proposal.mask.shape}, "
                     f"expected {(height, width)}; refusing implicit resize"
                 )
-            if not 0.0 <= proposal.score <= 1.0:
+            if proposal.score is not None and not 0.0 <= proposal.score <= 1.0:
                 raise ValueError(f"proposal score out of range: {proposal.score}")
 
     masks_dir = destination / "masks"
@@ -202,7 +203,7 @@ def run_read(
         proposal_rows.append({
             "id": proposal.proposal_id,
             "prompt": proposal.prompt,
-            "score": round(proposal.score, 6),
+            "score": round(proposal.score, 6) if proposal.score is not None else None,
             "status": "unreviewed_proposal",
             "mask": f"proposals/{proposal_file}",
             "bbox_xyxy_pixels": _bbox(proposal.mask),
@@ -277,7 +278,7 @@ def run_read(
         "- preview.png: editable tint, explicit protected tint, context tint, and proposal bounding boxes.",
         "- masks/editable.png: only explicitly human-annotated editable pixels.",
         "- masks/protected_effective.png: complement of the editable mask; safe default for preservation.",
-        "- masks/explicit_protected.png: explicit human-protected regions.",
+        "- masks/explicit_protected.png: explicitly annotated protection.",
         "- masks/context.png: human-annotated context areas.",
         "- masks/unlabelled.png: pixels not covered by any human region annotation.",
         "- proposals/: model proposal masks, always unreviewed.",

@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageOps
 
 from .base import MaskProposal
 
@@ -47,7 +47,8 @@ class Sam3TextSegmenter:
         if not prompts:
             raise ValueError("SAM3 segmentation requires at least one text prompt")
         with Image.open(image_path) as opened:
-            image = opened.convert("RGB")
+            # Must match READ's EXIF-transposed display coordinate system exactly.
+            image = ImageOps.exif_transpose(opened).convert("RGB")
         state = self.processor.set_image(image)
         width, height = image.size
         proposals: list[MaskProposal] = []
@@ -73,21 +74,21 @@ class Sam3TextSegmenter:
                     "silently resize a geometry-bearing mask"
                 )
             raw_scores = output.get("scores")
-            scores = (
-                self._numpy(raw_scores).reshape(-1)
-                if raw_scores is not None
-                else np.ones((masks.shape[0],), dtype=np.float32)
-            )
+            scores = self._numpy(raw_scores).reshape(-1) if raw_scores is not None else np.array([])
+            scores_match = scores.size == masks.shape[0]
             for mask_index, raw_mask in enumerate(masks):
                 mask = np.asarray(raw_mask > 0.5, dtype=np.uint8) * 255
                 if not np.any(mask):
                     continue
-                score = float(scores[min(mask_index, len(scores) - 1)])
+                # Do not invent a confidence value if this SAM3 build omits/mismatches scores.
+                score = float(scores[mask_index]) if scores_match else None
+                if score is not None:
+                    score = max(0.0, min(1.0, score))
                 proposals.append(
                     MaskProposal(
                         proposal_id=f"sam3-{prompt_index:02d}-{mask_index:03d}",
                         prompt=text,
-                        score=max(0.0, min(1.0, score)),
+                        score=score,
                         mask=mask,
                     )
                 )

@@ -13,7 +13,7 @@ class MaskProposal:
 
     proposal_id: str
     prompt: str
-    score: float
+    score: float | None
     mask: np.ndarray
 
 
