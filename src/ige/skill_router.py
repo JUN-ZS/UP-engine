@@ -97,7 +97,10 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
         all_verified = all(verified(name) for name in prerequisites if name in observations)
         status = "ready" if definition["execution"] == "implemented" else "partial_not_full_legacy_skill" if definition["execution"] == "partial" else "blocked_not_imported"
         if definition["execution"] == "implemented_optional_runtime":
-            status = "ready" if checkpoint_path and Path(checkpoint_path).is_file() else "blocked_missing_checkpoint"
+            if upscaled_path and Path(upscaled_path).is_file():
+                status = "upscaled_master_available"
+            else:
+                status = "ready" if checkpoint_path and Path(checkpoint_path).is_file() else "blocked_missing_checkpoint"
         if not all_verified:
             status = "review_required"
         refs = catalog.search(skill=skill, limit=8)
