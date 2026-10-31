@@ -45,7 +45,7 @@ The sidecar includes BASE hash, checkpoint hash, output hash, model architecture
 
 ## DETAIL6
 
-DETAIL6 follows the legacy §0.12.19 sequence: verified 4x Siax master → material-zone residual → zone-limited detail gain → q98/q100 JPEG 4:4:4 → size gate.
+The current implementation is a partial §0.12.19 execution slice: verified 4x Siax master → material-zone residual → zone-limited detail gain → q98/q100 JPEG 4:4:4 → size gate. Full GRID_CLEAN/BEAT donor selection and legacy clarity proof are not yet migrated.
 
 Mask manifest shape:
 
@@ -78,9 +78,9 @@ Outputs:
 
 - `DETAIL6_WORKING.png`: lossless working result. The exact protected-pixel audit is performed against the verified Siax master.
 - `DETAIL6_FULL_q98.jpg` and `DETAIL6_FULL_q100.jpg`: JPEG quality 98/100, chroma subsampling 0 (4:4:4). These are lossy delivery files and are not claimed to be pixel-identical.
-- `DETAIL6_REPORT.json`: output bytes, dimensions, masks, zone HF energy before/after, protected-pixel deltas and gate results.
+- `DETAIL6_REPORT.json`: output bytes, dimensions, masks, zone HF diagnostics before/after, protected-pixel deltas and technical execution gates. HF diagnostics are not proof of clarity.
 
-DETAIL6 is not an identity, geometry, pose, topology or temporal validator. HF energy increase is a measured signal, not proof that the result looks better. Human comparison against the prior stage remains required.
+DETAIL6 is not an identity, geometry, pose, topology or temporal validator. HF energy increase is diagnostic only, not proof that the result looks clearer. Full visual clarity proof and human comparison remain unimplemented. Human comparison against the prior stage remains required.
 
 ## Explicitly not yet migrated
 

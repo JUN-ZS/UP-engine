@@ -43,6 +43,26 @@ class SkillRouterTests(unittest.TestCase):
             self.assertEqual(plan["overall_status"], "REVIEW_REQUIRED")
             self.assertTrue(all(step["status"] == "review_required" for step in plan["steps"]))
 
+    def test_detail6_path_is_partial_and_stays_review_required(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            image, diagnosis = self._inputs(root, {
+                "metal_detail_low": {
+                    "state": "present",
+                    "evidence": "metal weave requires detail restoration",
+                    "source": "human",
+                    "verification": "human_verified"
+                }
+            })
+            upscaled = root / "upscaled.png"
+            masks = root / "masks.json"
+            upscaled.write_bytes(b"fixture")
+            masks.write_text("{}", encoding="utf-8")
+            plan = plan_skills(image, diagnosis, upscaled_path=upscaled, masks_path=masks)
+            detail = [step for step in plan["steps"] if step["skill"] == "DETAIL6"][0]
+            self.assertEqual(detail["execution"], "partial")
+            self.assertEqual(detail["status"], "partial_execution_review_required")
+            self.assertEqual(plan["overall_status"], "REVIEW_REQUIRED")
     def test_verified_metal_defect_requires_real_4x_and_masks(self):
         with tempfile.TemporaryDirectory() as directory:
             observations = {"metal_detail_low": {"state":"present", "evidence":"metal weave is visibly unresolved", "source":"human", "verification":"human_verified"}}

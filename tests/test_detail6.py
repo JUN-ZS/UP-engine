@@ -45,6 +45,9 @@ class Detail6Tests(unittest.TestCase):
             report = run_detail6(base, high, masks, root / "out", minimum_bytes=1, gain=0.15)
             self.assertTrue(report["gates"]["exact_4x"])
             self.assertTrue(report["gates"]["protected_pixels_preserved_on_png"])
+            self.assertTrue(report["execution_complete"])
+            self.assertEqual(report["visual_quality_review"], "REQUIRED_NOT_RUN")
+            self.assertFalse(report["final_acceptance"])
             self.assertEqual(report["pixel_audit"]["changed_inside_protected_masks"], 0)
             self.assertTrue((root / "out" / "DETAIL6_WORKING.png").is_file())
 
@@ -54,7 +57,8 @@ class Detail6Tests(unittest.TestCase):
             base, high, masks = self._fixture(root)
             report = run_detail6(base, high, masks, root / "out", minimum_bytes=100_000_000)
             self.assertFalse(report["gates"]["minimum_delivery_bytes"])
-            self.assertFalse(report["detail6_ok"])
+            self.assertFalse(report["execution_complete"])
+            self.assertFalse(report["final_acceptance"])
 
     def test_wrong_dimensions_are_rejected_not_resized(self):
         with tempfile.TemporaryDirectory() as directory:

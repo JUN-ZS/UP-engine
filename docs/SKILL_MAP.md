@@ -15,7 +15,7 @@ The old constitution is the source of truth for skill order and failure rules. T
 | OBA | Layered object accumulation | Documented-only | Immutable BASE |
 | SWP / SPM / SIAX | Multi-scale detail enhancement | SIAX4X runtime adapter conditional; GRID/SWP still documented-only | Structural repair |
 | PIXEL_CTRL | Pixel class and eye-white protection | Documented-only; DETAIL6 enforces face/skin/eye masks for its own residual stage | Full face repair |
-| DETAIL6 | Siax master, material-mask residual and q98/q100 4:4:4 | Deterministic stage implemented; real model inference requires optional runtime and checkpoint | Perceptual quality or identity approval |
+| DETAIL6 | Siax master, material-mask residual and q98/q100 4:4:4 | Partial execution path; full GRID_CLEAN/BEAT donor selection and clarity proof remain open | Perceptual quality or identity approval |
 | GOU / V5 / GCS / ECC / WHOLE | Registration/reconstruction | Existing registration is dimension-only; residual/warp incomplete | Geometry acceptance |
 | DAMD / HTFC | Temporal state transitions | P4 not implemented | Single-image detail restoration |
 

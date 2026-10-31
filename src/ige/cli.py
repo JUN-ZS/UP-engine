@@ -474,7 +474,9 @@ def main() -> int:
             gain=args.gain, minimum_bytes=args.minimum_bytes,
         )
         print(_json.dumps(report, ensure_ascii=False, indent=2))
-        return 0 if report["detail6_ok"] else 2
+        print("Visual quality review:", report["visual_quality_review"])
+        print("Note: HF-energy change is diagnostic only, not an acceptance score.")
+        return 0 if report["execution_complete"] else 2
 
     parser.error(f"unsupported command: {args.command}")
     return 2

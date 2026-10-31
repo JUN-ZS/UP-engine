@@ -112,7 +112,7 @@ A topology error blocks downstream sharpening/upscale. PATH1E, TEX4, GRID_SIAX, 
 
 ## Siax 4x + DETAIL6
 
-The legacy DETAIL6 constitution requires a genuine 4x Siax master, region-limited residual detail, protected face/skin/eye-white masks, measured zone proof and JPEG 4:4:4 delivery. It explicitly forbids inflating a small image to meet a megabyte target.
+The first DETAIL6 execution slice accepts a genuine 4x Siax master, applies region-limited residual detail with protected face/skin/eye-white masks, and exports JPEG 4:4:4. This is not yet the complete legacy DETAIL6 skill: GRID_CLEAN/BEAT donor selection and legacy clarity proof still need migration. It explicitly forbids inflating a small image to meet a megabyte target.
 
 Install the optional local runtime:
 
@@ -128,7 +128,7 @@ The output includes a hash-bound .upscale.json sidecar. Prepare masks at BASE or
 
 The default byte threshold is 6,000,000, matching the legacy DETAIL6 floor. Set 30,000,000 only when that delivery target is specifically required. If the content does not naturally meet it, the size gate fails; no padding or fake enlargement is applied.
 
-DETAIL6 emits a lossless working PNG, q98 and q100 JPEG 4:4:4 outputs, per-zone high-frequency deltas and a protected-pixel audit. Exact pixel proof applies to the lossless PNG relative to the Siax master; JPEG is necessarily lossy. This stage does not certify identity, pose, topology, geometry or temporal continuity.
+This partial DETAIL6 path emits a lossless working PNG, q98 and q100 JPEG 4:4:4 outputs, per-zone high-frequency diagnostics and a protected-pixel audit. HF energy is not an acceptance score; visual clarity review remains required. Exact pixel proof applies to the lossless PNG relative to the Siax master; JPEG is necessarily lossy. This stage does not certify identity, pose, topology, geometry or temporal continuity.
 
 ## Source project
 

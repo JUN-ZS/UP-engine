@@ -75,7 +75,7 @@ SKILL_REGISTRY: dict[str, dict[str, Any]] = {
     "PIXEL_CTRL": {"stage": "pixel_protection", "execution": "documented_only", "source_section": "PIXEL_CTRL_LAW.md §0.12.16", "purpose": "pixel-class protection; sclera is restored from the structural base"},
     "SIAX4X": {"stage": "super_resolution", "execution": "implemented_optional_runtime", "source_section": "GRID_SIAX_CORRECT_PROCESS.md §0.12.15", "purpose": "4x_NMKD-Siax_200k.pth true 4x model inference"},
     "GRID_SIAX": {"stage": "detail_hybrid", "execution": "documented_only", "source_section": "GRID_SIAX_CORRECT_PROCESS.md §0.12.15–18", "purpose": "multi-region detail donor and hybrid composition with pixel-class protection"},
-    "DETAIL6": {"stage": "detail_delivery", "execution": "implemented", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.19", "purpose": "detail-only residual on approved material zones plus high-quality 4:4:4 delivery"},
+    "DETAIL6": {"stage": "detail_delivery", "execution": "partial", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.19", "purpose": "detail-only residual on approved material zones plus high-quality 4:4:4 delivery"},
     "SKIN_MAT": {"stage": "skin_material", "execution": "documented_only", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.20", "purpose": "same-composition pore plate, plate-dominant reconstruction and face-zone proof"},
 }
 
@@ -95,7 +95,7 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
     def add(skill: str, reason: str, prerequisites: list[str], *, stop_downstream: bool = False) -> None:
         definition = SKILL_REGISTRY[skill]
         all_verified = all(verified(name) for name in prerequisites if name in observations)
-        status = "ready" if definition["execution"] == "implemented" else "blocked_not_imported"
+        status = "ready" if definition["execution"] == "implemented" else "partial_not_full_legacy_skill" if definition["execution"] == "partial" else "blocked_not_imported"
         if definition["execution"] == "implemented_optional_runtime":
             status = "ready" if checkpoint_path and Path(checkpoint_path).is_file() else "blocked_missing_checkpoint"
         if not all_verified:
@@ -126,7 +126,7 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
         elif not upscaled_path or not Path(upscaled_path).is_file() or not masks_path or not Path(masks_path).is_file():
             steps[-1]["status"] = "blocked_missing_4x_master_or_masks"
         else:
-            steps[-1]["status"] = "ready_to_execute"
+            steps[-1]["status"] = "partial_execution_review_required"
 
     if present("face_detail_low"):
         add("PATH1E", observations["face_detail_low"]["evidence"], ["face_detail_low"])
@@ -135,7 +135,7 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
         add("PIXEL_CTRL", observations["skin_noise"]["evidence"], ["skin_noise"])
     if present("detail6_requested") and not detail_observations:
         add("DETAIL6", observations["detail6_requested"]["evidence"], ["detail6_requested"])
-        steps[-1]["status"] = "ready_to_execute" if upscaled_path and Path(upscaled_path).is_file() and masks_path and Path(masks_path).is_file() else "blocked_missing_4x_master_or_masks"
+        steps[-1]["status"] = "partial_execution_review_required" if upscaled_path and Path(upscaled_path).is_file() and masks_path and Path(masks_path).is_file() else "blocked_missing_4x_master_or_masks"
 
     if not steps:
         steps.append({"skill": None, "stage": "diagnosis", "status": "insufficient_semantic_evidence", "reason": "No verified defect observations selected a skill. Raster dimensions alone cannot identify face, topology or material defects."})
@@ -144,5 +144,5 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
             if step["skill"] in {"SIAX4X", "GRID_SIAX", "DETAIL6", "SKIN_MAT"}:
                 step["status"] = "blocked_by_upstream_topology"
     statuses = {step["status"] for step in steps}
-    overall = "BLOCKED" if any(status.startswith("blocked") for status in statuses) else "REVIEW_REQUIRED" if "review_required" in statuses or "blocked_not_imported" in statuses or "insufficient_semantic_evidence" in statuses else "READY_FOR_EXECUTION"
+    overall = "BLOCKED" if any(status.startswith("blocked") for status in statuses) else "REVIEW_REQUIRED" if any(status in {"review_required", "blocked_not_imported", "insufficient_semantic_evidence"} or status.startswith("partial") for status in statuses) else "READY_FOR_EXECUTION"
     return {"plan_version": "1.0", "image": diagnosis["image"], "diagnosis_source": diagnosis["diagnosis_source"], "observations": diagnosis["observations"], "steps": steps, "overall_status": overall, "non_claims": ["Raster dimensions are observed; semantic defects require evidence-bearing diagnosis.", "Grok Vision candidates are not human_verified and cannot authorize irreversible skill execution.", "A reference UUID is not proof that its image bytes are locally available.", "A 4x file or large MB count alone does not prove visual quality."]}
