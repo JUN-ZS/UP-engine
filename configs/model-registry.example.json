@@ -1,0 +1,10 @@
+{
+  "registry_version": "0.1.0",
+  "policy": "fail_closed",
+  "models": [],
+  "notes": [
+    "No model is enabled by default.",
+    "Populate only after license review and benchmark evidence.",
+    "Estimated VRAM/latency must be measured on the target runtime and hardware."
+  ]
+}
