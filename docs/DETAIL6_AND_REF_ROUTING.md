@@ -93,3 +93,11 @@ PATH1E, PIXEL_CTRL, GRID_CLEAN/BEAT, SWP/SPM full stack, ZYF/ETZ/SCD donor pipel
 - `PIXEL_CTRL_LAW.md`
 - `PATH1E_PLATE_ECC_LAW.md`
 - `FOUR_SKILL_TEX_ALIGN.md` §0.12.50
+
+## PREVENT BLUE INJECTION (PBI)
+
+As of `feat/prevent-blue-injection-v0.1`:
+
+- Metal DETAIL residual is **Y-only** (`material_chroma_guard.detail6_y_only_residual`). RGB chroma residual is not applied under the metal mask.
+- SIAX may apply `C(LP)×Y(SR)` on metal via `--apply-material-chroma-guard --metal-mask`.
+- Post-hoc blue detox is not a formal MASTER acceptance path. See `docs/PREVENT_BLUE_INJECTION.md`.

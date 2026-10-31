@@ -183,6 +183,9 @@ def build_parser() -> argparse.ArgumentParser:
     upscale.add_argument("--tile-pad", type=int, default=16)
     upscale.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     upscale.add_argument("--confirm-model-license-review", action="store_true")
+    upscale.add_argument("--metal-mask", type=Path, default=None, help="metal/silver mask (base or 4x); enables PREVENT BLUE INJECTION when --apply-material-chroma-guard")
+    upscale.add_argument("--apply-material-chroma-guard", action="store_true", help="lock metal chrom to LP×Y(SR); raw SR saved as *_RAW_SR.png")
+    upscale.add_argument("--chroma-guard-feather", type=float, default=1.5)
 
     detail6 = sub.add_parser(
         "detail6",
@@ -457,6 +460,9 @@ def main() -> int:
             tile_pad=args.tile_pad,
             confirm_model_license_review=args.confirm_model_license_review,
             device=args.device,
+            metal_mask_path=args.metal_mask,
+            apply_material_chroma_guard=args.apply_material_chroma_guard,
+            chroma_guard_feather=args.chroma_guard_feather,
         )
         print(f"Siax 4x master: {report['output_path']}")
         print(f"SHA256: {report['output_sha256']}")

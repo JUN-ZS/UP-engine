@@ -23,7 +23,7 @@ def file_sha256(path: str | Path) -> str:
 sha256_file = file_sha256
 
 
-def run_siax_upscale(input_path: str | Path, checkpoint_path: str | Path, output_path: str | Path, *, tile_size: int = 256, tile_pad: int = 16, confirm_model_license_review: bool = False, device: str = "auto") -> dict[str, Any]:
+def run_siax_upscale(input_path: str | Path, checkpoint_path: str | Path, output_path: str | Path, *, tile_size: int = 256, tile_pad: int = 16, confirm_model_license_review: bool = False, device: str = "auto", metal_mask_path: str | Path | None = None, apply_material_chroma_guard: bool = False, chroma_guard_feather: float = 1.5) -> dict[str, Any]:
     """Run the pinned 4x Siax model via Spandrel; never silently substitute a model."""
     source, checkpoint, output = Path(input_path), Path(checkpoint_path), Path(output_path)
     if not source.is_file() or not checkpoint.is_file():
@@ -79,6 +79,32 @@ def run_siax_upscale(input_path: str | Path, checkpoint_path: str | Path, output
                 cy1, cx1 = cy0 + (y1 - y0) * 4, cx0 + (x1 - x0) * 4
                 result[:, :, y0 * 4:y1 * 4, x0 * 4:x1 * 4] = tile_out[:, :, cy0:cy1, cx0:cx1]
     output_array = result.squeeze(0).clamp(0, 1).permute(1, 2, 0).numpy()
+    chroma_guard_meta = None
+    if apply_material_chroma_guard:
+        if metal_mask_path is None:
+            raise ValueError("apply_material_chroma_guard requires metal_mask_path at 4x or base size")
+        from .material_chroma_guard import apply_material_chroma_guard as _guard
+        import numpy as _np
+        sr_u8 = (output_array * 255 + 0.5).astype("uint8")
+        lp_u8 = _np.asarray(base.resize((w * 4, h * 4), Image.Resampling.LANCZOS), dtype="uint8")
+        mask_path = Path(metal_mask_path)
+        if not mask_path.is_file():
+            raise FileNotFoundError(mask_path)
+        with Image.open(mask_path) as mo:
+            mask_im = ImageOps.exif_transpose(mo).convert("L")
+        if mask_im.size == (w, h):
+            mask_im = mask_im.resize((w * 4, h * 4), Image.Resampling.NEAREST)
+        elif mask_im.size != (w * 4, h * 4):
+            raise ValueError(f"metal mask size must be base or 4x, got {mask_im.size}")
+        mask = _np.asarray(mask_im, dtype=_np.float32) / 255.0
+        guarded, chroma_guard_meta = _guard(lp_u8, sr_u8, mask, feather=chroma_guard_feather)
+        # keep raw SR diagnostic next to master when guard applied
+        raw_path = output.with_name(output.stem + "_RAW_SR.png")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        Image.fromarray(sr_u8, "RGB").save(raw_path, format="PNG")
+        output_array = guarded.astype("float32") / 255.0
+        chroma_guard_meta["raw_sr_path"] = str(raw_path.resolve())
+        chroma_guard_meta["policy"] = "PREVENT_BLUE_INJECTION · C(LP)*Y(SR) on metal"
     output.parent.mkdir(parents=True, exist_ok=True)
     Image.fromarray((output_array * 255 + 0.5).astype("uint8"), "RGB").save(output, format="PNG")
     metadata = {
@@ -91,7 +117,14 @@ def run_siax_upscale(input_path: str | Path, checkpoint_path: str | Path, output
         "output_dimensions": {"width": w * 4, "height": h * 4},
         "runtime": {"torch": torch.__version__, "device": selected_device, "tile_size": tile_size, "tile_pad": tile_pad},
         "acceptance": "candidate_only",
-        "limitations": ["Model inference does not prove identity, topology or perceptual quality.", "Checkpoint must be recognized as ESRGAN and expose exact 4x scale; otherwise it is rejected.", "The Hugging Face mirror labels its repository MIT; original upstream model terms still require user review."]
+        "material_chroma_guard": chroma_guard_meta,
+        "prevent_blue_injection": bool(apply_material_chroma_guard),
+        "limitations": [
+            "Model inference does not prove identity, topology or perceptual quality.",
+            "Checkpoint must be recognized as ESRGAN and expose exact 4x scale; otherwise it is rejected.",
+            "The Hugging Face mirror labels its repository MIT; original upstream model terms still require user review.",
+            "Without apply_material_chroma_guard, full RGB SR may inject metal chroma noise (navy blotch); enable guard for silver/metal.",
+        ]
     }
     sidecar = output.with_suffix(".upscale.json")
     sidecar.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
