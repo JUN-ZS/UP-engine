@@ -1,0 +1,237 @@
+{
+  "catalog_version": "1.0",
+  "source": {
+    "repository": "JUN-ZS/ai-image-gen-logic-review",
+    "commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+    "note": "Reviewed metadata snapshot only. No legacy image binaries, generated outputs or model weights are copied into UP-engine."
+  },
+  "references": [
+    {
+      "asset_id": "a8b78fe5-2654-4f6f-84e3-c1dfbee61004",
+      "label": "a8b standard face identity master",
+      "role": "identity_master",
+      "skills": [
+        "PATH1E",
+        "ST2",
+        "S1HL"
+      ],
+      "tags": [
+        "face",
+        "identity",
+        "canonical",
+        "a8b"
+      ],
+      "description": "Album-wide canonical heroine face source; must be the first identity reference in full-frame generation.",
+      "uri": "imagine://asset/a8b78fe5-2654-4f6f-84e3-c1dfbee61004",
+      "availability": "external_asset_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.10 / §0.13"
+    },
+    {
+      "asset_id": "9e1cd1e9-f229-4b21-bf4c-91b2d045e08b",
+      "label": "P1 FACE_SHARP_V2_ROI",
+      "role": "face_sharp_composite_reference",
+      "skills": [
+        "SKIN_MAT"
+      ],
+      "tags": [
+        "face",
+        "sharp",
+        "roi",
+        "p1"
+      ],
+      "description": "Plate-dominant face ROI sharp composite reference; alignment dx=dy=0 preferred.",
+      "uri": "imagine://asset/9e1cd1e9-f229-4b21-bf4c-91b2d045e08b",
+      "availability": "external_asset_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.20"
+    },
+    {
+      "asset_id": "3f769105-e85e-43d2-854f-f454f8171e34",
+      "label": "P2 SKIN_REDO board preview",
+      "role": "skin_material_preview",
+      "skills": [
+        "SKIN_MAT"
+      ],
+      "tags": [
+        "skin",
+        "preview",
+        "p2"
+      ],
+      "description": "Same-composition skin material board preview; not an identity master.",
+      "uri": "imagine://asset/3f769105-e85e-43d2-854f-f454f8171e34",
+      "availability": "external_asset_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.20"
+    },
+    {
+      "asset_id": "2befbe5e-751c-434a-a39f-ad4bf8ed4374",
+      "label": "P3 same-composition natural pore plate",
+      "role": "skin_texture_reference",
+      "skills": [
+        "SKIN_MAT",
+        "FACE_GENMIX"
+      ],
+      "tags": [
+        "skin",
+        "pore",
+        "natural",
+        "p3"
+      ],
+      "description": "Same-composition natural skin texture reference; documented face NCC around 0.947.",
+      "uri": "imagine://asset/2befbe5e-751c-434a-a39f-ad4bf8ed4374",
+      "availability": "external_asset_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.20 / §0.12.21"
+    },
+    {
+      "asset_id": "d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6",
+      "label": "P4 SKIN_REDO fair complexion plate",
+      "role": "skin_complexion_reference",
+      "skills": [
+        "SKIN_MAT",
+        "FACE_GENMIX"
+      ],
+      "tags": [
+        "skin",
+        "fair",
+        "porcelain",
+        "p4"
+      ],
+      "description": "Fair complexion parameter reference; the constitution explicitly says to use it as a parameter source, not a pixel paste donor.",
+      "uri": "imagine://asset/d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6",
+      "availability": "external_asset_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.20 / §0.12.21"
+    },
+    {
+      "asset_id": "L-f99f139b55a6",
+      "label": "METAL_BITE v8 proof",
+      "role": "metal_detail_reference",
+      "skills": [
+        "GRID_SIAX",
+        "DETAIL6"
+      ],
+      "tags": [
+        "metal",
+        "armor",
+        "detail",
+        "proof"
+      ],
+      "description": "Metal-zone detail proof baseline used by DETAIL6 comparisons.",
+      "uri": "legacy-ref://L-f99f139b55a6",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.18 / §0.12.19"
+    },
+    {
+      "asset_id": "L-7fcd14aab71a",
+      "label": "DETAIL6 full master proof",
+      "role": "detail6_output_reference",
+      "skills": [
+        "DETAIL6"
+      ],
+      "tags": [
+        "detail6",
+        "high_resolution",
+        "proof"
+      ],
+      "description": "Legacy DETAIL6 proof reference; q98 around 21MB and q100 around 35MB are historical reported outputs, not guarantees for other images.",
+      "uri": "legacy-ref://L-7fcd14aab71a",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.19"
+    },
+    {
+      "asset_id": "L-6fb3f0816139",
+      "label": "GRID_CLEAN v1 detail proof",
+      "role": "detail_quality_reference",
+      "skills": [
+        "GRID_SIAX",
+        "DETAIL6"
+      ],
+      "tags": [
+        "grid_clean",
+        "clarity",
+        "proof"
+      ],
+      "description": "Regional clarity/readability proof; clarity is not represented by total high-frequency energy alone.",
+      "uri": "legacy-ref://L-6fb3f0816139",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.18"
+    },
+    {
+      "asset_id": "L-fc0a2fa7b8a9",
+      "label": "PATH1E plate to ECC proof",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "plate",
+        "ecc",
+        "identity"
+      ],
+      "description": "PATH1E example with documented ECC correlation around 0.980; reference proof only.",
+      "uri": "legacy-ref://L-fc0a2fa7b8a9",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/PATH1E_PLATE_ECC_LAW.md",
+      "source_section": "PATH1E"
+    },
+    {
+      "asset_id": "4c99ea4b",
+      "label": "pure SIAX 4x comparison sample",
+      "role": "upscale_comparison_reference",
+      "skills": [
+        "SIAX4X",
+        "GRID_SIAX"
+      ],
+      "tags": [
+        "s iax",
+        "4x",
+        "comparison",
+        "baseline"
+      ],
+      "description": "Historical pure-SIAX FULL comparison sample; exact binary asset must be materialized before pixel comparison.",
+      "uri": "legacy-ref://4c99ea4b",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.18–19"
+    }
+  ],
+  "models": [
+    {
+      "model_id": "4x_NMKD-Siax_200k",
+      "filename": "4x_NMKD-Siax_200k.pth",
+      "scale": 4,
+      "sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+      "source_url": "https://huggingface.co/uwg/upscaler/resolve/aadb8d07077a0818db0f43000b05442074b413be/ESRGAN/4x_NMKD-Siax_200k.pth",
+      "source_revision": "aadb8d07077a0818db0f43000b05442074b413be",
+      "source_license_label": "MIT (mirror repository label)",
+      "license_status": "review_required",
+      "note": "Weight-file provenance/terms need user review. The binary is intentionally not vendored."
+    }
+  ]
+}

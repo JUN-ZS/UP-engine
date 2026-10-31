@@ -24,6 +24,11 @@ jobs:
       - run: ige accept-candidate --help
       - run: ige assess-registration --help
       - run: ige composite-generation --help
+      - run: ige ref-search --skill DETAIL6
+      - run: ige skill-plan --help
+      - run: ige upscale-siax --help
+      - run: ige detail6 --help
+      - run: python -c "import json,pathlib; json.loads(pathlib.Path('src/ige/data/legacy_reference_catalog.json').read_text(encoding='utf-8')); print('reference catalog valid')"
       - name: Mark live xAI API E2E status
         run: |
           if [ -z "${XAI_API_KEY:-}" ]; then

@@ -1,21 +1,31 @@
-# Legacy skill mapping (conceptual, not imported code)
+# Legacy skill map and execution status
 
-This table maps old techniques to engine roles. Names are retained as source vocabulary, not assumed to be validated algorithms.
+The old constitution is the source of truth for skill order and failure rules. This file records which pieces have become executable in UP-engine; a name in a map is not an implementation.
 
-| Legacy skill / concept | New engine layer | Intended responsibility | Cannot substitute for |
+## Reference and routing layer
+
+| Legacy concept | Engine implementation | Current status | Cannot substitute for |
 |---|---|---|---|
-| MSR | perception + task planner | read whole image, choose region and refinement scale | pixel validator |
-| OTL0 | topology contract | part count, shape, connectivity locks | material/detail pass |
-| RML | prompt compiler | concise invariant fingerprints | structured contract |
-| ZYF / ETZ / SCD | donor preparation | isolate, correct and lock garment donors | final compositor |
-| TEX4 | reconstruction workflow | garment geometry / hand-interaction / coordinate restoration | universal image model |
-| ghost interaction board | perception / occlusion graph | distinguish cloth from hands, props and head | pixel-level acceptance alone |
-| RRT | correction workflow | derive a corrected patch from a known action state | arbitrary whole-frame regeneration |
-| P_G | coordinate/material mapping | map material to original garment coordinates | topology repair |
-| OBA | layered object assembly | accumulate parts against a neutral working canvas | direct editing of immutable BASE |
-| SWP / SPM / SIAX / S1HL | detail enhancement | multi-scale texture/detail recovery | wrong object structure |
-| GOU / V5 / GCS / ECC / WHOLE | registration + compositor | align, mask, blend and preserve BASE | identity/topology validation |
-| N2R / WNK | material/noise analysis | separate real specular from artifacts | generation or geometry |
-| DAMD / HTFC | temporal workflow | controlled keyframe/state transitions | single-image detail restoration |
+| REF / asset UUID references | Offline reference catalog + ref-search CLI | Curated metadata snapshot | Actual image bytes, SHA verification or donor suitability |
+| MSR | Evidence-bearing diagnosis + state-aware skill planner | Partial; semantic observations require evidence | Human review or pixel validator |
+| OTL0 | Topology gate contract | Contract-only | Full object reconstruction |
+| PATH1E | a8b face plate, ECC and protected composite | Documented-only | Executed identity proof |
+| ZYF / ETZ / SCD | Donor preparation | Documented-only | Final compositor |
+| TEX4 / RRT / P_G | Garment/topology reconstruction | Documented-only | Detail enhancement |
+| OBA | Layered object accumulation | Documented-only | Immutable BASE |
+| SWP / SPM / SIAX | Multi-scale detail enhancement | SIAX4X runtime adapter conditional; GRID/SWP still documented-only | Structural repair |
+| PIXEL_CTRL | Pixel class and eye-white protection | Documented-only; DETAIL6 enforces face/skin/eye masks for its own residual stage | Full face repair |
+| DETAIL6 | Siax master, material-mask residual and q98/q100 4:4:4 | Deterministic stage implemented; real model inference requires optional runtime and checkpoint | Perceptual quality or identity approval |
+| GOU / V5 / GCS / ECC / WHOLE | Registration/reconstruction | Existing registration is dimension-only; residual/warp incomplete | Geometry acceptance |
+| DAMD / HTFC | Temporal state transitions | P4 not implemented | Single-image detail restoration |
 
-Import rule: reimplement or wrap a skill only after its inputs, outputs, invariants, failure states, and benchmark are defined. Documentation alone does not make a skill executable.
+## Provenance and execution rules
+
+- Source repository: JUN-ZS/ai-image-gen-logic-review, snapshot commit 2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e.
+- Each seeded reference stores its original path and constitution section. Binary assets are not copied; records remain external_asset_reference_only or legacy_manifest_reference_only.
+- No URI/UUID is treated as a fetched image. Local materialization requires a matching file; known hashes are verified.
+- A present diagnosis needs evidence. Grok Vision/other model observations marked candidate cannot authorize skill execution.
+- Structural/topology errors route before detail work and block later enhancement stages.
+- SIAX4X is pinned to model file SHA-256 560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e; checkpoint is not vendored and license review remains explicit.
+- DETAIL6 does not inflate bytes. It writes material-zone residuals only, excludes face/skin/eye_white masks, measures zone deltas and reports a byte gate.
+- Skills labelled documented-only are not silently replaced with generic sharpening or free-form image generation.

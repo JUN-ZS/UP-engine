@@ -150,6 +150,51 @@ def build_parser() -> argparse.ArgumentParser:
     )
     composite.add_argument("--overwrite", action="store_true")
 
+
+    ref_search = sub.add_parser(
+        "ref-search",
+        help="search the reviewed legacy reference snapshot by asset ID, role, tags or skill",
+    )
+    ref_search.add_argument("--query", default="")
+    ref_search.add_argument("--role", default=None)
+    ref_search.add_argument("--skill", default=None)
+    ref_search.add_argument("--limit", type=int, default=50)
+    ref_search.add_argument("--asset-root", type=Path, default=None)
+
+    skill_plan = sub.add_parser(
+        "skill-plan",
+        help="route an evidence-bearing diagnosis to documented or executable legacy skills",
+    )
+    skill_plan.add_argument("image", type=Path)
+    skill_plan.add_argument("--diagnosis", type=Path, required=True)
+    skill_plan.add_argument("--checkpoint", type=Path, default=None)
+    skill_plan.add_argument("--upscaled", type=Path, default=None)
+    skill_plan.add_argument("--masks", type=Path, default=None)
+    skill_plan.add_argument("--out", type=Path, default=None)
+
+    upscale = sub.add_parser(
+        "upscale-siax",
+        help="run the pinned 4x_NMKD-Siax_200k.pth model (optional upscale extra)",
+    )
+    upscale.add_argument("input", type=Path)
+    upscale.add_argument("--checkpoint", type=Path, required=True)
+    upscale.add_argument("--out", type=Path, required=True, help="lossless 4x PNG master")
+    upscale.add_argument("--tile-size", type=int, default=256)
+    upscale.add_argument("--tile-pad", type=int, default=16)
+    upscale.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
+    upscale.add_argument("--confirm-model-license-review", action="store_true")
+
+    detail6 = sub.add_parser(
+        "detail6",
+        help="apply region-limited DETAIL6 residual to a verified 4x Siax master and export 4:4:4 JPEGs",
+    )
+    detail6.add_argument("base", type=Path)
+    detail6.add_argument("--upscaled", type=Path, required=True)
+    detail6.add_argument("--masks", type=Path, required=True)
+    detail6.add_argument("--out", type=Path, required=True)
+    detail6.add_argument("--gain", type=float, default=0.15)
+    detail6.add_argument("--minimum-bytes", type=int, default=6_000_000)
+
     return parser
 
 
@@ -372,6 +417,64 @@ def main() -> int:
             "(identity, pose, topology and registration checks remain separate)"
         )
         return 0
+
+
+    if args.command == "ref-search":
+        from .references import ReferenceCatalog
+        import json as _json
+
+        catalog = ReferenceCatalog.load()
+        results = catalog.search(args.query, role=args.role, skill=args.skill, limit=args.limit)
+        if args.asset_root:
+            for item in results:
+                resolved = catalog.inspect(item["asset_id"], asset_root=args.asset_root)
+                item.update({"materialization": resolved["materialization"], "local_file": resolved["local_file"]})
+        print(_json.dumps(results, ensure_ascii=False, indent=2))
+        return 0 if results else 2
+
+    if args.command == "skill-plan":
+        from .skill_router import plan_skills
+        import json as _json
+
+        report = plan_skills(
+            args.image, args.diagnosis, checkpoint_path=args.checkpoint,
+            upscaled_path=args.upscaled, masks_path=args.masks,
+        )
+        rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(rendered, encoding="utf-8")
+            print(f"Skill plan written: {args.out}")
+        else:
+            print(rendered, end="")
+        return 0 if report["overall_status"] == "READY_FOR_EXECUTION" else 2
+
+    if args.command == "upscale-siax":
+        from .upscale.siax import run_siax_upscale
+
+        report = run_siax_upscale(
+            args.input, args.checkpoint, args.out, tile_size=args.tile_size,
+            tile_pad=args.tile_pad,
+            confirm_model_license_review=args.confirm_model_license_review,
+            device=args.device,
+        )
+        print(f"Siax 4x master: {report['output_path']}")
+        print(f"SHA256: {report['output_sha256']}")
+        print(f"Size: {report['output_dimensions']['width']}x{report['output_dimensions']['height']}")
+        print(f"Metadata: {report['metadata_path']}")
+        print("Status: candidate only; identity/topology/visual gates remain separate")
+        return 0
+
+    if args.command == "detail6":
+        from .upscale.detail6 import run_detail6
+        import json as _json
+
+        report = run_detail6(
+            args.base, args.upscaled, args.masks, args.out,
+            gain=args.gain, minimum_bytes=args.minimum_bytes,
+        )
+        print(_json.dumps(report, ensure_ascii=False, indent=2))
+        return 0 if report["detail6_ok"] else 2
 
     parser.error(f"unsupported command: {args.command}")
     return 2

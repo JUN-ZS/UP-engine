@@ -19,6 +19,7 @@ dependencies = [
 dev = []
 vlm = ["transformers>=5.8.1"]
 xai = []  # Grok Vision/Imagine use stdlib urllib; only XAI_API_KEY is required
+upscale = ["torch>=2.2", "spandrel>=0.4.1"]
 
 
 [project.scripts]
@@ -26,3 +27,6 @@ ige = "ige.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+ige = ["data/*.json"]

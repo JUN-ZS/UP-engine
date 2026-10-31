@@ -180,6 +180,27 @@
       },
       "enabled": false,
       "reason": "Specialist comparison candidate. Still disabled."
+    },
+    {
+      "model_id": "4x_NMKD-Siax_200k",
+      "role": "optional_local_4x_super_resolution",
+      "supported_tasks": [
+        "upscale",
+        "detail_enhance"
+      ],
+      "license_status": "review_required",
+      "license": "mirror repository label MIT; original model terms require review",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "Spandrel image model descriptor; tiled 4x ESRGAN inference",
+        "checkpoint_filename": "4x_NMKD-Siax_200k.pth",
+        "checkpoint_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+        "optional_extra": "upscale",
+        "device": "auto",
+        "local_weights": true
+      },
+      "enabled": false,
+      "reason": "Pinned model adapter is implemented but disabled until checkpoint provenance/license review and a project image benchmark are completed."
     }
   ],
   "notes": [
@@ -191,6 +212,9 @@
     "Grok Imagine produces unverified candidates; registration and compositor are separate UP-engine stages.",
     "Model confidence is uncalibrated and is not probability.",
     "Only human-verified relations may enter a generation packet's geometry locks.",
-    "API keys are environment-only (XAI_API_KEY). Never commit keys or private images."
+    "API keys are environment-only (XAI_API_KEY). Never commit keys or private images.",
+    "REF Resolver is a curated provenance snapshot; an indexed UUID does not mean the image bytes are materialized.",
+    "SIAX4X/DETAIL6 are separate stages: real model inference produces a 4x master; DETAIL6 only adds masked residual detail and emits 4:4:4 delivery files.",
+    "A model being present or a JPEG reaching a target byte size does not prove visual quality."
   ]
 }

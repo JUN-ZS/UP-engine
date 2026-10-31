@@ -95,6 +95,41 @@ No model is enabled automatically. Hardware, license and project-specific qualit
 - No image-quality, identity-preservation or spatial-reasoning improvement is claimed before evaluation on the project's real gold test corpus.
 - No model weights, private images, API keys or legacy artifact dumps are included.
 
+
+## Automatic reference resolution and skill routing
+
+UP-engine now ships an offline, provenance-pinned metadata snapshot of key a8b, skin, PATH1E and DETAIL6 references. It indexes asset IDs, roles, skills, source commit and source section. It does not pretend that a UUID means the underlying Imagine image bytes are locally available. The seed catalog is curated, not yet a complete crawl of every historical reference.
+
+    ige ref-search --skill SKIN_MAT
+    ige ref-search --query "a8b face identity"
+    ige ref-search --query "metal detail" --asset-root ./reference-assets
+
+For defect-aware routing, provide an evidence-bearing diagnosis. A Grok Vision proposal may inform the diagnosis, but it must remain a candidate until a human verifies it. Raster dimensions are measured automatically; face identity, topology, metal, skin and material defects are not guessed from generic pixel statistics.
+
+    ige skill-plan source.png --diagnosis examples/skill_diagnosis.example.json --out runs/skill-plan.json
+
+A topology error blocks downstream sharpening/upscale. PATH1E, TEX4, GRID_SIAX, PIXEL_CTRL and SKIN_MAT are still documented-only until their full execution paths are imported and benchmarked. The planner reports that limitation rather than pretending to execute them.
+
+## Siax 4x + DETAIL6
+
+The legacy DETAIL6 constitution requires a genuine 4x Siax master, region-limited residual detail, protected face/skin/eye-white masks, measured zone proof and JPEG 4:4:4 delivery. It explicitly forbids inflating a small image to meet a megabyte target.
+
+Install the optional local runtime:
+
+    python -m pip install -e ".[upscale]"
+
+The checkpoint is not committed. Download the pinned file from the reference listed in docs/DETAIL6_AND_REF_ROUTING.md, verify its SHA-256 and review its model terms first. The mirror repository labels itself MIT, but original model terms still require review. The command requires an explicit acknowledgement:
+
+    ige upscale-siax source.png --checkpoint models/4x_NMKD-Siax_200k.pth --out runs/upscale/SIAX4X.png --confirm-model-license-review
+
+The output includes a hash-bound .upscale.json sidecar. Prepare masks at BASE or 4x dimensions; the mask manifest must provide metal/stone/text/fire detail masks (at least one) and face/skin/eye_white protection masks:
+
+    ige detail6 source.png --upscaled runs/upscale/SIAX4X.png --masks runs/masks.json --out runs/detail6 --minimum-bytes 30000000
+
+The default byte threshold is 6,000,000, matching the legacy DETAIL6 floor. Set 30,000,000 only when that delivery target is specifically required. If the content does not naturally meet it, the size gate fails; no padding or fake enlargement is applied.
+
+DETAIL6 emits a lossless working PNG, q98 and q100 JPEG 4:4:4 outputs, per-zone high-frequency deltas and a protected-pixel audit. Exact pixel proof applies to the lossless PNG relative to the Siax master; JPEG is necessarily lossy. This stage does not certify identity, pose, topology, geometry or temporal continuity.
+
 ## Source project
 
 See docs/LEGACY_SOURCE_POLICY.md. The historical repository is not a dependency and will never be automatically pulled into this repository.

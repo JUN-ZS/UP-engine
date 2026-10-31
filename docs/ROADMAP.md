@@ -38,10 +38,17 @@
 
 ## P3 — legacy skill migration
 
-- donor pipeline (ZYF/ETZ/SCD)
-- garment reconstruction (TEX4/RRT/P_G)
-- object accumulation (OBA)
-- detail stack (SWP/SPM/SIAX) only after topology gate
+- [x] curated provenance-pinned reference metadata snapshot + REF Resolver / search CLI (initial seed only; full legacy catalog crawl remains open)
+- [x] evidence-based skill planner with topology-first stop rules and candidate/human_verified distinction
+- [x] optional Siax 4x inference adapter (pinned hash; actual run requires optional runtime, checkpoint and license review)
+- [x] deterministic DETAIL6 material-mask residual, face/skin/eye protection and q98/q100 4:4:4 exports
+- [ ] complete REF ingestion/materialization for legacy image assets (UUIDs are not local binary assets)
+- [ ] donor pipeline (ZYF/ETZ/SCD)
+- [ ] identity-protected PATH1E plate + ECC executor
+- [ ] garment reconstruction (TEX4/RRT/P_G)
+- [ ] object accumulation (OBA)
+- [ ] GRID×SIAX / SWP / SPM hybrid execution and project-specific comparison
+- [ ] PIXEL_CTRL per-pixel classification and proof
 
 ## P4 — new-image and temporal generation
 
