@@ -29,6 +29,8 @@ class ReferenceEntry:
     expected_sha256: str | None = None
     local_path: str | None = None
     license_status: str = "not_applicable"
+    source_contexts: tuple[str, ...] = ()
+    aliases: tuple[str, ...] = ()
 
     @classmethod
     def from_dict(cls, raw: dict[str, Any]) -> "ReferenceEntry":
@@ -47,10 +49,10 @@ class ReferenceEntry:
         digest = raw.get("expected_sha256")
         if digest is not None and not re.fullmatch(r"[0-9a-fA-F]{64}", str(digest)):
             raise ReferenceCatalogError("expected_sha256 must be 64 hexadecimal characters")
-        return cls(str(raw["asset_id"]), str(raw["label"]), str(raw["role"]), tuple(raw["skills"]), tuple(tags), str(raw["description"]), str(raw["uri"]), str(raw["availability"]), str(raw["source_repo"]), str(raw["source_commit"]), str(raw["source_path"]), str(raw["source_section"]), str(digest).lower() if digest else None, str(raw["local_path"]) if raw.get("local_path") else None, str(raw.get("license_status", "not_applicable")))
+        return cls(str(raw["asset_id"]), str(raw["label"]), str(raw["role"]), tuple(raw["skills"]), tuple(tags), str(raw["description"]), str(raw["uri"]), str(raw["availability"]), str(raw["source_repo"]), str(raw["source_commit"]), str(raw["source_path"]), str(raw["source_section"]), str(digest).lower() if digest else None, str(raw["local_path"]) if raw.get("local_path") else None, str(raw.get("license_status", "not_applicable")), tuple(str(x) for x in raw.get("source_contexts", [])), tuple(str(x) for x in raw.get("aliases", [])))
 
     def to_dict(self) -> dict[str, Any]:
-        return {"asset_id": self.asset_id, "label": self.label, "role": self.role, "skills": list(self.skills), "tags": list(self.tags), "description": self.description, "uri": self.uri, "availability": self.availability, "source_repo": self.source_repo, "source_commit": self.source_commit, "source_path": self.source_path, "source_section": self.source_section, "expected_sha256": self.expected_sha256, "local_path": self.local_path, "license_status": self.license_status}
+        return {"asset_id": self.asset_id, "label": self.label, "role": self.role, "skills": list(self.skills), "tags": list(self.tags), "description": self.description, "uri": self.uri, "availability": self.availability, "source_repo": self.source_repo, "source_commit": self.source_commit, "source_path": self.source_path, "source_section": self.source_section, "expected_sha256": self.expected_sha256, "local_path": self.local_path, "license_status": self.license_status, "source_contexts": list(self.source_contexts), "aliases": list(self.aliases)}
 
 
 def _sha256(path: Path) -> str:
@@ -95,7 +97,7 @@ class ReferenceCatalog:
                 continue
             if skill and skill.upper() not in {item.upper() for item in entry.skills}:
                 continue
-            haystack = " ".join([entry.asset_id, entry.label, entry.role, entry.description, *entry.skills, *entry.tags, entry.source_section]).lower()
+            haystack = " ".join([entry.asset_id, entry.label, entry.role, entry.description, *entry.skills, *entry.tags, entry.source_section, *entry.source_contexts, *entry.aliases]).lower()
             score = sum(2 if token == entry.asset_id.lower() else 1 for token in tokens if token in haystack)
             if not tokens:
                 score = 1
@@ -105,13 +107,20 @@ class ReferenceCatalog:
         return [self.inspect(entry.asset_id) | {"match_score": score} for score, entry in scored[:limit]]
 
     def inspect(self, asset_id: str, *, asset_root: str | Path | None = None) -> dict[str, Any]:
-        matches = [entry for entry in self.entries if entry.asset_id.lower() == asset_id.lower()]
+        key = asset_id.lower()
+        matches = [entry for entry in self.entries if entry.asset_id.lower() == key]
+        resolved_from_alias = False
+        if not matches:
+            matches = [entry for entry in self.entries if key in {alias.lower() for alias in entry.aliases}]
+            resolved_from_alias = bool(matches)
         if not matches:
             raise KeyError(f"reference not found: {asset_id}")
         if len(matches) != 1:
-            raise ReferenceCatalogError(f"reference is ambiguous: {asset_id}")
+            raise ReferenceCatalogError(f"reference is ambiguous: {asset_id}; use the full asset ID")
         entry = matches[0]
         result = entry.to_dict()
+        if resolved_from_alias:
+            result["resolved_from_alias"] = asset_id
         result["materialization"] = "reference_only"
         result["local_file"] = None
         if asset_root is not None:

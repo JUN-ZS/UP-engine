@@ -6,7 +6,7 @@ The old constitution is the source of truth for skill order and failure rules. T
 
 | Legacy concept | Engine implementation | Current status | Cannot substitute for |
 |---|---|---|---|
-| REF / asset UUID references | Offline reference catalog + ref-search CLI | Curated metadata snapshot | Actual image bytes, SHA verification or donor suitability |
+| REF / asset UUID references | Offline reference catalog + ref-search CLI | **81 source identifiers + 160 short aliases**, with searchable context | Actual image bytes, SHA verification or donor suitability |
 | MSR | Evidence-bearing diagnosis + state-aware skill planner | Partial; semantic observations require evidence | Human review or pixel validator |
 | OTL0 | Topology gate contract | Contract-only | Full object reconstruction |
 | PATH1E | a8b face plate, ECC and protected composite | Documented-only | Executed identity proof |

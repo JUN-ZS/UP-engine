@@ -38,7 +38,8 @@
 
 ## P3 — legacy skill migration
 
-- [x] curated provenance-pinned reference metadata snapshot + REF Resolver / search CLI (initial seed only; full legacy catalog crawl remains open)
+- [x] provenance-pinned REF snapshot: 81 UUID/L artifact IDs + 160 short aliases from 9 legacy source documents, with searchable context and unique-prefix resolution
+- [ ] full historical binary asset materialization / donor suitability validation (UUIDs and proof IDs are still metadata references, not image bytes)
 - [x] evidence-based skill planner with topology-first stop rules and candidate/human_verified distinction
 - [x] Grok Vision skill-defect diagnosis adapter + `ige diagnose-image` command (candidate-only; live API and gold-set accuracy not yet validated)
 - [x] optional Siax 4x inference adapter (pinned hash; actual run requires optional runtime, checkpoint and license review)

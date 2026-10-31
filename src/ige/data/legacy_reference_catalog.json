@@ -13,13 +13,21 @@
       "skills": [
         "PATH1E",
         "ST2",
-        "S1HL"
+        "S1HL",
+        "SIAX",
+        "PIXEL_CTRL"
       ],
       "tags": [
         "face",
         "identity",
         "canonical",
-        "a8b"
+        "a8b",
+        "skin",
+        "detail",
+        "upscale",
+        "heroine_ip",
+        "registration",
+        "pixel_protection"
       ],
       "description": "Album-wide canonical heroine face source; must be the first identity reference in full-frame generation.",
       "uri": "imagine://asset/a8b78fe5-2654-4f6f-84e3-c1dfbee61004",
@@ -27,20 +35,36 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.10 / §0.13"
+      "source_section": "§0.10 / §0.13",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.0]: RULES.md > **ASOF:** 2026-10-26T18:50:00Z > **地位：** 唯一操作總憲。 > **新 SET 第一步 LOCK：** §0.0 · ST0 環境概念圖 → ST1 對型鎖臉創新 IP（退地·多角度·槌創意） > **標準面 LOCK：** `a8b78fe5-2654-4f6f-84e3-c1dfbee61004`（§0.10 · 全專輯） > **首 IP LOCK：** §0.5.1 無底圖 + 多角度 IP 包（先於全幅鎖臉） > **全幅鎖臉 LOCK：** §0.13（樣板 `2ce5fabe…` · SET-Q v2 `f1d38afd…`）· **asset_ids 必須 a8b 最前** · 即 PATH1E · GRID 臉格禁",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.10 全專輯標準面 LOCK（STANDARD FACE · ALL ALBUMS） · §0.9]: an→hud→paste→final | §6 LAYERED_CHAIN | *END §0.9* --- ## 0.10 全專輯標準面 LOCK（STANDARD FACE · ALL ALBUMS） > **用戶指定（2026-10-25T15:12:55Z）：** 她（asset `a8b78fe5-2654-4f6f-84e3-c1dfbee61004`）**才是所有專輯的標準面**。 > 之後任何 SET／album／LOOP／grid60／FREE／IP／PATH1E **只准用此臉**。 ### 正典 | 欄位 | 值 | |------|-----| | asset_id | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` | | SHA256 |",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [正典 · §0.9]: 654-4f6f-84e3-c1dfbee61004`）**才是所有專輯的標準面**。 > 之後任何 SET／album／LOOP／grid60／FREE／IP／PATH1E **只准用此臉**。 ### 正典 | 欄位 | 值 | |------|-----| | asset_id | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` | | SHA256 | `f612ec7e07d95f256d3bd352f73f98ca913074c87556aed58cfc3223a059ee81` | | FACE-L | `FACE-f612ec7e07d9` | | 檔 | `heroine_lock/STANDARD_FACE.jpg` · `STANDARD_FACE_L",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [F3 · 真臉正典框（SET-R aerial `2455522d` · 1792×1008） · §0.12.14]: | x≈650–740 · y≈120–170 | | face 心 | ≈ `(694, 172)` | | 非 | 銅盤 · 頸 · 左髮 face-like | | **F_s**（a8b 板） | `[175, 70, 200, 250]`（板尺可微調，心對心） | | donor | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004`（§0.10） | | dst | `2455522d-06e7-44c5-b925-cd9a3c5f05df` | **定位法（強制）：** 1. **GRID100** 疊原圖（20px 格） 2. **DENSE 80px 掃** 只在頭區；拒 skin 胸溝／銅盤高分 3. 人眼確認：雙眼＋鼻＋嘴 同框、朝相機 4. 寫",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [樣板 · §0.12.15]: 鎖後 **停** | 二升耗時／易漂 | | Hybrid | 必有 | 可缺（純 Siax 禁 FINAL） | #### 樣板 | 角色 | 值 | |------|-----| | 母 | `68ffbcb3-d315-4c78-a96a-3be84cf206c9` | | a8b | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` | | 臉鎖中 | `e002eca0-a025-4657-9ac9-f816e0730e99` | | **L** | **L-9441d3d22539** · 4608×6912 · ≈23MB | > 實作輪可曾多跑二升；**招名正典不要求二升**。 #### 黑名單（本支） | 代號 | 禁 | |------|-----| |",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.17.G 樣板（SET-R 海報） · §0.13]: ef 全幅；**像素級 residual 升清**走本節 | #### 0.12.17.G 樣板（SET-R 海報） | 項 | 值 | |----|-----| | L0／base 鏈 | `90807317…` → Hybrid → PIXEL_CTRL → D2D7 | | a8b | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` / `heroine_lock/a8b78fe5_STANDARD.jpg` | | plate | `44d18362-906a-4659-b162-f162cc5a51df` | | PATH1E | `L-fc0a2fa7b8a9` · ECC **0.980** · conf **0.782** · core→plate **5.13"
+      ],
+      "aliases": [
+        "a8b78fe5",
+        "a8b78fe5-265"
+      ]
     },
     {
       "asset_id": "9e1cd1e9-f229-4b21-bf4c-91b2d045e08b",
       "label": "P1 FACE_SHARP_V2_ROI",
       "role": "face_sharp_composite_reference",
       "skills": [
-        "SKIN_MAT"
+        "SKIN_MAT",
+        "DETAIL6",
+        "GOU"
       ],
       "tags": [
         "face",
         "sharp",
         "roi",
-        "p1"
+        "p1",
+        "skin",
+        "upscale"
       ],
       "description": "Plate-dominant face ROI sharp composite reference; alignment dx=dy=0 preferred.",
       "uri": "imagine://asset/9e1cd1e9-f229-4b21-bf4c-91b2d045e08b",
@@ -48,19 +72,36 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.12.20"
+      "source_section": "§0.12.20",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.20]: ∈[0.30,0.75] · 禁病毒母 · 樣板 L-767fc2634e8f / L-05683b2c4e72 / 終態 L-8ed30b6e8fe0 · 流程 GOU_MESH_CORRECT_PROCESS > **SKIN_MAT 四參數 LOCK：** §0.12.20 · P1 銳拼 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 同構圖毛孔板 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 拼回 ROI `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · face_ncc≥0.90 · BEAT",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.20]: DN `L-39ba8c8f1d7c`；BEAT 4c99 §0.12.18。 - **2026-10-26T17:40:00Z：** **§0.12.20 SKIN_MAT 四參數** 入憲。**用戶：**「[references: P1–P4] 這4参數都可寫進憲」。**四參數：** P1 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` 銳拼 ROI · P2 `3f769105-e85e-43d2-854f-f454f8171e34` 板預覽 · P3 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` 同構圖毛孔板（face_ncc≈0.947）· P4 `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` 拼回 ROI（",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.B 四參數（寫死 · 必引用） · §0.12.16]: MATERIAL · 特寫改構圖 · 差分全黑仍稱成功 ``` #### 0.12.20.B 四參數（寫死 · 必引用） | 代號 | asset_id | 角色 | 不可替代含義 | |------|----------|------|--------------| | **P1** | `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` | **FACE_SHARP_V2_ROI** · 銳拼樣板 | 對位 dx=dy=0 後 **板主導** 拼回；**禁** canvas LP 進臉內（舊糊因 M≈0.32） | | **P2** | `3f769105-e85e-43d2-854f-f454f8171e34` | **SKIN_REDO 板預覽** | 同構圖毛孔板交付預",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.G 樣板索引（SET-R 海報） · §0.12.16]: · 記錯 | | **E-GS-24** | 不跑 G-BEAT-ZONE 就說「比上圖好」 | 無證勝過 | #### 0.12.20.G 樣板索引（SET-R 海報） | 產物 | id / L | 備註 | |------|--------|------| | P1 銳拼 ROI | `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · `L-ebaf5fca8718` | 對位 OK · 板主導 | | P2 板預覽 | `3f769105-e85e-43d2-854f-f454f8171e34` | | | P3 毛孔板 | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | face_ncc 0.947 | | P4 拼回 ROI |",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_DO_NOT_REPEAT.md [E-GS-21…24 · SKIN_MAT（§0.12.20 · 2026-10-26T17:40:00Z） · §0.12.20]: vas-LP 主導拼臉 | P1 反例：Lap 崩 | | E-GS-23 | 差分全黑稱真實 MATERIAL | c27b+0c70 自檢 FAIL | | E-GS-24 | 無 G-BEAT-ZONE 稱比上圖好 | 必對 baseline zone | **正典四參數：** P1 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` *（E-GS-17 已用於 DETAIL6 整圖 USM，皮膚黑名單從 21"
+      ],
+      "aliases": [
+        "9e1cd1e9",
+        "9e1cd1e9-f22"
+      ]
     },
     {
       "asset_id": "3f769105-e85e-43d2-854f-f454f8171e34",
       "label": "P2 SKIN_REDO board preview",
       "role": "skin_material_preview",
       "skills": [
-        "SKIN_MAT"
+        "SKIN_MAT",
+        "DETAIL6",
+        "FACE_GENMIX",
+        "GOU"
       ],
       "tags": [
         "skin",
         "preview",
-        "p2"
+        "p2",
+        "face",
+        "metal",
+        "upscale"
       ],
       "description": "Same-composition skin material board preview; not an identity master.",
       "uri": "imagine://asset/3f769105-e85e-43d2-854f-f454f8171e34",
@@ -68,7 +109,18 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.12.20"
+      "source_section": "§0.12.20",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.20]: 3b2c4e72 / 終態 L-8ed30b6e8fe0 · 流程 GOU_MESH_CORRECT_PROCESS > **SKIN_MAT 四參數 LOCK：** §0.12.20 · P1 銳拼 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 同構圖毛孔板 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 拼回 ROI `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · face_ncc≥0.90 · BEAT facezone · 可見Δ · 樣板 `L-af02132e74ec` / `L-ebaf5",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.20]: 0-26T17:40:00Z：** **§0.12.20 SKIN_MAT 四參數** 入憲。**用戶：**「[references: P1–P4] 這4参數都可寫進憲」。**四參數：** P1 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` 銳拼 ROI · P2 `3f769105-e85e-43d2-854f-f454f8171e34` 板預覽 · P3 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` 同構圖毛孔板（face_ncc≈0.947）· P4 `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` 拼回 ROI（`L-af02132e74ec` facezone Lap 839→5953 BEAT）。**除錯：*",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.B 四參數（寫死 · 必引用） · §0.12.16]: *P1** | `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` | **FACE_SHARP_V2_ROI** · 銳拼樣板 | 對位 dx=dy=0 後 **板主導** 拼回；**禁** canvas LP 進臉內（舊糊因 M≈0.32） | | **P2** | `3f769105-e85e-43d2-854f-f454f8171e34` | **SKIN_REDO 板預覽** | 同構圖毛孔板交付預覽（與 P3 同源鏈） | | **P3** | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | **同構圖毛孔板正典** | face_ncc≈**0.947** · 全構圖鎖（槌／火字／肩甲在框）· **非**緊特寫 | | **P4** |",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.G 樣板索引（SET-R 海報） · §0.12.16]: 報） | 產物 | id / L | 備註 | |------|--------|------| | P1 銳拼 ROI | `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · `L-ebaf5fca8718` | 對位 OK · 板主導 | | P2 板預覽 | `3f769105-e85e-43d2-854f-f454f8171e34` | | | P3 毛孔板 | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | face_ncc 0.947 | | P4 拼回 ROI | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · `L-af02132e74ec` | BEAT zone 839→5953 | | 舊糊",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_DO_NOT_REPEAT.md [E-GS-21…24 · SKIN_MAT（§0.12.20 · 2026-10-26T17:40:00Z） · §0.12.20]: 稱真實 MATERIAL | c27b+0c70 自檢 FAIL | | E-GS-24 | 無 G-BEAT-ZONE 稱比上圖好 | 必對 baseline zone | **正典四參數：** P1 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` *（E-GS-17 已用於 DETAIL6 整圖 USM，皮膚黑名單從 21 起，勿覆寫）* ## E-GS-25…28 · FACE_GENMIX（§0.12"
+      ],
+      "aliases": [
+        "3f769105",
+        "3f769105-e85"
+      ]
     },
     {
       "asset_id": "2befbe5e-751c-434a-a39f-ad4bf8ed4374",
@@ -76,13 +128,19 @@
       "role": "skin_texture_reference",
       "skills": [
         "SKIN_MAT",
-        "FACE_GENMIX"
+        "FACE_GENMIX",
+        "DETAIL6",
+        "S1HL"
       ],
       "tags": [
         "skin",
         "pore",
         "natural",
-        "p3"
+        "p3",
+        "face",
+        "metal",
+        "upscale",
+        "registration"
       ],
       "description": "Same-composition natural skin texture reference; documented face NCC around 0.947.",
       "uri": "imagine://asset/2befbe5e-751c-434a-a39f-ad4bf8ed4374",
@@ -90,7 +148,19 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.12.20 / §0.12.21"
+      "source_section": "§0.12.20 / §0.12.21",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.20]: PROCESS > **SKIN_MAT 四參數 LOCK：** §0.12.20 · P1 銳拼 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 同構圖毛孔板 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 拼回 ROI `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · face_ncc≥0.90 · BEAT facezone · 可見Δ · 樣板 `L-af02132e74ec` / `L-ebaf5fca8718` > **DETAIL6 體積／細節 LOCK：** §0.12.19 · 交付 ≥6",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.20]: *用戶：**「[references: P1–P4] 這4参數都可寫進憲」。**四參數：** P1 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` 銳拼 ROI · P2 `3f769105-e85e-43d2-854f-f454f8171e34` 板預覽 · P3 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` 同構圖毛孔板（face_ncc≈0.947）· P4 `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` 拼回 ROI（`L-af02132e74ec` facezone Lap 839→5953 BEAT）。**除錯：** (1) AI 美顏≠MATERIAL；(2) canvas-LP 主導=糊；(3) 緊特寫板",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.B 四參數（寫死 · 必引用） · §0.12.16]: 板主導** 拼回；**禁** canvas LP 進臉內（舊糊因 M≈0.32） | | **P2** | `3f769105-e85e-43d2-854f-f454f8171e34` | **SKIN_REDO 板預覽** | 同構圖毛孔板交付預覽（與 P3 同源鏈） | | **P3** | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | **同構圖毛孔板正典** | face_ncc≈**0.947** · 全構圖鎖（槌／火字／肩甲在框）· **非**緊特寫 | | **P4** | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` | **SKIN_REDO 拼回 ROI** | A→B→C 完成臉區 · 必須 **BEAT** 舊臉區 ba",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.G 樣板索引（SET-R 海報） · §0.12.16]: 銳拼 ROI | `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · `L-ebaf5fca8718` | 對位 OK · 板主導 | | P2 板預覽 | `3f769105-e85e-43d2-854f-f454f8171e34` | | | P3 毛孔板 | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | face_ncc 0.947 | | P4 拼回 ROI | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · `L-af02132e74ec` | BEAT zone 839→5953 | | 舊糊對照 | `589b6de8-87f7-4965-924b-ffd70d39cd53` | 必須被 P4 鏈",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.B 參數表（寫死 · 與 §0.12.20 對齊） · §0.12.20]: -------|----|----| | **P4 / 白REF** | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` | **fair / porcelain 白** | 亮膚、白瓷傾向 | **粒粒噪、雀斑砂、噴點** | | **P3 / 自然REF** | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | **natural 皮感** | 自然毛孔／真實膚質感 | **棕色／古銅／暖棕底** | | **結構錨** | 當幀 face_crop 或 wide face（DETAIL6／LOCKED MID） | 姿／構／甲／髮／光向 | 骨相與構圖 | 不得改機位 | **混參語義（prompt 必寫清）：** - 白 = **insp",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.20]: | 備選 | | 拼回全圖 | FACE_GENMIX_FULL · `L-90961cfbcd33` | ECC≈0.86 · 結構鎖 | | 白REF | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` | §0.12.20 **P4** | | 自然REF | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | §0.12.20 **P3** | | 噪粒 DN 對照 | BEAT_4C99_DN · `L-39ba8c8f1d7c` | 非 GENMIX | #### 0.12.21.H 閘門勾選 ``` [ ] asset_ids 順序 = [結構錨, 白REF, 自然REF] [ ] prompt 明示：白無粒 · 自然無棕 · 禁止"
+      ],
+      "aliases": [
+        "2befbe5e",
+        "2befbe5e-751"
+      ]
     },
     {
       "asset_id": "d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6",
@@ -98,13 +168,18 @@
       "role": "skin_complexion_reference",
       "skills": [
         "SKIN_MAT",
-        "FACE_GENMIX"
+        "FACE_GENMIX",
+        "DETAIL6"
       ],
       "tags": [
         "skin",
         "fair",
         "porcelain",
-        "p4"
+        "p4",
+        "face",
+        "metal",
+        "upscale",
+        "registration"
       ],
       "description": "Fair complexion parameter reference; the constitution explicitly says to use it as a parameter source, not a pixel paste donor.",
       "uri": "imagine://asset/d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6",
@@ -112,7 +187,19 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.12.20 / §0.12.21"
+      "source_section": "§0.12.20 / §0.12.21",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.20]: 9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 同構圖毛孔板 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 拼回 ROI `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · face_ncc≥0.90 · BEAT facezone · 可見Δ · 樣板 `L-af02132e74ec` / `L-ebaf5fca8718` > **DETAIL6 體積／細節 LOCK：** §0.12.19 · 交付 ≥6MB 必走 **原生 4× 全幅 + 好區 residual + 高碼率存檔** · 禁假升採樣灌體積",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.20]: b21-bf4c-91b2d045e08b` 銳拼 ROI · P2 `3f769105-e85e-43d2-854f-f454f8171e34` 板預覽 · P3 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` 同構圖毛孔板（face_ncc≈0.947）· P4 `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` 拼回 ROI（`L-af02132e74ec` facezone Lap 839→5953 BEAT）。**除錯：** (1) AI 美顏≠MATERIAL；(2) canvas-LP 主導=糊；(3) 緊特寫板 ncc 崩。**E-GS-21…24**。樣板 `L-ebaf5fca8718` / `L-af02132e74ec`。 - **",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.B 四參數（寫死 · 必引用） · §0.12.16]: 構圖毛孔板交付預覽（與 P3 同源鏈） | | **P3** | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | **同構圖毛孔板正典** | face_ncc≈**0.947** · 全構圖鎖（槌／火字／肩甲在框）· **非**緊特寫 | | **P4** | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` | **SKIN_REDO 拼回 ROI** | A→B→C 完成臉區 · 必須 **BEAT** 舊臉區 baseline | **鏈：** `P3`（A 板）→ 混法 B → 拼入全圖 → **P4**（C ROI）；**P1** 定義銳拼法；**P2** 板檢視。 #### 0.12.20.C 數值閘（從實測寫死） | 閘 | 閾",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.G 樣板索引（SET-R 海報） · §0.12.16]: OK · 板主導 | | P2 板預覽 | `3f769105-e85e-43d2-854f-f454f8171e34` | | | P3 毛孔板 | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | face_ncc 0.947 | | P4 拼回 ROI | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · `L-af02132e74ec` | BEAT zone 839→5953 | | 舊糊對照 | `589b6de8-87f7-4965-924b-ffd70d39cd53` | 必須被 P4 鏈勝過 | | 全圖 | `SET_R_9080_SKIN_REDO_FULL` · `L-af02132e74ec` | 甲球石火保留 + 新皮",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.B 參數表（寫死 · 與 §0.12.20 對齊） · §0.12.20]: 參」 · 疊上疊模糊鏈 ``` #### 0.12.21.B 參數表（寫死 · 與 §0.12.20 對齊） | 代號 | asset_id | 混參角色 | 取 | 棄 | |------|----------|----------|----|----| | **P4 / 白REF** | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` | **fair / porcelain 白** | 亮膚、白瓷傾向 | **粒粒噪、雀斑砂、噴點** | | **P3 / 自然REF** | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | **natural 皮感** | 自然毛孔／真實膚質感 | **棕色／古銅／暖棕底** | | **結構錨** |",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18]: 90a7` | 混參重生主樣 | | GEN wide | `0128d1c9-df18-4bcf-a599-34306821d2d1` | 備選 | | 拼回全圖 | FACE_GENMIX_FULL · `L-90961cfbcd33` | ECC≈0.86 · 結構鎖 | | 白REF | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` | §0.12.20 **P4** | | 自然REF | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | §0.12.20 **P3** | | 噪粒 DN 對照 | BEAT_4C99_DN · `L-39ba8c8f1d7c` | 非 GENMIX | #### 0.12.21.H 閘門勾選 ```"
+      ],
+      "aliases": [
+        "d4d2d76d",
+        "d4d2d76d-c46"
+      ]
     },
     {
       "asset_id": "L-f99f139b55a6",
@@ -120,13 +207,20 @@
       "role": "metal_detail_reference",
       "skills": [
         "GRID_SIAX",
-        "DETAIL6"
+        "DETAIL6",
+        "SIAX",
+        "GRID_CLEAN"
       ],
       "tags": [
         "metal",
         "armor",
         "detail",
-        "proof"
+        "proof",
+        "face",
+        "skin",
+        "upscale",
+        "registration",
+        "pixel_protection"
       ],
       "description": "Metal-zone detail proof baseline used by DETAIL6 comparisons.",
       "uri": "legacy-ref://L-f99f139b55a6",
@@ -134,19 +228,38 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.12.18 / §0.12.19"
+      "source_section": "§0.12.18 / §0.12.19",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.19]: 走 **原生 4× 全幅 + 好區 residual + 高碼率存檔** · 禁假升採樣灌體積 · 禁整圖 USM 當加細節 · 樣板 DETAIL6 `L-7fcd14aab71a` · FULL q98≈21MB · q100≈35MB · 3072≈10MB · 基線 METAL_BITE `L-f99f139b55a6` > **GRID_CLEAN／勝過全開 Siax LOCK：** §0.12.18 · GRID=好區地圖·混合只寫好 donor·禁區永不寫 · 勝過≠加像素＝殺假紋+鎖結構+字金真細節+臉 plate · PROOF 用清晰／可讀非 HF 總量 · 樣板 BEAT_v7 `L-5c738bdfdcdf` · GRID_CLEAN `L-6fb3f0816139` · 對手 pure",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.19]: L-7fcd14aab71a` · q98≈**21MB** · q100≈**35MB** · 3072≈**10MB**；相對 METAL_BITE v8 甲 HF+5.2／clar+73 · 字 HF+4.4／clar+59 · 球 HF+5.3／clar+72。基線 METAL_BITE `L-f99f139b55a6`（甲咬過 Siax）。**E-GS-16** 假升採樣／整圖 USM 灌體積。附件同步。 - **2026-10-26T15:35:00Z：** **§0.12.18 GRID_CLEAN／BEAT_SIAX** 入憲。**構想：** (1) 不加像素如何勝過全開 Siax＝換好像素+殺壞像素+鎖結構／身份；(2) GRID 是地圖非工廠；混合只在好區寫好 donor；禁區（眼白等）永不",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.19.E 成果樣板 · §0.12.16]: clar 暴衝但目視「鐵皮／假毛孔」→ **回退 USM／降 residual**，不得以 HF 總量辯護（E-GS-14） #### 0.12.19.E 成果樣板 | 階 | L- | 體積／關鍵 | |----|-----|------------| | METAL_BITE v8 | `L-f99f139b55a6` | FULL≈9MB · 甲 HF/clar 已 ≥ pure Siax | | **DETAIL6** | `L-7fcd14aab71a` | **q98≈21MB · q100≈35MB · 3072≈10MB** · 甲 HF+5.2／clar+73 vs v8 · 字 HF+4.4／clar+59 · 球 HF+5.3／clar+72 | | rival pure Siax",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_DO_NOT_REPEAT.md [2. 實證（SET-R 海報 L0 `90807317…`） · §0.12.18]: `L-5c738bdfdcdf` · §0.12.18 | | **GRID_CLEAN 字 clarΔ** | **+11.2** | — | `L-6fb3f0816139` 言清 | | **METAL_BITE 甲 clarΔ vs Siax** | **+37** | HF+1.1 | `L-f99f139b55a6` | | **DETAIL6 主檔** | q98 **21MB** / q100 **35MB** | — | `L-7fcd14aab71a` · §0.12.19 | | DETAIL6 甲 vs v8 | HF+5.2 clar+73 | — | residual 合法 | --- ## 3. 閘 · 任一即 FAIL 稱「有變／已鎖」 ``` [ ] 未跑 face cr"
+      ],
+      "aliases": [
+        "L-f99f13",
+        "L-f99f139b"
+      ]
     },
     {
       "asset_id": "L-7fcd14aab71a",
       "label": "DETAIL6 full master proof",
       "role": "detail6_output_reference",
       "skills": [
-        "DETAIL6"
+        "DETAIL6",
+        "SIAX4X",
+        "SIAX",
+        "GRID_CLEAN"
       ],
       "tags": [
         "detail6",
         "high_resolution",
-        "proof"
+        "proof",
+        "face",
+        "metal",
+        "detail",
+        "upscale",
+        "registration",
+        "pixel_protection"
       ],
       "description": "Legacy DETAIL6 proof reference; q98 around 21MB and q100 around 35MB are historical reported outputs, not guarantees for other images.",
       "uri": "legacy-ref://L-7fcd14aab71a",
@@ -154,7 +267,17 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.12.19"
+      "source_section": "§0.12.19",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.19]: 2e74ec` / `L-ebaf5fca8718` > **DETAIL6 體積／細節 LOCK：** §0.12.19 · 交付 ≥6MB 必走 **原生 4× 全幅 + 好區 residual + 高碼率存檔** · 禁假升採樣灌體積 · 禁整圖 USM 當加細節 · 樣板 DETAIL6 `L-7fcd14aab71a` · FULL q98≈21MB · q100≈35MB · 3072≈10MB · 基線 METAL_BITE `L-f99f139b55a6` > **GRID_CLEAN／勝過全開 Siax LOCK：** §0.12.18 · GRID=好區地圖·混合只寫好 donor·禁區永不寫 · 勝過≠加像素＝殺假紋+鎖結構+字金真細節+臉 plate · PROOF 用清晰／可讀非 HF",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.19]: GRID_CLEAN 上對 metal/stone/text/fire 做 **Siax residual HF + MID + USM + micro-contrast**，臉／皮／眼白禁寫；(3) 中間檔 3072≈10MB／2304 可略低於 6MB 作預覽。**成果：** DETAIL6 `L-7fcd14aab71a` · q98≈**21MB** · q100≈**35MB** · 3072≈**10MB**；相對 METAL_BITE v8 甲 HF+5.2／clar+73 · 字 HF+4.4／clar+59 · 球 HF+5.3／clar+72。基線 METAL_BITE `L-f99f139b55a6`（甲咬過 Siax）。**E-GS-16** 假升採樣／整圖 USM 灌體積。附件同步。",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.19.E 成果樣板 · §0.12.16]: 12.19.E 成果樣板 | 階 | L- | 體積／關鍵 | |----|-----|------------| | METAL_BITE v8 | `L-f99f139b55a6` | FULL≈9MB · 甲 HF/clar 已 ≥ pure Siax | | **DETAIL6** | `L-7fcd14aab71a` | **q98≈21MB · q100≈35MB · 3072≈10MB** · 甲 HF+5.2／clar+73 vs v8 · 字 HF+4.4／clar+59 · 球 HF+5.3／clar+72 | | rival pure Siax | `SIAX4x_9080_FULL` | ~10MB · 禁 FINAL | 檔索引：`SET_R_9080_DETAIL6_FULL.j",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_DO_NOT_REPEAT.md [2. 實證（SET-R 海報 L0 `90807317…`） · §0.12.18]: `L-6fb3f0816139` 言清 | | **METAL_BITE 甲 clarΔ vs Siax** | **+37** | HF+1.1 | `L-f99f139b55a6` | | **DETAIL6 主檔** | q98 **21MB** / q100 **35MB** | — | `L-7fcd14aab71a` · §0.12.19 | | DETAIL6 甲 vs v8 | HF+5.2 clar+73 | — | residual 合法 | --- ## 3. 閘 · 任一即 FAIL 稱「有變／已鎖」 ``` [ ] 未跑 face crop mean|Δ| / pct>8 [ ] mean|Δ|<2 且 pct>8<5% 仍對用戶說已變 [ ] 權重非真 pth [ ] L0 為"
+      ],
+      "aliases": [
+        "L-7fcd14",
+        "L-7fcd14aa"
+      ]
     },
     {
       "asset_id": "L-6fb3f0816139",
@@ -162,12 +285,24 @@
       "role": "detail_quality_reference",
       "skills": [
         "GRID_SIAX",
-        "DETAIL6"
+        "DETAIL6",
+        "PATH1E",
+        "SIAX4X",
+        "SIAX",
+        "GRID_CLEAN",
+        "SKIN_MAT"
       ],
       "tags": [
         "grid_clean",
         "clarity",
-        "proof"
+        "proof",
+        "face",
+        "skin",
+        "metal",
+        "detail",
+        "upscale",
+        "registration",
+        "pixel_protection"
       ],
       "description": "Regional clarity/readability proof; clarity is not represented by total high-frequency energy alone.",
       "uri": "legacy-ref://L-6fb3f0816139",
@@ -175,20 +310,42 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.12.18"
+      "source_section": "§0.12.18",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.18]: Siax LOCK：** §0.12.18 · GRID=好區地圖·混合只寫好 donor·禁區永不寫 · 勝過≠加像素＝殺假紋+鎖結構+字金真細節+臉 plate · PROOF 用清晰／可讀非 HF 總量 · 樣板 BEAT_v7 `L-5c738bdfdcdf` · GRID_CLEAN `L-6fb3f0816139` · 對手 pure Siax `SIAX4x_9080_FULL`≈`4c99ea4b…` > **PATH1E plate→ECC LOCK：** §0.12.17 · **棚拍 a8b 直接 ECC 海報臉 = 禁止當完成**（E-GS-12）· 正典 `plate=Ref(face_crop,a8b)` → `ECC(plate,base)` → 硬貼 · 眼白仍 HARD→ST",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.18]: r；禁區（眼白等）永不寫 → 合成言清；(3) 勝過定義＝字可讀／臉身份準／無油眼白／有用微對比，**不是** HF energy 最大值。**成果：** BEAT_v7 `L-5c738bdfdcdf` 清晰 5/5 區 ≥ pure Siax、字／臉 HF 勝或平；GRID_CLEAN_v1 `L-6fb3f0816139` 字 clarΔ≈**+11.2** 言清大勝。對手：pure Siax FULL 4608×6912（≈ user `4c99ea4b…` / `SIAX4x_9080_FULL`）。**E-GS-14** 以 HF 總量冒充勝過。用戶：「先把構想和成果寫入憲」。附件 DO_NOT_REPEAT / CORRECT_PROCESS 同步。 - **2026-10-26T15:00:00",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.18.E 成果樣板（SET-R 海報 L0 `90807317…`） · §0.12.17]: x FULL 4608×6912 | 清晰 **5/5** 區 ≥ Siax；字 title clarΔ **+14.1** · ped **+14.2** · 臉 clarΔ **+12.6**；HF 字／臉勝或平；甲／球 HF 略讓（刻意少油） | | **GRID_CLEAN_v1** | `L-6fb3f0816139` | 同上 | 字 clarΔ **+11.2**（言清大勝）；臉≈平且更乾；CLASS+M 地圖可證「只寫好區」 | | pure Siax | `SIAX4x_9080_FULL` ≈ user `4c99ea4b…` | — | 全開 HF donor · **禁止當 FINAL**（E-GS-06） | **增益起點（GRID_CLEAN／BEAT · 可調必 PROOF）：*",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [樣板 · §0.12.16]: 2fa7b8a9`（cc 0.980 · conf 0.782） - plate asset `44d18362-906a-4659-b162-f162cc5a51df` - BEAT_v7 `L-5c738bdfdcdf`（清晰 5/5 ≥ pure Siax） - GRID_CLEAN_v1 `L-6fb3f0816139`（字 clarΔ +11.2） - pure Siax 對手 `SIAX4x_9080_FULL` ≈ `4c99ea4b…`（禁 FINAL） *END CORRECT_PROCESS · 2026-10-26T15:35:00Z* ## §0.12.20 SKIN_MAT 進程（2026-10-26T17:40:00Z） 1. A0 face_same_comp 全構圖裁（禁只",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_DO_NOT_REPEAT.md [2. 實證（SET-R 海報 L0 `90807317…`） · §0.12.18]: fter 1E | **0.18** | 0.6% | 眼白仍鎖 | | **BEAT_v7 vs Siax 清晰** | 5/5 區 ≥ | — | `L-5c738bdfdcdf` · §0.12.18 | | **GRID_CLEAN 字 clarΔ** | **+11.2** | — | `L-6fb3f0816139` 言清 | | **METAL_BITE 甲 clarΔ vs Siax** | **+37** | HF+1.1 | `L-f99f139b55a6` | | **DETAIL6 主檔** | q98 **21MB** / q100 **35MB** | — | `L-7fcd14aab71a` · §0.12.19 | | DETAIL6 甲 vs v8 | HF+5.2 clar+"
+      ],
+      "aliases": [
+        "L-6fb3f0",
+        "L-6fb3f081"
+      ]
     },
     {
       "asset_id": "L-fc0a2fa7b8a9",
       "label": "PATH1E plate to ECC proof",
       "role": "face_registration_reference",
       "skills": [
-        "PATH1E"
+        "PATH1E",
+        "SIAX4X",
+        "SIAX",
+        "GRID_SIAX",
+        "GRID_CLEAN",
+        "DETAIL6",
+        "PIXEL_CTRL"
       ],
       "tags": [
         "face",
         "plate",
         "ecc",
-        "identity"
+        "identity",
+        "detail",
+        "upscale",
+        "heroine_ip",
+        "registration",
+        "pixel_protection"
       ],
       "description": "PATH1E example with documented ECC correlation around 0.980; reference proof only.",
       "uri": "legacy-ref://L-fc0a2fa7b8a9",
@@ -196,7 +353,19 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/PATH1E_PLATE_ECC_LAW.md",
-      "source_section": "PATH1E"
+      "source_section": "PATH1E",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.17]: ATH1E plate→ECC LOCK：** §0.12.17 · **棚拍 a8b 直接 ECC 海報臉 = 禁止當完成**（E-GS-12）· 正典 `plate=Ref(face_crop,a8b)` → `ECC(plate,base)` → 硬貼 · 眼白仍 HARD→ST · 樣板 `L-fc0a2fa7b8a9` · ECC cc≈0.98 · conf≈0.78 > **PIXEL_RATIO 臉回原圖 LOCK：** §0.12.14 · **座標已校正**（`s_face`/`s_eff`/FACE_CROP_DIRECT · pad≤0.12 · 禁銅盤） · **真臉鎖** §0.12.14.F（F_d=[648,118,92,108] · kill_wall x=620 · δ_cr",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.17]: * `Ref(face_crop, a8b)` 得 pose plate → ECC euclid **cc=0.980** · conf≈**0.78** · core→plate mean|Δ|≈**5.13** · ew→ST≈**0.18** · gate **PATH1E_OK** · `L-fc0a2fa7b8a9`。用戶選 B 試 D7 後指令「寫」。附件 PIXEL_CTRL_LAW / DO_NOT_REPEAT / CORRECT_PROCESS 同步。 - **2026-10-26T14:35:00Z：** **§0.12.16 PIXEL 每點記認與控制** 入憲 + 擴 E-GS-08…11。**除錯鏈：** (1) 臉混比不只三元（gain/ROI/κ）· 尚有 M_CAP/det/",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.16.I 樣板 · §0.12.15]: 值 | |----|-----| | L0 | `90807317-4e7d-4646-9f98-ac6c59208d08` | | Hybrid base | v6 或 v3 | | PIXEL_CTRL | `L-69e63d57a466` | | PATH1E plate（接本節後） | `L-fc0a2fa7b8a9` · §0.12.17 | | 附件 | `PIXEL_CTRL_LAW.md` · `GRID_SIAX_DO_NOT_REPEAT` E-GS-08…13 | #### 0.12.16.J 閘門 ``` [ ] Hybrid 後已跑 PIXEL_CLASS map [ ] eye_white HARD 像素 = ST（目視 + mask 內 mean|Δ|<1） [ ] 非 ma",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.17 PATH1E plate→ECC（pose-matched plate 正典 · 棚拍 a8b 禁直 ECC） · §0.12.6]: 後指令「**寫**」入憲。 > **地位：** 臉 residual 的 **唯一合法 ECC 路徑**（與 §0.10 a8b 身份源 · §0.11 FAR 羽化 · §0.12.6 G4 接駁並列）。 > **樣板：** SET-R 海報 Hybrid+PIXEL_CTRL 後 · `L-fc0a2fa7b8a9` · gate **PATH1E_OK**。 #### 0.12.17.A 一句話 ``` plate = Ref(face_crop_of_base, a8b) ← 姿／光／角對齊的身份板 warp = ECC(plate → base face ROI) ← 結構對位 out = hard_paste(base, plate_warped, α, matt",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.17.G 樣板（SET-R 海報） · §0.13]: a8b | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` / `heroine_lock/a8b78fe5_STANDARD.jpg` | | plate | `44d18362-906a-4659-b162-f162cc5a51df` | | PATH1E | `L-fc0a2fa7b8a9` · ECC **0.980** · conf **0.782** · core→plate **5.13** · ew→ST **0.18** | | 產物 | `path1e_d7b/PATH1E_D7B_*` · `SET_R_9080_PATH1E_D7B_*` · `PATH1E_D7B_META.json` | #### 0.12.17.H 閘門勾選 ``` [ ] do",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [樣板 · §0.12.16]: 0807317-4e7d-4646-9f98-ac6c59208d08` - Siax FULL `L-ec355935c17f` - Hybrid v3 `L-8bca4ceb59b5` - PIXEL_CTRL v1.1 `L-69e63d57a466` - PATH1E plate→ECC `L-fc0a2fa7b8a9`（cc 0.980 · conf 0.782） - plate asset `44d18362-906a-4659-b162-f162cc5a51df` - BEAT_v7 `L-5c738bdfdcdf`（清晰 5/5 ≥ pure Siax） - GRID_CLEAN_v1 `L-6fb3f0816139`（字 clarΔ +11.2） - pure Siax 對手 `SIAX4x_"
+      ],
+      "aliases": [
+        "L-fc0a2f",
+        "L-fc0a2fa7"
+      ]
     },
     {
       "asset_id": "4c99ea4b",
@@ -218,7 +387,1958 @@
       "source_repo": "JUN-ZS/ai-image-gen-logic-review",
       "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
       "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
-      "source_section": "§0.12.18–19"
+      "source_section": "§0.12.18–19",
+      "aliases": []
+    },
+    {
+      "asset_id": "b41e0072-ccf5-41ee-97ef-2fd1b7ad75d2",
+      "label": "face registration reference · b41e0072-ccf5-41ee-97ef-2fd1b7ad75d2",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "detail",
+        "heroine_ip"
+      ],
+      "description": "Legacy source reference. Context: - **唯一合法女主臉：** asset `b41e0072-ccf5-41ee-97ef-2fd1b7ad75d2`（用戶指定）",
+      "uri": "legacy-ref://b41e0072-ccf5-41ee-97ef-2fd1b7ad75d2",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.6 真女主鎖定（2026-10-25T10:13:56Z） · §0.5.1",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.6 真女主鎖定（2026-10-25T10:13:56Z） · §0.5.1]: *FAIL** | | 用 ET／GRID 完成圖回寫當 IP_HD | **FAIL** | *END §0.5.1 · asof 2026-10-26T01:51:00Z* ## 0.6 真女主鎖定（2026-10-25T10:13:56Z） - **唯一合法女主臉：** asset `b41e0072-ccf5-41ee-97ef-2fd1b7ad75d2`（用戶指定） - 先前 arctic／高髻 IP **作廢** - 全景必須 **REF 此女主 IP** 進去，不可另抽臉 - 連貫打泡：先 LOCK MID，再 ±δt 推 PRE/POST（C-01） --- ## 0.7 禁止人物疊影 · 必須用高清 IP REF 出新動作（2026-10-25T10:16:50Z · 用戶 Obs"
+      ],
+      "aliases": [
+        "b41e0072",
+        "b41e0072-ccf"
+      ]
+    },
+    {
+      "asset_id": "86bc3e56-a757-418a-aa84-9445e7e48677",
+      "label": "face registration reference · 86bc3e56-a757-418a-aa84-9445e7e48677",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "heroine_ip"
+      ],
+      "description": "Legacy source reference. Context: - 資產：`86bc3e56-a757-418a-aa84-9445e7e48677`（舊 POST）",
+      "uri": "legacy-ref://86bc3e56-a757-418a-aa84-9445e7e48677",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "違規案例（寫死） · §0.5.1",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [違規案例（寫死） · §0.5.1]: 女主 IP** 進去，不可另抽臉 - 連貫打泡：先 LOCK MID，再 ±δt 推 PRE/POST（C-01） --- ## 0.7 禁止人物疊影 · 必須用高清 IP REF 出新動作（2026-10-25T10:16:50Z · 用戶 Obs） ### 違規案例（寫死） - 資產：`86bc3e56-a757-418a-aa84-9445e7e48677`（舊 POST） - 現象：**人物疊影 / 雙重殘影**（像兩層人糊在一起），不是乾淨的單一實體跟進動作 - 根因：對上一幀做弱結構 i2i「時間推進」，模型把 **舊姿 + 新姿** 疊在一起；**沒有**用高清女主 IP REF 去 **REF 出一個新的乾淨動作姿態** - 判定：**結構 FAIL · 禁止當 FINAL · 禁止當連"
+      ],
+      "aliases": [
+        "86bc3e56",
+        "86bc3e56-a75"
+      ]
+    },
+    {
+      "asset_id": "2ce5fabe-8de3-42a2-bab9-727d63c834c8",
+      "label": "face registration reference · 2ce5fabe-8de3-42a2-bab9-727d63c834c8",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "detail",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | **`2ce5fabe-8de3-42a2-bab9-727d63c834c8`** | **OK · 臉質正典樣板** | **單次全幅** `Ref(景, a8b, IP_HD)`；無切格；無 B 平均；無雙格搶臉 |",
+      "uri": "legacy-ref://2ce5fabe-8de3-42a2-bab9-727d63c834c8",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "為什麼（Obs 寫死） · §0.13",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [為什麼（Obs 寫死） · §0.13]: ET 疊**，**GRID 只升景／字**、**不對臉格再 FACE_REF**。 > **寫進全文每一 SET 程序（本節 + §0.13）。** #### 為什麼（Obs 寫死） | 資產／案例 | 結果 | 根因 | |------------|------|------| | **`2ce5fabe-8de3-42a2-bab9-727d63c834c8`** | **OK · 臉質正典樣板** | **單次全幅** `Ref(景, a8b, IP_HD)`；無切格；無 B 平均；無雙格搶臉 | | GRID24_FACE_REF / FAT_FACE_REF 完成圖 | 臉漂／鬼影／糊 | 臉被切成碎格 → 格級再 identity REF → 拼回平均 → 身份斷鏈 | | 誤用衍生板 `2",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.13.1 正典樣板 · §0.10]: scene-first 弱鎖。 > **地位：** 與 §0.10 標準面 a8b 並列——**a8b 是臉身份源；本節是「把 a8b 鎖進全幅構圖」的唯一合法程序。** ### 0.13.1 正典樣板 | 欄位 | 值 | |------|-----| | 樣板 asset（OK） | `2ce5fabe-8de3-42a2-bab9-727d63c834c8` | | SET-Q v2 LOCK（OK） | `f1d38afd-17cb-476e-b354-6d77e153d6ca`（用戶 02:17 確認） | | SET-Q PATH1E 變體 | `f80c51c8-3611-45e7-87ae-a6fccb811703` | | identity plate 例 | `49568425-f4",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [B4 閘 · §0.11]: \", \"standard_face\": \"a8b78fe5-2654-4f6f-84e3-c1dfbee61004\", \"identity_plate\": \"<Plate optional>\", \"path1e_done_on_st2\": true, \"quality_ref\": \"2ce5fabe-8de3-42a2-bab9-727d63c834c8\", \"fail_examples\": [\"f5bedf13-d489-440a-bfb6-d374c56ec6df\"], \"forbidden_identity_refs\": [\"2d3416e0-a435-44d4-a16b-6306fc798a19\"] } ``` ### 0.13.3 與 ST 對接（每 SET） | STAG"
+      ],
+      "aliases": [
+        "2ce5fabe",
+        "2ce5fabe-8de"
+      ]
+    },
+    {
+      "asset_id": "2455522d-06e7-44c5-b925-cd9a3c5f05df",
+      "label": "skin material reference · 2455522d-06e7-44c5-b925-cd9a3c5f05df",
+      "role": "skin_material_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "skin",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: | dst | `2455522d-06e7-44c5-b925-cd9a3c5f05df` |",
+      "uri": "legacy-ref://2455522d-06e7-44c5-b925-cd9a3c5f05df",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "F3 · 真臉正典框（SET-R aerial `2455522d` · 1792×1008） · §0.10",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [F3 · 真臉正典框（SET-R aerial `2455522d` · 1792×1008） · §0.10]: 非 | 銅盤 · 頸 · 左髮 face-like | | **F_s**（a8b 板） | `[175, 70, 200, 250]`（板尺可微調，心對心） | | donor | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004`（§0.10） | | dst | `2455522d-06e7-44c5-b925-cd9a3c5f05df` | **定位法（強制）：** 1. **GRID100** 疊原圖（20px 格） 2. **DENSE 80px 掃** 只在頭區；拒 skin 胸溝／銅盤高分 3. 人眼確認：雙眼＋鼻＋嘴 同框、朝相機 4. 寫 `TRUEFACE_META.json` 才允許 paste ##### F4 · FACE_CROP_DI"
+      ],
+      "aliases": [
+        "2455522d",
+        "2455522d-06e"
+      ]
+    },
+    {
+      "asset_id": "90807317-4e7d-4646-9f98-ac6c59208d08",
+      "label": "skin material reference · 90807317-4e7d-4646-9f98-ac6c59208d08",
+      "role": "skin_material_reference",
+      "skills": [
+        "PATH1E",
+        "SIAX",
+        "GRID_SIAX",
+        "PIXEL_CTRL"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "metal",
+        "detail",
+        "upscale",
+        "registration",
+        "pixel_protection"
+      ],
+      "description": "Legacy source reference. Context: **SET-R 海報 L0 樣板：** `90807317-4e7d-4646-9f98-ac6c59208d08`",
+      "uri": "legacy-ref://90807317-4e7d-4646-9f98-ac6c59208d08",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.15.D GRID 類增益表（正典起點 · 可調但必寫 META） · §0.12.14",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.15.D GRID 類增益表（正典起點 · 可調但必寫 META） · §0.12.14]: 石刻／台座字 | **0.98** + ROI +0.35 | **字極高** → 幾乎全吃 Siax HF | | **FIRE** | 火字／焰 | **0.72** | 可銳 | | **FLAT** | 其餘 | **0.45** | 少動 | **SET-R 海報 L0 樣板：** `90807317-4e7d-4646-9f98-ac6c59208d08` **Siax 全開 4×：** `L-ec355935c17f`（4608×6912 · spandrel + tile-to-disk） **Hybrid v3：** `L-8bca4ceb59b5` #### 0.12.15.E 算力策略（不用全副武裝） | 級 | 做法 | 何時 | |----|------|------|",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.16.I 樣板 · §0.12.15]: OOF_MASK | mask 內 ST→ctrl≈0 · base→ctrl 有清 · Siax 遠 | | **T9** | META | PIXEL_CTRL_META + 更新 LAW | #### 0.12.16.I 樣板 | 項 | 值 | |----|-----| | L0 | `90807317-4e7d-4646-9f98-ac6c59208d08` | | Hybrid base | v6 或 v3 | | PIXEL_CTRL | `L-69e63d57a466` | | PATH1E plate（接本節後） | `L-fc0a2fa7b8a9` · §0.12.17 | | 附件 | `PIXEL_CTRL_LAW.md` · `GRID_SIAX_DO_NOT_REPEAT` E-",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [樣板 · §0.12.16]: 被 face gain 覆蓋** - TEXT **0.98** + ROI +0.35 - METAL 0.80 · FIRE 0.72 · FLAT 0.45 - 皮膚可選雙帶：MID_SKIN_M≈0.45 · FEATURE_USM 僅 feature mask ## 樣板 - L0 `90807317-4e7d-4646-9f98-ac6c59208d08` - Siax FULL `L-ec355935c17f` - Hybrid v3 `L-8bca4ceb59b5` - PIXEL_CTRL v1.1 `L-69e63d57a466` - PATH1E plate→ECC `L-fc0a2fa7b8a9`（cc 0.980 · conf 0.782） - plate asset `44d18"
+      ],
+      "aliases": [
+        "90807317",
+        "90807317-4e7"
+      ]
+    },
+    {
+      "asset_id": "68ffbcb3-d315-4c78-a96a-3be84cf206c9",
+      "label": "face registration reference · 68ffbcb3-d315-4c78-a96a-3be84cf206c9",
+      "role": "face_registration_reference",
+      "skills": [
+        "SIAX"
+      ],
+      "tags": [
+        "face",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: | 母 | `68ffbcb3-d315-4c78-a96a-3be84cf206c9` |",
+      "uri": "legacy-ref://68ffbcb3-d315-4c78-a96a-3be84cf206c9",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "樣板 · §0.12.15",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [樣板 · §0.12.15]: -| | SIAX 次數 | **1** | 臉鎖後再全幅 SIAX | | 終點 | Ref 臉鎖後 **停** | 二升耗時／易漂 | | Hybrid | 必有 | 可缺（純 Siax 禁 FINAL） | #### 樣板 | 角色 | 值 | |------|-----| | 母 | `68ffbcb3-d315-4c78-a96a-3be84cf206c9` | | a8b | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` | | 臉鎖中 | `e002eca0-a025-4657-9ac9-f816e0730e99` | | **L** | **L-9441d3d22539** · 4608×6912 · ≈23MB | > 實作輪可曾多跑二升；**招名正典不要"
+      ],
+      "aliases": [
+        "68ffbcb3",
+        "68ffbcb3-d31"
+      ]
+    },
+    {
+      "asset_id": "e002eca0-a025-4657-9ac9-f816e0730e99",
+      "label": "face registration reference · e002eca0-a025-4657-9ac9-f816e0730e99",
+      "role": "face_registration_reference",
+      "skills": [
+        "SIAX"
+      ],
+      "tags": [
+        "face",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: | 臉鎖中 | `e002eca0-a025-4657-9ac9-f816e0730e99` |",
+      "uri": "legacy-ref://e002eca0-a025-4657-9ac9-f816e0730e99",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "樣板 · §0.12.15",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [樣板 · §0.12.15]: FINAL） | #### 樣板 | 角色 | 值 | |------|-----| | 母 | `68ffbcb3-d315-4c78-a96a-3be84cf206c9` | | a8b | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` | | 臉鎖中 | `e002eca0-a025-4657-9ac9-f816e0730e99` | | **L** | **L-9441d3d22539** · 4608×6912 · ≈23MB | > 實作輪可曾多跑二升；**招名正典不要求二升**。 #### 黑名單（本支） | 代號 | 禁 | |------|-----| | **E-GS-47** | 本招再跑第二次全幅 SIAX | | **E-GS-48** | 無"
+      ],
+      "aliases": [
+        "e002eca0",
+        "e002eca0-a02"
+      ]
+    },
+    {
+      "asset_id": "44d18362-906a-4659-b162-f162cc5a51df",
+      "label": "face registration reference · 44d18362-906a-4659-b162-f162cc5a51df",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E",
+        "SIAX4X",
+        "SIAX",
+        "GRID_CLEAN",
+        "PIXEL_CTRL"
+      ],
+      "tags": [
+        "face",
+        "detail",
+        "upscale",
+        "heroine_ip",
+        "registration",
+        "pixel_protection"
+      ],
+      "description": "Legacy source reference. Context: | plate | `44d18362-906a-4659-b162-f162cc5a51df` |",
+      "uri": "legacy-ref://44d18362-906a-4659-b162-f162cc5a51df",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.17.G 樣板（SET-R 海報） · §0.13",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.17.G 樣板（SET-R 海報） · §0.13]: ase 鏈 | `90807317…` → Hybrid → PIXEL_CTRL → D2D7 | | a8b | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` / `heroine_lock/a8b78fe5_STANDARD.jpg` | | plate | `44d18362-906a-4659-b162-f162cc5a51df` | | PATH1E | `L-fc0a2fa7b8a9` · ECC **0.980** · conf **0.782** · core→plate **5.13** · ew→ST **0.18** | | 產物 | `path1e_d7b/PATH1E_D7B_*` · `SET_R_9080_PATH1E_D7B_*` · `PATH",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [樣板 · §0.12.16]: 355935c17f` - Hybrid v3 `L-8bca4ceb59b5` - PIXEL_CTRL v1.1 `L-69e63d57a466` - PATH1E plate→ECC `L-fc0a2fa7b8a9`（cc 0.980 · conf 0.782） - plate asset `44d18362-906a-4659-b162-f162cc5a51df` - BEAT_v7 `L-5c738bdfdcdf`（清晰 5/5 ≥ pure Siax） - GRID_CLEAN_v1 `L-6fb3f0816139`（字 clarΔ +11.2） - pure Siax 對手 `SIAX4x_9080_FULL` ≈ `4c99ea4b…`（禁 FINAL） *END CORRECT_PROCES"
+      ],
+      "aliases": [
+        "44d18362",
+        "44d18362-906"
+      ]
+    },
+    {
+      "asset_id": "589b6de8-87f7-4965-924b-ffd70d39cd53",
+      "label": "skin material reference · 589b6de8-87f7-4965-924b-ffd70d39cd53",
+      "role": "skin_material_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "skin",
+        "metal"
+      ],
+      "description": "Legacy source reference. Context: | **G-BEAT-ZONE** | 新 facezone Lap **>** 對照 zone ×1.05 | 舊 `589b6de8-87f7-4965-924b-ffd70d39cd53` Lap≈**839** → P4 鏈 zone≈**5953**（`L-af02132e74ec`） |",
+      "uri": "legacy-ref://589b6de8-87f7-4965-924b-ffd70d39cd53",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.20.C 數值閘（從實測寫死） · §0.12.16",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.C 數值閘（從實測寫死） · §0.12.16]: ** | P3 face_ncc **0.947** | | **G-ALIGN** | 拼回前 NCC 位移優先 **dx=dy=0**（±2 可） | P1 診斷 0,0 | | **G-BEAT-ZONE** | 新 facezone Lap **>** 對照 zone ×1.05 | 舊 `589b6de8-87f7-4965-924b-ffd70d39cd53` Lap≈**839** → P4 鏈 zone≈**5953**（`L-af02132e74ec`） | | **G-VISIBLE-Δ** | mean\\|Δ\\| **> 4** 且 pct\\|Δ\\|>8 **> 8%** | P4 鏈 \\|Δ\\|≈**14** · >8%≈**48%** | | **G-NO-BLUR** | 拼後 RO",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.G 樣板索引（SET-R 海報） · §0.12.16]: c-434a-a39f-ad4bf8ed4374` | face_ncc 0.947 | | P4 拼回 ROI | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · `L-af02132e74ec` | BEAT zone 839→5953 | | 舊糊對照 | `589b6de8-87f7-4965-924b-ffd70d39cd53` | 必須被 P4 鏈勝過 | | 全圖 | `SET_R_9080_SKIN_REDO_FULL` · `L-af02132e74ec` | 甲球石火保留 + 新皮膚 | #### 0.12.20.H 閘門勾選 ``` [ ] A 板 face_ncc ≥ 0.90（G-SAME-COMP）· 非緊特寫 [ ] 拼前 align 近 0（"
+      ],
+      "aliases": [
+        "589b6de8",
+        "589b6de8-87f"
+      ]
+    },
+    {
+      "asset_id": "90867833-a190-425a-96e9-f26a3ed75848",
+      "label": "face registration reference · 90867833-a190-425a-96e9-f26a3ed75848",
+      "role": "face_registration_reference",
+      "skills": [
+        "DETAIL6"
+      ],
+      "tags": [
+        "face",
+        "upscale",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | 結構錨 face | `90867833-a190-425a-96e9-f26a3ed75848` | DETAIL6 face box |",
+      "uri": "legacy-ref://90867833-a190-425a-96e9-f26a3ed75848",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18]: **E-GS-28** | GENMIX 後不 ECC／不結構鎖就全圖硬貼 | 糊邊／錯位 | #### 0.12.21.G 樣板索引（SET-R · 2026-10-26） | 產物 | id / L | 備註 | |------|--------|------| | 結構錨 face | `90867833-a190-425a-96e9-f26a3ed75848` | DETAIL6 face box | | 結構錨 wide | `794a5b00-cca4-4a69-90db-fbeafeb8faf7` | | | GEN 臉板 | `7e87efdd-5f8b-4385-992b-ce7ef53b90a7` | 混參重生主樣 | | GEN wide | `0128d1c9-df18-4bcf-a"
+      ],
+      "aliases": [
+        "90867833",
+        "90867833-a19"
+      ]
+    },
+    {
+      "asset_id": "794a5b00-cca4-4a69-90db-fbeafeb8faf7",
+      "label": "face registration reference · 794a5b00-cca4-4a69-90db-fbeafeb8faf7",
+      "role": "face_registration_reference",
+      "skills": [
+        "DETAIL6",
+        "FACE_GENMIX"
+      ],
+      "tags": [
+        "face",
+        "upscale"
+      ],
+      "description": "Legacy source reference. Context: | 結構錨 wide | `794a5b00-cca4-4a69-90db-fbeafeb8faf7` | |",
+      "uri": "legacy-ref://794a5b00-cca4-4a69-90db-fbeafeb8faf7",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18]: R · 2026-10-26） | 產物 | id / L | 備註 | |------|--------|------| | 結構錨 face | `90867833-a190-425a-96e9-f26a3ed75848` | DETAIL6 face box | | 結構錨 wide | `794a5b00-cca4-4a69-90db-fbeafeb8faf7` | | | GEN 臉板 | `7e87efdd-5f8b-4385-992b-ce7ef53b90a7` | 混參重生主樣 | | GEN wide | `0128d1c9-df18-4bcf-a599-34306821d2d1` | 備選 | | 拼回全圖 | FACE_GENMIX_FULL · `L-90961cfbcd33` | E"
+      ],
+      "aliases": [
+        "794a5b00",
+        "794a5b00-cca"
+      ]
+    },
+    {
+      "asset_id": "7e87efdd-5f8b-4385-992b-ce7ef53b90a7",
+      "label": "face registration reference · 7e87efdd-5f8b-4385-992b-ce7ef53b90a7",
+      "role": "face_registration_reference",
+      "skills": [
+        "DETAIL6",
+        "FACE_GENMIX"
+      ],
+      "tags": [
+        "face",
+        "upscale",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | GEN 臉板 | `7e87efdd-5f8b-4385-992b-ce7ef53b90a7` | 混參重生主樣 |",
+      "uri": "legacy-ref://7e87efdd-5f8b-4385-992b-ce7ef53b90a7",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18]: |------| | 結構錨 face | `90867833-a190-425a-96e9-f26a3ed75848` | DETAIL6 face box | | 結構錨 wide | `794a5b00-cca4-4a69-90db-fbeafeb8faf7` | | | GEN 臉板 | `7e87efdd-5f8b-4385-992b-ce7ef53b90a7` | 混參重生主樣 | | GEN wide | `0128d1c9-df18-4bcf-a599-34306821d2d1` | 備選 | | 拼回全圖 | FACE_GENMIX_FULL · `L-90961cfbcd33` | ECC≈0.86 · 結構鎖 | | 白REF | `d4d2d76d-c467-46e9-96f2-eb6b"
+      ],
+      "aliases": [
+        "7e87efdd",
+        "7e87efdd-5f8"
+      ]
+    },
+    {
+      "asset_id": "0128d1c9-df18-4bcf-a599-34306821d2d1",
+      "label": "face registration reference · 0128d1c9-df18-4bcf-a599-34306821d2d1",
+      "role": "face_registration_reference",
+      "skills": [
+        "DETAIL6",
+        "FACE_GENMIX"
+      ],
+      "tags": [
+        "face",
+        "upscale",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | GEN wide | `0128d1c9-df18-4bcf-a599-34306821d2d1` | 備選 |",
+      "uri": "legacy-ref://0128d1c9-df18-4bcf-a599-34306821d2d1",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18]: DETAIL6 face box | | 結構錨 wide | `794a5b00-cca4-4a69-90db-fbeafeb8faf7` | | | GEN 臉板 | `7e87efdd-5f8b-4385-992b-ce7ef53b90a7` | 混參重生主樣 | | GEN wide | `0128d1c9-df18-4bcf-a599-34306821d2d1` | 備選 | | 拼回全圖 | FACE_GENMIX_FULL · `L-90961cfbcd33` | ECC≈0.86 · 結構鎖 | | 白REF | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` | §0.12.20 **P4** | | 自然REF | `2befbe5e-751c-434a-a39"
+      ],
+      "aliases": [
+        "0128d1c9",
+        "0128d1c9-df1"
+      ]
+    },
+    {
+      "asset_id": "f1d38afd-17cb-476e-b354-6d77e153d6ca",
+      "label": "face registration reference · f1d38afd-17cb-476e-b354-6d77e153d6ca",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | SET-Q v2 LOCK（OK） | `f1d38afd-17cb-476e-b354-6d77e153d6ca`（用戶 02:17 確認） |",
+      "uri": "legacy-ref://f1d38afd-17cb-476e-b354-6d77e153d6ca",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.13.1 正典樣板 · §0.10",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.13.1 正典樣板 · §0.10]: 「把 a8b 鎖進全幅構圖」的唯一合法程序。** ### 0.13.1 正典樣板 | 欄位 | 值 | |------|-----| | 樣板 asset（OK） | `2ce5fabe-8de3-42a2-bab9-727d63c834c8` | | SET-Q v2 LOCK（OK） | `f1d38afd-17cb-476e-b354-6d77e153d6ca`（用戶 02:17 確認） | | SET-Q PATH1E 變體 | `f80c51c8-3611-45e7-87ae-a6fccb811703` | | identity plate 例 | `49568425-f48f-4cf3-beb3-233ce85d03b9`（a8b 鎖進 pose） | | 為何 OK | **a8b 身份權最重"
+      ],
+      "aliases": [
+        "f1d38afd",
+        "f1d38afd-17c"
+      ]
+    },
+    {
+      "asset_id": "f80c51c8-3611-45e7-87ae-a6fccb811703",
+      "label": "face registration reference · f80c51c8-3611-45e7-87ae-a6fccb811703",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | SET-Q PATH1E 變體 | `f80c51c8-3611-45e7-87ae-a6fccb811703` |",
+      "uri": "legacy-ref://f80c51c8-3611-45e7-87ae-a6fccb811703",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.13.1 正典樣板 · §0.10",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.13.1 正典樣板 · §0.10]: asset（OK） | `2ce5fabe-8de3-42a2-bab9-727d63c834c8` | | SET-Q v2 LOCK（OK） | `f1d38afd-17cb-476e-b354-6d77e153d6ca`（用戶 02:17 確認） | | SET-Q PATH1E 變體 | `f80c51c8-3611-45e7-87ae-a6fccb811703` | | identity plate 例 | `49568425-f48f-4cf3-beb3-233ce85d03b9`（a8b 鎖進 pose） | | 為何 OK | **a8b 身份權最重** · 單次全幅 · 可再 PATH1E；無切格平均；骨相=標準面 | | 身份 ref | **僅** `a8b78fe5-…`（標準面）+ *"
+      ],
+      "aliases": [
+        "f80c51c8",
+        "f80c51c8-361"
+      ]
+    },
+    {
+      "asset_id": "49568425-f48f-4cf3-beb3-233ce85d03b9",
+      "label": "face registration reference · 49568425-f48f-4cf3-beb3-233ce85d03b9",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "heroine_ip",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | identity plate 例 | `49568425-f48f-4cf3-beb3-233ce85d03b9`（a8b 鎖進 pose） |",
+      "uri": "legacy-ref://49568425-f48f-4cf3-beb3-233ce85d03b9",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.13.1 正典樣板 · §0.10",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.13.1 正典樣板 · §0.10]: 2 LOCK（OK） | `f1d38afd-17cb-476e-b354-6d77e153d6ca`（用戶 02:17 確認） | | SET-Q PATH1E 變體 | `f80c51c8-3611-45e7-87ae-a6fccb811703` | | identity plate 例 | `49568425-f48f-4cf3-beb3-233ce85d03b9`（a8b 鎖進 pose） | | 為何 OK | **a8b 身份權最重** · 單次全幅 · 可再 PATH1E；無切格平均；骨相=標準面 | | 身份 ref | **僅** `a8b78fe5-…`（標準面）+ **無底** IP 包（FACE_CLOSE / FRONT / ACTION…） | | 禁止混入 | 後製衍生 plate"
+      ],
+      "aliases": [
+        "49568425",
+        "49568425-f48"
+      ]
+    },
+    {
+      "asset_id": "f5bedf13-d489-440a-bfb6-d374c56ec6df",
+      "label": "face registration reference · f5bedf13-d489-440a-bfb6-d374c56ec6df",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "heroine_ip",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | **`f5bedf13-d489-440a-bfb6-d374c56ec6df`**（SET-Q ST2 v1） | **FAIL · 不像女主 · 不清** | **scene-first**：景／動作權 > a8b；臉成「泛東亞女」；**無即 PATH1E** |",
+      "uri": "legacy-ref://f5bedf13-d489-440a-bfb6-d374c56ec6df",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.13.1b 失敗樣板（寫死 · 禁止再犯） · §0.10",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.13.1b 失敗樣板（寫死 · 禁止再犯） · §0.10]: 包（FACE_CLOSE / FRONT / ACTION…） | | 禁止混入 | 後製衍生 plate 當身份主；**有景完成圖當身份主** | ### 0.13.1b 失敗樣板（寫死 · 禁止再犯） | 資產 | 判定 | 根因 | |------|------|------| | **`f5bedf13-d489-440a-bfb6-d374c56ec6df`**（SET-Q ST2 v1） | **FAIL · 不像女主 · 不清** | **scene-first**：景／動作權 > a8b；臉成「泛東亞女」；**無即 PATH1E** | | 任何「景放 asset_ids[0] 且無 a8b 最前」的全幅 | **FAIL** | 模型優先跟構圖錨的臉 | | 有景劇照當唯一 IP 再進 S",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [B4 閘 · §0.11]: , \"identity_plate\": \"<Plate optional>\", \"path1e_done_on_st2\": true, \"quality_ref\": \"2ce5fabe-8de3-42a2-bab9-727d63c834c8\", \"fail_examples\": [\"f5bedf13-d489-440a-bfb6-d374c56ec6df\"], \"forbidden_identity_refs\": [\"2d3416e0-a435-44d4-a16b-6306fc798a19\"] } ``` ### 0.13.3 與 ST 對接（每 SET） | STAGE | 全幅鎖臉 | |-------|----------| | ST1 | 無底多角度 IP；**a8b 最前**"
+      ],
+      "aliases": [
+        "f5bedf13",
+        "f5bedf13-d48"
+      ]
+    },
+    {
+      "asset_id": "2d3416e0-a435-44d4-a16b-6306fc798a19",
+      "label": "face registration reference · 2d3416e0-a435-44d4-a16b-6306fc798a19",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face"
+      ],
+      "description": "Legacy source reference. Context: \"forbidden_identity_refs\": [\"2d3416e0-a435-44d4-a16b-6306fc798a19\"]",
+      "uri": "legacy-ref://2d3416e0-a435-44d4-a16b-6306fc798a19",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "B4 閘 · §0.11",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [B4 閘 · §0.11]: \"quality_ref\": \"2ce5fabe-8de3-42a2-bab9-727d63c834c8\", \"fail_examples\": [\"f5bedf13-d489-440a-bfb6-d374c56ec6df\"], \"forbidden_identity_refs\": [\"2d3416e0-a435-44d4-a16b-6306fc798a19\"] } ``` ### 0.13.3 與 ST 對接（每 SET） | STAGE | 全幅鎖臉 | |-------|----------| | ST1 | 無底多角度 IP；**a8b 最前** 生每角 | | ST2 MID | **必須** FULLFRAME_FACE_LOCK = **a8b-first + 即 PATH1E**"
+      ],
+      "aliases": [
+        "2d3416e0",
+        "2d3416e0-a43"
+      ]
+    },
+    {
+      "asset_id": "f0caf896-b056-4dd8-8aca-a9f7cbaa38a3",
+      "label": "face registration reference · f0caf896-b056-4dd8-8aca-a9f7cbaa38a3",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face"
+      ],
+      "description": "Legacy source reference. Context: > - 俯視對撞指標場：`f0caf896-b056-4dd8-8aca-a9f7cbaa38a3`（GEO.T2 · FACE · F↔180° · 打擊面1//2 · 受面=BETWEEN）",
+      "uri": "legacy-ref://f0caf896-b056-4dd8-8aca-a9f7cbaa38a3",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.14 GEO_INDICATOR_TYPE · 方向性／指標性字層（每 SET 新程序） · §0.8",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14 GEO_INDICATOR_TYPE · 方向性／指標性字層（每 SET 新程序） · §0.8]: **性質：** 這不是 §0.8 極藝術 FREE 海報字，也不是單純裝飾 HUD；而是 **把接觸幾何契約（analysis_line · HIGHLIGHT · 力／法線／GAP）直接印成可讀指標系統**。 > **樣板 ref（只鎖概念，不抄像素排版）：** > - 俯視對撞指標場：`f0caf896-b056-4dd8-8aca-a9f7cbaa38a3`（GEO.T2 · FACE · F↔180° · 打擊面1//2 · 受面=BETWEEN） > - 方法總表三聯：`78a0a9f1-1e11-45bb-9972-f29b3cc37e54` > - PRE|MID|POST 指標三聯：`2a869e73…`（A05 T2）· `53f2be80…`（A04 H3）· `fd235a",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14]: 標寫死 · §0.14.14）；MID/POST diegetic 一次 + G-LINE/G-TOKEN；無 M-END 黑名單 ``` ### 0.14.12 樣板資產索引（概念鎖 · 非排版鎖） | asset_id | 概念角色 | |----------|----------| | `f0caf896-b056-4dd8-8aca-a9f7cbaa38a3` | 俯視 FACE 對撞全場指標網 | | `78a0a9f1-1e11-45bb-9972-f29b3cc37e54` | 多方法 PRE\\|MID\\|POST 總表 | | `2a869e73-31c6-4b92-af18-0c999f34eca9` | A05 T2 三聯 | | `53f2be80-1b46-45c2-ab88-577"
+      ],
+      "aliases": [
+        "f0caf896",
+        "f0caf896-b05"
+      ]
+    },
+    {
+      "asset_id": "78a0a9f1-1e11-45bb-9972-f29b3cc37e54",
+      "label": "face registration reference · 78a0a9f1-1e11-45bb-9972-f29b3cc37e54",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face"
+      ],
+      "description": "Legacy source reference. Context: > - 方法總表三聯：`78a0a9f1-1e11-45bb-9972-f29b3cc37e54`",
+      "uri": "legacy-ref://78a0a9f1-1e11-45bb-9972-f29b3cc37e54",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.14 GEO_INDICATOR_TYPE · 方向性／指標性字層（每 SET 新程序） · §0.8",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14 GEO_INDICATOR_TYPE · 方向性／指標性字層（每 SET 新程序） · §0.8]: 標系統**。 > **樣板 ref（只鎖概念，不抄像素排版）：** > - 俯視對撞指標場：`f0caf896-b056-4dd8-8aca-a9f7cbaa38a3`（GEO.T2 · FACE · F↔180° · 打擊面1//2 · 受面=BETWEEN） > - 方法總表三聯：`78a0a9f1-1e11-45bb-9972-f29b3cc37e54` > - PRE|MID|POST 指標三聯：`2a869e73…`（A05 T2）· `53f2be80…`（A04 H3）· `fd235ae4…`（A03 H2）· `d96c66cd…`（A02 H1） > - HOT 軸向指標：`a51850bc-bb1c-4188-bf9f-61b3956d7b82`（GEO.PLANT_0",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14]: 黑名單 ``` ### 0.14.12 樣板資產索引（概念鎖 · 非排版鎖） | asset_id | 概念角色 | |----------|----------| | `f0caf896-b056-4dd8-8aca-a9f7cbaa38a3` | 俯視 FACE 對撞全場指標網 | | `78a0a9f1-1e11-45bb-9972-f29b3cc37e54` | 多方法 PRE\\|MID\\|POST 總表 | | `2a869e73-31c6-4b92-af18-0c999f34eca9` | A05 T2 三聯 | | `53f2be80-1b46-45c2-ab88-577e4b525c06` | A04 H3 三聯 | | `fd235ae4-73d0-43ca-8484-929989d46"
+      ],
+      "aliases": [
+        "78a0a9f1",
+        "78a0a9f1-1e1"
+      ]
+    },
+    {
+      "asset_id": "a51850bc-bb1c-4188-bf9f-61b3956d7b82",
+      "label": "legacy artifact reference · a51850bc-bb1c-4188-bf9f-61b3956d7b82",
+      "role": "legacy_artifact_reference",
+      "skills": [],
+      "tags": [],
+      "description": "Legacy source reference. Context: > - HOT 軸向指標：`a51850bc-bb1c-4188-bf9f-61b3956d7b82`（GEO.PLANT_0 · 大紅箭 · F_axial）",
+      "uri": "legacy-ref://a51850bc-bb1c-4188-bf9f-61b3956d7b82",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.14 GEO_INDICATOR_TYPE · 方向性／指標性字層（每 SET 新程序） · §0.8",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14 GEO_INDICATOR_TYPE · 方向性／指標性字層（每 SET 新程序） · §0.8]: 11-45bb-9972-f29b3cc37e54` > - PRE|MID|POST 指標三聯：`2a869e73…`（A05 T2）· `53f2be80…`（A04 H3）· `fd235ae4…`（A03 H2）· `d96c66cd…`（A02 H1） > - HOT 軸向指標：`a51850bc-bb1c-4188-bf9f-61b3956d7b82`（GEO.PLANT_0 · 大紅箭 · F_axial） ### 0.14.1 一句話定義 ``` GEO_INDICATOR = 方向線 + 力矢 + 法線 + GAP/接觸狀態 + 打擊面/受面標籤 + 方法頭 Method(v) + LOOP L- 全部錨在真實幾何上（不是飄在",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14]: b525c06` | A04 H3 三聯 | | `fd235ae4-73d0-43ca-8484-929989d46b7e` | A03 H2 三聯 + COLD etch | | `d96c66cd-163e-47be-84a6-6d718e62cd4f` | A02 H1 微隙三聯 | | `a51850bc-bb1c-4188-bf9f-61b3956d7b82` | PLANT HOT 軸向指標 | ### 0.14.13 引用原文 → 盲生成公式（TEXT_SET LOCK） > **用戶（2026-10-26T03:11）：** 找到他用的**引用原文**而生出這字的公式，研究 ref 到程序的文字 SET 中，**盲也能靈巧地生成**。 #### 引用鏈（OBSERVED · 非記憶）"
+      ],
+      "aliases": [
+        "a51850bc",
+        "a51850bc-bb1"
+      ]
+    },
+    {
+      "asset_id": "2a869e73-31c6-4b92-af18-0c999f34eca9",
+      "label": "face registration reference · 2a869e73-31c6-4b92-af18-0c999f34eca9",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face"
+      ],
+      "description": "Legacy source reference. Context: | `2a869e73-31c6-4b92-af18-0c999f34eca9` | A05 T2 三聯 |",
+      "uri": "legacy-ref://2a869e73-31c6-4b92-af18-0c999f34eca9",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14]: ------|----------| | `f0caf896-b056-4dd8-8aca-a9f7cbaa38a3` | 俯視 FACE 對撞全場指標網 | | `78a0a9f1-1e11-45bb-9972-f29b3cc37e54` | 多方法 PRE\\|MID\\|POST 總表 | | `2a869e73-31c6-4b92-af18-0c999f34eca9` | A05 T2 三聯 | | `53f2be80-1b46-45c2-ab88-577e4b525c06` | A04 H3 三聯 | | `fd235ae4-73d0-43ca-8484-929989d46b7e` | A03 H2 三聯 + COLD etch | | `d96c66cd-163e-47be-84a6-6d718e62c"
+      ],
+      "aliases": [
+        "2a869e73",
+        "2a869e73-31c"
+      ]
+    },
+    {
+      "asset_id": "53f2be80-1b46-45c2-ab88-577e4b525c06",
+      "label": "face registration reference · 53f2be80-1b46-45c2-ab88-577e4b525c06",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face"
+      ],
+      "description": "Legacy source reference. Context: | `53f2be80-1b46-45c2-ab88-577e4b525c06` | A04 H3 三聯 |",
+      "uri": "legacy-ref://53f2be80-1b46-45c2-ab88-577e4b525c06",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14]: 8a3` | 俯視 FACE 對撞全場指標網 | | `78a0a9f1-1e11-45bb-9972-f29b3cc37e54` | 多方法 PRE\\|MID\\|POST 總表 | | `2a869e73-31c6-4b92-af18-0c999f34eca9` | A05 T2 三聯 | | `53f2be80-1b46-45c2-ab88-577e4b525c06` | A04 H3 三聯 | | `fd235ae4-73d0-43ca-8484-929989d46b7e` | A03 H2 三聯 + COLD etch | | `d96c66cd-163e-47be-84a6-6d718e62cd4f` | A02 H1 微隙三聯 | | `a51850bc-bb1c-4188-bf9f-61b3956"
+      ],
+      "aliases": [
+        "53f2be80",
+        "53f2be80-1b4"
+      ]
+    },
+    {
+      "asset_id": "fd235ae4-73d0-43ca-8484-929989d46b7e",
+      "label": "legacy artifact reference · fd235ae4-73d0-43ca-8484-929989d46b7e",
+      "role": "legacy_artifact_reference",
+      "skills": [],
+      "tags": [],
+      "description": "Legacy source reference. Context: | `fd235ae4-73d0-43ca-8484-929989d46b7e` | A03 H2 三聯 + COLD etch |",
+      "uri": "legacy-ref://fd235ae4-73d0-43ca-8484-929989d46b7e",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14]: b3cc37e54` | 多方法 PRE\\|MID\\|POST 總表 | | `2a869e73-31c6-4b92-af18-0c999f34eca9` | A05 T2 三聯 | | `53f2be80-1b46-45c2-ab88-577e4b525c06` | A04 H3 三聯 | | `fd235ae4-73d0-43ca-8484-929989d46b7e` | A03 H2 三聯 + COLD etch | | `d96c66cd-163e-47be-84a6-6d718e62cd4f` | A02 H1 微隙三聯 | | `a51850bc-bb1c-4188-bf9f-61b3956d7b82` | PLANT HOT 軸向指標 | ### 0.14.13 引用原文 → 盲生成公式（T"
+      ],
+      "aliases": [
+        "fd235ae4",
+        "fd235ae4-73d"
+      ]
+    },
+    {
+      "asset_id": "d96c66cd-163e-47be-84a6-6d718e62cd4f",
+      "label": "legacy artifact reference · d96c66cd-163e-47be-84a6-6d718e62cd4f",
+      "role": "legacy_artifact_reference",
+      "skills": [],
+      "tags": [],
+      "description": "Legacy source reference. Context: | `d96c66cd-163e-47be-84a6-6d718e62cd4f` | A02 H1 微隙三聯 |",
+      "uri": "legacy-ref://d96c66cd-163e-47be-84a6-6d718e62cd4f",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.14.12 樣板資產索引（概念鎖 · 非排版鎖） · §0.14.14]: 99f34eca9` | A05 T2 三聯 | | `53f2be80-1b46-45c2-ab88-577e4b525c06` | A04 H3 三聯 | | `fd235ae4-73d0-43ca-8484-929989d46b7e` | A03 H2 三聯 + COLD etch | | `d96c66cd-163e-47be-84a6-6d718e62cd4f` | A02 H1 微隙三聯 | | `a51850bc-bb1c-4188-bf9f-61b3956d7b82` | PLANT HOT 軸向指標 | ### 0.14.13 引用原文 → 盲生成公式（TEXT_SET LOCK） > **用戶（2026-10-26T03:11）：** 找到他用的**引用原文**而生出這字的公式，研究"
+      ],
+      "aliases": [
+        "d96c66cd",
+        "d96c66cd-163"
+      ]
+    },
+    {
+      "asset_id": "b47031a9-99ed-4b91-b94a-c730e9e8b555",
+      "label": "material detail reference · b47031a9-99ed-4b91-b94a-c730e9e8b555",
+      "role": "material_detail_reference",
+      "skills": [],
+      "tags": [
+        "metal"
+      ],
+      "description": "Legacy source reference. Context: - `b47031a9-99ed-4b91-b94a-c730e9e8b555` — 胸甲局部 1440×1376",
+      "uri": "legacy-ref://b47031a9-99ed-4b91-b94a-c730e9e8b555",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "毒株示例（勿再當 BASE） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [毒株示例（勿再當 BASE） · §0.12.23]: - [ ] BASE.asset 是全幅且含頭／石／字／球 - [ ] 所有 GEN crop 的 box 來自該 BASE 座標 - [ ] 無「先升局部再當全圖」中間檔進母鏈 - [ ] gold_frac / lap / MAD 門檻過 V5 ## 毒株示例（勿再當 BASE） - `b47031a9-99ed-4b91-b94a-c730e9e8b555` — 胸甲局部 1440×1376 - 任何 headless torso-only / 單臂 / 單甲 crop 當「全圖升」起點 --- ### 0.12.24 WHOLE_COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） > asof 2026-10-27T08:49:06Z · 用戶確認寫入"
+      ],
+      "aliases": [
+        "b47031a9",
+        "b47031a9-99e"
+      ]
+    },
+    {
+      "asset_id": "6201efd4-55d6-42dd-8b76-1e63e97ec3c6",
+      "label": "material detail reference · 6201efd4-55d6-42dd-8b76-1e63e97ec3c6",
+      "role": "material_detail_reference",
+      "skills": [],
+      "tags": [],
+      "description": "Legacy source reference. Context: | asset WHOLE | `6201efd4-55d6-42dd-8b76-1e63e97ec3c6` | — | SET_R_947_WHOLE_FULL |",
+      "uri": "legacy-ref://6201efd4-55d6-42dd-8b76-1e63e97ec3c6",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.24.H 數值樣板（SET-R · 2026-10-27） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.24.H 數值樣板（SET-R · 2026-10-27） · §0.12.23]: 49404dfc | affine + 舊法 + RANGE | **0.80** | 修錯位 | | **L-6be8d4e2514f** | **WHOLE_COLLAGE** | **0.80** | 全板 uniform；整 lap 4743→6139 | | asset WHOLE | `6201efd4-55d6-42dd-8b76-1e63e97ec3c6` | — | SET_R_947_WHOLE_FULL | #### 0.12.24.I 閘門勾選 - [ ] BASE 全幅 native（非局部病毒） - [ ] 反推 / mesh **只進 RANGE**，不進 full-RGB 內容 - [ ] 內容公式 = V5 舊混法（MF Δ + base_HF） - [ ] 對位試過 **"
+      ],
+      "aliases": [
+        "6201efd4",
+        "6201efd4-55d"
+      ]
+    },
+    {
+      "asset_id": "8978bc25-47e6-46b7-8a58-805defef1e81",
+      "label": "material detail reference · 8978bc25-47e6-46b7-8a58-805defef1e81",
+      "role": "material_detail_reference",
+      "skills": [],
+      "tags": [
+        "metal"
+      ],
+      "description": "Legacy source reference. Context: | 啞面母 FULL | `8978bc25-47e6-46b7-8a58-805defef1e81` · L-620123e3a03a |",
+      "uri": "legacy-ref://8978bc25-47e6-46b7-8a58-805defef1e81",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.26.M 樣板資產（可稽） · §0.12.22",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.M 樣板資產（可稽） · §0.12.22]: T.md` | 本節黑名單展開 | | META JSON | `CONSTITUTION_WRITE_01226_META.json` | ### 0.12.26.M 樣板資產（可稽） | 角色 | asset / L | |------|-----------| | 啞面母 FULL | `8978bc25-47e6-46b7-8a58-805defef1e81` · L-620123e3a03a | | 啞面+光（色溫前） | `cacce121…` · L-1186f92df119 | | **色溫終態 FULL** | `f9dedda8-90fc-4cb9-8228-33eb3dc71386` · **L-a166300b8f6a** | | 甲鏈中途 | L-95991c6bae6b | |"
+      ],
+      "aliases": [
+        "8978bc25",
+        "8978bc25-47e"
+      ]
+    },
+    {
+      "asset_id": "f9dedda8-90fc-4cb9-8228-33eb3dc71386",
+      "label": "material detail reference · f9dedda8-90fc-4cb9-8228-33eb3dc71386",
+      "role": "material_detail_reference",
+      "skills": [],
+      "tags": [
+        "metal"
+      ],
+      "description": "Legacy source reference. Context: | **色溫終態 FULL** | `f9dedda8-90fc-4cb9-8228-33eb3dc71386` · **L-a166300b8f6a** |",
+      "uri": "legacy-ref://f9dedda8-90fc-4cb9-8228-33eb3dc71386",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.26.M 樣板資產（可稽） · §0.12.22",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.M 樣板資產（可稽） · §0.12.22]: -|-----------| | 啞面母 FULL | `8978bc25-47e6-46b7-8a58-805defef1e81` · L-620123e3a03a | | 啞面+光（色溫前） | `cacce121…` · L-1186f92df119 | | **色溫終態 FULL** | `f9dedda8-90fc-4cb9-8228-33eb3dc71386` · **L-a166300b8f6a** | | 甲鏈中途 | L-95991c6bae6b | | 火／石 ORIG 勾 | `from_1f29_origbound/*` | ### 0.12.26.N 招名（正式） | 層 | 名 | |----|-----| | **正招** | **啞面貼光 · 分溫鎖相** | | **短"
+      ],
+      "aliases": [
+        "f9dedda8",
+        "f9dedda8-90f"
+      ]
+    },
+    {
+      "asset_id": "092a9e12-286c-4719-af7f-275ace5218e7",
+      "label": "face registration reference · 092a9e12-286c-4719-af7f-275ace5218e7",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: > 終態 asset：`092a9e12-286c-4719-af7f-275ace5218e7` · face lap 4935→**9316** · 格均 NCC **0.899**",
+      "uri": "legacy-ref://092a9e12-286c-4719-af7f-275ace5218e7",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26]: 用戶：「給這找錯除毒的成功過程給招名(寫入憲)」 > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9** > 終態 asset：`092a9e12-286c-4719-af7f-275ace5218e7` · face lap 4935→**9316** · 格均 NCC **0.899** > **地位：** 整臉／整板硬貼失敗、PATH1E 不收斂、feather 糊邊、病毒底人格歪時的 **正解除毒鏈**。 > 未過本節 → 不得稱「細格對換完成／GCS 解毒」。 #### 0.12.27.A 招名（寫死） | 語 | 名 |"
+      ],
+      "aliases": [
+        "092a9e12",
+        "092a9e12-286"
+      ]
+    },
+    {
+      "asset_id": "L-8bca4ceb59b5",
+      "label": "skin material reference · L-8bca4ceb59b5",
+      "role": "skin_material_reference",
+      "skills": [
+        "PATH1E",
+        "SIAX",
+        "PIXEL_CTRL",
+        "S1HL"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "metal",
+        "detail",
+        "upscale",
+        "registration",
+        "pixel_protection"
+      ],
+      "description": "Legacy source reference. Context: > **GRID×SIAX 像素協調 LOCK：** §0.12.15 · 真 `4x_NMKD-Siax_200k.pth` HF donor + GRID 定義像素 · 參數≠像素（PROOF 閘）· 防油面／假紋 · 樣板 L0 `90807317…` · Hybrid v3 `L-8bca4ceb59b5`",
+      "uri": "legacy-ref://L-8bca4ceb59b5",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.15",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.15]: .13） > **GRID×SIAX 像素協調 LOCK：** §0.12.15 · 真 `4x_NMKD-Siax_200k.pth` HF donor + GRID 定義像素 · 參數≠像素（PROOF 閘）· 防油面／假紋 · 樣板 L0 `90807317…` · Hybrid v3 `L-8bca4ceb59b5` > **一升混鎖 S1HL LOCK：** §0.12.15.L · 正名「**一升混鎖**」· **SIAX×1** → Hybrid → Ref(hybrid,a8b) 臉鎖 · **禁二升** · 樣板 **L-9441d3d22539** · 附件 `SIAX_HYBRID_FACELOCK_S1HL_NAME.md` > **PIXEL 每點記認／控制 LOCK：** §0.",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.15.D GRID 類增益表（正典起點 · 可調但必寫 META） · §0.12.14]: **SET-R 海報 L0 樣板：** `90807317-4e7d-4646-9f98-ac6c59208d08` **Siax 全開 4×：** `L-ec355935c17f`（4608×6912 · spandrel + tile-to-disk） **Hybrid v3：** `L-8bca4ceb59b5` #### 0.12.15.E 算力策略（不用全副武裝） | 級 | 做法 | 何時 | |----|------|------| | **E0 試效** | 可先 **全圖 Siax 一次** 存盤，再只做 **M 混合**（便宜重調增益） | 調 M／比對版本 | | **E1 省算** | 只對 \\(g\\ge 0.60\\)（或 TEXT/METAL/FACE ROI）的 **G",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [樣板 · §0.12.16]: 5 - 皮膚可選雙帶：MID_SKIN_M≈0.45 · FEATURE_USM 僅 feature mask ## 樣板 - L0 `90807317-4e7d-4646-9f98-ac6c59208d08` - Siax FULL `L-ec355935c17f` - Hybrid v3 `L-8bca4ceb59b5` - PIXEL_CTRL v1.1 `L-69e63d57a466` - PATH1E plate→ECC `L-fc0a2fa7b8a9`（cc 0.980 · conf 0.782） - plate asset `44d18362-906a-4659-b162-f162cc5a51df` - BEAT_v7 `L-5c738bdfdcdf`（清晰 5/5 ≥ pure Siax）"
+      ],
+      "aliases": [
+        "L-8bca4c",
+        "L-8bca4ceb"
+      ]
+    },
+    {
+      "asset_id": "L-9441d3d22539",
+      "label": "face registration reference · L-9441d3d22539",
+      "role": "face_registration_reference",
+      "skills": [
+        "SIAX",
+        "N2R",
+        "WNK",
+        "S1HL"
+      ],
+      "tags": [
+        "face",
+        "detail",
+        "upscale",
+        "pixel_protection"
+      ],
+      "description": "Legacy source reference. Context: > **一升混鎖 S1HL LOCK：** §0.12.15.L · 正名「**一升混鎖**」· **SIAX×1** → Hybrid → Ref(hybrid,a8b) 臉鎖 · **禁二升** · 樣板 **L-9441d3d22539** · 附件 `SIAX_HYBRID_FACELOCK_S1HL_NAME.md`",
+      "uri": "legacy-ref://L-9441d3d22539",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.15",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.15]: 0 `90807317…` · Hybrid v3 `L-8bca4ceb59b5` > **一升混鎖 S1HL LOCK：** §0.12.15.L · 正名「**一升混鎖**」· **SIAX×1** → Hybrid → Ref(hybrid,a8b) 臉鎖 · **禁二升** · 樣板 **L-9441d3d22539** · 附件 `SIAX_HYBRID_FACELOCK_S1HL_NAME.md` > **PIXEL 每點記認／控制 LOCK：** §0.12.16 · 記認 mask → 只寫允許類 · **眼白鐵律** M_hf=0·M_mid=0·lock=1·HARD=ST exact · 禁整臉重構（E-GS-08/09）· 樣板 `L-69e63d57a466` · 附件 `PIXEL",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.15]: **§0.12.15.L 一升混鎖 / S1HL** 入憲。**用戶：** 技法不用「再 TRUE SIAX4×」→ 正名 **一升混鎖** · 入憲。 流程：SIAX×1 → Hybrid(LP+HF×M) → Ref(hybrid,a8b) 臉鎖 · **停**；E-GS-47…50；樣板 **L-9441d3d22539**；附件 `SIAX_HYBRID_FACELOCK_S1HL_NAME.md` · `SIAX_HYBRID_FACELOCK_S1HL.md`。 - **2026-10-27T21:24:47Z：** **§0.12.26.D 白噪殺 / WNK** 招名入憲。**用戶：**「入憲, 叫白噪殺」。 正名寫死 **白噪殺**；公式 kill=NOISE∩¬SPEC；與 **噪折 N2R",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [樣板 · §0.12.15]: 68ffbcb3-d315-4c78-a96a-3be84cf206c9` | | a8b | `a8b78fe5-2654-4f6f-84e3-c1dfbee61004` | | 臉鎖中 | `e002eca0-a025-4657-9ac9-f816e0730e99` | | **L** | **L-9441d3d22539** · 4608×6912 · ≈23MB | > 實作輪可曾多跑二升；**招名正典不要求二升**。 #### 黑名單（本支） | 代號 | 禁 | |------|-----| | **E-GS-47** | 本招再跑第二次全幅 SIAX | | **E-GS-48** | 無 Hybrid 只 Siax 稱混鎖 | | **E-GS-49** | 先臉鎖再 SIAX 當本招正典",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [支招 · 一升混鎖 S1HL（§0.12.15.L · 2026-10-28T07:06:55Z） · §0.12.15]: `` T0 L0 → T1 SIAX×1 → T3 Hybrid → Ref(hybrid,a8b) 臉鎖 → 停 ``` - **禁** 再 TRUE SIAX4×（E-GS-47） - g_face≈0.88 · g_body≈0.72 · g_bg≈0.40 · 眼白 M≈0 - 樣板 **L-9441d3d22539** - 詳 `SIAX_HYBRID_FACELOCK_S1HL.md`"
+      ],
+      "aliases": [
+        "L-9441d3",
+        "L-9441d3d2"
+      ]
+    },
+    {
+      "asset_id": "L-69e63d57a466",
+      "label": "face registration reference · L-69e63d57a466",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E",
+        "SIAX",
+        "GRID_SIAX",
+        "GRID_CLEAN",
+        "DETAIL6",
+        "PIXEL_CTRL",
+        "FACE_GENMIX",
+        "S1HL"
+      ],
+      "tags": [
+        "face",
+        "detail",
+        "upscale",
+        "registration",
+        "pixel_protection"
+      ],
+      "description": "Legacy source reference. Context: > **PIXEL 每點記認／控制 LOCK：** §0.12.16 · 記認 mask → 只寫允許類 · **眼白鐵律** M_hf=0·M_mid=0·lock=1·HARD=ST exact · 禁整臉重構（E-GS-08/09）· 樣板 `L-69e63d57a466` · 附件 `PIXEL_CTRL_LAW.md`",
+      "uri": "legacy-ref://L-69e63d57a466",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.16",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.16]: D_FACELOCK_S1HL_NAME.md` > **PIXEL 每點記認／控制 LOCK：** §0.12.16 · 記認 mask → 只寫允許類 · **眼白鐵律** M_hf=0·M_mid=0·lock=1·HARD=ST exact · 禁整臉重構（E-GS-08/09）· 樣板 `L-69e63d57a466` · 附件 `PIXEL_CTRL_LAW.md` > **FACE_GENMIX 混參重生 LOCK：** §0.12.21 · 白=P4 `d4d2d76d…`（去粒）· 自然=P3 `2befbe5e…`（去棕） · **Ref(結構錨,P4,P3) 重生** · 禁直接圖拿／像素貼混（E-GS-25/26） · 樣板 GEN `7e87efdd…` · `L-90961cfbcd",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.16]: 紋 + feature HF）可清但 **整臉重構** 使 ST→after 眼區大漂＝錯（E-GS-09）；(4) **外科 v1.1** 只寫 mask 像素：ST→ctrl mask 內 mean|Δ|≈**0.38** · Siax→ctrl≈**12.6** · base 其餘不動 · `L-69e63d57a466`。用戶：「好,記到憲的除錯,再發現」。附件 PIXEL_CTRL_LAW + DO_NOT_REPEAT/CORRECT_PROCESS 更新。 - **2026-10-26T14:05:00Z：** **§0.12.15 GRID×SIAX 像素協調** 入憲：真 `4x_NMKD-Siax_200k.pth` 為 HF donor；GRID 定義像素增益；公式 out=LP(Lanc",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.16.E 除錯鏈（已核實 · 禁止再犯） · §0.12.15]: kin MID（v6） | 皮方法 A–E | | 4 | v6 後眼區仍怪／ST 遠 | **整臉重構** 非外科 | 只寫 mask · 其餘 base | E-GS-09 | | 5 | 外科後 mask 內 ST 鎖死 | — | ST→ctrl mean\\|Δ\\|≈**0.38** | `L-69e63d57a466` | #### 0.12.16.F 新增黑名單（E-GS 續） | ID | 錯誤 | 後果 | 校正 | |----|------|------|------| | **E-GS-08** | 眼白仍吃 Siax HF／只加 face gain 治爆點 | 眼白假紋／亂 PIXEL | eye_white M=0 · HARD=ST · 禁 color_pull | | **E-G",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.16.I 樣板 · §0.12.15]: _META + 更新 LAW | #### 0.12.16.I 樣板 | 項 | 值 | |----|-----| | L0 | `90807317-4e7d-4646-9f98-ac6c59208d08` | | Hybrid base | v6 或 v3 | | PIXEL_CTRL | `L-69e63d57a466` | | PATH1E plate（接本節後） | `L-fc0a2fa7b8a9` · §0.12.17 | | 附件 | `PIXEL_CTRL_LAW.md` · `GRID_SIAX_DO_NOT_REPEAT` E-GS-08…13 | #### 0.12.16.J 閘門 ``` [ ] Hybrid 後已跑 PIXEL_CLASS map [ ] eye_white HA",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [樣板 · §0.12.16]: E_USM 僅 feature mask ## 樣板 - L0 `90807317-4e7d-4646-9f98-ac6c59208d08` - Siax FULL `L-ec355935c17f` - Hybrid v3 `L-8bca4ceb59b5` - PIXEL_CTRL v1.1 `L-69e63d57a466` - PATH1E plate→ECC `L-fc0a2fa7b8a9`（cc 0.980 · conf 0.782） - plate asset `44d18362-906a-4659-b162-f162cc5a51df` - BEAT_v7 `L-5c738bdfdcdf`（清晰 5/5 ≥ pure Siax） - GRID_CLEAN_v1 `L-6fb3f0816139`（字",
+        "docs/boundary_pedestrian/constitution/PIXEL_CTRL_LAW.md [PIXEL 每點記認與控制法（正典附件 · §0.12.16 · §0.12.17） · §0.12.19]: · §0.12.17） > ASOF 2026-10-26T15:55:00Z > 總憲：**§0.12.16** · **§0.12.17** · **§0.12.18** · **§0.12.19 DETAIL6** · 黑名單 E-GS-08…18 > 樣板 PIXEL_CTRL `L-69e63d57a466` · PATH1E `L-fc0a2fa7b8a9` --- ## 一句話 ``` 記認 mask[x,y] → 只允許改這些像素 眼白/ runaway → 寫回結構 ST（L0 Lanczos） 其餘像素 → 完全不動 base 臉 residual → plate=Ref(face_crop,a8b) → ECC → 硬貼（§0.12.17） 棚拍 a8b 直 ECC = 禁"
+      ],
+      "aliases": [
+        "L-69e63d",
+        "L-69e63d57"
+      ]
+    },
+    {
+      "asset_id": "L-90961cfbcd33",
+      "label": "skin material reference · L-90961cfbcd33",
+      "role": "skin_material_reference",
+      "skills": [
+        "SIAX",
+        "SKIN_MAT",
+        "FACE_GENMIX",
+        "N2R",
+        "WNK",
+        "S1HL"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "detail",
+        "upscale",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > **FACE_GENMIX 混參重生 LOCK：** §0.12.21 · 白=P4 `d4d2d76d…`（去粒）· 自然=P3 `2befbe5e…`（去棕） · **Ref(結構錨,P4,P3) 重生** · 禁直接圖拿／像素貼混（E-GS-25/26） · 樣板 GEN `7e87efdd…` · `L-90961cfbcd33`",
+      "uri": "legacy-ref://L-90961cfbcd33",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.21",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.21]: E_GENMIX 混參重生 LOCK：** §0.12.21 · 白=P4 `d4d2d76d…`（去粒）· 自然=P3 `2befbe5e…`（去棕） · **Ref(結構錨,P4,P3) 重生** · 禁直接圖拿／像素貼混（E-GS-25/26） · 樣板 GEN `7e87efdd…` · `L-90961cfbcd33` > **字糊反推對換 TBRS 備案（未LOCK）：** §0.12.28 · 正名「字糊反推對換」· 本輪全錯 · 以後再改 > **白噪殺 WNK LOCK：** §0.12.26.D · 正名「**白噪殺**」· kill=NOISE∩¬SPEC · 噪殺／反光留 · 附件 `WHITE_NOISE_KILL_NAME.md` > **噪折成光 N2R LOCK：** §",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.21]: 原圖去生,不是直接圖拿」（白=P4 `d4d2d76d…` 要白去粒；自然=P3 `2befbe5e…` 要自然去棕）。**正典：** `Ref(結構錨, P4, P3)` 重生 → ECC 結構鎖拼回；**禁**像素貼板混（E-GS-25/26）。樣板 GEN `7e87efdd…` · 全圖 `L-90961cfbcd33`。關聯：噪粒 DN `L-39ba8c8f1d7c`；BEAT 4c99 §0.12.18。 - **2026-10-26T17:40:00Z：** **§0.12.20 SKIN_MAT 四參數** 入憲。**用戶：**「[references: P1–P4] 這4参數都可寫進憲」。**四參數：** P1 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` 銳",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.18]: | GEN 臉板 | `7e87efdd-5f8b-4385-992b-ce7ef53b90a7` | 混參重生主樣 | | GEN wide | `0128d1c9-df18-4bcf-a599-34306821d2d1` | 備選 | | 拼回全圖 | FACE_GENMIX_FULL · `L-90961cfbcd33` | ECC≈0.86 · 結構鎖 | | 白REF | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` | §0.12.20 **P4** | | 自然REF | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | §0.12.20 **P3** | | 噪粒 DN 對照 | BEAT_4C99_DN · `L-39ba8c8",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_DO_NOT_REPEAT.md [E-GS-25…28 · FACE_GENMIX（§0.12.21 · asof 2026-10-26T18:50Z） · §0.12.21]: b/HF 混冒充「混參」 | | E-GS-26 | 直接圖拿 P3/P4 paste 當臉完成 | | E-GS-27 | GEN 無結構錨 | | E-GS-28 | GENMIX 不 ECC／不結構鎖硬貼 | 正典：`Ref(結構錨, P4白, P3自然)` 重生 → ECC 拼回。樣板 `L-90961cfbcd33`。 ## 一升混鎖 S1HL（§0.12.15.L · 2026-10-28T07:06:55Z） | 代號 | 禁止 | |------|------| | **E-GS-47** | 本招再跑第二次全幅 SIAX（「再 TRUE SIAX4×」） | | **E-GS-48** | 無 Hybrid 只 Siax 稱「混鎖」 | | **E-GS-49** | 先臉鎖再 SIAX",
+        "docs/boundary_pedestrian/constitution/PIXEL_CTRL_LAW.md [E-GS-25…28 · FACE_GENMIX（§0.12.21 · asof 2026-10-26T18:50Z） · §0.12.21]: b/HF 混冒充「混參」 | | E-GS-26 | 直接圖拿 P3/P4 paste 當臉完成 | | E-GS-27 | GEN 無結構錨 | | E-GS-28 | GENMIX 不 ECC／不結構鎖硬貼 | 正典：`Ref(結構錨, P4白, P3自然)` 重生 → ECC 拼回。樣板 `L-90961cfbcd33`。"
+      ],
+      "aliases": [
+        "L-90961c",
+        "L-90961cfb"
+      ]
+    },
+    {
+      "asset_id": "L-06f22d5402af",
+      "label": "legacy proof artifact · L-06f22d5402af",
+      "role": "legacy_proof_artifact",
+      "skills": [
+        "GOU",
+        "N2R"
+      ],
+      "tags": [],
+      "description": "Legacy source reference. Context: > **噪折成光 N2R LOCK：** §0.12.26.O · 正名「噪折成光」· 短碼 **噪折／N2R** · cand→微面折射（**轉**非純滅）· 樣板 **L-06f22d5402af** · OVERLAY/MAPS · 附件 `NOISE_REFRACT_N2R_NAME.md`",
+      "uri": "legacy-ref://L-06f22d5402af",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.26",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.26]: *」· kill=NOISE∩¬SPEC · 噪殺／反光留 · 附件 `WHITE_NOISE_KILL_NAME.md` > **噪折成光 N2R LOCK：** §0.12.26.O · 正名「噪折成光」· 短碼 **噪折／N2R** · cand→微面折射（**轉**非純滅）· 樣板 **L-06f22d5402af** · OVERLAY/MAPS · 附件 `NOISE_REFRACT_N2R_NAME.md` > **GOU_DETECT_SHAPE 勾形拼 LOCK：** §0.12.25 · 反推=DETECT改動真邊界 · 拼≠方框 · fill∈[0.30,0.75] · 禁病毒母 · 樣板 L-767fc2634e8f / L-05683b2c4e72 / 終態 L-8ed30b6",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.26]: L_NAME.md`。 - **2026-10-27T21:20:07Z：** **§0.12.26.O 噪折成光 / N2R** 入憲。**用戶：** 表問「NOISE2SPEC…技法叫什麼名字」→ 定 **噪折成光** · ok 入憲。 正名／短碼／英寫死；**轉化 not 消滅**；樣板 **L-06f22d5402af**；E-SF-11…14； 附件 `NOISE_REFRACT_N2R_NAME.md` · `NOISE_REFRACT_N2R_01226.md`。 - **2026-10-27T20:40:46Z：** **§0.12.28 字糊反推對換 / TBRS** 備案入憲。**用戶：**「全錯啊,先備案入憲, 出技名,以後再改」。技名寫死；試種 L-ce43… 等 **非**成功樣板；E",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [樣板 · §0.12.26]: d 質量可視化 | | `MAPS` | residual / fringe / spec / refract | | `FULL` | fuse 全幅 | | `META` + `L-` | 可稽 | #### 樣板 | 角色 | 值 | |------|-----| | **L** | **L-06f22d5402af** | | technique 欄 | `NOISE→REFRACT (轉化 not 消滅)` | | META | `artifacts/SET_R_1F29_NOISE2SPEC_META.json` | | OVERLAY | `from_1f29_noise_to_spec/NOISE_CANDIDATE_OVERLAY.jpg` | | MAPS / FULL | `SET_R"
+      ],
+      "aliases": [
+        "L-06f22d",
+        "L-06f22d54"
+      ]
+    },
+    {
+      "asset_id": "L-767fc2634e8f",
+      "label": "skin material reference · L-767fc2634e8f",
+      "role": "skin_material_reference",
+      "skills": [
+        "SKIN_MAT",
+        "FACE_GENMIX",
+        "GOU",
+        "N2R"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "metal",
+        "upscale"
+      ],
+      "description": "Legacy source reference. Context: > **GOU_DETECT_SHAPE 勾形拼 LOCK：** §0.12.25 · 反推=DETECT改動真邊界 · 拼≠方框 · fill∈[0.30,0.75] · 禁病毒母 · 樣板 L-767fc2634e8f / L-05683b2c4e72 / 終態 L-8ed30b6e8fe0 · 流程 GOU_MESH_CORRECT_PROCESS",
+      "uri": "legacy-ref://L-767fc2634e8f",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.25",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.25]: ** · OVERLAY/MAPS · 附件 `NOISE_REFRACT_N2R_NAME.md` > **GOU_DETECT_SHAPE 勾形拼 LOCK：** §0.12.25 · 反推=DETECT改動真邊界 · 拼≠方框 · fill∈[0.30,0.75] · 禁病毒母 · 樣板 L-767fc2634e8f / L-05683b2c4e72 / 終態 L-8ed30b6e8fe0 · 流程 GOU_MESH_CORRECT_PROCESS > **SKIN_MAT 四參數 LOCK：** §0.12.20 · P1 銳拼 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34`",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.25]: *進展：** fill 0.57–0.58 · lap 升 · 綠形≠紅框。**探錯：** BOX_PASTE / OLD_EDGE / FILL≈1 / 病毒母 / 反推當內容。**正解：** DETECT 改動真邊界 + 勾內域 + GrabCut 自邊界 + V5 + 全幅 BASE。樣板 `L-767fc2634e8f` · `L-05683b2c4e72`。 - **2026-10-26T18:50:00Z：** **§0.12.21 FACE_GENMIX** 入憲。**用戶：**「記下這在憲中」+「混和那兩圖的參數…用原圖去生,不是直接圖拿」（白=P4 `d4d2d76d…` 要白去粒；自然=P3 `2befbe5e…` 要自然去棕）。**正典：** `Ref(結構錨, P4, P3)` 重生",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.25 GOU_DETECT_SHAPE（勾形 DETECT · 非方框拼 · 探錯進程入憲） · §0.12.24]: CT · 非方框拼 · 探錯進程入憲） > asof 2026-10-27T10:54:00Z · 用戶確認：「這不是有進展嗎, 探錯過程寫入憲」 > 鏈：§0.12.23 VIRUS · §0.12.24 WHOLE · **本節 = 反推真義 + 勾形拼 + 探錯年表** > 樣板：`L-767fc2634e8f`（形狀 fill=0.568）· `L-05683b2c4e72`（勾→無框母）· contour `360ef2a0…` · FULL `f5c6a555…` > **地位：** 升清／密網／材質拼回時，**拼的單位是「DETECT 出的改動形狀」**，不是 search box。 > 未過本節 → 不得稱「勾形拼回／誠實密網合回」。 #### 0.12.25.A 一句話 *",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.25.F 進展樣板（PROOF · 有進展） · §0.12.23]: 忽略填滿率 | #### 0.12.25.F 進展樣板（PROOF · 有進展） | L / asset | 模式 | fill | ncc | lap armor | 備註 | |-----------|------|------|-----|-----------|------| | **L-767fc2634e8f** | SHAPE DETECT | **0.568** | 0.977 | 1592→**2086** | 綠形≠紅框 · contour `e61ab50c` 邏輯 | | **L-05683b2c4e72** | 勾→無框母 TRY | **0.581** | 0.930 | 1529→**1825** | gou e61 ∩ GrabCut · FULL `f5c6a555` ·"
+      ],
+      "aliases": [
+        "L-767fc2",
+        "L-767fc263"
+      ]
+    },
+    {
+      "asset_id": "L-05683b2c4e72",
+      "label": "skin material reference · L-05683b2c4e72",
+      "role": "skin_material_reference",
+      "skills": [
+        "SIAX",
+        "SKIN_MAT",
+        "FACE_GENMIX",
+        "GOU",
+        "N2R"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "detail",
+        "upscale",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > **GOU_DETECT_SHAPE 勾形拼 LOCK：** §0.12.25 · 反推=DETECT改動真邊界 · 拼≠方框 · fill∈[0.30,0.75] · 禁病毒母 · 樣板 L-767fc2634e8f / L-05683b2c4e72 / 終態 L-8ed30b6e8fe0 · 流程 GOU_MESH_CORRECT_PROCESS",
+      "uri": "legacy-ref://L-05683b2c4e72",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.25",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.25]: · 附件 `NOISE_REFRACT_N2R_NAME.md` > **GOU_DETECT_SHAPE 勾形拼 LOCK：** §0.12.25 · 反推=DETECT改動真邊界 · 拼≠方框 · fill∈[0.30,0.75] · 禁病毒母 · 樣板 L-767fc2634e8f / L-05683b2c4e72 / 終態 L-8ed30b6e8fe0 · 流程 GOU_MESH_CORRECT_PROCESS > **SKIN_MAT 四參數 LOCK：** §0.12.20 · P1 銳拼 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 同構圖毛孔板 `2be",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.25]: 58 · lap 升 · 綠形≠紅框。**探錯：** BOX_PASTE / OLD_EDGE / FILL≈1 / 病毒母 / 反推當內容。**正解：** DETECT 改動真邊界 + 勾內域 + GrabCut 自邊界 + V5 + 全幅 BASE。樣板 `L-767fc2634e8f` · `L-05683b2c4e72`。 - **2026-10-26T18:50:00Z：** **§0.12.21 FACE_GENMIX** 入憲。**用戶：**「記下這在憲中」+「混和那兩圖的參數…用原圖去生,不是直接圖拿」（白=P4 `d4d2d76d…` 要白去粒；自然=P3 `2befbe5e…` 要自然去棕）。**正典：** `Ref(結構錨, P4, P3)` 重生 → ECC 結構鎖拼回；**禁**像素",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.25 GOU_DETECT_SHAPE（勾形 DETECT · 非方框拼 · 探錯進程入憲） · §0.12.24]: 10-27T10:54:00Z · 用戶確認：「這不是有進展嗎, 探錯過程寫入憲」 > 鏈：§0.12.23 VIRUS · §0.12.24 WHOLE · **本節 = 反推真義 + 勾形拼 + 探錯年表** > 樣板：`L-767fc2634e8f`（形狀 fill=0.568）· `L-05683b2c4e72`（勾→無框母）· contour `360ef2a0…` · FULL `f5c6a555…` > **地位：** 升清／密網／材質拼回時，**拼的單位是「DETECT 出的改動形狀」**，不是 search box。 > 未過本節 → 不得稱「勾形拼回／誠實密網合回」。 #### 0.12.25.A 一句話 **反推 = DETECT 圖中改了什麼（含 SIAX／混生／放大衣",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.25.F 進展樣板（PROOF · 有進展） · §0.12.23]: ------|------|-----|-----------|------| | **L-767fc2634e8f** | SHAPE DETECT | **0.568** | 0.977 | 1592→**2086** | 綠形≠紅框 · contour `e61ab50c` 邏輯 | | **L-05683b2c4e72** | 勾→無框母 TRY | **0.581** | 0.930 | 1529→**1825** | gou e61 ∩ GrabCut · FULL `f5c6a555` · contour `360ef2a0` | | L-5d776bf61a20 | WHOLE 自邊界（前） | — | 0.977 | 999→1204 | 仍偏 ROI 拼；後改形狀 | | L-a6ca442"
+      ],
+      "aliases": [
+        "L-05683b",
+        "L-05683b2c"
+      ]
+    },
+    {
+      "asset_id": "L-8ed30b6e8fe0",
+      "label": "skin material reference · L-8ed30b6e8fe0",
+      "role": "skin_material_reference",
+      "skills": [
+        "SKIN_MAT",
+        "GOU",
+        "N2R"
+      ],
+      "tags": [
+        "skin",
+        "metal",
+        "upscale",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > **GOU_DETECT_SHAPE 勾形拼 LOCK：** §0.12.25 · 反推=DETECT改動真邊界 · 拼≠方框 · fill∈[0.30,0.75] · 禁病毒母 · 樣板 L-767fc2634e8f / L-05683b2c4e72 / 終態 L-8ed30b6e8fe0 · 流程 GOU_MESH_CORRECT_PROCESS",
+      "uri": "legacy-ref://L-8ed30b6e8fe0",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.25",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.25]: _N2R_NAME.md` > **GOU_DETECT_SHAPE 勾形拼 LOCK：** §0.12.25 · 反推=DETECT改動真邊界 · 拼≠方框 · fill∈[0.30,0.75] · 禁病毒母 · 樣板 L-767fc2634e8f / L-05683b2c4e72 / 終態 L-8ed30b6e8fe0 · 流程 GOU_MESH_CORRECT_PROCESS > **SKIN_MAT 四參數 LOCK：** §0.12.20 · P1 銳拼 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 同構圖毛孔板 `2befbe5e-751c-434a-a39f",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.25]: Z：** **§0.12.25.J 病毒→勾勾全鏈 + 流程** 入憲。**用戶：**「把我試出這方法的重重錯走病毒到現在這勾勾圖的方法入憲和流程」。附件 **GOU_MESH_CORRECT_PROCESS**（T0–T12）· **GOU_MESH_DO_NOT_REPEAT**。終態樣板 **L-8ed30b6e8fe0**（fill 0.575 · ncc 0.82）。錯走：病毒母／方框／反推當內容／只補上／OLD 邊／硬縮放。正解：全幅裁→GEN 密網→template+affine→勾 DETECT→V5 形狀拼。 - **2026-10-27T10:55:37Z：** **§0.12.25 GOU_DETECT_SHAPE** 入憲。**用戶：**「這不是有進展嗎, 探錯過程寫入憲」（refs c",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.25.J 病毒→勾勾 全鏈入憲（用戶試出 · 流程鎖） · §0.12.22]: | | `WHOLE_COLLAGE_ALIGN_01224.md` | 反推 RANGE · WHOLE | | `MESH_STITCH_FORMULA_V5.md` | V5 內容 | **終態樣板（試錯 v2 過閘）：** | 欄 | 值 | |----|-----| | L | **L-8ed30b6e8fe0** | | BASE | `f5c6a555…` GOU_ON_A0 FULL | | GEN | `96992a7f…` Ref(crop,7f5)+2× | | fill | **0.575** | | affine ncc | **0.824** | | lap armor | 1178→**1609** | | out | 4608×6912 · ~31MB | | FULL a",
+        "docs/boundary_pedestrian/constitution/GOU_MESH_CORRECT_PROCESS.md [勾勾密網升清 · 正確流程（T0→T12） · §0.12.25]: 2026-10-27T14:38:15Z · 憲：§0.12.23 VIRUS · §0.12.24 WHOLE · §0.12.25 GOU > **用戶試出終態：** 全幅母 → 衣裁出 GEN 密網重組 → 放大 → 勾形 DETECT → V5 形狀拼回 FULL > 樣板終態：`L-8ed30b6e8fe0`（f5 母 · fill 0.575 · ncc 0.82 · lap↑） --- ## 總覽（一眼） ``` T0 讀憲閘（virus/box/soft 禁） T1 BASE = 全幅 native only（寫 asset + SHA） T2 從 BASE 裁衣／甲 ROI（不是外來局部當母） T3 GEN：Ref( crop , mesh_lock ) 密網重組（真生",
+        "docs/boundary_pedestrian/constitution/GOU_MESH_CORRECT_PROCESS.md [T11 · 閘門 PROOF · §0.12.25]: # RGB=V5 · A=RANGE FULL_out = composite(FULL_base, plate_SHAPE @ (x0,y0)) ``` - magick `compose over` 可；禁整框無 α 蓋 ## T11 · 閘門 PROOF | 閘 | 過線 | 樣板 L-8ed30b6e8fe0 | |----|------|---------------------| | virus_local_base | false | false | | shape_fill_ratio | [0.30, 0.75] | **0.575** | | affine_ncc | ≥ 0.75 | **0.824** | | lap_armor out/in | ≥ 0.95 | 1178→*"
+      ],
+      "aliases": [
+        "L-8ed30b",
+        "L-8ed30b6e"
+      ]
+    },
+    {
+      "asset_id": "L-af02132e74ec",
+      "label": "skin material reference · L-af02132e74ec",
+      "role": "skin_material_reference",
+      "skills": [
+        "DETAIL6",
+        "SKIN_MAT"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "metal",
+        "upscale",
+        "pixel_protection"
+      ],
+      "description": "Legacy source reference. Context: > **SKIN_MAT 四參數 LOCK：** §0.12.20 · P1 銳拼 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 同構圖毛孔板 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 拼回 ROI `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · face_ncc≥0.90 · BEAT facezone · 可見Δ · 樣板 `L-af02132e74ec` / `L-ebaf5fca8718`",
+      "uri": "legacy-ref://L-af02132e74ec",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.20",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.20]: 34` · P3 同構圖毛孔板 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 拼回 ROI `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · face_ncc≥0.90 · BEAT facezone · 可見Δ · 樣板 `L-af02132e74ec` / `L-ebaf5fca8718` > **DETAIL6 體積／細節 LOCK：** §0.12.19 · 交付 ≥6MB 必走 **原生 4× 全幅 + 好區 residual + 高碼率存檔** · 禁假升採樣灌體積 · 禁整圖 USM 當加細節 · 樣板 DETAIL6 `L-7fcd14aab71a` · FULL q98≈21MB · q100≈35MB · 3072≈1",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.20]: 85e-43d2-854f-f454f8171e34` 板預覽 · P3 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` 同構圖毛孔板（face_ncc≈0.947）· P4 `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` 拼回 ROI（`L-af02132e74ec` facezone Lap 839→5953 BEAT）。**除錯：** (1) AI 美顏≠MATERIAL；(2) canvas-LP 主導=糊；(3) 緊特寫板 ncc 崩。**E-GS-21…24**。樣板 `L-ebaf5fca8718` / `L-af02132e74ec`。 - **2026-10-26T15:55:00Z：** **§0.12.19 DETAIL6** 入",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.C 數值閘（從實測寫死） · §0.12.16]: 可） | P1 診斷 0,0 | | **G-BEAT-ZONE** | 新 facezone Lap **>** 對照 zone ×1.05 | 舊 `589b6de8-87f7-4965-924b-ffd70d39cd53` Lap≈**839** → P4 鏈 zone≈**5953**（`L-af02132e74ec`） | | **G-VISIBLE-Δ** | mean\\|Δ\\| **> 4** 且 pct\\|Δ\\|>8 **> 8%** | P4 鏈 \\|Δ\\|≈**14** · >8%≈**48%** | | **G-NO-BLUR** | 拼後 ROI Lap **不得** 低於拼前 canvas ROI 的 0.7× | 舊 FAIL：1997→215；P1 修後 ROI Lap≈**19",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.G 樣板索引（SET-R 海報） · §0.12.16]: 2-854f-f454f8171e34` | | | P3 毛孔板 | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | face_ncc 0.947 | | P4 拼回 ROI | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · `L-af02132e74ec` | BEAT zone 839→5953 | | 舊糊對照 | `589b6de8-87f7-4965-924b-ffd70d39cd53` | 必須被 P4 鏈勝過 | | 全圖 | `SET_R_9080_SKIN_REDO_FULL` · `L-af02132e74ec` | 甲球石火保留 + 新皮膚 | #### 0.12.20.H 閘門勾選 ``` [ ] A 板 fac",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.G 樣板索引（SET-R 海報） · §0.12.16]: ec5f6` · `L-af02132e74ec` | BEAT zone 839→5953 | | 舊糊對照 | `589b6de8-87f7-4965-924b-ffd70d39cd53` | 必須被 P4 鏈勝過 | | 全圖 | `SET_R_9080_SKIN_REDO_FULL` · `L-af02132e74ec` | 甲球石火保留 + 新皮膚 | #### 0.12.20.H 閘門勾選 ``` [ ] A 板 face_ncc ≥ 0.90（G-SAME-COMP）· 非緊特寫 [ ] 拼前 align 近 0（G-ALIGN） [ ] 板主導 · 無 canvas-LP 糊臉（對齊 P1 邏輯） [ ] 眼白 HARD→ST（§0.12.16） [ ] facezone Lap BEAT"
+      ],
+      "aliases": [
+        "L-af0213",
+        "L-af02132e"
+      ]
+    },
+    {
+      "asset_id": "L-ebaf5fca8718",
+      "label": "skin material reference · L-ebaf5fca8718",
+      "role": "skin_material_reference",
+      "skills": [
+        "DETAIL6",
+        "SKIN_MAT"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "metal",
+        "upscale"
+      ],
+      "description": "Legacy source reference. Context: > **SKIN_MAT 四參數 LOCK：** §0.12.20 · P1 銳拼 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · P2 板預覽 `3f769105-e85e-43d2-854f-f454f8171e34` · P3 同構圖毛孔板 `2befbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 拼回 ROI `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · face_ncc≥0.90 · BEAT facezone · 可見Δ · 樣板 `L-af02132e74ec` / `L-ebaf5fca8718`",
+      "uri": "legacy-ref://L-ebaf5fca8718",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.20",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.20]: efbe5e-751c-434a-a39f-ad4bf8ed4374` · P4 拼回 ROI `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` · face_ncc≥0.90 · BEAT facezone · 可見Δ · 樣板 `L-af02132e74ec` / `L-ebaf5fca8718` > **DETAIL6 體積／細節 LOCK：** §0.12.19 · 交付 ≥6MB 必走 **原生 4× 全幅 + 好區 residual + 高碼率存檔** · 禁假升採樣灌體積 · 禁整圖 USM 當加細節 · 樣板 DETAIL6 `L-7fcd14aab71a` · FULL q98≈21MB · q100≈35MB · 3072≈10MB · 基線 METAL_BITE",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.20]: 6f2-eb6ba58ec5f6` 拼回 ROI（`L-af02132e74ec` facezone Lap 839→5953 BEAT）。**除錯：** (1) AI 美顏≠MATERIAL；(2) canvas-LP 主導=糊；(3) 緊特寫板 ncc 崩。**E-GS-21…24**。樣板 `L-ebaf5fca8718` / `L-af02132e74ec`。 - **2026-10-26T15:55:00Z：** **§0.12.19 DETAIL6** 入憲。**用戶：**「把圖的大小升到6MB以上, 找方法加細節」→ 再「寫入憲」。**構想：** (1) 體積≥6MB = **原生 4× 全幅 (4608×6912) + JPEG q≥95 4:4:4**，不是再升採樣灌假像素；(2) 加細節 =",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.20.G 樣板索引（SET-R 海報） · §0.12.16]: 「比上圖好」 | 無證勝過 | #### 0.12.20.G 樣板索引（SET-R 海報） | 產物 | id / L | 備註 | |------|--------|------| | P1 銳拼 ROI | `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` · `L-ebaf5fca8718` | 對位 OK · 板主導 | | P2 板預覽 | `3f769105-e85e-43d2-854f-f454f8171e34` | | | P3 毛孔板 | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | face_ncc 0.947 | | P4 拼回 ROI | `d4d2d76d-c467-46e9-96f2-eb6ba58ec5f6` ·"
+      ],
+      "aliases": [
+        "L-ebaf5f",
+        "L-ebaf5fca"
+      ]
+    },
+    {
+      "asset_id": "L-5c738bdfdcdf",
+      "label": "skin material reference · L-5c738bdfdcdf",
+      "role": "skin_material_reference",
+      "skills": [
+        "PATH1E",
+        "SIAX4X",
+        "SIAX",
+        "GRID_CLEAN",
+        "DETAIL6",
+        "SKIN_MAT"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "metal",
+        "detail",
+        "upscale",
+        "registration",
+        "pixel_protection"
+      ],
+      "description": "Legacy source reference. Context: > **GRID_CLEAN／勝過全開 Siax LOCK：** §0.12.18 · GRID=好區地圖·混合只寫好 donor·禁區永不寫 · 勝過≠加像素＝殺假紋+鎖結構+字金真細節+臉 plate · PROOF 用清晰／可讀非 HF 總量 · 樣板 BEAT_v7 `L-5c738bdfdcdf` · GRID_CLEAN `L-6fb3f0816139` · 對手 pure Siax `SIAX4x_9080_FULL`≈`4c99ea4b…`",
+      "uri": "legacy-ref://L-5c738bdfdcdf",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.18",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [BOUNDARY_WALKER_UNIFIED_RULES.md · §0.12.18]: f139b55a6` > **GRID_CLEAN／勝過全開 Siax LOCK：** §0.12.18 · GRID=好區地圖·混合只寫好 donor·禁區永不寫 · 勝過≠加像素＝殺假紋+鎖結構+字金真細節+臉 plate · PROOF 用清晰／可讀非 HF 總量 · 樣板 BEAT_v7 `L-5c738bdfdcdf` · GRID_CLEAN `L-6fb3f0816139` · 對手 pure Siax `SIAX4x_9080_FULL`≈`4c99ea4b…` > **PATH1E plate→ECC LOCK：** §0.12.17 · **棚拍 a8b 直接 ECC 海報臉 = 禁止當完成**（E-GS-12）· 正典 `plate=Ref(face_crop,a8b)` → `ECC(p",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.18]: 不加像素如何勝過全開 Siax＝換好像素+殺壞像素+鎖結構／身份；(2) GRID 是地圖非工廠；混合只在好區寫好 donor；禁區（眼白等）永不寫 → 合成言清；(3) 勝過定義＝字可讀／臉身份準／無油眼白／有用微對比，**不是** HF energy 最大值。**成果：** BEAT_v7 `L-5c738bdfdcdf` 清晰 5/5 區 ≥ pure Siax、字／臉 HF 勝或平；GRID_CLEAN_v1 `L-6fb3f0816139` 字 clarΔ≈**+11.2** 言清大勝。對手：pure Siax FULL 4608×6912（≈ user `4c99ea4b…` / `SIAX4x_9080_FULL`）。**E-GS-14** 以 HF 總量冒充勝過。用戶：「先把構想和成果寫入憲」",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.18.E 成果樣板（SET-R 海報 L0 `90807317…`） · §0.12.17]: hybrid 追 HF 總量 → **FAIL**（回油面）。 #### 0.12.18.E 成果樣板（SET-R 海報 L0 `90807317…`） | 試次 | L- | 對手 | 關鍵數 | |------|-----|------|--------| | **BEAT_v7** | `L-5c738bdfdcdf` | pure Siax FULL 4608×6912 | 清晰 **5/5** 區 ≥ Siax；字 title clarΔ **+14.1** · ped **+14.2** · 臉 clarΔ **+12.6**；HF 字／臉勝或平；甲／球 HF 略讓（刻意少油） | | **GRID_CLEAN_v1** | `L-6fb3f0816139` | 同上 | 字 clarΔ **+",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [樣板 · §0.12.16]: CTRL v1.1 `L-69e63d57a466` - PATH1E plate→ECC `L-fc0a2fa7b8a9`（cc 0.980 · conf 0.782） - plate asset `44d18362-906a-4659-b162-f162cc5a51df` - BEAT_v7 `L-5c738bdfdcdf`（清晰 5/5 ≥ pure Siax） - GRID_CLEAN_v1 `L-6fb3f0816139`（字 clarΔ +11.2） - pure Siax 對手 `SIAX4x_9080_FULL` ≈ `4c99ea4b…`（禁 FINAL） *END CORRECT_PROCESS · 2026-10-26T15:35:00Z* ## §0.12.20 SKIN_MAT 進",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_DO_NOT_REPEAT.md [2. 實證（SET-R 海報 L0 `90807317…`） · §0.12.19]: OK** · `L-fc0a2fa7b8a9` | | plate ECC cc | **0.980** | — | 收斂 | | ew→ST after 1E | **0.18** | 0.6% | 眼白仍鎖 | | **BEAT_v7 vs Siax 清晰** | 5/5 區 ≥ | — | `L-5c738bdfdcdf` · §0.12.18 | | **GRID_CLEAN 字 clarΔ** | **+11.2** | — | `L-6fb3f0816139` 言清 | | **METAL_BITE 甲 clarΔ vs Siax** | **+37** | HF+1.1 | `L-f99f139b55a6` | | **DETAIL6 主檔** | q98 **21MB** / q100 **35"
+      ],
+      "aliases": [
+        "L-5c738b",
+        "L-5c738bdf"
+      ]
+    },
+    {
+      "asset_id": "L-dcc66a60d5e2",
+      "label": "face registration reference · L-dcc66a60d5e2",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | L- 最終 | L-dcc66a60d5e2 |",
+      "uri": "legacy-ref://L-dcc66a60d5e2",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "9. SET-O 違規紀錄（Obs） · §0.12",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [9. SET-O 違規紀錄（Obs） · §0.12]: `` --- ## 9. SET-O 違規紀錄（Obs） | 項 | 結果 | |----|------| | 先 LOCK MID 再抽人 | **否** | | 人物 ROI 漂移 | **~33**（門檻 ≤15） | | 字模組 | 閃電／火／塗鴉 **有** | | L- 最終 | L-dcc66a60d5e2 | | 結論 | **字齊、鎖未死 → 結構 FAIL** | 重做：凍結 MID `ab069d6e…` → 自 MID 切人 → PRE/POST 極低改動只改間距／碎裂／字 → 必要 ECC 回貼。 --- ## 10. 文件地圖 | 檔 | 角色 | |----|------| | **本文** | **唯一總操作憲（全集合一）** | | **§0.0 本文** | *"
+      ],
+      "aliases": [
+        "L-dcc66a",
+        "L-dcc66a60"
+      ]
+    },
+    {
+      "asset_id": "L-39ba8c8f1d7c",
+      "label": "skin material reference · L-39ba8c8f1d7c",
+      "role": "skin_material_reference",
+      "skills": [
+        "SIAX4X",
+        "SIAX",
+        "SKIN_MAT",
+        "FACE_GENMIX"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "detail",
+        "upscale",
+        "heroine_ip",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: - **2026-10-26T18:50:00Z：** **§0.12.21 FACE_GENMIX** 入憲。**用戶：**「記下這在憲中」+「混和那兩圖的參數…用原圖去生,不是直接圖拿」（白=P4 `d4d2d76d…` 要白去粒；自然=P3 `2befbe5e…` 要自然去棕）。**正典：** `Ref(結構錨, P4, P3)` 重生 → ECC 結構鎖拼回；**禁**像素貼板混（E-GS-25/26）。樣板 GEN `7e87efdd…` · 全圖 `L-90961cfbcd33`。關聯：噪粒 DN `L-39ba8c8f1d7c`；BEAT 4c99 §0.12.18。",
+      "uri": "legacy-ref://L-39ba8c8f1d7c",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "11. 修訂 · §0.12.21",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [11. 修訂 · §0.12.21]: d…` 要白去粒；自然=P3 `2befbe5e…` 要自然去棕）。**正典：** `Ref(結構錨, P4, P3)` 重生 → ECC 結構鎖拼回；**禁**像素貼板混（E-GS-25/26）。樣板 GEN `7e87efdd…` · 全圖 `L-90961cfbcd33`。關聯：噪粒 DN `L-39ba8c8f1d7c`；BEAT 4c99 §0.12.18。 - **2026-10-26T17:40:00Z：** **§0.12.20 SKIN_MAT 四參數** 入憲。**用戶：**「[references: P1–P4] 這4参數都可寫進憲」。**四參數：** P1 `9e1cd1e9-f229-4b21-bf4c-91b2d045e08b` 銳拼 ROI · P2 `3f769105-e85e-",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.E 與噪粒／BEAT 的關係 · §0.12.16]: Ref 疊上疊 | 層層模糊 | **E-FLOW-06/07** | #### 0.12.21.E 與噪粒／BEAT 的關係 1. **臉噪粒**（Siax／SKIN HF 過強）：先可 **§0.12.16** 平面 HF kill + bilateral（樣板 BEAT_4C99_DN `L-39ba8c8f1d7c`）。 2. 若需求是 **「A 白 − 粒 + B 自然 − 棕」** → **必須升本節 GENMIX**，不得用像素混冒充。 3. **勝過 pure Siax**（`4c99ea4b…` ≈ SIAX4x_FULL）仍走 §0.12.18；GENMIX 是 **膚色／皮感身份刀**，不替代 BEAT 清晰閘。 #### 0.12.21.F 黑名單（E-GS 續） | I",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.21.G 樣板索引（SET-R · 2026-10-26） · §0.12.20]: 6d-c467-46e9-96f2-eb6ba58ec5f6` | §0.12.20 **P4** | | 自然REF | `2befbe5e-751c-434a-a39f-ad4bf8ed4374` | §0.12.20 **P3** | | 噪粒 DN 對照 | BEAT_4C99_DN · `L-39ba8c8f1d7c` | 非 GENMIX | #### 0.12.21.H 閘門勾選 ``` [ ] asset_ids 順序 = [結構錨, 白REF, 自然REF] [ ] prompt 明示：白無粒 · 自然無棕 · 禁止 paste/collage [ ] 產出為 **新生成** asset（非 P3/P4 檔名拷貝） [ ] 目視：無砂粒噪、無古銅棕底、身份=女主 [ ] 拼回：ECC +"
+      ],
+      "aliases": [
+        "L-39ba8c",
+        "L-39ba8c8f"
+      ]
+    },
+    {
+      "asset_id": "L-1ca33c5e3c15",
+      "label": "face registration reference · L-1ca33c5e3c15",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "heroine_ip",
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: SET-O 已執行：IP_RAW → IP_PATH1E_HD → CUT_HD → MID_v2 (`L-1ca33c5e3c15`)。",
+      "uri": "legacy-ref://L-1ca33c5e3c15",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.5 修訂 · IP 女主先出（2026-10-25T10:04:21Z · 用戶確立） · §0.5.1",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.5 修訂 · IP 女主先出（2026-10-25T10:04:21Z · 用戶確立） · §0.5.1]: 臉。 > 禁止：把「有底圖的完成圖／2ce5 類全幅」誤當 **首 IP**（那是 ST2 產物，不是 ST1 IP）。 > 人物身份只從 **無底圖 IP 鏈 + a8b** 繼承。 SET-O 已執行：IP_RAW → IP_PATH1E_HD → CUT_HD → MID_v2 (`L-1ca33c5e3c15`)。 ### 0.5.1 首 IP 定義（NO_BG · MULTI_ANGLE） **首 IP（PRIMARY IP PACK）=** ``` 無底圖（NO_BG · 退地） + 標準面 a8b 身份（鎖臉） + 對型本 SET 世界（§0.0 ST0 bible） + 大師級創新造型（服裝輪廓／材質／結構至少一項新） + 創意武器／槌（外形創新 + strike"
+      ],
+      "aliases": [
+        "L-1ca33c",
+        "L-1ca33c5e"
+      ]
+    },
+    {
+      "asset_id": "L-ec355935c17f",
+      "label": "skin material reference · L-ec355935c17f",
+      "role": "skin_material_reference",
+      "skills": [
+        "PATH1E",
+        "SIAX",
+        "PIXEL_CTRL"
+      ],
+      "tags": [
+        "face",
+        "skin",
+        "detail",
+        "upscale",
+        "registration",
+        "pixel_protection"
+      ],
+      "description": "Legacy source reference. Context: **Siax 全開 4×：** `L-ec355935c17f`（4608×6912 · spandrel + tile-to-disk）",
+      "uri": "legacy-ref://L-ec355935c17f",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.15.D GRID 類增益表（正典起點 · 可調但必寫 META） · §0.12.14",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.15.D GRID 類增益表（正典起點 · 可調但必寫 META） · §0.12.14]: | **FIRE** | 火字／焰 | **0.72** | 可銳 | | **FLAT** | 其餘 | **0.45** | 少動 | **SET-R 海報 L0 樣板：** `90807317-4e7d-4646-9f98-ac6c59208d08` **Siax 全開 4×：** `L-ec355935c17f`（4608×6912 · spandrel + tile-to-disk） **Hybrid v3：** `L-8bca4ceb59b5` #### 0.12.15.E 算力策略（不用全副武裝） | 級 | 做法 | 何時 | |----|------|------| | **E0 試效** | 可先 **全圖 Siax 一次** 存盤，再只做 **M 混合**（便宜重調增益）",
+        "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md [樣板 · §0.12.16]: L 0.80 · FIRE 0.72 · FLAT 0.45 - 皮膚可選雙帶：MID_SKIN_M≈0.45 · FEATURE_USM 僅 feature mask ## 樣板 - L0 `90807317-4e7d-4646-9f98-ac6c59208d08` - Siax FULL `L-ec355935c17f` - Hybrid v3 `L-8bca4ceb59b5` - PIXEL_CTRL v1.1 `L-69e63d57a466` - PATH1E plate→ECC `L-fc0a2fa7b8a9`（cc 0.980 · conf 0.782） - plate asset `44d18362-906a-4659-b162-f162cc5a51df` - BEAT_v7 `L-5c738"
+      ],
+      "aliases": [
+        "L-ec3559",
+        "L-ec355935"
+      ]
+    },
+    {
+      "asset_id": "L-cb92586a3275",
+      "label": "skin material reference · L-cb92586a3275",
+      "role": "skin_material_reference",
+      "skills": [],
+      "tags": [
+        "skin",
+        "metal"
+      ],
+      "description": "Legacy source reference. Context: - 放大後若種類漂：用 OBJECT_LOCK mask **硬鎖回** 原種類 donor（樣板：977 柄還原 L-cb92586a3275）。",
+      "uri": "legacy-ref://L-cb92586a3275",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.22.D 與「放大」的關係 · §0.12.20",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.22.D 與「放大」的關係 · §0.12.20]: 大**（038→71→2×）：允許，且 **仍須 E2 鎖種類**（放大不得把柄紋類別漂成甲網）。 - **無 E1–E3 的 i2i 重畫花紋** = 錯圖源 → 黑名單。 - 放大後若種類漂：用 OBJECT_LOCK mask **硬鎖回** 原種類 donor（樣板：977 柄還原 L-cb92586a3275）。 #### 0.12.22.E 閘門勾選 ``` [ ] E1 全圖邊已產且 edge_band 用於拼回 [ ] E2 classmap 至少含 weapon≠armor≠skin [ ] E3 flow_ang／streamlines 已檢（甲切向、柄軸向） [ ] E4 GEN 只在本類 mask；prompt 含「不改輪廓／沿走勢」 [ ] 武器未授權 → 柄 Δ≈0 或硬"
+      ],
+      "aliases": [
+        "L-cb9258",
+        "L-cb92586a"
+      ]
+    },
+    {
+      "asset_id": "L-f85d575a276c",
+      "label": "face registration reference · L-f85d575a276c",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: | 樣板 | `SET_R_BETTER_SEG_*` · L-f85d575a276c |",
+      "uri": "legacy-ref://L-f85d575a276c",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.22.I 識物升級 v3（rembg 人像 + 分物勾邊） · §0.12.20",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.22.I 識物升級 v3（rembg 人像 + 分物勾邊） · §0.12.20]: | 勾邊 | 碎塊合併後 **大 contour 每類最多 N 條**（禁止 200+ 碎線） | | 必交付 | OUTLINES / FILL / LINE / GRID / SOLO_* / MASK_* / classmap | | 樣板 | `SET_R_BETTER_SEG_*` · L-f85d575a276c | **禁止**僅 RGB 閾值、禁止碎塊不合併就當 OBJECT_LOCK 準。 *END §0.12.22 · asof 2026-10-26T20:40:00Z* ## 0.13 全幅鎖臉 FULLFRAME_FACE_LOCK（每 SET 身份正典 · 2ce5 類） > **用戶（2026-10-26）：** 以 `2ce5fabe` 類全幅鎖臉"
+      ],
+      "aliases": [
+        "L-f85d57",
+        "L-f85d575a"
+      ]
+    },
+    {
+      "asset_id": "L-9168908bc3b9",
+      "label": "face registration reference · L-9168908bc3b9",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "metal",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > asof 2026-10-27T08:01:29Z · 用戶診斷確認 · L-9168908bc3b9 後寫入",
+      "uri": "legacy-ref://L-9168908bc3b9",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.23 VIRUS_LOCAL_BASE — 局部母底病毒（永久禁用） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [§0.12.23 VIRUS_LOCAL_BASE — 局部母底病毒（永久禁用） · §0.12.23]: -TOKEN。 *END §0.14.14* *END §0.14 · asof 2026-10-26T15:40:00Z* # §0.12.23 VIRUS_LOCAL_BASE — 局部母底病毒（永久禁用） > asof 2026-10-27T08:01:29Z · 用戶診斷確認 · L-9168908bc3b9 後寫入 ## 根因（不是「拼貼 α alone」） 曾用**單一局部圖**當放大母底（例：`b47031a9` 胸甲 crop 1440×1376、無頭無全構圖； 以及 `28abef` 路徑把局部升成「全圖」），導致： 1. **底圖邏輯被限死在 PART 座標系**（只有上半身裁切的光、比例、邊緣） 2. 之後所有 ECC / mask / α / GEN 都以這 PART"
+      ],
+      "aliases": [
+        "L-916890",
+        "L-9168908b"
+      ]
+    },
+    {
+      "asset_id": "L-bd9269270026",
+      "label": "material detail reference · L-bd9269270026",
+      "role": "material_detail_reference",
+      "skills": [],
+      "tags": [],
+      "description": "Legacy source reference. Context: > 樣板鏈：`d8d40da5` donor · BASE `FULL_V5`/`947cf5b2` · L-bd9269270026 → L-b9a649404dfc → **L-6be8d4e2514f WHOLE**",
+      "uri": "legacy-ref://L-bd9269270026",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.24 WHOLE_COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.24 WHOLE_COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） · §0.12.23]: ## 0.12.24 WHOLE_COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） > asof 2026-10-27T08:49:06Z · 用戶確認寫入 > 樣板鏈：`d8d40da5` donor · BASE `FULL_V5`/`947cf5b2` · L-bd9269270026 → L-b9a649404dfc → **L-6be8d4e2514f WHOLE** > **地位：** 在 §0.12.23 VIRUS_LOCAL_BASE 與 MESH V5 之上的 **拼貼方法論鐵律**。 > 未過本節 → 不得稱「整體拼貼／誠實密網合回」。 #### 0.12.24.A 一句話 **反推 PIXEL 只定 RANGE；真拼回必須舊混法（V5）；對位",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.24.H 數值樣板（SET-R · 2026-10-27） · §0.12.23]: **不可**單獨當錯位證明（GEN 密網邊 ≠ BASE 邊；以 **gray NCC + phase** 為準） #### 0.12.24.H 數值樣板（SET-R · 2026-10-27） | L | 模式 | ncc | 備註 | |---|------|-----|------| | L-bd9269270026 | euclid V5 | 0.65 | 有拼、對位尚可 | | L-17da7b838d2b | REV full-RGB | — | **lap 崩** · KILL | | L-b9a649404dfc | affine + 舊法 + RANGE | **0.80** | 修錯位 | | **L-6be8d4e2514f** | **WHOLE_COLLAGE** | **0.80"
+      ],
+      "aliases": [
+        "L-bd9269",
+        "L-bd926927"
+      ]
+    },
+    {
+      "asset_id": "L-b9a649404dfc",
+      "label": "face registration reference · L-b9a649404dfc",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > 樣板鏈：`d8d40da5` donor · BASE `FULL_V5`/`947cf5b2` · L-bd9269270026 → L-b9a649404dfc → **L-6be8d4e2514f WHOLE**",
+      "uri": "legacy-ref://L-b9a649404dfc",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.24 WHOLE_COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.24 WHOLE_COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） · §0.12.23]: COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） > asof 2026-10-27T08:49:06Z · 用戶確認寫入 > 樣板鏈：`d8d40da5` donor · BASE `FULL_V5`/`947cf5b2` · L-bd9269270026 → L-b9a649404dfc → **L-6be8d4e2514f WHOLE** > **地位：** 在 §0.12.23 VIRUS_LOCAL_BASE 與 MESH V5 之上的 **拼貼方法論鐵律**。 > 未過本節 → 不得稱「整體拼貼／誠實密網合回」。 #### 0.12.24.A 一句話 **反推 PIXEL 只定 RANGE；真拼回必須舊混法（V5）；對位用 AFFINE ECC；拼貼單位",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.24.H 數值樣板（SET-R · 2026-10-27） · §0.12.23]: 模式 | ncc | 備註 | |---|------|-----|------| | L-bd9269270026 | euclid V5 | 0.65 | 有拼、對位尚可 | | L-17da7b838d2b | REV full-RGB | — | **lap 崩** · KILL | | L-b9a649404dfc | affine + 舊法 + RANGE | **0.80** | 修錯位 | | **L-6be8d4e2514f** | **WHOLE_COLLAGE** | **0.80** | 全板 uniform；整 lap 4743→6139 | | asset WHOLE | `6201efd4-55d6-42dd-8b76-1e63e97ec3c6` | — | SET_R_947_"
+      ],
+      "aliases": [
+        "L-b9a649",
+        "L-b9a64940"
+      ]
+    },
+    {
+      "asset_id": "L-6be8d4e2514f",
+      "label": "face registration reference · L-6be8d4e2514f",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > 樣板鏈：`d8d40da5` donor · BASE `FULL_V5`/`947cf5b2` · L-bd9269270026 → L-b9a649404dfc → **L-6be8d4e2514f WHOLE**",
+      "uri": "legacy-ref://L-6be8d4e2514f",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.24 WHOLE_COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.24 WHOLE_COLLAGE_ALIGN（整體拼貼 · 反推只定 RANGE · 錯位解救） · §0.12.23]: · 反推只定 RANGE · 錯位解救） > asof 2026-10-27T08:49:06Z · 用戶確認寫入 > 樣板鏈：`d8d40da5` donor · BASE `FULL_V5`/`947cf5b2` · L-bd9269270026 → L-b9a649404dfc → **L-6be8d4e2514f WHOLE** > **地位：** 在 §0.12.23 VIRUS_LOCAL_BASE 與 MESH V5 之上的 **拼貼方法論鐵律**。 > 未過本節 → 不得稱「整體拼貼／誠實密網合回」。 #### 0.12.24.A 一句話 **反推 PIXEL 只定 RANGE；真拼回必須舊混法（V5）；對位用 AFFINE ECC；拼貼單位是整板 match box，不是「上面",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.24.H 數值樣板（SET-R · 2026-10-27） · §0.12.23]: | euclid V5 | 0.65 | 有拼、對位尚可 | | L-17da7b838d2b | REV full-RGB | — | **lap 崩** · KILL | | L-b9a649404dfc | affine + 舊法 + RANGE | **0.80** | 修錯位 | | **L-6be8d4e2514f** | **WHOLE_COLLAGE** | **0.80** | 全板 uniform；整 lap 4743→6139 | | asset WHOLE | `6201efd4-55d6-42dd-8b76-1e63e97ec3c6` | — | SET_R_947_WHOLE_FULL | #### 0.12.24.I 閘門勾選 - [ ] BASE 全幅 native（非局部病"
+      ],
+      "aliases": [
+        "L-6be8d4",
+        "L-6be8d4e2"
+      ]
+    },
+    {
+      "asset_id": "L-17da7b838d2b",
+      "label": "legacy proof artifact · L-17da7b838d2b",
+      "role": "legacy_proof_artifact",
+      "skills": [],
+      "tags": [],
+      "description": "Legacy source reference. Context: | L-17da7b838d2b | REV full-RGB | — | **lap 崩** · KILL |",
+      "uri": "legacy-ref://L-17da7b838d2b",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.24.H 數值樣板（SET-R · 2026-10-27） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.24.H 數值樣板（SET-R · 2026-10-27） · §0.12.23]: ase** 為準） #### 0.12.24.H 數值樣板（SET-R · 2026-10-27） | L | 模式 | ncc | 備註 | |---|------|-----|------| | L-bd9269270026 | euclid V5 | 0.65 | 有拼、對位尚可 | | L-17da7b838d2b | REV full-RGB | — | **lap 崩** · KILL | | L-b9a649404dfc | affine + 舊法 + RANGE | **0.80** | 修錯位 | | **L-6be8d4e2514f** | **WHOLE_COLLAGE** | **0.80** | 全板 uniform；整 lap 4743→6139 | | asset WHOLE"
+      ],
+      "aliases": [
+        "L-17da7b",
+        "L-17da7b83"
+      ]
+    },
+    {
+      "asset_id": "L-5d776bf61a20",
+      "label": "legacy proof artifact · L-5d776bf61a20",
+      "role": "legacy_proof_artifact",
+      "skills": [
+        "GOU"
+      ],
+      "tags": [],
+      "description": "Legacy source reference. Context: | L-5d776bf61a20 | WHOLE 自邊界（前） | — | 0.977 | 999→1204 | 仍偏 ROI 拼；後改形狀 |",
+      "uri": "legacy-ref://L-5d776bf61a20",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.25.F 進展樣板（PROOF · 有進展） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.25.F 進展樣板（PROOF · 有進展） · §0.12.23]: r `e61ab50c` 邏輯 | | **L-05683b2c4e72** | 勾→無框母 TRY | **0.581** | 0.930 | 1529→**1825** | gou e61 ∩ GrabCut · FULL `f5c6a555` · contour `360ef2a0` | | L-5d776bf61a20 | WHOLE 自邊界（前） | — | 0.977 | 999→1204 | 仍偏 ROI 拼；後改形狀 | | L-a6ca442ac78f | 假形 fill≈0.96 | **0.964** | — | — | **KILL 樣** · 形未收緊 | **進展判定（寫死）：** fill≪1 **且** lap 升 **且** 目視綠勾跟衣緣 **= 有進展**。不得因中間錯刀"
+      ],
+      "aliases": [
+        "L-5d776b",
+        "L-5d776bf6"
+      ]
+    },
+    {
+      "asset_id": "L-a6ca442ac78f",
+      "label": "legacy proof artifact · L-a6ca442ac78f",
+      "role": "legacy_proof_artifact",
+      "skills": [
+        "GOU"
+      ],
+      "tags": [],
+      "description": "Legacy source reference. Context: | L-a6ca442ac78f | 假形 fill≈0.96 | **0.964** | — | — | **KILL 樣** · 形未收緊 |",
+      "uri": "legacy-ref://L-a6ca442ac78f",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.25.F 進展樣板（PROOF · 有進展） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.25.F 進展樣板（PROOF · 有進展） · §0.12.23]: 1529→**1825** | gou e61 ∩ GrabCut · FULL `f5c6a555` · contour `360ef2a0` | | L-5d776bf61a20 | WHOLE 自邊界（前） | — | 0.977 | 999→1204 | 仍偏 ROI 拼；後改形狀 | | L-a6ca442ac78f | 假形 fill≈0.96 | **0.964** | — | — | **KILL 樣** · 形未收緊 | **進展判定（寫死）：** fill≪1 **且** lap 升 **且** 目視綠勾跟衣緣 **= 有進展**。不得因中間錯刀否定已驗證鏈。 #### 0.12.25.G 閘門勾選 - [ ] BASE 全幅 · `virus_local_base=false` -"
+      ],
+      "aliases": [
+        "L-a6ca44",
+        "L-a6ca442a"
+      ]
+    },
+    {
+      "asset_id": "L-a166300b8f6a",
+      "label": "material detail reference · L-a166300b8f6a",
+      "role": "material_detail_reference",
+      "skills": [
+        "SIAX",
+        "N2R"
+      ],
+      "tags": [
+        "metal",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: > **終態樣板：** 啞面母 `8978bc25…`（STONE_V2）→ 光源貼層 → 色溫正反推 **L-a166300b8f6a** FULL `f9dedda8…`",
+      "uri": "legacy-ref://L-a166300b8f6a",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "§0.12.26 STONE_FIRE_LIGHT_CTEMP（石／火材質 · 啞面+光源 · 色溫正反推） · §0.12.18",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [§0.12.26 STONE_FIRE_LIGHT_CTEMP（石／火材質 · 啞面+光源 · 色溫正反推） · §0.12.18]: ：** 在 §0.12.23–25 勾拼、§0.12.18 GRID×SIAX、甲成功鏈之上。 > **對象：** poster 石台／火字／啞面岩 + 計算光源 + Lab 色溫。 > **終態樣板：** 啞面母 `8978bc25…`（STONE_V2）→ 光源貼層 → 色溫正反推 **L-a166300b8f6a** FULL `f9dedda8…` ### 0.12.26.A 終態一句 ``` ORIG 抽裁 + DETECT 勾（§0.12.25） → 大裁 GEN 拓樸（甲成功鏈密度，真生成） → 可 2× 二次拓樸 → 殺「無意義白噪線」· 留／創「光源真反光」 → 啞面母鎖拓樸（V2 級）· 光源只作照明層貼上 → Lab 正反推色溫：冷岩鎖啞面 a,b · 近火",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23]: SIAX mask | | 2× 二次拓樸殺白 | L-620123e3a03a | 母 `8978bc25` 啞面源 | | SPEC 正反 | L-3009e047956a | 留真反光（過渡） | | 啞面+光 | L-1186f92df119 | 光貼啞面 | | **色溫修好** | **L-a166300b8f6a** | 冷 a,b 鎖回 | ### 0.12.26.D 白：噪 vs 反光（鐵律）· 招名 **白噪殺** > **asof 2026-10-27T21:24:47Z** · **用戶：**「入憲, 叫白噪殺」 > **地位：** §0.12.26 白分層鐵律 LOCK · 與支招 **噪折成光 N2R**（.O · **轉**）並存：.D 先 **分殺留**，.O 可選 **",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.F 色溫正／反推（Lab） · §0.12.26]: light 向 ref L + spec 加亮 a,b_out: 冷區 → 鎖啞面 a,b 近火 → 向 ref 插值（有 max Δ 閘，禁全局 +b） 火 → ref a,b 二次 cold 閘：殘餘棕拉回啞面 HF：matte_hf 鎖回 ``` **PROOF 數（樣板 L-a166300b8f6a）：** | | a | b | |--|--|--| | 啞面冷岩 | 133.7 | 137.1 | | 錯溫（E-SF-06） | 135.7 | **146.3**（Δb≈+9） | | 修好 | 133.4 | **136.8** | ### 0.12.26.G 石／火分工 | 區 | 主刀 | 鎖 | |----|------|-----| | stone_mid | 啞",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.M 樣板資產（可稽） · §0.12.22]: -46b7-8a58-805defef1e81` · L-620123e3a03a | | 啞面+光（色溫前） | `cacce121…` · L-1186f92df119 | | **色溫終態 FULL** | `f9dedda8-90fc-4cb9-8228-33eb3dc71386` · **L-a166300b8f6a** | | 甲鏈中途 | L-95991c6bae6b | | 火／石 ORIG 勾 | `from_1f29_origbound/*` | ### 0.12.26.N 招名（正式） | 層 | 名 | |----|-----| | **正招** | **啞面貼光 · 分溫鎖相** | | **短碼** | **啞貼分溫** / `MATTE_LIGHT_CTEMP` | | *"
+      ],
+      "aliases": [
+        "L-a16630",
+        "L-a166300b"
+      ]
+    },
+    {
+      "asset_id": "L-95991c6bae6b",
+      "label": "face registration reference · L-95991c6bae6b",
+      "role": "face_registration_reference",
+      "skills": [
+        "SIAX"
+      ],
+      "tags": [
+        "metal",
+        "detail",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: | 甲鏈 stone+fire | L-95991c6bae6b | 大裁 GEN + 高α + SIAX mask |",
+      "uri": "legacy-ref://L-95991c6bae6b",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23]: 義糊） 4. ECC／affine 對位 → **勾形 α** 高咬（石 fill_hard 可高；火須人／器洞） 5. SIAX **僅 mask 內** 拋光，非全幅蓋 **樣板 L：** | 刀 | L | 要點 | |----|---|------| | 甲鏈 stone+fire | L-95991c6bae6b | 大裁 GEN + 高α + SIAX mask | | 2× 二次拓樸殺白 | L-620123e3a03a | 母 `8978bc25` 啞面源 | | SPEC 正反 | L-3009e047956a | 留真反光（過渡） | | 啞面+光 | L-1186f92df119 | 光貼啞面 | | **色溫修好** | **L-a166300b8f6a** | 冷 a,b 鎖回 |",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.M 樣板資產（可稽） · §0.12.22]: -620123e3a03a | | 啞面+光（色溫前） | `cacce121…` · L-1186f92df119 | | **色溫終態 FULL** | `f9dedda8-90fc-4cb9-8228-33eb3dc71386` · **L-a166300b8f6a** | | 甲鏈中途 | L-95991c6bae6b | | 火／石 ORIG 勾 | `from_1f29_origbound/*` | ### 0.12.26.N 招名（正式） | 層 | 名 | |----|-----| | **正招** | **啞面貼光 · 分溫鎖相** | | **短碼** | **啞貼分溫** / `MATTE_LIGHT_CTEMP` | | **英** | Matte-Lock · Light-Pa"
+      ],
+      "aliases": [
+        "L-95991c",
+        "L-95991c6b"
+      ]
+    },
+    {
+      "asset_id": "L-620123e3a03a",
+      "label": "material detail reference · L-620123e3a03a",
+      "role": "material_detail_reference",
+      "skills": [
+        "SIAX"
+      ],
+      "tags": [
+        "metal",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: | 2× 二次拓樸殺白 | L-620123e3a03a | 母 `8978bc25` 啞面源 |",
+      "uri": "legacy-ref://L-620123e3a03a",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23]: 5. SIAX **僅 mask 內** 拋光，非全幅蓋 **樣板 L：** | 刀 | L | 要點 | |----|---|------| | 甲鏈 stone+fire | L-95991c6bae6b | 大裁 GEN + 高α + SIAX mask | | 2× 二次拓樸殺白 | L-620123e3a03a | 母 `8978bc25` 啞面源 | | SPEC 正反 | L-3009e047956a | 留真反光（過渡） | | 啞面+光 | L-1186f92df119 | 光貼啞面 | | **色溫修好** | **L-a166300b8f6a** | 冷 a,b 鎖回 | ### 0.12.26.D 白：噪 vs 反光（鐵律）· 招名 **白噪殺** > **asof 2026-",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.M 樣板資產（可稽） · §0.12.22]: UTION_WRITE_01226_META.json` | ### 0.12.26.M 樣板資產（可稽） | 角色 | asset / L | |------|-----------| | 啞面母 FULL | `8978bc25-47e6-46b7-8a58-805defef1e81` · L-620123e3a03a | | 啞面+光（色溫前） | `cacce121…` · L-1186f92df119 | | **色溫終態 FULL** | `f9dedda8-90fc-4cb9-8228-33eb3dc71386` · **L-a166300b8f6a** | | 甲鏈中途 | L-95991c6bae6b | | 火／石 ORIG 勾 | `from_1f29_origbound/*` |"
+      ],
+      "aliases": [
+        "L-620123",
+        "L-620123e3"
+      ]
+    },
+    {
+      "asset_id": "L-3009e047956a",
+      "label": "material detail reference · L-3009e047956a",
+      "role": "material_detail_reference",
+      "skills": [
+        "SIAX"
+      ],
+      "tags": [
+        "metal",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: | SPEC 正反 | L-3009e047956a | 留真反光（過渡） |",
+      "uri": "legacy-ref://L-3009e047956a",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23]: L | 要點 | |----|---|------| | 甲鏈 stone+fire | L-95991c6bae6b | 大裁 GEN + 高α + SIAX mask | | 2× 二次拓樸殺白 | L-620123e3a03a | 母 `8978bc25` 啞面源 | | SPEC 正反 | L-3009e047956a | 留真反光（過渡） | | 啞面+光 | L-1186f92df119 | 光貼啞面 | | **色溫修好** | **L-a166300b8f6a** | 冷 a,b 鎖回 | ### 0.12.26.D 白：噪 vs 反光（鐵律）· 招名 **白噪殺** > **asof 2026-10-27T21:24:47Z** · **用戶：**「入憲, 叫白噪殺」 > **地位：*"
+      ],
+      "aliases": [
+        "L-3009e0",
+        "L-3009e047"
+      ]
+    },
+    {
+      "asset_id": "L-1186f92df119",
+      "label": "material detail reference · L-1186f92df119",
+      "role": "material_detail_reference",
+      "skills": [
+        "SIAX"
+      ],
+      "tags": [
+        "metal",
+        "detail"
+      ],
+      "description": "Legacy source reference. Context: | 啞面+光 | L-1186f92df119 | 光貼啞面 |",
+      "uri": "legacy-ref://L-1186f92df119",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.C 甲成功鏈（石／火拓樸） · §0.12.23]: +fire | L-95991c6bae6b | 大裁 GEN + 高α + SIAX mask | | 2× 二次拓樸殺白 | L-620123e3a03a | 母 `8978bc25` 啞面源 | | SPEC 正反 | L-3009e047956a | 留真反光（過渡） | | 啞面+光 | L-1186f92df119 | 光貼啞面 | | **色溫修好** | **L-a166300b8f6a** | 冷 a,b 鎖回 | ### 0.12.26.D 白：噪 vs 反光（鐵律）· 招名 **白噪殺** > **asof 2026-10-27T21:24:47Z** · **用戶：**「入憲, 叫白噪殺」 > **地位：** §0.12.26 白分層鐵律 LOCK · 與支招 **噪折成光 N2",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.26.M 樣板資產（可稽） · §0.12.22]: 樣板資產（可稽） | 角色 | asset / L | |------|-----------| | 啞面母 FULL | `8978bc25-47e6-46b7-8a58-805defef1e81` · L-620123e3a03a | | 啞面+光（色溫前） | `cacce121…` · L-1186f92df119 | | **色溫終態 FULL** | `f9dedda8-90fc-4cb9-8228-33eb3dc71386` · **L-a166300b8f6a** | | 甲鏈中途 | L-95991c6bae6b | | 火／石 ORIG 勾 | `from_1f29_origbound/*` | ### 0.12.26.N 招名（正式） | 層 | 名 | |----|-----"
+      ],
+      "aliases": [
+        "L-1186f9",
+        "L-1186f92d"
+      ]
+    },
+    {
+      "asset_id": "L-8dc48986cf31",
+      "label": "face registration reference · L-8dc48986cf31",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "detail",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9**",
+      "uri": "legacy-ref://L-8dc48986cf31",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26]: 補 2026-10-27T21:20:07Z* ### 0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） > asof 2026-10-27T19:44:53Z · 用戶：「給這找錯除毒的成功過程給招名(寫入憲)」 > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9** > 終態 asset：`092a9e12-286c-4719-af7f-275ace5218e7` · face lap 4935→**9316** · 格均 NCC **0.899** > **地位：** 整臉／整板硬貼",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27.I 樣板數值（SET-R · 2026-10-27） · §0.12.18]: | CELL8 打全臉不打 zone（算力毒+過銳） | | **E-GS-38** | 用病毒 SELFGEN 底再 GCS（毒未除） | #### 0.12.27.I 樣板數值（SET-R · 2026-10-27） | L | 遍 | 要點 | |---|-----|------| | L-8dc48986cf31 | CLEAN 人格 | ECC face 0.936 · 解毒 BASE | | L-c27dacaa89f4 | GRID48 | mean NCC 0.816 · 500 格 | | L-ea2a6b0f2778 | 32+16+12 | P2 NCC **0.958** · lap 3346→7493 | | **L-db350bf16fa9** | **CELL8** | **"
+      ],
+      "aliases": [
+        "L-8dc489",
+        "L-8dc48986"
+      ]
+    },
+    {
+      "asset_id": "L-c27dacaa89f4",
+      "label": "face registration reference · L-c27dacaa89f4",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "detail",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9**",
+      "uri": "legacy-ref://L-c27dacaa89f4",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26]: ### 0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） > asof 2026-10-27T19:44:53Z · 用戶：「給這找錯除毒的成功過程給招名(寫入憲)」 > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9** > 終態 asset：`092a9e12-286c-4719-af7f-275ace5218e7` · face lap 4935→**9316** · 格均 NCC **0.899** > **地位：** 整臉／整板硬貼失敗、PATH1E 不收斂、feather 糊邊",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27.I 樣板數值（SET-R · 2026-10-27） · §0.12.18]: 底再 GCS（毒未除） | #### 0.12.27.I 樣板數值（SET-R · 2026-10-27） | L | 遍 | 要點 | |---|-----|------| | L-8dc48986cf31 | CLEAN 人格 | ECC face 0.936 · 解毒 BASE | | L-c27dacaa89f4 | GRID48 | mean NCC 0.816 · 500 格 | | L-ea2a6b0f2778 | 32+16+12 | P2 NCC **0.958** · lap 3346→7493 | | **L-db350bf16fa9** | **CELL8** | **13904** 格 · NCC **0.899** · lap **9316** | #### 0.12.27."
+      ],
+      "aliases": [
+        "L-c27dac",
+        "L-c27dacaa"
+      ]
+    },
+    {
+      "asset_id": "L-ea2a6b0f2778",
+      "label": "face registration reference · L-ea2a6b0f2778",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "detail",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9**",
+      "uri": "legacy-ref://L-ea2a6b0f2778",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26]: AP / GCS · 貼失敗→分格對換→羽化解毒） > asof 2026-10-27T19:44:53Z · 用戶：「給這找錯除毒的成功過程給招名(寫入憲)」 > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9** > 終態 asset：`092a9e12-286c-4719-af7f-275ace5218e7` · face lap 4935→**9316** · 格均 NCC **0.899** > **地位：** 整臉／整板硬貼失敗、PATH1E 不收斂、feather 糊邊、病毒底人格歪時的 **正解除毒鏈**。 > 未過本節",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27.I 樣板數值（SET-R · 2026-10-27） · §0.12.18]: 7） | L | 遍 | 要點 | |---|-----|------| | L-8dc48986cf31 | CLEAN 人格 | ECC face 0.936 · 解毒 BASE | | L-c27dacaa89f4 | GRID48 | mean NCC 0.816 · 500 格 | | L-ea2a6b0f2778 | 32+16+12 | P2 NCC **0.958** · lap 3346→7493 | | **L-db350bf16fa9** | **CELL8** | **13904** 格 · NCC **0.899** · lap **9316** | #### 0.12.27.J 一刀參數卡 ``` BASE_ASSET= # 全幅 native / CLEAN"
+      ],
+      "aliases": [
+        "L-ea2a6b",
+        "L-ea2a6b0f"
+      ]
+    },
+    {
+      "asset_id": "L-db350bf16fa9",
+      "label": "face registration reference · L-db350bf16fa9",
+      "role": "face_registration_reference",
+      "skills": [
+        "PATH1E"
+      ],
+      "tags": [
+        "face",
+        "detail",
+        "registration"
+      ],
+      "description": "Legacy source reference. Context: > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9**",
+      "uri": "legacy-ref://L-db350bf16fa9",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27 細格對換（GRID_CELL_SWAP / GCS · 貼失敗→分格對換→羽化解毒） · §0.12.26]: > asof 2026-10-27T19:44:53Z · 用戶：「給這找錯除毒的成功過程給招名(寫入憲)」 > 樣板鏈：CLEAN L-8dc48986cf31 → GRID48 L-c27dacaa89f4 → FINE32+16+12 L-ea2a6b0f2778 → **CELL8 L-db350bf16fa9** > 終態 asset：`092a9e12-286c-4719-af7f-275ace5218e7` · face lap 4935→**9316** · 格均 NCC **0.899** > **地位：** 整臉／整板硬貼失敗、PATH1E 不收斂、feather 糊邊、病毒底人格歪時的 **正解除毒鏈**。 > 未過本節 → 不得稱「細格對換完成／GCS 解毒」。 ##",
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [0.12.27.I 樣板數值（SET-R · 2026-10-27） · §0.12.18]: ECC face 0.936 · 解毒 BASE | | L-c27dacaa89f4 | GRID48 | mean NCC 0.816 · 500 格 | | L-ea2a6b0f2778 | 32+16+12 | P2 NCC **0.958** · lap 3346→7493 | | **L-db350bf16fa9** | **CELL8** | **13904** 格 · NCC **0.899** · lap **9316** | #### 0.12.27.J 一刀參數卡 ``` BASE_ASSET= # 全幅 native / CLEAN DONOR_FACE_GEN= # 自裁同構 GEN CELL_CHAIN=48,32,16,12,8 FEATHER_C"
+      ],
+      "aliases": [
+        "L-db350b",
+        "L-db350bf1"
+      ]
+    },
+    {
+      "asset_id": "L-ce43c615607c",
+      "label": "legacy proof artifact · L-ce43c615607c",
+      "role": "legacy_proof_artifact",
+      "skills": [
+        "TEX4"
+      ],
+      "tags": [
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: | 試 L | L-ce43c615607c 等 |",
+      "uri": "legacy-ref://L-ce43c615607c",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "source_section": "本輪 · §0.12.27",
+      "source_contexts": [
+        "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md [本輪 · §0.12.27]: p 升稱字好；本輪試種當 FINAL | ### 種子鏈（未LOCK） ``` BASE 全幅 → 反推 blur_text_zone → 同構優 donor + 結構閘 → 字區 GCS 細格 → 人眼字可讀閘（未過） ``` ### 本輪 | | | |--|--| | 試 L | L-ce43c615607c 等 | | 用戶判 | **全錯** | | 黑名單 | E-GS-42…46 | | 再改 | **YES** · 參數不LOCK | *END §0.12.28 · 字糊反推對換 / TBRS · 備案* # §0.12.50 四技對紋絕招 · TEX4 / FOUR_SKILL_TEX_ALIGN（**LOCK** · asof 2026-10-30T21:15:44Z）"
+      ],
+      "aliases": [
+        "L-ce43c6",
+        "L-ce43c615"
+      ]
+    },
+    {
+      "asset_id": "6adcdd6a-b328-83ec-9ef3-c98746074119",
+      "label": "face registration reference · 6adcdd6a-b328-83ec-9ef3-c98746074119",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "metal",
+        "world",
+        "heroine_ip",
+        "registration",
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: *User prompt: 你明白我想要的極致VIDEO 幀的 故事變體嗎 https\\://chatgpt.com/share/6adcdd6a-b328-83ec-9ef3-c98746074119 我已把《邊界行人》從「不同方法的圖片集合」推進成同一故事不斷輪迴、每輪試法不同、畫面內有藝術字標示方法的完整提示詞工作流。 1\\. 六幕故事持續輪迴 《邊界行人》無限輪迴故事規格 畫界 → 保護 → 試法／碎裂 → 假修 → 一界 → 選擇，再由結尾接回開場。角色、世界和因果保持連續，每輪改變拓撲、接觸狀態、鏡頭、風格或影片方法。 2\\. 全量 3,723 個變體編成六幕故事 新增 輪迴 Prompt 編譯器，將每個合法變體編成獨立 LOOP／TRY，輸出六幕各自完整的 IMAGE／VIDE",
+      "uri": "legacy-ref://6adcdd6a-b328-83ec-9ef3-c98746074119",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md",
+      "source_section": "legacy source",
+      "source_contexts": [
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [legacy source]: --- *User prompt: 你明白我想要的極致VIDEO 幀的 故事變體嗎 https\\://chatgpt.com/share/6adcdd6a-b328-83ec-9ef3-c98746074119 我已把《邊界行人》從「不同方法的圖片集合」推進成同一故事不斷輪迴、每輪試法不同、畫面內有藝術字標示方法的完整提示詞工作流。 1\\. 六幕故事持續輪迴 《邊界行人》無限輪迴故事規格 畫界 → 保護 → 試法／碎裂 → 假修 → 一界 → 選擇，再由結尾接回開場。角色、世界和因果保持連續，每輪改變拓撲、接觸狀態、鏡頭、風格或影片方法。 2\\. 全量"
+      ],
+      "aliases": [
+        "6adcdd6a",
+        "6adcdd6a-b32"
+      ]
+    },
+    {
+      "asset_id": "L-546119e75b2e",
+      "label": "face registration reference · L-546119e75b2e",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "metal",
+        "world",
+        "heroine_ip",
+        "registration",
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: *User prompt: 你明白我想要的極致VIDEO 幀的 故事變體嗎 https\\://chatgpt.com/share/6adcdd6a-b328-83ec-9ef3-c98746074119 我已把《邊界行人》從「不同方法的圖片集合」推進成同一故事不斷輪迴、每輪試法不同、畫面內有藝術字標示方法的完整提示詞工作流。 1\\. 六幕故事持續輪迴 《邊界行人》無限輪迴故事規格 畫界 → 保護 → 試法／碎裂 → 假修 → 一界 → 選擇，再由結尾接回開場。角色、世界和因果保持連續，每輪改變拓撲、接觸狀態、鏡頭、風格或影片方法。 2\\. 全量 3,723 個變體編成六幕故事 新增 輪迴 Prompt 編譯器，將每個合法變體編成獨立 LOOP／TRY，輸出六幕各自完整的 IMAGE／VIDE",
+      "uri": "legacy-ref://L-546119e75b2e",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md",
+      "source_section": "legacy source",
+      "source_contexts": [
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [legacy source]: 字的風格 是要有極大的不同和融入世界, 不用底背鎖得太死板 重做字牌：LOOP 用 SHA 記認、去掉 REVIEW PENDING、位置可流動、前後風格極端不同並融入雨夜世界。 v2 已改好 你的要求 現在做法 LOOP 用 SHA 記認 L- \\+ MID 圖 SHA256 前 12 位（例 L-546119e75b2e） 不顯示 REVIEW PENDING 畫面已全部去掉 字可走不同位置 每組 PRE/POST 不同錨點（底／頂／左／右／浮／角） 風格極大不同 \\+ 融世界 PRE＝霜白冷光；POST＝金鉻＋洋紅霓虹；底只做輕 wash，不鎖死框 文案前後仍是同一串（之後 VIDEO 字不變、風格 morph）。 LOOP 索引（SHA） F01 L-546119e75b2e F02 L-d489"
+      ],
+      "aliases": [
+        "L-546119",
+        "L-546119e7"
+      ]
+    },
+    {
+      "asset_id": "L-d4890246f4f1",
+      "label": "face registration reference · L-d4890246f4f1",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "metal",
+        "world",
+        "heroine_ip",
+        "registration",
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: *User prompt: 你明白我想要的極致VIDEO 幀的 故事變體嗎 https\\://chatgpt.com/share/6adcdd6a-b328-83ec-9ef3-c98746074119 我已把《邊界行人》從「不同方法的圖片集合」推進成同一故事不斷輪迴、每輪試法不同、畫面內有藝術字標示方法的完整提示詞工作流。 1\\. 六幕故事持續輪迴 《邊界行人》無限輪迴故事規格 畫界 → 保護 → 試法／碎裂 → 假修 → 一界 → 選擇，再由結尾接回開場。角色、世界和因果保持連續，每輪改變拓撲、接觸狀態、鏡頭、風格或影片方法。 2\\. 全量 3,723 個變體編成六幕故事 新增 輪迴 Prompt 編譯器，將每個合法變體編成獨立 LOOP／TRY，輸出六幕各自完整的 IMAGE／VIDE",
+      "uri": "legacy-ref://L-d4890246f4f1",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md",
+      "source_section": "legacy source",
+      "source_contexts": [
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [legacy source]: PRE/POST 不同錨點（底／頂／左／右／浮／角） 風格極大不同 \\+ 融世界 PRE＝霜白冷光；POST＝金鉻＋洋紅霓虹；底只做輕 wash，不鎖死框 文案前後仍是同一串（之後 VIDEO 字不變、風格 morph）。 LOOP 索引（SHA） F01 L-546119e75b2e F02 L-d4890246f4f1 F03 L-668b0ffb9db9 F04 L-e185fc04cebb F05 L-273feb9920b1 F06 L-96cb558c7f61 完整表：setF\\_rain/LOOP\\_SHA\\_INDEX.txt manifest：text\\_manifest\\_v2.jsonl 三連（左 ice 前 · 中淨 · 右 metal 後 · 位置流動） F01 前底冷／後"
+      ],
+      "aliases": [
+        "L-d48902",
+        "L-d4890246"
+      ]
+    },
+    {
+      "asset_id": "L-668b0ffb9db9",
+      "label": "face registration reference · L-668b0ffb9db9",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "metal",
+        "world",
+        "heroine_ip",
+        "registration",
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: *User prompt: 你明白我想要的極致VIDEO 幀的 故事變體嗎 https\\://chatgpt.com/share/6adcdd6a-b328-83ec-9ef3-c98746074119 我已把《邊界行人》從「不同方法的圖片集合」推進成同一故事不斷輪迴、每輪試法不同、畫面內有藝術字標示方法的完整提示詞工作流。 1\\. 六幕故事持續輪迴 《邊界行人》無限輪迴故事規格 畫界 → 保護 → 試法／碎裂 → 假修 → 一界 → 選擇，再由結尾接回開場。角色、世界和因果保持連續，每輪改變拓撲、接觸狀態、鏡頭、風格或影片方法。 2\\. 全量 3,723 個變體編成六幕故事 新增 輪迴 Prompt 編譯器，將每個合法變體編成獨立 LOOP／TRY，輸出六幕各自完整的 IMAGE／VIDE",
+      "uri": "legacy-ref://L-668b0ffb9db9",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md",
+      "source_section": "legacy source",
+      "source_contexts": [
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [legacy source]: 右／浮／角） 風格極大不同 \\+ 融世界 PRE＝霜白冷光；POST＝金鉻＋洋紅霓虹；底只做輕 wash，不鎖死框 文案前後仍是同一串（之後 VIDEO 字不變、風格 morph）。 LOOP 索引（SHA） F01 L-546119e75b2e F02 L-d4890246f4f1 F03 L-668b0ffb9db9 F04 L-e185fc04cebb F05 L-273feb9920b1 F06 L-96cb558c7f61 完整表：setF\\_rain/LOOP\\_SHA\\_INDEX.txt manifest：text\\_manifest\\_v2.jsonl 三連（左 ice 前 · 中淨 · 右 metal 後 · 位置流動） F01 前底冷／後右金 F02 前頂冷／後右上金 F03",
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [**4\\. 乾淨的資訊契約（去蕪存菁）**]: h-cut 接回畫界。柔性敘事幕不硬塞武器，打擊幕精準執行單一主試法。 #### **4\\. 乾淨的資訊契約（去蕪存菁）** > * **不顯示** TRY 次數、**不顯示** REVIEW PENDING 等破壞畫面電影感的工程標籤。 > * **LOOP 記認直接用 SHA**：例如 L-668b0ffb9db9（取自母圖 SHA-256 前 12 碼），既像科幻編號又能做密碼學溯源。 > * **畫面內精確呈現的文案元素**（各自拆散、各自亂走、字內大小不一、各自附著於場景物體）： * 故事名：邊界行人 ／ THE BOUNDARY WALKER * 打法與幾何：GEO.T · H2 FIRST CONTACT（依變體替換） * 鏡頭／風格／ID：CAM · STYL",
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [**第一部分：極致全量 Prompt 總綱（Master .MD 完整版）**]: `- **畫面潔淨契約**：` ``- **禁止出現**：`TRY 次數`（如 `TRY-0001`）、`REVIEW PENDING` 等工程審核字樣。`` ``- **LOOP 記認**：統一使用母圖 SHA-256 前 12 碼 `L-<SHA12>`（例：`L-668b0ffb9db9`）。`` ``- **必備文案欄位**：`邊界行人` ｜ `THE BOUNDARY WALKER` ｜ `<METHOD & CONTACT>` ｜ `<CAM · POSE · STYLE · PROMPT_ID>` ｜ `WORLD: <WORLD>` ｜ `L-<SHA12>`。`` `- **字塊解綁亂走 ＋ 一句中字可大可小（Unbundled Sca"
+      ],
+      "aliases": [
+        "L-668b0f",
+        "L-668b0ffb"
+      ]
+    },
+    {
+      "asset_id": "L-e185fc04cebb",
+      "label": "face registration reference · L-e185fc04cebb",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "metal",
+        "world",
+        "heroine_ip",
+        "registration",
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: *User prompt: 你明白我想要的極致VIDEO 幀的 故事變體嗎 https\\://chatgpt.com/share/6adcdd6a-b328-83ec-9ef3-c98746074119 我已把《邊界行人》從「不同方法的圖片集合」推進成同一故事不斷輪迴、每輪試法不同、畫面內有藝術字標示方法的完整提示詞工作流。 1\\. 六幕故事持續輪迴 《邊界行人》無限輪迴故事規格 畫界 → 保護 → 試法／碎裂 → 假修 → 一界 → 選擇，再由結尾接回開場。角色、世界和因果保持連續，每輪改變拓撲、接觸狀態、鏡頭、風格或影片方法。 2\\. 全量 3,723 個變體編成六幕故事 新增 輪迴 Prompt 編譯器，將每個合法變體編成獨立 LOOP／TRY，輸出六幕各自完整的 IMAGE／VIDE",
+      "uri": "legacy-ref://L-e185fc04cebb",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md",
+      "source_section": "legacy source",
+      "source_contexts": [
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [legacy source]: PRE＝霜白冷光；POST＝金鉻＋洋紅霓虹；底只做輕 wash，不鎖死框 文案前後仍是同一串（之後 VIDEO 字不變、風格 morph）。 LOOP 索引（SHA） F01 L-546119e75b2e F02 L-d4890246f4f1 F03 L-668b0ffb9db9 F04 L-e185fc04cebb F05 L-273feb9920b1 F06 L-96cb558c7f61 完整表：setF\\_rain/LOOP\\_SHA\\_INDEX.txt manifest：text\\_manifest\\_v2.jsonl 三連（左 ice 前 · 中淨 · 右 metal 後 · 位置流動） F01 前底冷／後右金 F02 前頂冷／後右上金 F03 前左冷／後頂金 F04 前右冷／後底金"
+      ],
+      "aliases": [
+        "L-e185fc",
+        "L-e185fc04"
+      ]
+    },
+    {
+      "asset_id": "L-273feb9920b1",
+      "label": "face registration reference · L-273feb9920b1",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "metal",
+        "world",
+        "heroine_ip",
+        "registration",
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: *User prompt: 你明白我想要的極致VIDEO 幀的 故事變體嗎 https\\://chatgpt.com/share/6adcdd6a-b328-83ec-9ef3-c98746074119 我已把《邊界行人》從「不同方法的圖片集合」推進成同一故事不斷輪迴、每輪試法不同、畫面內有藝術字標示方法的完整提示詞工作流。 1\\. 六幕故事持續輪迴 《邊界行人》無限輪迴故事規格 畫界 → 保護 → 試法／碎裂 → 假修 → 一界 → 選擇，再由結尾接回開場。角色、世界和因果保持連續，每輪改變拓撲、接觸狀態、鏡頭、風格或影片方法。 2\\. 全量 3,723 個變體編成六幕故事 新增 輪迴 Prompt 編譯器，將每個合法變體編成獨立 LOOP／TRY，輸出六幕各自完整的 IMAGE／VIDE",
+      "uri": "legacy-ref://L-273feb9920b1",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md",
+      "source_section": "legacy source",
+      "source_contexts": [
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [legacy source]: 霓虹；底只做輕 wash，不鎖死框 文案前後仍是同一串（之後 VIDEO 字不變、風格 morph）。 LOOP 索引（SHA） F01 L-546119e75b2e F02 L-d4890246f4f1 F03 L-668b0ffb9db9 F04 L-e185fc04cebb F05 L-273feb9920b1 F06 L-96cb558c7f61 完整表：setF\\_rain/LOOP\\_SHA\\_INDEX.txt manifest：text\\_manifest\\_v2.jsonl 三連（左 ice 前 · 中淨 · 右 metal 後 · 位置流動） F01 前底冷／後右金 F02 前頂冷／後右上金 F03 前左冷／後頂金 F04 前右冷／後底金 F05 前浮冷／後左金 F06 前角冷／"
+      ],
+      "aliases": [
+        "L-273feb",
+        "L-273feb99"
+      ]
+    },
+    {
+      "asset_id": "L-96cb558c7f61",
+      "label": "face registration reference · L-96cb558c7f61",
+      "role": "face_registration_reference",
+      "skills": [],
+      "tags": [
+        "face",
+        "metal",
+        "world",
+        "heroine_ip",
+        "registration",
+        "garment_topology"
+      ],
+      "description": "Legacy source reference. Context: *User prompt: 你明白我想要的極致VIDEO 幀的 故事變體嗎 https\\://chatgpt.com/share/6adcdd6a-b328-83ec-9ef3-c98746074119 我已把《邊界行人》從「不同方法的圖片集合」推進成同一故事不斷輪迴、每輪試法不同、畫面內有藝術字標示方法的完整提示詞工作流。 1\\. 六幕故事持續輪迴 《邊界行人》無限輪迴故事規格 畫界 → 保護 → 試法／碎裂 → 假修 → 一界 → 選擇，再由結尾接回開場。角色、世界和因果保持連續，每輪改變拓撲、接觸狀態、鏡頭、風格或影片方法。 2\\. 全量 3,723 個變體編成六幕故事 新增 輪迴 Prompt 編譯器，將每個合法變體編成獨立 LOOP／TRY，輸出六幕各自完整的 IMAGE／VIDE",
+      "uri": "legacy-ref://L-96cb558c7f61",
+      "availability": "legacy_manifest_reference_only",
+      "source_repo": "JUN-ZS/ai-image-gen-logic-review",
+      "source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+      "source_path": "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md",
+      "source_section": "legacy source",
+      "source_contexts": [
+        "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md [legacy source]: 前後仍是同一串（之後 VIDEO 字不變、風格 morph）。 LOOP 索引（SHA） F01 L-546119e75b2e F02 L-d4890246f4f1 F03 L-668b0ffb9db9 F04 L-e185fc04cebb F05 L-273feb9920b1 F06 L-96cb558c7f61 完整表：setF\\_rain/LOOP\\_SHA\\_INDEX.txt manifest：text\\_manifest\\_v2.jsonl 三連（左 ice 前 · 中淨 · 右 metal 後 · 位置流動） F01 前底冷／後右金 F02 前頂冷／後右上金 F03 前左冷／後頂金 F04 前右冷／後底金 F05 前浮冷／後左金 F06 前角冷／後下金 全尺寸對照（同文案 · 位置+風"
+      ],
+      "aliases": [
+        "L-96cb55",
+        "L-96cb558c"
+      ]
     }
   ],
   "models": [
@@ -233,5 +2353,25 @@
       "license_status": "review_required",
       "note": "Weight-file provenance/terms need user review. The binary is intentionally not vendored."
     }
-  ]
+  ],
+  "reference_snapshot": {
+    "last_indexed_source_commit": "2cdb22bf6ef8ed68a88dc0fc23d0c33ce1e6d62e",
+    "source_documents": [
+      "docs/boundary_pedestrian/constitution/BOUNDARY_WALKER_UNIFIED_RULES.md",
+      "docs/boundary_pedestrian/MASTER_PROMPT_REQUIREMENTS_AND_FORMULAS_v5_20261025.md",
+      "docs/boundary_pedestrian/constitution/GRID_SIAX_CORRECT_PROCESS.md",
+      "docs/boundary_pedestrian/constitution/GRID_SIAX_DO_NOT_REPEAT.md",
+      "docs/boundary_pedestrian/constitution/PATH1E_PLATE_ECC_LAW.md",
+      "docs/boundary_pedestrian/constitution/PIXEL_CTRL_LAW.md",
+      "docs/boundary_pedestrian/constitution/GOU_MESH_CORRECT_PROCESS.md",
+      "docs/boundary_pedestrian/constitution/FOUR_SKILL_TEX_ALIGN.md",
+      "docs/boundary_pedestrian/constitution/README.md"
+    ],
+    "extraction": {
+      "uuid_ids": 36,
+      "l_artifact_ids": 45,
+      "source_occurrence_contexts": "up to 6 per ID",
+      "note": "81 distinct full UUID/L artifact identifiers were indexed. 160 explicit short aliases support historical abbreviated references. Alias resolution returns the canonical full ID when unique; it never fetches or invents image bytes."
+    }
+  }
 }

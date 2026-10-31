@@ -116,7 +116,7 @@ The diagnostic model request is wired and mock-tested; live xAI calls and projec
 
 ## Automatic reference resolution and skill routing
 
-UP-engine now ships an offline, provenance-pinned metadata snapshot of key a8b, skin, PATH1E and DETAIL6 references. It indexes asset IDs, roles, skills, source commit and source section. It does not pretend that a UUID means the underlying Imagine image bytes are locally available. The seed catalog is curated, not yet a complete crawl of every historical reference.
+UP-engine now ships an offline, provenance-pinned snapshot with 81 distinct full UUID/L artifact identifiers and 160 explicit short aliases extracted from nine legacy source documents. It indexes roles, skills, source commit/section and surrounding text context; short aliases resolve to canonical IDs only when unique. It does not pretend that a UUID means the underlying Imagine image bytes are locally available, and it is not a full binary asset archive.
 
     ige ref-search --skill SKIN_MAT
     ige ref-search --query "a8b face identity"

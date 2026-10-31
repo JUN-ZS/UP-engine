@@ -10,8 +10,10 @@ Legacy source snapshot: `JUN-ZS/ai-image-gen-logic-review` at `2cdb22bf6ef8ed68a
 
 - `ige ref-search --skill SKIN_MAT` resolves P1/P2/P3/P4 to their recorded roles and source sections.
 - `ige ref-search --query a8b` finds the canonical face identity reference.
+- `ige ref-search --query 2ce5fabe` resolves the historical short prefix to its canonical full UUID when unique.
+- `ige ref-search --query 'plate ECC'` searches the source-context snippets, not only hand-authored labels.
 - `--asset-root` checks whether a referenced local file has been materialized. A reference-only UUID is not reported as a fetched image.
-- The first seed includes a8b, P1–P4, PATH1E proof, METAL_BITE, GRID_CLEAN and DETAIL6 proof references. It is not the complete historical asset corpus.
+- The current snapshot indexes 81 distinct full UUID/L artifact identifiers and 160 explicit short aliases extracted from nine source documents (including the master formulas and the main constitution). Each record carries source path, section and up to six source-context snippets. Short aliases resolve to canonical IDs only when unique. This remains a metadata index, not a complete historical binary asset corpus.
 
 ## Evidence-first skill routing
 
