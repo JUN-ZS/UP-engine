@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/read-regions.schema.json",
+  "title": "Human-reviewed READ regions",
+  "type": "object",
+  "required": ["coordinate_space", "regions"],
+  "properties": {
+    "coordinate_space": {"const": "normalized_0_1"},
+    "regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "role", "polygon"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+$"},
+          "label": {"type": "string", "minLength": 1},
+          "role": {"enum": ["editable", "protected", "context", "object"]},
+          "polygon": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {"type": "number", "minimum": 0, "maximum": 1},
+                {"type": "number", "minimum": 0, "maximum": 1}
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
