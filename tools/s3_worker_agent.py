@@ -3,6 +3,9 @@
 
 Intended to run on each host. Uses shared job directory (NFS/SMB/local).
 Does not claim quality PASS or E3 speed.
+
+v1.1: wait for job_manifest with continuous registry heartbeat (default 600s);
+      publish real --cpu-threads into registry resources.
 """
 from __future__ import annotations
 
@@ -23,21 +26,29 @@ def main() -> int:
     ap.add_argument("--checkpoint", type=Path, default=Path("models/4x_NMKD-Siax_200k.pth"))
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--ram-mib", type=float, default=1800)
+    ap.add_argument("--cpu-threads", type=int, default=0, help="0 = os.cpu_count()")
     ap.add_argument("--throughput-est", type=float, default=8.0)
     ap.add_argument("--lease-seconds", type=float, default=60)
     ap.add_argument("--heartbeat-every-s", type=float, default=1.0)
     ap.add_argument("--registry-every-s", type=float, default=2.0)
     ap.add_argument("--max-tasks", type=int, default=None)
     ap.add_argument("--idle-exit-s", type=float, default=15.0, help="exit if no work for this long")
+    ap.add_argument(
+        "--wait-manifest-s",
+        type=float,
+        default=600.0,
+        help="seconds to wait for job_manifest.json while heartbeating (v1.1 dock)",
+    )
     ap.add_argument("--confirm-model-license-review", action="store_true")
     ap.add_argument("--simulate-hang-s", type=float, default=0.0, help="test only: hang after claim without HB")
     args = ap.parse_args()
 
     src = str(Path(__file__).resolve().parents[1] / "src")
     sys.path.insert(0, src)
-    os.environ.setdefault("OMP_NUM_THREADS", "1")
-    os.environ.setdefault("MKL_NUM_THREADS", "1")
-    os.environ.setdefault("TORCH_NUM_THREADS", "1")
+    cpu_threads = int(args.cpu_threads) if args.cpu_threads > 0 else int(os.cpu_count() or 1)
+    os.environ.setdefault("OMP_NUM_THREADS", str(max(1, min(4, cpu_threads))))
+    os.environ.setdefault("MKL_NUM_THREADS", os.environ["OMP_NUM_THREADS"])
+    os.environ.setdefault("TORCH_NUM_THREADS", os.environ["OMP_NUM_THREADS"])
 
     from ige.upscale.s3 import (
         FsLeaseTransport,
@@ -52,6 +63,7 @@ def main() -> int:
     queue = job / "queue"
     children = job / "children"
     children.mkdir(parents=True, exist_ok=True)
+    queue.mkdir(parents=True, exist_ok=True)
 
     if args.mode == "siax":
         if not args.confirm_model_license_review:
@@ -84,13 +96,15 @@ def main() -> int:
             "hostname": socket.gethostname(),
             "pid": os.getpid(),
             "resources": {
-                "ram_available_mib": args.ram_mib,
-                "cpu_threads": 1,
+                "ram_available_mib": float(args.ram_mib),
+                "cpu_threads": int(cpu_threads),
             },
             "devices": [
                 {
                     "device_id": args.device,
-                    "kind": "cuda" if args.device.startswith("cuda") else "cpu",
+                    "kind": "cuda" if args.device.startswith("cuda") else (
+                        "mps" if args.device == "mps" else "cpu"
+                    ),
                     "name": args.device,
                 }
             ],
@@ -108,18 +122,31 @@ def main() -> int:
         registry.report(cap)
 
     publish()
-    # load job id
-    man = {}
+
+    # v1.1: wait for controller init while heartbeating (worker-first dock order)
     man_path = job / "job_manifest.json"
-    for _ in range(50):
+    man: dict = {}
+    t_wait0 = time.time()
+    while time.time() - t_wait0 < float(args.wait_manifest_s):
+        publish()
         if man_path.is_file():
-            man = json.loads(man_path.read_text())
-            break
-        time.sleep(0.1)
+            try:
+                man = json.loads(man_path.read_text(encoding="utf-8"))
+            except Exception:
+                man = {}
+            if man.get("base_path"):
+                break
+        time.sleep(min(0.5, args.registry_every_s))
+    else:
+        raise SystemExit(
+            f"job_manifest.json not ready after {args.wait_manifest_s}s — "
+            "start controller init on the same job-dir (worker may start first)"
+        )
+
     job_id = man.get("job_id", "unknown")
     base_path = man.get("base_path")
     if not base_path:
-        raise SystemExit("job_manifest.json missing base_path — start controller first or wait")
+        raise SystemExit("job_manifest.json missing base_path")
 
     # Optional hang mode for recovery tests: claim one then die without heartbeat
     if args.simulate_hang_s > 0:
@@ -129,13 +156,11 @@ def main() -> int:
             publish()
             task = transport.claim(args.worker_id)
             if task:
-                # hold lease without heartbeat until hang ends then exit (crash simulation)
                 time.sleep(args.simulate_hang_s)
-                raise SystemExit(99)  # crash without complete
+                raise SystemExit(99)
             time.sleep(0.1)
         raise SystemExit("hang mode: no task claimed")
 
-    # Normal loop with periodic registry refresh in a side thread
     import threading
 
     stop = threading.Event()
@@ -151,7 +176,6 @@ def main() -> int:
     th = threading.Thread(target=reg_loop, daemon=True)
     th.start()
 
-    # run until idle
     idle_start = time.time()
     completed = 0
     total_result = {
@@ -160,12 +184,13 @@ def main() -> int:
         "task_ids": [],
         "tasks_stale": 0,
         "tasks_failed": 0,
+        "cpu_threads": cpu_threads,
+        "ram_mib": float(args.ram_mib),
     }
     while True:
         remaining = None if args.max_tasks is None else max(0, args.max_tasks - completed)
         if remaining == 0:
             break
-        before = transport.done_count()
         res = run_worker_loop(
             transport,
             adapter,
@@ -183,18 +208,16 @@ def main() -> int:
         total_result["tasks_stale"] += res.get("tasks_stale") or 0
         total_result["tasks_failed"] += res.get("tasks_failed") or 0
         if res["tasks_completed"] == 0 and res.get("tasks_failed", 0) == 0:
-            # check pending for us
             pending_for_us = False
             for p in (queue / "pending").glob("*.json"):
                 try:
-                    d = json.loads(p.read_text())
+                    d = json.loads(p.read_text(encoding="utf-8"))
                 except Exception:
                     continue
                 if d.get("assigned_worker") == args.worker_id:
                     pending_for_us = True
                     break
             if not pending_for_us:
-                # stay alive while job still incomplete (other workers / reassign)
                 plan_remaining = False
                 try:
                     plan = man.get("plan") or {}
@@ -205,7 +228,7 @@ def main() -> int:
                 except Exception:
                     pass
                 if plan_remaining:
-                    idle_start = time.time()  # don't exit while job open
+                    idle_start = time.time()
                     time.sleep(0.3)
                     continue
                 if time.time() - idle_start >= args.idle_exit_s:
@@ -228,7 +251,7 @@ def main() -> int:
     total_result["mode"] = args.mode
     total_result["final_acceptance"] = False
     total_result["e3_speed_claim"] = False
-    out.write_text(json.dumps(total_result, indent=2) + "\n")
+    out.write_text(json.dumps(total_result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(total_result, indent=2))
     return 0
 

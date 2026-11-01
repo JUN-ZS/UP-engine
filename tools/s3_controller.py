@@ -54,8 +54,57 @@ def main() -> int:
     from ige.upscale.siax import MODEL_SHA256
 
     if args.cmd == "init":
-        if args.job_dir.exists() and any(args.job_dir.iterdir()):
-            raise SystemExit(f"job-dir must be empty: {args.job_dir}")
+        # v1.1: allow dock bootstrap (handshake / registry / empty queue|children)
+        # before init so worker can start first. Reject real job artifacts.
+        def _assert_job_dir_initable(job_dir: Path) -> None:
+            job_dir = Path(job_dir)
+            if not job_dir.exists():
+                return
+            blocking_files = {
+                "job_manifest.json",
+                "plan.json",
+                "assignment.json",
+                "controller_report.json",
+                "OUT_PRIMARY.png",
+            }
+            for name in blocking_files:
+                if (job_dir / name).exists():
+                    raise SystemExit(f"job-dir already has job artifact {name}: {job_dir}")
+            queue = job_dir / "queue"
+            if queue.is_dir():
+                for sub in ("pending", "lease", "done", "failed", "dead"):
+                    p = queue / sub
+                    if not p.exists():
+                        continue
+                    if sub == "lease":
+                        # any leased task file
+                        for f in p.rglob("*.json"):
+                            raise SystemExit(f"job-dir has existing lease receipt/task: {f}")
+                    else:
+                        if any(p.glob("*.json")):
+                            raise SystemExit(f"job-dir has existing queue/{sub} tasks: {p}")
+            children = job_dir / "children"
+            if children.is_dir() and any(children.iterdir()):
+                raise SystemExit(f"job-dir children/ not empty: {children}")
+            # Allowed: dock/, registry/, agent_reports/, empty queue/, empty children/,
+            # and other non-artifact noise — only reject unknown non-empty top-level
+            # files that look like previous job state is already covered above.
+            allowed_dirs = {"dock", "registry", "queue", "children", "agent_reports"}
+            for p in job_dir.iterdir():
+                if p.name in blocking_files:
+                    raise SystemExit(f"job-dir already has job artifact {p.name}: {job_dir}")
+                if p.is_dir() and p.name not in allowed_dirs:
+                    # tolerate empty extra dirs; reject non-empty unknown
+                    if any(p.iterdir()):
+                        raise SystemExit(
+                            f"job-dir has unexpected non-empty dir {p.name}/ — "
+                            f"use a fresh job-dir or clean it: {job_dir}"
+                        )
+                if p.is_file() and p.name not in blocking_files and p.suffix in {".json", ".png", ".jpg"}:
+                    # stray evidence files
+                    raise SystemExit(f"job-dir has unexpected file {p.name}: {job_dir}")
+
+        _assert_job_dir_initable(args.job_dir)
         ctl = JobController(args.job_dir, lease_seconds=args.lease_seconds)
         region = None
         if args.region.strip():

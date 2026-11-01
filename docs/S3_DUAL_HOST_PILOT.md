@@ -57,3 +57,8 @@ This CI/runner environment is **one machine**. Dual-agent processes/threads prov
 → 啟動器：`python tools/s3_dock_local_pc.py --job-dir ...`
 
 遠端 Grok **不能** 直接占用本機 RAM；本機必須跑 pull-based agent。
+
+### Dock v1.1 (runnable)
+
+See `docs/S3_LOCAL_PC_GROK_CLI_DOCK.md` (v1.1). Worker-first order is supported.
+`physical_dual_host` is never inferred from `dock_mode`; operator must pass `--claim-physical-dual-host`.

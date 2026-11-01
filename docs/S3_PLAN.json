@@ -1,7 +1,7 @@
 {
   "program": "UPSCALE_S3_HETEROGENEOUS",
   "title": "Heterogeneous Upscale Execution Engine",
-  "asof_utc": "2026-11-01T16:33:07Z",
+  "asof_utc": "2026-11-01T16:57:46Z",
   "branch": "feat/upscale-s3-heterogeneous-runner-v0.1",
   "base_freeze_s21": "297ba74",
   "relation_to_pr8": "isolated_follow_on; do_not_rewrite_s21_quality_decision",
@@ -24,7 +24,7 @@
     "worker_agent_cli": "DONE",
     "worker_registry": "DONE",
     "orphan_reassign": "DONE",
-    "local_pc_grok_cli_dock": "SPEC_V1"
+    "local_pc_grok_cli_dock": "SPEC_V1.1_RUNNABLE"
   },
   "steps": [
     {
@@ -93,12 +93,12 @@
     {
       "id": "S3.6.1",
       "name": "local_pc_grok_cli_dock_spec",
-      "status": "DONE_SPEC",
+      "status": "DONE_SPEC_V1.1",
       "doc": "docs/S3_LOCAL_PC_GROK_CLI_DOCK.md",
       "tools": [
         "tools/s3_dock_local_pc.py"
       ],
-      "note": "pull-based; remote grok cannot steal local RAM without local agent"
+      "note": "worker-first init allowlist; cpu_threads to registry; physical_dual_host default false; PS docs"
     }
   ],
   "observed": {

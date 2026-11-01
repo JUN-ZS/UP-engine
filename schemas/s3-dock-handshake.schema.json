@@ -17,37 +17,102 @@
     "status"
   ],
   "properties": {
-    "format": { "const": "ige.s3.dock_handshake" },
-    "format_version": { "type": "string" },
-    "role": { "enum": ["local_pc_worker", "controller_here", "relay"] },
-    "worker_id": { "type": "string", "minLength": 1 },
-    "hostname": { "type": "string" },
-    "pid": { "type": "integer" },
-    "reported_at_utc": { "type": "string" },
+    "format": {
+      "const": "ige.s3.dock_handshake"
+    },
+    "format_version": {
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "local_pc_worker",
+        "controller_here",
+        "relay"
+      ]
+    },
+    "worker_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hostname": {
+      "type": "string"
+    },
+    "pid": {
+      "type": "integer"
+    },
+    "reported_at_utc": {
+      "type": "string"
+    },
     "resources": {
       "type": "object",
-      "required": ["ram_available_mib", "cpu_threads"],
+      "required": [
+        "ram_available_mib",
+        "cpu_threads"
+      ],
       "properties": {
-        "ram_available_mib": { "type": "number" },
-        "ram_total_mib": { "type": "number" },
-        "cpu_threads": { "type": "integer", "minimum": 1 }
+        "ram_available_mib": {
+          "type": "number"
+        },
+        "ram_total_mib": {
+          "type": "number"
+        },
+        "cpu_threads": {
+          "type": "integer",
+          "minimum": 1
+        }
       }
     },
-    "devices": { "type": "array" },
+    "devices": {
+      "type": "array"
+    },
     "dock_mode": {
       "type": "string",
-      "enum": ["shared_fs", "rsync_pull", "manual_paste", "http_pull_future"]
+      "enum": [
+        "shared_fs",
+        "rsync_pull",
+        "manual_paste",
+        "http_pull_future"
+      ]
     },
-    "job_dir": { "type": "string" },
-    "shared_root": { "type": ["string", "null"] },
+    "job_dir": {
+      "type": "string"
+    },
+    "shared_root": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "status": {
       "type": "string",
-      "enum": ["online", "working", "idle", "offline", "error"]
+      "enum": [
+        "online",
+        "working",
+        "idle",
+        "offline",
+        "error"
+      ]
     },
-    "note": { "type": "string" },
-    "final_acceptance": { "const": false },
-    "e3_speed_claim": { "const": false },
-    "physical_dual_host": { "type": "boolean" }
+    "note": {
+      "type": "string"
+    },
+    "final_acceptance": {
+      "const": false
+    },
+    "e3_speed_claim": {
+      "const": false
+    },
+    "physical_dual_host": {
+      "type": "boolean",
+      "default": false
+    },
+    "controller_where": {
+      "type": "string"
+    },
+    "sync": {
+      "type": "string"
+    }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "description": "v1.1 handshake is offline announcement only. Scheduler reads registry/workers. physical_dual_host is operator claim; default false."
 }
