@@ -1,0 +1,81 @@
+{
+  "format": "ige.native4k.n1_gen_dual_here",
+  "format_version": "1.0",
+  "stamp_utc": "2026-11-01T21:15:35Z",
+  "pair_index": 12,
+  "tile_ids": [
+    "n1_0013_1792_0448",
+    "n1_0014_2240_0448"
+  ],
+  "boxes": {
+    "n1_0013_1792_0448": [
+      1792,
+      448,
+      2304,
+      960
+    ],
+    "n1_0014_2240_0448": [
+      2240,
+      448,
+      2752,
+      960
+    ]
+  },
+  "backend": "here_imagine_reference_to_image",
+  "gen_assets": {
+    "n1_0013_1792_0448": "e6373638-5685-40e0-b746-9eec2fe0978b",
+    "n1_0014_2240_0448": "f56473a9-d749-4716-a86f-609c790043ac"
+  },
+  "stitch": {
+    "complete": true,
+    "ok": true,
+    "output_sha256": "4dca9063589999d40133dba786cd200e8e6717ff2ea7a6c091d8e7f6c50a6199"
+  },
+  "receipts": [
+    {
+      "tile_id": "n1_0013_1792_0448",
+      "gen_asset": "e6373638-5685-40e0-b746-9eec2fe0978b.jpg",
+      "gen_wh_before_pack": [
+        1408,
+        1408
+      ],
+      "expect_wh": [
+        512,
+        512
+      ],
+      "packed_sha256": "c3945830c634ee249d5a68ce05fe4381b8d4f0abcef35973d88eea4bf57eab49",
+      "backend": "here_imagine_reference_to_image",
+      "global_ref": "warrior_BASE.jpg"
+    },
+    {
+      "tile_id": "n1_0014_2240_0448",
+      "gen_asset": "f56473a9-d749-4716-a86f-609c790043ac.jpg",
+      "gen_wh_before_pack": [
+        1408,
+        1408
+      ],
+      "expect_wh": [
+        512,
+        512
+      ],
+      "packed_sha256": "a2330ae382b7fb6e20d52eba86415d6cc1d23edb1c038dbc3acd9f98d81e2e40",
+      "backend": "here_imagine_reference_to_image",
+      "global_ref": "warrior_BASE.jpg"
+    }
+  ],
+  "labels": {
+    "N1_SCAFFOLD_OK": true,
+    "N1_GEN_PILOT_OK": true,
+    "N1_SEAM_CONTINUITY_OK": false,
+    "NATIVE_4K_PILOT_OK": false,
+    "note_seam": "Visual: A is frontal portrait crop; B is shoulder/lightning; framing drifted from Lanczos ref crops \u2014 continuity NOT claimed PASS"
+  },
+  "limitations": [
+    "Imagine output packed to 512 via Lanczos (engine does not emit exact 512); not allow-resize of wrong content.",
+    "Not all 45 tiles; not full native 4K frame product.",
+    "Not Siax 4x upscale path.",
+    "Global ref + scene lock used; no neighbor-closed-loop second pass."
+  ],
+  "not_siax_4x_upscale": true,
+  "final_acceptance": false
+}
