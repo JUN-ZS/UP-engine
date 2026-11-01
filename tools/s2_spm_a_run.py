@@ -30,7 +30,10 @@ def main():
     ap.add_argument('--out', type=Path, required=True)
     ap.add_argument('--device', default='cpu')
     ap.add_argument('--limit', type=int, default=0, help='0=all probes')
+    ap.add_argument('--confirm-model-license-review', action='store_true')
     args = ap.parse_args()
+    if not args.confirm_model_license_review:
+        ap.error('--confirm-model-license-review is required before running Siax inference')
 
     os.environ.setdefault('OMP_NUM_THREADS', '1')
     os.environ.setdefault('MKL_NUM_THREADS', '1')

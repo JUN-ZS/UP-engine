@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Matched seam vs non-seam controls with FIXED sample geometry across tile cells (P0)."""
 from __future__ import annotations
-import argparse, json
+import argparse, json, hashlib
 from pathlib import Path
 import numpy as np
 from PIL import Image
@@ -24,24 +24,29 @@ def main():
     ap.add_argument('--base-h', type=int, default=1008)
     ap.add_argument('--out', type=Path, required=True)
     ap.add_argument('--samples-per-seam', type=int, default=8)
+    ap.add_argument('--control-offset-base-px', type=int, default=64, help='same non-seam control offset in BASE pixels for every cell')
     args = ap.parse_args()
+    if args.samples_per_seam < 1:
+        ap.error('--samples-per-seam must be positive')
+    if args.control_offset_base_px <= args.tile_pad:
+        ap.error('--control-offset-base-px must exceed tile-pad')
 
     scale = 4
     with Image.open(args.image) as im:
         canvas = np.asarray(im.convert('RGB'), dtype=np.uint8)
     H, W, _ = canvas.shape
-    assert W == args.base_w * scale and H == args.base_h * scale
+    if W != args.base_w * scale or H != args.base_h * scale:
+        raise ValueError(f'candidate dimensions {W}x{H} do not match BASE {args.base_w}x{args.base_h} at 4x')
 
     tile = args.tile_size
     pad = args.tile_pad
     grid_w = (args.base_w + tile - 1) // tile
     grid_h = (args.base_h + tile - 1) // tile
-    tile_out = tile * scale
+    # Fixed absolute BASE-space control offset, independent of tile_size.
+    # This intentionally changes the old reports' geometry; those reports remain historical.
+    control_off = args.control_offset_base_px * scale
     # FIXED sample fractions along each seam (same for all configs)
     fracs = np.linspace(0.12, 0.88, args.samples_per_seam)
-
-    # control offset: mid-tile interior in output pixels, away from boundaries
-    control_off = max(tile_out // 2, pad * scale * 4 + 32)
 
     v_pairs = []
     for col in range(1, grid_w):
@@ -132,7 +137,10 @@ def main():
         'tile_pad': args.tile_pad,
         'image': str(args.image),
         'sample_fracs': list(map(float, fracs)),
-        'control_offset_px': control_off,
+        'control_offset_base_px': args.control_offset_base_px,
+        'control_offset_output_px': control_off,
+        'image_sha256': hashlib.sha256(args.image.read_bytes()).hexdigest(),
+        'output_dimensions': [W, H],
         'vertical': vsum,
         'horizontal': hsum,
         'matched_excess_strip_mae_p50': rank,

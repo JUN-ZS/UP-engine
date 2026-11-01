@@ -1,5 +1,5 @@
 {
-  "program": "SIAX_S2_1_P0_COMPLETE",
+  "program": "SIAX_S2_1_P0_PARTIAL",
   "asof_utc": "2026-11-01T13:34:46Z",
   "final_acceptance": false,
   "base_commit_design": "92b3e98",
@@ -26,14 +26,30 @@
       "t_s": 331.104169,
       "canvas_bytes": 86704128,
       "canvas_mib": 82.69,
-      "delta_rss_mb": 0.0
+      "delta_rss_mb": 0
     },
     "interpretation": [
       "Isolated 320x320 forward SUCCEEDS with maxrss ~1665 MiB on 1.9 GiB host.",
       "Peak scales strongly with input area (144→664, 288→1474, 320→1665 MiB maxrss).",
       "Full-job 256/32 OOM remains consistent with forward peak near ceiling PLUS base/canvas/runtime headroom — not disproved; refined from pure \"320 cannot forward\".",
       "Canvas 7168x4032 uint8 alone is small vs forward peak."
-    ]
+    ],
+    "synthetic_forward_baseline_status": "OBSERVED_COMPLETE",
+    "full_job_profile": {
+      "status": "IMPLEMENTED_NOT_RUN",
+      "tool": "tools/ram_profile_siax.py",
+      "invocation": "runs the exact run_siax_upscale path in a child process; stage callbacks cover model_load, input_preprocess, tile_forward, tile_postprocess, output_stitch, final_encode and metadata_write",
+      "safeguards": [
+        "available-memory preflight",
+        "RSS polling",
+        "stage-boundary process HWM",
+        "optional stricter RSS ceiling",
+        "timeout stop"
+      ],
+      "caveat": "RSS sampling and stage-boundary HWM are not a hard real-time memory guarantee; the first tile transient may still exceed a small host's limit",
+      "device_metrics": "CUDA allocated/reserved/peak allocation are recorded separately when device=cuda",
+      "final_acceptance": false
+    }
   },
   "spm_a": {
     "evidence_grade": "OBSERVED",
@@ -45,7 +61,9 @@
       "residual_hf_p50": 6.378968238830566,
       "residual_hf_p95": 10.633862209320068
     },
-    "note": "Real Siax residual vs Lanczos on fixed 48x64 probes — fingerprint bank, not full-frame rank."
+    "note": "Real Siax residual vs Lanczos on fixed 48x64 probes — fingerprint bank, not full-frame rank.",
+    "status": "OBSERVED_REFERENCE_PROBE_BANK_ONLY",
+    "comparison_scope": "48 actual Siax crops vs Lanczos; fixed geometry; no per-cell full-output residual comparison has yet been run"
   },
   "seam_controls": {
     "evidence_grade": "OBSERVED",
@@ -77,11 +95,20 @@
       "256/16 excess p50 ~ 0.45 (mildly higher).",
       "p95 still large for all — natural edges in samples; do not overclaim.",
       "Replaces biased SPM-approx interior sampling for cross-cell seam compare."
-    ]
+    ],
+    "comparability_status": "HISTORICAL_PROVISIONAL_GEOMETRY",
+    "old_control_offsets_output_px": {
+      "128_8": 256,
+      "128_16": 288,
+      "256_16": 512
+    },
+    "caveat": "The historical P0 seam reports used tile-dependent control offsets. The script is updated to one fixed BASE-space offset, but all three cell reports must be regenerated before cross-cell ranking is accepted."
   },
   "next": [
-    "P1 nested compute RF",
-    "P1 strip finalizer",
-    "optional 256/32 full job with memory budget from profile"
-  ]
+    "run full real-image staged RAM profiles on the designated compute host",
+    "regenerate 128/8, 128/16 and 256/16 seam results using common BASE-space offset",
+    "compare fixed SPM-A bank against each full-frame output",
+    "only then proceed to Nested Compute Tile RF experiments"
+  ],
+  "status": "PARTIAL"
 }
