@@ -1,0 +1,126 @@
+{
+  "program": "SIAX_VALIDATION_R2",
+  "phase": "S2_SPM_APPROX_TILE_HALO",
+  "asof_utc": "2026-11-01T12:46:37Z",
+  "status": "PARTIAL_3_OF_4_CELLS",
+  "spm_definition": "§0.12.39 SIAX Probe Match — full stack documented-only; S2 uses probe-approx diagnostics only",
+  "probe_base_px": [
+    48,
+    64
+  ],
+  "host": {
+    "ram_gi": 1.9,
+    "cpus": 2
+  },
+  "cells": [
+    {
+      "cell": "128x8",
+      "tile_size": 128,
+      "tile_pad": 8,
+      "ok": true,
+      "output_sha256": "3289e3e02928ac688002adc621124ac73d3730f67a5a0d0a5cabe351a6cfd181",
+      "wall_s": 0.0,
+      "mode": "reuse_S1C_r1_single_master",
+      "classic_seam": {
+        "vertical_mean_abs_boundary_delta": 4.527529761904762,
+        "horizontal_mean_abs_boundary_delta": 4.99137037627551,
+        "vertical_count": 13,
+        "horizontal_count": 7
+      },
+      "spm": {
+        "vertical_probe_count": 78,
+        "horizontal_probe_count": 42,
+        "interior_probe_count": 16,
+        "mean_across_seam_strip_mae": 4.792303240740741,
+        "p95_across_seam_strip_mae": 9.594401041666666,
+        "mean_near_seam_band_hf": 7.303385798136393,
+        "mean_interior_hf": 6.6999624371528625,
+        "near_seam_over_interior_hf_ratio": 1.0900636931391445,
+        "mean_vertical_left_right_probe_mae": 34.62758069160657,
+        "mean_horizontal_top_bot_probe_mae": 34.91508588841353
+      },
+      "rank_score_lower_better": 5.6929
+    },
+    {
+      "cell": "128x16",
+      "tile_size": 128,
+      "tile_pad": 16,
+      "ok": true,
+      "output_sha256": "b7ea35b5ec84e6cb83777ca9c44066b95bcb42580f26cdf1469ddc51af60d26f",
+      "wall_s": 569.429,
+      "mode": "single_process_upscale_siax",
+      "classic_seam": {
+        "vertical_mean_abs_boundary_delta": 4.572713166463166,
+        "horizontal_mean_abs_boundary_delta": 4.966757015306123,
+        "vertical_count": 13,
+        "horizontal_count": 7
+      },
+      "spm": {
+        "vertical_probe_count": 78,
+        "horizontal_probe_count": 42,
+        "interior_probe_count": 16,
+        "mean_across_seam_strip_mae": 4.829698350694444,
+        "p95_across_seam_strip_mae": 9.55251736111111,
+        "mean_near_seam_band_hf": 7.463681276639303,
+        "mean_interior_hf": 6.7893887758255005,
+        "near_seam_over_interior_hf_ratio": 1.0993156413747742,
+        "mean_vertical_left_right_probe_mae": 34.62179017678286,
+        "mean_horizontal_top_bot_probe_mae": 34.8906324275587
+      },
+      "rank_score_lower_better": 5.8229
+    },
+    {
+      "cell": "256x16",
+      "tile_size": 256,
+      "tile_pad": 16,
+      "ok": true,
+      "output_sha256": "2399064660d96b2ffa9eb8a2eb7e30cd45a80380d7cf5852beb5731c37e443c0",
+      "wall_s": 937.604,
+      "mode": "single_process_1thread_fullframe",
+      "classic_seam": {
+        "vertical_mean_abs_boundary_delta": 4.908082561728395,
+        "horizontal_mean_abs_boundary_delta": 5.182276165674604,
+        "vertical_count": 6,
+        "horizontal_count": 3
+      },
+      "spm": {
+        "vertical_probe_count": 36,
+        "horizontal_probe_count": 18,
+        "interior_probe_count": 24,
+        "mean_across_seam_strip_mae": 4.8539657278806585,
+        "p95_across_seam_strip_mae": 9.00733506944444,
+        "mean_near_seam_band_hf": 7.994968776349668,
+        "mean_interior_hf": 6.711535235246022,
+        "near_seam_over_interior_hf_ratio": 1.1912280120893382,
+        "mean_vertical_left_right_probe_mae": 35.44379830066069,
+        "mean_horizontal_top_bot_probe_mae": 36.79980318045911
+      },
+      "rank_score_lower_better": 6.7662
+    },
+    {
+      "cell": "256x32",
+      "tile_size": 256,
+      "tile_pad": 32,
+      "ok": false,
+      "status": "OOM_BLOCKED_ON_HOST",
+      "rank_score_lower_better": null
+    }
+  ],
+  "rank_order_ok_cells_lower_better": [
+    "128x8",
+    "128x16",
+    "256x16"
+  ],
+  "best_by_spm_rank": "128x8",
+  "notes": [
+    "Do not judge by seam mean alone; rank uses strip MAE + excess near-seam HF.",
+    "128/8 reuses S1-C master SHA 3289e3e0…",
+    "Different tile/pad → different output SHA (expected; not bug).",
+    "256/32 OOM on 1.9Gi — retest on larger host before rejecting the config.",
+    "final_acceptance remains false; 400% human blind still required.",
+    "E3 formal speed only after quality-qualified pick."
+  ],
+  "final_acceptance": false,
+  "recommendation_candidate": "128x8",
+  "recommendation_caveat": "SPM-approx rank only; confirm with human 400% before locking E3."
+}

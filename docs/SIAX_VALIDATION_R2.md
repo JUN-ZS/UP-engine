@@ -38,7 +38,7 @@ Stamp: `docs/SIAX_R1_HERE_RUN_STAMP.json`
 | --- | --- | --- |
 | **E0** Evidence Lock | R1 stamp + BASE/ckpt/SHA + docs on PR branch | **DONE** |
 | **E1** S1-C perf | Same total thread budget: single N vs dual N/2+N/2 · 3 rounds · median | **DONE** (PASS speed 1.267×) |
-| **E2** S2 quality | Tile/halo matrix 128/8 · 128/16 · 256/16 · 256/32 · seam + blind | **NEXT** |
+| **E2** S2 quality | Tile/halo matrix 128/8 · 128/16 · 256/16 · 256/32 · SPM-approx | **PARTIAL** (3/4; 256/32 OOM 1.9Gi) |
 | **E3** S1 Final perf | Re-time on S2-chosen tile/halo (formal speed number) | PENDING |
 | **E4** S3 CPU/GPU | cpu / gpu / mix · SHA or MAE/max/PSNR + visual | BLOCKED_NO_GPU |
 | **E5** S4 multi-host | lease/heartbeat/reclaim/retry first · then shared FS · then object store | BLOCKED_NEEDS_LEASE |
@@ -68,6 +68,20 @@ Stamp: `docs/SIAX_R1_HERE_RUN_STAMP.json`
 Per cell: single-worker reference + distributed output, SHA or quantified delta.  
 Accept on 400% detail, seams, gold-line continuity, repeat texture, naturalness.  
 **Do not** judge by seam mean alone — compare near-seam vs similar non-seam, plus blind review.
+
+
+### E2 (S2) result — short
+
+| Cell | SPM rank score ↓ | Notes |
+| --- | ---: | --- |
+| 128/8 | **5.693** | best of completed; reuses S1-C master |
+| 128/16 | 5.823 | more pad, slightly higher strip/HF |
+| 256/16 | 6.766 | worse near-seam HF ratio on this BASE |
+| 256/32 | — | **OOM_BLOCKED** on 1.9Gi host |
+
+- SPM = rough §0.12.39 probe logic only (48×64 BASE probes) · not full residual peep
+- **Candidate for E3:** 128/8 (still needs human 400% blind)
+- Evidence: `docs/SIAX_S2_RESULTS.md` · `docs/evidence/S2_SUMMARY.json`
 
 ### E3
 
