@@ -1,36 +1,36 @@
-# S2 Tile/Halo · SPM-approx Results
+# S2 · Tile/Halo SPM-approx Results
 
-**asof:** `2026-11-01T12:46:37Z` · **status:** `PARTIAL_3_OF_4_CELLS` · **final_acceptance:** false
+**asof:** `2026-11-01T13:57:30Z` · **final_acceptance:** false
 
-## SPM logic (rough)
+## Host constraint
 
-Legacy **SPM §0.12.39 SIAX 探針匹配** (probe 48×64 BASE) full stack = documented-only.
+- Free/`nproc` host shows ~1.9Gi RAM, but **cgroup memory.max ≈ 1.02GiB**
+- True 256/32 window (≤320²) fp16 peak ~1.25GiB → **OOM** on this host
+- 256/32 **not** quality-ranked (incomplete)
 
-S2 approx: across-seam strip MAE · near-seam vs interior HF · rank = strip_mae + 10·max(0, ratio−1).
+## SPM-approx table (lower rank better)
 
-## Matrix
+| Cell | strip MAE | p95 | HF ratio | interior HF | rank | wall_s | notes |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 128x8 | 4.7923 | 9.5944 | 1.0901 | 6.7 | **5.6929** | None | reuse_S1C_r1_single_master |
+| 128x16 | 4.8297 | 9.5525 | 1.0993 | 6.7894 | **5.8229** | 569.429 | single_process_upscale_siax |
+| 256x16 | 4.854 | 9.0073 | 1.1912 | 6.7115 | **6.7662** | 937.604 | single_process_1thread_fullframe |
+| 256x32 | — | — | — | — | n/a | — | OOM / incomplete on cgroup 1.02GiB |
 
-| Cell | OK | Wall (s) | Seam V/H mean | Strip MAE | HF ratio | Rank ↓ | SHA prefix |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| 128x8 | yes | 0.0 | 4.528/4.991 | 4.792 | 1.090 | **5.693** | `3289e3e0…` |
-| 128x16 | yes | 569.429 | 4.573/4.967 | 4.830 | 1.099 | **5.823** | `b7ea35b5…` |
-| 256x16 | yes | 937.604 | 4.908/5.182 | 4.854 | 1.191 | **6.766** | `23990646…` |
-| 256x32 | **OOM** | — | — | — | — | — | blocked 1.9Gi |
+## Ranking
 
-## Rank (ok cells only)
+1. **128x8** rank=5.6929
+2. **128x16** rank=5.8229
+3. **256x16** rank=6.7662
 
-128x8 → 128x16 → 256x16
+## Verdict
 
-**Best by SPM-approx:** `128x8`
-
-## Caveats
-
-- 256/32 **OOM_BLOCKED** on this 1.9Gi host (single + distributed worker).
-- Rank is diagnostic, not E6 acceptance.
-- Human 400% blind still required before locking E3 config.
-- Different tile/pad produce different SHAs by design.
+- Prefer **128x8** as E3 formal timing config among completed cells
+- 128/16 does **not** beat 128/8 on SPM-approx
+- 256/16 worse seam metrics → do not pick for quality
+- 256/32 needs ≥~1.5GiB cgroup headroom (or nested compute executor) — **not** a model reject
+- Still **not** final_acceptance; no identity/topology claim
 
 ## Next
 
-- Optional: re-run 256/32 on larger RAM host
-- E3 formal speed on chosen cell under S1-C thread budget
+E3 · re-time single vs dual under S1-C affinity using recommended tile/halo
