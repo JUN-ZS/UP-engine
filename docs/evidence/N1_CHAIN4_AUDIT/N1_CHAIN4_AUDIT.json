@@ -1,0 +1,405 @@
+{
+  "format": "ige.native4k.n1_chain4_audit",
+  "format_version": "1.0",
+  "stamp_utc": "2026-11-01T21:42:20Z",
+  "commit_expected": "096675e_plus_this_audit",
+  "freeze_decision": "STOP_EXPANSION \u2014 no more left/right/down tiles until audit human review",
+  "scope": {
+    "row_y0_y1": [
+      448,
+      960
+    ],
+    "tiles_filled": [
+      "n1_0012_1344_0448",
+      "n1_0013_1792_0448",
+      "n1_0014_2240_0448",
+      "n1_0015_2688_0448",
+      "n1_0016_3136_0448",
+      "n1_0017_3584_0448"
+    ],
+    "tile_count": 6,
+    "of_plan_tiles": 45,
+    "pct_tile_count_only": 13.3,
+    "not_quality_percent": true
+  },
+  "labels": {
+    "N1_GEN_V3_CHAIN4": "experiment_complete",
+    "N1_CHAIN4_AUDIT": "PACKED_RECOMPUTED",
+    "N1_SEAM_CONTINUITY_OK": false,
+    "NATIVE_4K_PILOT_OK": false,
+    "N1_GEN_V2": "postgen_hardlock_baseline"
+  },
+  "mechanism_note": "Four adjacent joint generations + hard-lock per step; NOT one long single capture. overlap_equality_mae==0 is hard-lock geometric identity, not model continuation skill.",
+  "tile_receipts": [
+    {
+      "tile_id": "n1_0012_1344_0448",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/tiles/n1_0012_1344_0448.png",
+      "sha256": "07c6823ccf3b20d88fafb46a26e04eeeaec98ba3bb55aff84b14e5ffca6df9c4",
+      "wh": [
+        512,
+        512
+      ],
+      "expect_wh": [
+        512,
+        512
+      ],
+      "box": [
+        1344,
+        448,
+        1856,
+        960
+      ],
+      "core": [
+        1376,
+        480,
+        1824,
+        928
+      ],
+      "size_ok": true
+    },
+    {
+      "tile_id": "n1_0013_1792_0448",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/tiles/n1_0013_1792_0448.png",
+      "sha256": "b77544ba8508581829dace33134a44999c8f3188c9e104562967d46ad15b4fa0",
+      "wh": [
+        512,
+        512
+      ],
+      "expect_wh": [
+        512,
+        512
+      ],
+      "box": [
+        1792,
+        448,
+        2304,
+        960
+      ],
+      "core": [
+        1824,
+        480,
+        2272,
+        928
+      ],
+      "size_ok": true
+    },
+    {
+      "tile_id": "n1_0014_2240_0448",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/tiles/n1_0014_2240_0448.png",
+      "sha256": "1be1cfdec02a5a3f135b131aae69c52e22c1d54c81e3716718c8eb8a1f5d879e",
+      "wh": [
+        512,
+        512
+      ],
+      "expect_wh": [
+        512,
+        512
+      ],
+      "box": [
+        2240,
+        448,
+        2752,
+        960
+      ],
+      "core": [
+        2272,
+        480,
+        2720,
+        928
+      ],
+      "size_ok": true
+    },
+    {
+      "tile_id": "n1_0015_2688_0448",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/tiles/n1_0015_2688_0448.png",
+      "sha256": "7e21d3ad7eec136cc8f858120152aa1c2fac77c703a002ee68d7def878f2a109",
+      "wh": [
+        512,
+        512
+      ],
+      "expect_wh": [
+        512,
+        512
+      ],
+      "box": [
+        2688,
+        448,
+        3200,
+        960
+      ],
+      "core": [
+        2720,
+        480,
+        3168,
+        928
+      ],
+      "size_ok": true
+    },
+    {
+      "tile_id": "n1_0016_3136_0448",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/tiles/n1_0016_3136_0448.png",
+      "sha256": "b47857bb7f34ca018751959538240da1614e0e623a05a32076fa2da2aaa89554",
+      "wh": [
+        512,
+        512
+      ],
+      "expect_wh": [
+        512,
+        512
+      ],
+      "box": [
+        3136,
+        448,
+        3648,
+        960
+      ],
+      "core": [
+        3168,
+        480,
+        3616,
+        928
+      ],
+      "size_ok": true
+    },
+    {
+      "tile_id": "n1_0017_3584_0448",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/tiles/n1_0017_3584_0448.png",
+      "sha256": "09b898d8ea37dafdb2459d336ce41c875ff9ee8bb60fb5f29bc8186261c2c5b4",
+      "wh": [
+        256,
+        512
+      ],
+      "expect_wh": [
+        256,
+        512
+      ],
+      "box": [
+        3584,
+        448,
+        3840,
+        960
+      ],
+      "core": [
+        3616,
+        480,
+        3840,
+        928
+      ],
+      "size_ok": true
+    }
+  ],
+  "all_tiles_size_ok": true,
+  "joint_receipts": [
+    {
+      "step": "R1",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/joints/R1_plate.png",
+      "sha256": "f34e6ed6dbdd543eac4a7dd487802a98a7aa10866e85e26b218c4370b4b5d62f",
+      "wh": [
+        960,
+        512
+      ],
+      "note": "packed joint plate after gen (not raw 1792 Imagine file; raw not re-hosted in audit pack \u2014 see asset_ids)"
+    },
+    {
+      "step": "R2",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/joints/R2_plate.png",
+      "sha256": "5a963439b6b49a80caadb2d13d536c76f9a9d6798b6f57571c0798943aaa27e9",
+      "wh": [
+        960,
+        512
+      ],
+      "note": "packed joint plate after gen (not raw 1792 Imagine file; raw not re-hosted in audit pack \u2014 see asset_ids)"
+    },
+    {
+      "step": "R3",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/joints/R3_plate.png",
+      "sha256": "6d14476870fd6e862f8b14723194b0dd8d028421127dbed8ef9b4654ceb6de79",
+      "wh": [
+        704,
+        512
+      ],
+      "note": "packed joint plate after gen (not raw 1792 Imagine file; raw not re-hosted in audit pack \u2014 see asset_ids)"
+    },
+    {
+      "step": "L1",
+      "path": "docs/evidence/N1_CHAIN4_AUDIT/joints/L1_plate.png",
+      "sha256": "a34bd30180035be3730d660b12563221f9bdb958eecb21c03d7f644187b6aed8",
+      "wh": [
+        960,
+        512
+      ],
+      "note": "packed joint plate after gen (not raw 1792 Imagine file; raw not re-hosted in audit pack \u2014 see asset_ids)"
+    }
+  ],
+  "stitched": {
+    "path": "docs/evidence/N1_CHAIN4_AUDIT/OUT_CHAIN_stitched.png",
+    "sha256": "3a9e4a66e60e97daed18d196fe11fa56cd6ff9ecd34339f385aba6d9fbd9b920",
+    "wh": [
+      3840,
+      2160
+    ]
+  },
+  "region_preview": {
+    "path": "docs/evidence/N1_CHAIN4_AUDIT/OUT_CHAIN_region_preview.png",
+    "sha256": "99d8b6e09cdf8081f3231f060273542b02d4b47d11f71c77a68828237e270eea",
+    "wh": [
+      2464,
+      448
+    ]
+  },
+  "seams_recomputed": [
+    {
+      "a": "n1_0012_1344_0448",
+      "b": "n1_0013_1792_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 12.578125,
+      "frontier_canvas_x": 1856,
+      "overlap_px": 64
+    },
+    {
+      "a": "n1_0013_1792_0448",
+      "b": "n1_0014_2240_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 20.720703125,
+      "frontier_canvas_x": 2304,
+      "overlap_px": 64
+    },
+    {
+      "a": "n1_0014_2240_0448",
+      "b": "n1_0015_2688_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 30.62890625,
+      "frontier_canvas_x": 2752,
+      "overlap_px": 64
+    },
+    {
+      "a": "n1_0015_2688_0448",
+      "b": "n1_0016_3136_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 32.62630081176758,
+      "frontier_canvas_x": 3200,
+      "overlap_px": 64
+    },
+    {
+      "a": "n1_0016_3136_0448",
+      "b": "n1_0017_3584_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 27.35221290588379,
+      "frontier_canvas_x": 3648,
+      "overlap_px": 64
+    }
+  ],
+  "frontier_trend": {
+    "values": [
+      12.578125,
+      20.720703125,
+      30.62890625,
+      32.62630081176758,
+      27.35221290588379
+    ],
+    "min": 12.578125,
+    "max": 32.62630081176758,
+    "note": "Rising frontier toward mud-empty right is drift SIGNAL not auto semantic FAIL rate"
+  },
+  "steps": [
+    {
+      "name": "seed",
+      "tiles": [
+        "n1_0013_1792_0448",
+        "n1_0014_2240_0448"
+      ],
+      "source": "v3_joint",
+      "asset_id": "7b2c68ba-0c7a-424b-9964-1dc5fe68a7f7"
+    },
+    {
+      "name": "R1",
+      "tiles": [
+        "n1_0014_2240_0448",
+        "n1_0015_2688_0448"
+      ],
+      "new": "n1_0015_2688_0448",
+      "asset_id": "4f5bfc65-dd6d-4af1-9e12-0dddc99e4c8f",
+      "dir": "right"
+    },
+    {
+      "name": "R2",
+      "tiles": [
+        "n1_0015_2688_0448",
+        "n1_0016_3136_0448"
+      ],
+      "new": "n1_0016_3136_0448",
+      "asset_id": "7666f6c5-77f2-4f86-9003-d110d3f92f67",
+      "dir": "right"
+    },
+    {
+      "name": "R3",
+      "tiles": [
+        "n1_0016_3136_0448",
+        "n1_0017_3584_0448"
+      ],
+      "new": "n1_0017_3584_0448",
+      "asset_id": "12b0b343-e7af-4937-b9ab-50c6a8e633ff",
+      "dir": "right"
+    },
+    {
+      "name": "L1",
+      "tiles": [
+        "n1_0012_1344_0448",
+        "n1_0013_1792_0448"
+      ],
+      "new": "n1_0012_1344_0448",
+      "asset_id": "7fabde72-ad0f-4956-8747-b4fcea1bee78",
+      "dir": "left"
+    }
+  ],
+  "human_review": {
+    "status": "PENDING_OPERATOR",
+    "checklist": [
+      {
+        "id": "face_identity",
+        "desc": "\u683c12\u201314 \u4eba\u7269\u81c9\u8207 seed \u662f\u5426\u540c\u4e00\u4eba\uff0f\u540c\u4e00\u6a5f\u4f4d",
+        "result": null
+      },
+      {
+        "id": "hammer_geometry",
+        "desc": "\u6230\u9318\u82e5\u8de8\u683c\u662f\u5426\u9023\u7e8c\uff08\u672c\u6a6b\u5217\u53ef\u80fd\u50c5\u80a9\uff0f\u9aee\uff0f\u6ce5\uff09",
+        "result": null
+      },
+      {
+        "id": "armor_continuity",
+        "desc": "\u91d1\u9c57\u76d4\u7532\u8de8 12\u201314 \u662f\u5426\u81ea\u7136",
+        "result": null
+      },
+      {
+        "id": "hair_flow",
+        "desc": "\u982d\u9aee\u6d41\u5411\u662f\u5426\u4e00\u6c23\u5475\u6210",
+        "result": null
+      },
+      {
+        "id": "lightning_scene",
+        "desc": "\u96f7\u96fb\uff0f\u6ce5\u96e8\u662f\u5426\u8207 seed \u540c\u4e00\u5834\u800c\u975e\u9010\u6b65\u7a7a\u666f\u5316",
+        "result": null
+      },
+      {
+        "id": "perspective_horizon",
+        "desc": "\u900f\u8996\uff0f\u5730\u5e73\u7dda\u662f\u5426\u7a69\u5b9a",
+        "result": null
+      },
+      {
+        "id": "rightward_drift",
+        "desc": "14\u219217 \u662f\u5426\u7d2f\u7a4d\u504f\u96e2\u70ba\u7d14\u6ce5\u7a7a\u666f",
+        "result": null
+      }
+    ],
+    "note": "Do not mark N1_SEAM_CONTINUITY_OK true from metrics alone."
+  },
+  "next_architecture": {
+    "name": "global_scene_state_memory",
+    "not_started": true,
+    "intent": "Each extension should carry fixed scene state: subject pose/bbox, hammer geometry, camera, horizon, lighting \u2014 not only previous tile pixels."
+  },
+  "ci_note": "pytest missing on CI is separate from N1 quality; not a green light",
+  "pr_status": "Draft PR #9; do not merge as quality pass",
+  "not_siax_4x_upscale": true,
+  "final_acceptance": false
+}
