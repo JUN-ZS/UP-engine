@@ -16,16 +16,13 @@ class ChildTask:
 
 
 class CapabilityScheduler:
-    """Greedy capability-aware assignment (v0).
-
-    Does **not** average-split. Re-score after each assignment using updated queue_depth.
-    """
+    """Greedy capability-aware assignment. Batch fill_all ignores hard max_inflight."""
 
     def __init__(self, workers: Iterable[WorkerCapability], *, prefer_device: str = "cuda"):
         self.workers = {w.worker_id: w for w in workers}
         self.prefer_device = prefer_device
 
-    def assign_one(self, task: ChildTask) -> str | None:
+    def assign_one(self, task: ChildTask, *, enforce_max_inflight: bool = False) -> str | None:
         best_id: str | None = None
         best_score: float | None = None
         for wid, w in self.workers.items():
@@ -35,6 +32,7 @@ class CapabilityScheduler:
                 weight_sha256=task.weight_sha256,
                 est_peak_rss_mib=task.est_peak_rss_mib,
                 prefer_device=self.prefer_device,
+                enforce_max_inflight=enforce_max_inflight,
             )
             if s is None:
                 continue
@@ -46,5 +44,12 @@ class CapabilityScheduler:
         self.workers[best_id].queue_depth += 1
         return best_id
 
-    def assign_all(self, tasks: list[ChildTask]) -> dict[str, str | None]:
-        return {t.child_id: self.assign_one(t) for t in tasks}
+    def assign_all(self, tasks: list[ChildTask], *, fill_all: bool = True) -> dict[str, str | None]:
+        out = {t.child_id: self.assign_one(t, enforce_max_inflight=False) for t in tasks}
+        if fill_all and any(v is None for v in out.values()):
+            for w in self.workers.values():
+                w.queue_depth = 0
+            for t in tasks:
+                if out.get(t.child_id) is None:
+                    out[t.child_id] = self.assign_one(t, enforce_max_inflight=False)
+        return out

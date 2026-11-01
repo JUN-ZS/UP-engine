@@ -52,17 +52,17 @@ def score_worker_for_child(
     weight_sha256: str,
     est_peak_rss_mib: float,
     prefer_device: str = "cuda",
+    enforce_max_inflight: bool = False,
 ) -> float | None:
     """Higher is better. None = ineligible.
 
-    Simple v0: eligibility by model + RAM headroom; prefer GPU and higher throughput,
-    penalize queue depth. Not a claim of global optimality.
+    max_inflight is concurrent claim capacity, not total job share.
+    Batch schedule uses enforce_max_inflight=False.
     """
     if not worker.supports_model(model_id, weight_sha256):
         return None
-    if worker.queue_depth >= worker.max_inflight:
+    if enforce_max_inflight and worker.queue_depth >= worker.max_inflight:
         return None
-    # require some headroom above estimated peak
     if worker.ram_available_mib < est_peak_rss_mib + 256:
         return None
     score = 0.0
@@ -73,5 +73,7 @@ def score_worker_for_child(
     thr = worker.throughput_tiles_per_min_est or 1.0
     score += thr
     score -= 5.0 * worker.queue_depth
+    if worker.queue_depth >= max(1, worker.max_inflight):
+        score -= 2.0 * (worker.queue_depth - worker.max_inflight + 1)
     score += min(worker.ram_available_mib, 65536) / 1024.0
     return score
