@@ -12,6 +12,8 @@ from .adapter_synthetic import SyntheticNearestAdapter
 from .job_plan import plan_compute_children
 from .rebuild import rebuild_from_receipts, pixel_match_children
 from .worker_loop import run_worker_loop
+from .registry import WorkerRegistry
+from .controller import JobController
 
 __all__ = [
     "WorkerCapability",
@@ -29,4 +31,6 @@ __all__ = [
     "rebuild_from_receipts",
     "pixel_match_children",
     "run_worker_loop",
+    "WorkerRegistry",
+    "JobController",
 ]

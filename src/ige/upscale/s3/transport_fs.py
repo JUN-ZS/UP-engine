@@ -53,7 +53,9 @@ class FsLeaseTransport:
 
     def enqueue(self, task_id: str, payload: dict[str, Any]) -> Path:
         path = self.root / "pending" / f"{task_id}.json"
-        if path.exists() or (self.root / "done" / f"{task_id}.json").exists():
+        if (self.root / "done" / f"{task_id}.json").exists():
+            return self.root / "done" / f"{task_id}.json"
+        if path.exists():
             return path
         body = dict(payload)
         body.setdefault("child_id", task_id)
@@ -111,15 +113,34 @@ class FsLeaseTransport:
                 "path": str(dest),
                 "attempt": attempt,
             }
-            _atomic_write(dest, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+            try:
+                _atomic_write(dest, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+            except OSError:
+                continue
             child_id = data.get("child_id") or path.stem
-            self.heartbeat(worker_id, child_id, fencing_token)
+            try:
+                self.heartbeat(worker_id, child_id, fencing_token)
+            except StaleLeaseError:
+                # concurrent requeue race — put back to pending if still ours
+                try:
+                    if dest.is_file():
+                        body = json.loads(dest.read_text(encoding="utf-8"))
+                        body.pop("_lease", None)
+                        pend = self.root / "pending" / f"{child_id}.json"
+                        _atomic_write(pend, json.dumps(body, ensure_ascii=False, indent=2) + "\n")
+                        dest.unlink(missing_ok=True)
+                except Exception:
+                    pass
+                continue
             data["_fencing_token"] = fencing_token
             return data
         return None
 
     def heartbeat(self, worker_id: str, task_id: str, fencing_token: str) -> None:
         lease = self._load_lease(worker_id, task_id)
+        if lease is None:
+            time.sleep(0.02)
+            lease = self._load_lease(worker_id, task_id)
         if lease is None:
             raise StaleLeaseError(f"no lease for {worker_id}/{task_id}")
         tok = (lease.get("_lease") or {}).get("fencing_token")

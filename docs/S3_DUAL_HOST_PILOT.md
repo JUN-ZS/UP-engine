@@ -1,49 +1,48 @@
-# S3.5 Dual-Host Pilot Protocol (optional · not auto-run)
+# S3.6 Dual-Host / Dual-Agent Pilot
 
-**status:** DOCUMENTED_NOT_RUN · **requires S3.5 control plane (DONE)**  
-**does not claim:** quality PASS · E3 speed · S2.1 decision flip
+**status:** INTERFACE_DONE · RECOVERY_DONE · PHYSICAL_DUAL_HOST=NOT_RUN  
+**requires:** S3.5 control plane  
+**does not claim:** quality PASS · E3 · S2.1 flip
 
-## Goal
+## What was proven on this runner
 
-Prove capability-aware multi-host Siax child execution + rebuild integrity on **shared job directory** (NFS/SMB) or pull-agent transport (future).
+| Capability | Evidence |
+| --- | --- |
+| Separate Controller (no inference) | `JobController` + `tools/s3_controller.py` |
+| Separate Worker Agent | `tools/s3_worker_agent.py` + registry heartbeat |
+| Hard assignment + fencing | S3.5 + S3.6 happy |
+| Kill worker → expire → reassign → single rebuild | `docs/evidence/S3_6_DUAL_AGENT_KILL_A.json` |
+| Happy dual-agent rebuild + pixel match | `docs/evidence/S3_6_DUAL_AGENT_HAPPY.json` |
 
-## Preconditions
-
-1. Both hosts can read BASE + checkpoint with matching SHA-256.
-2. Job root is a shared filesystem with atomic rename, **or** object-store transport is implemented.
-3. Each host reports capability JSON (RAM/VRAM/model SHA/max_inflight).
-4. S2.1 Nested quality remains INCONCLUSIVE; pilot uses a **new** job id.
-
-## Procedure
+## Physical two-host procedure (when second machine available)
 
 ```bash
-# Host A — controller (once)
-python tools/s3_multi_worker_sim.py \
-  --job-dir /shared/s3_pilot_job \
-  --base BASE.jpg \
-  --mode siax \
-  --region 0,0,256,256 \
-  --compute-core 64 --compute-context 16 \
-  --workers "gpu-a:cuda:24000,cpu-b:cpu:8000" \
-  --confirm-model-license-review \
-  --out-report docs/evidence/S3_DUAL_HOST_PILOT.json
+# Shared FS mount both hosts can rename on, e.g. /shared/s3_job
+
+# Host A — controller
+python tools/s3_controller.py init --job-dir /shared/s3_job --base BASE.jpg \
+  --mode siax --region 0,0,256,256 --compute-core 64 --compute-context 32 \
+  --lease-seconds 60
+
+# Host A — worker (optional GPU)
+python tools/s3_worker_agent.py --job-dir /shared/s3_job --worker-id hostA_gpu \
+  --mode siax --device cuda --ram-mib 24000 --throughput-est 40 \
+  --confirm-model-license-review
+
+# Host B — worker (CPU or GPU)
+python tools/s3_worker_agent.py --job-dir /shared/s3_job --worker-id hostB_cpu \
+  --mode siax --device cpu --ram-mib 8000 --throughput-est 6 \
+  --confirm-model-license-review
+
+# Host A — schedule after both registries live
+python tools/s3_controller.py schedule --job-dir /shared/s3_job --wait-workers 2
+python tools/s3_controller.py wait --job-dir /shared/s3_job --timeout-s 7200 --reassign-every-s 5
+python tools/s3_controller.py rebuild --job-dir /shared/s3_job
 ```
 
-For true dual-host, split into controller enqueue + per-host worker_loop processes (future CLI split). v0 sim runs multi-process on one machine as structural rehearsal.
+Pass criteria: all children receipted · pixel integrity · model SHA match · quality_qualified=false · e3=false.
 
-## Pass criteria (pilot only)
+## Explicit honesty
 
-| Check | Required |
-| --- | --- |
-| All assigned children have receipts | yes |
-| Rebuild coverage complete | yes |
-| Pixel match children ↔ primary | yes |
-| Model SHA matches on both hosts | yes |
-| quality_qualified | **false** (unless separate Same-SHA QC) |
-| e3_speed_claim | **false** |
-
-## Explicit non-goals
-
-- Average-splitting tiles without capability scores  
-- Treating pilot wall time as E3  
-- Rewriting PR #8 quality decision  
+This CI/runner environment is **one machine**. Dual-agent processes/threads prove the control plane.  
+**True multi-host** requires two physical machines + shared FS (or future object store transport).
