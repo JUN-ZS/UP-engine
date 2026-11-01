@@ -46,3 +46,14 @@ Pass criteria: all children receipted · pixel integrity · model SHA match · q
 
 This CI/runner environment is **one machine**. Dual-agent processes/threads prove the control plane.  
 **True multi-host** requires two physical machines + shared FS (or future object store transport).
+
+---
+
+## Local PC × Grok CLI dock
+
+若要用 **本機 CPU/RAM** 當第二台 worker，並與 HERE Grok 對接（共享 job-dir / handshake）：
+
+→ 見 **[S3_LOCAL_PC_GROK_CLI_DOCK.md](./S3_LOCAL_PC_GROK_CLI_DOCK.md)**  
+→ 啟動器：`python tools/s3_dock_local_pc.py --job-dir ...`
+
+遠端 Grok **不能** 直接占用本機 RAM；本機必須跑 pull-based agent。
