@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jun-zs.local/schemas/spm-here-handoff.schema.json",
+  "title": "SPMHereHandoff",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["format", "request_id", "input_path"],
+      "properties": {
+        "format": { "const": "ige.spm.here_request" },
+        "request_id": { "type": "string" },
+        "input_path": { "type": "string" }
+      }
+    },
+    {
+      "type": "object",
+      "required": ["format", "request_id", "output_sha256", "ok"],
+      "properties": {
+        "format": { "const": "ige.spm.here_result" },
+        "request_id": { "type": "string" },
+        "ok": { "type": "boolean" },
+        "output_sha256": { "type": "string" },
+        "paste_this_json_to_grok_chat": { "type": "boolean" }
+      }
+    }
+  ]
+}

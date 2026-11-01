@@ -267,3 +267,63 @@ After tests: stop tunnel, restart executor, **rotate** `SPM_LOCAL_TOKEN`.
 3. Full OAuth authorization+token endpoints on the executor (high cost; only if product requires grok.com UI).
 
 Evidence: `docs/evidence/S_PATH1_GROK_COM_OAUTH_BLOCK.json`
+
+
+---
+
+## 10. HERE chat ↔ 本機 SPM 協同（handoff）
+
+**用途：** 在此 Grok 對話生圖／規劃 SPM 補足 → 我出**本機命令** → 你 `.venv` 跑原生 Siax → **回傳 result JSON**（可選附 PNG）給我繼續協同。
+
+**不是：** grok.com OAuth MCP · 我 SSH 進你 PC · 自動無代理收檔。
+
+### 邊界（必讀）
+
+| | |
+| --- | --- |
+| 我能做 | 給 request JSON + 一條 PowerShell；讀你**貼回**的 result JSON；用 Imagine 再編 |
+| 我不能 | 直接在你 GPU 上執行；在無橋接時「自己收到」磁碟檔 |
+| 你要常開 | 可選 `spm_here_pull.py --watch` 盯 `inbox/` |
+
+### 目錄（建議）
+
+```text
+D:\s3_share\spm_handoff\
+  inbox\     ← 放入 here_*.json 請求
+  outbox\    ← *_result.json + PNG
+  done\      ← 已處理請求
+```
+
+### 你本機一次開好（watch）
+
+```powershell
+cd C:\Users\user\Documents\GitHub\UP-engine
+.\.venv\Scripts\Activate.ps1
+$env:SPM_HANDOFF_ROOT = "D:\s3_share\spm_handoff"
+python tools\spm_here_pull.py --watch --interval 2
+```
+
+### 每輪協同（典型）
+
+1. **此處** Imagine 生圖 / 定要補的區域說明  
+2. 你把輸入圖存到本機，例如 `D:\s3_share\spm_in\from_here.png`  
+3. **我出命令**（或出 JSON 你存 inbox）  
+4. watch 自動跑，或：
+
+```powershell
+python tools\spm_here_request.py `
+  --input D:\s3_share\spm_in\from_here.png `
+  --output D:\s3_share\spm_handoff\outbox\OUT.png `
+  --note "HERE handoff" `
+  --inbox D:\s3_share\spm_handoff\inbox
+python tools\spm_here_pull.py --once
+```
+
+5. 把 `outbox\here_*_result.json` **整份貼回 chat**（PNG 可另傳）  
+6. 我根據 SHA／路徑繼續下一輪
+
+### 「你自己會收到回傳」怎麼理解
+
+- **自動進此對話：** 需要你貼 JSON，或之後接 Git push／其他上傳橋  
+- **自動落盤：** `outbox/` 有檔 = 本機協同完成  
+- 有 watch 時：你只負責存圖 + 把 result 貼回（或我教你最短貼法）
