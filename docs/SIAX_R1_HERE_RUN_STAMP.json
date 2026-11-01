@@ -1,0 +1,41 @@
+{
+  "phase": "R1_HERE_REAL_WEIGHTS_DISTRIBUTED",
+  "asof_utc": "2026-10-31T23:58:42Z",
+  "status": "PASS_CANDIDATE_ONLY",
+  "final_acceptance": false,
+  "base_asset": "e283276e-0895-4c2e-89bf-b4e69c40b3e3",
+  "base_sha256": "4f1df41f1f9f1b0c7d43519321b03ec303a277d5cad9c9f55a36db8e61407994",
+  "checkpoint_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+  "model_id": "4x_NMKD-Siax_200k",
+  "tiles": 112,
+  "tile_size": 128,
+  "tile_pad": 8,
+  "workers": [
+    "here-cpu-a",
+    "here-cpu-b"
+  ],
+  "tasks_per_worker": 56,
+  "output_sha256": "3289e3e02928ac688002adc621124ac73d3730f67a5a0d0a5cabe351a6cfd181",
+  "output_bytes": 42995025,
+  "output_dims": "7168x4032",
+  "byte_identical_to_single_process_A": true,
+  "proved": [
+    "real Siax weights on distributed tiles",
+    "2 workers disjoint complete 112",
+    "stitch success",
+    "byte-identical to single-process A baseline"
+  ],
+  "not_proved": [
+    "wall-clock speedup dual vs single",
+    "tile/halo quality matrix",
+    "CPU/GPU numeric tolerance",
+    "multi-host queue",
+    "lease/heartbeat reclaim"
+  ],
+  "env": {
+    "hostname": "hds-cgwb7ahulw40",
+    "platform": "Linux-6.12.8+-x86_64-with-glibc2.36",
+    "python": "3.10.21",
+    "cpu_count": 2
+  }
+}
