@@ -1,0 +1,27 @@
+{
+  "format": "ige.spm.path1_report",
+  "format_version": "1.0",
+  "stamp_utc": "2026-11-01T19:39:58Z",
+  "layers": {
+    "local_cli_one_image_cuda": "PASS",
+    "local_http_auth_token": "PASS",
+    "public_tunnel_cloudflared": "PASS",
+    "public_mcp_tools_list_and_status": "PASS",
+    "grok_com_custom_connector_dialogue": "BLOCKED_OAUTH_ONLY",
+    "canvas_embedded_mcp": "NOT_TESTED",
+    "quality_acceptance": false,
+    "e3_speed_claim": false
+  },
+  "grok_com_observation": {
+    "connector_name_attempted": "PATH1 local SPM",
+    "flow": "enter name + MCP URL → Checking authentication… → OAuth-only form (Client ID/Secret/Authorize/Token); Save & Connect disabled; no Bearer/header field",
+    "decision": "do_not_fake_oauth; keep local+tunnel as PASS for transport"
+  },
+  "next": [
+    "close_tunnel_rotate_token",
+    "optional_grok_cli_stdio_mcp",
+    "optional_xai_api_remote_mcp_with_headers",
+    "do_not_implement_oauth_for_path1_now"
+  ],
+  "final_acceptance": false
+}

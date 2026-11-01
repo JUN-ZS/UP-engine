@@ -239,3 +239,31 @@ error: (if any)
 | SSE errors on cloudflared | use ngrok for SSE transports; our `/mcp` is request/response JSON |
 
 **Cloudflare quick tunnel does not support SSE**; if Grok requires SSE and fails, switch to **ngrok**.
+
+
+---
+
+## 9. PATH1 grok.com outcome (locked)
+
+**status:** `TRANSPORT_PASS` · `GROK_COM_DIALOGUE_BLOCKED_OAUTH_ONLY`
+
+| Layer | Result |
+| --- | --- |
+| Local CLI one-image CUDA | PASS |
+| Local HTTP + Bearer | PASS |
+| Public tunnel (cloudflared) + `/mcp` tools/list + `local_pc_status` | PASS |
+| grok.com Custom Connector chat tools | **BLOCKED** — UI requires OAuth only; no URL+Bearer field; Save & Connect stays disabled if OAuth not filled |
+| Canvas embedded MCP | NOT TESTED |
+| Quality / E3 | false |
+
+**Decision:** Do **not** fake OAuth Client ID/Secret/Authorize/Token for this server.  
+PATH1 success for **transport** is already proven without grok.com.  
+After tests: stop tunnel, restart executor, **rotate** `SPM_LOCAL_TOKEN`.
+
+### Alternatives (later, not required for PATH1 close)
+
+1. **Grok CLI local** `stdio` / project MCP (no public URL) if CLI supports command servers.
+2. **xAI API** remote MCP with static headers (API path, not grok.com Connectors UI).
+3. Full OAuth authorization+token endpoints on the executor (high cost; only if product requires grok.com UI).
+
+Evidence: `docs/evidence/S_PATH1_GROK_COM_OAUTH_BLOCK.json`
