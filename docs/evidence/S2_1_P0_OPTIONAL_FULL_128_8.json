@@ -1,0 +1,11 @@
+{
+  "kind": "optional_bonus_not_p0_gate",
+  "status": "completed",
+  "cell": "128/8",
+  "sampled_peak_rss_mib": 741.3,
+  "dominant_stage": "tile_forward",
+  "output_sha256": "3289e3e02928ac688002adc621124ac73d3730f67a5a0d0a5cabe351a6cfd181",
+  "output_bytes": 42995025,
+  "note": "Observed after P0 closed; not required for P0 DONE; not a 256/32 OOM replay",
+  "final_acceptance": false
+}

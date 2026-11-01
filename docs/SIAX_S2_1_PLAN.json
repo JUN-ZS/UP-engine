@@ -1,7 +1,7 @@
 {
   "program": "SIAX_S2_1_R3",
   "title": "Memory-aware Nested Tile Executor + Virtual Master",
-  "asof_utc": "2026-11-01T13:59:51Z",
+  "asof_utc": "2026-11-01T15:03:49Z",
   "base_commit": "463cce1aa20ad4067c8e29b7ced999c6422acc58",
   "relation_to_pr7": "isolated_follow_on_draft; do_not_rewrite_pr7_evidence",
   "decision": "Do not primary-path buy-RAM re-run 256/32; evolve architecture",
@@ -45,14 +45,14 @@
     {
       "id": "S2.1.3",
       "name": "nested_compute_tile_rf",
-      "status": "IN_PROGRESS_P1",
-      "note": "RF measured (rec ctx24, using 32); nested runner + smoke 1-parent done; full L256 job running"
+      "status": "DONE_P1_CANDIDATE",
+      "note": "RF ctx rec24 used32; full nested L256/32 C64 completed 448 children; NOT equivalence claim"
     },
     {
       "id": "S2.1.4",
       "name": "virtual_master_store",
-      "status": "IN_PROGRESS_P1",
-      "note": "strip_finalize + virtual_master.schema + VM emit from nested runner"
+      "status": "DONE_P1_CANDIDATE",
+      "note": "strip_finalize primary PNG + VM manifest 448 children; size/dim/path asserts held"
     },
     {
       "id": "S2.1.5",
@@ -94,15 +94,17 @@
     "Keep full-frame 256/32 OOM replay out of scope unless a separately justified, measured-safe experiment is approved"
   ],
   "p1": {
-    "status": "IN_PROGRESS",
-    "asof_utc": "2026-11-01T13:59:51Z",
+    "status": "CANDIDATE_COMPLETE_PENDING_QUALITY",
+    "asof_utc": "2026-11-01T15:03:49Z",
     "cell_id": "nested_L256/32_C64/ctx32",
-    "rf_recommended_context": 24,
-    "compute_context_used": 32,
-    "isolation": "inprocess_with_resume_driver",
-    "smoke_peak_rss_mb": 630.18,
-    "smoke_children": 16,
-    "full_job_dir": "runs/siax_validation_r2/S2_1/p1/nested_L256_32_C64_ctx32",
-    "final_acceptance": false
+    "children": 448,
+    "peak_rss_mb": 663.79,
+    "output_sha256": "5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656",
+    "output_bytes": 43281047,
+    "dimensions": "7168x4032",
+    "equivalence_to_single_forward_logical": "NOT_CLAIMED",
+    "final_acceptance": false,
+    "evidence": "docs/evidence/S2_1_P1_NESTED_FULL_SUMMARY.json",
+    "next": "S2.1.5 quality reaccept on nested cell only"
   }
 }

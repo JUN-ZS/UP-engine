@@ -1,0 +1,10 @@
+{
+  "virtual_master_path": "/workspace/artifacts/up-engine/runs/siax_validation_r2/S2_1/p1/nested_L256_32_C64_ctx32/manifests/virtual_master.json",
+  "master_id": "vm_nested_L256_32_C64_ctx32",
+  "children": 448,
+  "primary_policy": {
+    "preview_never_primary": true,
+    "min_fullframe_bytes": 5000000,
+    "assert_dimensions": true
+  }
+}

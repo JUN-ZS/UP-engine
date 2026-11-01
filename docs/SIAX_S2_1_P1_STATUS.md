@@ -1,53 +1,47 @@
-# S2.1 P1 Status — Nested RF + strip finalizer + memory-budgeted nested full job
+# S2.1 P1 Status — Nested Compute + Virtual Master
 
-**asof:** 2026-11-01 · **final_acceptance:** false · **branch:** `feat/siax-r3-nested-peep-vm-v0.1`
+**asof:** `2026-11-01T15:03:49Z` · **P0:** DONE · **final_acceptance:** false
 
-## Scope (opened)
+## Scope (locked)
 
-| Item | Status |
+- Do **not** re-run original 256/32 OOM as work item.
+- Nested cell is a **new experimental cell**, not “256/32 recovered”.
+- Runner remote orchestration is a **separate later phase** (PR #7 FS queue already exists).
+
+## Cell
+
+| Field | Value |
 | --- | --- |
-| RF measure (core=64) | **DONE** · rec context **24** · using **32** conservative |
-| Nested compute runner | **DONE** · `tools/nested_compute_siax.py` (subprocess \| inprocess, resume, VM emit) |
-| Strip finalizer | **DONE** · `src/ige/upscale/strip_finalize.py` (preview-never-primary, size/path asserts) |
-| Virtual Master schema | **DONE** · `schemas/virtual-master.schema.json` |
-| 1-parent smoke L256/C64/ctx32 | **DONE** · peak RSS **630 MiB** · 16 children |
-| Full nested L256/32 C64/ctx32 | **IN_PROGRESS** · durable resume driver |
+| cell_id | `nested_L256/32_C64/ctx32` |
+| logical | core 256 · halo 32 |
+| compute | core 64 · context 32 (RF rec 24, conservative) |
+| isolation | inprocess + resume driver |
+| children | **448** |
+| peak RSS | **663.79 MiB** |
+| primary PNG | 7168×4032 · 43 281 047 B |
+| SHA256 | `5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656` |
+| strip finalizer | uint8 canvas · preview never primary · dim/size asserts OK |
+| Virtual Master | `vm_nested_L256_32_C64_ctx32` · 448 native children |
 
-## RF (OBSERVED)
+## Evidence
 
-Source: `docs/evidence/S2_1_RF_MEASURE_c64.json`
-
-| margin | mae_vs_ref | inner_mae |
-| ---: | ---: | ---: |
-| 0 | 1.754 | 1.495 |
-| 8 | 0.752 | 0.706 |
-| 16 | 0.462 | 0.419 |
-| 24 | 0.307 | 0.284 |
-| 32 | 0.128 | 0.115 |
-| 40 | 0.025 | 0.020 |
-| 48 | 0.000 | 0.000 |
-
-**recommended_compute_context = 24** (conservative production cell uses **32**).
-
-## Smoke nested (OBSERVED)
-
-- cell_id: `nested_L256/32_C64/ctx32` (1 parent only)
-- peak_rss_mb: **630.18**
-- model_rss_after_load_mb: **411.36**
-- isolation: inprocess + resume
-- equivalence_to_single_forward_logical: **NOT_CLAIMED**
-- evidence: `docs/evidence/S2_1_P1_SMOKE_NESTED_SUMMARY.json`
-
-## Full job
-
-- job-dir: `runs/siax_validation_r2/S2_1/p1/nested_L256_32_C64_ctx32`
-- planned children ≈ 448 (28 parents × 16)
-- driver: `/tmp/p1_full_nested_driver.sh` with resume + foreign-agent kill
-- primary out: `OUT_NESTED_PRIMARY.png` via strip finalizer when complete
-- **NOT** labeled as recovered single-forward 256/32
+- `docs/evidence/S2_1_P1_NESTED_FULL_SUMMARY.json`
+- `docs/evidence/S2_1_RF_MEASURE_c64.json`
+- run dir: `runs/siax_validation_r2/S2_1/p1/nested_L256_32_C64_ctx32/`
 
 ## Explicit non-claims
 
-- final_acceptance remains false
-- PR #7 evidence untouched
-- Nested cell is a **new** experimental cell ID
+- Not single-forward 256/32 success
+- Not quality-qualified (SPM-A / seam / continuity pending S2.1.5)
+- Not final_acceptance
+
+## Optional bonus (not a gate)
+
+Full-image 128/8 stage profile completed on HERE after P0 closed:
+peak RSS **741.3 MiB** @ `tile_forward`; output SHA `3289e3e0…`.  
+Recorded only as optional envelope data — **not** P0 completion criterion, **not** 256/32 OOM replay.
+
+## Next
+
+1. S2.1.5 quality reaccept on **this nested cell only** (SPM-A fixed probes + seam bank + continuity).
+2. Optionally resume dual-host FS worker pilot (PR #7) as **separate** phase — not mixed into quality gate.
