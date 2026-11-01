@@ -1,7 +1,7 @@
 {
   "program": "SIAX_S2_1_R3",
   "title": "Memory-aware Nested Tile Executor + Virtual Master",
-  "asof_utc": "2026-11-01T15:15:49Z",
+  "asof_utc": "2026-11-01T15:25:28Z",
   "base_commit": "463cce1aa20ad4067c8e29b7ced999c6422acc58",
   "relation_to_pr7": "isolated_follow_on_draft; do_not_rewrite_pr7_evidence",
   "decision": "Do not primary-path buy-RAM re-run 256/32; evolve architecture",
@@ -57,8 +57,8 @@
     {
       "id": "S2.1.5",
       "name": "s2_quality_reaccept",
-      "status": "DIAGNOSTICS_OBSERVED_PENDING_BLIND",
-      "note": "integrity pass + SPM-A candidate + seam 64/32 on locked SHA; quality_qualified still false"
+      "status": "CLOSED_INCONCLUSIVE",
+      "note": "integrity PASS; quality INCONCLUSIVE; stop expansion"
     },
     {
       "id": "S2.1.6",
@@ -95,7 +95,7 @@
     "Keep full-frame 256/32 OOM replay out of scope unless a separately justified, measured-safe experiment is approved"
   ],
   "p1": {
-    "status": "CANDIDATE_COMPLETE_PENDING_QUALITY",
+    "status": "INTEGRITY_PASS_QUALITY_INCONCLUSIVE",
     "asof_utc": "2026-11-01T15:03:49Z",
     "cell_id": "nested_L256/32_C64/ctx32",
     "children": 448,
@@ -108,11 +108,13 @@
     "evidence": "docs/evidence/S2_1_P1_NESTED_FULL_SUMMARY.json",
     "next": "S2.1.5 quality reaccept on nested cell only",
     "s215": {
-      "status": "DIAGNOSTICS_OBSERVED_PENDING_BLIND",
-      "asof_utc": "2026-11-01T15:15:49Z",
+      "status": "CLOSED_INCONCLUSIVE",
+      "asof_utc": "2026-11-01T15:25:28Z",
       "primary_sha256": "5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656",
+      "integrity": "PASS",
+      "quality_decision": "INCONCLUSIVE",
       "quality_qualified": false,
-      "rollup": "docs/evidence/S2_1_P1_S215_ROLLUP.json"
+      "decision_doc": "docs/evidence/S2_1_P1_QUALITY_DECISION.json"
     }
   }
 }
