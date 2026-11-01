@@ -62,7 +62,8 @@ def main() -> int:
     if args.run_id:
         out_path = out_path.with_name(f"{out_path.stem}_{args.run_id}{out_path.suffix}")
 
-    if out_path.exists() and not args.force_out and not args.allow_partial:
+    # overwrite policy independent of allow-partial (partial may write, but still needs --force-out to clobber)
+    if out_path.exists() and not args.force_out:
         print(
             json.dumps(
                 {

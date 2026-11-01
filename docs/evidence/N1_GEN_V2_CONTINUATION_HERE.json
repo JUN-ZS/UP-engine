@@ -20,8 +20,24 @@
     "N1_GEN_PILOT_OK": "limited_pass_v1",
     "N1_SEAM_CONTINUITY_OK": false,
     "N1_SEAM_CONTINUITY_NOTE": "hard-lock removes left-edge pixel break; semantic hair/armor continuity still imperfect \u2014 not PASS",
-    "NATIVE_4K_PILOT_OK": false
+    "NATIVE_4K_PILOT_OK": false,
+    "N1_GEN_V2": "postgen_hardlock_experiment_complete",
+    "N1_GEN_V2_MASKED_CONTINUATION": false
   },
   "not_siax_4x_upscale": true,
-  "final_acceptance": false
+  "final_acceptance": false,
+  "official_name": "V2_POSTGEN_HARDLOCK",
+  "not_true_masked_continuation": true,
+  "proves": [
+    "A frozen (no re-roll)",
+    "B generated separately then pack",
+    "64px overlap hard-lock from A onto B"
+  ],
+  "does_not_prove": [
+    "generator honored mask/outpaint",
+    "B semantically continued hair/armor/camera from A",
+    "seam continuity PASS"
+  ],
+  "mae_note": "seam_interface_mae_adjacent_cols alone is not comparable improvement vs v1; must split overlap_equality vs generation_frontier vs semantic.",
+  "decision": "Keep v1 independent FAIL + v2 hard-lock as baselines. Next: Joint AUB plate. Do not re-roll A. Pixel lock != model continuation."
 }

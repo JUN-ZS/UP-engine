@@ -1,0 +1,85 @@
+{
+  "format": "ige.native4k.n1_gen_v3_joint_here",
+  "format_version": "1.0",
+  "stamp_utc": "2026-11-01T21:29:12Z",
+  "mechanism": "joint_AUB_plate",
+  "joint_box_canvas": [
+    1792,
+    448,
+    2752,
+    960
+  ],
+  "joint_target_wh": [
+    960,
+    512
+  ],
+  "joint_gen_asset": "7b2c68ba-0c7a-424b-9964-1dc5fe68a7f7",
+  "joint_gen_wh": [
+    1792,
+    1008
+  ],
+  "packed_with_lanczos_to_960x512": true,
+  "metrics": {
+    "v1_independent": {
+      "format": "ige.native4k.n1_seam_metrics_v1",
+      "tile_a": "n1_0013_1792_0448",
+      "tile_b": "n1_0014_2240_0448",
+      "overlap_px": 64,
+      "overlap_equality_mae": 72.6845474243164,
+      "generation_frontier_mae": 56.83919143676758,
+      "frontier_canvas_x": 2304,
+      "semantic_continuity": "HUMAN_REVIEW_REQUIRED",
+      "notes": [
+        "overlap_equality ~0 is geometric identity (joint or hard-lock), not model skill",
+        "generation_frontier is A last locked/own pixel vs B first free pixel",
+        "do not use single adjacent-col MAE as v1-vs-v2 improvement alone"
+      ]
+    },
+    "v2_POSTGEN_HARDLOCK": {
+      "format": "ige.native4k.n1_seam_metrics_v1",
+      "tile_a": "n1_0013_1792_0448",
+      "tile_b": "n1_0014_2240_0448",
+      "overlap_px": 64,
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 54.51953125,
+      "frontier_canvas_x": 2304,
+      "semantic_continuity": "HUMAN_REVIEW_REQUIRED",
+      "notes": [
+        "overlap_equality ~0 is geometric identity (joint or hard-lock), not model skill",
+        "generation_frontier is A last locked/own pixel vs B first free pixel",
+        "do not use single adjacent-col MAE as v1-vs-v2 improvement alone"
+      ]
+    },
+    "v3_joint_plate": {
+      "format": "ige.native4k.n1_seam_metrics_v1",
+      "tile_a": "n1_0013_1792_0448",
+      "tile_b": "n1_0014_2240_0448",
+      "overlap_px": 64,
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 20.720703125,
+      "frontier_canvas_x": 2304,
+      "semantic_continuity": "HUMAN_REVIEW_REQUIRED",
+      "notes": [
+        "overlap_equality ~0 is geometric identity (joint or hard-lock), not model skill",
+        "generation_frontier is A last locked/own pixel vs B first free pixel",
+        "do not use single adjacent-col MAE as v1-vs-v2 improvement alone"
+      ]
+    }
+  },
+  "labels": {
+    "N1_GEN_PILOT_OK": "limited_pass_v1",
+    "N1_GEN_V2": "postgen_hardlock_experiment_complete",
+    "N1_GEN_V2_MASKED_CONTINUATION": false,
+    "N1_GEN_V3_JOINT_PLATE": "experiment_complete",
+    "N1_SEAM_CONTINUITY_OK": false,
+    "N1_SEAM_CONTINUITY_NOTE": "Joint plate yields continuous capture; semantic continuity needs human review. Not auto PASS.",
+    "NATIVE_4K_PILOT_OK": false
+  },
+  "baselines_kept": [
+    "v1_independent_FAIL",
+    "v2_POSTGEN_HARDLOCK"
+  ],
+  "not_siax_4x_upscale": true,
+  "final_acceptance": false,
+  "decision": "v3 joint is third baseline. Do not claim seam PASS without human semantic review. Pixel metrics: overlap_eq must be ~0 for joint; frontier lower than v2 hardlock is expected but not sufficient alone."
+}
