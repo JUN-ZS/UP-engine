@@ -21,14 +21,16 @@ def main() -> int:
     n = args.threads_total
     env_base = os.environ.copy()
     # pin BLAS/OMP
-    for k in ('OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS','NUMEXPR_NUM_THREADS'):
-        env_base[k] = str(n if args.arm=='single' else max(1, n//2))
+    thr_default = n if args.arm=='single' else max(1, n//2)
+    for k in ('OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS','NUMEXPR_NUM_THREADS','TORCH_NUM_THREADS'):
+        env_base[k] = str(thr_default)
 
     t0 = time.perf_counter()
     workers = []
     if args.arm == 'single':
         env = env_base.copy()
         env['OMP_NUM_THREADS'] = str(n)
+        env['TORCH_NUM_THREADS'] = str(n)
         cmd = [
             'taskset','-c','0,1',
             sys.executable,'-m','ige.cli','siax-distribute-worker', str(args.job_dir),
@@ -53,6 +55,7 @@ def main() -> int:
             env = env_base.copy()
             env['OMP_NUM_THREADS'] = str(thr)
             env['MKL_NUM_THREADS'] = str(thr)
+            env['TORCH_NUM_THREADS'] = str(thr)
             cmd = [
                 'taskset','-c',cpus,
                 sys.executable,'-m','ige.cli','siax-distribute-worker', str(args.job_dir),

@@ -1,6 +1,7 @@
 # S1-C Final (controlled thread budget · 3 rounds)
 
-**asof:** `2026-11-01T11:54:56Z` · **final_acceptance:** false
+**asof:** `2026-11-01T11:54:56Z` · **final_acceptance:** false  
+**canonical:** `docs/evidence/S1C_FINAL_REPORT.json`
 
 ## Design
 | Arm | Threads | Affinity |
@@ -21,7 +22,7 @@ Pilot R1 (uncontrolled dual 0.69×) **not** pooled.
 
 ## Verdict
 - Correctness: **PASS** (all SHA = master `3289e3e0…`)
-- Same-host dual speed: **PASS** (median 1.267× vs single)
-- Siax final_acceptance: **not yet** → next E2 S2 quality matrix
+- Same-host dual speed: **PASS** (median **1.267×** vs single under same N=2 budget)
+- Siax final_acceptance: **not yet** → next **E2 S2** quality matrix
 
-Finding: affinity-controlled dual fixes pilot oversubscription.
+Finding: affinity-controlled dual fixes pilot oversubscription. Do not re-run S1 blindly; go S2 next.

@@ -1,120 +1,132 @@
 {
   "program": "SIAX_VALIDATION_R2",
-  "asof_utc": "2026-10-31T23:58:42Z",
-  "order_lock": "Siax first to real acceptance gates before other SR families / PR#8",
-  "principle": "Distributed Siax success ≠ HD generation success; Siax is one executor under UP-engine",
-  "R1_status": {
-    "phase": "R1_HERE_REAL_WEIGHTS_DISTRIBUTED",
-    "asof_utc": "2026-10-31T23:58:42Z",
-    "status": "PASS_CANDIDATE_ONLY",
-    "final_acceptance": false,
-    "base_asset": "e283276e-0895-4c2e-89bf-b4e69c40b3e3",
-    "base_sha256": "4f1df41f1f9f1b0c7d43519321b03ec303a277d5cad9c9f55a36db8e61407994",
-    "checkpoint_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
-    "model_id": "4x_NMKD-Siax_200k",
-    "tiles": 112,
-    "tile_size": 128,
-    "tile_pad": 8,
-    "workers": [
-      "here-cpu-a",
-      "here-cpu-b"
-    ],
-    "tasks_per_worker": 56,
-    "output_sha256": "3289e3e02928ac688002adc621124ac73d3730f67a5a0d0a5cabe351a6cfd181",
-    "output_bytes": 42995025,
-    "output_dims": "7168x4032",
-    "byte_identical_to_single_process_A": true,
-    "proved": [
-      "real Siax weights on distributed tiles",
-      "2 workers disjoint complete 112",
-      "stitch success",
-      "byte-identical to single-process A baseline"
-    ],
-    "not_proved": [
-      "wall-clock speedup dual vs single",
-      "tile/halo quality matrix",
-      "CPU/GPU numeric tolerance",
-      "multi-host queue",
-      "lease/heartbeat reclaim"
-    ],
-    "env": {
-      "hostname": "hds-cgwb7ahulw40",
-      "platform": "Linux-6.12.8+-x86_64-with-glibc2.36",
-      "python": "3.10.21",
-      "cpu_count": 2
-    }
+  "asof_utc": "2026-11-01T18:30:00Z",
+  "order_lock": "E0\u2192E1\u2192E2\u2192E3\u2192E4\u2192E5\u2192E6; Siax first; no PR#8 until Siax acceptance path complete",
+  "principle": "Correctness \u2260 speed \u2260 image quality. One question per phase. Distributed Siax \u2260 HD generation gold.",
+  "R1_pilot_uncontrolled": {
+    "status": "CORRECTNESS_PASS_SPEED_FAIL",
+    "single_inference_s": 451.3,
+    "dual_wall_s": 650.0,
+    "speedup": 0.694,
+    "output_sha_match": true,
+    "note": "Not pooled into S1-C median. Oversubscription hypothesis on N=2.",
+    "stamp": "docs/SIAX_R1_HERE_RUN_STAMP.json"
   },
-  "R2_phases": {
-    "S1_single_machine_perf": {
-      "status": "IN_PROGRESS",
-      "same": "BASE, checkpoint, tile 128/8, host",
-      "arms": [
-        "1x_cpu_worker",
-        "2x_cpu_worker"
-      ],
-      "rounds": 3,
-      "metrics": [
-        "model_load_s",
-        "inference_s",
-        "stitch_s",
-        "wall_s",
-        "median"
+  "phases": {
+    "E0_evidence_lock": {
+      "status": "DONE",
+      "items": [
+        "R1 HERE stamp on branch",
+        "BASE/ckpt/output SHA",
+        "PR#7 docs no longer lag HERE"
       ]
     },
-    "S2_tile_halo_quality": {
-      "status": "PENDING",
+    "E1_S1C_controlled_perf": {
+      "status": "DONE",
+      "design": "single=N threads affinity 0,1; dual=N/2+N/2 affinity 0|1; 3 rounds alternate order",
+      "host_N": 2,
+      "tile": "128/8",
+      "median_single_wall_inf_s": 697.072,
+      "median_dual_wall_inf_s": 550.116,
+      "median_speedup": 1.267,
+      "correctness": "PASS",
+      "same_host_dual_speed": "PASS",
+      "pilot_uncontrolled": "FAIL 0.694x",
+      "evidence": "docs/evidence/S1C_FINAL_REPORT.json",
+      "measurement_gaps": [
+        "model_load not split from wall_inference",
+        "CPU util % not sampled",
+        "peak_rss_children is max not sum of dual workers"
+      ]
+    },
+    "E2_S2_tile_halo_quality": {
+      "status": "NEXT",
       "matrix": [
         "128/8",
         "128/16",
         "256/16",
         "256/32"
       ],
-      "checks": [
-        "seam_400pct",
-        "texture_continuity",
-        "detail_delta"
-      ]
+      "per_cell": [
+        "single_reference",
+        "distributed_output",
+        "sha_or_delta"
+      ],
+      "accept": [
+        "400pct_detail",
+        "seams",
+        "gold_line_continuity",
+        "repeat_texture",
+        "naturalness",
+        "near_seam_vs_non_seam",
+        "blind_review"
+      ],
+      "not_only": "seam_mean"
     },
-    "S3_cpu_gpu_mix": {
+    "E3_S1_final_perf": {
+      "status": "PENDING",
+      "depends_on": "E2 quality-qualified tile/halo",
+      "note": "Formal speed number only after tile/halo chosen"
+    },
+    "E4_S3_cpu_gpu": {
       "status": "BLOCKED_NO_GPU_HERE",
       "arms": [
         "cpu_only",
         "gpu_only",
         "cpu+gpu"
       ],
-      "metrics": [
-        "sha",
-        "max_abs_diff",
+      "if_not_bit_identical": [
         "MAE",
+        "max_abs_diff",
         "PSNR",
-        "local_blind"
-      ],
-      "note": "bit-identical not required; differences must be quantified"
+        "visual"
+      ]
     },
-    "S4_multi_host": {
+    "E5_S4_multi_host": {
       "status": "BLOCKED_NEEDS_LEASE",
       "prereq": [
         "lease",
         "heartbeat",
-        "stale reclaim",
-        "dedupe complete"
+        "expired_claim_reclaim",
+        "max_retry",
+        "no_double_complete",
+        "disconnect_recovery"
       ],
       "then": [
-        "2nd machine join queue",
-        "disconnect reassign",
-        "dup result",
-        "full stitch"
+        "shared_fs_multi_host",
+        "object_storage",
+        "github_hosted_local_bridge"
       ]
+    },
+    "E6_siax_final_acceptance": {
+      "status": "NOT_YET",
+      "gates": [
+        "BASE_model_output_SHA",
+        "full_tile_coverage_no_dup",
+        "seam_and_400pct_blind",
+        "real_speedup_E3",
+        "RAM_VRAM_compute_cost",
+        "lossless_4x_master_plus_record"
+      ],
+      "explicit_not": "identity / costume topology / generative micro-detail"
     }
   },
-  "engineering_before_S4": {
-    "issue": "SIGKILL leaves in_progress; manual requeue",
-    "fix": "lease + heartbeat + expire reclaim + prevent double-complete"
+  "architecture_layers": {
+    "L1": "upscale method family",
+    "L2": "executor adapters (Siax first)",
+    "L3": "schedule plane \u2014 this PR",
+    "L4": "reconstruct (PEEP/Warp/Virtual Master)",
+    "L5": "quality accept (identity/topology/detail/fusion)"
   },
-  "pr7_doc_lag": {
-    "pr": 7,
-    "draft": true,
-    "body_still_says": "real Siax inference NOT RUN",
-    "action": "register HERE R1 stamp into PR comment + local docs"
+  "do_not": [
+    "open PR#8 before Siax path",
+    "pool pilot into S1-C median",
+    "claim final_acceptance early",
+    "blind re-run S1 after design answered"
+  ],
+  "pr7": {
+    "number": 7,
+    "branch": "feat/siax-distributed-runner-v0.1",
+    "url": "https://github.com/JUN-ZS/UP-engine/pull/7"
   }
 }
