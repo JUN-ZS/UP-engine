@@ -108,9 +108,13 @@ def mcp_dispatch(req: dict) -> dict:
     # notifications have no id
     try:
         if method == "initialize":
+            # Negotiate: prefer client-requested version if we know it; always capable of tools.
+            client_ver = (params.get("protocolVersion") or "2024-11-05")
+            supported = {"2024-11-05", "2025-03-26", "2024-10-07"}
+            use_ver = client_ver if client_ver in supported else "2024-11-05"
             result = {
-                "protocolVersion": "2024-11-05",
-                "serverInfo": {"name": "ige-spm-local-siax", "version": "0.1.1"},
+                "protocolVersion": use_ver,
+                "serverInfo": {"name": "ige-spm-local-siax", "version": "0.1.2"},
                 "capabilities": {"tools": {"listChanged": False}},
             }
         elif method == "notifications/initialized":

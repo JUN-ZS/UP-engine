@@ -148,7 +148,7 @@ py -3 tools/spm_local_executor.py http --port 8765
 Use:
 
 ```powershell
-.\ .venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 python tools/spm_local_executor.py cli local_pc_status
 ```
 
