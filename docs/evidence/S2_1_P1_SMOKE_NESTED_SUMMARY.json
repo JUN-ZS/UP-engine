@@ -1,0 +1,33 @@
+{
+  "program": "SIAX_S2_1_P1_NESTED_COMPUTE",
+  "cell_id": "nested_L256/32_C64/ctx32",
+  "logical_core": 256,
+  "logical_halo": 32,
+  "compute_core": 64,
+  "compute_context": 32,
+  "base_wh": [
+    1792,
+    1008
+  ],
+  "base_sha256": "4f1df41f1f9f1b0c7d43519321b03ec303a277d5cad9c9f55a36db8e61407994",
+  "parent_count": 1,
+  "child_count": 16,
+  "child_count_planned": 16,
+  "resumed_count": 12,
+  "isolation": "inprocess",
+  "model_load_s": 0.508,
+  "forward_sum_s": 25.089,
+  "wall_s": 28.568,
+  "peak_rss_mb": 630.18,
+  "model_rss_after_load_mb": 411.36,
+  "final_acceptance": false,
+  "equivalence_to_single_forward_logical": "NOT_CLAIMED",
+  "note": "New nested cell; RF-guided context; not labeled as original 256/32 success.",
+  "rf_reference": "runs/siax_validation_r2/S2_1/p1/RF_MEASURE_c64.json recommended_compute_context=24; using ctx32 conservative",
+  "virtual_master_path": "/workspace/artifacts/up-engine/runs/siax_validation_r2/S2_1/p1/nested_smoke_inproc/manifests/virtual_master.json",
+  "finalize": {
+    "skipped": true,
+    "reason": "max_parents smoke; incomplete coverage"
+  },
+  "children_count": 16
+}

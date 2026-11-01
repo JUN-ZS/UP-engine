@@ -1,7 +1,7 @@
 {
   "program": "SIAX_S2_1_R3",
   "title": "Memory-aware Nested Tile Executor + Virtual Master",
-  "asof_utc": "2026-11-01T13:00:00Z",
+  "asof_utc": "2026-11-01T13:59:51Z",
   "base_commit": "463cce1aa20ad4067c8e29b7ced999c6422acc58",
   "relation_to_pr7": "isolated_follow_on_draft; do_not_rewrite_pr7_evidence",
   "decision": "Do not primary-path buy-RAM re-run 256/32; evolve architecture",
@@ -43,12 +43,14 @@
     {
       "id": "S2.1.3",
       "name": "nested_compute_tile_rf",
-      "status": "TODO"
+      "status": "IN_PROGRESS_P1",
+      "note": "RF measured (rec ctx24, using 32); nested runner + smoke 1-parent done; full L256 job running"
     },
     {
       "id": "S2.1.4",
       "name": "virtual_master_store",
-      "status": "TODO"
+      "status": "IN_PROGRESS_P1",
+      "note": "strip_finalize + virtual_master.schema + VM emit from nested runner"
     },
     {
       "id": "S2.1.5",
@@ -88,5 +90,17 @@
     "re-run seam controls with identical BASE-space control offset for all cells",
     "apply fixed SPM-A probe bank to each full output and compare per-probe residuals",
     "do not label any full-job OOM stage until the real full-image profile records it"
-  ]
+  ],
+  "p1": {
+    "status": "IN_PROGRESS",
+    "asof_utc": "2026-11-01T13:59:51Z",
+    "cell_id": "nested_L256/32_C64/ctx32",
+    "rf_recommended_context": 24,
+    "compute_context_used": 32,
+    "isolation": "inprocess_with_resume_driver",
+    "smoke_peak_rss_mb": 630.18,
+    "smoke_children": 16,
+    "full_job_dir": "runs/siax_validation_r2/S2_1/p1/nested_L256_32_C64_ctx32",
+    "final_acceptance": false
+  }
 }
