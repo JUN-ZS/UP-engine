@@ -126,3 +126,30 @@ py -3 tools/spm_local_executor.py http --port 8765
 | `schemas/spm-local-tool.schema.json` | 契約 |
 
 **不宣稱:** quality PASS · E3 · Canvas MCP 已打通 · physical dual-host。
+
+
+---
+
+## 7. First local GPU pilot (observed · not quality)
+
+**status:** OBSERVED_LOCAL_CUDA_ONE_IMAGE  
+**not:** quality PASS · Canvas MCP · tunnel · S3
+
+| Item | Value |
+| --- | --- |
+| Host | DESKTOP-GNMQ0PF · RTX 3070 Ti |
+| Python | **repo `.venv`** torch 2.11.0+cu128 (not bare `py -3` without venv) |
+| Input | 128×128 synthetic `small_BASE.jpg` |
+| Output | 512×512 PNG · job `spm_50001dedfed7` |
+| Wall | ~3.6 s · VRAM ~557 MiB peak observed |
+| device | request `auto` · **runtime `cuda`** |
+| Flags | cloud_imagine=false · comfyui=false · s3_scheduler=false · quality_qualified=false |
+
+Use:
+
+```powershell
+.\ .venv\Scripts\Activate.ps1
+python tools/spm_local_executor.py cli local_pc_status
+```
+
+Top-level `device_used` must report **runtime** device (cuda|cpu), with `device_requested` for the call argument.

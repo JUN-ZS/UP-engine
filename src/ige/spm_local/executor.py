@@ -172,6 +172,14 @@ def spm_local_execute(
     )
     wall = time.perf_counter() - t0
     status_after = local_pc_status()
+    # Prefer actual runtime device from siax_report (auto → cuda|cpu), not the request string.
+    runtime = (report.get("runtime") or {}) if isinstance(report, dict) else {}
+    device_actual = (
+        runtime.get("device")
+        or report.get("device")
+        or report.get("selected_device")
+        or device
+    )
     sha = file_sha256(out)
     with __import__("PIL").Image.open(out) as im:
         w, h = im.size
@@ -189,7 +197,8 @@ def spm_local_execute(
         "height": h,
         "model_id": MODEL_ID,
         "model_sha256": MODEL_SHA256,
-        "device_used": report.get("device") or report.get("selected_device") or device,
+        "device_used": device_actual,
+        "device_requested": device,
         "tile_size": tile_size,
         "tile_pad": tile_pad,
         "wall_s": round(wall, 3),
