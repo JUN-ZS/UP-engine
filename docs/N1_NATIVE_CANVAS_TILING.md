@@ -93,3 +93,10 @@ Scaffold success **≠** native 4K product success.
 Evidence: `docs/evidence/N1_SCAFFOLD_LOCAL_PC.json`  
 User host: 3840×2160 plan (45 tiles), empty canvas, Lanczos structure fit, smoke 15/15.  
 **Still not** N1_GEN_PILOT_OK / NATIVE_4K_PILOT_OK.
+
+
+---
+
+## N1.gen
+
+See **[N1_GEN_CHARTER.md](./N1_GEN_CHARTER.md)**. Stitch fail-closed v1.1. Dual-tile pilot: `tools/n1_gen_dual_pilot.py`.

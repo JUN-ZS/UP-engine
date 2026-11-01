@@ -102,3 +102,10 @@ BASE SHA：`cdc2af9738c0ab8d4f121126eeff3dd97959e0b69f486c9242b70d1f52c0e51c` ·
 See **[N1_NATIVE_CANVAS_TILING.md](./N1_NATIVE_CANVAS_TILING.md)**.  
 Scaffold tools: `tools/n1_plan.py`, `n1_init_canvas.py`, `n1_stitch.py`, `n1_scaffold_smoke.py`.  
 Evidence smoke: `docs/evidence/N1_SCAFFOLD_SMOKE.json` · **`native_4k_success=false`**.
+
+
+---
+
+## N1.gen
+
+See **[N1_GEN_CHARTER.md](./N1_GEN_CHARTER.md)**. Stitch fail-closed v1.1. Dual-tile pilot: `tools/n1_gen_dual_pilot.py`.
