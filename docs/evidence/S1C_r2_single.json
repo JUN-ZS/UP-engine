@@ -1,0 +1,22 @@
+{
+  "arm": "single",
+  "threads_total": 2,
+  "affinity": "0,1",
+  "threads_per_worker": 2,
+  "wall_inference_s": 687.336,
+  "wall_stitch_s": 19.533,
+  "wall_total_s": 706.868,
+  "workers": [
+    {
+      "worker_id": "s1c-single",
+      "tasks_completed": 112,
+      "runtime_seconds": 448.4037582520032,
+      "status": "completed"
+    }
+  ],
+  "sum_worker_runtime_s": 448.404,
+  "peak_rss_children_mb": 666.5,
+  "output_sha256": "3289e3e02928ac688002adc621124ac73d3730f67a5a0d0a5cabe351a6cfd181",
+  "completed_tiles": 112,
+  "match_r1_master": true
+}

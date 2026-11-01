@@ -1,0 +1,60 @@
+{
+  "program": "SIAX_VALIDATION_R2",
+  "phase": "S1-C",
+  "asof_utc": "2026-11-01T11:54:56Z",
+  "status": "COMPLETE_3_ROUNDS",
+  "host": {
+    "logical_cpus": 2,
+    "N": 2,
+    "design": "single=2thr@0,1; dual=1@0 + 1@1"
+  },
+  "fixed": {
+    "base_asset": "e283276e-0895-4c2e-89bf-b4e69c40b3e3",
+    "base_sha256": "4f1df41f1f9f1b0c7d43519321b03ec303a277d5cad9c9f55a36db8e61407994",
+    "checkpoint_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+    "tile": "128/8",
+    "tiles": 112
+  },
+  "pilot_R1_uncontrolled_not_pooled": {
+    "single_s": 451.3,
+    "dual_wall_s": 650.0,
+    "speedup": 0.694
+  },
+  "per_round": [
+    {
+      "round": 1,
+      "single_wall_inf_s": 699.272,
+      "dual_wall_inf_s": 548.238,
+      "speedup": 1.275,
+      "sha_ok": true
+    },
+    {
+      "round": 2,
+      "single_wall_inf_s": 687.336,
+      "dual_wall_inf_s": 555.686,
+      "speedup": 1.237,
+      "sha_ok": true
+    },
+    {
+      "round": 3,
+      "single_wall_inf_s": 697.072,
+      "dual_wall_inf_s": 550.116,
+      "speedup": 1.267,
+      "sha_ok": true
+    }
+  ],
+  "median": {
+    "single_wall_inference_s": 697.072,
+    "dual_wall_inference_s": 550.116,
+    "single_wall_total_s": 716.812,
+    "dual_wall_total_s": 569.187,
+    "pair_speedup_median": 1.267
+  },
+  "verdict": {
+    "correctness": "PASS",
+    "same_host_dual_speed_vs_single": "PASS",
+    "note": "Controlled affinity dual faster than single under same N=2 budget. Pilot dual slow = oversubscription."
+  },
+  "final_acceptance": false,
+  "next": "E2 S2 tile/halo quality matrix"
+}

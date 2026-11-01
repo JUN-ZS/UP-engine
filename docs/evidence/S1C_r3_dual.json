@@ -1,0 +1,29 @@
+{
+  "arm": "dual",
+  "threads_total": 2,
+  "affinity": "0 | 1",
+  "threads_per_worker": 1,
+  "wall_inference_s": 550.116,
+  "wall_stitch_s": 19.071,
+  "wall_total_s": 569.187,
+  "workers": [
+    {
+      "worker_id": "s1c-dual-a",
+      "tasks_completed": 56,
+      "runtime_seconds": 421.34806017700157,
+      "status": "completed"
+    },
+    {
+      "worker_id": "s1c-dual-b",
+      "tasks_completed": 56,
+      "runtime_seconds": 416.57998474500255,
+      "status": "completed"
+    }
+  ],
+  "sum_worker_runtime_s": 837.928,
+  "peak_rss_children_mb": 687.4,
+  "output_sha256": "3289e3e02928ac688002adc621124ac73d3730f67a5a0d0a5cabe351a6cfd181",
+  "completed_tiles": 112,
+  "match_r1_master": true,
+  "source": "s1c_run_arm.py on r3_complete_dual job (terminal 01a196ec)"
+}
