@@ -341,3 +341,11 @@ python tools/spm_here_grab.py --package warrior_mud_hammer --variant base --run-
 ```
 
 See `.grok/SPM_HERE_CLI.md`.
+
+
+---
+
+## 12. SPM Distill（未實作）
+
+See **[SPM_DISTILL_CHARTER.md](./SPM_DISTILL_CHARTER.md)** — scope / non-goals / boundary vs SPM-A.  
+No training code. Native Siax + tile cell remains the default execution path.
