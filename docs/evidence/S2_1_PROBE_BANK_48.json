@@ -1,0 +1,691 @@
+{
+  "format": "ige.siax.spm_a_probe_bank",
+  "format_version": "1.0",
+  "base_path": "runs/fair_e283/BASE.jpg",
+  "base_wh": [
+    1792,
+    1008
+  ],
+  "probe_hw": [
+    48,
+    64
+  ],
+  "n_probes": 48,
+  "probes": [
+    {
+      "probe_id": "p00",
+      "kind": "lattice",
+      "box_base": [
+        183,
+        127,
+        247,
+        175
+      ],
+      "center_base": [
+        215,
+        151
+      ]
+    },
+    {
+      "probe_id": "p01",
+      "kind": "lattice",
+      "box_base": [
+        469,
+        127,
+        533,
+        175
+      ],
+      "center_base": [
+        501,
+        151
+      ]
+    },
+    {
+      "probe_id": "p02",
+      "kind": "lattice",
+      "box_base": [
+        756,
+        127,
+        820,
+        175
+      ],
+      "center_base": [
+        788,
+        151
+      ]
+    },
+    {
+      "probe_id": "p03",
+      "kind": "lattice",
+      "box_base": [
+        1043,
+        127,
+        1107,
+        175
+      ],
+      "center_base": [
+        1075,
+        151
+      ]
+    },
+    {
+      "probe_id": "p04",
+      "kind": "lattice",
+      "box_base": [
+        1329,
+        127,
+        1393,
+        175
+      ],
+      "center_base": [
+        1361,
+        151
+      ]
+    },
+    {
+      "probe_id": "p05",
+      "kind": "lattice",
+      "box_base": [
+        1580,
+        127,
+        1644,
+        175
+      ],
+      "center_base": [
+        1612,
+        151
+      ]
+    },
+    {
+      "probe_id": "p06",
+      "kind": "lattice",
+      "box_base": [
+        183,
+        328,
+        247,
+        376
+      ],
+      "center_base": [
+        215,
+        352
+      ]
+    },
+    {
+      "probe_id": "p07",
+      "kind": "lattice",
+      "box_base": [
+        469,
+        328,
+        533,
+        376
+      ],
+      "center_base": [
+        501,
+        352
+      ]
+    },
+    {
+      "probe_id": "p08",
+      "kind": "lattice",
+      "box_base": [
+        756,
+        328,
+        820,
+        376
+      ],
+      "center_base": [
+        788,
+        352
+      ]
+    },
+    {
+      "probe_id": "p09",
+      "kind": "lattice",
+      "box_base": [
+        1043,
+        328,
+        1107,
+        376
+      ],
+      "center_base": [
+        1075,
+        352
+      ]
+    },
+    {
+      "probe_id": "p10",
+      "kind": "lattice",
+      "box_base": [
+        1329,
+        328,
+        1393,
+        376
+      ],
+      "center_base": [
+        1361,
+        352
+      ]
+    },
+    {
+      "probe_id": "p11",
+      "kind": "lattice",
+      "box_base": [
+        1580,
+        328,
+        1644,
+        376
+      ],
+      "center_base": [
+        1612,
+        352
+      ]
+    },
+    {
+      "probe_id": "p12",
+      "kind": "lattice",
+      "box_base": [
+        183,
+        530,
+        247,
+        578
+      ],
+      "center_base": [
+        215,
+        554
+      ]
+    },
+    {
+      "probe_id": "p13",
+      "kind": "lattice",
+      "box_base": [
+        469,
+        530,
+        533,
+        578
+      ],
+      "center_base": [
+        501,
+        554
+      ]
+    },
+    {
+      "probe_id": "p14",
+      "kind": "lattice",
+      "box_base": [
+        756,
+        530,
+        820,
+        578
+      ],
+      "center_base": [
+        788,
+        554
+      ]
+    },
+    {
+      "probe_id": "p15",
+      "kind": "lattice",
+      "box_base": [
+        1043,
+        530,
+        1107,
+        578
+      ],
+      "center_base": [
+        1075,
+        554
+      ]
+    },
+    {
+      "probe_id": "p16",
+      "kind": "lattice",
+      "box_base": [
+        1329,
+        530,
+        1393,
+        578
+      ],
+      "center_base": [
+        1361,
+        554
+      ]
+    },
+    {
+      "probe_id": "p17",
+      "kind": "lattice",
+      "box_base": [
+        1580,
+        530,
+        1644,
+        578
+      ],
+      "center_base": [
+        1612,
+        554
+      ]
+    },
+    {
+      "probe_id": "p18",
+      "kind": "lattice",
+      "box_base": [
+        183,
+        732,
+        247,
+        780
+      ],
+      "center_base": [
+        215,
+        756
+      ]
+    },
+    {
+      "probe_id": "p19",
+      "kind": "lattice",
+      "box_base": [
+        469,
+        732,
+        533,
+        780
+      ],
+      "center_base": [
+        501,
+        756
+      ]
+    },
+    {
+      "probe_id": "p20",
+      "kind": "lattice",
+      "box_base": [
+        756,
+        732,
+        820,
+        780
+      ],
+      "center_base": [
+        788,
+        756
+      ]
+    },
+    {
+      "probe_id": "p21",
+      "kind": "lattice",
+      "box_base": [
+        1043,
+        732,
+        1107,
+        780
+      ],
+      "center_base": [
+        1075,
+        756
+      ]
+    },
+    {
+      "probe_id": "p22",
+      "kind": "lattice",
+      "box_base": [
+        1329,
+        732,
+        1393,
+        780
+      ],
+      "center_base": [
+        1361,
+        756
+      ]
+    },
+    {
+      "probe_id": "p23",
+      "kind": "lattice",
+      "box_base": [
+        1580,
+        732,
+        1644,
+        780
+      ],
+      "center_base": [
+        1612,
+        756
+      ]
+    },
+    {
+      "probe_id": "p24",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        76,
+        121,
+        124
+      ],
+      "center_base": [
+        89,
+        100
+      ]
+    },
+    {
+      "probe_id": "p25",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        197,
+        121,
+        245
+      ],
+      "center_base": [
+        89,
+        221
+      ]
+    },
+    {
+      "probe_id": "p26",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        318,
+        121,
+        366
+      ],
+      "center_base": [
+        89,
+        342
+      ]
+    },
+    {
+      "probe_id": "p27",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        439,
+        121,
+        487
+      ],
+      "center_base": [
+        89,
+        463
+      ]
+    },
+    {
+      "probe_id": "p28",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        560,
+        121,
+        608
+      ],
+      "center_base": [
+        89,
+        584
+      ]
+    },
+    {
+      "probe_id": "p29",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        681,
+        121,
+        729
+      ],
+      "center_base": [
+        89,
+        705
+      ]
+    },
+    {
+      "probe_id": "p30",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        802,
+        121,
+        850
+      ],
+      "center_base": [
+        89,
+        826
+      ]
+    },
+    {
+      "probe_id": "p31",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        903,
+        121,
+        951
+      ],
+      "center_base": [
+        89,
+        927
+      ]
+    },
+    {
+      "probe_id": "p32",
+      "kind": "focus",
+      "box_base": [
+        864,
+        56,
+        928,
+        104
+      ],
+      "center_base": [
+        896,
+        80
+      ]
+    },
+    {
+      "probe_id": "p33",
+      "kind": "focus",
+      "box_base": [
+        864,
+        903,
+        928,
+        951
+      ],
+      "center_base": [
+        896,
+        927
+      ]
+    },
+    {
+      "probe_id": "p34",
+      "kind": "focus",
+      "box_base": [
+        111,
+        480,
+        175,
+        528
+      ],
+      "center_base": [
+        143,
+        504
+      ]
+    },
+    {
+      "probe_id": "p35",
+      "kind": "focus",
+      "box_base": [
+        1616,
+        480,
+        1680,
+        528
+      ],
+      "center_base": [
+        1648,
+        504
+      ]
+    },
+    {
+      "probe_id": "p36",
+      "kind": "focus",
+      "box_base": [
+        416,
+        228,
+        480,
+        276
+      ],
+      "center_base": [
+        448,
+        252
+      ]
+    },
+    {
+      "probe_id": "p37",
+      "kind": "focus",
+      "box_base": [
+        1312,
+        228,
+        1376,
+        276
+      ],
+      "center_base": [
+        1344,
+        252
+      ]
+    },
+    {
+      "probe_id": "p38",
+      "kind": "focus",
+      "box_base": [
+        416,
+        732,
+        480,
+        780
+      ],
+      "center_base": [
+        448,
+        756
+      ]
+    },
+    {
+      "probe_id": "p39",
+      "kind": "focus",
+      "box_base": [
+        1312,
+        732,
+        1376,
+        780
+      ],
+      "center_base": [
+        1344,
+        756
+      ]
+    },
+    {
+      "probe_id": "p40",
+      "kind": "focus",
+      "box_base": [
+        595,
+        379,
+        659,
+        427
+      ],
+      "center_base": [
+        627,
+        403
+      ]
+    },
+    {
+      "probe_id": "p41",
+      "kind": "focus",
+      "box_base": [
+        1132,
+        379,
+        1196,
+        427
+      ],
+      "center_base": [
+        1164,
+        403
+      ]
+    },
+    {
+      "probe_id": "p42",
+      "kind": "focus",
+      "box_base": [
+        595,
+        580,
+        659,
+        628
+      ],
+      "center_base": [
+        627,
+        604
+      ]
+    },
+    {
+      "probe_id": "p43",
+      "kind": "focus",
+      "box_base": [
+        1132,
+        580,
+        1196,
+        628
+      ],
+      "center_base": [
+        1164,
+        604
+      ]
+    },
+    {
+      "probe_id": "p44",
+      "kind": "focus",
+      "box_base": [
+        720,
+        157,
+        784,
+        205
+      ],
+      "center_base": [
+        752,
+        181
+      ]
+    },
+    {
+      "probe_id": "p45",
+      "kind": "focus",
+      "box_base": [
+        1007,
+        157,
+        1071,
+        205
+      ],
+      "center_base": [
+        1039,
+        181
+      ]
+    },
+    {
+      "probe_id": "p46",
+      "kind": "focus",
+      "box_base": [
+        720,
+        802,
+        784,
+        850
+      ],
+      "center_base": [
+        752,
+        826
+      ]
+    },
+    {
+      "probe_id": "p47",
+      "kind": "focus",
+      "box_base": [
+        1007,
+        802,
+        1071,
+        850
+      ],
+      "center_base": [
+        1039,
+        826
+      ]
+    }
+  ],
+  "note": "Fixed geometry for all tile cells; not material-labeled yet. final_acceptance false.",
+  "final_acceptance": false,
+  "bank_sha256": "1267b78b1b957cb16057b978e2aabe720a5e1d69712eb6edcec8636aa7837af9"
+}

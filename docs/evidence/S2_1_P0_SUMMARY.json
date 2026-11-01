@@ -1,0 +1,87 @@
+{
+  "program": "SIAX_S2_1_P0_COMPLETE",
+  "asof_utc": "2026-11-01T13:34:46Z",
+  "final_acceptance": false,
+  "base_commit_design": "92b3e98",
+  "ram_profile": {
+    "evidence_grade": "OBSERVED",
+    "method": "subprocess synthetic RNG forward per size; 1 thread",
+    "peaks_maxrss_mb": {
+      "144x144": 663.67,
+      "160x160": 725.57,
+      "288x288": 1473.67,
+      "320x320": 1664.96
+    },
+    "labels": {
+      "144x144": "128/8 input",
+      "160x160": "128/16 input",
+      "288x288": "256/16 input",
+      "320x320": "256/32 input"
+    },
+    "oom_in_isolation": [],
+    "canvas_stage": {
+      "stage": "after_canvas_7168x4032",
+      "rss_mb": 450.88,
+      "maxrss_mb": 1650.89,
+      "t_s": 331.104169,
+      "canvas_bytes": 86704128,
+      "canvas_mib": 82.69,
+      "delta_rss_mb": 0.0
+    },
+    "interpretation": [
+      "Isolated 320x320 forward SUCCEEDS with maxrss ~1665 MiB on 1.9 GiB host.",
+      "Peak scales strongly with input area (144→664, 288→1474, 320→1665 MiB maxrss).",
+      "Full-job 256/32 OOM remains consistent with forward peak near ceiling PLUS base/canvas/runtime headroom — not disproved; refined from pure \"320 cannot forward\".",
+      "Canvas 7168x4032 uint8 alone is small vs forward peak."
+    ]
+  },
+  "spm_a": {
+    "evidence_grade": "OBSERVED",
+    "bank_sha256": "1267b78b1b957cb16057b978e2aabe720a5e1d69712eb6edcec8636aa7837af9",
+    "n_probes": 48,
+    "summary": {
+      "mae_residual_p50": 3.886912027994792,
+      "mae_residual_p95": 6.6636145697699645,
+      "residual_hf_p50": 6.378968238830566,
+      "residual_hf_p95": 10.633862209320068
+    },
+    "note": "Real Siax residual vs Lanczos on fixed 48x64 probes — fingerprint bank, not full-frame rank."
+  },
+  "seam_controls": {
+    "evidence_grade": "OBSERVED",
+    "fixed_fracs": true,
+    "cells": {
+      "128_8": {
+        "matched_excess_strip_mae_p50": -0.03385416666666674,
+        "matched_excess_strip_mae_p95": 4.604166666666663,
+        "n_pairs": 160
+      },
+      "128_16": {
+        "matched_excess_strip_mae_p50": 2.220446049250313e-16,
+        "matched_excess_strip_mae_p95": 5.146093749999992,
+        "n_pairs": 160
+      },
+      "256_16": {
+        "matched_excess_strip_mae_p50": 0.453125,
+        "matched_excess_strip_mae_p95": 6.866927083333335,
+        "n_pairs": 72
+      }
+    },
+    "rank_by_excess_p50_lower_better": [
+      "128_8",
+      "128_16",
+      "256_16"
+    ],
+    "interpretation": [
+      "128/8 and 128/16 excess p50 ~ 0 (seam ≈ matched control).",
+      "256/16 excess p50 ~ 0.45 (mildly higher).",
+      "p95 still large for all — natural edges in samples; do not overclaim.",
+      "Replaces biased SPM-approx interior sampling for cross-cell seam compare."
+    ]
+  },
+  "next": [
+    "P1 nested compute RF",
+    "P1 strip finalizer",
+    "optional 256/32 full job with memory budget from profile"
+  ]
+}

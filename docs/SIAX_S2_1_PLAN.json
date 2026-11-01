@@ -12,7 +12,11 @@
     "256_32": "OOM_BLOCKED quality_unknown",
     "oom_hypothesis": "tile_forward_activation_peak",
     "oom_evidence_grade": "Hypothesis_until_staged_RSS",
-    "spm_approx_bias": ["interior_probe_fallback_differs_by_tile", "no_matched_non_seam_control", "not_true_01239_residual"]
+    "spm_approx_bias": [
+      "interior_probe_fallback_differs_by_tile",
+      "no_matched_non_seam_control",
+      "not_true_01239_residual"
+    ]
   },
   "layers": {
     "Siax": "4x CNN/GAN executor",
@@ -26,18 +30,52 @@
     "compute_context": "RF-measured interior context"
   },
   "steps": [
-    {"id": "S2.1.1", "name": "fix_diagnostics", "status": "TODO"},
-    {"id": "S2.1.2", "name": "staged_peak_rss_256_32", "status": "TODO"},
-    {"id": "S2.1.3", "name": "nested_compute_tile_rf", "status": "TODO"},
-    {"id": "S2.1.4", "name": "virtual_master_store", "status": "TODO"},
-    {"id": "S2.1.5", "name": "s2_quality_reaccept", "status": "TODO"},
-    {"id": "S2.1.6", "name": "e3_speed_qualified_only", "status": "TODO"}
+    {
+      "id": "S2.1.1",
+      "name": "fix_diagnostics",
+      "status": "DONE_P0"
+    },
+    {
+      "id": "S2.1.2",
+      "name": "staged_peak_rss_256_32",
+      "status": "DONE_P0"
+    },
+    {
+      "id": "S2.1.3",
+      "name": "nested_compute_tile_rf",
+      "status": "TODO"
+    },
+    {
+      "id": "S2.1.4",
+      "name": "virtual_master_store",
+      "status": "TODO"
+    },
+    {
+      "id": "S2.1.5",
+      "name": "s2_quality_reaccept",
+      "status": "TODO"
+    },
+    {
+      "id": "S2.1.6",
+      "name": "e3_speed_qualified_only",
+      "status": "TODO"
+    }
   ],
-  "oom_stages": ["model_load", "tile_forward", "output_stitch", "final_encode"],
+  "oom_stages": [
+    "model_load",
+    "tile_forward",
+    "output_stitch",
+    "final_encode"
+  ],
   "virtual_master_not": [
     "universal_oom_eraser",
     "identity_gate",
     "license_to_claim_unrun_256_32"
   ],
-  "final_acceptance": false
+  "final_acceptance": false,
+  "p0": {
+    "status": "DONE",
+    "summary": "docs/evidence/S2_1_P0_SUMMARY.json",
+    "asof_utc": "2026-11-01T13:34:46Z"
+  }
 }
