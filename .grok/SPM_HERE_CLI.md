@@ -41,3 +41,28 @@ Grok CLI 若只能跑 shell 指令，讓它執行 **同一條** `spm_cli.ps1 run
 
 可另開：`python tools\spm_here_pull.py --watch`  
 `run` 模式會自己 `process_one`，**不必**與 watch 同時搶同一 request。
+
+
+## 为什么是 warrior_mud_hammer？
+
+那只是**第一张** HERE 示例图的 **package_id**（雷暴泥地战锤），不是全局唯一品牌名。
+
+以后每张新图 = **新 package_id**：
+
+```powershell
+# 1) 把新 BASE 存到本机任意路径，例如 D:\s3_share\spm_in\raw_new.jpg
+# 2) 登记进 git package 目录
+.\tools\spm_cli.ps1 pack -Package street_rain_v1 -Image D:\s3_share\spm_in\raw_new.jpg
+
+# 3) 跑本机 Siax（名字换成你的 package）
+.\tools\spm_cli.ps1 run -Package street_rain_v1 -Cell 256/16
+```
+
+或 Python：
+
+```powershell
+python tools\spm_here_pack.py create --package street_rain_v1 --image D:\path\BASE.jpg
+python tools\spm_here_grab.py --package street_rain_v1 --variant base --run-siax --cell 256/16
+```
+
+HERE 对话流程：生图 → 你/我把图写入 `packages/spm_here/<id>/` 并 commit → CLI 用 **那个 id** 抓。
