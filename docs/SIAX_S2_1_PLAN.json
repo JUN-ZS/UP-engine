@@ -1,7 +1,7 @@
 {
   "program": "SIAX_S2_1_R3",
   "title": "Memory-aware Nested Tile Executor + Virtual Master",
-  "asof_utc": "2026-11-01T15:25:28Z",
+  "asof_utc": "2026-11-01T15:35:15Z",
   "base_commit": "463cce1aa20ad4067c8e29b7ced999c6422acc58",
   "relation_to_pr7": "isolated_follow_on_draft; do_not_rewrite_pr7_evidence",
   "decision": "Do not primary-path buy-RAM re-run 256/32; evolve architecture",
@@ -116,5 +116,17 @@
       "quality_qualified": false,
       "decision_doc": "docs/evidence/S2_1_P1_QUALITY_DECISION.json"
     }
+  },
+  "freeze": {
+    "status": "FROZEN",
+    "asof_utc": "2026-11-01T15:35:15Z",
+    "head_note": "S2.1 closed; quality INCONCLUSIVE; integrity PASS",
+    "next_phase": "S3 Heterogeneous Upscale Execution on isolated branch",
+    "do_not": [
+      "128/16_bonus",
+      "256_32_oom_replay",
+      "flip_inconclusive_to_pass_without_same_sha_qc",
+      "claim_e3_from_s3_dev"
+    ]
   }
 }
