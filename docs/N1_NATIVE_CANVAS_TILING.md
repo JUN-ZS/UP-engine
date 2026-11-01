@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `N1_SCAFFOLD_V0` · charter + plan/init/stitch tools |
+| **Status** | `N1_SCAFFOLD_OK` · scaffold + **local PC** plan/init/smoke |
 | **asof** | 2026-11-02 |
 | **native_4k_success** | `false` |
 | **final_acceptance** | `false` |
@@ -84,3 +84,12 @@ Scaffold success **≠** native 4K product success.
 - **N2** supplies *what* draws inside a native tile (generative SPM).  
 - **N3** may add Siax high-freq *inside* a tile after structure exists.  
 - **N1** owns **canvas + tile ledger + stitch** only.
+
+
+---
+
+## 7. Local PC confirmation
+
+Evidence: `docs/evidence/N1_SCAFFOLD_LOCAL_PC.json`  
+User host: 3840×2160 plan (45 tiles), empty canvas, Lanczos structure fit, smoke 15/15.  
+**Still not** N1_GEN_PILOT_OK / NATIVE_4K_PILOT_OK.
