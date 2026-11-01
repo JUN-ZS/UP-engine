@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jun-zs.local/schemas/s3-child-receipt.schema.json",
+  "title": "S3ChildReceipt",
+  "type": "object",
+  "required": [
+    "receipt_version", "child_id", "job_id", "worker_id", "adapter_id",
+    "model_id", "model_sha256", "uri", "sha256",
+    "core_box_base", "input_box_base", "output_box_hires", "status"
+  ],
+  "properties": {
+    "receipt_version": { "type": "string" },
+    "child_id": { "type": "string" },
+    "job_id": { "type": "string" },
+    "worker_id": { "type": "string" },
+    "adapter_id": { "type": "string" },
+    "model_id": { "type": "string" },
+    "model_sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "uri": { "type": "string" },
+    "sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "core_box_base": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "integer" } },
+    "input_box_base": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "integer" } },
+    "output_box_hires": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "integer" } },
+    "wall_s": { "type": "number" },
+    "peak_rss_mib": { "type": ["number", "null"] },
+    "peak_vram_mib": { "type": ["number", "null"] },
+    "status": { "type": "string", "enum": ["ok", "failed", "cancelled"] },
+    "error": { "type": ["string", "null"] }
+  },
+  "additionalProperties": true
+}

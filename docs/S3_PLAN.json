@@ -1,0 +1,30 @@
+{
+  "program": "UPSCALE_S3_HETEROGENEOUS",
+  "title": "Heterogeneous Upscale Execution Engine",
+  "asof_utc": "2026-11-01T15:40:00Z",
+  "branch": "feat/upscale-s3-heterogeneous-runner-v0.1",
+  "base_freeze_s21": "297ba74",
+  "relation_to_pr8": "isolated_follow_on; do_not_rewrite_s21_quality_decision",
+  "final_acceptance": false,
+  "e3_speed_claim": false,
+  "modules": {
+    "capability_scheduler": "TODO",
+    "reliable_transport": "TODO",
+    "artifact_integrity": "REUSE_S21_STRICT",
+    "siax_adapter": "TODO",
+    "virtual_master_rebuild": "REUSE_STRIP_FINALIZE"
+  },
+  "steps": [
+    {"id": "S3.0", "name": "architecture_lock_schemas", "status": "IN_PROGRESS"},
+    {"id": "S3.1", "name": "transport_lease_heartbeat_fs", "status": "TODO"},
+    {"id": "S3.2", "name": "capability_scheduler_v0", "status": "TODO"},
+    {"id": "S3.3", "name": "siax_adapter_wrap", "status": "TODO"},
+    {"id": "S3.4", "name": "synthetic_multi_worker_sim", "status": "TODO"},
+    {"id": "S3.5", "name": "dual_host_pilot_optional", "status": "TODO"}
+  ],
+  "workstreams": {
+    "A_s21": "FROZEN on PR8",
+    "B_same_sha_qc": "optional_human_only",
+    "C_s3": "this_branch"
+  }
+}

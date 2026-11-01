@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jun-zs.local/schemas/s3-adapter.schema.json",
+  "title": "S3UpscaleAdapterDescriptor",
+  "type": "object",
+  "required": ["adapter_id", "model_family", "scale", "run_unit"],
+  "properties": {
+    "adapter_id": { "type": "string" },
+    "model_family": { "type": "string" },
+    "scale": { "type": "integer", "minimum": 1 },
+    "run_unit": { "type": "string", "enum": ["compute_child", "tile", "full_frame"] },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}

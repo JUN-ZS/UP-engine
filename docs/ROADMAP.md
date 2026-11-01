@@ -64,3 +64,12 @@
 ## Exit criteria
 
 A phase is not complete because a document or demo exists. It requires executable tests, evidence outputs, reproducible fixtures, and explicit failure cases. No generated image is accepted solely because the model returns an image.
+
+
+## S3 Heterogeneous Upscale Execution (2026-11)
+
+- **S2.1 frozen** on PR #8 (`docs/SIAX_S2_1_FREEZE.md`): Integrity PASS · Quality INCONCLUSIVE · `final_acceptance=false`.
+- **S3** isolated branch `feat/upscale-s3-heterogeneous-runner-v0.1`: capability scheduler · lease transport · model adapters · artifact integrity.
+- S3 does **not** flip Nested quality or claim E3 speed.
+- Design: `docs/S3_HETEROGENEOUS_UPSCALE_ENGINE.md`
+
