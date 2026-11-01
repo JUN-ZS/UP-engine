@@ -1,27 +1,78 @@
 {
   "program": "UPSCALE_S3_HETEROGENEOUS",
   "title": "Heterogeneous Upscale Execution Engine",
-  "asof_utc": "2026-11-01T15:40:00Z",
+  "asof_utc": "2026-11-01T15:45:53Z",
   "branch": "feat/upscale-s3-heterogeneous-runner-v0.1",
   "base_freeze_s21": "297ba74",
   "relation_to_pr8": "isolated_follow_on; do_not_rewrite_s21_quality_decision",
   "final_acceptance": false,
   "e3_speed_claim": false,
   "modules": {
-    "capability_scheduler": "TODO",
-    "reliable_transport": "TODO",
-    "artifact_integrity": "REUSE_S21_STRICT",
-    "siax_adapter": "TODO",
-    "virtual_master_rebuild": "REUSE_STRIP_FINALIZE"
+    "capability_scheduler": "DONE_V0",
+    "reliable_transport": "DONE_V0_FS_LEASE",
+    "artifact_integrity": "DONE_PIXEL_MATCH",
+    "siax_adapter": "DONE_V0_WIRED",
+    "virtual_master_rebuild": "DONE_REBUILD_FROM_RECEIPTS",
+    "synthetic_adapter": "DONE"
   },
   "steps": [
-    {"id": "S3.0", "name": "architecture_lock_schemas", "status": "IN_PROGRESS"},
-    {"id": "S3.1", "name": "transport_lease_heartbeat_fs", "status": "TODO"},
-    {"id": "S3.2", "name": "capability_scheduler_v0", "status": "TODO"},
-    {"id": "S3.3", "name": "siax_adapter_wrap", "status": "TODO"},
-    {"id": "S3.4", "name": "synthetic_multi_worker_sim", "status": "TODO"},
-    {"id": "S3.5", "name": "dual_host_pilot_optional", "status": "TODO"}
+    {
+      "id": "S3.0",
+      "name": "architecture_lock_schemas",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.1",
+      "name": "transport_lease_heartbeat_fs",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.2",
+      "name": "capability_scheduler_v0",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.3",
+      "name": "siax_adapter_wrap",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.4",
+      "name": "synthetic_multi_worker_sim",
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/S3_SIM_SYNTHETIC_MULTI_WORKER.json",
+        "docs/evidence/S3_SIM_SIAX_MINI_MULTI_WORKER.json"
+      ]
+    },
+    {
+      "id": "S3.5",
+      "name": "dual_host_pilot_optional",
+      "status": "DOCUMENTED_NOT_RUN",
+      "doc": "docs/S3_DUAL_HOST_PILOT.md"
+    }
   ],
+  "observed": {
+    "synthetic_16_children": {
+      "ok": true,
+      "workers": {
+        "w_fast": 9,
+        "w_slow": 7
+      },
+      "integrity_pixel_ok": true,
+      "output_sha256": "72b562cea6041c52faf4b0efa74c5a8cc90410bad5cfa868508ed71dd79f8ff1"
+    },
+    "siax_mini_4_children": {
+      "ok": true,
+      "workers": {
+        "w1": 2,
+        "w2": 2
+      },
+      "integrity_pixel_ok": true,
+      "output_sha256": "28c5751a483a31668d2d798e44a726be48e828678ba523537f81909cb954f15c",
+      "note": "real Siax dual-process on 128x128 region; not full-frame quality claim"
+    }
+  },
   "workstreams": {
     "A_s21": "FROZEN on PR8",
     "B_same_sha_qc": "optional_human_only",

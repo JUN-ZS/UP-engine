@@ -1,0 +1,92 @@
+{
+  "program": "S3_MULTI_WORKER_SIM",
+  "mode": "synthetic",
+  "job_id": "s3_synthetic_1793547794",
+  "base": "runs/fair_e283/BASE.jpg",
+  "base_sha256": "4f1df41f1f9f1b0c7d43519321b03ec303a277d5cad9c9f55a36db8e61407994",
+  "plan": {
+    "child_count": 16,
+    "compute_core": 64,
+    "compute_context": 0,
+    "region": [
+      0,
+      0,
+      256,
+      256
+    ],
+    "output_wh": [
+      1024,
+      1024
+    ]
+  },
+  "assignment": {
+    "assigned_n": 16,
+    "unassigned": [],
+    "by_worker_hint": {
+      "w_fast": 8,
+      "w_slow": 8
+    }
+  },
+  "execution": {
+    "wall_s": 71.922,
+    "receipts_n": 16,
+    "by_worker_completed": {
+      "w_slow": 7,
+      "w_fast": 9
+    },
+    "process_exits": {
+      "w_fast": {
+        "exitcode": 0,
+        "alive": false
+      },
+      "w_slow": {
+        "exitcode": 0,
+        "alive": false
+      }
+    },
+    "pending_left": 0,
+    "failed_n": 0
+  },
+  "rebuild": {
+    "output_path": "/workspace/artifacts/up-engine/runs/s3_sim_synthetic/OUT_PRIMARY.png",
+    "output_sha256": "72b562cea6041c52faf4b0efa74c5a8cc90410bad5cfa868508ed71dd79f8ff1",
+    "output_bytes": 171523,
+    "output_dimensions": {
+      "width": 1024,
+      "height": 1024
+    },
+    "children_placed": [
+      "c_0000_0000",
+      "c_0000_0064",
+      "c_0000_0128",
+      "c_0000_0192",
+      "c_0064_0000",
+      "c_0064_0064",
+      "c_0064_0128",
+      "c_0064_0192",
+      "c_0128_0000",
+      "c_0128_0064",
+      "c_0128_0128",
+      "c_0128_0192",
+      "c_0192_0000",
+      "c_0192_0064",
+      "c_0192_0128",
+      "c_0192_0192"
+    ],
+    "n_placed": 16,
+    "final_acceptance": false,
+    "quality_qualified": false,
+    "e3_speed_claim": false
+  },
+  "integrity": {
+    "checked": 16,
+    "pixel_mismatches": 0,
+    "ok": true,
+    "primary_sha256": "72b562cea6041c52faf4b0efa74c5a8cc90410bad5cfa868508ed71dd79f8ff1"
+  },
+  "ok": true,
+  "final_acceptance": false,
+  "quality_qualified": false,
+  "e3_speed_claim": false,
+  "note": "S3 dispatch/rebuild smoke only; not S2.1 quality flip; not E3"
+}
