@@ -1,5 +1,5 @@
 {
-  "program": "SIAX_S2_1_P0_PARTIAL",
+  "program": "SIAX_S2_1_P0_COMPLETE",
   "asof_utc": "2026-11-01T13:34:46Z",
   "final_acceptance": false,
   "base_commit_design": "92b3e98",
@@ -36,19 +36,9 @@
     ],
     "synthetic_forward_baseline_status": "OBSERVED_COMPLETE",
     "full_job_profile": {
-      "status": "IMPLEMENTED_NOT_RUN",
-      "tool": "tools/ram_profile_siax.py",
-      "invocation": "runs the exact run_siax_upscale path in a child process; stage callbacks cover model_load, input_preprocess, tile_forward, tile_postprocess, output_stitch, final_encode and metadata_write",
-      "safeguards": [
-        "available-memory preflight",
-        "RSS polling",
-        "stage-boundary process HWM",
-        "optional stricter RSS ceiling",
-        "timeout stop"
-      ],
-      "caveat": "RSS sampling and stage-boundary HWM are not a hard real-time memory guarantee; the first tile transient may still exceed a small host's limit",
-      "device_metrics": "CUDA allocated/reserved/peak allocation are recorded separately when device=cuda",
-      "final_acceptance": false
+      "status": "OPTIONAL_DIAGNOSTIC_IMPLEMENTED_NOT_RUN",
+      "is_p0_gate": false,
+      "note": "The full-image profiler was added as an optional future diagnostic. Do not run it merely to complete P0 and do not intentionally OOM the 1.9 GiB host."
     }
   },
   "spm_a": {
@@ -96,19 +86,25 @@
       "p95 still large for all — natural edges in samples; do not overclaim.",
       "Replaces biased SPM-approx interior sampling for cross-cell seam compare."
     ],
-    "comparability_status": "HISTORICAL_PROVISIONAL_GEOMETRY",
+    "comparability_status": "P0_DIAGNOSTICS_COMPLETE_CROSS_CELL_RANK_DIRECTIONAL",
     "old_control_offsets_output_px": {
       "128_8": 256,
       "128_16": 288,
       "256_16": 512
     },
-    "caveat": "The historical P0 seam reports used tile-dependent control offsets. The script is updated to one fixed BASE-space offset, but all three cell reports must be regenerated before cross-cell ranking is accepted."
+    "caveat": "The P0 outputs used fixed along-seam fractions and same-y paired control lines, but the control offset varied by cell. Therefore within-cell seam excess is observed; the cross-cell p50 ordering is directional only until the optional common-offset rerun."
   },
   "next": [
-    "run full real-image staged RAM profiles on the designated compute host",
-    "regenerate 128/8, 128/16 and 256/16 seam results using common BASE-space offset",
-    "compare fixed SPM-A bank against each full-frame output",
-    "only then proceed to Nested Compute Tile RF experiments"
+    "P1 Nested Compute Tile full run using small compute_core and resume",
+    "verify native child SHA/coverage and Virtual Master finalizer",
+    "perform quality re-acceptance; final_acceptance remains false",
+    "do not use a full 256/32 OOM replay as a completion gate"
   ],
-  "status": "PARTIAL"
+  "status": "DONE",
+  "completion_scope": {
+    "ram_profile": "Pinned-Siax synthetic single-forward per-size profile, each size subprocess-isolated. Completed; 320x320 succeeds at 1664.96 MiB max RSS.",
+    "spm_a": "Fixed 48x64 BASE-coordinate bank; real Siax crop residual against Lanczos observed.",
+    "seam_controls": "Per-cell seam-vs-nearby-control diagnostics run for 128/8, 128/16 and 256/16.",
+    "not_required": "Full BASE image run or deliberate full-job 256/32 OOM replay is not required to complete P0."
+  }
 }

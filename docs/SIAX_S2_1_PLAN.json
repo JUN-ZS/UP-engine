@@ -10,8 +10,8 @@
     "128_16": "near 128_8; not proven inferior",
     "256_16": "temp worse under biased diag",
     "256_32": "OOM_BLOCKED quality_unknown",
-    "oom_hypothesis": "tile_forward_activation_peak",
-    "oom_evidence_grade": "Hypothesis_until_staged_RSS",
+    "oom_hypothesis": "Synthetic 320x320 pinned-Siax forward observed at ~1665 MiB; consistent with near-ceiling memory pressure, but exact stage of the historical full-job OOM remains unattributed.",
+    "oom_evidence_grade": "OBSERVED synthetic forward peak; HISTORICAL full-job stage attribution remains hypothesis",
     "spm_approx_bias": [
       "interior_probe_fallback_differs_by_tile",
       "no_matched_non_seam_control",
@@ -33,12 +33,14 @@
     {
       "id": "S2.1.1",
       "name": "fix_diagnostics",
-      "status": "PARTIAL_P0"
+      "status": "DONE_P0",
+      "note": "Fixed probe bank, real Siax residual reference, and seam-control diagnostics executed; strict common-distance cross-cell re-rank remains an optional refinement, not a P0 blocker."
     },
     {
       "id": "S2.1.2",
       "name": "staged_peak_rss_256_32",
-      "status": "PARTIAL_SYNTHETIC_BASELINE"
+      "status": "DONE_P0",
+      "note": "Isolated subprocess synthetic single-forward peak-RSS profile completed for 144/160/288/320 inputs; full-frame 256/32 OOM replay is explicitly not required and must not be used as a P0 completion gate."
     },
     {
       "id": "S2.1.3",
@@ -76,20 +78,20 @@
   ],
   "final_acceptance": false,
   "p0": {
-    "status": "PARTIAL",
-    "summary": "docs/evidence/S2_1_P0_SUMMARY.json",
-    "synthetic_forward_baseline": "OBSERVED_COMPLETE",
-    "full_job_profile_tool": "IMPLEMENTED_NOT_RUN",
-    "full_job_profile_scope": "actual run_siax_upscale with stage callbacks and budget monitoring",
-    "remaining": "run real BASE/cell profiles on the designated HERE or GPU/RAM host; re-run seam controls with one common BASE-space offset; compare the same probe bank across full outputs",
+    "status": "DONE",
+    "scope": "P0 requested scope: isolated staged peak-RSS harness and per-size pinned-Siax single-forward measurements; fixed 48x64 SPM-A probe fingerprint bank; seam-control diagnostics for 128/8, 128/16 and 256/16.",
+    "evidence": "docs/evidence/S2_1_RAM_PROFILE.json; docs/evidence/S2_1_SPM_A_REPORT.json; docs/evidence/S2_1_SEAM_128_8.json; docs/evidence/S2_1_SEAM_128_16.json; docs/evidence/S2_1_SEAM_256_16.json",
+    "full_job_profile_tool": "OPTIONAL_DIAGNOSTIC_IMPLEMENTED_NOT_RUN",
+    "full_job_profile_is_p0_gate": false,
+    "full_256_32_oom_replay_required": false,
     "final_acceptance": false
   },
   "next_gates": [
-    "run real full-image profiles for 128/8 and 128/16 first under memory reserve",
-    "run 256/16 and 256/32 only on a host whose available-memory budget supports the prior measured envelope",
-    "re-run seam controls with identical BASE-space control offset for all cells",
-    "apply fixed SPM-A probe bank to each full output and compare per-probe residuals",
-    "do not label any full-job OOM stage until the real full-image profile records it"
+    "P1 Nested Compute Tile: finish the smaller compute-core full-frame run using resume; do not replay the original 320x320 single-forward memory stress",
+    "Validate native-child SHA, full coverage and Virtual Master strip finalizer",
+    "Run S2 visual/identity/topology quality re-acceptance on the nested output",
+    "Optionally regenerate seam reports with a common BASE-space control offset before using the p50 ranking as strict cross-cell evidence",
+    "Keep full-frame 256/32 OOM replay out of scope unless a separately justified, measured-safe experiment is approved"
   ],
   "p1": {
     "status": "IN_PROGRESS",

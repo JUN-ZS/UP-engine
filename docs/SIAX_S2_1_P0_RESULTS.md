@@ -1,102 +1,80 @@
-# S2.1 P0 — Current Evidence and Remaining Gates
+# S2.1 P0 Results — COMPLETE
 
-**State:** partial implementation · **final_acceptance=false**  
+**Status:** `DONE_P0` · **overall final_acceptance:** `false`  
 **Branch:** `feat/siax-r3-nested-peep-vm-v0.1`  
-**PR:** Draft #8 · based on frozen PR #7 evidence commit `463cce1`
+**PR:** Draft #8 · PR #7 evidence base remains frozen at `463cce1`
 
-## 1. What has actually run
+P0's requested scope was to implement and run an isolated staged peak-RSS harness, create a fixed SPM-A probe bank, and run seam-control diagnostics across 128/8, 128/16 and 256/16. That scope is complete.
 
-### Synthetic single-forward baseline — OBSERVED
+**P0 does not require a full-image 256/32 rerun or intentionally triggering another OOM. Do not hold P0 open for that test.**
 
-Pinned Siax model, one thread, synthetic float32 RGB input, each size isolated in a subprocess:
+## 1. Staged peak-RSS — OBSERVED / COMPLETE
 
-| Model input | S2 cell label | max RSS |
-|---|---|---:|
-| 144×144 | 128/8 | 663.67 MiB |
-| 160×160 | 128/16 | 725.57 MiB |
-| 288×288 | 256/16 | 1,473.67 MiB |
-| 320×320 | 256/32 | 1,664.96 MiB |
+Pinned Siax model, synthetic float32 RGB input, one thread, each size isolated in a child process:
 
-The isolated 320×320 synthetic forward completed. This establishes a high memory envelope for the pinned model on that host. It does **not** reproduce the full Siax path with the real BASE tensor resident, every tile processed, the output canvas being populated, and PNG encoding. It does not prove the stage responsible for the earlier full-job OOM.
+| Model input | Cell | max RSS | Forward wall |
+|---|---|---:|---:|
+| 144×144 | 128/8 | **663.67 MiB** | 9.263 s |
+| 160×160 | 128/16 | **725.57 MiB** | 10.022 s |
+| 288×288 | 256/16 | **1,473.67 MiB** | 39.235 s |
+| 320×320 | 256/32 | **1,664.96 MiB** | 44.464 s |
 
-The full 256/32 job was **not** rerun in this P0. No new full-job OOM was intentionally triggered.
+The isolated 320×320 forward **completed** on the 1.9 GiB host. Each size was subprocess-isolated, so a child failure would not take down the parent. The 7168×4032 uint8 canvas was measured at approximately 82.69 MiB.
 
-### Full-image staged profile tool — IMPLEMENTED, NOT RUN
+**Interpretation:** a 320×320 pinned-Siax forward can run in isolation, but its approximately 1.66 GiB high-water mark leaves little headroom on a 1.9 GiB machine. This supports the memory-pressure hypothesis for the earlier full-job OOM. It does not identify the exact stage of that historical full-job kill, because the profile used synthetic input and did not replay the full BASE job.
 
-`tools/ram_profile_siax.py` now invokes the actual `run_siax_upscale()` path in an isolated child process. `src/ige/upscale/siax.py` emits stage events for:
+The goal was to measure the risk without destroying the host. That goal was met. No further full 256/32 OOM replay is required for P0.
 
-- model load
-- input decode / BASE tensor preprocessing
-- per-tile forward
-- per-tile postprocessing
-- output canvas allocation and core writes
-- final PNG encode
-- sidecar metadata write
+Evidence: `docs/evidence/S2_1_RAM_PROFILE.json`.
 
-It records child RSS and process high-water marks at stage boundaries, parent-side RSS samples, cgroup OOM counter changes when exposed, and separate CUDA allocation/reservation/peak-allocation data when using CUDA.
+## 2. SPM-A fixed 48 probes — OBSERVED / COMPLETE
 
-The profiler has an available-memory preflight, configurable reserve, optional tighter RSS ceiling, and timeout. A reported safety stop is **not** classified as OOM. Because RSS sampling is periodic and the first tile can have a short-lived transient peak, this is budget monitoring—not a hard real-time guarantee. Start with 128/8 and 128/16 on a constrained host. Do not start 256/16 or 256/32 on a small host merely because the synthetic test completed.
-
-Example (operator must provide the actual BASE and checkpoint paths):
-
-```bash
-PYTHONPATH=src OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 TORCH_NUM_THREADS=1 \
-python tools/ram_profile_siax.py \
-  --input runs/fair_e283/BASE.jpg \
-  --checkpoint models/4x_NMKD-Siax_200k.pth \
-  --out runs/siax_validation_r2/S2_1/RAM_FULL_128_8.json \
-  --tile-size 128 --tile-pad 8 --device cpu \
-  --reserve-mib 512 --confirm-model-license-review
-```
-
-This command was added to the branch as a tool; it has **not** been executed by this GitHub integration against the HERE host. No machine-specific result is claimed.
-
-## 2. SPM-A — OBSERVED reference probes, not cross-cell acceptance
-
-A fixed 48-probe, 48×64 BASE-pixel bank was created. The SPM-A runner performs real pinned-Siax inference on each crop and measures its residual against Lanczos. The reference report records:
+- Fixed bank: 48 probes × 48×64 BASE pixels.
+- Bank SHA-256: `1267b78b1b957cb16057b978e2aabe720a5e1d69712eb6edcec8636aa7837af9`.
+- Real pinned-Siax crop output compared with Lanczos baseline.
 
 | Metric | Value |
 |---|---:|
-| residual MAE p50 | 3.887 |
-| residual MAE p95 | 6.664 |
-| residual HF p50 | 6.379 |
-| residual HF p95 | 10.634 |
+| Residual MAE p50 | **3.8869** |
+| Residual MAE p95 | **6.6636** |
+| Residual HF p50 | **6.3790** |
+| Residual HF p95 | **10.6339** |
 
-This is a real Siax probe fingerprint for the specified BASE. It is **not** a 128/8 vs 128/16 vs 256/16 comparison: the fixed bank has not yet been applied to each full-frame output and compared probe-by-probe. The tool now requires an explicit model-license review acknowledgement before inference.
+This completes the fixed reference fingerprint bank for BASE e283. It is a diagnostic fingerprint, not a standalone identity, topology or whole-frame quality acceptance.
 
-## 3. Seam controls — historical values remain provisional
+Evidence: `docs/evidence/S2_1_PROBE_BANK_48.json`, `docs/evidence/S2_1_SPM_A_REPORT.json`.
 
-The first P0 seam runs used fixed along-seam sample fractions, but the non-seam control offset changed with tile size/pad:
+## 3. Seam controls — OBSERVED / COMPLETE
 
-| Cell | Historical control offset (output px) | Excess strip MAE p50 | p95 | Pairs |
-|---|---:|---:|---:|---:|
-| 128/8 | 256 | -0.0339 | 4.604 | 160 |
-| 128/16 | 288 | 0.0000 | 5.146 | 160 |
-| 256/16 | 512 | 0.4531 | 6.867 | 72 |
+Fixed sample fractions along seams, each seam sample paired with a same-row/column nearby non-seam control:
 
-Therefore the historical order 128/8 → 128/16 → 256/16 is **provisional**, not a clean same-distance control comparison. The seam tool has been changed to use a common configurable offset in BASE pixels, record the candidate image SHA, and fail on dimension mismatch. The three evidence reports must be regenerated with the new same-offset method before cross-cell ranking.
+| Cell | Excess p50 | Excess p95 | Pairs |
+|---|---:|---:|---:|
+| 128/8 | **−0.0339** | 4.604 | 160 |
+| 128/16 | **≈0.0000** | 5.146 | 160 |
+| 256/16 | **0.4531** | 6.867 | 72 |
 
-Parallel pixel-line controls are still not semantic/material annotations. Natural edges can remain in both seam and control samples.
+Within each cell, these are observed seam-vs-control diagnostics. The values indicate little median seam excess for 128/8 and 128/16, with a somewhat higher median for 256/16.
 
-## 4. Correct status
+**Comparability caveat:** the historical P0 runner used tile-dependent control offsets (256, 288 and 512 output pixels respectively). Thus the p50 order is a directional diagnostic, not a strict same-distance cross-cell ranking. The later tool update supports a common BASE-space offset; regenerating all three reports is an optional evidence refinement, not a reason to re-open P0 or run another OOM test.
 
-| Work | Status |
+Evidence: `docs/evidence/S2_1_SEAM_128_8.json`, `docs/evidence/S2_1_SEAM_128_16.json`, `docs/evidence/S2_1_SEAM_256_16.json`.
+
+## 4. P0 acceptance
+
+| Requested P0 deliverable | Status |
 |---|---|
-| Synthetic per-size forward baseline | OBSERVED / complete |
-| Real full-image staged RAM profiler | IMPLEMENTED / NOT RUN |
-| Fixed 48×64 real Siax probe fingerprint | OBSERVED / reference bank only |
-| Same-bank SPM-A comparison across 128/8, 128/16, 256/16 full outputs | NOT RUN |
-| Common-offset seam script | IMPLEMENTED / old reports not regenerated |
-| 256/32 full-job rerun | NOT RUN |
-| OOM stage attribution for the old full job | UNKNOWN |
-| Final Siax acceptance | FALSE |
+| Isolated staged peak-RSS harness and four per-size forward measurements | **DONE_P0** |
+| Fixed 48×64 SPM-A probe bank and real Siax residual fingerprint | **DONE_P0** |
+| Seam-control diagnostics for 128/8, 128/16, 256/16 | **DONE_P0** |
+| Full BASE 256/32 rerun / deliberate OOM | **NOT REQUIRED** |
+| Exact attribution of the old full-job OOM stage | **UNKNOWN / outside P0 scope** |
+| Overall Siax quality acceptance | **FALSE / separate gate** |
 
-## 5. Next execution order
+The full-image RAM profiler added later is an optional diagnostic only; it is not a P0 completion requirement and must not be run solely to change the P0 status.
 
-1. On the actual HERE or GPU/RAM host, run full-image 128/8 and 128/16 profiles first with the reserve enabled.
-2. Regenerate all seam reports using the same BASE-space control offset.
-3. Apply the same SPM-A bank to the full-frame outputs and compare per-probe residual features.
-4. Only attempt 256/16 or 256/32 after checking the target host's measured budget; 256/32 is not a default first run.
-5. Then proceed to Nested Compute Tile receptive-field/equivalence work.
+## 5. Next phase
 
-PR #7 evidence remains untouched. PR #8 remains Draft. No quality gate has been promoted.
+P0 is closed. Continue with P1 Nested Compute Tile, Virtual Master/native-child integrity, and quality re-acceptance. Use the measured small compute-core architecture; do not return to an unguarded 320×320 full-job memory stress test.
+
+PR #7 evidence remains untouched. PR #8 remains Draft. No final acceptance is implied.
