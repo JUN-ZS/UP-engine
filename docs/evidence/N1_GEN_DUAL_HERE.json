@@ -65,10 +65,11 @@
   ],
   "labels": {
     "N1_SCAFFOLD_OK": true,
-    "N1_GEN_PILOT_OK": true,
+    "N1_GEN_PILOT_OK": "limited_pass",
     "N1_SEAM_CONTINUITY_OK": false,
     "NATIVE_4K_PILOT_OK": false,
-    "note_seam": "Visual: A is frontal portrait crop; B is shoulder/lightning; framing drifted from Lanczos ref crops \u2014 continuity NOT claimed PASS"
+    "note_seam": "Visual: A is frontal portrait crop; B is shoulder/lightning; framing drifted from Lanczos ref crops \u2014 continuity NOT claimed PASS",
+    "N1_GEN_PILOT_OK_strict_native_slot": false
   },
   "limitations": [
     "Imagine output packed to 512 via Lanczos (engine does not emit exact 512); not allow-resize of wrong content.",
@@ -77,5 +78,6 @@
     "Global ref + scene lock used; no neighbor-closed-loop second pass."
   ],
   "not_siax_4x_upscale": true,
-  "final_acceptance": false
+  "final_acceptance": false,
+  "decision": "Keep independent A/B seam FAIL as baseline. Next: N1.gen v2 A\u2192B continuation only; do not re-roll independent A/B."
 }
