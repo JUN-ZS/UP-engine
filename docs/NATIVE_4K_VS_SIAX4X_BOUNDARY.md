@@ -93,3 +93,12 @@ BASE SHA：`cdc2af9738c0ab8d4f121126eeff3dd97959e0b69f486c9242b70d1f52c0e51c` ·
 | 版本 | 日期 | 說明 |
 | --- | --- | --- |
 | 1.0 | 2026-11-02 | 鎖定：4× 基準 ≠ 原生 4K；三線 N1–N3 |
+
+
+---
+
+## 7. N1 status
+
+See **[N1_NATIVE_CANVAS_TILING.md](./N1_NATIVE_CANVAS_TILING.md)**.  
+Scaffold tools: `tools/n1_plan.py`, `n1_init_canvas.py`, `n1_stitch.py`, `n1_scaffold_smoke.py`.  
+Evidence smoke: `docs/evidence/N1_SCAFFOLD_SMOKE.json` · **`native_4k_success=false`**.
