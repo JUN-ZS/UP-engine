@@ -1,17 +1,12 @@
-# Grok CLI / human: grab HERE warrior package from git, then local Siax
 param(
   [ValidateSet("base","master")][string]$Variant = "base",
+  [string]$Cell = "256/16",
   [switch]$GrabOnly
 )
 $ErrorActionPreference = "Stop"
-$Root = Split-Path -Parent $PSScriptRoot
-Set-Location $Root
-$py = Join-Path $Root ".venv\Scripts\python.exe"
-if (-not (Test-Path $py)) { throw "Missing .venv: $py" }
-
-& $py tools\spm_here_grab.py --list | Out-Host
+$here = $PSScriptRoot
 if ($GrabOnly) {
-  & $py tools\spm_here_grab.py --package warrior_mud_hammer --variant $Variant
+  & "$here\spm_cli.ps1" grab -Package warrior_mud_hammer -Variant $Variant
 } else {
-  & $py tools\spm_here_grab.py --package warrior_mud_hammer --variant $Variant --run-siax
+  & "$here\spm_cli.ps1" run -Package warrior_mud_hammer -Variant $Variant -Cell $Cell
 }

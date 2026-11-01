@@ -349,3 +349,14 @@ See `.grok/SPM_HERE_CLI.md`.
 
 See **[SPM_DISTILL_CHARTER.md](./SPM_DISTILL_CHARTER.md)** — scope / non-goals / boundary vs SPM-A.  
 No training code. Native Siax + tile cell remains the default execution path.
+
+
+---
+
+## 13. Grab naming v1.1 + CLI re-entry
+
+See **[.grok/SPM_HERE_CLI.md](../.grok/SPM_HERE_CLI.md)**.
+
+- Input: `{package}_{variant}.jpg` — skip copy if SHA matches
+- Output: always unique `{package}_{variant}_t{T}p{P}_{request_id}.png`
+- Entry: `tools/spm_cli.ps1` list|grab|run · `--cell 256/16`
