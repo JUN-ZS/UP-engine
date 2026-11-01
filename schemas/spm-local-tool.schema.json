@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jun-zs.local/schemas/spm-local-tool.schema.json",
+  "title": "SPMLocalSiaxTools",
+  "description": "Thin local Siax outlet for Grok SPM/Canvas. Not ComfyUI. Not S3 scheduler.",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["format"],
+      "properties": {
+        "format": { "const": "ige.spm.local_pc_status" }
+      }
+    },
+    {
+      "type": "object",
+      "required": ["format", "job_id", "output_sha256"],
+      "properties": {
+        "format": { "const": "ige.spm.local_execute_result" },
+        "job_id": { "type": "string" },
+        "output_sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+        "cloud_imagine": { "const": false },
+        "comfyui": { "const": false },
+        "s3_scheduler": { "const": false }
+      }
+    }
+  ]
+}
