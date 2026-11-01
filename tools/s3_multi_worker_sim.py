@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""S3 multi-worker synthetic (or mini Siax) simulation.
+"""S3 multi-worker simulation with hard assignment + fencing (S3.5).
 
-Validates: capability schedule · FS lease claim · multi-process workers ·
-rebuild · pixel integrity. Does NOT claim quality PASS or E3 speed.
+Does NOT claim quality PASS or E3 speed.
 """
 from __future__ import annotations
 
@@ -23,7 +22,12 @@ def _worker_entry(args: dict) -> dict:
     os.environ.setdefault("TORCH_NUM_THREADS", "1")
     from ige.upscale.s3 import FsLeaseTransport, SyntheticNearestAdapter, SiaxAdapter, run_worker_loop
 
-    transport = FsLeaseTransport(args["job_root"], lease_seconds=args["lease_seconds"])
+    transport = FsLeaseTransport(
+        args["job_root"],
+        lease_seconds=args["lease_seconds"],
+        max_attempts=args.get("max_attempts", 3),
+        allow_unassigned=False,
+    )
     if args["mode"] == "synthetic":
         adapter = SyntheticNearestAdapter()
     else:
@@ -40,6 +44,8 @@ def _worker_entry(args: dict) -> dict:
         base_path=args["base"],
         children_dir=args["children_dir"],
         max_tasks=args.get("max_tasks"),
+        heartbeat_every_s=args.get("heartbeat_every_s", 1.0),
+        device=args["device"],
     )
 
 
@@ -52,9 +58,11 @@ def main() -> int:
     ap.add_argument("--compute-core", type=int, default=64)
     ap.add_argument("--compute-context", type=int, default=0)
     ap.add_argument("--region", default="", help="x0,y0,x1,y1 optional")
-    ap.add_argument("--workers", default="w_cpu_a:cpu:1800,w_cpu_b:cpu:1200")
+    # id:kind:ram_mib:device
+    ap.add_argument("--workers", default="w_cpu_a:cpu:1800:cpu,w_cpu_b:cpu:1200:cpu")
     ap.add_argument("--lease-seconds", type=float, default=60)
-    ap.add_argument("--device", default="cpu")
+    ap.add_argument("--heartbeat-every-s", type=float, default=1.0)
+    ap.add_argument("--max-attempts", type=int, default=3)
     ap.add_argument("--out-report", type=Path, required=True)
     ap.add_argument("--confirm-model-license-review", action="store_true")
     args = ap.parse_args()
@@ -66,7 +74,7 @@ def main() -> int:
     import sys
 
     sys.path.insert(0, src)
-    from ige.upscale.siax import file_sha256
+    from ige.upscale.siax import file_sha256, MODEL_SHA256
     from ige.upscale.s3 import (
         CapabilityScheduler,
         ChildTask,
@@ -76,7 +84,6 @@ def main() -> int:
         rebuild_from_receipts,
         pixel_match_children,
     )
-    from ige.upscale.s3.adapter_siax import SiaxAdapter
     from ige.upscale.s3.adapter_synthetic import SyntheticNearestAdapter
 
     job = Path(args.job_dir)
@@ -89,7 +96,6 @@ def main() -> int:
     region = None
     if args.region.strip():
         region = tuple(int(x) for x in args.region.split(","))
-        assert len(region) == 4
 
     plan = plan_compute_children(
         args.base,
@@ -100,10 +106,7 @@ def main() -> int:
     (job / "plan.json").write_text(json.dumps(plan, indent=2) + "\n")
 
     if args.mode == "siax":
-        model_id = SiaxAdapter.model_id
-        # weight sha without loading full adapter twice
-        from ige.upscale.siax import MODEL_SHA256
-
+        model_id = "4x_NMKD-Siax_200k"
         weight_sha = MODEL_SHA256
         est_rss = 700.0
     else:
@@ -112,16 +115,22 @@ def main() -> int:
         weight_sha = adapter0.weight_sha256()
         est_rss = 200.0
 
-    # parse workers: id:kind:ram_mib
+    worker_specs = []
     caps = []
     for part in args.workers.split(","):
-        wid, kind, ram = part.strip().split(":")
+        bits = part.strip().split(":")
+        if len(bits) == 3:
+            wid, kind, ram = bits
+            device = kind if kind in ("cpu", "cuda") else "cpu"
+        else:
+            wid, kind, ram, device = bits
+        worker_specs.append({"worker_id": wid, "kind": kind, "ram": float(ram), "device": device})
         caps.append(
             WorkerCapability.from_dict(
                 {
                     "worker_id": wid,
                     "resources": {"ram_available_mib": float(ram), "cpu_threads": 1},
-                    "devices": [{"device_id": kind, "kind": kind if kind in ("cpu", "cuda") else "cpu"}],
+                    "devices": [{"device_id": device, "kind": kind if kind in ("cpu", "cuda") else "cpu"}],
                     "models": [
                         {
                             "model_id": model_id,
@@ -129,7 +138,7 @@ def main() -> int:
                             "adapter_id": "siax.esgan.4x" if args.mode == "siax" else "synthetic.nearest.4x",
                         }
                     ],
-                    "max_inflight": 8,
+                    "max_inflight": 64,
                     "queue_depth": 0,
                     "throughput_tiles_per_min_est": 30.0 if kind == "cuda" else 8.0,
                 }
@@ -152,27 +161,35 @@ def main() -> int:
     unassigned = [k for k, v in assignment.items() if v is None]
     (job / "assignment.json").write_text(json.dumps(assignment, indent=2) + "\n")
 
-    transport = FsLeaseTransport(job / "queue", lease_seconds=args.lease_seconds)
+    transport = FsLeaseTransport(
+        job / "queue",
+        lease_seconds=args.lease_seconds,
+        max_attempts=args.max_attempts,
+        allow_unassigned=False,
+    )
     for c in plan["children"]:
-        if c["child_id"] in unassigned:
+        wid = assignment.get(c["child_id"])
+        if wid is None:
             continue
         payload = dict(c)
-        payload["assigned_worker_hint"] = assignment[c["child_id"]]
+        payload["assigned_worker"] = wid  # HARD assignment
         transport.enqueue(c["child_id"], payload)
 
     job_id = f"s3_{args.mode}_{int(time.time())}"
     t0 = time.perf_counter()
     procs = []
     ctx = mp.get_context("spawn")
-    for cap in caps:
+    for spec in worker_specs:
         entry = {
             "src": src,
             "job_root": str(job / "queue"),
             "lease_seconds": args.lease_seconds,
+            "max_attempts": args.max_attempts,
+            "heartbeat_every_s": args.heartbeat_every_s,
             "mode": args.mode,
             "checkpoint": str(args.checkpoint),
-            "device": args.device,
-            "worker_id": cap.worker_id,
+            "device": spec["device"],
+            "worker_id": spec["worker_id"],
             "job_id": job_id,
             "base": str(args.base),
             "children_dir": str(children_dir),
@@ -180,7 +197,7 @@ def main() -> int:
         }
         p = ctx.Process(target=_worker_entry, args=(entry,))
         p.start()
-        procs.append((cap.worker_id, p))
+        procs.append((spec["worker_id"], p))
 
     results = {}
     for wid, p in procs:
@@ -192,43 +209,50 @@ def main() -> int:
 
     wall = time.perf_counter() - t0
     receipts = transport.list_receipts()
-    # rebuild only the planned region canvas
-    out_w, out_h = plan["output_wh"]
-    origin = tuple(plan["output_origin_hires"])
-    primary = job / "OUT_PRIMARY.png"
-    rebuild = rebuild_from_receipts(
-        receipts=receipts,
-        output_path=primary,
-        output_width=out_w,
-        output_height=out_h,
-        origin_hires=origin,
-        min_bytes=100 if args.mode == "synthetic" else 1000,
-    )
-    integrity = pixel_match_children(receipts, primary, origin_hires=origin)
-
     by_worker: dict[str, int] = {}
     for r in receipts:
         by_worker[r["worker_id"]] = by_worker.get(r["worker_id"], 0) + 1
 
+    # assignment fidelity: actual completer must match assigned_worker
+    mismatches = []
+    for r in receipts:
+        cid = r["task_id"]
+        if assignment.get(cid) and assignment[cid] != r["worker_id"]:
+            mismatches.append({"child_id": cid, "assigned": assignment[cid], "actual": r["worker_id"]})
+
+    out_w, out_h = plan["output_wh"]
+    origin = tuple(plan["output_origin_hires"])
+    primary = job / "OUT_PRIMARY.png"
+    rebuild = None
+    integrity = None
+    if receipts and not unassigned and len(receipts) == plan["child_count"]:
+        rebuild = rebuild_from_receipts(
+            receipts=receipts,
+            output_path=primary,
+            output_width=out_w,
+            output_height=out_h,
+            origin_hires=origin,
+            min_bytes=100 if args.mode == "synthetic" else 1000,
+        )
+        integrity = pixel_match_children(receipts, primary, origin_hires=origin)
+
     report = {
         "program": "S3_MULTI_WORKER_SIM",
+        "control_plane": "S3.5_hard_assignment_fencing",
         "mode": args.mode,
         "job_id": job_id,
-        "base": str(args.base),
         "base_sha256": file_sha256(args.base),
         "plan": {
             "child_count": plan["child_count"],
             "compute_core": plan["compute_core"],
-            "compute_context": plan["compute_context"],
             "region": plan["region"],
             "output_wh": plan["output_wh"],
         },
         "assignment": {
             "assigned_n": len(assigned),
             "unassigned": unassigned,
-            "by_worker_hint": {
-                wid: sum(1 for v in assignment.values() if v == wid) for wid in results
-            },
+            "by_worker_hint": {wid: sum(1 for v in assignment.values() if v == wid) for wid, _ in procs},
+            "assignment_mismatches": mismatches,
         },
         "execution": {
             "wall_s": round(wall, 3),
@@ -237,21 +261,30 @@ def main() -> int:
             "process_exits": results,
             "pending_left": transport.pending_count(),
             "failed_n": len(list((job / "queue" / "failed").glob("*.json"))),
+            "dead_n": transport.dead_count(),
+            "rejects_n": len(list((job / "queue" / "rejects").glob("*.json"))),
         },
         "rebuild": rebuild,
         "integrity": integrity,
-        "ok": integrity.get("ok") is True and len(receipts) == plan["child_count"] - len(unassigned),
+        "ok": (
+            len(mismatches) == 0
+            and integrity is not None
+            and integrity.get("ok") is True
+            and len(receipts) == plan["child_count"]
+        ),
         "final_acceptance": False,
         "quality_qualified": False,
         "e3_speed_claim": False,
-        "note": "S3 dispatch/rebuild smoke only; not S2.1 quality flip; not E3",
     }
     args.out_report.parent.mkdir(parents=True, exist_ok=True)
     args.out_report.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
-    print(json.dumps({k: report[k] for k in ("mode", "ok", "execution", "integrity", "rebuild") if k in report}, indent=2))
-    # slim print rebuild sha
-    print("output_sha256", rebuild.get("output_sha256"))
-    print("ok", report["ok"])
+    print(json.dumps({
+        "ok": report["ok"],
+        "assignment_mismatches": mismatches,
+        "by_worker_completed": by_worker,
+        "by_worker_assigned": report["assignment"]["by_worker_hint"],
+        "integrity": integrity,
+    }, indent=2))
     return 0 if report["ok"] else 2
 
 

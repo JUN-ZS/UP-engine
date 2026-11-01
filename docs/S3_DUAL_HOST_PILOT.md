@@ -1,6 +1,6 @@
 # S3.5 Dual-Host Pilot Protocol (optional · not auto-run)
 
-**status:** DOCUMENTED_NOT_RUN  
+**status:** DOCUMENTED_NOT_RUN · **requires S3.5 control plane (DONE)**  
 **does not claim:** quality PASS · E3 speed · S2.1 decision flip
 
 ## Goal

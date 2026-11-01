@@ -1,7 +1,7 @@
 {
   "program": "UPSCALE_S3_HETEROGENEOUS",
   "title": "Heterogeneous Upscale Execution Engine",
-  "asof_utc": "2026-11-01T15:45:53Z",
+  "asof_utc": "2026-11-01T16:00:39Z",
   "branch": "feat/upscale-s3-heterogeneous-runner-v0.1",
   "base_freeze_s21": "297ba74",
   "relation_to_pr8": "isolated_follow_on; do_not_rewrite_s21_quality_decision",
@@ -13,7 +13,13 @@
     "artifact_integrity": "DONE_PIXEL_MATCH",
     "siax_adapter": "DONE_V0_WIRED",
     "virtual_master_rebuild": "DONE_REBUILD_FROM_RECEIPTS",
-    "synthetic_adapter": "DONE"
+    "synthetic_adapter": "DONE",
+    "hard_assignment": "DONE",
+    "fencing_token": "DONE",
+    "heartbeat_during_forward": "DONE",
+    "stale_complete_reject": "DONE",
+    "max_attempts_dead_letter": "DONE",
+    "per_worker_device": "DONE"
   },
   "steps": [
     {
@@ -39,17 +45,38 @@
     {
       "id": "S3.4",
       "name": "synthetic_multi_worker_sim",
-      "status": "DONE",
-      "evidence": [
-        "docs/evidence/S3_SIM_SYNTHETIC_MULTI_WORKER.json",
-        "docs/evidence/S3_SIM_SIAX_MINI_MULTI_WORKER.json"
-      ]
+      "status": "DONE"
     },
     {
       "id": "S3.5",
-      "name": "dual_host_pilot_optional",
-      "status": "DOCUMENTED_NOT_RUN",
-      "doc": "docs/S3_DUAL_HOST_PILOT.md"
+      "name": "reliable_distributed_control",
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/S3_5_SYNTHETIC_HARD_ASSIGN.json",
+        "docs/evidence/S3_5_FAULT_INJECT.json",
+        "tests/test_s3_control_plane.py"
+      ]
+    },
+    {
+      "id": "S3.6",
+      "name": "true_dual_host_pilot",
+      "status": "TODO",
+      "doc": "docs/S3_DUAL_HOST_PILOT.md",
+      "gate": "requires_S3_5"
+    },
+    {
+      "id": "S3.7",
+      "name": "full_448_siax_distributed_replay",
+      "status": "TODO",
+      "gate": "requires_S3_5_and_S3_6",
+      "params": {
+        "base": "1792x1008",
+        "compute_core": 64,
+        "compute_context": 32,
+        "children": 448,
+        "out": "7168x4032"
+      },
+      "compare_s21": "optional same-SHA vs Nested children if available"
     }
   ],
   "observed": {
@@ -71,6 +98,20 @@
       "integrity_pixel_ok": true,
       "output_sha256": "28c5751a483a31668d2d798e44a726be48e828678ba523537f81909cb954f15c",
       "note": "real Siax dual-process on 128x128 region; not full-frame quality claim"
+    },
+    "s35_hard_assign": {
+      "ok": true,
+      "assigned_equals_completed": {
+        "w_fast": 8,
+        "w_slow": 8
+      },
+      "assignment_mismatches": 0,
+      "integrity_ok": true
+    },
+    "s35_fault_inject": {
+      "ok": true,
+      "stale_complete_rejected": true,
+      "final_receipts_n": 1
     }
   },
   "workstreams": {
