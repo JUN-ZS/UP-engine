@@ -1,0 +1,18 @@
+{
+  "format": "ige.native4k.boundary",
+  "format_version": "1.0",
+  "status": "BOUNDARY_LOCKED",
+  "stamp_utc": "2026-11-01T20:53:17Z",
+  "research_goal": "native_target_resolution_frames_via_siax_spm_assist",
+  "not_replaced_by": "fixed_4x_esrgan_upscale_of_lowres_base",
+  "siax_4x_fullframe_observed": true,
+  "native_4k_success": false,
+  "final_acceptance": false,
+  "tracks": [
+    "N1_native_canvas_tiling",
+    "N2_local_generative_spm",
+    "N3_siax_detail_contribution"
+  ],
+  "warrior_package": "warrior_mud_hammer",
+  "doc": "docs/NATIVE_4K_VS_SIAX4X_BOUNDARY.md"
+}

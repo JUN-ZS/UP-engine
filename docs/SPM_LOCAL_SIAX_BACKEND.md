@@ -360,3 +360,11 @@ See **[.grok/SPM_HERE_CLI.md](../.grok/SPM_HERE_CLI.md)**.
 - Input: `{package}_{variant}.jpg` — skip copy if SHA matches
 - Output: always unique `{package}_{variant}_t{T}p{P}_{request_id}.png`
 - Entry: `tools/spm_cli.ps1` list|grab|run · `--cell 256/16`
+
+
+---
+
+## 14. Native 4K ≠ 4× Siax
+
+See **[NATIVE_4K_VS_SIAX4X_BOUNDARY.md](./NATIVE_4K_VS_SIAX4X_BOUNDARY.md)**.  
+Warrior pilot / commercial cells are **4× baseline only**, not native 4K success.
