@@ -1,0 +1,125 @@
+# S3 self-drive validation. Does not flip quality PASS / E3.
+# Grok CLI / human: gh workflow run s3-self-drive.yml
+name: S3 Self-Drive
+
+on:
+  workflow_dispatch:
+    inputs:
+      stages:
+        description: "Comma stages: unit,single_pull,docker_dual,self_hosted_hint"
+        default: "unit,single_pull,self_hosted_hint"
+        type: string
+      run_docker_dual:
+        description: "Also run docker dual on ubuntu-latest (needs docker)"
+        default: false
+        type: boolean
+      run_dual_self_hosted:
+        description: "Run dual self-hosted job (needs runners labeled s3-host-a and s3-host-b + shared FS)"
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  # ---- A: GitHub-hosted single machine self-drive ----
+  self_drive_hosted:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          python -m pip install -e .
+          python -m pip install pytest pillow
+      - name: Self-drive stages
+        run: |
+          STAGES="${{ inputs.stages }}"
+          if [ "${{ inputs.run_docker_dual }}" = "true" ]; then
+            STAGES="${STAGES},docker_dual"
+          fi
+          python tools/s3_self_drive.py \
+            --stages "$STAGES" \
+            --lease-seconds 90 \
+            --evidence-out docs/evidence/S3_SELF_DRIVE_CI.json
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: s3-self-drive-evidence
+          path: docs/evidence/S3_SELF_DRIVE_CI.json
+          if-no-files-found: warn
+
+  # ---- B: True dual self-hosted (optional, opt-in) ----
+  # Requires: two self-hosted runners with labels s3-host-a / s3-host-b
+  # and a shared filesystem path both can see (set env S3_SHARED_JOB below).
+  dual_self_hosted_a:
+    if: ${{ inputs.run_dual_self_hosted == true }}
+    runs-on: [self-hosted, s3-host-a]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Host A — controller + worker
+        env:
+          S3_SHARED_JOB: ${{ vars.S3_SHARED_JOB || '/shared/s3_jobs/ci_job' }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install -e . pytest pillow -q
+          JOB="${S3_SHARED_JOB}"
+          LEASE=90
+          rm -rf "$JOB" || true
+          mkdir -p "$JOB"
+          python3 -c "from PIL import Image; Image.new('RGB',(128,128),(7,8,9)).save('$JOB/BASE.png')"
+          # worker A background
+          python3 tools/s3_worker_agent.py \
+            --job-dir "$JOB" --worker-id hostA_ci --mode synthetic --device cpu \
+            --ram-mib 4096 --cpu-threads 4 --lease-seconds $LEASE \
+            --wait-manifest-s 300 --idle-exit-s 120 --registry-every-s 1 &
+          echo $! > /tmp/s3_wa.pid
+          sleep 3
+          python3 tools/s3_controller.py init \
+            --job-dir "$JOB" --base "$JOB/BASE.png" --mode synthetic \
+            --region 0,0,128,128 --compute-core 64 --lease-seconds $LEASE
+          # wait for hostB registry (up to 90s)
+          for i in $(seq 1 90); do
+            n=$(ls "$JOB/registry/workers" 2>/dev/null | wc -l || echo 0)
+            if [ "$n" -ge 2 ]; then break; fi
+            sleep 1
+          done
+          python3 tools/s3_controller.py schedule \
+            --job-dir "$JOB" --wait-workers 2 --wait-timeout-s 60 --lease-seconds $LEASE
+          python3 tools/s3_controller.py wait \
+            --job-dir "$JOB" --timeout-s 600 --reassign-every-s 2 --lease-seconds $LEASE
+          python3 tools/s3_controller.py rebuild --job-dir "$JOB" --lease-seconds $LEASE
+          cp "$JOB/controller_report.json" controller_report_dual.json || true
+          kill $(cat /tmp/s3_wa.pid) 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s3-dual-self-hosted-report
+          path: controller_report_dual.json
+          if-no-files-found: warn
+
+  dual_self_hosted_b:
+    if: ${{ inputs.run_dual_self_hosted == true }}
+    runs-on: [self-hosted, s3-host-b]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Host B — worker only
+        env:
+          S3_SHARED_JOB: ${{ vars.S3_SHARED_JOB || '/shared/s3_jobs/ci_job' }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install -e . pillow -q
+          JOB="${S3_SHARED_JOB}"
+          LEASE=90
+          # wait until job dir exists (host A creates it)
+          for i in $(seq 1 120); do
+            [ -d "$JOB" ] && break
+            sleep 1
+          done
+          python3 tools/s3_worker_agent.py \
+            --job-dir "$JOB" --worker-id hostB_ci --mode synthetic --device cpu \
+            --ram-mib 4096 --cpu-threads 4 --lease-seconds $LEASE \
+            --wait-manifest-s 600 --idle-exit-s 180 --registry-every-s 1
