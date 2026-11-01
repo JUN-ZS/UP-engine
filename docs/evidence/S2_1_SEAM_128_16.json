@@ -1,0 +1,44 @@
+{
+  "program": "SIAX_S2_1_P0_SEAM_CONTROLS",
+  "tile_size": 128,
+  "tile_pad": 16,
+  "image": "runs/siax_validation_r2/S2/128_16/OUT.png",
+  "sample_fracs": [
+    0.12,
+    0.22857142857142856,
+    0.33714285714285713,
+    0.44571428571428573,
+    0.5542857142857143,
+    0.6628571428571428,
+    0.7714285714285715,
+    0.88
+  ],
+  "control_offset_px": 288,
+  "vertical": {
+    "v_n": 104,
+    "v_seam_strip_mae_p50": 3.9375,
+    "v_seam_strip_mae_p95": 8.920052083333333,
+    "v_control_strip_mae_p50": 3.7005208333333335,
+    "v_excess_strip_mae_p50": 0.07812499999999989,
+    "v_excess_strip_mae_p95": 4.7299479166666645,
+    "v_seam_hf_p50": 6.444285869598389,
+    "v_control_hf_p50": 6.87560772895813,
+    "v_hf_excess_p50": -0.035857200622558594
+  },
+  "horizontal": {
+    "h_n": 56,
+    "h_seam_strip_mae_p50": 3.7942708333333335,
+    "h_seam_strip_mae_p95": 10.02734375,
+    "h_control_strip_mae_p50": 3.979166666666667,
+    "h_excess_strip_mae_p50": -0.203125,
+    "h_excess_strip_mae_p95": 6.679687499999999,
+    "h_seam_hf_p50": 5.891822576522827,
+    "h_control_hf_p50": 6.512053489685059,
+    "h_hf_excess_p50": -0.4255983829498291
+  },
+  "matched_excess_strip_mae_p50": 2.220446049250313e-16,
+  "matched_excess_strip_mae_p95": 5.146093749999992,
+  "n_pairs": 160,
+  "final_acceptance": false,
+  "note": "Matched seam vs non-seam controls with fixed fracs. Natural edges still possible; excess p50 is diagnostic only."
+}

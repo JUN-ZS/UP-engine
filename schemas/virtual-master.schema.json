@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jun-zs.local/schemas/virtual-master.schema.json",
+  "title": "VirtualMasterManifest",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "master_id",
+    "base_sha256",
+    "scale",
+    "logical_grid",
+    "children",
+    "primary_policy"
+  ],
+  "properties": {
+    "manifest_version": { "type": "string" },
+    "master_id": { "type": "string", "minLength": 1 },
+    "base_sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "scale": { "type": "integer", "const": 4 },
+    "output_dimensions": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "logical_grid": {
+      "type": "object",
+      "required": ["logical_core", "logical_halo"],
+      "properties": {
+        "logical_core": { "type": "integer", "minimum": 32 },
+        "logical_halo": { "type": "integer", "minimum": 0 },
+        "compute_core": { "type": "integer", "minimum": 16 },
+        "compute_context": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["child_id", "parent_id", "uri", "sha256", "core_box_base", "output_box_hires"],
+        "properties": {
+          "child_id": { "type": "string" },
+          "parent_id": { "type": "string" },
+          "uri": { "type": "string" },
+          "sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+          "role": { "type": "string", "enum": ["compute_native", "parent_native", "preview", "intermediate"] },
+          "core_box_base": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": { "type": "integer" }
+          },
+          "output_box_hires": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": { "type": "integer" }
+          },
+          "acceptance": { "type": "string", "enum": ["candidate_only", "quality_qualified", "rejected"] }
+        }
+      }
+    },
+    "primary_policy": {
+      "type": "object",
+      "required": ["preview_never_primary", "min_fullframe_bytes", "assert_dimensions"],
+      "properties": {
+        "preview_never_primary": { "type": "boolean", "const": true },
+        "min_fullframe_bytes": { "type": "integer", "minimum": 1 },
+        "assert_dimensions": { "type": "boolean" }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

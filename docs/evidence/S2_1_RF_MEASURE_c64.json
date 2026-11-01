@@ -1,0 +1,114 @@
+{
+  "program": "SIAX_S2_1_P1_RF_MEASURE_SUB",
+  "final_acceptance": false,
+  "core": 64,
+  "box": [
+    864,
+    472,
+    928,
+    536
+  ],
+  "ref_margin": 48,
+  "rows": [
+    {
+      "margin": 0,
+      "ok": true,
+      "mae_vs_ref": 1.7537994384765625,
+      "inner_mae": 1.4953761574074074,
+      "border_mae": 107.10245768229167
+    },
+    {
+      "margin": 8,
+      "ok": true,
+      "mae_vs_ref": 0.7519175211588541,
+      "inner_mae": 0.706087962962963,
+      "border_mae": 79.16805013020833
+    },
+    {
+      "margin": 16,
+      "ok": true,
+      "mae_vs_ref": 0.4622853597005208,
+      "inner_mae": 0.4187384259259259,
+      "border_mae": 74.95882161458333
+    },
+    {
+      "margin": 24,
+      "ok": true,
+      "mae_vs_ref": 0.3067626953125,
+      "inner_mae": 0.28378472222222223,
+      "border_mae": 58.658365885416664
+    },
+    {
+      "margin": 32,
+      "ok": true,
+      "mae_vs_ref": 0.12827555338541666,
+      "inner_mae": 0.11456597222222223,
+      "border_mae": 39.988525390625
+    },
+    {
+      "margin": 40,
+      "ok": true,
+      "mae_vs_ref": 0.025014241536458332,
+      "inner_mae": 0.020457175925925927,
+      "border_mae": 12.474039713541666
+    },
+    {
+      "margin": 48,
+      "ok": true,
+      "mae_vs_ref": 0.0,
+      "inner_mae": 0.0,
+      "border_mae": 0.0
+    }
+  ],
+  "recommended_compute_context": 24,
+  "results_meta": {
+    "0": {
+      "ok": true,
+      "out": "runs/siax_validation_r2/S2_1/p1/rf_cores/core_m00.png",
+      "cached": true
+    },
+    "8": {
+      "ok": true,
+      "out": "runs/siax_validation_r2/S2_1/p1/rf_cores/core_m08.png",
+      "cached": true
+    },
+    "16": {
+      "ok": true,
+      "out": "runs/siax_validation_r2/S2_1/p1/rf_cores/core_m16.png",
+      "cached": true
+    },
+    "24": {
+      "ok": true,
+      "input_wh": [
+        112,
+        112
+      ],
+      "out": "runs/siax_validation_r2/S2_1/p1/rf_cores/core_m24.png"
+    },
+    "32": {
+      "ok": true,
+      "input_wh": [
+        128,
+        128
+      ],
+      "out": "runs/siax_validation_r2/S2_1/p1/rf_cores/core_m32.png"
+    },
+    "40": {
+      "ok": true,
+      "input_wh": [
+        144,
+        144
+      ],
+      "out": "runs/siax_validation_r2/S2_1/p1/rf_cores/core_m40.png"
+    },
+    "48": {
+      "ok": true,
+      "input_wh": [
+        160,
+        160
+      ],
+      "out": "runs/siax_validation_r2/S2_1/p1/rf_cores/core_m48.png"
+    }
+  },
+  "evidence_grade": "OBSERVED"
+}

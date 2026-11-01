@@ -1,0 +1,18 @@
+{
+  "program": "SIAX_S2_1_P1_NESTED_INTEGRITY",
+  "primary_sha256": "5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656",
+  "primary_bytes": 43281047,
+  "primary_dimensions": [
+    7168,
+    4032
+  ],
+  "children_in_vm": 448,
+  "children_verified": 448,
+  "missing_base_pixels": 0,
+  "coverage_complete": true,
+  "errors_n": 0,
+  "errors_sample": [],
+  "ok": true,
+  "final_acceptance": false,
+  "quality_qualified": false
+}

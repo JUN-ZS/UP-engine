@@ -1,0 +1,49 @@
+{
+  "status": "diagnostic_only_spm_approx_not_acceptance",
+  "spm_note": "Rough SPM-logic probes only. Full §0.12.39 residual peep match NOT imported.",
+  "image": "runs/siax_validation_r2/S2/128_16/OUT.png",
+  "sha256": "b7ea35b5ec84e6cb83777ca9c44066b95bcb42580f26cdf1469ddc51af60d26f",
+  "output_dims": {
+    "width": 7168,
+    "height": 4032
+  },
+  "tile_size": 128,
+  "tile_pad": 16,
+  "grid": [
+    14,
+    8
+  ],
+  "probe_base_px": [
+    48,
+    64
+  ],
+  "probe_out_px": [
+    192,
+    256
+  ],
+  "classic_seam": {
+    "vertical_mean_abs_boundary_delta": 4.572713166463166,
+    "horizontal_mean_abs_boundary_delta": 4.966757015306123,
+    "vertical_count": 13,
+    "horizontal_count": 7
+  },
+  "spm_probes": {
+    "vertical_probe_count": 78,
+    "horizontal_probe_count": 42,
+    "interior_probe_count": 16,
+    "mean_across_seam_strip_mae": 4.829698350694444,
+    "p95_across_seam_strip_mae": 9.55251736111111,
+    "mean_near_seam_band_hf": 7.463681276639303,
+    "mean_interior_hf": 6.7893887758255005,
+    "near_seam_over_interior_hf_ratio": 1.0993156413747742,
+    "mean_vertical_left_right_probe_mae": 34.62179017678286,
+    "mean_horizontal_top_bot_probe_mae": 34.8906324275587
+  },
+  "rank_score_lower_better": 5.8229,
+  "interpretation": {
+    "strip_mae": "1px across-seam absolute RGB mean; lower → softer boundary jump",
+    "hf_ratio": "near-seam / interior Laplacian energy; ~1.0 preferred; >>1 may mark seam emphasis or >1 detail",
+    "rank_score": "strip_mae + 10*max(0, hf_ratio-1); lower better; diagnostic only",
+    "do_not": "Do not treat as final_acceptance or identity/topology gold"
+  }
+}

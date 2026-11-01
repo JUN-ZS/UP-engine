@@ -1,0 +1,110 @@
+{
+  "program": "SIAX_S2_1_P0_COMPLETE",
+  "asof_utc": "2026-11-01T13:34:46Z",
+  "final_acceptance": false,
+  "base_commit_design": "92b3e98",
+  "ram_profile": {
+    "evidence_grade": "OBSERVED",
+    "method": "subprocess synthetic RNG forward per size; 1 thread",
+    "peaks_maxrss_mb": {
+      "144x144": 663.67,
+      "160x160": 725.57,
+      "288x288": 1473.67,
+      "320x320": 1664.96
+    },
+    "labels": {
+      "144x144": "128/8 input",
+      "160x160": "128/16 input",
+      "288x288": "256/16 input",
+      "320x320": "256/32 input"
+    },
+    "oom_in_isolation": [],
+    "canvas_stage": {
+      "stage": "after_canvas_7168x4032",
+      "rss_mb": 450.88,
+      "maxrss_mb": 1650.89,
+      "t_s": 331.104169,
+      "canvas_bytes": 86704128,
+      "canvas_mib": 82.69,
+      "delta_rss_mb": 0
+    },
+    "interpretation": [
+      "Isolated 320x320 forward SUCCEEDS with maxrss ~1665 MiB on 1.9 GiB host.",
+      "Peak scales strongly with input area (144→664, 288→1474, 320→1665 MiB maxrss).",
+      "Full-job 256/32 OOM remains consistent with forward peak near ceiling PLUS base/canvas/runtime headroom — not disproved; refined from pure \"320 cannot forward\".",
+      "Canvas 7168x4032 uint8 alone is small vs forward peak."
+    ],
+    "synthetic_forward_baseline_status": "OBSERVED_COMPLETE",
+    "full_job_profile": {
+      "status": "OPTIONAL_DIAGNOSTIC_IMPLEMENTED_NOT_RUN",
+      "is_p0_gate": false,
+      "note": "The full-image profiler was added as an optional future diagnostic. Do not run it merely to complete P0 and do not intentionally OOM the 1.9 GiB host."
+    }
+  },
+  "spm_a": {
+    "evidence_grade": "OBSERVED",
+    "bank_sha256": "1267b78b1b957cb16057b978e2aabe720a5e1d69712eb6edcec8636aa7837af9",
+    "n_probes": 48,
+    "summary": {
+      "mae_residual_p50": 3.886912027994792,
+      "mae_residual_p95": 6.6636145697699645,
+      "residual_hf_p50": 6.378968238830566,
+      "residual_hf_p95": 10.633862209320068
+    },
+    "note": "Real Siax residual vs Lanczos on fixed 48x64 probes — fingerprint bank, not full-frame rank.",
+    "status": "OBSERVED_REFERENCE_PROBE_BANK_ONLY",
+    "comparison_scope": "48 actual Siax crops vs Lanczos; fixed geometry; no per-cell full-output residual comparison has yet been run"
+  },
+  "seam_controls": {
+    "evidence_grade": "OBSERVED",
+    "fixed_fracs": true,
+    "cells": {
+      "128_8": {
+        "matched_excess_strip_mae_p50": -0.03385416666666674,
+        "matched_excess_strip_mae_p95": 4.604166666666663,
+        "n_pairs": 160
+      },
+      "128_16": {
+        "matched_excess_strip_mae_p50": 2.220446049250313e-16,
+        "matched_excess_strip_mae_p95": 5.146093749999992,
+        "n_pairs": 160
+      },
+      "256_16": {
+        "matched_excess_strip_mae_p50": 0.453125,
+        "matched_excess_strip_mae_p95": 6.866927083333335,
+        "n_pairs": 72
+      }
+    },
+    "rank_by_excess_p50_lower_better": [
+      "128_8",
+      "128_16",
+      "256_16"
+    ],
+    "interpretation": [
+      "128/8 and 128/16 excess p50 ~ 0 (seam ≈ matched control).",
+      "256/16 excess p50 ~ 0.45 (mildly higher).",
+      "p95 still large for all — natural edges in samples; do not overclaim.",
+      "Replaces biased SPM-approx interior sampling for cross-cell seam compare."
+    ],
+    "comparability_status": "P0_DIAGNOSTICS_COMPLETE_CROSS_CELL_RANK_DIRECTIONAL",
+    "old_control_offsets_output_px": {
+      "128_8": 256,
+      "128_16": 288,
+      "256_16": 512
+    },
+    "caveat": "The P0 outputs used fixed along-seam fractions and same-y paired control lines, but the control offset varied by cell. Therefore within-cell seam excess is observed; the cross-cell p50 ordering is directional only until the optional common-offset rerun."
+  },
+  "next": [
+    "P1 Nested Compute Tile full run using small compute_core and resume",
+    "verify native child SHA/coverage and Virtual Master finalizer",
+    "perform quality re-acceptance; final_acceptance remains false",
+    "do not use a full 256/32 OOM replay as a completion gate"
+  ],
+  "status": "DONE",
+  "completion_scope": {
+    "ram_profile": "Pinned-Siax synthetic single-forward per-size profile, each size subprocess-isolated. Completed; 320x320 succeeds at 1664.96 MiB max RSS.",
+    "spm_a": "Fixed 48x64 BASE-coordinate bank; real Siax crop residual against Lanczos observed.",
+    "seam_controls": "Per-cell seam-vs-nearby-control diagnostics run for 128/8, 128/16 and 256/16.",
+    "not_required": "Full BASE image run or deliberate full-job 256/32 OOM replay is not required to complete P0."
+  }
+}

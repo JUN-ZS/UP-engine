@@ -1,0 +1,53 @@
+{
+  "program": "SIAX_S2_1_P1_NESTED_FULL",
+  "asof_utc": "2026-11-01T15:05:00Z",
+  "cell_id": "nested_L256/32_C64/ctx32",
+  "status": "OBSERVED_COMPLETE_CANDIDATE",
+  "final_acceptance": false,
+  "equivalence_to_single_forward_logical": "NOT_CLAIMED",
+  "children": 448,
+  "peak_rss_mb": 663.79,
+  "wall_s_this_run": 815.801,
+  "isolation": "inprocess",
+  "output": {
+    "path": "runs/siax_validation_r2/S2_1/p1/nested_L256_32_C64_ctx32/OUT_NESTED_PRIMARY.png",
+    "bytes": 43281047,
+    "sha256": "5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656",
+    "dimensions": {
+      "width": 7168,
+      "height": 4032
+    },
+    "expected_dimensions": {
+      "width": 7168,
+      "height": 4032
+    },
+    "dim_ok": true,
+    "size_gate_ok": true
+  },
+  "strip_finalize": {
+    "execution_mode": "strip_finalize_uint8_canvas",
+    "preview_never_primary": true,
+    "children_placed_count": 448
+  },
+  "virtual_master": {
+    "master_id": "vm_nested_L256_32_C64_ctx32",
+    "children_in_manifest": 448,
+    "primary_policy": {
+      "preview_never_primary": true,
+      "min_fullframe_bytes": 5000000,
+      "assert_dimensions": true
+    }
+  },
+  "rf": {
+    "recommended_compute_context": 24,
+    "compute_context_used": 32,
+    "note": "conservative margin over RF rec"
+  },
+  "vs_optional_128_8_full": {
+    "note": "different cell; not quality rank",
+    "nested_bytes": 43281047,
+    "full_128_8_bytes": 42995025
+  },
+  "p0_status": "DONE",
+  "next": "S2.1.5 quality reaccept (SPM-A + seam bank + continuity) on this nested cell only; do not label as original 256/32 success"
+}

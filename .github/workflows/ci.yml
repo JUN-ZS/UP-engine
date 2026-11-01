@@ -13,7 +13,8 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m pip install -e .
-      - run: python -m compileall -q src tests
+      - run: python -m compileall -q src tests tools
+      - run: python tools/ram_profile_siax.py --help
       - run: python -m unittest discover -s tests -v
       - run: node --check tools/read-studio/app.js
       - run: python -c "import json,pathlib; [json.loads(p.read_text(encoding='utf-8')) for root in ('schemas','configs','examples') for p in pathlib.Path(root).rglob('*.json')]; print('JSON files valid')"

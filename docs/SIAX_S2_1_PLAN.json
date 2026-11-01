@@ -1,0 +1,132 @@
+{
+  "program": "SIAX_S2_1_R3",
+  "title": "Memory-aware Nested Tile Executor + Virtual Master",
+  "asof_utc": "2026-11-01T15:35:15Z",
+  "base_commit": "463cce1aa20ad4067c8e29b7ced999c6422acc58",
+  "relation_to_pr7": "isolated_follow_on_draft; do_not_rewrite_pr7_evidence",
+  "decision": "Do not primary-path buy-RAM re-run 256/32; evolve architecture",
+  "s2_findings_locked": {
+    "128_8": "temp best SPM-approx",
+    "128_16": "near 128_8; not proven inferior",
+    "256_16": "temp worse under biased diag",
+    "256_32": "OOM_BLOCKED quality_unknown",
+    "oom_hypothesis": "Synthetic 320x320 pinned-Siax forward observed at ~1665 MiB; consistent with near-ceiling memory pressure, but exact stage of the historical full-job OOM remains unattributed.",
+    "oom_evidence_grade": "OBSERVED synthetic forward peak; HISTORICAL full-job stage attribution remains hypothesis",
+    "spm_approx_bias": [
+      "interior_probe_fallback_differs_by_tile",
+      "no_matched_non_seam_control",
+      "not_true_01239_residual"
+    ]
+  },
+  "layers": {
+    "Siax": "4x CNN/GAN executor",
+    "SPM": "HF residual fingerprint and match",
+    "NCPG_PEEP_VirtualMaster": "ROI context native children transforms rebuild"
+  },
+  "parameters": {
+    "logical_core": "experiment tile core e.g. 256",
+    "compute_core": "actual model core e.g. 64/96/128",
+    "logical_halo": "parent halo e.g. 32",
+    "compute_context": "RF-measured interior context"
+  },
+  "steps": [
+    {
+      "id": "S2.1.1",
+      "name": "fix_diagnostics",
+      "status": "DONE_P0",
+      "note": "Fixed probe bank, real Siax residual reference, and seam-control diagnostics executed; strict common-distance cross-cell re-rank remains an optional refinement, not a P0 blocker."
+    },
+    {
+      "id": "S2.1.2",
+      "name": "staged_peak_rss_256_32",
+      "status": "DONE_P0",
+      "note": "Isolated subprocess synthetic single-forward peak-RSS profile completed for 144/160/288/320 inputs; full-frame 256/32 OOM replay is explicitly not required and must not be used as a P0 completion gate."
+    },
+    {
+      "id": "S2.1.3",
+      "name": "nested_compute_tile_rf",
+      "status": "DONE_P1_CANDIDATE",
+      "note": "RF ctx rec24 used32; full nested L256/32 C64 completed 448 children; NOT equivalence claim"
+    },
+    {
+      "id": "S2.1.4",
+      "name": "virtual_master_store",
+      "status": "DONE_P1_CANDIDATE",
+      "note": "strip_finalize primary PNG + VM manifest 448 children; size/dim/path asserts held"
+    },
+    {
+      "id": "S2.1.5",
+      "name": "s2_quality_reaccept",
+      "status": "CLOSED_INCONCLUSIVE",
+      "note": "integrity PASS; quality INCONCLUSIVE; stop expansion"
+    },
+    {
+      "id": "S2.1.6",
+      "name": "e3_speed_qualified_only",
+      "status": "TODO"
+    }
+  ],
+  "oom_stages": [
+    "model_load",
+    "tile_forward",
+    "output_stitch",
+    "final_encode"
+  ],
+  "virtual_master_not": [
+    "universal_oom_eraser",
+    "identity_gate",
+    "license_to_claim_unrun_256_32"
+  ],
+  "final_acceptance": false,
+  "p0": {
+    "status": "DONE",
+    "scope": "P0 requested scope: isolated staged peak-RSS harness and per-size pinned-Siax single-forward measurements; fixed 48x64 SPM-A probe fingerprint bank; seam-control diagnostics for 128/8, 128/16 and 256/16.",
+    "evidence": "docs/evidence/S2_1_RAM_PROFILE.json; docs/evidence/S2_1_SPM_A_REPORT.json; docs/evidence/S2_1_SEAM_128_8.json; docs/evidence/S2_1_SEAM_128_16.json; docs/evidence/S2_1_SEAM_256_16.json",
+    "full_job_profile_tool": "OPTIONAL_DIAGNOSTIC_IMPLEMENTED_NOT_RUN",
+    "full_job_profile_is_p0_gate": false,
+    "full_256_32_oom_replay_required": false,
+    "final_acceptance": false
+  },
+  "next_gates": [
+    "P1 Nested Compute Tile: finish the smaller compute-core full-frame run using resume; do not replay the original 320x320 single-forward memory stress",
+    "Validate native-child SHA, full coverage and Virtual Master strip finalizer",
+    "Run S2 visual/identity/topology quality re-acceptance on the nested output",
+    "Optionally regenerate seam reports with a common BASE-space control offset before using the p50 ranking as strict cross-cell evidence",
+    "Keep full-frame 256/32 OOM replay out of scope unless a separately justified, measured-safe experiment is approved"
+  ],
+  "p1": {
+    "status": "INTEGRITY_PASS_QUALITY_INCONCLUSIVE",
+    "asof_utc": "2026-11-01T15:03:49Z",
+    "cell_id": "nested_L256/32_C64/ctx32",
+    "children": 448,
+    "peak_rss_mb": 663.79,
+    "output_sha256": "5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656",
+    "output_bytes": 43281047,
+    "dimensions": "7168x4032",
+    "equivalence_to_single_forward_logical": "NOT_CLAIMED",
+    "final_acceptance": false,
+    "evidence": "docs/evidence/S2_1_P1_NESTED_FULL_SUMMARY.json",
+    "next": "S2.1.5 quality reaccept on nested cell only",
+    "s215": {
+      "status": "CLOSED_INCONCLUSIVE",
+      "asof_utc": "2026-11-01T15:25:28Z",
+      "primary_sha256": "5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656",
+      "integrity": "PASS",
+      "quality_decision": "INCONCLUSIVE",
+      "quality_qualified": false,
+      "decision_doc": "docs/evidence/S2_1_P1_QUALITY_DECISION.json"
+    }
+  },
+  "freeze": {
+    "status": "FROZEN",
+    "asof_utc": "2026-11-01T15:35:15Z",
+    "head_note": "S2.1 closed; quality INCONCLUSIVE; integrity PASS",
+    "next_phase": "S3 Heterogeneous Upscale Execution on isolated branch",
+    "do_not": [
+      "128/16_bonus",
+      "256_32_oom_replay",
+      "flip_inconclusive_to_pass_without_same_sha_qc",
+      "claim_e3_from_s3_dev"
+    ]
+  }
+}
