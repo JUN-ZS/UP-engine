@@ -153,3 +153,89 @@ python tools/spm_local_executor.py cli local_pc_status
 ```
 
 Top-level `device_used` must report **runtime** device (cuda|cpu), with `device_requested` for the call argument.
+
+
+---
+
+## 8. PATH1 · Dialogue tools (Grok chat MCP)
+
+**Goal:** Grok **對話** 透過 Custom MCP 打到本機 Executor（先 status，再一圖）。  
+**Not:** Canvas 內嵌 · quality · S3
+
+### Protocol note
+
+- Grok custom connector needs a **public** MCP URL (not localhost).
+- Use tunnel: [xAI custom MCP tunneling](https://x.ai/docs/grok/connectors/custom-mcp-tunneling)
+- This executor exposes **POST `/mcp`** for `initialize` / `tools/list` / `tools/call`.
+- Set **`SPM_LOCAL_TOKEN`** before tunneling (Bearer auth).
+
+### Windows steps
+
+```powershell
+cd C:\Users\user\Documents\GitHub\UP-engine
+git pull
+.\.venv\Scripts\Activate.ps1
+
+# Window A — server
+.\tools\spm_path1_dialogue.ps1 -Port 8765
+
+# Window B — tunnel (pick one)
+winget install --id Cloudflare.cloudflared
+cloudflared tunnel --url http://127.0.0.1:8765
+# OR
+winget install ngrok -s msstore
+ngrok http 8765
+```
+
+Then:
+
+1. Copy HTTPS forwarding URL (e.g. `https://….trycloudflare.com`)
+2. Open [grok.com/connectors](https://grok.com/connectors) → **New Connector** → **Custom**
+3. Server URL: `https://….trycloudflare.com/mcp`  
+   (if connector asks for header: `Authorization: Bearer <SPM_LOCAL_TOKEN>`)
+4. **New chat**, ask only: call `local_pc_status` and show GPU name
+5. If tools appear and status returns RTX 3070 Ti → PASS for PATH1-status
+6. Then: `spm_local_execute` with  
+   `input_path=D:\s3_share\spm_in\small_BASE.jpg`  
+   `confirm_model_license_review=true`  
+   `device=auto`
+
+### Local smoke before tunnel
+
+```powershell
+curl http://127.0.0.1:8765/health
+curl -H "Authorization: Bearer $env:SPM_LOCAL_TOKEN" http://127.0.0.1:8765/local_pc_status
+```
+
+### MCP smoke (optional)
+
+```powershell
+$body = '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+Invoke-RestMethod -Uri http://127.0.0.1:8765/mcp -Method POST -ContentType 'application/json' -Body $body -Headers @{Authorization="Bearer $env:SPM_LOCAL_TOKEN"}
+```
+
+### What to paste back
+
+```text
+PATH1_REPORT
+tunnel: cloudflared|ngrok|none
+connector_added: yes|no
+tools_listed: yes|no
+local_pc_status_via_chat: yes|no
+gpu_name_seen: ...
+spm_local_execute_via_chat: yes|no|skipped
+job_id: ...
+error: (if any)
+```
+
+### Failure modes (still useful evidence)
+
+| Symptom | Likely cause |
+| --- | --- |
+| Connector rejects URL | not public / missing https / wrong path (need `/mcp`) |
+| Tools empty | handshake not MCP; check POST /mcp tools/list via curl |
+| 401 | token mismatch |
+| execute fails path | Grok cloud cannot see `D:\…` — path is on **your** PC; executor runs **locally** so path is OK if server is on that PC |
+| SSE errors on cloudflared | use ngrok for SSE transports; our `/mcp` is request/response JSON |
+
+**Cloudflare quick tunnel does not support SSE**; if Grok requires SSE and fails, switch to **ngrok**.

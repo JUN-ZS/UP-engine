@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""SPM Local Siax Executor — thin outlet for Grok Canvas / MCP / tunnel.
+"""SPM Local Siax Executor — thin outlet for Grok dialogue / MCP / tunnel.
 
-Tools:
-  local_pc_status
-  spm_local_execute
-  spm_local_result
+Tools: local_pc_status · spm_local_execute · spm_local_result
 
 Modes:
-  cli   — direct commands
-  stdio — JSON-RPC lines (MCP-compatible tool/call surface, minimal)
-  http  — localhost HTTP for tunnel (ngrok/cloudflared) experiments
+  cli    direct commands
+  stdio  JSON-RPC lines (experiments / some local CLI bridges)
+  http   localhost server:
+           REST:  GET /health /tools /local_pc_status
+                  POST /tools/call /spm_local_execute /spm_local_result
+           MCP:   POST /mcp  (initialize · tools/list · tools/call) for Grok custom connector
+
+Env:
+  SPM_LOCAL_TOKEN  if set, require Authorization: Bearer <token> on all non-health routes
 
 Does NOT implement ComfyUI, rewrite SPM, or start S3 scheduler.
 """
@@ -17,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
@@ -63,7 +67,7 @@ TOOLS = [
         "name": "spm_local_execute",
         "description": (
             "Run native Siax 4x on an input image on this PC (GPU/CPU/RAM). "
-            "Not Grok Imagine cloud. Not ComfyUI. Requires confirm_model_license_review."
+            "Not Grok Imagine cloud. Not ComfyUI. Requires confirm_model_license_review=true."
         ),
         "inputSchema": {
             "type": "object",
@@ -94,6 +98,55 @@ TOOLS = [
         },
     },
 ]
+
+
+def mcp_dispatch(req: dict) -> dict:
+    """Handle one JSON-RPC MCP request body; return JSON-RPC response object."""
+    rid = req.get("id")
+    method = req.get("method") or ""
+    params = req.get("params") or {}
+    # notifications have no id
+    try:
+        if method == "initialize":
+            result = {
+                "protocolVersion": "2024-11-05",
+                "serverInfo": {"name": "ige-spm-local-siax", "version": "0.1.1"},
+                "capabilities": {"tools": {"listChanged": False}},
+            }
+        elif method == "notifications/initialized":
+            return {"jsonrpc": "2.0", "result": {}}  # may be ignored if no id
+        elif method in ("tools/list", "list_tools"):
+            result = {"tools": TOOLS}
+        elif method in ("tools/call", "call_tool"):
+            name = params.get("name") or params.get("tool")
+            arguments = params.get("arguments") or params.get("args") or {}
+            payload = handle_tool(name, arguments)
+            result = {
+                "content": [
+                    {"type": "text", "text": json.dumps(payload, ensure_ascii=False)}
+                ],
+                "isError": False,
+            }
+        elif method == "ping":
+            result = {}
+        else:
+            return {
+                "jsonrpc": "2.0",
+                "id": rid,
+                "error": {"code": -32601, "message": f"Method not found: {method}"},
+            }
+        resp = {"jsonrpc": "2.0", "result": result}
+        if rid is not None:
+            resp["id"] = rid
+        return resp
+    except Exception as exc:
+        resp = {
+            "jsonrpc": "2.0",
+            "error": {"code": -32000, "message": str(exc)},
+        }
+        if rid is not None:
+            resp["id"] = rid
+        return resp
 
 
 def cmd_cli(args: argparse.Namespace) -> int:
@@ -130,7 +183,6 @@ def cmd_cli(args: argparse.Namespace) -> int:
 
 
 def cmd_stdio() -> int:
-    """Minimal JSON-RPC 2.0 over stdin/stdout for MCP tool bridge experiments."""
     for line in sys.stdin:
         line = line.strip()
         if not line:
@@ -138,56 +190,56 @@ def cmd_stdio() -> int:
         try:
             req = json.loads(line)
         except json.JSONDecodeError as exc:
-            print(json.dumps({"jsonrpc": "2.0", "error": {"code": -32700, "message": str(exc)}}))
+            print(json.dumps({"jsonrpc": "2.0", "error": {"code": -32700, "message": str(exc)}}), flush=True)
             continue
-        rid = req.get("id")
-        method = req.get("method")
-        params = req.get("params") or {}
-        try:
-            if method in ("tools/list", "list_tools"):
-                result = {"tools": TOOLS}
-            elif method in ("tools/call", "call_tool"):
-                name = params.get("name") or params.get("tool")
-                arguments = params.get("arguments") or params.get("args") or {}
-                result = {"content": [{"type": "text", "text": json.dumps(handle_tool(name, arguments))}]}
-            elif method == "initialize":
-                result = {
-                    "protocolVersion": "2024-11-05",
-                    "serverInfo": {"name": "ige-spm-local-siax", "version": "0.1.0"},
-                    "capabilities": {"tools": {}},
-                }
-            else:
-                raise ValueError(f"unknown method {method}")
-            print(json.dumps({"jsonrpc": "2.0", "id": rid, "result": result}), flush=True)
-        except Exception as exc:
-            print(
-                json.dumps(
-                    {
-                        "jsonrpc": "2.0",
-                        "id": rid,
-                        "error": {"code": -32000, "message": str(exc)},
-                    }
-                ),
-                flush=True,
-            )
+        print(json.dumps(mcp_dispatch(req), ensure_ascii=False), flush=True)
     return 0
 
 
 def cmd_http(host: str, port: int) -> int:
+    token = os.environ.get("SPM_LOCAL_TOKEN") or ""
+
     class H(BaseHTTPRequestHandler):
+        def _check_auth(self) -> bool:
+            if not token:
+                return True
+            auth = self.headers.get("Authorization") or ""
+            if auth == f"Bearer {token}":
+                return True
+            self._json(401, {"ok": False, "error": "unauthorized"})
+            return False
+
         def _json(self, code: int, body: dict) -> None:
             data = json.dumps(body, ensure_ascii=False).encode("utf-8")
             self.send_response(code)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.send_header("Content-Length", str(len(data)))
+            # CORS not required for Grok server-side; keep simple
             self.end_headers()
             self.wfile.write(data)
+
+        def _read_json(self) -> dict:
+            n = int(self.headers.get("Content-Length") or 0)
+            raw = self.rfile.read(n) if n else b"{}"
+            return json.loads(raw.decode("utf-8") or "{}")
 
         def do_GET(self) -> None:  # noqa: N802
             path = urlparse(self.path).path
             if path in ("/", "/health"):
-                self._json(200, {"ok": True, "service": "ige-spm-local-siax", "tools": [t["name"] for t in TOOLS]})
-            elif path == "/tools":
+                self._json(
+                    200,
+                    {
+                        "ok": True,
+                        "service": "ige-spm-local-siax",
+                        "mcp": "/mcp",
+                        "tools": [t["name"] for t in TOOLS],
+                        "auth_required": bool(token),
+                    },
+                )
+                return
+            if not self._check_auth():
+                return
+            if path == "/tools":
                 self._json(200, {"tools": TOOLS})
             elif path == "/local_pc_status":
                 try:
@@ -198,16 +250,23 @@ def cmd_http(host: str, port: int) -> int:
                 self._json(404, {"ok": False, "error": "not_found"})
 
         def do_POST(self) -> None:  # noqa: N802
-            n = int(self.headers.get("Content-Length") or 0)
-            raw = self.rfile.read(n) if n else b"{}"
+            path = urlparse(self.path).path
+            if path not in ("/", "/health") and not self._check_auth():
+                return
             try:
-                body = json.loads(raw.decode("utf-8") or "{}")
+                body = self._read_json()
             except json.JSONDecodeError:
                 self._json(400, {"ok": False, "error": "invalid_json"})
                 return
-            path = urlparse(self.path).path
             try:
-                if path == "/tools/call":
+                if path in ("/mcp", "/mcp/"):
+                    # Single JSON-RPC object or batch
+                    if isinstance(body, list):
+                        out = [mcp_dispatch(x) for x in body]
+                    else:
+                        out = mcp_dispatch(body)
+                    self._json(200, out)
+                elif path == "/tools/call":
                     name = body.get("name")
                     arguments = body.get("arguments") or {}
                     self._json(200, handle_tool(name, arguments))
@@ -224,8 +283,15 @@ def cmd_http(host: str, port: int) -> int:
             sys.stderr.write("http: " + (fmt % args) + "\n")
 
     httpd = HTTPServer((host, port), H)
-    sys.stderr.write(f"spm_local_executor http://{host}:{port}  (tunnel this for MCP/connector tests)\n")
-    sys.stderr.write("Canvas MCP support is NOT assumed — run a real call test first.\n")
+    sys.stderr.write(f"spm_local_executor http://{host}:{port}\n")
+    sys.stderr.write(f"  health: GET  /health\n")
+    sys.stderr.write(f"  MCP:    POST /mcp   (initialize / tools/list / tools/call)\n")
+    sys.stderr.write(f"  REST:   GET  /local_pc_status\n")
+    if token:
+        sys.stderr.write("  auth:   Bearer SPM_LOCAL_TOKEN required\n")
+    else:
+        sys.stderr.write("  auth:   SPM_LOCAL_TOKEN not set (open) — set before public tunnel\n")
+    sys.stderr.write("PATH1: tunnel this host, then grok.com/connectors → Custom → https://…/mcp\n")
     httpd.serve_forever()
     return 0
 
@@ -247,12 +313,12 @@ def main() -> int:
     p_cli.add_argument("--job-store", default="runs/spm_local")
     p_cli.add_argument("--confirm-model-license-review", action="store_true")
 
-    sub.add_parser("stdio", help="JSON-RPC stdio bridge for MCP experiments")
-    p_http = sub.add_parser("http", help="localhost HTTP for tunnel tests")
+    sub.add_parser("stdio", help="JSON-RPC stdio bridge")
+    p_http = sub.add_parser("http", help="HTTP + MCP /mcp for tunnel / Grok connector")
     p_http.add_argument("--host", default="127.0.0.1")
     p_http.add_argument("--port", type=int, default=8765)
 
-    p_list = sub.add_parser("list-tools")
+    sub.add_parser("list-tools")
     args = ap.parse_args()
 
     if args.cmd == "list-tools":
