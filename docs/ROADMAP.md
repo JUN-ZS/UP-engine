@@ -51,6 +51,7 @@
 - [ ] garment reconstruction (TEX4/RRT/P_G)
 - [ ] object accumulation (OBA)
 - [ ] GRID×SIAX / SWP / SPM hybrid execution and project-specific clarity comparison
+- [ ] SIAX R3 / S2.1: Nested Compute Tile + Virtual Master + staged RAM profile + true SPM-A (see docs/SIAX_R3_NESTED_PEEP_VIRTUAL_MASTER.md); do not treat S2 256/32 OOM as quality fail
 - [ ] DETAIL6 native 4608/quality proof and human-reviewed clarity benchmark
 - [ ] PIXEL_CTRL per-pixel classification and proof
 

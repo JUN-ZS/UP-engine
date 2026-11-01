@@ -1,0 +1,43 @@
+{
+  "program": "SIAX_S2_1_R3",
+  "title": "Memory-aware Nested Tile Executor + Virtual Master",
+  "asof_utc": "2026-11-01T13:00:00Z",
+  "base_commit": "463cce1aa20ad4067c8e29b7ced999c6422acc58",
+  "relation_to_pr7": "isolated_follow_on_draft; do_not_rewrite_pr7_evidence",
+  "decision": "Do not primary-path buy-RAM re-run 256/32; evolve architecture",
+  "s2_findings_locked": {
+    "128_8": "temp best SPM-approx",
+    "128_16": "near 128_8; not proven inferior",
+    "256_16": "temp worse under biased diag",
+    "256_32": "OOM_BLOCKED quality_unknown",
+    "oom_hypothesis": "tile_forward_activation_peak",
+    "oom_evidence_grade": "Hypothesis_until_staged_RSS",
+    "spm_approx_bias": ["interior_probe_fallback_differs_by_tile", "no_matched_non_seam_control", "not_true_01239_residual"]
+  },
+  "layers": {
+    "Siax": "4x CNN/GAN executor",
+    "SPM": "HF residual fingerprint and match",
+    "NCPG_PEEP_VirtualMaster": "ROI context native children transforms rebuild"
+  },
+  "parameters": {
+    "logical_core": "experiment tile core e.g. 256",
+    "compute_core": "actual model core e.g. 64/96/128",
+    "logical_halo": "parent halo e.g. 32",
+    "compute_context": "RF-measured interior context"
+  },
+  "steps": [
+    {"id": "S2.1.1", "name": "fix_diagnostics", "status": "TODO"},
+    {"id": "S2.1.2", "name": "staged_peak_rss_256_32", "status": "TODO"},
+    {"id": "S2.1.3", "name": "nested_compute_tile_rf", "status": "TODO"},
+    {"id": "S2.1.4", "name": "virtual_master_store", "status": "TODO"},
+    {"id": "S2.1.5", "name": "s2_quality_reaccept", "status": "TODO"},
+    {"id": "S2.1.6", "name": "e3_speed_qualified_only", "status": "TODO"}
+  ],
+  "oom_stages": ["model_load", "tile_forward", "output_stitch", "final_encode"],
+  "virtual_master_not": [
+    "universal_oom_eraser",
+    "identity_gate",
+    "license_to_claim_unrun_256_32"
+  ],
+  "final_acceptance": false
+}
