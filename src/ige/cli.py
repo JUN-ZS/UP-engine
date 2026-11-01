@@ -211,6 +211,33 @@ def build_parser() -> argparse.ArgumentParser:
     detail6.add_argument("--gain", type=float, default=0.15)
     detail6.add_argument("--minimum-bytes", type=int, default=6_000_000)
 
+    dist_plan = sub.add_parser(
+        "siax-distribute-plan",
+        help="prepare a shared filesystem queue of halo-padded Siax 4x tile tasks",
+    )
+    dist_plan.add_argument("input", type=Path)
+    dist_plan.add_argument("--job-dir", type=Path, required=True)
+    dist_plan.add_argument("--tile-size", type=int, default=128)
+    dist_plan.add_argument("--tile-pad", type=int, default=8)
+
+    dist_worker = sub.add_parser(
+        "siax-distribute-worker",
+        help="claim and process queued Siax tiles; each process loads the model once",
+    )
+    dist_worker.add_argument("job_dir", type=Path)
+    dist_worker.add_argument("--checkpoint", type=Path, required=True)
+    dist_worker.add_argument("--worker-id", default=None)
+    dist_worker.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
+    dist_worker.add_argument("--max-tasks", type=int, default=None)
+    dist_worker.add_argument("--confirm-model-license-review", action="store_true")
+
+    dist_stitch = sub.add_parser(
+        "siax-distribute-stitch",
+        help="verify tile receipts and stitch the distributed Siax 4x PNG master",
+    )
+    dist_stitch.add_argument("job_dir", type=Path)
+    dist_stitch.add_argument("--out", type=Path, required=True)
+
     return parser
 
 
@@ -526,6 +553,47 @@ def main() -> int:
         print(f"Size: {report['output_dimensions']['width']}x{report['output_dimensions']['height']}")
         print(f"Metadata: {report['metadata_path']}")
         print("Status: candidate only; identity/topology/visual gates remain separate")
+        return 0
+
+    if args.command == "siax-distribute-plan":
+        from .upscale.distributed import prepare_siax_job
+        import json as _json
+
+        manifest = prepare_siax_job(
+            args.input, args.job_dir, tile_size=args.tile_size, tile_pad=args.tile_pad
+        )
+        print(_json.dumps({
+            "job_id": manifest["job_id"],
+            "job_dir": str(args.job_dir.resolve()),
+            "tile_count": manifest["tiling"]["task_count"],
+            "grid": [manifest["tiling"]["grid_width"], manifest["tiling"]["grid_height"]],
+            "base_rgb_sha256": manifest["source"]["base_rgb_sha256"],
+            "checkpoint_sha256": manifest["checkpoint_sha256"],
+            "status": "planned",
+        }, ensure_ascii=False, indent=2))
+        return 0
+
+    if args.command == "siax-distribute-worker":
+        from .upscale.distributed import run_siax_worker
+        import json as _json
+
+        if args.max_tasks is not None and args.max_tasks < 1:
+            parser.error("--max-tasks must be >= 1")
+        report = run_siax_worker(
+            args.job_dir, args.checkpoint, worker_id=args.worker_id,
+            device=args.device, max_tasks=args.max_tasks,
+            confirm_model_license_review=args.confirm_model_license_review,
+        )
+        print(_json.dumps(report, ensure_ascii=False, indent=2))
+        return 0
+
+    if args.command == "siax-distribute-stitch":
+        from .upscale.distributed import stitch_siax_job
+        import json as _json
+
+        report = stitch_siax_job(args.job_dir, args.out)
+        print(_json.dumps(report, ensure_ascii=False, indent=2))
+        print("Status: candidate only; no identity/topology/perceptual acceptance is implied.")
         return 0
 
     if args.command == "detail6":
