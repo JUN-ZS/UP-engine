@@ -1,0 +1,41 @@
+{
+  "format": "ige.spm.here_grab_package",
+  "format_version": "1.0",
+  "package_id": "warrior_mud_hammer",
+  "created_at_utc": "2026-11-01T19:57:30Z",
+  "grok_cli": {
+    "grab_command": "python tools/spm_here_grab.py --package warrior_mud_hammer --variant base",
+    "run_spm_command": "python tools/spm_here_grab.py --package warrior_mud_hammer --variant base --run-siax",
+    "note": "Images ship in git package so Grok CLI on PC can grab without grok.com OAuth or manual chat save."
+  },
+  "variants": {
+    "base": {
+      "file": "warrior_BASE.jpg",
+      "sha256": "cdc2af9738c0ab8d4f121126eeff3dd97959e0b69f486c9242b70d1f52c0e51c",
+      "here_asset_id": "cd5c430d-f261-4f9f-aa3b-d5782d9f5ced",
+      "share_url": "https://grok.com/imagine/post/cd5c430d-f261-4f9f-aa3b-d5782d9f5ced?source=agent",
+      "role": "SPM_INPUT_DEFAULT"
+    },
+    "master": {
+      "file": "warrior_MASTER.jpg",
+      "sha256": "b01c432b03e4abcaf614b739e4aed4d56cb3339be86e64d81f06ba324ceb608a",
+      "here_asset_id": "4ac69625-ed8d-4666-b778-e93227a3c48d",
+      "share_url": "https://grok.com/imagine/post/4ac69625-ed8d-4666-b778-e93227a3c48d?source=agent",
+      "role": "SPM_INPUT_OPTIONAL_POLISH"
+    }
+  },
+  "local_defaults": {
+    "dest_dir": "D:\\s3_share\\spm_in",
+    "dest_name": "warrior_BASE.jpg",
+    "handoff_root": "D:\\s3_share\\spm_handoff",
+    "output_png": "D:\\s3_share\\spm_handoff\\outbox\\warrior_SIAX4X.png"
+  },
+  "siax": {
+    "tile_size": 128,
+    "tile_pad": 8,
+    "device": "auto",
+    "scale": 4
+  },
+  "final_acceptance": false,
+  "e3_speed_claim": false
+}

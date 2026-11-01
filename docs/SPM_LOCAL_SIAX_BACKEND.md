@@ -327,3 +327,17 @@ python tools\spm_here_pull.py --once
 - **自動進此對話：** 需要你貼 JSON，或之後接 Git push／其他上傳橋  
 - **自動落盤：** `outbox/` 有檔 = 本機協同完成  
 - 有 watch 時：你只負責存圖 + 把 result 貼回（或我教你最短貼法）
+
+
+---
+
+## 11. Grok CLI 在此抓圖（git package）
+
+HERE 對話備好的圖會進 `packages/spm_here/<id>/`，本機 **Grok CLI / shell** 可直接 grab，不必 grok.com OAuth，也不必手動另存聊天圖。
+
+```powershell
+python tools/spm_here_grab.py --package warrior_mud_hammer --variant base
+python tools/spm_here_grab.py --package warrior_mud_hammer --variant base --run-siax
+```
+
+See `.grok/SPM_HERE_CLI.md`.
