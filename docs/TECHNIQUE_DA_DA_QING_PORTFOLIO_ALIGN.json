@@ -1,0 +1,73 @@
+{
+  "technique_id": "DA_DA_QING",
+  "technique_name_zh": "大大清",
+  "asof_utc_amended": "2026-10-31T22:53:43Z",
+  "architecture_correction": {
+    "problem_fixed": "Do not collapse mechanism / model / quality-policy into one '升清方法' list",
+    "three_layers": {
+      "L1_mechanism": "How detail is recovered or synthesized (SR family)",
+      "L2_executor": "Which model/algorithm implements the mechanism",
+      "L3_quality_policy": "Identity/topology/ROI/mask/acceptance gates (DETAIL6 is policy+ROI residual, not a SR model)"
+    },
+    "大大清_placement": {
+      "L1": [
+        "CNN_GAN_SR (Siax ESRGAN 4x)",
+        "ROI residual HF enhancement (DETAIL6 partial)"
+      ],
+      "L2": "4x_NMKD-Siax_200k + DETAIL6 residual runner",
+      "L3": "face/skin/eye_white protect · metal detail · execution_complete · final_acceptance=false",
+      "NOT": "Not a complete portfolio. Not Diffusion/Transformer/Ref-guided/Temporal/Geometry families."
+    },
+    "HERE_3_升清_correct_class": {
+      "pass1_exhausted_lock": "NATIVE_GENERATIVE_REDETAIL",
+      "pass2_hard_hit_lock": "NATIVE_GENERATIVE_REDETAIL",
+      "pass3_hybrid_a8b": "NATIVE_GENERATIVE_REDETAIL + ROI_HYBRID identity lock",
+      "native_px": "1792x1008 — NOT spatial 4x SR"
+    }
+  },
+  "portfolio_v1_12_families": {
+    "source_doc": "JUN-ZS/UP-engine docs/UPSCALE_STRATEGY_PORTFOLIO.md @ 4474415",
+    "note": "Strategy planning scope; NOT 12 installed executors",
+    "executable_here_now": {
+      "RESAMPLE_CONTROL": "yes (Pillow baseline)",
+      "CNN_GAN_SR": "Siax adapter + HERE real run on 83fd",
+      "NATIVE_GENERATIVE_REDETAIL": "HERE Imagine external",
+      "ROI_HYBRID": "partial (DETAIL6 masks + protect)"
+    },
+    "not_imported": [
+      "CLASSICAL_RESTORATION",
+      "MULTISCALE_FREQUENCY_ENHANCEMENT",
+      "TRANSFORMER_SR",
+      "DIFFUSION_SR",
+      "IDENTITY_GUIDED_FACE_RESTORATION (PATH1E incomplete)",
+      "REFERENCE_GUIDED_SR",
+      "TEMPORAL_MULTI_FRAME_SR",
+      "GEOMETRY_GUIDED_SR"
+    ]
+  },
+  "fair_compare_next": {
+    "protocol": "Freeze ONE BASE SHA; Control Lanczos 4x + A Siax + E native re-detail + F ROI hybrid; B/C/D when adapters exist",
+    "fixed_base_proposal": "83fd0872-0faf-44ef-b6bb-ea4a00c5d639",
+    "axes_not_single_score": [
+      "identity",
+      "topology",
+      "gold-mesh",
+      "skin",
+      "edge/halo",
+      "geometry"
+    ],
+    "do_not": "Compare different compositions as if they were SR methods"
+  },
+  "engine_head": {
+    "pr": 5,
+    "sha": "44744150d9093088fb1f575e746cc979f06787b9",
+    "tests": 110,
+    "draft": true,
+    "main_untouched": true
+  },
+  "honesty": {
+    "PR_CI_Siax": "NOT RUN in GitHub CI (no vendored weights)",
+    "HERE_Siax_real_run": "DONE on 83fd — separate evidence from CI",
+    "final_acceptance": false
+  }
+}
