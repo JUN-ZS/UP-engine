@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/visual-reasoning-proposals.schema.json",
+  "title": "Unreviewed visual reasoning proposals",
+  "type": "object",
+  "required": ["provider_id", "model_id", "status", "confidence_semantics", "nodes", "relations", "uncertainties", "raw_response_sha256"],
+  "properties": {
+    "provider_id": {"type": "string", "minLength": 1},
+    "model_id": {"type": "string", "minLength": 1},
+    "status": {"const": "unreviewed_model_proposals"},
+    "confidence_semantics": {"const": "uncalibrated_model_self_assessment_not_probability"},
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "semantic_type", "bbox_xyxy_norm", "visual_evidence", "uncertainty", "status", "source", "edit_permission"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "label": {"type": "string", "minLength": 1},
+          "semantic_type": {"type": "string", "minLength": 1},
+          "bbox_xyxy_norm": {"$ref": "#/$defs/bbox"},
+          "visual_evidence": {"type": "string", "minLength": 1},
+          "uncertainty": {"enum": ["low", "medium", "high", "unknown"]},
+          "status": {"const": "candidate"},
+          "source": {"const": "model"},
+          "edit_permission": {"const": false}
+        },
+        "additionalProperties": false
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "subject_id", "predicate", "object_id", "confidence", "evidence_bbox_xyxy_norm", "visual_evidence", "uncertainty", "details", "status", "source", "geometry_lock"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "subject_id": {"type": "string", "minLength": 1},
+          "predicate": {"enum": ["part_of", "occludes", "in_front_of", "behind", "touches", "contacts_at", "attached_to", "aligned_with", "opposes", "parallel_to", "perpendicular_to", "same_object_as"]},
+          "object_id": {"type": "string", "minLength": 1},
+          "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "evidence_bbox_xyxy_norm": {"$ref": "#/$defs/bbox"},
+          "visual_evidence": {"type": "string", "minLength": 1},
+          "uncertainty": {"enum": ["low", "medium", "high", "unknown"]},
+          "details": {"type": "object"},
+          "status": {"const": "candidate"},
+          "source": {"const": "model"},
+          "geometry_lock": {"const": false}
+        },
+        "additionalProperties": false
+      }
+    },
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "raw_response_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "bbox": {
+      "type": "array",
+      "prefixItems": [
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1}
+      ],
+      "minItems": 4,
+      "maxItems": 4
+    }
+  },
+  "additionalProperties": false
+}

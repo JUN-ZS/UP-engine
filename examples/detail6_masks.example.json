@@ -1,0 +1,12 @@
+{
+  "mask_version": "1.0",
+  "masks": {
+    "metal": "masks/metal.png",
+    "stone": "masks/stone.png",
+    "text": "masks/text.png",
+    "fire": "masks/fire.png",
+    "face": "masks/face.png",
+    "skin": "masks/skin.png",
+    "eye_white": "masks/eye_white.png"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "format": "ige.spm.here_request",
+  "format_version": "1.0",
+  "request_id": "REPLACE_BY_TOOL",
+  "input_path": "D:\\s3_share\\spm_in\\warrior_BASE.jpg",
+  "output_path": "D:\\s3_share\\spm_handoff\\outbox\\warrior_SIAX4X.png",
+  "device": "auto",
+  "tile_size": 128,
+  "tile_pad": 8,
+  "confirm_model_license_review": true,
+  "checkpoint": "models/4x_NMKD-Siax_200k.pth",
+  "note": "HERE package warrior_mud_hammer full-frame local Siax pilot",
+  "source_asset_hint": "cd5c430d-f261-4f9f-aa3b-d5782d9f5ced",
+  "final_acceptance": false,
+  "e3_speed_claim": false
+}

@@ -1,0 +1,28 @@
+{
+  "arm": "dual",
+  "threads_total": 2,
+  "affinity": "0 | 1",
+  "threads_per_worker": 1,
+  "wall_inference_s": 548.238,
+  "wall_stitch_s": 18.927,
+  "wall_total_s": 567.164,
+  "workers": [
+    {
+      "worker_id": "s1c-dual-a",
+      "tasks_completed": 56,
+      "runtime_seconds": 422.7954187670002,
+      "status": "completed"
+    },
+    {
+      "worker_id": "s1c-dual-b",
+      "tasks_completed": 56,
+      "runtime_seconds": 422.23043596000036,
+      "status": "completed"
+    }
+  ],
+  "sum_worker_runtime_s": 845.026,
+  "peak_rss_children_mb": 706.9,
+  "output_sha256": "3289e3e02928ac688002adc621124ac73d3730f67a5a0d0a5cabe351a6cfd181",
+  "completed_tiles": 112,
+  "match_r1_master": true
+}

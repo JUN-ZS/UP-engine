@@ -1,0 +1,55 @@
+{
+  "format": "ige.native4k.n1_scaffold_local",
+  "format_version": "1.0",
+  "status": "N1_SCAFFOLD_OK",
+  "stamp_utc": "2026-11-01T21:06:38Z",
+  "branch_head_ref": "b0e9f74",
+  "boundary_ref": "a8a898c",
+  "host_note": "user local PC · reported in chat",
+  "plan": {
+    "path": "runs\\n1\\plan.json",
+    "width": 3840,
+    "height": 2160,
+    "tile": 512,
+    "overlap": 64,
+    "step": 448,
+    "tile_count": 45
+  },
+  "empty_canvas": {
+    "path": "runs\\n1\\canvas.png",
+    "wh": [
+      3840,
+      2160
+    ],
+    "sha256_prefix": "2c3a556d",
+    "sha256_suffix": "ea39a5",
+    "sha256_reported": "2c3a556d…ea39a5"
+  },
+  "structure_fit": {
+    "path": "runs\\n1\\canvas_struct.png",
+    "method": "Lanczos contain",
+    "base_sha256": "cdc2af9738c0ab8d4f121126eeff3dd97959e0b69f486c9242b70d1f52c0e51c",
+    "sha256_reported": "1237ed65…5818a",
+    "not_siax_4x": true,
+    "not_native_gen": true
+  },
+  "smoke": {
+    "canvas": [
+      1024,
+      576
+    ],
+    "placed": "15/15",
+    "status": "N1_SCAFFOLD_OK"
+  },
+  "flags": {
+    "not_siax_4x_upscale": true,
+    "native_4k_success": false,
+    "n1_gen_pilot_ok": false,
+    "native_4k_pilot_ok": false,
+    "final_acceptance": false,
+    "e3_speed_claim": false,
+    "warrior_4x_rerun": false,
+    "s3_dock_uncommitted_untouched": true
+  },
+  "next": "N1.gen when ready to fill tiles at target resolution"
+}

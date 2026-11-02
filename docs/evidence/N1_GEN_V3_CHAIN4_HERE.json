@@ -1,0 +1,90 @@
+{
+  "format": "ige.native4k.n1_gen_v3_chain4",
+  "stamp_utc": "2026-11-01T21:36:58Z",
+  "mechanism": "joint_plate_chain_4_steps_plus_seed",
+  "seed": "v3 joint tiles 13+14 frozen",
+  "steps": [
+    {
+      "name": "R1",
+      "pair": [
+        "n1_0014_2240_0448",
+        "n1_0015_2688_0448"
+      ],
+      "asset": "4f5bfc65-dd6d-4af1-9e12-0dddc99e4c8f"
+    },
+    {
+      "name": "R2",
+      "pair": [
+        "n1_0015_2688_0448",
+        "n1_0016_3136_0448"
+      ],
+      "asset": "7666f6c5-77f2-4f86-9003-d110d3f92f67"
+    },
+    {
+      "name": "R3",
+      "pair": [
+        "n1_0016_3136_0448",
+        "n1_0017_3584_0448"
+      ],
+      "asset": "12b0b343-e7af-4937-b9ab-50c6a8e633ff"
+    },
+    {
+      "name": "L1",
+      "pair": [
+        "n1_0012_1344_0448",
+        "n1_0013_1792_0448"
+      ],
+      "asset": "7fabde72-ad0f-4956-8747-b4fcea1bee78"
+    }
+  ],
+  "tiles_filled": [
+    "n1_0012_1344_0448",
+    "n1_0013_1792_0448",
+    "n1_0014_2240_0448",
+    "n1_0015_2688_0448",
+    "n1_0016_3136_0448",
+    "n1_0017_3584_0448"
+  ],
+  "tile_count": 6,
+  "metrics_pairs": [
+    {
+      "a": "n1_0012_1344_0448",
+      "b": "n1_0013_1792_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 12.578125
+    },
+    {
+      "a": "n1_0013_1792_0448",
+      "b": "n1_0014_2240_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 20.720703125
+    },
+    {
+      "a": "n1_0014_2240_0448",
+      "b": "n1_0015_2688_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 30.62890625
+    },
+    {
+      "a": "n1_0015_2688_0448",
+      "b": "n1_0016_3136_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 32.62630081176758
+    },
+    {
+      "a": "n1_0016_3136_0448",
+      "b": "n1_0017_3584_0448",
+      "overlap_equality_mae": 0.0,
+      "generation_frontier_mae": 27.35221290588379
+    }
+  ],
+  "labels": {
+    "N1_GEN_V3_CHAIN4": "experiment_complete",
+    "N1_SEAM_CONTINUITY_OK": false,
+    "NATIVE_4K_PILOT_OK": false,
+    "note": "4 joint extensions (3 right + 1 left). Hard-lock overlap each step. Semantic continuity HUMAN_REVIEW. Not full 45-tile canvas."
+  },
+  "stitch_exit": 0,
+  "not_siax_4x_upscale": true,
+  "final_acceptance": false
+}

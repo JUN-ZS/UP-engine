@@ -1,0 +1,107 @@
+{
+  "program": "SIAX_S2_1_P1_QUALITY_DECISION",
+  "asof_utc": "2026-11-01T15:25:28Z",
+  "cell_id": "nested_L256/32_C64/ctx32",
+  "primary_sha256": "5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656",
+  "scope": "Nested cell only; not single-forward 256/32; not project final_acceptance",
+  "integrity": {
+    "decision": "PASS",
+    "evidence": "docs/evidence/S2_1_P1_NESTED_INTEGRITY_STRICT.json",
+    "summary": {
+      "children_verified": 448,
+      "pixel_mismatches": 0,
+      "missing_sha_fields": 0,
+      "coverage_complete": true,
+      "fail_closed": true
+    }
+  },
+  "diagnostics_reference_only": {
+    "spm_a_candidate": {
+      "mae_residual_p50": 3.997341579861111,
+      "mae_residual_p95": 7.042189534505208,
+      "residual_hf_p50": 6.699585437774658,
+      "residual_hf_p95": 11.852714443206786
+    },
+    "spm_note": "MAE vs Lanczos is not true-detail judgment; high residual may be good or bad detail",
+    "seam_total_excess_p50": -0.10416666666666674,
+    "seam_total_excess_p95": 5.684895833333332,
+    "seam_vertical_excess_p50": 0.09635416666666696,
+    "seam_vertical_excess_p95": 5.7421875,
+    "seam_horizontal_excess_p50": -0.3359374999999998,
+    "seam_horizontal_excess_p95": 4.5684895833333306,
+    "seam_ranked_samples": "runs/siax_validation_r2/S2_1/p1/blind_400/keyed/seam_ranked_samples.json"
+  },
+  "blind_400pct": {
+    "protocol": "anonymous crops first; scores unblinded after visual notes",
+    "n_crops": 20,
+    "crops_dir": "runs/siax_validation_r2/S2_1/p1/blind_400/crops",
+    "notes": [
+      {
+        "anon_id": "R01",
+        "after_unblind": "p09",
+        "finding": "glass/reflection bottles; high residual consistent with complex reflection detail; no wrong-texture fail observed"
+      },
+      {
+        "anon_id": "R02",
+        "after_unblind": "p13",
+        "finding": "fabric folds; coherent; no contour break"
+      },
+      {
+        "anon_id": "R03",
+        "after_unblind": "p08",
+        "finding": "fabric near glossy bag; acceptable microdetail"
+      },
+      {
+        "anon_id": "SV01",
+        "finding": "highest-v excess sample; mild fabric intensity shift at marked child boundary; not hard tile cut"
+      },
+      {
+        "anon_id": "SV02",
+        "finding": "mild weave continuity change at vertical boundary"
+      },
+      {
+        "anon_id": "SH01",
+        "finding": "horizontal boundary soft; no hard step"
+      },
+      {
+        "anon_id": "X01",
+        "finding": "grid cross; fabric continuous enough; no catastrophic break"
+      },
+      {
+        "anon_id": "D01",
+        "finding": "glassware/reflection subject detail usable"
+      },
+      {
+        "anon_id": "D02",
+        "finding": "soft fabric subject; no obvious tile grid"
+      }
+    ],
+    "limitations": [
+      "sampled regions only (~20 crops), not full-frame exhaustive review",
+      "vertical high-excess seam samples show mild fabric continuity change",
+      "reviewer is automated multimodal inspection, not a substitute for dedicated human production QC if required"
+    ]
+  },
+  "quality_decision": "INCONCLUSIVE",
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "equivalence_to_single_forward_logical": "NOT_CLAIMED",
+  "rationale": [
+    "Integrity PASS: 448 children pixel-equal to primary crops; SHA fail-closed; full coverage.",
+    "Blind sample found no FAIL-level wrong texture or hard contour destruction on reviewed crops.",
+    "However vertical seam tail (p95) and mild fabric boundary shifts at top excess samples remain; sample coverage is partial.",
+    "SPM-A residual cannot prove true vs false detail; therefore cannot promote to quality_qualified.",
+    "INCONCLUSIVE is the honest gate: usable candidate with locked integrity, not quality-qualified."
+  ],
+  "explicit_non_claims": [
+    "not original single-forward 256/32 success",
+    "not Siax project final_acceptance",
+    "not license to skip human QC for production-critical use"
+  ],
+  "s215_closeout": "STOP further S2.1.5 test expansion; only reopen if human QC upgrades decision to PASS/FAIL",
+  "next_allowed": [
+    "optional human 400% on same SHA crops + full frame",
+    "E3 speed only if quality_qualified later becomes true",
+    "Runner dual-host as separate phase"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/read-relations.schema.json",
+  "title": "READ object and geometry relations",
+  "type": "object",
+  "required": ["version", "relations"],
+  "properties": {
+    "version": {"const": "0.1.0"},
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "subject_region_id", "predicate", "object_region_id", "status", "source"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+$"},
+          "subject_region_id": {"type": "string", "minLength": 1},
+          "predicate": {"enum": ["part_of", "occludes", "in_front_of", "behind", "touches", "contacts_at", "attached_to", "aligned_with", "opposes", "parallel_to", "perpendicular_to", "same_object_as"]},
+          "object_region_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["candidate", "human_verified", "rejected"]},
+          "source": {"enum": ["human", "model"]},
+          "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "evidence": {"type": "string"},
+          "evidence_region_id": {"type": ["string", "null"]},
+          "details": {"type": "object"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

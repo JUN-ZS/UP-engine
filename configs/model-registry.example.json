@@ -1,0 +1,220 @@
+{
+  "registry_version": "0.6.1",
+  "policy": "fail_closed",
+  "models": [
+    {
+      "model_id": "grok.imagine.here",
+      "api_model_id_default": "grok-imagine-here",
+      "role": "primary_candidate_image_generator_editor",
+      "supported_tasks": [
+        "generate_candidate",
+        "edit_candidate"
+      ],
+      "license_status": "review_required",
+      "license": "xAI / Grok Imagine product terms",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "HERE Grok agent session + Grok Imagine tools; UP-engine prepares job and ingests candidate",
+        "backend": "here",
+        "primary": true,
+        "local_weights": false
+      },
+      "enabled": false,
+      "reason": "PRIMARY candidate path. Operator/agent generates with Imagine tools; engine does not auto-accept geometry."
+    },
+    {
+      "model_id": "xai.grok.vision",
+      "api_model_id_default": "grok-4",
+      "role": "primary_rgb_visual_reasoner",
+      "supported_tasks": [
+        "read_objects",
+        "read_relations",
+        "spatial_grounding"
+      ],
+      "license_status": "review_required",
+      "license": "xAI API Terms",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "xAI Responses API with input_image detail=high",
+        "endpoint": "https://api.x.ai/v1/responses",
+        "auth_env": "XAI_API_KEY",
+        "model_env": "XAI_VISION_MODEL",
+        "local_weights": false,
+        "measured_latency_seconds": null
+      },
+      "enabled": false,
+      "reason": "Active READ visual reasoner adapter. Requires XAI_API_KEY. Outputs remain unreviewed candidates. Project gold-set replay is required before enablement."
+    },
+    {
+      "model_id": "xai.grok.imagine.api",
+      "api_model_id_default": "grok-imagine-image-2.0",
+      "role": "secondary_candidate_image_generator_editor",
+      "supported_tasks": [
+        "generate_candidate",
+        "edit_candidate"
+      ],
+      "license_status": "review_required",
+      "license": "xAI API Terms",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "xAI Images edits API with b64_json persistence",
+        "endpoint": "https://api.x.ai/v1/images/edits",
+        "auth_env": "XAI_API_KEY",
+        "model_env": "XAI_IMAGINE_MODEL",
+        "local_weights": false,
+        "measured_latency_seconds": null,
+        "primary": false,
+        "backend": "xai-api"
+      },
+      "enabled": false,
+      "reason": "SECONDARY remote Images API path (--backend xai-api). Not the default."
+    },
+    {
+      "model_id": "meta.sam3.1",
+      "role": "semantic_segmentation_proposal",
+      "supported_tasks": [
+        "read_segment"
+      ],
+      "license_status": "review_required",
+      "validation_status": "untested",
+      "environment": {
+        "python": ">=3.12",
+        "pytorch": ">=2.7",
+        "cuda": ">=12.6",
+        "checkpoint_access": "separate approval and authentication required"
+      },
+      "enabled": false,
+      "reason": "Open-vocabulary pixel segmentation candidate. Not a geometry validator."
+    },
+    {
+      "model_id": "Qwen/Qwen3.8-27B",
+      "role": "deprecated_open_weight_rgb_visual_reasoner_comparison",
+      "supported_tasks": [
+        "read_objects",
+        "read_relations",
+        "spatial_grounding"
+      ],
+      "license_status": "approved",
+      "license": "Apache-2.0",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "Transformers AutoModelForImageTextToText",
+        "transformers": ">=5.8.1",
+        "deprecated": true,
+        "not_default": true,
+        "not_fallback": true
+      },
+      "enabled": false,
+      "reason": "DEPRECATED. Retained for explicit historical comparison only. Not on the default path and never used as a silent fallback when Grok fails."
+    },
+    {
+      "model_id": "Qwen/Qwen3.6-27B",
+      "role": "deprecated_previous_generation_rgb_visual_reasoner_baseline",
+      "supported_tasks": [
+        "read_objects",
+        "read_relations",
+        "spatial_grounding"
+      ],
+      "license_status": "approved",
+      "license": "Apache-2.0",
+      "validation_status": "untested",
+      "runtime": {
+        "deprecated": true,
+        "not_default": true,
+        "not_fallback": true
+      },
+      "enabled": false,
+      "reason": "DEPRECATED baseline comparison only."
+    },
+    {
+      "model_id": "Qwen/Qwen3-VL-8B-Instruct",
+      "role": "deprecated_older_low_parameter_rgb_visual_reasoner_baseline",
+      "supported_tasks": [
+        "read_objects",
+        "read_relations"
+      ],
+      "license_status": "approved",
+      "license": "Apache-2.0",
+      "validation_status": "untested",
+      "runtime": {
+        "deprecated": true,
+        "not_default": true,
+        "not_fallback": true
+      },
+      "enabled": false,
+      "reason": "DEPRECATED historical baseline."
+    },
+    {
+      "model_id": "Qwen/Qwen3.8-35B-A3B",
+      "role": "deprecated_moe_rgb_visual_reasoner_comparison",
+      "supported_tasks": [
+        "read_objects",
+        "read_relations",
+        "spatial_grounding"
+      ],
+      "license_status": "approved",
+      "license": "Apache-2.0",
+      "validation_status": "untested",
+      "runtime": {
+        "deprecated": true,
+        "not_default": true,
+        "not_fallback": true
+      },
+      "enabled": false,
+      "reason": "DEPRECATED MoE comparison candidate."
+    },
+    {
+      "model_id": "lhzzzzzy/HiSpatial-3B",
+      "role": "rgb_xyz_spatial_reasoner_candidate",
+      "supported_tasks": [
+        "spatial_relations",
+        "depth_order",
+        "orientation"
+      ],
+      "license_status": "review_required",
+      "license": "Gemma Terms of Use",
+      "validation_status": "untested",
+      "runtime": {
+        "input": "RGB image plus metric XYZ point map",
+        "depth_estimator": "MoGe"
+      },
+      "enabled": false,
+      "reason": "Specialist comparison candidate. Still disabled."
+    },
+    {
+      "model_id": "4x_NMKD-Siax_200k",
+      "role": "optional_local_4x_super_resolution",
+      "supported_tasks": [
+        "upscale",
+        "detail_enhance"
+      ],
+      "license_status": "review_required",
+      "license": "mirror repository label MIT; original model terms require review",
+      "validation_status": "untested",
+      "runtime": {
+        "implementation": "Spandrel image model descriptor; tiled 4x ESRGAN inference",
+        "checkpoint_filename": "4x_NMKD-Siax_200k.pth",
+        "checkpoint_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+        "optional_extra": "upscale",
+        "device": "auto",
+        "local_weights": true
+      },
+      "enabled": false,
+      "reason": "Pinned model adapter is implemented but disabled until checkpoint provenance/license review and a project image benchmark are completed."
+    }
+  ],
+  "notes": [
+    "Primary Imagine backend is HERE (agent + tools); xAI Images API is secondary.",
+    "No model is enabled by default.",
+    "Grok Vision is the active READ reasoner adapter; Qwen adapters are deprecated and disabled.",
+    "Grok failure must not fall back to Qwen.",
+    "SAM proposes pixel masks; VLM proposes semantic nodes and relations; neither grants edit permission.",
+    "Grok Imagine produces unverified candidates; registration and compositor are separate UP-engine stages.",
+    "Model confidence is uncalibrated and is not probability.",
+    "Only human-verified relations may enter a generation packet's geometry locks.",
+    "API keys are environment-only (XAI_API_KEY). Never commit keys or private images.",
+    "REF Resolver is a curated provenance snapshot; an indexed UUID does not mean the image bytes are materialized.",
+    "SIAX4X/DETAIL6 are separate stages: real model inference produces a 4x master; DETAIL6 only adds masked residual detail and emits 4:4:4 delivery files.",
+    "A model being present or a JPEG reaching a target byte size does not prove visual quality."
+  ]
+}

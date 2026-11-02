@@ -1,0 +1,178 @@
+{
+  "technique_id": "DA_DA_QING",
+  "technique_name_zh": "大大清",
+  "technique_name_en": "Da-Da-Qing (Siax4x + DETAIL6 residual delivery)",
+  "asof_utc": "2026-10-31T22:50:28Z",
+  "status": "TECHNIQUE_RECORDED_SUCCESS_PARTIAL",
+  "set": "SET-S MERCURY_CHOIR",
+  "heroine": "a8b",
+  "costume_ip": "金網紋女戰士 EPIC",
+  "source_chain": {
+    "step0_native_here": {
+      "asset_id": "83fd0872-0faf-44ef-b6bb-ea4a00c5d639",
+      "role": "HERE Imagine 升清2 · 雨中狠打 · native 1792x1008",
+      "note": "Grok Imagine re-detail candidate, not final_acceptance"
+    },
+    "step1_siax_4x": {
+      "model_id": "4x_NMKD-Siax_200k",
+      "architecture": "ESRGAN",
+      "scale": 4,
+      "checkpoint_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+      "checkpoint_source": "https://huggingface.co/uwg/upscaler/resolve/aadb8d07077a0818db0f43000b05442074b413be/ESRGAN/4x_NMKD-Siax_200k.pth",
+      "input": "1792x1008",
+      "output": "7168x4032",
+      "output_bytes": 43340490,
+      "output_sha256": "2da4aa0f0dbe29d044d62e7e5fbe794f6ff8edb3b98e4ccfa3a881cb0e17fd15",
+      "runtime": {
+        "torch": "2.5.1+cpu",
+        "device": "cpu",
+        "tile_size": 128,
+        "tile_pad": 8,
+        "n_tiles": 112
+      },
+      "upscale_version": "1.0-memefficient",
+      "asset_id_registered": "b5d3864d-ee46-487a-9afe-6053d6f58ba8",
+      "success": true,
+      "note": "Official ige upscale-siax full-float OOM on 1.9Gi host; same SHA-gated weights ran via mem-efficient tiled uint8 canvas (1.0-memefficient)."
+    },
+    "step2_detail6_residual": {
+      "scope": "DETAIL6_PARTIAL_EXECUTION_PATH",
+      "gain": 0.15,
+      "protected_masks": [
+        "face",
+        "skin",
+        "eye_white"
+      ],
+      "detail_masks": [
+        "metal"
+      ],
+      "mask_origin": "HEURISTIC_CANDIDATE_NOT_HUMAN_GOLD",
+      "gates": {
+        "exact_4x": true,
+        "protected_pixels_preserved_on_png": true,
+        "minimum_delivery_bytes": true
+      },
+      "pixel_audit": {
+        "changed_outside_effective_detail_mask": 0,
+        "changed_inside_protected_masks": 0
+      },
+      "zone_proof": {
+        "metal": {
+          "hf_before": 2.424393,
+          "hf_after": 2.752565,
+          "hf_delta": 0.328172
+        }
+      },
+      "jpeg_bytes": {
+        "q98": 16606889,
+        "q100": 29461485
+      },
+      "execution_complete": true,
+      "working_png_bytes": 45117596,
+      "working_png_sha256": "8cfa2dbb7f8de963b5398617b8266a72dc032798fbe59da8860d231c779591e6",
+      "q100_asset_id": "a7e53a77-ecda-4dda-bb7a-78cb8c7c871c",
+      "success": true,
+      "note": "Strip-mmap residual under RAM cap; protected pixels unchanged."
+    }
+  },
+  "what_succeeded": [
+    "Pinned Siax checkpoint download + SHA-256 match",
+    "True ESRGAN 4x inference (not Lanczos INTERP)",
+    "Exact 4x dimension gate 1792x1008 → 7168x4032",
+    "DETAIL6 metal residual with face/skin/eye_white protection",
+    "pixel_audit protected=0 outside=0",
+    "q98/q100 JPEG 4:4:4 delivery without fake padding",
+    "execution_complete=true technical path",
+    "Full provenance sidecars + report JSON"
+  ],
+  "what_did_not_succeed_or_not_claimed": [
+    "Official CLI float-buffer ige upscale-siax on full frame (OOM)",
+    "human gold mask adjudication",
+    "human gold identity lock sign-off",
+    "visual_quality_review (REQUIRED_NOT_RUN)",
+    "final_acceptance (hard false)",
+    "GRID_CLEAN / BEAT donor",
+    "PATH1E full face plate stack",
+    "PRE/MID/POST temporal certification",
+    "geometry / H2 contact acceptance"
+  ],
+  "gates_snapshot": {
+    "final_acceptance": false,
+    "visual_quality_review": "REQUIRED_NOT_RUN",
+    "human_gold": "REQUIRED_NOT_RUN",
+    "acceptance_label": "CANDIDATE_TECHNIQUE_SUCCESS"
+  },
+  "recipe_大大清": {
+    "1": "HERE native master still (a8b-first) at 16:9",
+    "2": "ige-compatible Siax: checkpoint 4x_NMKD-Siax_200k.pth + SHA gate + --confirm-model-license-review",
+    "3": "If OOM: tiled mem-efficient Siax same weights/SHA → lossless PNG + .upscale.json sidecar",
+    "4": "Build masks.json v1.0: face, skin, eye_white (protect) + metal|stone|text|fire (detail)",
+    "5": "DETAIL6 residual gain≈0.15; strip/mmap if RAM <2Gi",
+    "6": "Export DETAIL6_WORKING.png + q98/q100 4:4:4; write DETAIL6_REPORT.json",
+    "7": "Stop: HUMAN_GOLD_PENDING; never auto final_acceptance"
+  },
+  "file_index": {
+    "paths": {
+      "base_jpg": "/workspace/artifacts/up-engine/runs/siax_83fd/BASE_83fd0872.jpg",
+      "siax_png": "/workspace/artifacts/up-engine/runs/siax_83fd/SIAX4X_83fd0872.png",
+      "siax_sidecar": "/workspace/artifacts/up-engine/runs/siax_83fd/SIAX4X_83fd0872.upscale.json",
+      "detail6_png": "/workspace/artifacts/up-engine/runs/siax_83fd/DETAIL6/DETAIL6_WORKING.png",
+      "detail6_q100": "/workspace/artifacts/up-engine/runs/siax_83fd/DETAIL6/DETAIL6_FULL_q100.jpg",
+      "detail6_report": "/workspace/artifacts/up-engine/runs/siax_83fd/DETAIL6/DETAIL6_REPORT.json",
+      "human_gold_pending": "/workspace/artifacts/up-engine/runs/siax_83fd/DETAIL6/HUMAN_GOLD_PENDING.json",
+      "masks_json": "/workspace/artifacts/up-engine/runs/siax_83fd/masks.json"
+    },
+    "bytes": {
+      "base_jpg": 925115,
+      "siax_png": 43340490,
+      "siax_sidecar": 1350,
+      "detail6_png": 45117596,
+      "detail6_q100": 29461485,
+      "detail6_report": 2134,
+      "human_gold_pending": 860,
+      "masks_json": 716
+    },
+    "sha256": {
+      "base_jpg": "05909542d9592035e5c419b0392b33702bb03499631681e68d698b432892b1ae",
+      "siax_png": "2da4aa0f0dbe29d044d62e7e5fbe794f6ff8edb3b98e4ccfa3a881cb0e17fd15",
+      "siax_sidecar": "5b36da20222079c6f55a42db2217696c0baa11890fbdb635234c97713892b3d3",
+      "detail6_png": "8cfa2dbb7f8de963b5398617b8266a72dc032798fbe59da8860d231c779591e6",
+      "detail6_q100": "013b64726cf5efc45b4e5b9cd24db605ac8da72d4ef9465f94f162c11c3b0733",
+      "detail6_report": "087bc5e1fa5fc930c67eca9d583259872193ba6b7fe48a6919c3eb552680e5cd",
+      "human_gold_pending": "1e6c5ba86fbc5d4754e743accc9b8eb769f9dfe9ca2c37667dcd311bf1819695",
+      "masks_json": "f9432b23c025ce410c5317cc2689c183c66b89dce527736be7131689ce110ecf"
+    },
+    "artifacts_copy": {
+      "SIAX4X": "/workspace/artifacts/SIAX4X_83fd0872_7168x4032.png",
+      "DETAIL6_PNG": "/workspace/artifacts/DETAIL6_83fd_WORKING.png",
+      "DETAIL6_Q100": "/workspace/artifacts/DETAIL6_83fd_q100.jpg",
+      "REPORT": "/workspace/artifacts/DETAIL6_83fd_REPORT.json",
+      "HUMAN_GOLD_PENDING": "/workspace/artifacts/DETAIL6_83fd_HUMAN_GOLD_PENDING.json"
+    },
+    "hub": {
+      "siax": "https://grok.com/imagine/post/b5d3864d-ee46-487a-9afe-6053d6f58ba8?source=agent",
+      "detail6_q100": "https://grok.com/imagine/post/a7e53a77-ecda-4dda-bb7a-78cb8c7c871c?source=agent"
+    }
+  },
+  "engine_context": {
+    "repo": "JUN-ZS/UP-engine",
+    "branch": "feat/ref-skill-router-detail6-v0.1",
+    "head": "8d5cee939389f51cbedf6cbf8103af4569c29288",
+    "pr": "https://github.com/JUN-ZS/UP-engine/pull/5",
+    "pr_state": "draft open not merged",
+    "main_untouched": true
+  },
+  "naming": {
+    "canonical": "大大清",
+    "aliases": [
+      "DA_DA_QING",
+      "DaDaQing",
+      "Siax+DETAIL6 delivery"
+    ],
+    "do_not_confuse_with": [
+      "HERE re-detail only (升清 without Siax)",
+      "LANCZOS INTERP_NOT_SR 30MB export",
+      "full legacy DETAIL6 GRID_CLEAN stack"
+    ]
+  }
+}

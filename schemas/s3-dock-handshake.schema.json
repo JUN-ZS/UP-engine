@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jun-zs.local/schemas/s3-dock-handshake.schema.json",
+  "title": "S3LocalPcDockHandshake",
+  "type": "object",
+  "required": [
+    "format",
+    "format_version",
+    "role",
+    "worker_id",
+    "hostname",
+    "reported_at_utc",
+    "resources",
+    "devices",
+    "dock_mode",
+    "job_dir",
+    "status"
+  ],
+  "properties": {
+    "format": {
+      "const": "ige.s3.dock_handshake"
+    },
+    "format_version": {
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "local_pc_worker",
+        "controller_here",
+        "relay"
+      ]
+    },
+    "worker_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hostname": {
+      "type": "string"
+    },
+    "pid": {
+      "type": "integer"
+    },
+    "reported_at_utc": {
+      "type": "string"
+    },
+    "resources": {
+      "type": "object",
+      "required": [
+        "ram_available_mib",
+        "cpu_threads"
+      ],
+      "properties": {
+        "ram_available_mib": {
+          "type": "number"
+        },
+        "ram_total_mib": {
+          "type": "number"
+        },
+        "cpu_threads": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "devices": {
+      "type": "array"
+    },
+    "dock_mode": {
+      "type": "string",
+      "enum": [
+        "shared_fs",
+        "rsync_pull",
+        "manual_paste",
+        "http_pull_future"
+      ]
+    },
+    "job_dir": {
+      "type": "string"
+    },
+    "shared_root": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "online",
+        "working",
+        "idle",
+        "offline",
+        "error"
+      ]
+    },
+    "note": {
+      "type": "string"
+    },
+    "final_acceptance": {
+      "const": false
+    },
+    "e3_speed_claim": {
+      "const": false
+    },
+    "physical_dual_host": {
+      "type": "boolean",
+      "default": false
+    },
+    "controller_where": {
+      "type": "string"
+    },
+    "sync": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "description": "v1.1 handshake is offline announcement only. Scheduler reads registry/workers. physical_dual_host is operator claim; default false."
+}

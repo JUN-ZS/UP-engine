@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "up-engine"
+version = "0.5.0"
+description = "A contract-first, region-aware image generation and reconstruction engine"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "All rights reserved; no license granted" }
+authors = [{ name = "JUN-ZS" }]
+dependencies = [
+  "numpy>=1.26",
+  "Pillow>=10.0"
+]
+
+[project.optional-dependencies]
+dev = []
+vlm = ["transformers>=5.8.1"]
+xai = []  # Grok Vision/Imagine use stdlib urllib; only XAI_API_KEY is required
+upscale = ["torch>=2.2", "spandrel>=0.4.1"]
+
+
+[project.scripts]
+ige = "ige.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ige = ["data/*.json"]

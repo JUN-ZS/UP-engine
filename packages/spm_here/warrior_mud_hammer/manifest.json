@@ -1,0 +1,45 @@
+{
+  "format": "ige.spm.here_grab_package",
+  "format_version": "1.1",
+  "package_id": "warrior_mud_hammer",
+  "created_at_utc": "2026-11-01T19:57:30Z",
+  "grok_cli": {
+    "list": "python tools/spm_here_grab.py --list",
+    "grab": "python tools/spm_here_grab.py --package warrior_mud_hammer --variant base",
+    "run_commercial": "python tools/spm_here_grab.py --package warrior_mud_hammer --variant base --run-siax --cell 256/16",
+    "ps1": ".\\tools\\spm_cli.ps1 run -Package warrior_mud_hammer -Cell 256/16",
+    "note": "v1.1 unique output names; skip input copy if SHA matches; --force-dest to replace"
+  },
+  "variants": {
+    "base": {
+      "file": "warrior_BASE.jpg",
+      "sha256": "cdc2af9738c0ab8d4f121126eeff3dd97959e0b69f486c9242b70d1f52c0e51c",
+      "here_asset_id": "cd5c430d-f261-4f9f-aa3b-d5782d9f5ced",
+      "share_url": "https://grok.com/imagine/post/cd5c430d-f261-4f9f-aa3b-d5782d9f5ced?source=agent",
+      "role": "SPM_INPUT_DEFAULT"
+    },
+    "master": {
+      "file": "warrior_MASTER.jpg",
+      "sha256": "b01c432b03e4abcaf614b739e4aed4d56cb3339be86e64d81f06ba324ceb608a",
+      "here_asset_id": "4ac69625-ed8d-4666-b778-e93227a3c48d",
+      "share_url": "https://grok.com/imagine/post/4ac69625-ed8d-4666-b778-e93227a3c48d?source=agent",
+      "role": "SPM_INPUT_OPTIONAL_POLISH"
+    }
+  },
+  "local_defaults": {
+    "dest_dir": "D:\\s3_share\\spm_in",
+    "dest_name_rule": "{package_id}_{variant}.jpg",
+    "handoff_root": "D:\\s3_share\\spm_handoff",
+    "output_png_rule": "{package_id}_{variant}_t{tile}p{pad}_{request_id}.png",
+    "legacy_fixed_output_disabled": true
+  },
+  "siax": {
+    "tile_size": 256,
+    "tile_pad": 16,
+    "device": "auto",
+    "scale": 4,
+    "cell_default": "256/16"
+  },
+  "final_acceptance": false,
+  "e3_speed_claim": false
+}

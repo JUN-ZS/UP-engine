@@ -1,0 +1,51 @@
+{
+  "format": "ige.spm.here_fullframe_pilot",
+  "format_version": "1.0",
+  "stamp_utc": "2026-11-01T20:05:25Z",
+  "status": "OBSERVED_OK",
+  "request_id": "here_e6e0dca77894",
+  "package_id": "warrior_mud_hammer",
+  "variant": "base",
+  "path": "HERE package → Grok CLI grab → native Siax cuda",
+  "input": {
+    "path": "D:\\s3_share\\spm_in\\warrior_BASE.jpg",
+    "sha256": "cdc2af9738c0ab8d4f121126eeff3dd97959e0b69f486c9242b70d1f52c0e51c",
+    "wh": [
+      1792,
+      1008
+    ],
+    "matches_git_package": true
+  },
+  "output": {
+    "path": "D:\\s3_share\\spm_handoff\\outbox\\warrior_SIAX4X.png",
+    "sha256": "72a01792d1c13ac6ca0bcfbd6493c8bd2065d23f54fbe9ec8c696190a067b541",
+    "wh": [
+      7168,
+      4032
+    ]
+  },
+  "runtime": {
+    "device_used": "cuda",
+    "wall_s": 16.531,
+    "tile_size": 128,
+    "tile_pad": 8,
+    "tile_count": 112,
+    "torch": "2.11.0+cu128",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti"
+  },
+  "model_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+  "flags": {
+    "ok": true,
+    "comfyui": false,
+    "s3_scheduler": false,
+    "cloud_imagine": false,
+    "final_acceptance": false,
+    "e3_speed_claim": false,
+    "quality_qualified": false
+  },
+  "notes": [
+    "Full-frame 4x on single GPU in ~16.5s with tiled ESRGAN Siax",
+    "Handoff loop HERE→git package→CLI grab→result JSON proven",
+    "Not S2.1 quality PASS; not dual-host; not E3"
+  ]
+}

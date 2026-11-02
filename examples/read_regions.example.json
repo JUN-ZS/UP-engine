@@ -1,0 +1,29 @@
+{
+  "coordinate_space": "normalized_0_1",
+  "regions": [
+    {
+      "id": "garment-edit",
+      "label": "Example armor/garment edit region; replace with a polygon traced on the actual BASE image",
+      "semantic_type": "garment",
+      "permission": "editable",
+      "tags": ["object"],
+      "polygon": [[0.28, 0.30], [0.72, 0.30], [0.76, 0.78], [0.24, 0.78]]
+    },
+    {
+      "id": "face-protect",
+      "label": "Example face protection; replace with a polygon traced on the actual BASE image",
+      "semantic_type": "face",
+      "permission": "protected",
+      "tags": ["object", "identity_anchor"],
+      "polygon": [[0.40, 0.08], [0.60, 0.08], [0.62, 0.27], [0.38, 0.27]]
+    },
+    {
+      "id": "context-zone",
+      "label": "Example surrounding context; replace with a polygon traced on the actual BASE image",
+      "semantic_type": "environment_context",
+      "permission": "protected",
+      "tags": ["context"],
+      "polygon": [[0.05, 0.30], [0.22, 0.30], [0.22, 0.78], [0.05, 0.78]]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+# S3 dual-worker CONTAINER sim — one physical host, two containers.
+# physical_dual_host=false. Use GitHub self-hosted dual runners for real dual-host.
+services:
+  worker-a:
+    image: python:3.12-slim
+    working_dir: /src
+    volumes:
+      - ../..:/src
+      - s3_job:/job
+    environment:
+      PYTHONPATH: /src/src
+      PYTHONUNBUFFERED: "1"
+    command: >
+      bash -lc "pip install -q -e /src pillow &&
+      python tools/s3_worker_agent.py
+      --job-dir /job --worker-id docker_a --mode synthetic --device cpu
+      --ram-mib 2048 --cpu-threads 2 --lease-seconds 90
+      --wait-manifest-s 180 --idle-exit-s 60 --registry-every-s 1"
+
+  worker-b:
+    image: python:3.12-slim
+    working_dir: /src
+    volumes:
+      - ../..:/src
+      - s3_job:/job
+    environment:
+      PYTHONPATH: /src/src
+      PYTHONUNBUFFERED: "1"
+    command: >
+      bash -lc "pip install -q -e /src pillow &&
+      python tools/s3_worker_agent.py
+      --job-dir /job --worker-id docker_b --mode synthetic --device cpu
+      --ram-mib 2048 --cpu-threads 2 --lease-seconds 90
+      --wait-manifest-s 180 --idle-exit-s 60 --registry-every-s 1"
+
+  controller:
+    image: python:3.12-slim
+    working_dir: /src
+    volumes:
+      - ../..:/src
+      - s3_job:/job
+    environment:
+      PYTHONPATH: /src/src
+      PYTHONUNBUFFERED: "1"
+    depends_on:
+      - worker-a
+      - worker-b
+    command: >
+      bash -lc "pip install -q -e /src pillow &&
+      python -c 'from PIL import Image; Image.new(\"RGB\",(128,128),(1,2,3)).save(\"/job/BASE.png\")' &&
+      sleep 8 &&
+      python tools/s3_controller.py init --job-dir /job --base /job/BASE.png
+      --mode synthetic --region 0,0,128,128 --compute-core 64 --lease-seconds 90 &&
+      python tools/s3_controller.py schedule --job-dir /job --wait-workers 2
+      --wait-timeout-s 90 --lease-seconds 90 &&
+      python tools/s3_controller.py wait --job-dir /job --timeout-s 300
+      --reassign-every-s 2 --lease-seconds 90 &&
+      python tools/s3_controller.py rebuild --job-dir /job --lease-seconds 90 &&
+      test -f /job/controller_report.json &&
+      python -c 'import json; r=json.load(open(\"/job/controller_report.json\")); assert r.get(\"ok\"); print(\"DOCKER_DUAL_OK\")'"
+
+volumes:
+  s3_job:

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jun-zs.local/schemas/s3-worker-capability.schema.json",
+  "title": "S3WorkerCapability",
+  "type": "object",
+  "required": ["worker_id", "reported_at_utc", "devices", "resources", "models", "max_inflight"],
+  "properties": {
+    "worker_id": { "type": "string", "minLength": 1 },
+    "reported_at_utc": { "type": "string" },
+    "hostname": { "type": "string" },
+    "devices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["device_id", "kind"],
+        "properties": {
+          "device_id": { "type": "string" },
+          "kind": { "type": "string", "enum": ["cpu", "cuda", "mps", "other"] },
+          "name": { "type": "string" },
+          "vram_mib": { "type": ["number", "null"] }
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "required": ["ram_available_mib", "cpu_threads"],
+      "properties": {
+        "ram_available_mib": { "type": "number" },
+        "ram_total_mib": { "type": "number" },
+        "cpu_threads": { "type": "integer", "minimum": 1 },
+        "load_1m": { "type": ["number", "null"] }
+      }
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["model_id", "weight_sha256", "adapter_id"],
+        "properties": {
+          "model_id": { "type": "string" },
+          "weight_sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+          "adapter_id": { "type": "string" },
+          "max_safe_input_wh": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "type": "integer" }
+          },
+          "dtype": { "type": "string" }
+        }
+      }
+    },
+    "max_inflight": { "type": "integer", "minimum": 1 },
+    "throughput_tiles_per_min_est": { "type": ["number", "null"] },
+    "queue_depth": { "type": "integer", "minimum": 0 }
+  },
+  "additionalProperties": true
+}

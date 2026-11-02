@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jun-zs.local/schemas/n1-plan.schema.json",
+  "type": "object",
+  "required": ["format", "path", "width", "height", "tiles", "not_siax_4x_upscale"],
+  "properties": {
+    "format": { "const": "ige.native4k.n1_plan" },
+    "path": { "const": "native_canvas_tiling" },
+    "not_siax_4x_upscale": { "const": true },
+    "width": { "type": "integer", "minimum": 1 },
+    "height": { "type": "integer", "minimum": 1 },
+    "native_4k_success": { "type": "boolean" }
+  }
+}

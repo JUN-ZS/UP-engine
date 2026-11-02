@@ -1,0 +1,23 @@
+{
+  "format": "ige.spm.distill_charter",
+  "format_version": "1.0",
+  "status": "CHARTER_ONLY",
+  "stamp_utc": "2026-11-01T20:38:32Z",
+  "final_acceptance": false,
+  "quality_qualified": false,
+  "e3_speed_claim": false,
+  "in_scope_ids": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6"
+  ],
+  "implementation_started": false,
+  "spm_a_role": "diagnostic_fingerprint_only",
+  "distill_role": "optional_future_residual_student_layer",
+  "default_execution_path_remains": "native_full_siax_plus_tile_cell",
+  "commercial_cell_candidate_evidence": "256/16 on 3070 Ti warrior matrix",
+  "doc": "docs/SPM_DISTILL_CHARTER.md"
+}

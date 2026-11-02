@@ -1,0 +1,51 @@
+{
+  "format": "ige.s3.self_drive_report",
+  "format_version": "1.0",
+  "stamp_utc": "20261101T172602Z",
+  "ok": true,
+  "results": [
+    {
+      "stage": "single_pull",
+      "ok": true,
+      "job_dir": "/workspace/artifacts/up-engine/runs/s3_self_drive_20261101T172602Z/single_pull",
+      "physical_dual_host": false,
+      "final_acceptance": false,
+      "e3_speed_claim": false,
+      "controller_report": {
+        "receipts_n": 4,
+        "rebuild": {
+          "output_path": "/workspace/artifacts/up-engine/runs/s3_self_drive_20261101T172602Z/single_pull/OUT_PRIMARY.png",
+          "output_sha256": "110b218669c19920ff95e86a42bf3c86e12b0cc62165b2f123252c5e6ebd5f06",
+          "output_bytes": 4410,
+          "output_dimensions": {
+            "width": 512,
+            "height": 512
+          },
+          "children_placed": [
+            "c_0000_0000",
+            "c_0000_0064",
+            "c_0064_0000",
+            "c_0064_0064"
+          ],
+          "n_placed": 4,
+          "final_acceptance": false,
+          "quality_qualified": false,
+          "e3_speed_claim": false
+        },
+        "integrity": {
+          "checked": 4,
+          "pixel_mismatches": 0,
+          "ok": true,
+          "primary_sha256": "110b218669c19920ff95e86a42bf3c86e12b0cc62165b2f123252c5e6ebd5f06"
+        },
+        "ok": true,
+        "final_acceptance": false,
+        "e3_speed_claim": false
+      }
+    }
+  ],
+  "final_acceptance": false,
+  "e3_speed_claim": false,
+  "physical_dual_host": false,
+  "note": "GitHub dual self-hosted runners can share one job-dir; this script does not spawn remote Grok chat."
+}

@@ -1,0 +1,15 @@
+{
+  "manifest_version": "0.1.0",
+  "task_id": "example-retexture-001",
+  "parent_asset_id": "base-001",
+  "generation_mask": "masks/garment-generation.png",
+  "protected_mask": "masks/face-hands-protected.png",
+  "context_ring": "masks/garment-context-ring.png",
+  "transform": {
+    "kind": "affine_ecc",
+    "parameters": {"coordinate_space": "base_pixels", "max_translation_px": 24}
+  },
+  "adapter_id": "candidate.adapter.not-enabled",
+  "seed": 104729,
+  "output_uri": "outputs/example-candidate.png"
+}

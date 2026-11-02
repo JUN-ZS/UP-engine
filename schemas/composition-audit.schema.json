@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/composition-audit.schema.json",
+  "title": "UP-engine pixel-preserving composition audit",
+  "type": "object",
+  "required": ["audit_version", "status", "task_id", "base", "candidate", "authorization", "output", "pixel_diff", "hard_gates", "final_acceptance", "limitations"],
+  "properties": {
+    "audit_version": {"const": "0.1.0"},
+    "status": {"const": "composited_candidate_not_accepted"},
+    "task_id": {"type": ["string", "null"]},
+    "base": {
+      "type": "object",
+      "required": ["path", "sha256", "width", "height"],
+      "properties": {
+        "path": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "required": ["path", "sha256", "model_id", "registered_dimensions_match_base", "registration_quality"],
+      "properties": {
+        "path": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "model_id": {"type": ["string", "null"]},
+        "registered_dimensions_match_base": {"const": true},
+        "registration_quality": {"const": "not_measured_by_this_compositor"}
+      },
+      "additionalProperties": false
+    },
+    "authorization": {
+      "type": "object",
+      "required": ["generation_mask_sha256", "protected_mask_sha256", "authorized_pixels"],
+      "properties": {
+        "generation_mask_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "protected_mask_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "authorized_pixels": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "required": ["path", "sha256", "format"],
+      "properties": {
+        "path": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "format": {"const": "PNG"}
+      },
+      "additionalProperties": false
+    },
+    "pixel_diff": {
+      "type": "object",
+      "required": ["changed_pixels_inside_authorized_region", "changed_pixels_outside_authorized_region", "outside_mask_preservation", "full_frame_changed_fraction"],
+      "properties": {
+        "changed_pixels_inside_authorized_region": {"type": "integer", "minimum": 0},
+        "changed_pixels_outside_authorized_region": {"const": 0},
+        "outside_mask_preservation": {"const": "pass"},
+        "full_frame_changed_fraction": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "hard_gates": {
+      "type": "object",
+      "required": ["parent_source_identity", "mask_integrity", "protected_region_pixel_preservation", "mask_leakage", "registration_quality", "identity", "pose", "topology", "geometry_lock_preservation", "native_resolution"],
+      "properties": {
+        "parent_source_identity": {"const": "pass"},
+        "mask_integrity": {"const": "pass"},
+        "protected_region_pixel_preservation": {"const": "pass"},
+        "mask_leakage": {"const": "pass"},
+        "registration_quality": {"enum": ["pass", "pending", "fail"]},
+        "identity": {"enum": ["pass", "pending", "fail"]},
+        "pose": {"enum": ["pass", "pending", "fail"]},
+        "topology": {"enum": ["pass", "pending", "fail"]},
+        "geometry_lock_preservation": {"enum": ["pass", "pending", "fail"]},
+        "native_resolution": {"const": "pass"}
+      },
+      "additionalProperties": false
+    },
+    "final_acceptance": {"const": false},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

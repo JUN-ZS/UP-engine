@@ -1,0 +1,18 @@
+{
+  "format": "ige.native4k.n1_scaffold_smoke",
+  "status": "N1_SCAFFOLD_OK",
+  "smoke_canvas": [
+    1024,
+    576
+  ],
+  "production_default_canvas": [
+    3840,
+    2160
+  ],
+  "tile_count": 15,
+  "placed": 15,
+  "output_sha256": "0aff65a4b26a8d3722e79f4d647dfa0a56be4e5d7126106fb567f3e4c7e03b01",
+  "not_siax_4x_upscale": true,
+  "native_4k_success": false,
+  "note": "Synthetic colored tiles prove ledger+stitch only; no generative native fill."
+}

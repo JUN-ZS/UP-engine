@@ -1,0 +1,208 @@
+{
+  "program": "UPSCALE_S3_HETEROGENEOUS",
+  "title": "Heterogeneous Upscale Execution Engine",
+  "asof_utc": "2026-11-01T16:57:46Z",
+  "branch": "feat/upscale-s3-heterogeneous-runner-v0.1",
+  "base_freeze_s21": "297ba74",
+  "relation_to_pr8": "isolated_follow_on; do_not_rewrite_s21_quality_decision",
+  "final_acceptance": false,
+  "e3_speed_claim": false,
+  "modules": {
+    "capability_scheduler": "DONE_V0",
+    "reliable_transport": "DONE_V0_FS_LEASE",
+    "artifact_integrity": "DONE_PIXEL_MATCH",
+    "siax_adapter": "DONE_V0_WIRED",
+    "virtual_master_rebuild": "DONE_REBUILD_FROM_RECEIPTS",
+    "synthetic_adapter": "DONE",
+    "hard_assignment": "DONE",
+    "fencing_token": "DONE",
+    "heartbeat_during_forward": "DONE",
+    "stale_complete_reject": "DONE",
+    "max_attempts_dead_letter": "DONE",
+    "per_worker_device": "DONE",
+    "job_controller": "DONE",
+    "worker_agent_cli": "DONE",
+    "worker_registry": "DONE",
+    "orphan_reassign": "DONE",
+    "local_pc_grok_cli_dock": "SPEC_V1.1_RUNNABLE"
+  },
+  "steps": [
+    {
+      "id": "S3.0",
+      "name": "architecture_lock_schemas",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.1",
+      "name": "transport_lease_heartbeat_fs",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.2",
+      "name": "capability_scheduler_v0",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.3",
+      "name": "siax_adapter_wrap",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.4",
+      "name": "synthetic_multi_worker_sim",
+      "status": "DONE"
+    },
+    {
+      "id": "S3.5",
+      "name": "reliable_distributed_control",
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/S3_5_SYNTHETIC_HARD_ASSIGN.json",
+        "docs/evidence/S3_5_FAULT_INJECT.json",
+        "tests/test_s3_control_plane.py"
+      ]
+    },
+    {
+      "id": "S3.6",
+      "name": "true_dual_host_pilot",
+      "status": "DONE_INTERFACE_RECOVERY",
+      "doc": "docs/S3_DUAL_HOST_PILOT.md",
+      "gate": "requires_S3_5",
+      "physical_dual_host": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/S3_6_DUAL_AGENT_HAPPY.json",
+        "docs/evidence/S3_6_DUAL_AGENT_KILL_A.json",
+        "tests/test_s3_6_kill_reassign.py",
+        "tests/test_s3_controller_reassign.py"
+      ]
+    },
+    {
+      "id": "S3.7",
+      "name": "full_448_siax_distributed_replay",
+      "status": "TODO",
+      "gate": "requires_S3_5_and_S3_6",
+      "params": {
+        "base": "1792x1008",
+        "compute_core": 64,
+        "compute_context": 32,
+        "children": 448,
+        "out": "7168x4032"
+      },
+      "compare_s21": "optional same-SHA vs Nested children if available"
+    },
+    {
+      "id": "S3.6.1",
+      "name": "local_pc_grok_cli_dock_spec",
+      "status": "DONE_SPEC_V1.1",
+      "doc": "docs/S3_LOCAL_PC_GROK_CLI_DOCK.md",
+      "tools": [
+        "tools/s3_dock_local_pc.py"
+      ],
+      "note": "worker-first init allowlist; cpu_threads to registry; physical_dual_host default false; PS docs"
+    }
+  ],
+  "observed": {
+    "synthetic_16_children": {
+      "ok": true,
+      "workers": {
+        "w_fast": 9,
+        "w_slow": 7
+      },
+      "integrity_pixel_ok": true,
+      "output_sha256": "72b562cea6041c52faf4b0efa74c5a8cc90410bad5cfa868508ed71dd79f8ff1"
+    },
+    "siax_mini_4_children": {
+      "ok": true,
+      "workers": {
+        "w1": 2,
+        "w2": 2
+      },
+      "integrity_pixel_ok": true,
+      "output_sha256": "28c5751a483a31668d2d798e44a726be48e828678ba523537f81909cb954f15c",
+      "note": "real Siax dual-process on 128x128 region; not full-frame quality claim"
+    },
+    "s35_hard_assign": {
+      "ok": true,
+      "assigned_equals_completed": {
+        "w_fast": 8,
+        "w_slow": 8
+      },
+      "assignment_mismatches": 0,
+      "integrity_ok": true
+    },
+    "s35_fault_inject": {
+      "ok": true,
+      "stale_complete_rejected": true,
+      "final_receipts_n": 1
+    },
+    "s36_happy": {
+      "program": "S3_6_DUAL_AGENT_PILOT",
+      "scenario": "happy",
+      "physical_dual_host": false,
+      "expected_children": 4,
+      "assignment": {
+        "c_0000_0000": "hostA_cpu",
+        "c_0000_0064": "hostA_cpu",
+        "c_0064_0000": "hostA_cpu",
+        "c_0064_0064": "hostB_cpu"
+      },
+      "by_worker_completed": {
+        "hostA_cpu": 3,
+        "hostB_cpu": 1
+      },
+      "assignment_mismatches": [],
+      "rebuild": {
+        "receipts_n": 4,
+        "rebuild": {
+          "output_path": "/workspace/artifacts/up-engine/runs/s3_6_happy_ev/OUT_PRIMARY.png",
+          "output_sha256": "a566f98c5c8298720e3bdbf7620a4d0d962f6ae35bdff54ad8dc6621bb03f720",
+          "output_bytes": 43243,
+          "output_dimensions": {
+            "width": 512,
+            "height": 512
+          },
+          "children_placed": [
+            "c_0000_0000",
+            "c_0000_0064",
+            "c_0064_0000",
+            "c_0064_0064"
+          ],
+          "n_placed": 4,
+          "final_acceptance": false,
+          "quality_qualified": false,
+          "e3_speed_claim": false
+        },
+        "integrity": {
+          "checked": 4,
+          "pixel_mismatches": 0,
+          "ok": true,
+          "primary_sha256": "a566f98c5c8298720e3bdbf7620a4d0d962f6ae35bdff54ad8dc6621bb03f720"
+        },
+        "ok": true,
+        "final_acceptance": false,
+        "e3_speed_claim": false
+      },
+      "ok": true,
+      "topology": {
+        "controller": "JobController (no inference)",
+        "agent_a": "hostA_cpu claim loop",
+        "agent_b": "hostB_cpu claim loop",
+        "transport": "shared_job_dir FsLeaseTransport + hard assignment + fencing",
+        "note": "Runner is single machine; CLIs tools/s3_controller.py + tools/s3_worker_agent.py are dual-host-ready. Physical dual-host NOT_RUN."
+      },
+      "final_acceptance": false,
+      "e3_speed_claim": false,
+      "s21_quality": "INCONCLUSIVE_unchanged"
+    },
+    "s36_kill_a": {
+      "ok": true,
+      "see": "docs/evidence/S3_6_DUAL_AGENT_KILL_A.json"
+    }
+  },
+  "workstreams": {
+    "A_s21": "FROZEN on PR8",
+    "B_same_sha_qc": "optional_human_only",
+    "C_s3": "this_branch"
+  },
+  "docs": {}
+}

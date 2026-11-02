@@ -1,0 +1,12 @@
+{
+  "program": "S3_5_FAULT_INJECT",
+  "stale_complete_rejected": true,
+  "requeue_expired_n": 1,
+  "final_receipts_n": 1,
+  "final_fencing_token": "e8c768cb-1344-4c7d-8f62-ae2e801c72ba",
+  "dead_token": "f257dc4c-d42a-4a3d-913c-977f9f6f3d09",
+  "rejects_n": 1,
+  "ok": true,
+  "final_acceptance": false,
+  "e3_speed_claim": false
+}

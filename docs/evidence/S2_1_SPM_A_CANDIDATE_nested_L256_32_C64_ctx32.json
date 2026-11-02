@@ -1,0 +1,1183 @@
+{
+  "program": "SIAX_S2_1_P1_SPM_A_CANDIDATE",
+  "method": "crop_candidate_4x_at_fixed_probes_vs_lanczos_base; no re-inference",
+  "bank_sha256": "1267b78b1b957cb16057b978e2aabe720a5e1d69712eb6edcec8636aa7837af9",
+  "n_probes": 48,
+  "base_sha256": "4f1df41f1f9f1b0c7d43519321b03ec303a277d5cad9c9f55a36db8e61407994",
+  "candidate_path": "/workspace/artifacts/up-engine/runs/siax_validation_r2/S2_1/p1/nested_L256_32_C64_ctx32/OUT_NESTED_PRIMARY.png",
+  "candidate_sha256": "5b7ca844e72b64e6c9e9fff5bf1f74e450b4c518003b096cd77bc2c8fa632656",
+  "candidate_dimensions": [
+    7168,
+    4032
+  ],
+  "summary": {
+    "mae_residual_p50": 3.997341579861111,
+    "mae_residual_p95": 7.042189534505208,
+    "residual_hf_p50": 6.699585437774658,
+    "residual_hf_p95": 11.852714443206786
+  },
+  "reference_fingerprint": {
+    "path": "docs/evidence/S2_1_SPM_A_REPORT.json",
+    "delta_mae_p50": 0.08571370442708304,
+    "delta_mae_p95": 0.6553626166449651,
+    "n_matched": 48,
+    "use": "distribution reference only; not pass/fail gate"
+  },
+  "probes": [
+    {
+      "probe_id": "p00",
+      "kind": "lattice",
+      "box_base": [
+        183,
+        127,
+        247,
+        175
+      ],
+      "box_hires": [
+        732,
+        508,
+        988,
+        700
+      ],
+      "mae_residual_vs_lanczos": 2.3975965711805554,
+      "p95_abs_residual": 6.0,
+      "residual_hf": 6.279852390289307,
+      "candidate_hf": 6.364581108093262,
+      "patch_sha256_prefix": "fb7d7a11db353eee",
+      "ref_mae_residual_vs_lanczos": 2.2242906358506946,
+      "delta_mae_vs_ref_fingerprint": 0.17330593532986072,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p01",
+      "kind": "lattice",
+      "box_base": [
+        469,
+        127,
+        533,
+        175
+      ],
+      "box_hires": [
+        1876,
+        508,
+        2132,
+        700
+      ],
+      "mae_residual_vs_lanczos": 2.153564453125,
+      "p95_abs_residual": 5.0,
+      "residual_hf": 5.62235164642334,
+      "candidate_hf": 5.690765380859375,
+      "patch_sha256_prefix": "f6761a400b4787e1",
+      "ref_mae_residual_vs_lanczos": 2.1717936197916665,
+      "delta_mae_vs_ref_fingerprint": -0.01822916666666652,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p02",
+      "kind": "lattice",
+      "box_base": [
+        756,
+        127,
+        820,
+        175
+      ],
+      "box_hires": [
+        3024,
+        508,
+        3280,
+        700
+      ],
+      "mae_residual_vs_lanczos": 5.017903645833333,
+      "p95_abs_residual": 15.0,
+      "residual_hf": 6.83110237121582,
+      "candidate_hf": 7.769021511077881,
+      "patch_sha256_prefix": "b7e4eaa407dc7a96",
+      "ref_mae_residual_vs_lanczos": 4.92645263671875,
+      "delta_mae_vs_ref_fingerprint": 0.09145100911458304,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p03",
+      "kind": "lattice",
+      "box_base": [
+        1043,
+        127,
+        1107,
+        175
+      ],
+      "box_hires": [
+        4172,
+        508,
+        4428,
+        700
+      ],
+      "mae_residual_vs_lanczos": 3.2091200086805554,
+      "p95_abs_residual": 10.0,
+      "residual_hf": 5.682151794433594,
+      "candidate_hf": 6.053157329559326,
+      "patch_sha256_prefix": "2bd095cf93550316",
+      "ref_mae_residual_vs_lanczos": 3.3139105902777777,
+      "delta_mae_vs_ref_fingerprint": -0.10479058159722232,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p04",
+      "kind": "lattice",
+      "box_base": [
+        1329,
+        127,
+        1393,
+        175
+      ],
+      "box_hires": [
+        5316,
+        508,
+        5572,
+        700
+      ],
+      "mae_residual_vs_lanczos": 2.99981689453125,
+      "p95_abs_residual": 8.0,
+      "residual_hf": 5.7637858390808105,
+      "candidate_hf": 5.974796772003174,
+      "patch_sha256_prefix": "53971d3bb935c1d0",
+      "ref_mae_residual_vs_lanczos": 2.9238755967881946,
+      "delta_mae_vs_ref_fingerprint": 0.07594129774305536,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p05",
+      "kind": "lattice",
+      "box_base": [
+        1580,
+        127,
+        1644,
+        175
+      ],
+      "box_hires": [
+        6320,
+        508,
+        6576,
+        700
+      ],
+      "mae_residual_vs_lanczos": 1.9818115234375,
+      "p95_abs_residual": 5.0,
+      "residual_hf": 5.679755687713623,
+      "candidate_hf": 5.6935834884643555,
+      "patch_sha256_prefix": "0128c83c66e1adcd",
+      "ref_mae_residual_vs_lanczos": 1.8092787000868056,
+      "delta_mae_vs_ref_fingerprint": 0.17253282335069442,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p06",
+      "kind": "lattice",
+      "box_base": [
+        183,
+        328,
+        247,
+        376
+      ],
+      "box_hires": [
+        732,
+        1312,
+        988,
+        1504
+      ],
+      "mae_residual_vs_lanczos": 3.035251193576389,
+      "p95_abs_residual": 9.0,
+      "residual_hf": 4.807708263397217,
+      "candidate_hf": 5.154482841491699,
+      "patch_sha256_prefix": "261569a832ce80ad",
+      "ref_mae_residual_vs_lanczos": 3.0456610785590277,
+      "delta_mae_vs_ref_fingerprint": -0.01040988498263884,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p07",
+      "kind": "lattice",
+      "box_base": [
+        469,
+        328,
+        533,
+        376
+      ],
+      "box_hires": [
+        1876,
+        1312,
+        2132,
+        1504
+      ],
+      "mae_residual_vs_lanczos": 4.501756456163195,
+      "p95_abs_residual": 14.0,
+      "residual_hf": 6.855525493621826,
+      "candidate_hf": 7.495600700378418,
+      "patch_sha256_prefix": "7b511fb9db3b3d7c",
+      "ref_mae_residual_vs_lanczos": 4.310099283854167,
+      "delta_mae_vs_ref_fingerprint": 0.19165717230902768,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p08",
+      "kind": "lattice",
+      "box_base": [
+        756,
+        328,
+        820,
+        376
+      ],
+      "box_hires": [
+        3024,
+        1312,
+        3280,
+        1504
+      ],
+      "mae_residual_vs_lanczos": 7.316535101996528,
+      "p95_abs_residual": 27.0,
+      "residual_hf": 8.470494270324707,
+      "candidate_hf": 9.456382751464844,
+      "patch_sha256_prefix": "bacb3dd2ec45222b",
+      "ref_mae_residual_vs_lanczos": 7.811577690972222,
+      "delta_mae_vs_ref_fingerprint": -0.49504258897569464,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p09",
+      "kind": "lattice",
+      "box_base": [
+        1043,
+        328,
+        1107,
+        376
+      ],
+      "box_hires": [
+        4172,
+        1312,
+        4428,
+        1504
+      ],
+      "mae_residual_vs_lanczos": 9.733445909288195,
+      "p95_abs_residual": 34.0,
+      "residual_hf": 13.057499885559082,
+      "candidate_hf": 13.988829612731934,
+      "patch_sha256_prefix": "6ece2e9d41135b7b",
+      "ref_mae_residual_vs_lanczos": 8.713392469618055,
+      "delta_mae_vs_ref_fingerprint": 1.0200534396701393,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p10",
+      "kind": "lattice",
+      "box_base": [
+        1329,
+        328,
+        1393,
+        376
+      ],
+      "box_hires": [
+        5316,
+        1312,
+        5572,
+        1504
+      ],
+      "mae_residual_vs_lanczos": 3.9088270399305554,
+      "p95_abs_residual": 13.0,
+      "residual_hf": 5.752513885498047,
+      "candidate_hf": 6.2409868240356445,
+      "patch_sha256_prefix": "b614a6e70ac3f406",
+      "ref_mae_residual_vs_lanczos": 3.8288506401909723,
+      "delta_mae_vs_ref_fingerprint": 0.07997639973958304,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p11",
+      "kind": "lattice",
+      "box_base": [
+        1580,
+        328,
+        1644,
+        376
+      ],
+      "box_hires": [
+        6320,
+        1312,
+        6576,
+        1504
+      ],
+      "mae_residual_vs_lanczos": 2.843105740017361,
+      "p95_abs_residual": 7.0,
+      "residual_hf": 6.245226860046387,
+      "candidate_hf": 6.530093669891357,
+      "patch_sha256_prefix": "7aca43b1991d8f5d",
+      "ref_mae_residual_vs_lanczos": 2.7110527886284723,
+      "delta_mae_vs_ref_fingerprint": 0.13205295138888884,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p12",
+      "kind": "lattice",
+      "box_base": [
+        183,
+        530,
+        247,
+        578
+      ],
+      "box_hires": [
+        732,
+        2120,
+        988,
+        2312
+      ],
+      "mae_residual_vs_lanczos": 3.8140733506944446,
+      "p95_abs_residual": 12.0,
+      "residual_hf": 5.303564071655273,
+      "candidate_hf": 5.6346940994262695,
+      "patch_sha256_prefix": "af4a701c2f2018d3",
+      "ref_mae_residual_vs_lanczos": 3.713406032986111,
+      "delta_mae_vs_ref_fingerprint": 0.10066731770833348,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p13",
+      "kind": "lattice",
+      "box_base": [
+        469,
+        530,
+        533,
+        578
+      ],
+      "box_hires": [
+        1876,
+        2120,
+        2132,
+        2312
+      ],
+      "mae_residual_vs_lanczos": 7.232062445746528,
+      "p95_abs_residual": 23.0,
+      "residual_hf": 19.29973793029785,
+      "candidate_hf": 19.539247512817383,
+      "patch_sha256_prefix": "86ae5e9d73bef0b6",
+      "ref_mae_residual_vs_lanczos": 5.867994520399305,
+      "delta_mae_vs_ref_fingerprint": 1.3640679253472223,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p14",
+      "kind": "lattice",
+      "box_base": [
+        756,
+        530,
+        820,
+        578
+      ],
+      "box_hires": [
+        3024,
+        2120,
+        3280,
+        2312
+      ],
+      "mae_residual_vs_lanczos": 3.8227471245659723,
+      "p95_abs_residual": 12.0,
+      "residual_hf": 6.168303966522217,
+      "candidate_hf": 6.595047473907471,
+      "patch_sha256_prefix": "89cd28fc1a6a72ff",
+      "ref_mae_residual_vs_lanczos": 3.9625990125868054,
+      "delta_mae_vs_ref_fingerprint": -0.13985188802083304,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p15",
+      "kind": "lattice",
+      "box_base": [
+        1043,
+        530,
+        1107,
+        578
+      ],
+      "box_hires": [
+        4172,
+        2120,
+        4428,
+        2312
+      ],
+      "mae_residual_vs_lanczos": 5.640272352430555,
+      "p95_abs_residual": 22.0,
+      "residual_hf": 6.747485637664795,
+      "candidate_hf": 7.264373779296875,
+      "patch_sha256_prefix": "5d44bbc0a8ff95a4",
+      "ref_mae_residual_vs_lanczos": 5.938768174913195,
+      "delta_mae_vs_ref_fingerprint": -0.2984958224826393,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p16",
+      "kind": "lattice",
+      "box_base": [
+        1329,
+        530,
+        1393,
+        578
+      ],
+      "box_hires": [
+        5316,
+        2120,
+        5572,
+        2312
+      ],
+      "mae_residual_vs_lanczos": 4.787156846788195,
+      "p95_abs_residual": 16.0,
+      "residual_hf": 7.617287635803223,
+      "candidate_hf": 8.098709106445312,
+      "patch_sha256_prefix": "ea738bbe5709814f",
+      "ref_mae_residual_vs_lanczos": 4.531080457899305,
+      "delta_mae_vs_ref_fingerprint": 0.2560763888888893,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p17",
+      "kind": "lattice",
+      "box_base": [
+        1580,
+        530,
+        1644,
+        578
+      ],
+      "box_hires": [
+        6320,
+        2120,
+        6576,
+        2312
+      ],
+      "mae_residual_vs_lanczos": 3.9473130967881946,
+      "p95_abs_residual": 10.0,
+      "residual_hf": 6.585522651672363,
+      "candidate_hf": 7.214346885681152,
+      "patch_sha256_prefix": "7bafeec8a2c722f7",
+      "ref_mae_residual_vs_lanczos": 3.7928534613715277,
+      "delta_mae_vs_ref_fingerprint": 0.15445963541666696,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p18",
+      "kind": "lattice",
+      "box_base": [
+        183,
+        732,
+        247,
+        780
+      ],
+      "box_hires": [
+        732,
+        2928,
+        988,
+        3120
+      ],
+      "mae_residual_vs_lanczos": 5.171359592013889,
+      "p95_abs_residual": 16.0,
+      "residual_hf": 7.553832530975342,
+      "candidate_hf": 8.079887390136719,
+      "patch_sha256_prefix": "f46101274c8deb9a",
+      "ref_mae_residual_vs_lanczos": 4.736328125,
+      "delta_mae_vs_ref_fingerprint": 0.4350314670138893,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p19",
+      "kind": "lattice",
+      "box_base": [
+        469,
+        732,
+        533,
+        780
+      ],
+      "box_hires": [
+        1876,
+        2928,
+        2132,
+        3120
+      ],
+      "mae_residual_vs_lanczos": 2.5883246527777777,
+      "p95_abs_residual": 8.0,
+      "residual_hf": 4.078726768493652,
+      "candidate_hf": 4.414877414703369,
+      "patch_sha256_prefix": "d927e37dc6967382",
+      "ref_mae_residual_vs_lanczos": 2.7366739908854165,
+      "delta_mae_vs_ref_fingerprint": -0.14834933810763884,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p20",
+      "kind": "lattice",
+      "box_base": [
+        756,
+        732,
+        820,
+        780
+      ],
+      "box_hires": [
+        3024,
+        2928,
+        3280,
+        3120
+      ],
+      "mae_residual_vs_lanczos": 6.030415852864583,
+      "p95_abs_residual": 25.0,
+      "residual_hf": 8.062923431396484,
+      "candidate_hf": 8.858922958374023,
+      "patch_sha256_prefix": "00e2b9d7496ea8da",
+      "ref_mae_residual_vs_lanczos": 6.013590494791667,
+      "delta_mae_vs_ref_fingerprint": 0.016825358072916075,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p21",
+      "kind": "lattice",
+      "box_base": [
+        1043,
+        732,
+        1107,
+        780
+      ],
+      "box_hires": [
+        4172,
+        2928,
+        4428,
+        3120
+      ],
+      "mae_residual_vs_lanczos": 3.7654825846354165,
+      "p95_abs_residual": 11.0,
+      "residual_hf": 8.144702911376953,
+      "candidate_hf": 8.252894401550293,
+      "patch_sha256_prefix": "aa1aa2ed2f4ee295",
+      "ref_mae_residual_vs_lanczos": 3.2036200629340277,
+      "delta_mae_vs_ref_fingerprint": 0.5618625217013888,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p22",
+      "kind": "lattice",
+      "box_base": [
+        1329,
+        732,
+        1393,
+        780
+      ],
+      "box_hires": [
+        5316,
+        2928,
+        5572,
+        3120
+      ],
+      "mae_residual_vs_lanczos": 6.689568413628472,
+      "p95_abs_residual": 25.0,
+      "residual_hf": 11.985496520996094,
+      "candidate_hf": 12.475273132324219,
+      "patch_sha256_prefix": "3d3852ee98ecb95a",
+      "ref_mae_residual_vs_lanczos": 6.337931315104167,
+      "delta_mae_vs_ref_fingerprint": 0.35163709852430536,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p23",
+      "kind": "lattice",
+      "box_base": [
+        1580,
+        732,
+        1644,
+        780
+      ],
+      "box_hires": [
+        6320,
+        2928,
+        6576,
+        3120
+      ],
+      "mae_residual_vs_lanczos": 4.7506103515625,
+      "p95_abs_residual": 16.0,
+      "residual_hf": 8.0839204788208,
+      "candidate_hf": 8.392277717590332,
+      "patch_sha256_prefix": "89844993cd854453",
+      "ref_mae_residual_vs_lanczos": 5.291775173611111,
+      "delta_mae_vs_ref_fingerprint": -0.5411648220486107,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p24",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        76,
+        121,
+        124
+      ],
+      "box_hires": [
+        228,
+        304,
+        484,
+        496
+      ],
+      "mae_residual_vs_lanczos": 2.1343519422743054,
+      "p95_abs_residual": 6.0,
+      "residual_hf": 3.8863515853881836,
+      "candidate_hf": 3.889073133468628,
+      "patch_sha256_prefix": "a985936820de34a5",
+      "ref_mae_residual_vs_lanczos": 2.1759575737847223,
+      "delta_mae_vs_ref_fingerprint": -0.04160563151041696,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p25",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        197,
+        121,
+        245
+      ],
+      "box_hires": [
+        228,
+        788,
+        484,
+        980
+      ],
+      "mae_residual_vs_lanczos": 2.87603759765625,
+      "p95_abs_residual": 7.0,
+      "residual_hf": 8.645102500915527,
+      "candidate_hf": 8.70348072052002,
+      "patch_sha256_prefix": "44af4c3a42e60ef2",
+      "ref_mae_residual_vs_lanczos": 2.2044609917534723,
+      "delta_mae_vs_ref_fingerprint": 0.6715766059027777,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p26",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        318,
+        121,
+        366
+      ],
+      "box_hires": [
+        228,
+        1272,
+        484,
+        1464
+      ],
+      "mae_residual_vs_lanczos": 2.4926961263020835,
+      "p95_abs_residual": 7.0,
+      "residual_hf": 5.442734241485596,
+      "candidate_hf": 5.665036201477051,
+      "patch_sha256_prefix": "550375aef8d13cb4",
+      "ref_mae_residual_vs_lanczos": 2.4813164605034723,
+      "delta_mae_vs_ref_fingerprint": 0.01137966579861116,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p27",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        439,
+        121,
+        487
+      ],
+      "box_hires": [
+        228,
+        1756,
+        484,
+        1948
+      ],
+      "mae_residual_vs_lanczos": 3.0020073784722223,
+      "p95_abs_residual": 9.0,
+      "residual_hf": 5.842726707458496,
+      "candidate_hf": 6.2035017013549805,
+      "patch_sha256_prefix": "af64bd08fee7b141",
+      "ref_mae_residual_vs_lanczos": 2.9234551323784723,
+      "delta_mae_vs_ref_fingerprint": 0.07855224609375,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p28",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        560,
+        121,
+        608
+      ],
+      "box_hires": [
+        228,
+        2240,
+        484,
+        2432
+      ],
+      "mae_residual_vs_lanczos": 3.4549085828993054,
+      "p95_abs_residual": 12.0,
+      "residual_hf": 5.801187992095947,
+      "candidate_hf": 6.122075080871582,
+      "patch_sha256_prefix": "112242666cd6702b",
+      "ref_mae_residual_vs_lanczos": 3.6096733940972223,
+      "delta_mae_vs_ref_fingerprint": -0.15476481119791696,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p29",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        681,
+        121,
+        729
+      ],
+      "box_hires": [
+        228,
+        2724,
+        484,
+        2916
+      ],
+      "mae_residual_vs_lanczos": 4.120700412326389,
+      "p95_abs_residual": 14.0,
+      "residual_hf": 6.646235942840576,
+      "candidate_hf": 7.176563739776611,
+      "patch_sha256_prefix": "4b805f6ac031950c",
+      "ref_mae_residual_vs_lanczos": 3.8729790581597223,
+      "delta_mae_vs_ref_fingerprint": 0.24772135416666696,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p30",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        802,
+        121,
+        850
+      ],
+      "box_hires": [
+        228,
+        3208,
+        484,
+        3400
+      ],
+      "mae_residual_vs_lanczos": 2.9650200737847223,
+      "p95_abs_residual": 9.0,
+      "residual_hf": 5.469242572784424,
+      "candidate_hf": 5.797548294067383,
+      "patch_sha256_prefix": "f449a54ff5a26420",
+      "ref_mae_residual_vs_lanczos": 3.054904513888889,
+      "delta_mae_vs_ref_fingerprint": -0.08988444010416652,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p31",
+      "kind": "edge_v",
+      "box_base": [
+        57,
+        903,
+        121,
+        951
+      ],
+      "box_hires": [
+        228,
+        3612,
+        484,
+        3804
+      ],
+      "mae_residual_vs_lanczos": 3.6475084092881946,
+      "p95_abs_residual": 10.0,
+      "residual_hf": 7.842644214630127,
+      "candidate_hf": 8.174561500549316,
+      "patch_sha256_prefix": "495203e70da42291",
+      "ref_mae_residual_vs_lanczos": 3.201626247829861,
+      "delta_mae_vs_ref_fingerprint": 0.4458821614583335,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p32",
+      "kind": "focus",
+      "box_base": [
+        864,
+        56,
+        928,
+        104
+      ],
+      "box_hires": [
+        3456,
+        224,
+        3712,
+        416
+      ],
+      "mae_residual_vs_lanczos": 5.560173882378472,
+      "p95_abs_residual": 18.0,
+      "residual_hf": 11.270493507385254,
+      "candidate_hf": 11.624581336975098,
+      "patch_sha256_prefix": "16e399dd41918e7e",
+      "ref_mae_residual_vs_lanczos": 5.158928765190972,
+      "delta_mae_vs_ref_fingerprint": 0.4012451171875,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p33",
+      "kind": "focus",
+      "box_base": [
+        864,
+        903,
+        928,
+        951
+      ],
+      "box_hires": [
+        3456,
+        3612,
+        3712,
+        3804
+      ],
+      "mae_residual_vs_lanczos": 4.027167426215278,
+      "p95_abs_residual": 12.0,
+      "residual_hf": 8.942131996154785,
+      "candidate_hf": 9.138092994689941,
+      "patch_sha256_prefix": "590d99464d6081a5",
+      "ref_mae_residual_vs_lanczos": 3.695590549045139,
+      "delta_mae_vs_ref_fingerprint": 0.33157687717013884,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p34",
+      "kind": "focus",
+      "box_base": [
+        111,
+        480,
+        175,
+        528
+      ],
+      "box_hires": [
+        444,
+        1920,
+        700,
+        2112
+      ],
+      "mae_residual_vs_lanczos": 4.214307996961805,
+      "p95_abs_residual": 14.0,
+      "residual_hf": 6.7067341804504395,
+      "candidate_hf": 7.004883766174316,
+      "patch_sha256_prefix": "88779d91d6d66541",
+      "ref_mae_residual_vs_lanczos": 4.1209716796875,
+      "delta_mae_vs_ref_fingerprint": 0.09333631727430536,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p35",
+      "kind": "focus",
+      "box_base": [
+        1616,
+        480,
+        1680,
+        528
+      ],
+      "box_hires": [
+        6464,
+        1920,
+        6720,
+        2112
+      ],
+      "mae_residual_vs_lanczos": 2.5438910590277777,
+      "p95_abs_residual": 6.0,
+      "residual_hf": 4.388590335845947,
+      "candidate_hf": 4.456513404846191,
+      "patch_sha256_prefix": "9eb5993500bb779c",
+      "ref_mae_residual_vs_lanczos": 2.9300401475694446,
+      "delta_mae_vs_ref_fingerprint": -0.38614908854166696,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p36",
+      "kind": "focus",
+      "box_base": [
+        416,
+        228,
+        480,
+        276
+      ],
+      "box_hires": [
+        1664,
+        912,
+        1920,
+        1104
+      ],
+      "mae_residual_vs_lanczos": 3.46002197265625,
+      "p95_abs_residual": 10.0,
+      "residual_hf": 4.595807075500488,
+      "candidate_hf": 4.990924835205078,
+      "patch_sha256_prefix": "82b0de8efc716b15",
+      "ref_mae_residual_vs_lanczos": 3.5311482747395835,
+      "delta_mae_vs_ref_fingerprint": -0.07112630208333348,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p37",
+      "kind": "focus",
+      "box_base": [
+        1312,
+        228,
+        1376,
+        276
+      ],
+      "box_hires": [
+        5248,
+        912,
+        5504,
+        1104
+      ],
+      "mae_residual_vs_lanczos": 3.9675157335069446,
+      "p95_abs_residual": 13.0,
+      "residual_hf": 6.275376319885254,
+      "candidate_hf": 6.8887834548950195,
+      "patch_sha256_prefix": "ae99e2bf5acb24da",
+      "ref_mae_residual_vs_lanczos": 3.912570529513889,
+      "delta_mae_vs_ref_fingerprint": 0.0549452039930558,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p38",
+      "kind": "focus",
+      "box_base": [
+        416,
+        732,
+        480,
+        780
+      ],
+      "box_hires": [
+        1664,
+        2928,
+        1920,
+        3120
+      ],
+      "mae_residual_vs_lanczos": 2.7271253797743054,
+      "p95_abs_residual": 8.0,
+      "residual_hf": 4.323981285095215,
+      "candidate_hf": 4.667875289916992,
+      "patch_sha256_prefix": "c2039271b73114b4",
+      "ref_mae_residual_vs_lanczos": 2.808932834201389,
+      "delta_mae_vs_ref_fingerprint": -0.08180745442708348,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p39",
+      "kind": "focus",
+      "box_base": [
+        1312,
+        732,
+        1376,
+        780
+      ],
+      "box_hires": [
+        5248,
+        2928,
+        5504,
+        3120
+      ],
+      "mae_residual_vs_lanczos": 6.039950900607639,
+      "p95_abs_residual": 21.0,
+      "residual_hf": 11.606119155883789,
+      "candidate_hf": 11.987602233886719,
+      "patch_sha256_prefix": "06a8bf25ddd1474b",
+      "ref_mae_residual_vs_lanczos": 5.649020724826389,
+      "delta_mae_vs_ref_fingerprint": 0.39093017578125,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p40",
+      "kind": "focus",
+      "box_base": [
+        595,
+        379,
+        659,
+        427
+      ],
+      "box_hires": [
+        2380,
+        1516,
+        2636,
+        1708
+      ],
+      "mae_residual_vs_lanczos": 5.411092122395833,
+      "p95_abs_residual": 18.0,
+      "residual_hf": 6.692436695098877,
+      "candidate_hf": 7.755381107330322,
+      "patch_sha256_prefix": "7075364599f61aff",
+      "ref_mae_residual_vs_lanczos": 5.398695203993055,
+      "delta_mae_vs_ref_fingerprint": 0.012396918402777679,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p41",
+      "kind": "focus",
+      "box_base": [
+        1132,
+        379,
+        1196,
+        427
+      ],
+      "box_hires": [
+        4528,
+        1516,
+        4784,
+        1708
+      ],
+      "mae_residual_vs_lanczos": 5.779859754774305,
+      "p95_abs_residual": 21.0,
+      "residual_hf": 8.99528980255127,
+      "candidate_hf": 9.64963436126709,
+      "patch_sha256_prefix": "8188184ef997f0d0",
+      "ref_mae_residual_vs_lanczos": 5.154608832465278,
+      "delta_mae_vs_ref_fingerprint": 0.6252509223090277,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p42",
+      "kind": "focus",
+      "box_base": [
+        595,
+        580,
+        659,
+        628
+      ],
+      "box_hires": [
+        2380,
+        2320,
+        2636,
+        2512
+      ],
+      "mae_residual_vs_lanczos": 5.894917805989583,
+      "p95_abs_residual": 18.0,
+      "residual_hf": 7.648024559020996,
+      "candidate_hf": 8.623111724853516,
+      "patch_sha256_prefix": "4245f7b66b2588f9",
+      "ref_mae_residual_vs_lanczos": 5.958997938368055,
+      "delta_mae_vs_ref_fingerprint": -0.06408013237847232,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p43",
+      "kind": "focus",
+      "box_base": [
+        1132,
+        580,
+        1196,
+        628
+      ],
+      "box_hires": [
+        4528,
+        2320,
+        4784,
+        2512
+      ],
+      "mae_residual_vs_lanczos": 4.297539605034722,
+      "p95_abs_residual": 14.0,
+      "residual_hf": 6.554717063903809,
+      "candidate_hf": 7.007784843444824,
+      "patch_sha256_prefix": "84c15af7f9eef7a1",
+      "ref_mae_residual_vs_lanczos": 3.900844997829861,
+      "delta_mae_vs_ref_fingerprint": 0.39669460720486116,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p44",
+      "kind": "focus",
+      "box_base": [
+        720,
+        157,
+        784,
+        205
+      ],
+      "box_hires": [
+        2880,
+        628,
+        3136,
+        820
+      ],
+      "mae_residual_vs_lanczos": 5.982225206163195,
+      "p95_abs_residual": 18.0,
+      "residual_hf": 8.314393043518066,
+      "candidate_hf": 9.276046752929688,
+      "patch_sha256_prefix": "196d99839452cf47",
+      "ref_mae_residual_vs_lanczos": 5.554185655381945,
+      "delta_mae_vs_ref_fingerprint": 0.42803955078125,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p45",
+      "kind": "focus",
+      "box_base": [
+        1007,
+        157,
+        1071,
+        205
+      ],
+      "box_hires": [
+        4028,
+        628,
+        4284,
+        820
+      ],
+      "mae_residual_vs_lanczos": 6.378567165798611,
+      "p95_abs_residual": 23.0,
+      "residual_hf": 8.364076614379883,
+      "candidate_hf": 9.327082633972168,
+      "patch_sha256_prefix": "f77894c0130fe2d8",
+      "ref_mae_residual_vs_lanczos": 6.838982476128472,
+      "delta_mae_vs_ref_fingerprint": -0.4604153103298616,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p46",
+      "kind": "focus",
+      "box_base": [
+        720,
+        802,
+        784,
+        850
+      ],
+      "box_hires": [
+        2880,
+        3208,
+        3136,
+        3400
+      ],
+      "mae_residual_vs_lanczos": 4.925435384114583,
+      "p95_abs_residual": 16.0,
+      "residual_hf": 10.155954360961914,
+      "candidate_hf": 10.49986743927002,
+      "patch_sha256_prefix": "8b2f01820becd876",
+      "ref_mae_residual_vs_lanczos": 4.534837510850695,
+      "delta_mae_vs_ref_fingerprint": 0.3905978732638884,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    },
+    {
+      "probe_id": "p47",
+      "kind": "focus",
+      "box_base": [
+        1007,
+        802,
+        1071,
+        850
+      ],
+      "box_hires": [
+        4028,
+        3208,
+        4284,
+        3400
+      ],
+      "mae_residual_vs_lanczos": 4.765638563368055,
+      "p95_abs_residual": 14.0,
+      "residual_hf": 11.371294975280762,
+      "candidate_hf": 11.542258262634277,
+      "patch_sha256_prefix": "bb371d8e0ea68224",
+      "ref_mae_residual_vs_lanczos": 4.686713324652778,
+      "delta_mae_vs_ref_fingerprint": 0.07892523871527768,
+      "ref_note": "P0 single-forward probe fingerprint; context may differ from nested child"
+    }
+  ],
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "note": "Candidate SPM-A on Nested primary only. Not identity/topology. Not original 256/32 single-forward claim. P0 ref deltas are advisory (different model context)."
+}

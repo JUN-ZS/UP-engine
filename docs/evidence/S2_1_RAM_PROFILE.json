@@ -1,0 +1,508 @@
+{
+  "program": "SIAX_S2_1_P0_RAM_PROFILE",
+  "final_acceptance": false,
+  "device": "cpu",
+  "checkpoint": "models/4x_NMKD-Siax_200k.pth",
+  "sizes_requested": [
+    "144x144",
+    "160x160",
+    "288x288",
+    "320x320"
+  ],
+  "size_labels": {
+    "144x144": "128/8 input",
+    "160x160": "128/16 input",
+    "288x288": "256/16 input",
+    "320x320": "256/32 input"
+  },
+  "method": {
+    "rss": "Linux /proc/self/status VmRSS + ru_maxrss",
+    "forward_input": "synthetic RNG float32 RGB — activation peak only, not quality",
+    "oom_isolation": "each size also attempted in subprocess so parent survives SIGKILL"
+  },
+  "subprocess_by_size": {
+    "144x144": {
+      "ok": true,
+      "stages": [
+        {
+          "stage": "child_start",
+          "rss_mb": 8.39,
+          "maxrss_mb": 10.89
+        },
+        {
+          "stage": "after_model_load",
+          "rss_mb": 390.81,
+          "maxrss_mb": 390.81,
+          "wall_s": 0.813
+        },
+        {
+          "stage": "before_forward",
+          "rss_mb": 392.18,
+          "maxrss_mb": 392.18,
+          "input_wh": [
+            144,
+            144
+          ]
+        },
+        {
+          "stage": "after_forward",
+          "rss_mb": 421.18,
+          "maxrss_mb": 663.67,
+          "wall_s": 9.263,
+          "delta_from_model_mb": 30.37,
+          "output_shape": [
+            1,
+            3,
+            576,
+            576
+          ],
+          "ok": true
+        }
+      ],
+      "maxrss_mb": 663.67,
+      "input_wh": [
+        144,
+        144
+      ],
+      "returncode": 0,
+      "wall_s": 15.377,
+      "status": "OK"
+    },
+    "160x160": {
+      "ok": true,
+      "stages": [
+        {
+          "stage": "child_start",
+          "rss_mb": 8.4,
+          "maxrss_mb": 10.89
+        },
+        {
+          "stage": "after_model_load",
+          "rss_mb": 391.0,
+          "maxrss_mb": 391.0,
+          "wall_s": 0.232
+        },
+        {
+          "stage": "before_forward",
+          "rss_mb": 392.3,
+          "maxrss_mb": 392.3,
+          "input_wh": [
+            160,
+            160
+          ]
+        },
+        {
+          "stage": "after_forward",
+          "rss_mb": 426.25,
+          "maxrss_mb": 725.57,
+          "wall_s": 10.022,
+          "delta_from_model_mb": 35.25,
+          "output_shape": [
+            1,
+            3,
+            640,
+            640
+          ],
+          "ok": true
+        }
+      ],
+      "maxrss_mb": 725.57,
+      "input_wh": [
+        160,
+        160
+      ],
+      "returncode": 0,
+      "wall_s": 12.749,
+      "status": "OK"
+    },
+    "288x288": {
+      "ok": true,
+      "stages": [
+        {
+          "stage": "child_start",
+          "rss_mb": 8.4,
+          "maxrss_mb": 10.89
+        },
+        {
+          "stage": "after_model_load",
+          "rss_mb": 390.89,
+          "maxrss_mb": 390.89,
+          "wall_s": 0.24
+        },
+        {
+          "stage": "before_forward",
+          "rss_mb": 392.31,
+          "maxrss_mb": 392.31,
+          "input_wh": [
+            288,
+            288
+          ]
+        },
+        {
+          "stage": "after_forward",
+          "rss_mb": 502.43,
+          "maxrss_mb": 1473.67,
+          "wall_s": 39.235,
+          "delta_from_model_mb": 111.54,
+          "output_shape": [
+            1,
+            3,
+            1152,
+            1152
+          ],
+          "ok": true
+        }
+      ],
+      "maxrss_mb": 1473.67,
+      "input_wh": [
+        288,
+        288
+      ],
+      "returncode": 0,
+      "wall_s": 41.889,
+      "status": "OK"
+    },
+    "320x320": {
+      "ok": true,
+      "stages": [
+        {
+          "stage": "child_start",
+          "rss_mb": 8.48,
+          "maxrss_mb": 10.89
+        },
+        {
+          "stage": "after_model_load",
+          "rss_mb": 391.05,
+          "maxrss_mb": 391.05,
+          "wall_s": 0.224
+        },
+        {
+          "stage": "before_forward",
+          "rss_mb": 392.25,
+          "maxrss_mb": 392.25,
+          "input_wh": [
+            320,
+            320
+          ]
+        },
+        {
+          "stage": "after_forward",
+          "rss_mb": 456.59,
+          "maxrss_mb": 1664.96,
+          "wall_s": 44.464,
+          "delta_from_model_mb": 65.54,
+          "output_shape": [
+            1,
+            3,
+            1280,
+            1280
+          ],
+          "ok": true
+        }
+      ],
+      "maxrss_mb": 1664.96,
+      "input_wh": [
+        320,
+        320
+      ],
+      "returncode": 0,
+      "wall_s": 47.219,
+      "status": "OK"
+    }
+  },
+  "inprocess_summary": {
+    "mode": "inprocess",
+    "model_baseline_rss_mb": 390.69,
+    "stages": [
+      {
+        "stage": "process_start",
+        "rss_mb": 9.84,
+        "maxrss_mb": 10.89,
+        "t_s": 228.084181
+      },
+      {
+        "stage": "after_imports",
+        "rss_mb": 254.75,
+        "maxrss_mb": 254.88,
+        "t_s": 231.863082
+      },
+      {
+        "stage": "after_model_load",
+        "rss_mb": 390.69,
+        "maxrss_mb": 390.69,
+        "t_s": 232.203975,
+        "wall_s": 0.258,
+        "device": "cpu"
+      },
+      {
+        "stage": "before_forward_144x144",
+        "rss_mb": 390.69,
+        "maxrss_mb": 390.69,
+        "t_s": 232.306471
+      },
+      {
+        "stage": "after_forward_144x144",
+        "rss_mb": 421.11,
+        "maxrss_mb": 663.43,
+        "t_s": 240.293904,
+        "wall_s": 7.987,
+        "input_wh": [
+          144,
+          144
+        ],
+        "output_shape": [
+          1,
+          3,
+          576,
+          576
+        ],
+        "delta_rss_mb": 30.42,
+        "delta_from_model_mb": 30.42,
+        "ok": true
+      },
+      {
+        "stage": "after_free_144x144",
+        "rss_mb": 421.11,
+        "maxrss_mb": 663.43,
+        "t_s": 240.375515
+      },
+      {
+        "stage": "before_forward_160x160",
+        "rss_mb": 421.11,
+        "maxrss_mb": 663.43,
+        "t_s": 240.433749
+      },
+      {
+        "stage": "after_forward_160x160",
+        "rss_mb": 426.19,
+        "maxrss_mb": 726.17,
+        "t_s": 249.769605,
+        "wall_s": 9.335,
+        "input_wh": [
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          640,
+          640
+        ],
+        "delta_rss_mb": 5.08,
+        "delta_from_model_mb": 35.5,
+        "ok": true
+      },
+      {
+        "stage": "after_free_160x160",
+        "rss_mb": 426.19,
+        "maxrss_mb": 726.17,
+        "t_s": 249.863292
+      },
+      {
+        "stage": "before_forward_288x288",
+        "rss_mb": 426.19,
+        "maxrss_mb": 726.17,
+        "t_s": 249.923467
+      },
+      {
+        "stage": "after_forward_288x288",
+        "rss_mb": 442.13,
+        "maxrss_mb": 1414.11,
+        "t_s": 286.004834,
+        "wall_s": 36.081,
+        "input_wh": [
+          288,
+          288
+        ],
+        "output_shape": [
+          1,
+          3,
+          1152,
+          1152
+        ],
+        "delta_rss_mb": 15.94,
+        "delta_from_model_mb": 51.44,
+        "ok": true
+      },
+      {
+        "stage": "after_free_288x288",
+        "rss_mb": 442.13,
+        "maxrss_mb": 1414.11,
+        "t_s": 286.102077
+      },
+      {
+        "stage": "before_forward_320x320",
+        "rss_mb": 442.13,
+        "maxrss_mb": 1414.11,
+        "t_s": 286.157238
+      },
+      {
+        "stage": "after_forward_320x320",
+        "rss_mb": 450.88,
+        "maxrss_mb": 1650.89,
+        "t_s": 330.927054,
+        "wall_s": 44.764,
+        "input_wh": [
+          320,
+          320
+        ],
+        "output_shape": [
+          1,
+          3,
+          1280,
+          1280
+        ],
+        "delta_rss_mb": 8.75,
+        "delta_from_model_mb": 60.19,
+        "ok": true
+      },
+      {
+        "stage": "after_free_320x320",
+        "rss_mb": 450.88,
+        "maxrss_mb": 1650.89,
+        "t_s": 331.049576
+      },
+      {
+        "stage": "before_canvas_7168x4032",
+        "rss_mb": 450.88,
+        "maxrss_mb": 1650.89,
+        "t_s": 331.103817
+      },
+      {
+        "stage": "after_canvas_7168x4032",
+        "rss_mb": 450.88,
+        "maxrss_mb": 1650.89,
+        "t_s": 331.104169,
+        "canvas_bytes": 86704128,
+        "canvas_mib": 82.69,
+        "delta_rss_mb": 0.0
+      },
+      {
+        "stage": "after_canvas_free",
+        "rss_mb": 450.88,
+        "maxrss_mb": 1650.89,
+        "t_s": 331.157503
+      }
+    ],
+    "forward_rows": [
+      {
+        "stage": "after_forward_144x144",
+        "rss_mb": 421.11,
+        "maxrss_mb": 663.43,
+        "t_s": 240.293904,
+        "wall_s": 7.987,
+        "input_wh": [
+          144,
+          144
+        ],
+        "output_shape": [
+          1,
+          3,
+          576,
+          576
+        ],
+        "delta_rss_mb": 30.42,
+        "delta_from_model_mb": 30.42,
+        "ok": true
+      },
+      {
+        "stage": "after_forward_160x160",
+        "rss_mb": 426.19,
+        "maxrss_mb": 726.17,
+        "t_s": 249.769605,
+        "wall_s": 9.335,
+        "input_wh": [
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          640,
+          640
+        ],
+        "delta_rss_mb": 5.08,
+        "delta_from_model_mb": 35.5,
+        "ok": true
+      },
+      {
+        "stage": "after_forward_288x288",
+        "rss_mb": 442.13,
+        "maxrss_mb": 1414.11,
+        "t_s": 286.004834,
+        "wall_s": 36.081,
+        "input_wh": [
+          288,
+          288
+        ],
+        "output_shape": [
+          1,
+          3,
+          1152,
+          1152
+        ],
+        "delta_rss_mb": 15.94,
+        "delta_from_model_mb": 51.44,
+        "ok": true
+      },
+      {
+        "stage": "after_forward_320x320",
+        "rss_mb": 450.88,
+        "maxrss_mb": 1650.89,
+        "t_s": 330.927054,
+        "wall_s": 44.764,
+        "input_wh": [
+          320,
+          320
+        ],
+        "output_shape": [
+          1,
+          3,
+          1280,
+          1280
+        ],
+        "delta_rss_mb": 8.75,
+        "delta_from_model_mb": 60.19,
+        "ok": true
+      }
+    ],
+    "maxrss_mb": 1650.89,
+    "final_acceptance": false
+  },
+  "conclusion": {
+    "peaks_mb": {
+      "144x144": {
+        "maxrss_mb": 663.67,
+        "rss_mb": 421.18,
+        "delta_from_model_mb": 30.37,
+        "wall_s": 9.263,
+        "label": "128/8 input"
+      },
+      "160x160": {
+        "maxrss_mb": 725.57,
+        "rss_mb": 426.25,
+        "delta_from_model_mb": 35.25,
+        "wall_s": 10.022,
+        "label": "128/16 input"
+      },
+      "288x288": {
+        "maxrss_mb": 1473.67,
+        "rss_mb": 502.43,
+        "delta_from_model_mb": 111.54,
+        "wall_s": 39.235,
+        "label": "256/16 input"
+      },
+      "320x320": {
+        "maxrss_mb": 1664.96,
+        "rss_mb": 456.59,
+        "delta_from_model_mb": 65.54,
+        "wall_s": 44.464,
+        "label": "256/32 input"
+      }
+    },
+    "oom_sizes": [],
+    "hypothesis_tile_forward_peak": false,
+    "evidence_grade": "OBSERVED",
+    "note": "Synthetic forward peak; real BASE tiles may differ slightly. Canvas stage measured only in inprocess cascade."
+  }
+}

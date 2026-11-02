@@ -1,0 +1,98 @@
+{
+  "format": "ige.spm.commercial_cell_matrix",
+  "format_version": "1.0",
+  "stamp_utc": "2026-11-01T20:19:52Z",
+  "status": "OBSERVED_OK_NO_OOM",
+  "host": "DESKTOP-GNMQ0PF RTX 3070 Ti 8191.5 MiB",
+  "input_sha256": "cdc2af9738c0ab8d4f121126eeff3dd97959e0b69f486c9242b70d1f52c0e51c",
+  "input_wh": [
+    1792,
+    1008
+  ],
+  "output_wh": [
+    7168,
+    4032
+  ],
+  "historical_note": "256/32 was OOM_BLOCKED on small-RAM hosts; full-frame CUDA on 3070 Ti succeeds",
+  "rows_cold_only": [
+    {
+      "cell": "128/8",
+      "wall_s_cold": 16.531,
+      "device": "cuda",
+      "tile_count": 112,
+      "output_sha256": "72a01792d1c13ac6ca0bcfbd6493c8bd2065d23f54fbe9ec8c696190a067b541",
+      "oom": false,
+      "vram_free_before_mib": 7109.0,
+      "vram_free_after_mib": 6157.0,
+      "vram_delta_mib": 952.0,
+      "request_id": "here_e6e0dca77894",
+      "png": "D:\\s3_share\\spm_handoff\\outbox\\warrior_SIAX4X_t128p8.png",
+      "time_vs_128_8": 1.0,
+      "vram_delta_vs_128_8": 1.0,
+      "cost_index_diag": 18.452
+    },
+    {
+      "cell": "256/16",
+      "wall_s_cold": 15.631,
+      "device": "cuda",
+      "tile_count": 28,
+      "output_sha256": "58301c0d047ae82f48e9fb3422c282f8478c394e1bacc6d526c36b8b13cd0342",
+      "oom": false,
+      "vram_free_before_mib": 7109.0,
+      "vram_free_after_mib": 3621.0,
+      "vram_delta_mib": 3488.0,
+      "request_id": "here_ee7a7d2a346f",
+      "png": "D:\\s3_share\\spm_handoff\\outbox\\warrior_SIAX4X_t256p16.png",
+      "time_vs_128_8": 0.946,
+      "vram_delta_vs_128_8": 3.664,
+      "cost_index_diag": 22.287
+    },
+    {
+      "cell": "256/32",
+      "wall_s_cold": 26.856,
+      "device": "cuda",
+      "tile_count": 28,
+      "output_sha256": "9e1f7d31d8f047524d75ca1d740d117124b92b02d58ddb6a19375fc0ea5b3de9",
+      "oom": false,
+      "vram_free_before_mib": 7109.0,
+      "vram_free_after_mib": 3065.0,
+      "vram_delta_mib": 4044.0,
+      "request_id": "here_8ba9471d3542",
+      "png": "D:\\s3_share\\spm_handoff\\outbox\\warrior_SIAX4X_t256p32_cold.png",
+      "warm_wall_s_not_for_cost": 13.231,
+      "warm_request_id": "here_c5f8e1f96b1f",
+      "warm_note": "same SHA as cold; exclude from cost ranking",
+      "time_vs_128_8": 1.625,
+      "vram_delta_vs_128_8": 4.248,
+      "cost_index_diag": 40.114
+    }
+  ],
+  "ranking_cold_wall": [
+    "256/16",
+    "128/8",
+    "256/32"
+  ],
+  "ranking_cost_index_diag": [
+    "128/8",
+    "256/16",
+    "256/32"
+  ],
+  "recommendation": {
+    "default_commercial_cell_this_frame": "256/16",
+    "reason": [
+      "fastest cold wall (~0.95x of 128/8)",
+      "no OOM",
+      "VRAM delta higher than 128/8 but still ~3.6 GiB free after",
+      "256/32 cold ~1.62x time for same 28 tiles — pad cost without time win on this BASE"
+    ],
+    "when_use_256_32": "if blind/seam review prefers larger halo; not for raw throughput on 1792x1008",
+    "when_use_128_8": "max free VRAM headroom / concurrent jobs"
+  },
+  "ops_notes": [
+    "Write errno 22 on default warrior_SIAX4X.png — use unique out names per cell",
+    "Warm 256/32 wall excluded from cost ranking"
+  ],
+  "final_acceptance": false,
+  "e3_speed_claim": false,
+  "quality_qualified": false
+}

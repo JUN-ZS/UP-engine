@@ -1,0 +1,43 @@
+{
+  "format": "ige.spm.here_package",
+  "format_version": "1.0",
+  "package_id": "warrior_mud_hammer_1792x1008",
+  "created_at_utc": "2026-11-01T19:53:52Z",
+  "source": {
+    "here_asset_id": "cd5c430d-f261-4f9f-aa3b-d5782d9f5ced",
+    "description": "Cinematic warrior woman gold scale armor swinging bronze hammer in mud rain lightning; 1792x1008",
+    "width": 1792,
+    "height": 1008,
+    "role": "BASE_for_local_siax_spm"
+  },
+  "local_paths": {
+    "save_input_as": "D:\\s3_share\\spm_in\\warrior_BASE.jpg",
+    "output_png": "D:\\s3_share\\spm_handoff\\outbox\\warrior_SIAX4X.png",
+    "handoff_root": "D:\\s3_share\\spm_handoff"
+  },
+  "siax": {
+    "mode": "native_run_siax_upscale",
+    "scale": 4,
+    "expected_output_wh": [
+      7168,
+      4032
+    ],
+    "device": "auto",
+    "tile_size": 128,
+    "tile_pad": 8,
+    "note_ram": "Full frame tiled on RTX 3070 Ti; if OOM raise tile pad carefully or use nested later — this is SPM local pilot not S3.7"
+  },
+  "not": {
+    "quality_qualified": false,
+    "e3_speed_claim": false,
+    "grok_com_mcp": false,
+    "comfyui": false
+  },
+  "steps_zh": [
+    "在聊天把参考图另存为 D:\\s3_share\\spm_in\\warrior_BASE.jpg",
+    "git pull 到含 handoff 的分支",
+    "开 .venv，可选 watch",
+    "跑下方 PowerShell 一次",
+    "把 outbox 里 here_*_result.json 贴回 chat"
+  ]
+}
