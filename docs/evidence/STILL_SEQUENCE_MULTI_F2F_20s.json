@@ -1,0 +1,91 @@
+{
+  "format": "ige.still_sequence_f2f_multi",
+  "format_version": "1.0",
+  "mode": "still_sequence_f2f_multi",
+  "not_image_to_video": true,
+  "image_to_video_tools_called_this_run": [],
+  "assembly": [
+    "C1_FrameBank",
+    "C2_Metrics",
+    "C3_Layout",
+    "C4_Encode_ffmpeg_image2",
+    "C5_Report"
+  ],
+  "source_bank": "/workspace/artifacts/tmp/gen_next_frame_20s/frames",
+  "stills": "g_0001.png .. g_0480.png (480 unique different stills)",
+  "provenance_of_stills": "prior_trial_PNG_bank; this run only still assembly",
+  "n_unique_stills": 480,
+  "fps_playback": 24,
+  "duration_s_probe": 20.0,
+  "motion_source": "still_playback_multi_different_stills",
+  "audio": "silence_anullsrc",
+  "volume_detect": [
+    "[Parsed_volumedetect_0 @ 0x7f1884001ac0] mean_volume: -91.0 dB",
+    "[Parsed_volumedetect_0 @ 0x7f1884001ac0] max_volume: -91.0 dB"
+  ],
+  "metrics": {
+    "n_pairs": 102,
+    "mae_p50": 15.547976016998291,
+    "mae_mean": 15.042801266791773,
+    "mae_max": 18.610763549804688,
+    "flow_p50_median": 2.278967022895813,
+    "pairs_head": [
+      {
+        "pair": "T0000->T0001",
+        "mae": 1.7573693990707397,
+        "p95": 10.0,
+        "flow_p50": 0.031011413782835007
+      },
+      {
+        "pair": "T0001->T0002",
+        "mae": 18.610763549804688,
+        "p95": 71.0,
+        "flow_p50": 3.3296890258789062
+      },
+      {
+        "pair": "T0002->T0003",
+        "mae": 17.207962036132812,
+        "p95": 66.0,
+        "flow_p50": 3.110167980194092
+      },
+      {
+        "pair": "T0003->T0004",
+        "mae": 17.15890884399414,
+        "p95": 67.0,
+        "flow_p50": 3.3787031173706055
+      }
+    ],
+    "pairs_tail": [
+      {
+        "pair": "T0464->T0465",
+        "mae": 14.06893253326416,
+        "p95": 62.0,
+        "flow_p50": 2.097834587097168
+      },
+      {
+        "pair": "T0472->T0473",
+        "mae": 14.867581367492676,
+        "p95": 66.0,
+        "flow_p50": 2.526803731918335
+      }
+    ]
+  },
+  "v12_baseline_ref": {
+    "mae_p50": 5.171940326690674,
+    "flow_p50_median": 0.22826668620109558
+  },
+  "vs_v12": {
+    "mae_ratio": 3.0062172095761293,
+    "flow_ratio": 9.983791594048537
+  },
+  "outputs": {
+    "STILL_MULTI_F2F_20s.mp4": "/workspace/artifacts/tmp/still_f2f_multi_20s/STILL_MULTI_F2F_20s.mp4",
+    "FIG_filmstrip_multi20s.png": "/workspace/artifacts/tmp/still_f2f_multi_20s/FIG_filmstrip_multi20s.png",
+    "FIG_grid_multi20s.png": "/workspace/artifacts/tmp/still_f2f_multi_20s/FIG_grid_multi20s.png",
+    "FIG_trend_vs_v12.png": "/workspace/artifacts/tmp/still_f2f_multi_20s/FIG_trend_vs_v12.png",
+    "FIG_residual_T0000_T0001.png": "/workspace/artifacts/tmp/still_f2f_multi_20s/FIG_residual_T0000_T0001.png"
+  },
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "e3_speed_claim": false
+}

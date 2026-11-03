@@ -1,0 +1,506 @@
+{
+  "format": "ige.siax.next_frame_f2f",
+  "format_version": "1.1",
+  "created_at_utc": "2026-11-03T17:06:40Z",
+  "mode": "next_frame_f2f",
+  "not_spatial_extend": true,
+  "source_video": "dfe82060-d1d7-4c7f-973f-d221d731509e",
+  "dt_s_between_selected": 0.0416667,
+  "frames": [
+    {
+      "id": "T00",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0000.png",
+      "t_index": 0,
+      "t_s": 0.0,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "75aa7d8f6ac6d900b8078e6ae9cb36056a98e7fac697cc0024667254c6ab55ab"
+    },
+    {
+      "id": "T01",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0001.png",
+      "t_index": 1,
+      "t_s": 0.0417,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "5ee834fae5c4daca1082ad3fedb7c2b96e71d62c89d948bfc9c2bfcec7c97f28"
+    },
+    {
+      "id": "T02",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0002.png",
+      "t_index": 2,
+      "t_s": 0.0833,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "c95cb71fdccad46f9a5d0bc082359748d8db7d7ba94fddb9144897ee16865147"
+    },
+    {
+      "id": "T03",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0003.png",
+      "t_index": 3,
+      "t_s": 0.125,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "eb28a1e76404bbdc0983758e0d9160e3f3efa703f2dfd14e3b8f887fb6342c9c"
+    },
+    {
+      "id": "T04",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0004.png",
+      "t_index": 4,
+      "t_s": 0.1667,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "72abe5cf97f167e522dacae325a9953f88fa6ebfab06a9bfba03580f32dae1fd"
+    },
+    {
+      "id": "T05",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0005.png",
+      "t_index": 5,
+      "t_s": 0.2083,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "fe441ad989fcab09d8cd177023fd7803f03b5863b6e2c2fa9148889441674616"
+    },
+    {
+      "id": "T06",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0006.png",
+      "t_index": 6,
+      "t_s": 0.25,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "0daf4cca83cf0a51f463a98d5fb9a0175f70103e5f5e2e12dd0d702514d988fe"
+    },
+    {
+      "id": "T07",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0007.png",
+      "t_index": 7,
+      "t_s": 0.2917,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "95b77e80adc4c13385c6ba1df29df75f70273609e9078ff73021f749ef977847"
+    },
+    {
+      "id": "T08",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0008.png",
+      "t_index": 8,
+      "t_s": 0.3333,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "96740e17801740aa0d00c2e8672c6d771ae36f25d3ae80729079f77d19af76ce"
+    },
+    {
+      "id": "T09",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0009.png",
+      "t_index": 9,
+      "t_s": 0.375,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "bdf8e910f095ec907f2270203f705e9ba349f79330672d15d6558e80144efaea"
+    },
+    {
+      "id": "T10",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0010.png",
+      "t_index": 10,
+      "t_s": 0.4167,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "39133820566d42fcd0c9733e07e9f3cce20e5e88709533bb578965554b522265"
+    },
+    {
+      "id": "T11",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v12_24fps/frames/n_0011.png",
+      "t_index": 11,
+      "t_s": 0.4583,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "5e16df23dd3bc3c4790e17ae517930ceed0a995a81c7f71dcbf5eb259f19e51a"
+    }
+  ],
+  "pair_pixel_residual": [
+    {
+      "pair": "T00->T01",
+      "t_from": 0.0,
+      "t_to": 0.0417,
+      "mae": 5.300611972808838,
+      "p50": 2.0,
+      "p95": 22.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T00_T01.png",
+      "flow_mean_px": 0.7876234650611877,
+      "flow_p50_px": 0.23021388053894043,
+      "flow_p95_px": 3.7202401161193848,
+      "flow_max_px": 8.560076713562012
+    },
+    {
+      "pair": "T01->T02",
+      "t_from": 0.0417,
+      "t_to": 0.0833,
+      "mae": 4.655707836151123,
+      "p50": 1.3333333730697632,
+      "p95": 21.33333396911621,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T01_T02.png",
+      "flow_mean_px": 0.8054555058479309,
+      "flow_p50_px": 0.22715508937835693,
+      "flow_p95_px": 3.7274272441864014,
+      "flow_max_px": 8.715312957763672
+    },
+    {
+      "pair": "T02->T03",
+      "t_from": 0.0833,
+      "t_to": 0.125,
+      "mae": 4.67372989654541,
+      "p50": 1.3333333730697632,
+      "p95": 21.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T02_T03.png",
+      "flow_mean_px": 0.8208355903625488,
+      "flow_p50_px": 0.22862587869167328,
+      "flow_p95_px": 3.7828073501586914,
+      "flow_max_px": 9.171996116638184
+    },
+    {
+      "pair": "T03->T04",
+      "t_from": 0.125,
+      "t_to": 0.1667,
+      "mae": 4.5746283531188965,
+      "p50": 1.3333333730697632,
+      "p95": 21.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T03_T04.png",
+      "flow_mean_px": 0.8265376687049866,
+      "flow_p50_px": 0.22826668620109558,
+      "flow_p95_px": 3.755645990371704,
+      "flow_max_px": 9.892390251159668
+    },
+    {
+      "pair": "T04->T05",
+      "t_from": 0.1667,
+      "t_to": 0.2083,
+      "mae": 5.353400707244873,
+      "p50": 2.0,
+      "p95": 22.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T04_T05.png",
+      "flow_mean_px": 0.7709177136421204,
+      "flow_p50_px": 0.20872247219085693,
+      "flow_p95_px": 3.6545333862304688,
+      "flow_max_px": 7.632457733154297
+    },
+    {
+      "pair": "T05->T06",
+      "t_from": 0.2083,
+      "t_to": 0.25,
+      "mae": 4.589045524597168,
+      "p50": 1.0,
+      "p95": 22.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T05_T06.png",
+      "flow_mean_px": 0.7840325832366943,
+      "flow_p50_px": 0.1869107186794281,
+      "flow_p95_px": 3.6733474731445312,
+      "flow_max_px": 8.602099418640137
+    },
+    {
+      "pair": "T06->T07",
+      "t_from": 0.25,
+      "t_to": 0.2917,
+      "mae": 5.171940326690674,
+      "p50": 1.6666666269302368,
+      "p95": 23.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T06_T07.png",
+      "flow_mean_px": 0.8315394520759583,
+      "flow_p50_px": 0.26577121019363403,
+      "flow_p95_px": 3.74356746673584,
+      "flow_max_px": 8.467682838439941
+    },
+    {
+      "pair": "T07->T08",
+      "t_from": 0.2917,
+      "t_to": 0.3333,
+      "mae": 5.013943195343018,
+      "p50": 1.3333333730697632,
+      "p95": 23.66666603088379,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T07_T08.png",
+      "flow_mean_px": 0.8418560028076172,
+      "flow_p50_px": 0.24683603644371033,
+      "flow_p95_px": 3.8146138191223145,
+      "flow_max_px": 7.656386852264404
+    },
+    {
+      "pair": "T08->T09",
+      "t_from": 0.3333,
+      "t_to": 0.375,
+      "mae": 6.05824613571167,
+      "p50": 2.3333332538604736,
+      "p95": 24.33333396911621,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T08_T09.png",
+      "flow_mean_px": 0.8164938688278198,
+      "flow_p50_px": 0.233201265335083,
+      "flow_p95_px": 3.839061737060547,
+      "flow_max_px": 15.060229301452637
+    },
+    {
+      "pair": "T09->T10",
+      "t_from": 0.375,
+      "t_to": 0.4167,
+      "mae": 5.536168098449707,
+      "p50": 2.0,
+      "p95": 25.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T09_T10.png",
+      "flow_mean_px": 0.8173680305480957,
+      "flow_p50_px": 0.20581084489822388,
+      "flow_p95_px": 3.861539125442505,
+      "flow_max_px": 7.805086612701416
+    },
+    {
+      "pair": "T10->T11",
+      "t_from": 0.4167,
+      "t_to": 0.4583,
+      "mae": 5.857152462005615,
+      "p50": 2.0,
+      "p95": 25.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v12_24fps/figures/FIG2_residual_T10_T11.png",
+      "flow_mean_px": 0.8454511165618896,
+      "flow_p50_px": 0.20173898339271545,
+      "flow_p95_px": 4.097777366638184,
+      "flow_max_px": 7.667564392089844
+    }
+  ],
+  "sift_consecutive": [
+    {
+      "pair": "T00->T01",
+      "n_anchors": 410,
+      "status": "ok"
+    },
+    {
+      "pair": "T01->T02",
+      "n_anchors": 416,
+      "status": "ok"
+    },
+    {
+      "pair": "T02->T03",
+      "n_anchors": 421,
+      "status": "ok"
+    },
+    {
+      "pair": "T03->T04",
+      "n_anchors": 421,
+      "status": "ok"
+    },
+    {
+      "pair": "T04->T05",
+      "n_anchors": 412,
+      "status": "ok"
+    },
+    {
+      "pair": "T05->T06",
+      "n_anchors": 422,
+      "status": "ok"
+    },
+    {
+      "pair": "T06->T07",
+      "n_anchors": 416,
+      "status": "ok"
+    },
+    {
+      "pair": "T07->T08",
+      "n_anchors": 418,
+      "status": "ok"
+    },
+    {
+      "pair": "T08->T09",
+      "n_anchors": 406,
+      "status": "ok"
+    },
+    {
+      "pair": "T09->T10",
+      "n_anchors": 411,
+      "status": "ok"
+    },
+    {
+      "pair": "T10->T11",
+      "n_anchors": 416,
+      "status": "ok"
+    }
+  ],
+  "motion_similarity_per_pair": [
+    {
+      "pair": "T00__T01",
+      "n_anchors": 410,
+      "scale": 0.999838969760305,
+      "rotation_deg": 0.00786288096604614,
+      "tx": 0.022502258181475554,
+      "ty": -0.18836466528335905,
+      "p95_residual": 2.4585660512759335,
+      "median_residual": 0.28855630919368663
+    },
+    {
+      "pair": "T01__T02",
+      "n_anchors": 416,
+      "scale": 1.0000362665074647,
+      "rotation_deg": 0.0013524453655569641,
+      "tx": -0.23797723848497299,
+      "ty": -0.15267129064909568,
+      "p95_residual": 1.8008187826481221,
+      "median_residual": 0.27885278133248786
+    },
+    {
+      "pair": "T02__T03",
+      "n_anchors": 421,
+      "scale": 1.0000609906483426,
+      "rotation_deg": -0.007218675377581266,
+      "tx": -0.3081270368749074,
+      "ty": -0.09240918294591438,
+      "p95_residual": 1.8159093155398036,
+      "median_residual": 0.32508878584202844
+    },
+    {
+      "pair": "T03__T04",
+      "n_anchors": 421,
+      "scale": 0.9998688417389903,
+      "rotation_deg": -0.003931681500030002,
+      "tx": -0.12998598511478576,
+      "ty": -0.05530094659150109,
+      "p95_residual": 2.5412281498230023,
+      "median_residual": 0.28303149143313644
+    },
+    {
+      "pair": "T04__T05",
+      "n_anchors": 412,
+      "scale": 0.9998478081957557,
+      "rotation_deg": -0.016437707466830508,
+      "tx": -0.16209904924323837,
+      "ty": 0.06255615414181648,
+      "p95_residual": 2.6823932887933593,
+      "median_residual": 0.3477462504718716
+    },
+    {
+      "pair": "T05__T06",
+      "n_anchors": 422,
+      "scale": 1.0000357266096969,
+      "rotation_deg": -0.025190333736221614,
+      "tx": -0.3840072439987807,
+      "ty": 0.13339923928697317,
+      "p95_residual": 2.4351134756682633,
+      "median_residual": 0.34046347581108927
+    },
+    {
+      "pair": "T06__T07",
+      "n_anchors": 416,
+      "scale": 0.9998854526877408,
+      "rotation_deg": -0.03212345605337405,
+      "tx": -0.3423386284653134,
+      "ty": 0.26031935733851697,
+      "p95_residual": 2.5637916372161667,
+      "median_residual": 0.40027315195881075
+    },
+    {
+      "pair": "T07__T08",
+      "n_anchors": 418,
+      "scale": 1.0000289928878938,
+      "rotation_deg": -0.036621492321159466,
+      "tx": -0.44754196672806756,
+      "ty": 0.2853432648078069,
+      "p95_residual": 2.6861736127146663,
+      "median_residual": 0.37677081306911486
+    },
+    {
+      "pair": "T08__T09",
+      "n_anchors": 406,
+      "scale": 0.999912445897175,
+      "rotation_deg": -0.04361519742740479,
+      "tx": -0.3884401473711705,
+      "ty": 0.39300418632296896,
+      "p95_residual": 2.732180283199491,
+      "median_residual": 0.4180698017832556
+    },
+    {
+      "pair": "T09__T10",
+      "n_anchors": 411,
+      "scale": 1.0000671997422668,
+      "rotation_deg": -0.05306447575060036,
+      "tx": -0.5880132864934922,
+      "ty": 0.49878409680746927,
+      "p95_residual": 2.699198413644063,
+      "median_residual": 0.4538752857599779
+    },
+    {
+      "pair": "T10__T11",
+      "n_anchors": 416,
+      "scale": 1.0000073517731505,
+      "rotation_deg": -0.05356441405234745,
+      "tx": -0.547010444900252,
+      "ty": 0.5342432162720456,
+      "p95_residual": 2.753639141133962,
+      "median_residual": 0.43527374025276583
+    }
+  ],
+  "ddxx_models": [
+    {
+      "model": "similarity",
+      "train_p95": 2.4369,
+      "holdout_p95": 2.6113,
+      "gate": "pass",
+      "ok": true,
+      "n_edges": 11,
+      "algorithm_id": "DDXX_MV_GLOBAL_SIMILARITY_V1"
+    },
+    {
+      "model": "homography",
+      "train_p95": 2.422,
+      "holdout_p95": 2.644,
+      "gate": "pass",
+      "ok": true,
+      "n_edges": 11,
+      "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2"
+    },
+    {
+      "model": "local_mesh",
+      "train_p95": 2.4369,
+      "holdout_p95": 2.6113,
+      "gate": "pass",
+      "ok": true,
+      "n_edges": 11,
+      "algorithm_id": "DDXX_MV_LOCAL_MESH_SIMTILE_V0_2"
+    }
+  ],
+  "formulas": {
+    "similarity": "x' = s R(θ) x + t",
+    "homography": "x~' ~ H [x y 1]^T",
+    "sift": "mutual SIFT + ratio + RANSAC on consecutive frames only",
+    "flow": "Farneback dense optical flow magnitude",
+    "f2f_mae": "mean |I_t - I_{t+1}| (identity residual; motion raises this)"
+  },
+  "acceptance": {
+    "next_frame_f2f_demo": true,
+    "spatial_extend": false,
+    "cinematic_product": false,
+    "quality_qualified": false,
+    "native_4k_success": false,
+    "final_acceptance": false,
+    "note": "Temporal F2F geometry/motion metrics only; not film-grade continuity pass."
+  },
+  "paths": {
+    "out_dir": "docs/evidence/siax_next_frame_f2f_v12_24fps",
+    "artifacts": "/workspace/artifacts/tmp/cinema_f2f_v11"
+  }
+}

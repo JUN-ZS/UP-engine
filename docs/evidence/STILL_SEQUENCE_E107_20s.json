@@ -1,0 +1,55 @@
+{
+  "format": "ige.still_sequence_f2f",
+  "format_version": "1.1",
+  "mode": "still_sequence_f2f",
+  "not_image_to_video": true,
+  "image_to_video_tools_called": [],
+  "source_asset_id": "e1075446-91c3-434d-a93c-462a7cd1ec5e",
+  "master_sha256_fullres": "4e24ef80f4afd552c74734c737534ed53af1f9b25f3b5f02d8850270b4c7e86f",
+  "playback_wh": [
+    1280,
+    720
+  ],
+  "hold_mode": "single_still_repeated",
+  "n_frames_logical_24fps": 480,
+  "n_frames_physical_samples": 12,
+  "encode_method": "ffmpeg_1s_then_stream_loop19_to_20s",
+  "fps_playback": 24,
+  "duration_s_target": 20.0,
+  "duration_s_probe": 20.0,
+  "motion_source": "still_playback",
+  "audio": "silence_anullsrc",
+  "volume_detect": [
+    "[Parsed_volumedetect_0 @ 0x7faa70001ac0] mean_volume: -91.0 dB",
+    "[Parsed_volumedetect_0 @ 0x7faa70001ac0] max_volume: -91.0 dB"
+  ],
+  "mae_p50": 0.0,
+  "mae_adjacent_sample": [
+    {
+      "pair": "T0000->T0001",
+      "mae": 0.0,
+      "p95": 0.0
+    },
+    {
+      "pair": "T0001->T0002",
+      "mae": 0.0,
+      "p95": 0.0
+    },
+    {
+      "pair": "T0002->T0003",
+      "mae": 0.0,
+      "p95": 0.0
+    }
+  ],
+  "note": "e107 single still held 20s @24fps. not I2V. not next-frame. playback 1280x720 from fullres still.",
+  "outputs": {
+    "mp4": "/workspace/artifacts/tmp/still_f2f_e107_20s/STILL_SEQUENCE_20s.mp4",
+    "filmstrip": "/workspace/artifacts/tmp/still_f2f_e107_20s/FIG_filmstrip_20s.png",
+    "grid": "/workspace/artifacts/tmp/still_f2f_e107_20s/FIG_grid.png",
+    "master_full": "/workspace/artifacts/tmp/still_f2f_e107_20s/MASTER_e107.png",
+    "master_play": "/workspace/artifacts/tmp/still_f2f_e107_20s/MASTER_e107_1280x720.png"
+  },
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "e3_speed_claim": false
+}

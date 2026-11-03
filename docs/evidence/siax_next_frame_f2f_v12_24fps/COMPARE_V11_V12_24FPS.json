@@ -1,0 +1,102 @@
+{
+  "format": "ige.siax.next_frame_f2f_compare",
+  "v11_subsample_4fps": {
+    "n_frames": 10,
+    "dt_s": 0.25,
+    "mae_mean": 15.637168566385904,
+    "mae_max": 20.45429039001465,
+    "mae_min": 10.96053409576416,
+    "p95_mean": 63.74074003431532,
+    "flow_mean": 0.6911868188116286,
+    "flow_max": 0.81800377368927,
+    "sift_mean": 284.77777777777777,
+    "sift_min": 251,
+    "ddxx": [
+      {
+        "model": "similarity",
+        "train_p95": 2.5568,
+        "holdout_p95": 2.4086,
+        "gate": "pass",
+        "ok": true,
+        "n_edges": 9,
+        "algorithm_id": "DDXX_MV_GLOBAL_SIMILARITY_V1"
+      },
+      {
+        "model": "homography",
+        "train_p95": 2.2576,
+        "holdout_p95": 2.1556,
+        "gate": "pass",
+        "ok": true,
+        "n_edges": 9,
+        "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2"
+      },
+      {
+        "model": "local_mesh",
+        "train_p95": 2.5568,
+        "holdout_p95": 2.4086,
+        "gate": "pass",
+        "ok": true,
+        "n_edges": 9,
+        "algorithm_id": "DDXX_MV_LOCAL_MESH_SIMTILE_V0_2"
+      }
+    ],
+    "motion_p95_mean": 2.3579825451685323,
+    "tx_mean_abs": 0.9409489814996859,
+    "ty_mean_abs": 0.7357342753427676
+  },
+  "v12_native_24fps": {
+    "n_frames": 12,
+    "dt_s": 0.0416667,
+    "mae_mean": 5.162234046242454,
+    "mae_max": 6.05824613571167,
+    "mae_min": 4.5746283531188965,
+    "p95_mean": 22.7575758153742,
+    "flow_mean": 0.22393209690397436,
+    "flow_max": 0.26577121019363403,
+    "sift_mean": 415.3636363636364,
+    "sift_min": 406,
+    "ddxx": [
+      {
+        "model": "similarity",
+        "train_p95": 2.4369,
+        "holdout_p95": 2.6113,
+        "gate": "pass",
+        "ok": true,
+        "n_edges": 11,
+        "algorithm_id": "DDXX_MV_GLOBAL_SIMILARITY_V1"
+      },
+      {
+        "model": "homography",
+        "train_p95": 2.422,
+        "holdout_p95": 2.644,
+        "gate": "pass",
+        "ok": true,
+        "n_edges": 11,
+        "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2"
+      },
+      {
+        "model": "local_mesh",
+        "train_p95": 2.4369,
+        "holdout_p95": 2.6113,
+        "gate": "pass",
+        "ok": true,
+        "n_edges": 11,
+        "algorithm_id": "DDXX_MV_LOCAL_MESH_SIMTILE_V0_2"
+      }
+    ],
+    "motion_p95_mean": 2.469910195605167,
+    "tx_mean_abs": 0.3234584805324051,
+    "ty_mean_abs": 0.24149050913158795
+  },
+  "delta_t_v11_s": 0.25,
+  "delta_t_v12_s": 0.041666666666666664,
+  "mae_mean_drop_pct": 66.98741191970433,
+  "flow_mean_drop_pct": 67.60179870197969,
+  "conclusion": "Native 24fps adjacent frames lower MAE/flow vs 0.25s subsample; closer cinema F2F sampling; still not product PASS.",
+  "acceptance": {
+    "next_frame_f2f_24fps_demo": true,
+    "cinematic_product": false,
+    "quality_qualified": false,
+    "final_acceptance": false
+  }
+}

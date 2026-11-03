@@ -1,0 +1,8 @@
+{
+  "format": "ige.still_sequence_debug",
+  "not_image_to_video": true,
+  "why_i2v_was_wrong": "User asked still-by-still assembly + PIL/ffmpeg; I2V synthesizes motion and confuses acceptance",
+  "doc": "/workspace/artifacts/up-engine/docs/STILL_SEQUENCE_F2F_CALL_FORMULA.md",
+  "tool": "/workspace/artifacts/up-engine/tools/still_sequence_f2f_kit.py",
+  "demo_report": "/workspace/artifacts/tmp/still_f2f_kit/demo_v12_stills/REPORT_STILL_SEQUENCE_F2F.json"
+}

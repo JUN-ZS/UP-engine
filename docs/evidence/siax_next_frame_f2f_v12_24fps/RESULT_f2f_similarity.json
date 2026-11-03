@@ -1,0 +1,170 @@
+{
+  "geometry_model": "similarity",
+  "geometry_gate": "pass",
+  "global_residual": {
+    "anchor_count": 3427,
+    "weighted_rmse_px": 0.9252303677189239,
+    "robust_weighted_rmse_px": 0.9252303677189239,
+    "median_residual_px": 0.33576156717173666,
+    "p95_residual_px": 2.4368824876546284,
+    "max_residual_px": 4.091962529648525,
+    "huber_px": 12.0,
+    "downweighted_anchor_count": 0,
+    "optimizer_iterations": 7,
+    "worst_edge_closure_p95_px": 0.03382426276047453,
+    "worst_cycle_checked_edge_closure_p95_px": 0.0
+  },
+  "holdout": {
+    "geometry_model": "similarity",
+    "algorithm_id": "DDXX_MV_GLOBAL_SIMILARITY_V1",
+    "train_geometry_gate": "pass",
+    "train_global_residual": {
+      "anchor_count": 3427,
+      "weighted_rmse_px": 0.9252303677189239,
+      "robust_weighted_rmse_px": 0.9252303677189239,
+      "median_residual_px": 0.33576156717173666,
+      "p95_residual_px": 2.4368824876546284,
+      "max_residual_px": 4.091962529648525,
+      "huber_px": 12.0,
+      "downweighted_anchor_count": 0,
+      "optimizer_iterations": 7,
+      "worst_edge_closure_p95_px": 0.03382426276047453,
+      "worst_cycle_checked_edge_closure_p95_px": 0.0
+    },
+    "holdout_global": {
+      "holdout_anchor_count": 1142,
+      "weighted_rmse_px": 0.9838270570669387,
+      "median_residual_px": 0.34634241162812396,
+      "p95_residual_px": 2.6113005426111497,
+      "max_residual_px": 4.839755194896422
+    },
+    "holdout_edges": [
+      {
+        "edge_id": "T00__T01",
+        "image_a": "T00",
+        "image_b": "T01",
+        "holdout_count": 102,
+        "p95_residual_px": 2.5160973312517947,
+        "median_residual_px": 0.34395383131261414,
+        "max_residual_px": 4.091962529648525
+      },
+      {
+        "edge_id": "T01__T02",
+        "image_a": "T01",
+        "image_b": "T02",
+        "holdout_count": 104,
+        "p95_residual_px": 2.011755310859948,
+        "median_residual_px": 0.2741050755755441,
+        "max_residual_px": 3.4925627265821793
+      },
+      {
+        "edge_id": "T02__T03",
+        "image_a": "T02",
+        "image_b": "T03",
+        "holdout_count": 105,
+        "p95_residual_px": 1.6742113606307611,
+        "median_residual_px": 0.32069250593054477,
+        "max_residual_px": 3.2102101272398675
+      },
+      {
+        "edge_id": "T03__T04",
+        "image_a": "T03",
+        "image_b": "T04",
+        "holdout_count": 105,
+        "p95_residual_px": 2.077978811884136,
+        "median_residual_px": 0.26694879029569135,
+        "max_residual_px": 3.8060442292827243
+      },
+      {
+        "edge_id": "T04__T05",
+        "image_a": "T04",
+        "image_b": "T05",
+        "holdout_count": 103,
+        "p95_residual_px": 2.390874575970128,
+        "median_residual_px": 0.3222227633312379,
+        "max_residual_px": 3.7308138475707096
+      },
+      {
+        "edge_id": "T05__T06",
+        "image_a": "T05",
+        "image_b": "T06",
+        "holdout_count": 106,
+        "p95_residual_px": 2.759376442652666,
+        "median_residual_px": 0.3547760780468532,
+        "max_residual_px": 3.667023269036024
+      },
+      {
+        "edge_id": "T06__T07",
+        "image_a": "T06",
+        "image_b": "T07",
+        "holdout_count": 104,
+        "p95_residual_px": 2.7970061216402993,
+        "median_residual_px": 0.4339419781164983,
+        "max_residual_px": 4.839755194896422
+      },
+      {
+        "edge_id": "T07__T08",
+        "image_a": "T07",
+        "image_b": "T08",
+        "holdout_count": 104,
+        "p95_residual_px": 2.8978214512600142,
+        "median_residual_px": 0.31275106803351804,
+        "max_residual_px": 3.517141708956516
+      },
+      {
+        "edge_id": "T08__T09",
+        "image_a": "T08",
+        "image_b": "T09",
+        "holdout_count": 102,
+        "p95_residual_px": 2.0143655791099473,
+        "median_residual_px": 0.3820204901969669,
+        "max_residual_px": 3.7648608448074095
+      },
+      {
+        "edge_id": "T09__T10",
+        "image_a": "T09",
+        "image_b": "T10",
+        "holdout_count": 103,
+        "p95_residual_px": 3.376506968096173,
+        "median_residual_px": 0.5152327805579261,
+        "max_residual_px": 3.643786992786629
+      },
+      {
+        "edge_id": "T10__T11",
+        "image_a": "T10",
+        "image_b": "T11",
+        "holdout_count": 104,
+        "p95_residual_px": 2.6091523469363405,
+        "median_residual_px": 0.44977847055164266,
+        "max_residual_px": 4.374528421425613
+      }
+    ],
+    "interpretation": [
+      "Holdout anchors were not used in the fit.",
+      "Prefer lower holdout p95 over lower train residual when choosing a model.",
+      "A model can overfit train anchors and still fail holdout (esp. high-DOF homography)."
+    ]
+  },
+  "graph": {
+    "image_count": 12,
+    "edge_count": 11,
+    "cycle_rank": 0,
+    "connectivity": "connected",
+    "cycle_closure_status": "not_testable_tree_only",
+    "bridge_edge_ids": [
+      "T00__T01",
+      "T01__T02",
+      "T02__T03",
+      "T03__T04",
+      "T04__T05",
+      "T05__T06",
+      "T06__T07",
+      "T07__T08",
+      "T08__T09",
+      "T09__T10",
+      "T10__T11"
+    ],
+    "unverified_bridge_edge_count": 11,
+    "bridge_edge_override": true
+  }
+}

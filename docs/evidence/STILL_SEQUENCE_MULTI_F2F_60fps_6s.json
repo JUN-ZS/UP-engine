@@ -1,0 +1,84 @@
+{
+  "format": "ige.still_sequence_f2f_multi_60fps",
+  "format_version": "1.0",
+  "mode": "still_sequence_f2f_multi",
+  "not_image_to_video": true,
+  "image_to_video_tools_called_this_run": [],
+  "still_gen_tools": [
+    "imagine_image_to_image"
+  ],
+  "interp": "opencv_farneback_bidirectional_blend",
+  "seed_asset": "1e8853a5-3897-48c0-aabd-aa20dda21723",
+  "n_keyframes": 5,
+  "n_frames": 360,
+  "n_unique_file_sha": 360,
+  "fps_playback": 60,
+  "duration_s_probe": 6.0,
+  "motion_source": "still_keyframes_plus_optical_flow_interp",
+  "audio": "silence_anullsrc",
+  "volume_detect": [
+    "[Parsed_volumedetect_0 @ 0x7fa738001ac0] mean_volume: -91.0 dB",
+    "[Parsed_volumedetect_0 @ 0x7fa738001ac0] max_volume: -91.0 dB"
+  ],
+  "key_still_mae": [
+    {
+      "pair": "K0->K1",
+      "mae": 12.550246238708496
+    },
+    {
+      "pair": "K1->K2",
+      "mae": 28.564218521118164
+    },
+    {
+      "pair": "K2->K3",
+      "mae": 28.790843963623047
+    },
+    {
+      "pair": "K3->K4",
+      "mae": 16.293466567993164
+    }
+  ],
+  "metrics": {
+    "n_pairs": 90,
+    "mae_p50": 0.9277841150760651,
+    "mae_mean": 0.8894786410861545,
+    "flow_p50_median": 0.06433603912591934,
+    "pairs_head": [
+      {
+        "pair": "T0000->T0001",
+        "mae": 1.3881549835205078,
+        "flow_p50": 0.07594114542007446
+      },
+      {
+        "pair": "T0001->T0002",
+        "mae": 1.319711685180664,
+        "flow_p50": 0.07905112206935883
+      },
+      {
+        "pair": "T0002->T0003",
+        "mae": 1.2537102699279785,
+        "flow_p50": 0.08176884055137634
+      }
+    ],
+    "pairs_tail": [
+      {
+        "pair": "T0340->T0341",
+        "mae": 0.4381018579006195,
+        "flow_p50": 0.005940891802310944
+      },
+      {
+        "pair": "T0350->T0351",
+        "mae": 0.5498188138008118,
+        "flow_p50": 0.009091392159461975
+      }
+    ]
+  },
+  "outputs": {
+    "mp4": "/workspace/artifacts/tmp/still_f2f_e107_60fps_6s/STILL_MULTI_F2F_60fps_6s.mp4",
+    "filmstrip": "/workspace/artifacts/tmp/still_f2f_e107_60fps_6s/FIG_filmstrip_60fps6s.png",
+    "keyframes": "/workspace/artifacts/tmp/still_f2f_e107_60fps_6s/FIG_keyframes.png"
+  },
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "e3_speed_claim": false
+}

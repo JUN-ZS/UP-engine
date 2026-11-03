@@ -152,6 +152,13 @@ def _procedural_generator(state: TemporalState, delta, out_path: Path) -> FrameR
     return FrameRef.from_path(out_path, t_index=state.t_index + 1, frame_origin="procedural_cv")
 
 
+
+def cmd_stick(args: argparse.Namespace) -> int:
+    from ige.nfe import attach_stick
+    out = attach_stick(Path(args.state), Path(args.out) if args.out else None, phase=args.phase)
+    print(json.dumps({"ok": True, "stick": str(out), "prompt": str(out.with_suffix(".prompt.txt"))}, indent=2))
+    return 0
+
 def cmd_step_procedural(args: argparse.Namespace) -> int:
     st = TemporalState.load(Path(args.state))
     out_dir = Path(args.out_dir)
@@ -209,6 +216,12 @@ def main() -> int:
     a.add_argument("--mae-max", type=float, default=35.0)
     a.add_argument("--flow-max", type=float, default=8.0)
     a.set_defaults(func=cmd_accept)
+
+    st = sub.add_parser("stick")
+    st.add_argument("--state", required=True)
+    st.add_argument("--phase", default=None)
+    st.add_argument("--out", default=None)
+    st.set_defaults(func=cmd_stick)
 
     s = sub.add_parser("step-procedural")
     s.add_argument("--state", required=True)
