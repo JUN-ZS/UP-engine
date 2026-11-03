@@ -1,0 +1,19 @@
+{
+  "format": "ige.nfe.charter_lock",
+  "format_version": "0.1",
+  "locked_at_utc": "2026-11-04T00:00:00Z",
+  "goal": "still-unit autonomous next-frame: F_{t+1}=G(F_t,F_{t-1},K,ΔS_t,C_t)",
+  "generator_G": "i2i_next_still_only",
+  "forbidden_as_G": ["i2v", "optical_flow_morph_as_generation", "spatial_extend"],
+  "ddxx_role": "static_geometry_validator_not_full_continuity",
+  "anchor_split": ["static_world", "dynamic_subject"],
+  "pipeline": ["C0", "C0.1", "C0.2", "C0.3", "C0.4", "C1-C5"],
+  "milestone_p0": "F0->F1->F2->F3 sequential accept/reject",
+  "not_360_claim": true,
+  "v12_is_reference_not_universal_floor": true,
+  "provenance_rule": "declare frame_origin every frame; not_image_to_video_this_encode insufficient alone",
+  "github_note": "scaffold local; PR integration separate",
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "cinematic_product": false
+}
