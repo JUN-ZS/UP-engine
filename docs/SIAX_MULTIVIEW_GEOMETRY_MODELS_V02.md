@@ -80,3 +80,11 @@ Optional real anchors: `--anchors-json` + `--specs-json`.
 ## ComfyUI
 
 `SIAX Multi-Image Geometry Registration` accepts `geometry_model` and optional `holdout_fraction`.
+
+
+## Real holdout pack (GO-3)
+
+See `docs/evidence/siax_real_multiview_holdout_v03/README.md`.
+
+Operator geometry anchors from N1 Chain4 planned tile boxes + optional SIFT candidates.
+CLI: `--anchors-json` + `--specs-json` on `tools/siax_multiview_model_holdout_compare.py`.

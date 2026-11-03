@@ -153,10 +153,17 @@ def main():
     scenes = []
     if args.anchors_json:
         payload = json.loads(args.anchors_json.read_text())
-        specs = json.loads(args.specs_json.read_text()) if args.specs_json else payload.get("image_specs")
+        if args.specs_json:
+            specs_payload = json.loads(args.specs_json.read_text())
+            specs = specs_payload.get("image_specs", specs_payload)
+        else:
+            specs = payload.get("image_specs")
         if not specs:
-            raise SystemExit("real anchors require --specs-json or image_specs in the JSON")
-        scenes.append(("user_provided", specs, payload["matches"]))
+            raise SystemExit("real anchors require --specs-json (or image_specs inside anchors JSON)")
+        # normalize specs to id/width/height only for solver
+        specs_norm = [{"id": s["id"], "width": int(s["width"]), "height": int(s["height"])} for s in specs]
+        scene_id = payload.get("pack_id") or "user_provided_real"
+        scenes.append((scene_id, specs_norm, payload["matches"]))
     else:
         scenes.extend([scene_similarity(), scene_homography(), scene_multiplane_proxy()])
 

@@ -1,0 +1,146 @@
+{
+  "format": "ige.siax.real_multiview_holdout",
+  "format_version": "0.3",
+  "asof": "2026-11-03T14:48:14.754603+00:00",
+  "task": "GO3 real SIAX multi-image holdout (manual/operator anchors + optional SIFT)",
+  "source": {
+    "run": "runs/n1/gen_v3_chain4",
+    "stitch": "/workspace/artifacts/up-engine/runs/n1/gen_v3_chain4/OUT_CHAIN_chain4.n1_stitch.json",
+    "tile_ids": [
+      "n1_0012_1344_0448",
+      "n1_0013_1792_0448",
+      "n1_0014_2240_0448",
+      "n1_0015_2688_0448"
+    ],
+    "note": "N1 native canvas tiles (512), not 4x Siax ESRGAN upscale of full plate"
+  },
+  "holdout_fraction": 0.25,
+  "holdout_seed": 42,
+  "packs": {
+    "operator_geometry_anchors": "docs/evidence/siax_real_multiview_holdout_v03/N1_CHAIN4_OPERATOR_GEOM_anchors.json",
+    "operator_geometry_specs": "docs/evidence/siax_real_multiview_holdout_v03/N1_CHAIN4_OPERATOR_GEOM_specs.json",
+    "sift_candidate_anchors": "docs/evidence/siax_real_multiview_holdout_v03/N1_CHAIN4_SIFT_CANDIDATE_anchors.json"
+  },
+  "operator_geometry_holdout": {
+    "models": [
+      {
+        "geometry_model": "similarity",
+        "algorithm_id": "DDXX_MV_GLOBAL_SIMILARITY_V1",
+        "geometry_gate": "pending_threshold_not_declared",
+        "train_p95_px": 2.3437142008433856e-13,
+        "train_rmse_px": 1.2447728924363293e-13,
+        "holdout_p95_px": 2.3437142008433856e-13,
+        "holdout_rmse_px": 1.1972170690189685e-13,
+        "holdout_anchor_count": 30,
+        "graph": {
+          "image_count": 4,
+          "edge_count": 3,
+          "cycle_rank": 0,
+          "connectivity": "connected",
+          "cycle_closure_status": "not_testable_tree_only",
+          "bridge_edge_ids": [
+            "geom_n1_0012_1344_0448_to_n1_0013_1792_0448",
+            "geom_n1_0013_1792_0448_to_n1_0014_2240_0448",
+            "geom_n1_0014_2240_0448_to_n1_0015_2688_0448"
+          ],
+          "unverified_bridge_edge_count": 3,
+          "bridge_edge_override": true
+        },
+        "ok": true,
+        "error": null
+      },
+      {
+        "geometry_model": "homography",
+        "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2",
+        "geometry_gate": "pending_threshold_not_declared",
+        "train_p95_px": 2.452834625488387e-13,
+        "train_rmse_px": 1.5116333994570207e-13,
+        "holdout_p95_px": 2.5421149729252077e-13,
+        "holdout_rmse_px": 1.5455631608956816e-13,
+        "holdout_anchor_count": 30,
+        "graph": {
+          "image_count": 4,
+          "edge_count": 3,
+          "cycle_rank": 0,
+          "connectivity": "connected",
+          "cycle_closure_status": "not_testable_tree_only",
+          "bridge_edge_ids": [
+            "geom_n1_0012_1344_0448_to_n1_0013_1792_0448",
+            "geom_n1_0013_1792_0448_to_n1_0014_2240_0448",
+            "geom_n1_0014_2240_0448_to_n1_0015_2688_0448"
+          ],
+          "unverified_bridge_edge_count": 3,
+          "bridge_edge_override": true
+        },
+        "ok": true,
+        "error": null
+      },
+      {
+        "geometry_model": "local_mesh",
+        "algorithm_id": "DDXX_MV_LOCAL_MESH_SIMTILE_V0_2",
+        "geometry_gate": "pending_threshold_not_declared",
+        "train_p95_px": 2.3437142008433856e-13,
+        "train_rmse_px": 1.2447728924363293e-13,
+        "holdout_p95_px": 2.3437142008433856e-13,
+        "holdout_rmse_px": 1.1972170690189685e-13,
+        "holdout_anchor_count": 30,
+        "graph": {
+          "image_count": 4,
+          "edge_count": 3,
+          "cycle_rank": 0,
+          "connectivity": "connected",
+          "cycle_closure_status": "not_testable_tree_only",
+          "bridge_edge_ids": [
+            "geom_n1_0012_1344_0448_to_n1_0013_1792_0448",
+            "geom_n1_0013_1792_0448_to_n1_0014_2240_0448",
+            "geom_n1_0014_2240_0448_to_n1_0015_2688_0448"
+          ],
+          "unverified_bridge_edge_count": 3,
+          "bridge_edge_override": true
+        },
+        "ok": true,
+        "error": null
+      }
+    ],
+    "best_by_holdout_p95": "similarity"
+  },
+  "sift_candidate_holdout": {
+    "models": [
+      {
+        "geometry_model": "similarity",
+        "geometry_gate": "pending_threshold_not_declared",
+        "train_p95_px": 1.5300853427170092e-05,
+        "holdout_p95_px": 1.383932137987677e-05,
+        "holdout_anchor_count": 30,
+        "ok": true
+      },
+      {
+        "geometry_model": "homography",
+        "geometry_gate": "pending_threshold_not_declared",
+        "train_p95_px": 1.4852763107154137e-05,
+        "holdout_p95_px": 1.3487972417114123e-05,
+        "holdout_anchor_count": 30,
+        "ok": true
+      },
+      {
+        "geometry_model": "local_mesh",
+        "geometry_gate": "pending_threshold_not_declared",
+        "train_p95_px": 1.5300853427170092e-05,
+        "holdout_p95_px": 1.383932137987677e-05,
+        "holdout_anchor_count": 30,
+        "ok": true
+      }
+    ],
+    "best_by_holdout_p95": "homography"
+  },
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "e3_speed_claim": false,
+  "native_4k_success": false,
+  "interpretation": [
+    "Operator geometry anchors test whether the registration recovers the planned N1 tile layout.",
+    "On pure plan geometry, similarity should dominate (tiles are axis-aligned translations on canvas).",
+    "SIFT holdout tests appearance correspondence on generative tiles; high residual means content drift across seams.",
+    "Neither pack is SIAX 4x quality acceptance."
+  ]
+}
