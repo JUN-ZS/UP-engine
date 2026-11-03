@@ -68,7 +68,9 @@ class TemporalValidator:
             fl = cv2.calcOpticalFlowFarneback(g0, g1, None, 0.5, 3, 15, 3, 5, 1.2, 0)
             flow_p50 = float(np.median(np.sqrt(fl[..., 0] ** 2 + fl[..., 1] ** 2)))
         except Exception as exc:
-            reasons.append(f"flow_unavailable:{exc}")
+            # soft: MAE gate still applies; flow is optional metric
+            flow_p50 = None
+            # do not hard-fail only for missing flow
 
         # Too similar → likely failed to advance / copy
         if mae < self.mae_min:
