@@ -1,29 +1,32 @@
-"""NEXT FRAME Engine (NFE) — still-unit temporal generation ALL framework.
+"""Next Frame Engine (NFE) — temporal I2I still chain, not I2V."""
 
-F_{t+1} = G(F_t, F_{t-1}, K, ΔS_t, C_t)
-G is I2I next-still only. I2V and optical-flow-as-generation are non-goals.
-"""
-
-from .framework import FrameworkManifest, bolt_check, resolve_tool
+from .framework import FrameworkManifest, TOOL_REGISTRY, MODULE_REGISTRY, bolt_check, resolve_tool
 from .loop import NextFrameLoop, StepResult
 from .motion import MotionCompiler, MotionDelta
-from .state import FrameRef, TemporalState
-from .stick import NfeStick, attach_stick, build_stick_from_state
+from .state import FrameRef, TemporalState, sha256_file
+from .stick import attach_stick
 from .validate import TemporalValidator, ValidationReport
+from .ddxx_gate import consecutive_ddxx_pair, chain_ddxx_reports, PairDDXXReport
+from .frameback import densify_frameback
 
 __all__ = [
-    "TemporalState",
-    "FrameRef",
-    "MotionCompiler",
-    "MotionDelta",
-    "TemporalValidator",
-    "ValidationReport",
-    "NextFrameLoop",
-    "StepResult",
     "FrameworkManifest",
+    "TOOL_REGISTRY",
+    "MODULE_REGISTRY",
     "bolt_check",
     "resolve_tool",
-    "NfeStick",
-    "build_stick_from_state",
+    "NextFrameLoop",
+    "StepResult",
+    "MotionCompiler",
+    "MotionDelta",
+    "FrameRef",
+    "TemporalState",
+    "sha256_file",
     "attach_stick",
+    "TemporalValidator",
+    "ValidationReport",
+    "consecutive_ddxx_pair",
+    "chain_ddxx_reports",
+    "PairDDXXReport",
+    "densify_frameback",
 ]

@@ -1,0 +1,47 @@
+{
+  "format": "ige.nfe.one_click_result",
+  "format_version": "1.1",
+  "created_at_utc": "2026-11-03T20:45:40Z",
+  "job_id": "nfe_job",
+  "out_dir": "runs/nfe/nfe_p0_c60_x30",
+  "bolt_core_ok": true,
+  "state": "runs/nfe/nfe_p0_c60_x30/state.json",
+  "stick": "runs/nfe/nfe_p0_c60_x30/STICK_EVOLVE.json",
+  "bootstrap_stdout": "",
+  "plan_rc": 0,
+  "procedural": null,
+  "encode": {
+    "rc": 0,
+    "stdout_tail": "{\n  \"ok\": true,\n  \"report\": \"runs/nfe/nfe_p0_c60_x30/encode/REPORT_STILL_SEQUENCE_F2F.json\",\n  \"n_frames\": 10,\n  \"not_image_to_video\": true\n}\n"
+  },
+  "verify_f2f": {
+    "rc": 0,
+    "stdout_tail": "_vs_f2f.png\",\n    \"FIG1_f2f_filmstrip.png\",\n    \"FIG2_residual_T00_T01.png\",\n    \"FIG2_residual_T01_T02.png\",\n    \"FIG2_residual_T02_T03.png\",\n    \"FIG2_residual_T03_T04.png\",\n    \"FIG2_residual_T04_T05.png\",\n    \"FIG2_residual_T05_T06.png\",\n    \"FIG2_residual_T06_T07.png\",\n    \"FIG2_residual_T07_T08.png\",\n    \"FIG2_residual_T08_T09.png\",\n    \"FIG3_verdict_f2f.png\",\n    \"FIG4_f2f_trend.png\"\n  ]\n}\n"
+  },
+  "mix": {
+    "rc": 0,
+    "stdout_tail": "745117,\n      \"sim_p95\": 0.6281944467957677,\n      \"flow_p50\": 0.3397292494773865,\n      \"gate\": \"pass_static_near_identity\"\n    },\n    {\n      \"pair\": \"F06->F07\",\n      \"mae\": 7.667721271514893,\n      \"sim_p95\": 0.586982755558179,\n      \"flow_p50\": 0.3770233988761902,\n      \"gate\": \"pass_static_near_identity\"\n    },\n    {\n      \"pair\": \"F07->F08\",\n      \"mae\": 11.069201469421387,\n      \"sim_p95\": 0.6933607725428088,\n      \"flow_p50\": 1.0202631950378418,\n      \"gate\": \"pass_static_near_identity\"\n    },\n    {\n      \"pair\": \"F08->F09\",\n      \"mae\": 14.4775972366333,\n      \"sim_p95\": 0.7405222488156636,\n      \"flow_p50\": 3.575748920440674,\n      \"gate\": \"pass_static_near_identity\"\n    },\n    \n...\n{\n  \"ok\": true,\n  \"out\": \"runs/nfe/nfe_p0_c60_x30/mix\",\n  \"ddxx_all_ok\": true,\n  \"n_pairs\": 10\n}\n",
+    "result": "runs/nfe/nfe_p0_c60_x30/mix/MIX_VERIFY_RESULT.json"
+  },
+  "flags": {
+    "mix_all": true,
+    "mix_only": true,
+    "ddxx_gate": true,
+    "frameback": 1,
+    "encode": true,
+    "verify_f2f": true
+  },
+  "mixed_components": [
+    "NFE bootstrap/plan/STICK",
+    "DDXX consecutive SIFT+sim/homo gate",
+    "seam/frontier series",
+    "F2F verify tool (if present)",
+    "FRAMEBACK densify (playback only)",
+    "C1-C5 encode (if frames)"
+  ],
+  "not_image_to_video": true,
+  "note": "MIX wires DDXX/N1 figure methods + NFE + frameback; G remains i2i_next_still only",
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "cinematic_product": false
+}

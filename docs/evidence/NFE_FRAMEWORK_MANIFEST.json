@@ -1,6 +1,6 @@
 {
   "format": "ige.nfe.framework_manifest",
-  "format_version": "0.2",
+  "format_version": "0.3",
   "formula": "F_{t+1}=G(F_t,F_{t-1},K,ΔS_t,C_t)",
   "generator_G": "i2i_next_still_only",
   "forbidden_as_G": [
@@ -44,6 +44,11 @@
       "path": "tools/siax_multiview_model_holdout_compare.py",
       "role": "DDXX multiview holdout compare",
       "slot": "DDXX"
+    },
+    "nfe_mix_verify": {
+      "path": "tools/nfe_mix_verify.py",
+      "role": "MIX: DDXX chain + seam + frameback post-pass on accepted stills",
+      "slot": "MIX"
     }
   },
   "modules": {
@@ -54,7 +59,9 @@
     "ige.nfe.framework": "ALL bolt + STICK + manifest",
     "ige.nfe.stick": "STICK evolve attach pack",
     "ige.registration.multiview": "DDXX multiview static geometry",
-    "ige.registration.geometry_models": "Similarity/Homography/LocalMesh"
+    "ige.registration.geometry_models": "Similarity/Homography/LocalMesh",
+    "ige.nfe.ddxx_gate": "C0.3.1 consecutive DDXX static gate + motion signature",
+    "ige.nfe.frameback": "playback-only flow densify (forbidden as G)"
   },
   "slots": [
     "C0",
@@ -67,7 +74,11 @@
     "C3",
     "C4",
     "C5",
-    "STICK"
+    "STICK",
+    "DDXX",
+    "FRAMEBACK",
+    "SEAM_METRICS",
+    "MIX"
   ],
   "not_image_to_video": true,
   "quality_qualified": false,

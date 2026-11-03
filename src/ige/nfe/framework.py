@@ -58,6 +58,11 @@ TOOL_REGISTRY: dict[str, dict[str, Any]] = {
         "role": "DDXX multiview holdout compare",
         "slot": "DDXX",
     },
+    "nfe_mix_verify": {
+        "path": "tools/nfe_mix_verify.py",
+        "role": "MIX: DDXX chain + seam + frameback post-pass on accepted stills",
+        "slot": "MIX",
+    },
 }
 
 MODULE_REGISTRY: dict[str, str] = {
@@ -69,6 +74,8 @@ MODULE_REGISTRY: dict[str, str] = {
     "ige.nfe.stick": "STICK evolve attach pack",
     "ige.registration.multiview": "DDXX multiview static geometry",
     "ige.registration.geometry_models": "Similarity/Homography/LocalMesh",
+    "ige.nfe.ddxx_gate": "C0.3.1 consecutive DDXX static gate + motion signature",
+    "ige.nfe.frameback": "playback-only flow densify (forbidden as G)",
 }
 
 FORBIDDEN_AS_G = [
@@ -82,7 +89,7 @@ FORBIDDEN_AS_G = [
 @dataclass
 class FrameworkManifest:
     format: str = "ige.nfe.framework_manifest"
-    format_version: str = "0.2"
+    format_version: str = "0.3"
     formula: str = "F_{t+1}=G(F_t,F_{t-1},K,ΔS_t,C_t)"
     generator_G: str = "i2i_next_still_only"
     forbidden_as_G: list[str] = field(default_factory=lambda: list(FORBIDDEN_AS_G))
@@ -101,6 +108,10 @@ class FrameworkManifest:
             "C4",
             "C5",
             "STICK",
+            "DDXX",
+            "FRAMEBACK",
+            "SEAM_METRICS",
+            "MIX",
         ]
     )
     not_image_to_video: bool = True
