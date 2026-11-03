@@ -1,0 +1,22 @@
+{
+  "image_specs": [
+    {
+      "id": "A_identity",
+      "width": 512,
+      "height": 512,
+      "path": "docs/evidence/siax_geometry_verify_new_v04/tiles/A_identity.png"
+    },
+    {
+      "id": "B_sim_s0.92_r7",
+      "width": 512,
+      "height": 512,
+      "path": "docs/evidence/siax_geometry_verify_new_v04/tiles/B_sim_s0.92_r7.png"
+    },
+    {
+      "id": "C_homography_mild",
+      "width": 512,
+      "height": 512,
+      "path": "docs/evidence/siax_geometry_verify_new_v04/tiles/C_homography_mild.png"
+    }
+  ]
+}
