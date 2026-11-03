@@ -1,0 +1,21 @@
+{
+  "format": "ige.nfe.one_click_result",
+  "format_version": "1.0",
+  "created_at_utc": "2026-11-03T19:55:08Z",
+  "job_id": "nfe_p0_e107",
+  "out_dir": "/workspace/artifacts/tmp/nfe_p0_e107",
+  "bolt_core_ok": true,
+  "state": "/workspace/artifacts/tmp/nfe_p0_e107/state.json",
+  "stick": "/workspace/artifacts/tmp/nfe_p0_e107/STICK_EVOLVE.json",
+  "stick_prompt": "/workspace/artifacts/tmp/nfe_p0_e107/STICK_NEXT.prompt.txt",
+  "bootstrap_stdout": "{\n  \"ok\": true,\n  \"state\": \"/workspace/artifacts/tmp/nfe_p0_e107/state.json\",\n  \"f0\": \"/workspace/artifacts/tmp/nfe_p0_e107/F0000_master.png\",\n  \"sha\": \"0a51c6ea3f028cd0518d782a41c2241fe724e2afb62ab172c70f9b51faf5f454\"\n}\n",
+  "plan_rc": 0,
+  "procedural": null,
+  "encode": null,
+  "verify_f2f": null,
+  "not_image_to_video": true,
+  "note": "STICK attached for I2I evolve; procedural_steps is plumbing only if used",
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "cinematic_product": false
+}

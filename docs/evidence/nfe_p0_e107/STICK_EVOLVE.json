@@ -1,0 +1,66 @@
+{
+  "format": "ige.nfe.stick_evolve",
+  "format_version": "1.0",
+  "skill_code": "NFE",
+  "skill_name_zh": "逐幀延生",
+  "formula": "F_{t+1}=G(F_t,F_{t-1},K,ΔS_t,C_t)",
+  "generator_G": "i2i_next_still_only",
+  "forbidden": [
+    "i2v",
+    "image_to_video",
+    "optical_flow_as_generation",
+    "spatial_extend_as_time",
+    "claim_360_next_frames_from_5_keys_plus_flow"
+  ],
+  "job_id": "nfe_p0_e107",
+  "t_target": 1,
+  "paths": {
+    "f_t": "/workspace/artifacts/tmp/nfe_p0_e107/F0000_master.png",
+    "f_tm1": null,
+    "k": "/workspace/artifacts/tmp/nfe_p0_e107/F0000_master.png"
+  },
+  "delta_s": {
+    "phase": "splash_expand",
+    "static_lock": [
+      "camera",
+      "horizon",
+      "ground_plane"
+    ],
+    "dynamic_allow": {
+      "splash": "expand_slightly",
+      "droplets": "higher"
+    },
+    "identity_lock": [
+      "face",
+      "armor_pattern",
+      "body_pose_family"
+    ],
+    "max_global_flow_p50_hint": 2.0,
+    "prompt_suffix": ""
+  },
+  "prompt": "Same photoreal locked camera and composition as previous frame. Same woman identity, same golden mesh armor, same warhammer grip family. Allowed motion only: splash:expand_slightly, droplets:higher. Do not reframe, do not new shot, do not change body pose family. One continuous next still only.",
+  "reanchor_to_K": false,
+  "accept_rules": {
+    "require_new_sha": true,
+    "mae_min": 0.3,
+    "mae_max": 35.0,
+    "flow_p50_max": 8.0,
+    "static_anchors": "camera_ground_horizon",
+    "dynamic_anchors": "track_not_force_align"
+  },
+  "provenance": {
+    "frame_origin_required": true,
+    "not_image_to_video_this_step": true,
+    "never_touched_by_i2v_in_lineage": null
+  },
+  "evolve": {
+    "mode": "sequential_accept_only",
+    "on_reject": "retry_same_t_do_not_advance",
+    "max_retries": 2,
+    "periodic_master_reanchor_every": 4
+  },
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "cinematic_product": false,
+  "created_at_utc": "2026-11-03T19:55:07Z"
+}

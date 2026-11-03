@@ -1,0 +1,91 @@
+{
+  "format": "ige.nfe.bolt_check",
+  "core_ok": true,
+  "tools": {
+    "nfe_pilot": {
+      "path": "/workspace/artifacts/up-engine/tools/nfe_next_frame_pilot.py",
+      "exists": true,
+      "role": "C0 bootstrap/plan/accept/procedural",
+      "slot": "C0-C0.4"
+    },
+    "nfe_one_click": {
+      "path": "/workspace/artifacts/up-engine/tools/nfe_one_click.py",
+      "exists": true,
+      "role": "one-click bootstrap+plan+stick+optional steps",
+      "slot": "ORCH"
+    },
+    "still_sequence_f2f_kit": {
+      "path": "/workspace/artifacts/up-engine/tools/still_sequence_f2f_kit.py",
+      "exists": true,
+      "role": "C1-C5 FrameBank/Metrics/Layout/Encode/Report",
+      "slot": "C1-C5"
+    },
+    "siax_next_frame_f2f_verify": {
+      "path": "/workspace/artifacts/up-engine/tools/siax_next_frame_f2f_verify.py",
+      "exists": true,
+      "role": "ordered-still F2F metrics + DDXX consecutive",
+      "slot": "C0.3_ext"
+    },
+    "siax_cinema_frame_chain_verify": {
+      "path": "/workspace/artifacts/up-engine/tools/siax_cinema_frame_chain_verify.py",
+      "exists": true,
+      "role": "cinema chain verify (legacy research)",
+      "slot": "RESEARCH"
+    },
+    "siax_self_gen_cinema_chain": {
+      "path": "/workspace/artifacts/up-engine/tools/siax_self_gen_cinema_chain.py",
+      "exists": true,
+      "role": "self-gen cinema chain (legacy)",
+      "slot": "RESEARCH"
+    },
+    "siax_multiview_model_holdout": {
+      "path": "/workspace/artifacts/up-engine/tools/siax_multiview_model_holdout_compare.py",
+      "exists": true,
+      "role": "DDXX multiview holdout compare",
+      "slot": "DDXX"
+    }
+  },
+  "modules": {
+    "ige.nfe.state": {
+      "importable": true,
+      "role": "C0 TemporalState / FrameRef"
+    },
+    "ige.nfe.motion": {
+      "importable": true,
+      "role": "C0.1 MotionCompiler"
+    },
+    "ige.nfe.validate": {
+      "importable": true,
+      "role": "C0.3 TemporalValidator"
+    },
+    "ige.nfe.loop": {
+      "importable": true,
+      "role": "C0.4 NextFrameLoop Accept/Reject"
+    },
+    "ige.nfe.framework": {
+      "importable": true,
+      "role": "ALL bolt + STICK + manifest"
+    },
+    "ige.nfe.stick": {
+      "importable": true,
+      "role": "STICK evolve attach pack"
+    },
+    "ige.registration.multiview": {
+      "importable": true,
+      "role": "DDXX multiview static geometry"
+    },
+    "ige.registration.geometry_models": {
+      "importable": true,
+      "role": "Similarity/Homography/LocalMesh"
+    }
+  },
+  "forbidden_as_G": [
+    "i2v",
+    "image_to_video",
+    "optical_flow_morph_as_generation",
+    "spatial_extend_as_time"
+  ],
+  "not_image_to_video": true,
+  "quality_qualified": false,
+  "final_acceptance": false
+}

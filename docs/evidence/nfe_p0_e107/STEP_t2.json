@@ -1,0 +1,46 @@
+{
+  "format": "ige.nfe.step_result",
+  "accepted": true,
+  "validation": {
+    "ok": true,
+    "reasons": [],
+    "mae": 11.0618314743042,
+    "flow_p50": 0.6234173774719238,
+    "static_note": "camera_lock_assumed; full DDXX static edge deferred to C0.3.1",
+    "dynamic_note": "allowed={'hair': 'wind_left_small', 'rain': 'streak_phase'}; do_not_force_align_all_body_anchors",
+    "identity_note": "periodic master re-anchor via TemporalState.should_reanchor",
+    "metrics": {
+      "mae": 11.0618314743042,
+      "flow_p50": 0.6234173774719238,
+      "delta": {
+        "phase": "hair_wind_left",
+        "static_lock": [
+          "camera",
+          "horizon",
+          "ground_plane"
+        ],
+        "dynamic_allow": {
+          "hair": "wind_left_small",
+          "rain": "streak_phase"
+        },
+        "identity_lock": [
+          "face",
+          "armor_pattern",
+          "body_pose_family"
+        ],
+        "max_global_flow_p50_hint": 2.0,
+        "prompt_suffix": ""
+      }
+    }
+  },
+  "candidate": {
+    "path": "/workspace/artifacts/tmp/nfe_p0_e107/accepted/F0002.png",
+    "sha256": "df92db8fe5657ffafb53badf44837adf98718e60010aaf04e307ca17ae8a0cdd",
+    "t_index": 2,
+    "frame_origin": "i2i_next_still",
+    "asset_id": null
+  },
+  "not_image_to_video": true,
+  "quality_qualified": false,
+  "final_acceptance": false
+}
