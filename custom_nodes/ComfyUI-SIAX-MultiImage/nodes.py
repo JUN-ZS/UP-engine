@@ -138,7 +138,7 @@ class SIAXMultiImageGeometryRegistration:
         referenced = {x for edge in payload.get("matches", [])
                       for x in (edge.get("image_a"), edge.get("image_b"))}
         if referenced - provided:
-            raise ValueError(f"anchors_json references unconnected image ports: {sorted(referenced-provided)}")
+            raise ValueError(f"anchors_json references unprovided image ports: {sorted(referenced-provided)}")
         result = register_multiview(
             specs, payload.get("matches", []), root_image_id=root_image_id,
             huber_px=float(huber_px),
