@@ -111,13 +111,17 @@ class SIAXMultiImageGeometryRegistration:
                 "acceptance_threshold_px": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 100.0, "step": 0.1}),
                 "max_canvas_megapixels": ("FLOAT", {"default": 100.0, "min": 1.0, "max": 400.0, "step": 1.0}),
                 "allow_unverified_bridge_edges": ("BOOLEAN", {"default": False}),
+                "geometry_model": (["similarity", "homography", "local_mesh"], {"default": "similarity"}),
+                "holdout_fraction": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 0.8, "step": 0.05}),
+                "holdout_seed": ("INT", {"default": 0, "min": 0, "max": 100000, "step": 1}),
             },
             "optional": {f"image_{i}": ("IMAGE",) for i in range(2, 8)},
         }
 
     def register(self, image_0, image_1, anchors_json, root_image_id, huber_px,
                  acceptance_threshold_px, max_canvas_megapixels,
-                 allow_unverified_bridge_edges, **kwargs):
+                 allow_unverified_bridge_edges, geometry_model="similarity",
+                 holdout_fraction=0.0, holdout_seed=0, **kwargs):
         tensors = {"image_0": image_0, "image_1": image_1}
         for i in range(2, 8):
             if kwargs.get(f"image_{i}") is not None:
@@ -139,18 +143,24 @@ class SIAXMultiImageGeometryRegistration:
                       for x in (edge.get("image_a"), edge.get("image_b"))}
         if referenced - provided:
             raise ValueError(f"anchors_json references unprovided image ports: {sorted(referenced-provided)}")
+        hf = float(holdout_fraction)
         result = register_multiview(
             specs, payload.get("matches", []), root_image_id=root_image_id,
             huber_px=float(huber_px),
             acceptance_threshold_px=float(acceptance_threshold_px) if float(acceptance_threshold_px) > 0 else None,
             max_canvas_pixels=int(float(max_canvas_megapixels) * 1_000_000),
             allow_unverified_bridge_edges=bool(allow_unverified_bridge_edges),
+            geometry_model=str(geometry_model),
+            holdout_fraction=hf if hf > 0 else None,
+            holdout_seed=int(holdout_seed),
         )
         report = {
             "schema_version": "siaux-registration-report/0.1",
             "status": "solved_candidate",
             "geometry_gate": result["geometry_gate"],
             "algorithm_id": result["algorithm_id"],
+            "geometry_model": result.get("geometry_model"),
+            "holdout": result.get("holdout"),
             "graph": result["graph"],
             "global_residual": result["global_residual"],
             "edge_reports": result["edge_reports"],

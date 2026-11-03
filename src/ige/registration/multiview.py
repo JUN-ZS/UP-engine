@@ -487,7 +487,7 @@ def warp_image_to_canvas(image: Any, transform_json: str | dict[str, Any], image
     """Warp one RGB PIL image into the shared canvas; requires a passed geometry gate."""
     from PIL import Image
     payload = json.loads(transform_json) if isinstance(transform_json, str) else transform_json
-    if payload.get("schema_version") != "siaux-multiview-transform/0.1" or payload.get("geometry_gate") != "pass":
+    if payload.get("schema_version") not in ("siaux-multiview-transform/0.1", "siaux-multiview-transform/0.2") or payload.get("geometry_gate") != "pass":
         raise MultiViewRegistrationError("supported transform schema and geometry_gate=pass are required")
     if image_id not in payload.get("images", {}):
         raise MultiViewRegistrationError(f"image_id is not registered: {image_id}")
@@ -500,20 +500,360 @@ def warp_image_to_canvas(image: Any, transform_json: str | dict[str, Any], image
     source = image.convert("RGB")
     if source.size != (int(record["width"]), int(record["height"])):
         raise MultiViewRegistrationError("source image dimensions differ from the registered input")
-    t = record["world_transform"]
-    scale, angle = float(t["scale"]), math.radians(float(t["rotation_degrees"]))
-    translation = np.asarray(t["translation_px"], dtype=np.float64)
-    min_xy = np.asarray(canvas["world_min_xy"], dtype=np.float64)
-    inv_linear = _rotation(angle).T / scale
-    offset = inv_linear @ (min_xy - translation)
-    matrix = (float(inv_linear[0,0]), float(inv_linear[0,1]), float(offset[0]),
-              float(inv_linear[1,0]), float(inv_linear[1,1]), float(offset[1]))
     filters = {"nearest": Image.Resampling.NEAREST, "bilinear": Image.Resampling.BILINEAR,
                "bicubic": Image.Resampling.BICUBIC, "lanczos": Image.Resampling.LANCZOS}
     if resample not in filters:
         raise MultiViewRegistrationError("resample must be nearest, bilinear, bicubic or lanczos")
-    rgb = source.transform((width, height), Image.Transform.AFFINE, matrix, resample=filters[resample], fillcolor=(0,0,0))
+
+    # Prefer canvas_transform (0.2) when present
+    tdict = record.get("canvas_transform") or record["world_transform"]
+    model = tdict.get("model", "similarity_2d")
+    min_xy = np.asarray(canvas["world_min_xy"], dtype=np.float64)
+
+    if model == "homography_2d":
+        H = np.asarray(tdict["matrix_3x3"], dtype=np.float64)
+        try:
+            Hinv = np.linalg.inv(H)
+        except np.linalg.LinAlgError as exc:
+            raise MultiViewRegistrationError("canvas homography is singular") from exc
+        Hinv = Hinv / Hinv[2, 2]
+        # PIL PERSPECTIVE: maps output->input
+        coeffs = (
+            float(Hinv[0, 0]), float(Hinv[0, 1]), float(Hinv[0, 2]),
+            float(Hinv[1, 0]), float(Hinv[1, 1]), float(Hinv[1, 2]),
+            float(Hinv[2, 0]), float(Hinv[2, 1]),
+        )
+        rgb = source.transform((width, height), Image.Transform.PERSPECTIVE, coeffs,
+                               resample=filters[resample], fillcolor=(0, 0, 0))
+        mask = Image.new("L", source.size, 255).transform(
+            (width, height), Image.Transform.PERSPECTIVE, coeffs,
+            resample=Image.Resampling.BILINEAR, fillcolor=0,
+        )
+        return rgb, mask
+
+    # similarity (and local_mesh backbone)
+    if "canvas_transform" in record and tdict is record["canvas_transform"]:
+        scale = float(tdict["scale"])
+        angle = math.radians(float(tdict["rotation_degrees"]))
+        translation = np.asarray(tdict["translation_px"], dtype=np.float64)
+        inv_linear = _rotation(angle).T / scale
+        offset = inv_linear @ (-translation)
+    else:
+        scale = float(tdict["scale"])
+        angle = math.radians(float(tdict["rotation_degrees"]))
+        translation = np.asarray(tdict["translation_px"], dtype=np.float64)
+        inv_linear = _rotation(angle).T / scale
+        offset = inv_linear @ (min_xy - translation)
+    matrix = (float(inv_linear[0, 0]), float(inv_linear[0, 1]), float(offset[0]),
+              float(inv_linear[1, 0]), float(inv_linear[1, 1]), float(offset[1]))
+    rgb = source.transform((width, height), Image.Transform.AFFINE, matrix, resample=filters[resample], fillcolor=(0, 0, 0))
     mask = Image.new("L", source.size, 255).transform(
         (width, height), Image.Transform.AFFINE, matrix, resample=Image.Resampling.BILINEAR, fillcolor=0
     )
     return rgb, mask
+
+
+# =============================================================================
+# Multi-model API (v0.2) — wraps similarity core; adds homography + local_mesh + holdout
+# =============================================================================
+
+def register_multiview_v2(
+    image_specs,
+    matches,
+    *,
+    root_image_id=None,
+    huber_px=10.0,
+    acceptance_threshold_px=None,
+    max_iterations=60,
+    max_canvas_pixels=100_000_000,
+    allow_unverified_bridge_edges=False,
+    geometry_model="similarity",
+    holdout_fraction=None,
+    holdout_seed=0,
+    local_mesh_grid=(2, 2),
+):
+    """Explicit geometry-model multiview registration (schema 0.2)."""
+    from collections import deque
+    import math
+    import numpy as np
+
+    model = str(geometry_model or "similarity").strip().lower()
+    if model not in ("similarity", "homography", "local_mesh"):
+        raise MultiViewRegistrationError("geometry_model must be similarity|homography|local_mesh")
+
+    work_matches = matches
+    holdout_matches = None
+    if holdout_fraction is not None:
+        from .geometry_models import split_edge_anchors_holdout, evaluate_holdout_residuals
+        work_matches, holdout_matches = split_edge_anchors_holdout(
+            matches,
+            holdout_fraction=float(holdout_fraction),
+            seed=int(holdout_seed),
+            min_train=4 if model == "homography" else 3,
+        )
+
+    if model == "similarity":
+        result = register_multiview(
+            image_specs, work_matches,
+            root_image_id=root_image_id, huber_px=huber_px,
+            acceptance_threshold_px=acceptance_threshold_px,
+            max_iterations=max_iterations, max_canvas_pixels=max_canvas_pixels,
+            allow_unverified_bridge_edges=allow_unverified_bridge_edges,
+        )
+        result = dict(result)
+        result["schema_version"] = "siaux-multiview-transform/0.2"
+        result["geometry_model"] = "similarity"
+        if holdout_matches is not None:
+            from .geometry_models import evaluate_holdout_residuals
+            result["holdout"] = evaluate_holdout_residuals(result, holdout_matches, "similarity")
+            result["holdout_fraction"] = float(holdout_fraction)
+            result["holdout_seed"] = int(holdout_seed)
+        return result
+
+    if model == "local_mesh":
+        from .geometry_models import fit_local_mesh_pair, evaluate_holdout_residuals
+        # validate specs
+        ids = []
+        dimensions = {}
+        for item in image_specs:
+            iid = item["id"]
+            ids.append(iid)
+            dimensions[iid] = (int(item["width"]), int(item["height"]))
+        local_edge_reports = []
+        for edge_index, edge in enumerate(work_matches):
+            a, b = edge["image_a"], edge["image_b"]
+            anchors = edge.get("anchors") or []
+            pa = np.asarray([x["xy_a"] for x in anchors], dtype=np.float64)
+            pb = np.asarray([x["xy_b"] for x in anchors], dtype=np.float64)
+            weights = np.asarray([
+                float(x.get("weight", 1.0)) * float(x.get("confidence", 1.0)) for x in anchors
+            ], dtype=np.float64)
+            pair = fit_local_mesh_pair(pb, pa, weights, grid=local_mesh_grid, huber_px=huber_px)
+            local_edge_reports.append({
+                "edge_id": str(edge.get("edge_id", f"edge_{edge_index}")),
+                "image_a": a, "image_b": b,
+                "local_mesh": pair.to_dict(),
+                "local_apply_p95_px": float(np.percentile(
+                    np.linalg.norm(pair.apply_local(pb) - pa, axis=1), 95
+                )) if len(pa) else None,
+                "backbone_p95_px": pair.backbone.p95_residual_px,
+            })
+        result = register_multiview(
+            image_specs, work_matches,
+            root_image_id=root_image_id, huber_px=huber_px,
+            acceptance_threshold_px=acceptance_threshold_px,
+            max_iterations=max_iterations, max_canvas_pixels=max_canvas_pixels,
+            allow_unverified_bridge_edges=allow_unverified_bridge_edges,
+        )
+        result = dict(result)
+        result["schema_version"] = "siaux-multiview-transform/0.2"
+        result["geometry_model"] = "local_mesh"
+        result["algorithm_id"] = "DDXX_MV_LOCAL_MESH_SIMTILE_V0_2"
+        result["local_mesh"] = {
+            "grid": list(local_mesh_grid),
+            "edge_reports": local_edge_reports,
+            "note": "Tiles improve pair residual; canvas poses remain global similarity backbone.",
+        }
+        result["limitations"] = [
+            "local_mesh v0.2 = per-edge spatial similarity tiles + global similarity canvas backbone.",
+            "Not a true multi-plane / deformable mesh.",
+            "Use holdout_fraction when comparing models.",
+        ] + list(result.get("limitations") or [])
+        if holdout_matches is not None:
+            result["holdout"] = evaluate_holdout_residuals(result, holdout_matches, "local_mesh")
+            result["holdout_fraction"] = float(holdout_fraction)
+            result["holdout_seed"] = int(holdout_seed)
+        return result
+
+    # ---- homography ----
+    from .geometry_models import HomographyTransform, fit_weighted_homography, evaluate_holdout_residuals
+
+    if not isinstance(image_specs, list) or len(image_specs) < 2:
+        raise MultiViewRegistrationError("at least two image_specs are required")
+    ids = []
+    dimensions = {}
+    for item in image_specs:
+        image_id, width, height = item.get("id"), item.get("width"), item.get("height")
+        if not isinstance(image_id, str) or not image_id or image_id in dimensions:
+            raise MultiViewRegistrationError("image IDs must be unique non-empty strings")
+        if not isinstance(width, int) or not isinstance(height, int) or width < 1 or height < 1:
+            raise MultiViewRegistrationError(f"invalid dimensions for image {image_id}")
+        ids.append(image_id)
+        dimensions[image_id] = (width, height)
+    root = root_image_id or ids[0]
+    if root not in dimensions:
+        raise MultiViewRegistrationError(f"root_image_id is not present: {root}")
+    if not work_matches:
+        raise MultiViewRegistrationError("at least one pairwise match edge is required")
+    if acceptance_threshold_px is not None and (not math.isfinite(acceptance_threshold_px) or acceptance_threshold_px <= 0):
+        raise MultiViewRegistrationError("acceptance_threshold_px must be positive or None")
+
+    edges = []
+    adjacency = {image_id: [] for image_id in ids}
+    for edge_index, edge in enumerate(work_matches):
+        a, b = edge.get("image_a"), edge.get("image_b")
+        if a not in dimensions or b not in dimensions or a == b:
+            raise MultiViewRegistrationError(f"edge {edge_index} has invalid image endpoints")
+        anchors = edge.get("anchors")
+        if not isinstance(anchors, list) or len(anchors) < 4:
+            raise MultiViewRegistrationError(f"edge {edge_index} needs at least 4 paired anchors for homography")
+        pa, pb, weights, names = [], [], [], []
+        for anchor_index, anchor in enumerate(anchors):
+            xa = np.asarray(anchor["xy_a"], dtype=np.float64)
+            xb = np.asarray(anchor["xy_b"], dtype=np.float64)
+            weight = float(anchor.get("weight", 1.0)) * float(anchor.get("confidence", 1.0))
+            wa, ha = dimensions[a]
+            wb, hb = dimensions[b]
+            if not (0 <= xa[0] < wa and 0 <= xa[1] < ha and 0 <= xb[0] < wb and 0 <= xb[1] < hb):
+                raise MultiViewRegistrationError(f"edge {edge_index} anchor {anchor_index} outside bounds")
+            if weight <= 0 or not math.isfinite(weight):
+                raise MultiViewRegistrationError(f"edge {edge_index} anchor weight invalid")
+            pa.append(xa); pb.append(xb); weights.append(weight); names.append(str(anchor.get("name", f"a{anchor_index}")))
+        fit = fit_weighted_homography(np.asarray(pb), np.asarray(pa), np.asarray(weights), huber_px=huber_px)
+        adjacency[a].append((b, fit.transform))
+        adjacency[b].append((a, fit.transform.inverse()))
+        edges.append({
+            "edge_id": str(edge.get("edge_id", f"edge_{edge_index}")), "image_a": a, "image_b": b,
+            "xy_a": np.asarray(pa), "xy_b": np.asarray(pb), "weights": np.asarray(weights),
+            "names": names, "b_to_a": fit.transform, "pairwise_fit": fit,
+        })
+
+    poses = {root: HomographyTransform.identity()}
+    queue = deque([root])
+    while queue:
+        current = queue.popleft()
+        for neighbour, neighbour_to_current in adjacency[current]:
+            if neighbour not in poses:
+                poses[neighbour] = poses[current].compose(neighbour_to_current)
+                queue.append(neighbour)
+    disconnected = sorted(set(ids) - set(poses))
+    if disconnected:
+        raise MultiViewRegistrationError(f"pairwise match graph is disconnected: {disconnected}")
+
+    bridge_indices = _find_bridge_edge_indices(ids, edges)
+    residuals, base_weights = [], []
+    for edge in edges:
+        a, b = edge["image_a"], edge["image_b"]
+        for pa, pb, w in zip(edge["xy_a"], edge["xy_b"], edge["weights"]):
+            qa = poses[a].apply(pa[None, :])[0]
+            qb = poses[b].apply(pb[None, :])[0]
+            residuals.append(float(np.linalg.norm(qa - qb)))
+            base_weights.append(float(w))
+    norms = np.asarray(residuals, dtype=np.float64)
+    base_weights = np.asarray(base_weights, dtype=np.float64)
+    factors = np.ones_like(norms)
+    outliers = norms > huber_px
+    factors[outliers] = huber_px / np.maximum(norms[outliers], 1e-12)
+    robust_weights = base_weights * factors
+    global_stats = {
+        "anchor_count": int(len(norms)),
+        "weighted_rmse_px": math.sqrt(float(np.sum(base_weights * norms ** 2) / np.sum(base_weights))),
+        "robust_weighted_rmse_px": math.sqrt(float(np.sum(robust_weights * norms ** 2) / np.sum(robust_weights))),
+        "median_residual_px": float(np.median(norms)),
+        "p95_residual_px": float(np.percentile(norms, 95)),
+        "max_residual_px": float(np.max(norms)),
+        "huber_px": float(huber_px),
+        "downweighted_anchor_count": int(np.count_nonzero(factors < 0.999999)),
+        "optimizer_iterations": 0,
+        "note": "homography v0.2: pairwise DLT/Huber + graph composition (no joint projective LM)",
+    }
+
+    edge_reports, cycle_closures = [], []
+    for i, edge in enumerate(edges):
+        a, b = edge["image_a"], edge["image_b"]
+        expected = poses[a].inverse().compose(poses[b])
+        closure = np.linalg.norm(edge["b_to_a"].apply(edge["xy_b"]) - expected.apply(edge["xy_b"]), axis=1)
+        closure_p95 = float(np.percentile(closure, 95))
+        if i not in bridge_indices:
+            cycle_closures.append(closure_p95)
+        edge_reports.append({
+            "edge_id": edge["edge_id"], "image_a": a, "image_b": b,
+            "direction": "image_b_to_image_a", "independent_cycle_check": i not in bridge_indices,
+            "pairwise_fit": edge["pairwise_fit"].to_dict(),
+            "global_closure": {"p95_residual_px": closure_p95, "max_residual_px": float(np.max(closure))},
+        })
+    worst_edge = max((x["global_closure"]["p95_residual_px"] for x in edge_reports), default=0.0)
+    worst_cycle_edge = max(cycle_closures, default=0.0)
+    global_stats["worst_edge_closure_p95_px"] = worst_edge
+    global_stats["worst_cycle_checked_edge_closure_p95_px"] = worst_cycle_edge
+    bridge_ids = [edges[i]["edge_id"] for i in sorted(bridge_indices)]
+    cycle_rank = max(0, len(edges) - len(ids) + 1)
+
+    if acceptance_threshold_px is None:
+        gate = "pending_threshold_not_declared"
+    elif global_stats["p95_residual_px"] > acceptance_threshold_px:
+        gate = "fail_global_residual_threshold"
+    elif worst_cycle_edge > acceptance_threshold_px:
+        gate = "fail_edge_closure_threshold"
+    elif len(ids) > 2 and bridge_indices and not allow_unverified_bridge_edges:
+        gate = "pending_unverified_bridge_edges"
+    else:
+        gate = "pass"
+
+    corners = []
+    for image_id in ids:
+        width, height = dimensions[image_id]
+        points = np.array([[0, 0], [width - 1, 0], [width - 1, height - 1], [0, height - 1]], dtype=np.float64)
+        corners.append(poses[image_id].apply(points))
+    all_corners = np.vstack(corners)
+    min_xy = np.floor(all_corners.min(axis=0))
+    max_xy = np.ceil(all_corners.max(axis=0))
+    canvas_width = int(max_xy[0] - min_xy[0] + 1)
+    canvas_height = int(max_xy[1] - min_xy[1] + 1)
+    canvas_pixels = canvas_width * canvas_height
+    if canvas_width < 1 or canvas_height < 1 or canvas_pixels > max_canvas_pixels:
+        raise MultiViewRegistrationError(f"canvas {canvas_width}x{canvas_height} exceeds pixel cap")
+
+    T = np.array([[1.0, 0.0, -float(min_xy[0])], [0.0, 1.0, -float(min_xy[1])], [0.0, 0.0, 1.0]], dtype=np.float64)
+    image_records = {}
+    for image_id in ids:
+        pose = poses[image_id]
+        canvas_pose = HomographyTransform(T @ pose.matrix)
+        image_records[image_id] = {
+            "width": dimensions[image_id][0],
+            "height": dimensions[image_id][1],
+            "world_transform": pose.to_dict(),
+            "canvas_transform": canvas_pose.to_dict(),
+        }
+    result = {
+        "schema_version": "siaux-multiview-transform/0.2",
+        "geometry_model": "homography",
+        "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2",
+        "coordinate_convention": "column_vector_homogeneous_H_x",
+        "root_image_id": root,
+        "images": image_records,
+        "canvas": {
+            "width": canvas_width, "height": canvas_height,
+            "world_min_xy": min_xy.tolist(), "world_max_xy": max_xy.tolist(),
+            "pixel_count": int(canvas_pixels), "max_canvas_pixels": int(max_canvas_pixels),
+        },
+        "graph": {
+            "image_count": len(ids), "edge_count": len(edges), "cycle_rank": cycle_rank,
+            "connectivity": "connected",
+            "cycle_closure_status": "checked_with_redundant_edges" if cycle_rank else "not_testable_tree_only",
+            "bridge_edge_ids": bridge_ids,
+            "unverified_bridge_edge_count": len(bridge_indices),
+            "bridge_edge_override": bool(allow_unverified_bridge_edges),
+        },
+        "global_residual": global_stats,
+        "edge_reports": edge_reports,
+        "geometry_gate": gate,
+        "acceptance_threshold_px": acceptance_threshold_px,
+        "allow_unverified_bridge_edges": bool(allow_unverified_bridge_edges),
+        "limitations": [
+            "One global 2D homography per image; fails under multi-depth parallax.",
+            "v0.2: pairwise DLT/Huber + graph composition; joint projective LM not yet included.",
+            "High-DOF risk: always compare holdout residual, not train residual alone.",
+            "Bridge edges still lack independent cycle checks unless waived.",
+            "Geometry registration does not certify seam quality or synthesize missing content.",
+        ],
+    }
+    if holdout_matches is not None:
+        result["holdout"] = evaluate_holdout_residuals(result, holdout_matches, "homography")
+        result["holdout_fraction"] = float(holdout_fraction)
+        result["holdout_seed"] = int(holdout_seed)
+    return result
+
+
+# Backward-compatible alias: register_multiview remains similarity-only.
+# Prefer register_multiview_v2 for model switching.

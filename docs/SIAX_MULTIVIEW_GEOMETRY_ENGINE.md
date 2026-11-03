@@ -74,6 +74,14 @@ The sample workflow deliberately starts with a zero acceptance threshold. Inspec
 - A low residual does not prove semantic identity, object correspondence or correct z-order.
 - No live ComfyUI UI import or real project-image acceptance has been claimed by this prototype.
 
+## v0.2 model switch (implemented)
+
+See `docs/SIAX_MULTIVIEW_GEOMETRY_MODELS_V02.md`.
+
+`register_multiview(..., geometry_model=similarity|homography|local_mesh, holdout_fraction=...)`.
+
+Schema `siaux-multiview-transform/0.2`. Holdout residual is the selection signal.
+
 ## Next model-family boundary
 
 Do not silently replace similarity with affine/homography/local mesh. Add explicit model IDs only when the data supports their assumptions. Strong parallax may require plane-specific transforms or depth-aware reconstruction, not one homography over the whole scene. Compare inlier residual, held-out anchors, cycle closure, foldover/Jacobian validity and resampling loss; lower training residual alone does not prove a better model.
