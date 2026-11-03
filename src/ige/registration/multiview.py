@@ -378,8 +378,9 @@ def register_multiview(
             damping *= 10.0; continue
         new_loss = objective(proposal)
         if new_loss < loss:
+            improvement = loss - new_loss
             params, loss = proposal, new_loss
-            if abs(new_loss-loss) < 1e-10 or np.linalg.norm(delta) < 1e-7:
+            if improvement < 1e-10 or np.linalg.norm(delta) < 1e-7:
                 break
             damping = max(damping*0.5, 1e-9)
         else:
