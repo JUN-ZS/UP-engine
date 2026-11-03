@@ -1,0 +1,180 @@
+{
+  "format": "ige.siax.new_prompt_donor_verify",
+  "format_version": "0.8",
+  "asof": "2026-11-03T16:21:38.245515+00:00",
+  "prompts": {
+    "donor_A_samepose_upgrade": "NEW PROMPT v08 SAME-POSE UPGRADE: Keep exact crop framing and face pose; only upgrade texture pores/wet/armor; no reframe.",
+    "donor_B_dualref_face": "NEW PROMPT v08 DONOR FACE PLATE: peep identity + tile13 pose lock; full face in frame; natural pores; square.",
+    "donor_R_right_cont": "NEW PROMPT v08 RIGHT CONTINUATION: left 64px continues tile13 right edge; storm style from tile14."
+  },
+  "assets": {
+    "mother_sha": "b77544ba8508581829dace33134a44999c8f3188c9e104562967d46ad15b4fa0",
+    "donor_A": {
+      "path": "/workspace/artifacts/imagine_images/03dc5095-120b-42ae-9708-1acaa5e4e88b.jpg",
+      "sha": "474f5d791cd363e297bafe0a77929c7db75483186cd63973ce3e52b9dd6dd418",
+      "asset": "03dc5095-120b-42ae-9708-1acaa5e4e88b"
+    },
+    "donor_B": {
+      "path": "/workspace/artifacts/imagine_images/bf2cb727-3653-4d90-934a-dd22b9999ea5.jpg",
+      "sha": "91927e44534a662d6c48350183bc2a26515264cec1e5a6cafc453f879588f10b",
+      "asset": "bf2cb727-3653-4d90-934a-dd22b9999ea5"
+    },
+    "donor_R": {
+      "path": "/workspace/artifacts/imagine_images/fe1ca046-9bb8-49ad-a1c3-3471c81482f7.jpg",
+      "sha": "ec5b5c98804028c48dd7727d7e16ade944ff8c62597aed2037f2631126215bed",
+      "asset": "fe1ca046-9bb8-49ad-a1c3-3471c81482f7"
+    }
+  },
+  "mother_vs_A": {
+    "n_anchors": 415,
+    "ecc": {
+      "face_mae": 5.614268779754639,
+      "global_mae": 6.652651786804199,
+      "scale": 0.9987739163957957,
+      "rot_deg": 0.0028461149294617865,
+      "t": [
+        0.588581391466505,
+        0.7025694582653159
+      ],
+      "p95": 1.447145130004903,
+      "rmse": 0.7942328069840804
+    },
+    "geo": {
+      "similarity": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 1.418510309884244,
+        "holdout_p95": 1.3267492427640408
+      },
+      "homography": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 1.1718836881846664,
+        "holdout_p95": 1.1808529173864515
+      },
+      "local_mesh": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 1.418510309884244,
+        "holdout_p95": 1.3267492427640408
+      }
+    }
+  },
+  "mother_vs_B": {
+    "n_anchors": 0,
+    "ecc": null,
+    "geo": {
+      "similarity": {
+        "ok": 0,
+        "gate": null,
+        "train_p95": null,
+        "holdout_p95": null
+      },
+      "homography": {
+        "ok": 0,
+        "gate": null,
+        "train_p95": null,
+        "holdout_p95": null
+      },
+      "local_mesh": {
+        "ok": 0,
+        "gate": null,
+        "train_p95": null,
+        "holdout_p95": null
+      }
+    }
+  },
+  "mother_vs_R": {
+    "n_anchors": 152,
+    "ecc": {
+      "face_mae": 28.688217163085938,
+      "global_mae": 26.21004295349121,
+      "scale": 1.1614949158231047,
+      "rot_deg": -0.008447092154374959,
+      "t": [
+        274.82150440300416,
+        -56.28569180637771
+      ],
+      "p95": 2.382406684631181,
+      "rmse": 1.5488786419034597
+    },
+    "geo": {
+      "similarity": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 2.284596788206981,
+        "holdout_p95": 2.2251092832264123
+      },
+      "homography": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 0.6626621044882991,
+        "holdout_p95": 0.7075238824397376
+      },
+      "local_mesh": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 2.284596788206981,
+        "holdout_p95": 2.2251092832264123
+      }
+    }
+  },
+  "R_vs_tile14": {
+    "n_anchors": 52,
+    "ecc": {
+      "face_mae": 28.669506072998047,
+      "global_mae": 42.899932861328125,
+      "scale": 0.8697203480050117,
+      "rot_deg": -0.32835744991732174,
+      "t": [
+        145.78110677293333,
+        45.23653227968214
+      ],
+      "p95": 1.232874013460284,
+      "rmse": 0.6027879094260924
+    },
+    "geo": {
+      "similarity": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 1.2689162605098927,
+        "holdout_p95": 0.6762029731003216
+      },
+      "homography": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 0.6518361881282776,
+        "holdout_p95": 0.44367673952501135
+      },
+      "local_mesh": {
+        "ok": 1,
+        "gate": "pass",
+        "train_p95": 1.2689162605098927,
+        "holdout_p95": 0.6762029731003216
+      }
+    }
+  },
+  "seams": {
+    "free": {
+      "overlap_mae": 69.02385711669922,
+      "frontier_mae": 69.26692962646484
+    },
+    "hardlock64": {
+      "overlap_mae": 0.0,
+      "frontier_mae": 23.14583396911621
+    }
+  },
+  "best_candidate": "A",
+  "quality_qualified": 0,
+  "final_acceptance": 0,
+  "face_juyuan_pass": 0,
+  "figures": [
+    "FIG0_prompts.png",
+    "FIG1_new_prompt_donors.png",
+    "FIG2_sift_mother_A.png",
+    "FIG3_paste_A.png",
+    "FIG4_continuation_seam.png",
+    "FIG5_residual_A.png",
+    "FIG6_verdict_board.png"
+  ]
+}
