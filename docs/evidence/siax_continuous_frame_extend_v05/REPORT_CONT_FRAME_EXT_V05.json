@@ -1,0 +1,241 @@
+{
+  "format": "ige.siax.continuous_frame_extend_verify",
+  "format_version": "0.5",
+  "asof": "2026-11-03T15:54:35.994699+00:00",
+  "source_stitch": "/workspace/artifacts/up-engine/runs/n1/gen_v3_chain4/OUT_CHAIN_chain4.n1_stitch.json",
+  "frame_count": 6,
+  "frames": [
+    {
+      "i": 0,
+      "tile_id": "n1_0012_1344_0448",
+      "box": [
+        1344,
+        448,
+        1856,
+        960
+      ],
+      "shape": [
+        512,
+        512,
+        3
+      ]
+    },
+    {
+      "i": 1,
+      "tile_id": "n1_0013_1792_0448",
+      "box": [
+        1792,
+        448,
+        2304,
+        960
+      ],
+      "shape": [
+        512,
+        512,
+        3
+      ]
+    },
+    {
+      "i": 2,
+      "tile_id": "n1_0014_2240_0448",
+      "box": [
+        2240,
+        448,
+        2752,
+        960
+      ],
+      "shape": [
+        512,
+        512,
+        3
+      ]
+    },
+    {
+      "i": 3,
+      "tile_id": "n1_0015_2688_0448",
+      "box": [
+        2688,
+        448,
+        3200,
+        960
+      ],
+      "shape": [
+        512,
+        512,
+        3
+      ]
+    },
+    {
+      "i": 4,
+      "tile_id": "n1_0016_3136_0448",
+      "box": [
+        3136,
+        448,
+        3648,
+        960
+      ],
+      "shape": [
+        512,
+        512,
+        3
+      ]
+    },
+    {
+      "i": 5,
+      "tile_id": "n1_0017_3584_0448",
+      "box": [
+        3584,
+        448,
+        3840,
+        960
+      ],
+      "shape": [
+        512,
+        256,
+        3
+      ]
+    }
+  ],
+  "seam_along_chain": [
+    {
+      "frame_a": 0,
+      "frame_b": 1,
+      "tile_a": "n1_0012_1344_0448",
+      "tile_b": "n1_0013_1792_0448",
+      "overlap_w": 64,
+      "overlap_h": 512,
+      "overlap_mae": 0.0,
+      "frontier_mae": 13.28515625,
+      "canvas_overlap": [
+        1792,
+        448,
+        1856,
+        960
+      ]
+    },
+    {
+      "frame_a": 1,
+      "frame_b": 2,
+      "tile_a": "n1_0013_1792_0448",
+      "tile_b": "n1_0014_2240_0448",
+      "overlap_w": 64,
+      "overlap_h": 512,
+      "overlap_mae": 0.0,
+      "frontier_mae": 23.14583396911621,
+      "canvas_overlap": [
+        2240,
+        448,
+        2304,
+        960
+      ]
+    },
+    {
+      "frame_a": 2,
+      "frame_b": 3,
+      "tile_a": "n1_0014_2240_0448",
+      "tile_b": "n1_0015_2688_0448",
+      "overlap_w": 64,
+      "overlap_h": 512,
+      "overlap_mae": 0.0,
+      "frontier_mae": 11.415364265441895,
+      "canvas_overlap": [
+        2688,
+        448,
+        2752,
+        960
+      ]
+    },
+    {
+      "frame_a": 3,
+      "frame_b": 4,
+      "tile_a": "n1_0015_2688_0448",
+      "tile_b": "n1_0016_3136_0448",
+      "overlap_w": 64,
+      "overlap_h": 512,
+      "overlap_mae": 0.0,
+      "frontier_mae": 11.682942390441895,
+      "canvas_overlap": [
+        3136,
+        448,
+        3200,
+        960
+      ]
+    },
+    {
+      "frame_a": 4,
+      "frame_b": 5,
+      "tile_a": "n1_0016_3136_0448",
+      "tile_b": "n1_0017_3584_0448",
+      "overlap_w": 64,
+      "overlap_h": 512,
+      "overlap_mae": 0.0,
+      "frontier_mae": 10.489583015441895,
+      "canvas_overlap": [
+        3584,
+        448,
+        3648,
+        960
+      ]
+    }
+  ],
+  "multiview_holdout_F0_F3": {
+    "similarity": {
+      "ok": true,
+      "gate": "pending_threshold_not_declared",
+      "train_p95": 0.002536127569979454,
+      "holdout_p95": 0.00164868606255796,
+      "holdout_n": 76
+    },
+    "homography": {
+      "ok": true,
+      "gate": "pending_threshold_not_declared",
+      "train_p95": 0.002815719811502509,
+      "holdout_p95": 0.0024608503088682475,
+      "holdout_n": 76
+    },
+    "local_mesh": {
+      "ok": true,
+      "gate": "pending_threshold_not_declared",
+      "train_p95": 0.002536127569979454,
+      "holdout_p95": 0.00164868606255796,
+      "holdout_n": 76
+    }
+  },
+  "extension_frame": {
+    "expect_translation_px": [
+      448.0,
+      0.0
+    ],
+    "recovered_similarity": {
+      "gate": "pass",
+      "train_p95": 0.0,
+      "holdout_p95": 0.0,
+      "world_transform": {
+        "model": "similarity_2d",
+        "convention": "column_vector_ccw_degrees",
+        "scale": 1.0,
+        "rotation_degrees": 9.618682941411327e-16,
+        "translation_px": [
+          448.0,
+          2.233847507667878e-16
+        ]
+      }
+    },
+    "recovered_homography_gate": "pass",
+    "tx_error": 0.0,
+    "ty_error": 2.233847507667878e-16,
+    "extension_ok": true
+  },
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "native_4k_success": false,
+  "n1_seam_continuity_ok": false,
+  "figures": [
+    "FIG1_continuous_filmstrip.png",
+    "FIG2_multigrid_extension_map.png",
+    "FIG3_continuous_stitched_band.png",
+    "FIG4_extension_frame_pair.png",
+    "FIG5_seam_trend_along_chain.png",
+    "FIG6_summary_board.png"
+  ]
+}

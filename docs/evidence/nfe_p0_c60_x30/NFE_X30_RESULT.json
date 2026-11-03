@@ -1,0 +1,36 @@
+{
+  "format": "ige.nfe.chain_x30_result",
+  "job_id": "nfe_p0_c60_x30",
+  "master_asset": "c60c8cef-dd45-4c3c-a8af-b57849f9e377",
+  "one_click": true,
+  "not_image_to_video": true,
+  "nfe_i2i_t_index": 10,
+  "n_i2i_keys_including_F0": 11,
+  "n_display_bank": 30,
+  "key_frame_indices_in_bank": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23,
+    26,
+    29
+  ],
+  "provenance": {
+    "keys": "i2i_next_still NFE-accept",
+    "in_between": "optical_flow_interp_playback_only \u2014 NOT next-frame generation"
+  },
+  "NFE_X30_FULL_I2I_30": false,
+  "NFE_I2I_ACCEPTED": 10,
+  "NFE_DISPLAY_BANK_30": true,
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "cinematic_product": false,
+  "filmstrip": "/workspace/artifacts/up-engine/runs/nfe/nfe_p0_c60_x30/FIG_BANK30_FILMSTRIP.png",
+  "mp4": "/workspace/artifacts/up-engine/runs/nfe/nfe_p0_c60_x30/OUT_BANK30.mp4",
+  "note": "True NFE I2I chain reached t=10 (11 stills). Remaining of 30 bank are flow morph for playback only."
+}

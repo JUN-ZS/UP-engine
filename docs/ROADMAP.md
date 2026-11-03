@@ -73,3 +73,12 @@ A phase is not complete because a document or demo exists. It requires executabl
 - S3 does **not** flip Nested quality or claim E3 speed.
 - Design: `docs/S3_HETEROGENEOUS_UPSCALE_ENGINE.md`
 
+
+
+## NFE · Next Frame Engine (2026-11-04)
+
+- **Goal:** still-unit \(F_{t+1}=G(F_t,F_{t-1},K,\Delta S_t,C_t)\) I2I only.
+- **Not:** I2V-as-G, optical-flow-as-generation, spatial EXTEND as time.
+- **Scaffold:** `src/ige/nfe/*`, `tools/nfe_next_frame_pilot.py`, `docs/NEXT_FRAME_ENGINE_CHARTER.md`.
+- **P0 milestone:** F0→F1→F2→F3 accept/reject — not 360fps claim.
+- `quality_qualified=false`.

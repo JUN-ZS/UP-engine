@@ -1,0 +1,86 @@
+{
+  "format": "ige.nfe.framework_manifest",
+  "format_version": "0.3",
+  "formula": "F_{t+1}=G(F_t,F_{t-1},K,ΔS_t,C_t)",
+  "generator_G": "i2i_next_still_only",
+  "forbidden_as_G": [
+    "i2v",
+    "image_to_video",
+    "optical_flow_morph_as_generation",
+    "spatial_extend_as_time"
+  ],
+  "tools": {
+    "nfe_pilot": {
+      "path": "tools/nfe_next_frame_pilot.py",
+      "role": "C0 bootstrap/plan/accept/procedural",
+      "slot": "C0-C0.4"
+    },
+    "nfe_one_click": {
+      "path": "tools/nfe_one_click.py",
+      "role": "one-click bootstrap+plan+stick+optional steps",
+      "slot": "ORCH"
+    },
+    "still_sequence_f2f_kit": {
+      "path": "tools/still_sequence_f2f_kit.py",
+      "role": "C1-C5 FrameBank/Metrics/Layout/Encode/Report",
+      "slot": "C1-C5"
+    },
+    "siax_next_frame_f2f_verify": {
+      "path": "tools/siax_next_frame_f2f_verify.py",
+      "role": "ordered-still F2F metrics + DDXX consecutive",
+      "slot": "C0.3_ext"
+    },
+    "siax_cinema_frame_chain_verify": {
+      "path": "tools/siax_cinema_frame_chain_verify.py",
+      "role": "cinema chain verify (legacy research)",
+      "slot": "RESEARCH"
+    },
+    "siax_self_gen_cinema_chain": {
+      "path": "tools/siax_self_gen_cinema_chain.py",
+      "role": "self-gen cinema chain (legacy)",
+      "slot": "RESEARCH"
+    },
+    "siax_multiview_model_holdout": {
+      "path": "tools/siax_multiview_model_holdout_compare.py",
+      "role": "DDXX multiview holdout compare",
+      "slot": "DDXX"
+    },
+    "nfe_mix_verify": {
+      "path": "tools/nfe_mix_verify.py",
+      "role": "MIX: DDXX chain + seam + frameback post-pass on accepted stills",
+      "slot": "MIX"
+    }
+  },
+  "modules": {
+    "ige.nfe.state": "C0 TemporalState / FrameRef",
+    "ige.nfe.motion": "C0.1 MotionCompiler",
+    "ige.nfe.validate": "C0.3 TemporalValidator",
+    "ige.nfe.loop": "C0.4 NextFrameLoop Accept/Reject",
+    "ige.nfe.framework": "ALL bolt + STICK + manifest",
+    "ige.nfe.stick": "STICK evolve attach pack",
+    "ige.registration.multiview": "DDXX multiview static geometry",
+    "ige.registration.geometry_models": "Similarity/Homography/LocalMesh",
+    "ige.nfe.ddxx_gate": "C0.3.1 consecutive DDXX static gate + motion signature",
+    "ige.nfe.frameback": "playback-only flow densify (forbidden as G)"
+  },
+  "slots": [
+    "C0",
+    "C0.1",
+    "C0.2",
+    "C0.3",
+    "C0.4",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "STICK",
+    "DDXX",
+    "FRAMEBACK",
+    "SEAM_METRICS",
+    "MIX"
+  ],
+  "not_image_to_video": true,
+  "quality_qualified": false,
+  "final_acceptance": false
+}

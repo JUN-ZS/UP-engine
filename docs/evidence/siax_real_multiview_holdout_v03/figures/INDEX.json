@@ -1,0 +1,14 @@
+{
+  "format": "ige.siax.real_holdout_figures",
+  "figures": [
+    "FIG1_tile_chain.png",
+    "FIG2_operator_anchors_13_14.png",
+    "FIG3_canvas_layout.png",
+    "FIG4_operator_model_bars.png",
+    "FIG5_sift_model_bars.png",
+    "FIG6_sift_anchors_13_14.png",
+    "FIG7_summary_board.png"
+  ],
+  "quality_qualified": false,
+  "final_acceptance": false
+}

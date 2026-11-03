@@ -1,0 +1,135 @@
+{
+  "format": "ige.nfe.temporal_state",
+  "format_version": "0.1",
+  "job_id": "nfe_p0_c60_x30",
+  "t_index": 10,
+  "master_k": {
+    "path": "/workspace/artifacts/up-engine/runs/nfe/nfe_p0_c60_x30/F0000_master.png",
+    "sha256": "c48f34f70dfb905b9a0bbff512b97eaff476c9a1fc1206616052989c6fdf6171",
+    "t_index": 0,
+    "frame_origin": "master",
+    "asset_id": "c60c8cef-dd45-4c3c-a8af-b57849f9e377"
+  },
+  "current_f": {
+    "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0010.png",
+    "sha256": "1b0acb02f5d5bf145b17f96d3b2e2850ac0279644f2bb4e029bbd94f9baacfdd",
+    "t_index": 10,
+    "frame_origin": "i2i_next_still",
+    "asset_id": null
+  },
+  "prev_f": {
+    "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0009.png",
+    "sha256": "3c91296a8056a48039865afa426a206b1f09ff832e40b1a956b1bb9590f291b2",
+    "t_index": 9,
+    "frame_origin": "i2i_next_still",
+    "asset_id": null
+  },
+  "history": [
+    {
+      "path": "/workspace/artifacts/up-engine/runs/nfe/nfe_p0_c60_x30/F0000_master.png",
+      "sha256": "c48f34f70dfb905b9a0bbff512b97eaff476c9a1fc1206616052989c6fdf6171",
+      "t_index": 0,
+      "frame_origin": "master",
+      "asset_id": "c60c8cef-dd45-4c3c-a8af-b57849f9e377"
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0001.png",
+      "sha256": "115f12e1cccddd1f7fb87d33376c0d8af196c025133f4151a98c766bdb119be0",
+      "t_index": 1,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0002.png",
+      "sha256": "e9a6c4fa22d604e186f170fc4b4004dfccb3dff39109b7c60bdaa29ad69eae77",
+      "t_index": 2,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0003.png",
+      "sha256": "31b0b8cac42daebb7d36e5ba1ab8e520c5cfc86858540b474975a9605c88390d",
+      "t_index": 3,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0004.png",
+      "sha256": "f65c04491ae44328d1e76fd06bcf73dd90b9d0da04bc70b8428e9acb8ca711b8",
+      "t_index": 4,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0005.png",
+      "sha256": "75792503da192e57ee4043870a0ad152c9c8bc25e348f5309e63002cbc1889e4",
+      "t_index": 5,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0006.png",
+      "sha256": "512729cf2be6aa8a1faaf8f2cb8e352d85d23890532aaf69735b0f7702bc8e27",
+      "t_index": 6,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0007.png",
+      "sha256": "759e2d9b7e26cedb36dad64fa5c79e620aeee6ce42da40a293599f60d803f482",
+      "t_index": 7,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0008.png",
+      "sha256": "bce98d1321c5101037a441c78c50a373d47ccc0792525eca80b72bb91491f466",
+      "t_index": 8,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0009.png",
+      "sha256": "3c91296a8056a48039865afa426a206b1f09ff832e40b1a956b1bb9590f291b2",
+      "t_index": 9,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "runs/nfe/nfe_p0_c60_x30/accepted/F0010.png",
+      "sha256": "1b0acb02f5d5bf145b17f96d3b2e2850ac0279644f2bb4e029bbd94f9baacfdd",
+      "t_index": 10,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    }
+  ],
+  "camera": {
+    "model": "locked",
+    "note": "static anchors only"
+  },
+  "phase": "accepted_t10",
+  "delta_s": {
+    "phase": "splash_settle",
+    "static_lock": [
+      "camera",
+      "horizon",
+      "ground_plane"
+    ],
+    "dynamic_allow": {
+      "splash": "settle",
+      "droplets": "fall"
+    },
+    "identity_lock": [
+      "face",
+      "armor_pattern",
+      "body_pose_family"
+    ],
+    "max_global_flow_p50_hint": 2.0,
+    "prompt_suffix": ""
+  },
+  "not_image_to_video": true,
+  "frame_origin_policy": "declare_every_frame_origin",
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "reanchor_every": 4
+}

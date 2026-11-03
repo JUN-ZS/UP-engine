@@ -1,0 +1,2043 @@
+{
+  "schema_version": "siaux-multiview-anchors/1.0-manual",
+  "pack_id": "VERIFY_NEW_GT_V04",
+  "matches": [
+    {
+      "edge_id": "ab",
+      "image_a": "A_identity",
+      "image_b": "B_sim_s0.92_r7",
+      "anchors": [
+        {
+          "name": "ab_0",
+          "xy_a": [
+            303.7872319758201,
+            409.91338237813443
+          ],
+          "xy_b": [
+            353.9536304644581,
+            422.96595622993465
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_1",
+          "xy_a": [
+            362.51741919562545,
+            147.83080409633084
+          ],
+          "xy_b": [
+            382.59774956995875,
+            132.4371911860447
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_2",
+          "xy_a": [
+            177.0648511153779,
+            400.68584370454215
+          ],
+          "xy_b": [
+            216.01627662831243,
+            429.7972772631994
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_3",
+          "xy_a": [
+            62.05346878057414,
+            380.27908316927886
+          ],
+          "xy_b": [
+            89.23251202090282,
+            423.01652727680744
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_4",
+          "xy_a": [
+            370.85707721329806,
+            242.4946316090511
+          ],
+          "xy_b": [
+            404.13482997717506,
+            233.46096189316555
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_5",
+          "xy_a": [
+            178.1826464595323,
+            168.5859887193016
+          ],
+          "xy_b": [
+            186.47671851492308,
+            179.24723069063117
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_6",
+          "xy_a": [
+            159.3991391851086,
+            233.57975929423216
+          ],
+          "xy_b": [
+            174.82155578213562,
+            251.8542421723552
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_7",
+          "xy_a": [
+            256.7738209936018,
+            275.8639673090521
+          ],
+          "xy_b": [
+            285.4759192207128,
+            284.5738502202079
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_8",
+          "xy_a": [
+            448.24511053941313,
+            369.1381484933637
+          ],
+          "xy_b": [
+            504.4013048794966,
+            359.8395559203155
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_9",
+          "xy_a": [
+            302.64989948205346,
+            445.6944575959351
+          ],
+          "xy_b": [
+            357.4664143267395,
+            461.71918935304916
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_10",
+          "xy_a": [
+            143.9703923118836,
+            122.48269320455938
+          ],
+          "xy_b": [
+            143.45952335577232,
+            134.04046591698332
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_11",
+          "xy_a": [
+            298.89044566648204,
+            77.13738310493952
+          ],
+          "xy_b": [
+            304.58897944363264,
+            64.59772872461875
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_12",
+          "xy_a": [
+            73.9153087217025,
+            260.8066399058344
+          ],
+          "xy_b": [
+            86.20359394419367,
+            292.55184419689414
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_13",
+          "xy_a": [
+            241.82034987686274,
+            417.6954315452124
+          ],
+          "xy_b": [
+            288.1312422751176,
+            439.57020208529434
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_14",
+          "xy_a": [
+            305.39823925149403,
+            260.5058821738104
+          ],
+          "xy_b": [
+            335.9001577710135,
+            261.5635956287834
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_15",
+          "xy_a": [
+            253.78063980346667,
+            156.530819590659
+          ],
+          "xy_b": [
+            266.43904657903465,
+            156.22724206281435
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_16",
+          "xy_a": [
+            64.59966996157729,
+            135.03683615427116
+          ],
+          "xy_b": [
+            59.49306698241075,
+            158.09853558036977
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_17",
+          "xy_a": [
+            329.8925271439173,
+            138.23662235492813
+          ],
+          "xy_b": [
+            346.1293281754252,
+            126.40817597672819
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_18",
+          "xy_a": [
+            204.1191611348606,
+            61.45635440030962
+          ],
+          "xy_b": [
+            200.26733768263685,
+            60.2342173387205
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_19",
+          "xy_a": [
+            383.7186146226808,
+            120.23982161396154
+          ],
+          "xy_b": [
+            401.81586914853494,
+            99.86208330672056
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_20",
+          "xy_a": [
+            164.36372877987634,
+            403.32954005252316
+          ],
+          "xy_b": [
+            202.66381515272903,
+            434.33191647606117
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_21",
+          "xy_a": [
+            258.81841584868505,
+            390.38859608268905
+          ],
+          "xy_b": [
+            302.8524366853214,
+            407.85842209510554
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_22",
+          "xy_a": [
+            309.48969510758525,
+            349.29066947112426
+          ],
+          "xy_b": [
+            352.0752691806472,
+            356.80748249561947
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_23",
+          "xy_a": [
+            95.6832859745878,
+            271.0460903368306
+          ],
+          "xy_b": [
+            111.0444604140004,
+            300.71518987639416
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_24",
+          "xy_a": [
+            258.0311721571365,
+            399.82235691022345
+          ],
+          "xy_b": [
+            303.25277423036744,
+            418.1403610914781
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_25",
+          "xy_a": [
+            200.89298301552145,
+            293.2917862108131
+          ],
+          "xy_b": [
+            227.49723026517532,
+            310.7782802373414
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_26",
+          "xy_a": [
+            83.10814051474641,
+            211.1764024331842
+          ],
+          "xy_b": [
+            89.54696934097441,
+            237.79029464996353
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_27",
+          "xy_a": [
+            185.9841750407006,
+            118.57789433747624
+          ],
+          "xy_b": [
+            188.26902671373034,
+            124.2623298261309
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_28",
+          "xy_a": [
+            378.37186048943954,
+            207.98400690462185
+          ],
+          "xy_b": [
+            407.6706800292648,
+            195.23356032271496
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_29",
+          "xy_a": [
+            441.7116749203764,
+            290.096760274138
+          ],
+          "xy_b": [
+            486.88232828734476,
+            275.4308600634585
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_30",
+          "xy_a": [
+            295.97193899364197,
+            308.81866650744956
+          ],
+          "xy_b": [
+            332.1303852271749,
+            314.93473170334306
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_31",
+          "xy_a": [
+            323.81559508698746,
+            118.8073274756638
+          ],
+          "xy_b": [
+            336.99946846167256,
+            106.25178451822546
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_32",
+          "xy_a": [
+            231.72225220339314,
+            153.4299451135141
+          ],
+          "xy_b": [
+            242.23049303514657,
+            155.80385095888417
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_33",
+          "xy_a": [
+            216.97433626055283,
+            97.7145966333808
+          ],
+          "xy_b": [
+            218.93921026269146,
+            97.64870325370674
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_34",
+          "xy_a": [
+            437.45293990904037,
+            143.8515745687932
+          ],
+          "xy_b": [
+            462.915158934697,
+            118.21772198917333
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_35",
+          "xy_a": [
+            321.98841341840114,
+            177.1638317768374
+          ],
+          "xy_b": [
+            342.75849751504074,
+            169.45200321127183
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_36",
+          "xy_a": [
+            400.89004019830674,
+            318.263747951997
+          ],
+          "xy_b": [
+            446.5729107296313,
+            311.2264481539921
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_37",
+          "xy_a": [
+            111.33016816523923,
+            389.57898514107563
+          ],
+          "xy_b": [
+            143.6268286370667,
+            426.5222478350318
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_38",
+          "xy_a": [
+            428.529786746542,
+            412.5275473964115
+          ],
+          "xy_b": [
+            488.87898835349836,
+            409.2620281691278
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_39",
+          "xy_a": [
+            282.19046766511815,
+            116.7293819667615
+          ],
+          "xy_b": [
+            291.8167533649795,
+            109.52392596374443
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_40",
+          "xy_a": [
+            135.06076303764962,
+            421.8832170503645
+          ],
+          "xy_b": [
+            173.5079222770263,
+            458.230301147618
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_41",
+          "xy_a": [
+            275.40733019023287,
+            130.41547439507553
+          ],
+          "xy_b": [
+            286.3116860837505,
+            125.1877682257245
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_42",
+          "xy_a": [
+            404.78218873662325,
+            310.2129650367675
+          ],
+          "xy_b": [
+            449.7055122791378,
+            302.02524468985007
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_43",
+          "xy_a": [
+            282.18076704478506,
+            206.75225609066885
+          ],
+          "xy_b": [
+            303.7313188514411,
+            206.64679496331615
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_44",
+          "xy_a": [
+            220.27256004128063,
+            153.40079294591948
+          ],
+          "xy_b": [
+            229.87407928677024,
+            157.2891026917425
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_45",
+          "xy_a": [
+            74.84234180958325,
+            401.7253351626157
+          ],
+          "xy_b": [
+            105.87075914883953,
+            444.45981349874154
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_46",
+          "xy_a": [
+            242.41478455749748,
+            273.5777276933568
+          ],
+          "xy_b": [
+            269.6817573981427,
+            284.0094241442408
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ab_47",
+          "xy_a": [
+            185.6436908142878,
+            353.01671874342185
+          ],
+          "xy_b": [
+            218.9570259424332,
+            377.23281629194577
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        }
+      ]
+    },
+    {
+      "edge_id": "bc",
+      "image_a": "B_sim_s0.92_r7",
+      "image_b": "C_homography_mild",
+      "anchors": [
+        {
+          "name": "bc_0",
+          "xy_a": [
+            353.9536304644581,
+            422.96595622993465
+          ],
+          "xy_b": [
+            277.05568312264563,
+            421.5495090101734
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_1",
+          "xy_a": [
+            382.59774956995875,
+            132.4371911860447
+          ],
+          "xy_b": [
+            361.8832260703261,
+            172.70472189450336
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_2",
+          "xy_a": [
+            216.01627662831243,
+            429.7972772631994
+          ],
+          "xy_b": [
+            144.0400178682972,
+            401.54407925068153
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_3",
+          "xy_a": [
+            89.23251202090282,
+            423.01652727680744
+          ],
+          "xy_b": [
+            27.913282316879883,
+            373.0607710318622
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_4",
+          "xy_a": [
+            404.13482997717506,
+            233.46096189316555
+          ],
+          "xy_b": [
+            363.40799145309234,
+            266.8093728877439
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_5",
+          "xy_a": [
+            186.47671851492308,
+            179.24723069063117
+          ],
+          "xy_b": [
+            158.62181333371205,
+            182.62456964751325
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_6",
+          "xy_a": [
+            174.82155578213562,
+            251.8542421723552
+          ],
+          "xy_b": [
+            135.04149899244115,
+            243.7921157039389
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_7",
+          "xy_a": [
+            285.4759192207128,
+            284.5738502202079
+          ],
+          "xy_b": [
+            235.82921630248538,
+            290.8565462776651
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_8",
+          "xy_a": [
+            504.4013048794966,
+            359.8395559203155
+          ],
+          "xy_b": [
+            439.36859850857917,
+            396.103596348806
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_9",
+          "xy_a": [
+            357.4664143267395,
+            461.71918935304916
+          ],
+          "xy_b": [
+            273.2995837816137,
+            454.79856997692866
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_10",
+          "xy_a": [
+            143.45952335577232,
+            134.04046591698332
+          ],
+          "xy_b": [
+            125.01501527052713,
+            136.13970030619632
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_11",
+          "xy_a": [
+            304.58897944363264,
+            64.59772872461875
+          ],
+          "xy_b": [
+            296.1537306301334,
+            98.7129682213412
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_12",
+          "xy_a": [
+            86.20359394419367,
+            292.55184419689414
+          ],
+          "xy_b": [
+            45.274538138653874,
+            263.78086372626285
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_13",
+          "xy_a": [
+            288.1312422751176,
+            439.57020208529434
+          ],
+          "xy_b": [
+            210.6251491624951,
+            423.07745904213436
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_14",
+          "xy_a": [
+            335.9001577710135,
+            261.5635956287834
+          ],
+          "xy_b": [
+            289.6295813788812,
+            279.63494724836386
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_15",
+          "xy_a": [
+            266.43904657903465,
+            156.22724206281435
+          ],
+          "xy_b": [
+            240.71376117673762,
+            175.15913768283738
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_16",
+          "xy_a": [
+            59.49306698241075,
+            158.09853558036977
+          ],
+          "xy_b": [
+            41.54485439259775,
+            144.29043360419143
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_17",
+          "xy_a": [
+            346.1293281754252,
+            126.40817597672819
+          ],
+          "xy_b": [
+            326.032083495618,
+            161.3215358211377
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_18",
+          "xy_a": [
+            200.26733768263685,
+            60.2342173387205
+          ],
+          "xy_b": [
+            193.05120974314633,
+            78.96298676197688
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_19",
+          "xy_a": [
+            401.81586914853494,
+            99.86208330672056
+          ],
+          "xy_b": [
+            388.2547623425779,
+            146.2078591167544
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_20",
+          "xy_a": [
+            202.66381515272903,
+            434.33191647606117
+          ],
+          "xy_b": [
+            130.7752965588366,
+            402.8589589406164
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_21",
+          "xy_a": [
+            302.8524366853214,
+            407.85842209510554
+          ],
+          "xy_b": [
+            230.37186793592687,
+            399.2204165125932
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_22",
+          "xy_a": [
+            352.0752691806472,
+            356.80748249561947
+          ],
+          "xy_b": [
+            287.57511532088176,
+            364.93924632100544
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_23",
+          "xy_a": [
+            111.0444604140004,
+            300.71518987639416
+          ],
+          "xy_b": [
+            67.0331948644054,
+            274.8363883690279
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_24",
+          "xy_a": [
+            303.25277423036744,
+            418.1403610914781
+          ],
+          "xy_b": [
+            228.9143515641856,
+            407.94886388939574
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_25",
+          "xy_a": [
+            227.49723026517532,
+            310.7782802373414
+          ],
+          "xy_b": [
+            175.20393243857413,
+            303.29451597505266
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_26",
+          "xy_a": [
+            89.54696934097441,
+            237.79029464996353
+          ],
+          "xy_b": [
+            57.00995902323425,
+            217.73963493530826
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_27",
+          "xy_a": [
+            188.26902671373034,
+            124.2623298261309
+          ],
+          "xy_b": [
+            169.9470919303725,
+            134.4168777540396
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_28",
+          "xy_a": [
+            407.6706800292648,
+            195.23356032271496
+          ],
+          "xy_b": [
+            374.71374991685224,
+            233.39350763171097
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_29",
+          "xy_a": [
+            486.88232828734476,
+            275.4308600634585
+          ],
+          "xy_b": [
+            439.1528137350976,
+            318.7586097698932
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_30",
+          "xy_a": [
+            332.1303852271749,
+            314.93473170334306
+          ],
+          "xy_b": [
+            275.8528980092301,
+            325.3196604815524
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_31",
+          "xy_a": [
+            336.99946846167256,
+            106.25178451822546
+          ],
+          "xy_b": [
+            320.7675448416897,
+            141.63146901997902
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_32",
+          "xy_a": [
+            242.23049303514657,
+            155.80385095888417
+          ],
+          "xy_b": [
+            216.9776723431564,
+            170.89303455526422
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_33",
+          "xy_a": [
+            218.93921026269146,
+            97.64870325370674
+          ],
+          "xy_b": [
+            204.65365888452808,
+            115.41770044577703
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_34",
+          "xy_a": [
+            462.915158934697,
+            118.21772198917333
+          ],
+          "xy_b": [
+            447.78102745080366,
+            172.9985247578358
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_35",
+          "xy_a": [
+            342.75849751504074,
+            169.45200321127183
+          ],
+          "xy_b": [
+            314.1913165594504,
+            199.4177554302811
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_36",
+          "xy_a": [
+            446.5729107296313,
+            311.2264481539921
+          ],
+          "xy_b": [
+            390.64029315784137,
+            342.86262634094226
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_37",
+          "xy_a": [
+            143.6268286370667,
+            426.5222478350318
+          ],
+          "xy_b": [
+            77.21566115619005,
+            385.66943538110297
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_38",
+          "xy_a": [
+            488.87898835349836,
+            409.2620281691278
+          ],
+          "xy_b": [
+            413.3959557211708,
+            435.81513165457216
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_39",
+          "xy_a": [
+            291.8167533649795,
+            109.52392596374443
+          ],
+          "xy_b": [
+            274.6827612319095,
+            137.42669008539883
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_40",
+          "xy_a": [
+            173.5079222770263,
+            458.230301147618
+          ],
+          "xy_b": [
+            99.74916150119438,
+            417.24057534055726
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_41",
+          "xy_a": [
+            286.3116860837505,
+            125.1877682257245
+          ],
+          "xy_b": [
+            266.21776851653283,
+            150.63270719584102
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_42",
+          "xy_a": [
+            449.7055122791378,
+            302.02524468985007
+          ],
+          "xy_b": [
+            395.68673152493295,
+            335.3839178016036
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_43",
+          "xy_a": [
+            303.7313188514411,
+            206.64679496331615
+          ],
+          "xy_b": [
+            268.1641954544687,
+            225.9241971275357
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_44",
+          "xy_a": [
+            229.87407928677024,
+            157.2891026917425
+          ],
+          "xy_b": [
+            204.6125321255743,
+            170.2313386061318
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_45",
+          "xy_a": [
+            105.87075914883953,
+            444.45981349874154
+          ],
+          "xy_b": [
+            39.79153052064398,
+            393.6310909549608
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_46",
+          "xy_a": [
+            269.6817573981427,
+            284.0094241442408
+          ],
+          "xy_b": [
+            220.57516358106992,
+            287.6253542378099
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "bc_47",
+          "xy_a": [
+            218.9570259424332,
+            377.23281629194577
+          ],
+          "xy_b": [
+            155.67559571884573,
+            358.12546297031986
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        }
+      ]
+    },
+    {
+      "edge_id": "ca",
+      "image_a": "C_homography_mild",
+      "image_b": "A_identity",
+      "anchors": [
+        {
+          "name": "ca_0",
+          "xy_a": [
+            277.05568312264563,
+            421.5495090101734
+          ],
+          "xy_b": [
+            303.7872319758201,
+            409.91338237813443
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_1",
+          "xy_a": [
+            361.8832260703261,
+            172.70472189450336
+          ],
+          "xy_b": [
+            362.51741919562545,
+            147.83080409633084
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_2",
+          "xy_a": [
+            144.0400178682972,
+            401.54407925068153
+          ],
+          "xy_b": [
+            177.0648511153779,
+            400.68584370454215
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_3",
+          "xy_a": [
+            27.913282316879883,
+            373.0607710318622
+          ],
+          "xy_b": [
+            62.05346878057414,
+            380.27908316927886
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_4",
+          "xy_a": [
+            363.40799145309234,
+            266.8093728877439
+          ],
+          "xy_b": [
+            370.85707721329806,
+            242.4946316090511
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_5",
+          "xy_a": [
+            158.62181333371205,
+            182.62456964751325
+          ],
+          "xy_b": [
+            178.1826464595323,
+            168.5859887193016
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_6",
+          "xy_a": [
+            135.04149899244115,
+            243.7921157039389
+          ],
+          "xy_b": [
+            159.3991391851086,
+            233.57975929423216
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_7",
+          "xy_a": [
+            235.82921630248538,
+            290.8565462776651
+          ],
+          "xy_b": [
+            256.7738209936018,
+            275.8639673090521
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_8",
+          "xy_a": [
+            439.36859850857917,
+            396.103596348806
+          ],
+          "xy_b": [
+            448.24511053941313,
+            369.1381484933637
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_9",
+          "xy_a": [
+            273.2995837816137,
+            454.79856997692866
+          ],
+          "xy_b": [
+            302.64989948205346,
+            445.6944575959351
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_10",
+          "xy_a": [
+            125.01501527052713,
+            136.13970030619632
+          ],
+          "xy_b": [
+            143.9703923118836,
+            122.48269320455938
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_11",
+          "xy_a": [
+            296.1537306301334,
+            98.7129682213412
+          ],
+          "xy_b": [
+            298.89044566648204,
+            77.13738310493952
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_12",
+          "xy_a": [
+            45.274538138653874,
+            263.78086372626285
+          ],
+          "xy_b": [
+            73.9153087217025,
+            260.8066399058344
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_13",
+          "xy_a": [
+            210.6251491624951,
+            423.07745904213436
+          ],
+          "xy_b": [
+            241.82034987686274,
+            417.6954315452124
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_14",
+          "xy_a": [
+            289.6295813788812,
+            279.63494724836386
+          ],
+          "xy_b": [
+            305.39823925149403,
+            260.5058821738104
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_15",
+          "xy_a": [
+            240.71376117673762,
+            175.15913768283738
+          ],
+          "xy_b": [
+            253.78063980346667,
+            156.530819590659
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_16",
+          "xy_a": [
+            41.54485439259775,
+            144.29043360419143
+          ],
+          "xy_b": [
+            64.59966996157729,
+            135.03683615427116
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_17",
+          "xy_a": [
+            326.032083495618,
+            161.3215358211377
+          ],
+          "xy_b": [
+            329.8925271439173,
+            138.23662235492813
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_18",
+          "xy_a": [
+            193.05120974314633,
+            78.96298676197688
+          ],
+          "xy_b": [
+            204.1191611348606,
+            61.45635440030962
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_19",
+          "xy_a": [
+            388.2547623425779,
+            146.2078591167544
+          ],
+          "xy_b": [
+            383.7186146226808,
+            120.23982161396154
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_20",
+          "xy_a": [
+            130.7752965588366,
+            402.8589589406164
+          ],
+          "xy_b": [
+            164.36372877987634,
+            403.32954005252316
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_21",
+          "xy_a": [
+            230.37186793592687,
+            399.2204165125932
+          ],
+          "xy_b": [
+            258.81841584868505,
+            390.38859608268905
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_22",
+          "xy_a": [
+            287.57511532088176,
+            364.93924632100544
+          ],
+          "xy_b": [
+            309.48969510758525,
+            349.29066947112426
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_23",
+          "xy_a": [
+            67.0331948644054,
+            274.8363883690279
+          ],
+          "xy_b": [
+            95.6832859745878,
+            271.0460903368306
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_24",
+          "xy_a": [
+            228.9143515641856,
+            407.94886388939574
+          ],
+          "xy_b": [
+            258.0311721571365,
+            399.82235691022345
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_25",
+          "xy_a": [
+            175.20393243857413,
+            303.29451597505266
+          ],
+          "xy_b": [
+            200.89298301552145,
+            293.2917862108131
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_26",
+          "xy_a": [
+            57.00995902323425,
+            217.73963493530826
+          ],
+          "xy_b": [
+            83.10814051474641,
+            211.1764024331842
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_27",
+          "xy_a": [
+            169.9470919303725,
+            134.4168777540396
+          ],
+          "xy_b": [
+            185.9841750407006,
+            118.57789433747624
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_28",
+          "xy_a": [
+            374.71374991685224,
+            233.39350763171097
+          ],
+          "xy_b": [
+            378.37186048943954,
+            207.98400690462185
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_29",
+          "xy_a": [
+            439.1528137350976,
+            318.7586097698932
+          ],
+          "xy_b": [
+            441.7116749203764,
+            290.096760274138
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_30",
+          "xy_a": [
+            275.8528980092301,
+            325.3196604815524
+          ],
+          "xy_b": [
+            295.97193899364197,
+            308.81866650744956
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_31",
+          "xy_a": [
+            320.7675448416897,
+            141.63146901997902
+          ],
+          "xy_b": [
+            323.81559508698746,
+            118.8073274756638
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_32",
+          "xy_a": [
+            216.9776723431564,
+            170.89303455526422
+          ],
+          "xy_b": [
+            231.72225220339314,
+            153.4299451135141
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_33",
+          "xy_a": [
+            204.65365888452808,
+            115.41770044577703
+          ],
+          "xy_b": [
+            216.97433626055283,
+            97.7145966333808
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_34",
+          "xy_a": [
+            447.78102745080366,
+            172.9985247578358
+          ],
+          "xy_b": [
+            437.45293990904037,
+            143.8515745687932
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_35",
+          "xy_a": [
+            314.1913165594504,
+            199.4177554302811
+          ],
+          "xy_b": [
+            321.98841341840114,
+            177.1638317768374
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_36",
+          "xy_a": [
+            390.64029315784137,
+            342.86262634094226
+          ],
+          "xy_b": [
+            400.89004019830674,
+            318.263747951997
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_37",
+          "xy_a": [
+            77.21566115619005,
+            385.66943538110297
+          ],
+          "xy_b": [
+            111.33016816523923,
+            389.57898514107563
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_38",
+          "xy_a": [
+            413.3959557211708,
+            435.81513165457216
+          ],
+          "xy_b": [
+            428.529786746542,
+            412.5275473964115
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_39",
+          "xy_a": [
+            274.6827612319095,
+            137.42669008539883
+          ],
+          "xy_b": [
+            282.19046766511815,
+            116.7293819667615
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_40",
+          "xy_a": [
+            99.74916150119438,
+            417.24057534055726
+          ],
+          "xy_b": [
+            135.06076303764962,
+            421.8832170503645
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_41",
+          "xy_a": [
+            266.21776851653283,
+            150.63270719584102
+          ],
+          "xy_b": [
+            275.40733019023287,
+            130.41547439507553
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_42",
+          "xy_a": [
+            395.68673152493295,
+            335.3839178016036
+          ],
+          "xy_b": [
+            404.78218873662325,
+            310.2129650367675
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_43",
+          "xy_a": [
+            268.1641954544687,
+            225.9241971275357
+          ],
+          "xy_b": [
+            282.18076704478506,
+            206.75225609066885
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_44",
+          "xy_a": [
+            204.6125321255743,
+            170.2313386061318
+          ],
+          "xy_b": [
+            220.27256004128063,
+            153.40079294591948
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_45",
+          "xy_a": [
+            39.79153052064398,
+            393.6310909549608
+          ],
+          "xy_b": [
+            74.84234180958325,
+            401.7253351626157
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_46",
+          "xy_a": [
+            220.57516358106992,
+            287.6253542378099
+          ],
+          "xy_b": [
+            242.41478455749748,
+            273.5777276933568
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        },
+        {
+          "name": "ca_47",
+          "xy_a": [
+            155.67559571884573,
+            358.12546297031986
+          ],
+          "xy_b": [
+            185.6436908142878,
+            353.01671874342185
+          ],
+          "weight": 1.0,
+          "confidence": 1.0,
+          "source": "gt_synthetic_from_real_tile"
+        }
+      ]
+    }
+  ]
+}

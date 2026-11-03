@@ -1,0 +1,87 @@
+{
+  "schema_version": "siaux-multiview-image-specs/0.1",
+  "pack_id": "N1_CHAIN4_OPERATOR_GEOM",
+  "image_specs": [
+    {
+      "id": "n1_0012_1344_0448",
+      "width": 512,
+      "height": 512,
+      "path": "runs/n1/gen_v3_chain4/tiles/n1_0012_1344_0448.png",
+      "sha256": "9faf4f63c452bc1845ece1884e513f7d329a88e62c9d35e8d6141c49c7e0bcd5",
+      "canvas_box": [
+        1344,
+        448,
+        1856,
+        960
+      ],
+      "canvas_core": [
+        1376,
+        480,
+        1824,
+        928
+      ]
+    },
+    {
+      "id": "n1_0013_1792_0448",
+      "width": 512,
+      "height": 512,
+      "path": "runs/n1/gen_v3_chain4/tiles/n1_0013_1792_0448.png",
+      "sha256": "6135d30137bc1547e6f0cc2621a20e203b3c05b0ab179e66a31136a469a6cd8a",
+      "canvas_box": [
+        1792,
+        448,
+        2304,
+        960
+      ],
+      "canvas_core": [
+        1824,
+        480,
+        2272,
+        928
+      ]
+    },
+    {
+      "id": "n1_0014_2240_0448",
+      "width": 512,
+      "height": 512,
+      "path": "runs/n1/gen_v3_chain4/tiles/n1_0014_2240_0448.png",
+      "sha256": "e5b3b6781064531a293977aa4970501fc182965c28a668c9a8eb66ececf8d22c",
+      "canvas_box": [
+        2240,
+        448,
+        2752,
+        960
+      ],
+      "canvas_core": [
+        2272,
+        480,
+        2720,
+        928
+      ]
+    },
+    {
+      "id": "n1_0015_2688_0448",
+      "width": 512,
+      "height": 512,
+      "path": "runs/n1/gen_v3_chain4/tiles/n1_0015_2688_0448.png",
+      "sha256": "0769c1ed28f1dff71f02d54f380d9839abfb300f9ca956d5caa36ea34855cf7a",
+      "canvas_box": [
+        2688,
+        448,
+        3200,
+        960
+      ],
+      "canvas_core": [
+        2720,
+        480,
+        3168,
+        928
+      ]
+    }
+  ],
+  "canvas_plan": {
+    "width": 3840,
+    "height": 2160,
+    "run_id": "chain4"
+  }
+}

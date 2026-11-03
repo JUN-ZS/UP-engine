@@ -1,0 +1,253 @@
+{
+  "format": "ige.nfe.mix_verify_result",
+  "format_version": "1.0",
+  "created_at_utc": "2026-11-03T20:45:40Z",
+  "n_frames": 11,
+  "frames": [
+    "runs/nfe/nfe_p0_c60_x30/F0000_master.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0001.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0002.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0003.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0004.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0005.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0006.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0007.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0008.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0009.png",
+    "runs/nfe/nfe_p0_c60_x30/accepted/F0010.png"
+  ],
+  "ddxx_chain": "runs/nfe/nfe_p0_c60_x30/mix/DDXX_CHAIN.json",
+  "ddxx_all_ok": true,
+  "frontier_series": [
+    {
+      "pair": "F00->F01",
+      "mae": 13.899615287780762,
+      "sim_p95": 0.8772437126709572,
+      "flow_p50": 0.4523048400878906,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F01->F02",
+      "mae": 10.275949478149414,
+      "sim_p95": 1.0319492872060667,
+      "flow_p50": 0.25642120838165283,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F02->F03",
+      "mae": 9.31151008605957,
+      "sim_p95": 0.609425297850457,
+      "flow_p50": 0.345528244972229,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F03->F04",
+      "mae": 15.549667358398438,
+      "sim_p95": 2.616006312044622,
+      "flow_p50": 0.8568553924560547,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F04->F05",
+      "mae": 7.42063570022583,
+      "sim_p95": 0.5746809307442489,
+      "flow_p50": 0.3232211470603943,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F05->F06",
+      "mae": 7.816831588745117,
+      "sim_p95": 0.6281944467957677,
+      "flow_p50": 0.3397292494773865,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F06->F07",
+      "mae": 7.667721271514893,
+      "sim_p95": 0.586982755558179,
+      "flow_p50": 0.3770233988761902,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F07->F08",
+      "mae": 11.069201469421387,
+      "sim_p95": 0.6933607725428088,
+      "flow_p50": 1.0202631950378418,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F08->F09",
+      "mae": 14.4775972366333,
+      "sim_p95": 0.7405222488156636,
+      "flow_p50": 3.575748920440674,
+      "gate": "pass_static_near_identity"
+    },
+    {
+      "pair": "F09->F10",
+      "mae": 10.954005241394043,
+      "sim_p95": 1.1339032297204987,
+      "flow_p50": 0.4722440838813782,
+      "gate": "pass_static_near_identity"
+    }
+  ],
+  "frameback": {
+    "format": "ige.nfe.frameback_result",
+    "n_src": 11,
+    "n_out": 21,
+    "mids_per_gap": 1,
+    "fps": 20,
+    "mp4": "runs/nfe/nfe_p0_c60_x30/mix/OUT_FRAMEBACK_m1_n21.mp4",
+    "not_image_to_video": true,
+    "optical_flow_as_generation": false,
+    "frameback_is_playback_only": true,
+    "meta": [
+      {
+        "i": 0,
+        "kind": "src",
+        "src": "F0000_master.png"
+      },
+      {
+        "i": 1,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0000_master.png",
+          "F0001.png"
+        ]
+      },
+      {
+        "i": 2,
+        "kind": "src",
+        "src": "F0001.png"
+      },
+      {
+        "i": 3,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0001.png",
+          "F0002.png"
+        ]
+      },
+      {
+        "i": 4,
+        "kind": "src",
+        "src": "F0002.png"
+      },
+      {
+        "i": 5,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0002.png",
+          "F0003.png"
+        ]
+      },
+      {
+        "i": 6,
+        "kind": "src",
+        "src": "F0003.png"
+      },
+      {
+        "i": 7,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0003.png",
+          "F0004.png"
+        ]
+      },
+      {
+        "i": 8,
+        "kind": "src",
+        "src": "F0004.png"
+      },
+      {
+        "i": 9,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0004.png",
+          "F0005.png"
+        ]
+      },
+      {
+        "i": 10,
+        "kind": "src",
+        "src": "F0005.png"
+      },
+      {
+        "i": 11,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0005.png",
+          "F0006.png"
+        ]
+      },
+      {
+        "i": 12,
+        "kind": "src",
+        "src": "F0006.png"
+      },
+      {
+        "i": 13,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0006.png",
+          "F0007.png"
+        ]
+      },
+      {
+        "i": 14,
+        "kind": "src",
+        "src": "F0007.png"
+      },
+      {
+        "i": 15,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0007.png",
+          "F0008.png"
+        ]
+      },
+      {
+        "i": 16,
+        "kind": "src",
+        "src": "F0008.png"
+      },
+      {
+        "i": 17,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0008.png",
+          "F0009.png"
+        ]
+      },
+      {
+        "i": 18,
+        "kind": "src",
+        "src": "F0009.png"
+      },
+      {
+        "i": 19,
+        "kind": "frameback_t0.500",
+        "between": [
+          "F0009.png",
+          "F0010.png"
+        ]
+      },
+      {
+        "i": 20,
+        "kind": "src",
+        "src": "F0010.png"
+      }
+    ],
+    "quality_qualified": false
+  },
+  "mixed_from": [
+    "NFE C0 state/accept",
+    "DDXX SIFT+Umeyama/Homography (figures GT anchors / residual)",
+    "seam/frontier trend (continuous frame verify)",
+    "FRAMEBACK flow densify (playback only)"
+  ],
+  "not_image_to_video": true,
+  "optical_flow_as_generation": false,
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "cinematic_product": false
+}

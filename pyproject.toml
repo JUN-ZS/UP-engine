@@ -16,10 +16,11 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = []
+dev = ["pytest>=8"]
 vlm = ["transformers>=5.8.1"]
 xai = []  # Grok Vision/Imagine use stdlib urllib; only XAI_API_KEY is required
 upscale = ["torch>=2.2", "spandrel>=0.4.1"]
+registration = ["opencv-python-headless>=4.10"]
 
 
 [project.scripts]

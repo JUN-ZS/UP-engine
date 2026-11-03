@@ -1,0 +1,57 @@
+{
+  "format": "ige.siax.multiview_model_holdout_compare",
+  "format_version": "0.2",
+  "asof": "2026-11-03T14:49:16.987329+00:00",
+  "holdout_fraction": 0.25,
+  "seed": 42,
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "e3_speed_claim": false,
+  "note": "Synthetic counterfactual unless user anchors provided. Not SIAX quality PASS.",
+  "scenes": [
+    {
+      "scene_id": "N1_CHAIN4_OPERATOR_GEOM",
+      "image_count": 4,
+      "edge_count": 3,
+      "models": [
+        {
+          "geometry_model": "similarity",
+          "algorithm_id": "DDXX_MV_GLOBAL_SIMILARITY_V1",
+          "geometry_gate": "pending_threshold_not_declared",
+          "train_p95_px": 2.3437142008433856e-13,
+          "train_rmse_px": 1.2447728924363293e-13,
+          "holdout_p95_px": 2.3437142008433856e-13,
+          "holdout_rmse_px": 1.1972170690189685e-13,
+          "holdout_anchor_count": 30,
+          "ok": true,
+          "error": null
+        },
+        {
+          "geometry_model": "homography",
+          "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2",
+          "geometry_gate": "pending_threshold_not_declared",
+          "train_p95_px": 2.452834625488387e-13,
+          "train_rmse_px": 1.5116333994570207e-13,
+          "holdout_p95_px": 2.5421149729252077e-13,
+          "holdout_rmse_px": 1.5455631608956816e-13,
+          "holdout_anchor_count": 30,
+          "ok": true,
+          "error": null
+        },
+        {
+          "geometry_model": "local_mesh",
+          "algorithm_id": "DDXX_MV_LOCAL_MESH_SIMTILE_V0_2",
+          "geometry_gate": "pending_threshold_not_declared",
+          "train_p95_px": 2.3437142008433856e-13,
+          "train_rmse_px": 1.2447728924363293e-13,
+          "holdout_p95_px": 2.3437142008433856e-13,
+          "holdout_rmse_px": 1.1972170690189685e-13,
+          "holdout_anchor_count": 30,
+          "ok": true,
+          "error": null
+        }
+      ],
+      "best_by_holdout_p95": "similarity"
+    }
+  ]
+}

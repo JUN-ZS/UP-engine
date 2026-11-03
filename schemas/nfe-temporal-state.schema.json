@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ige.nfe.temporal_state.v0",
+  "title": "NFE Temporal State",
+  "type": "object",
+  "required": ["format", "format_version", "t_index", "master_k", "current_f", "not_image_to_video", "frame_origin_policy"],
+  "properties": {
+    "format": { "const": "ige.nfe.temporal_state" },
+    "format_version": { "type": "string" },
+    "job_id": { "type": "string" },
+    "t_index": { "type": "integer", "minimum": 0 },
+    "master_k": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string" },
+        "asset_id": { "type": "string" }
+      }
+    },
+    "current_f": {
+      "type": "object",
+      "required": ["path", "sha256", "t_index"],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string" },
+        "t_index": { "type": "integer" },
+        "frame_origin": { "type": "string" }
+      }
+    },
+    "prev_f": { "type": ["object", "null"] },
+    "history": { "type": "array", "items": { "type": "object" } },
+    "camera": { "type": "object" },
+    "phase": { "type": "string" },
+    "delta_s": { "type": "object" },
+    "not_image_to_video": { "type": "boolean" },
+    "frame_origin_policy": { "type": "string" },
+    "quality_qualified": { "type": "boolean" },
+    "final_acceptance": { "type": "boolean" }
+  }
+}

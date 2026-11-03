@@ -1,0 +1,95 @@
+{
+  "format": "ige.siax.gen_donor_extend_verify",
+  "format_version": "0.7",
+  "asof": "2026-11-03T16:10:14.591184+00:00",
+  "donor_sources": {
+    "dens_donor_SHOW_long": "/workspace/artifacts/tmp/a8b_true_samepose/dens_donor_SHOW_long.png",
+    "dens_donor_SHOW_1920x1080": "/workspace/artifacts/tmp/a8b_true_samepose/dens_donor_SHOW_1920x1080.jpg",
+    "dens_donor_ECC_peep": "/workspace/artifacts/tmp/a8b_true_samepose/dens_donor_ECC_peep.jpg",
+    "sha_show": "e8e1749819d6051d10953c909fcf25d964659bee23e1478f27c06b2dcf9379d5",
+    "sha_long": "82fa2f0392b920504deb5f6d169690fbf4343b2f0d9350b767a9b2dc99d0bd0f"
+  },
+  "imagine_live_regen": false,
+  "imagine_note": "Imagine generation blocked on system-reminder turn; used existing True-A8B dens generated donor plates as NEW-to-N1 generative donors.",
+  "frames": [
+    {
+      "id": "D00_x0",
+      "sha256": "596efa3532607dcac73e2876d84f41d93a3bbad8d8c500d80ece02f458bde9ec",
+      "canvas_x0": 0,
+      "generated_donor": true
+    },
+    {
+      "id": "D01_x448",
+      "sha256": "1a7189616a53950a87adec7003eebb647c6b72ae0f4542365baf20e04caef4a4",
+      "canvas_x0": 448,
+      "generated_donor": true
+    },
+    {
+      "id": "D02_x896",
+      "sha256": "b6078218184c44fddf927491b8c6c502d380bb765b23bb3ce713bcb9f2f0587e",
+      "canvas_x0": 896,
+      "generated_donor": true
+    }
+  ],
+  "donor_face_show512_sha": "dc705b484a8887739a1139d9a42c9bc3a4833e14d80e412f5a1e6d4b065799c7",
+  "seams": [
+    {
+      "frame_a": 0,
+      "frame_b": 1,
+      "id_a": "D00_x0",
+      "id_b": "D01_x448",
+      "overlap_mae": 0.0,
+      "frontier_mae": 1.1087239980697632,
+      "overlap_w": 64
+    },
+    {
+      "frame_a": 1,
+      "frame_b": 2,
+      "id_a": "D01_x448",
+      "id_b": "D02_x896",
+      "overlap_mae": 0.0,
+      "frontier_mae": 1.82421875,
+      "overlap_w": 64
+    }
+  ],
+  "geometry_continuous": {
+    "similarity": {
+      "ok": true,
+      "gate": "pending_threshold_not_declared",
+      "train_p95": 4.691659840283908,
+      "holdout_p95": 745.5077503379141,
+      "holdout_n": 12,
+      "n_edges": null
+    },
+    "homography": {
+      "ok": true,
+      "gate": "pending_threshold_not_declared",
+      "train_p95": 0.04264959063563795,
+      "holdout_p95": 592.4551845986437,
+      "holdout_n": 12,
+      "n_edges": null
+    },
+    "local_mesh": {
+      "ok": true,
+      "gate": "pending_threshold_not_declared",
+      "train_p95": 4.691659840283908,
+      "holdout_p95": 745.5077503379141,
+      "holdout_n": 12,
+      "n_edges": null
+    }
+  },
+  "geometry_donor_vs_seed": {},
+  "sift_consecutive_edges": 2,
+  "donor_seed_inliers": 4,
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "native_4k_success": false,
+  "figures": [
+    "FIG1_gen_donor_filmstrip.png",
+    "FIG2_donor_vs_seed_matches.png",
+    "FIG3_gen_donor_extension_map.png",
+    "FIG4_gen_donor_stitched_band.png",
+    "FIG5_verdict_board.png",
+    "FIG6_F0_residual_heat.png"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "format": "ige.siax.geometry_verify_new",
+  "format_version": "0.4",
+  "asof": "2026-11-03T15:16:11.025200+00:00",
+  "source_tile": "/workspace/artifacts/up-engine/runs/n1/gen_v3_chain4/tiles/n1_0013_1792_0448.png",
+  "n_gt_anchors_total": 48,
+  "gt_poses": {
+    "B_similarity": {
+      "model": "similarity_2d",
+      "convention": "column_vector_ccw_degrees",
+      "scale": 0.92,
+      "rotation_degrees": 7.0,
+      "translation_px": [
+        28.0,
+        -16.0
+      ]
+    },
+    "C_homography": {
+      "model": "homography_2d",
+      "convention": "column_vector_homogeneous_H_x",
+      "matrix_3x3": [
+        [
+          0.97,
+          0.04,
+          18.0
+        ],
+        [
+          -0.03,
+          1.02,
+          -12.0
+        ],
+        [
+          0.00015,
+          -0.0001,
+          1.0
+        ]
+      ]
+    }
+  },
+  "models": {
+    "similarity": {
+      "geometry_gate": "fail_global_residual_threshold",
+      "algorithm_id": "DDXX_MV_GLOBAL_SIMILARITY_V1",
+      "train_p95_px": 14.737683694609347,
+      "holdout_p95_px": 17.873785847990945,
+      "holdout_n": 36,
+      "cycle_rank": 1
+    },
+    "homography": {
+      "geometry_gate": "pass",
+      "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2",
+      "train_p95_px": 2.0231693600456137e-13,
+      "holdout_p95_px": 1.962043563283881e-13,
+      "holdout_n": 36,
+      "cycle_rank": 1
+    },
+    "local_mesh": {
+      "geometry_gate": "fail_global_residual_threshold",
+      "algorithm_id": "DDXX_MV_LOCAL_MESH_SIMTILE_V0_2",
+      "train_p95_px": 14.737683694609347,
+      "holdout_p95_px": 17.873785847990945,
+      "holdout_n": 36,
+      "cycle_rank": 1
+    }
+  },
+  "gt_recovery_similarity_B": {
+    "scale_err": 0.00028127454415805,
+    "rot_err_deg": 0.0685380965302711,
+    "tx_err": 0.5040859276344953,
+    "ty_err": 0.2820447861444215
+  },
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "e3_speed_claim": false,
+  "verdict_notes": [
+    "NEW images warped from real N1 face tile with known GT poses (not free generation).",
+    "Triangle A\u2013B\u2013C has cycle; bridge waiver not required.",
+    "Expect: similarity recovers B; on full triangle with C projective, homography holdout should not be worse.",
+    "Not SIAX quality PASS / not native 4K product acceptance."
+  ],
+  "verdict": {
+    "sim_recovers_B_pose": true,
+    "homography_better_than_sim_on_holdout": true,
+    "all_gates": {
+      "similarity": "fail_global_residual_threshold",
+      "homography": "pass",
+      "local_mesh": "fail_global_residual_threshold"
+    }
+  }
+}

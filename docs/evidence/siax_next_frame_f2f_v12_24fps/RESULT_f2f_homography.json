@@ -1,0 +1,172 @@
+{
+  "geometry_model": "homography",
+  "geometry_gate": "pass",
+  "global_residual": {
+    "anchor_count": 3427,
+    "weighted_rmse_px": 0.9037299632361601,
+    "robust_weighted_rmse_px": 0.9037299632361601,
+    "median_residual_px": 0.3316152604803896,
+    "p95_residual_px": 2.4220432696298526,
+    "max_residual_px": 4.0391015353467346,
+    "huber_px": 12.0,
+    "downweighted_anchor_count": 0,
+    "optimizer_iterations": 0,
+    "note": "homography v0.2: pairwise DLT/Huber + graph composition (no joint projective LM)",
+    "worst_edge_closure_p95_px": 3.410605131648481e-13,
+    "worst_cycle_checked_edge_closure_p95_px": 0.0
+  },
+  "holdout": {
+    "geometry_model": "homography",
+    "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2",
+    "train_geometry_gate": "pass",
+    "train_global_residual": {
+      "anchor_count": 3427,
+      "weighted_rmse_px": 0.9037299632361601,
+      "robust_weighted_rmse_px": 0.9037299632361601,
+      "median_residual_px": 0.3316152604803896,
+      "p95_residual_px": 2.4220432696298526,
+      "max_residual_px": 4.0391015353467346,
+      "huber_px": 12.0,
+      "downweighted_anchor_count": 0,
+      "optimizer_iterations": 0,
+      "note": "homography v0.2: pairwise DLT/Huber + graph composition (no joint projective LM)",
+      "worst_edge_closure_p95_px": 3.410605131648481e-13,
+      "worst_cycle_checked_edge_closure_p95_px": 0.0
+    },
+    "holdout_global": {
+      "holdout_anchor_count": 1142,
+      "weighted_rmse_px": 0.9657695293594492,
+      "median_residual_px": 0.33534190846493545,
+      "p95_residual_px": 2.6439501976122637,
+      "max_residual_px": 4.80903626013951
+    },
+    "holdout_edges": [
+      {
+        "edge_id": "T00__T01",
+        "image_a": "T00",
+        "image_b": "T01",
+        "holdout_count": 102,
+        "p95_residual_px": 2.5890242179630625,
+        "median_residual_px": 0.40223261125206977,
+        "max_residual_px": 3.9081767770518208
+      },
+      {
+        "edge_id": "T01__T02",
+        "image_a": "T01",
+        "image_b": "T02",
+        "holdout_count": 104,
+        "p95_residual_px": 2.034040744844981,
+        "median_residual_px": 0.2550617211630589,
+        "max_residual_px": 3.449517309454219
+      },
+      {
+        "edge_id": "T02__T03",
+        "image_a": "T02",
+        "image_b": "T03",
+        "holdout_count": 105,
+        "p95_residual_px": 1.7548686071606956,
+        "median_residual_px": 0.26699311024240485,
+        "max_residual_px": 3.17057149596544
+      },
+      {
+        "edge_id": "T03__T04",
+        "image_a": "T03",
+        "image_b": "T04",
+        "holdout_count": 105,
+        "p95_residual_px": 2.0312987770305977,
+        "median_residual_px": 0.26659031212129,
+        "max_residual_px": 3.747669441856859
+      },
+      {
+        "edge_id": "T04__T05",
+        "image_a": "T04",
+        "image_b": "T05",
+        "holdout_count": 103,
+        "p95_residual_px": 2.379955796829129,
+        "median_residual_px": 0.3053437595499947,
+        "max_residual_px": 3.6284262441147384
+      },
+      {
+        "edge_id": "T05__T06",
+        "image_a": "T05",
+        "image_b": "T06",
+        "holdout_count": 106,
+        "p95_residual_px": 2.7433486884951392,
+        "median_residual_px": 0.31553368459797604,
+        "max_residual_px": 3.6450711755347664
+      },
+      {
+        "edge_id": "T06__T07",
+        "image_a": "T06",
+        "image_b": "T07",
+        "holdout_count": 104,
+        "p95_residual_px": 2.76032470866197,
+        "median_residual_px": 0.39234220884355264,
+        "max_residual_px": 4.80903626013951
+      },
+      {
+        "edge_id": "T07__T08",
+        "image_a": "T07",
+        "image_b": "T08",
+        "holdout_count": 104,
+        "p95_residual_px": 2.953396090022675,
+        "median_residual_px": 0.3168987065494145,
+        "max_residual_px": 3.541464612489244
+      },
+      {
+        "edge_id": "T08__T09",
+        "image_a": "T08",
+        "image_b": "T09",
+        "holdout_count": 102,
+        "p95_residual_px": 1.915975629255809,
+        "median_residual_px": 0.3827516676386112,
+        "max_residual_px": 3.681783534593023
+      },
+      {
+        "edge_id": "T09__T10",
+        "image_a": "T09",
+        "image_b": "T10",
+        "holdout_count": 103,
+        "p95_residual_px": 3.3274131701691427,
+        "median_residual_px": 0.4794126893001106,
+        "max_residual_px": 3.7397609115945487
+      },
+      {
+        "edge_id": "T10__T11",
+        "image_a": "T10",
+        "image_b": "T11",
+        "holdout_count": 104,
+        "p95_residual_px": 2.470220270961013,
+        "median_residual_px": 0.4356475818653708,
+        "max_residual_px": 4.538453084605873
+      }
+    ],
+    "interpretation": [
+      "Holdout anchors were not used in the fit.",
+      "Prefer lower holdout p95 over lower train residual when choosing a model.",
+      "A model can overfit train anchors and still fail holdout (esp. high-DOF homography)."
+    ]
+  },
+  "graph": {
+    "image_count": 12,
+    "edge_count": 11,
+    "cycle_rank": 0,
+    "connectivity": "connected",
+    "cycle_closure_status": "not_testable_tree_only",
+    "bridge_edge_ids": [
+      "T00__T01",
+      "T01__T02",
+      "T02__T03",
+      "T03__T04",
+      "T04__T05",
+      "T05__T06",
+      "T06__T07",
+      "T07__T08",
+      "T08__T09",
+      "T09__T10",
+      "T10__T11"
+    ],
+    "unverified_bridge_edge_count": 11,
+    "bridge_edge_override": true
+  }
+}

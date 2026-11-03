@@ -1,0 +1,86 @@
+{
+  "format": "ige.nfe.temporal_state",
+  "format_version": "0.1",
+  "job_id": "nfe_p0_e107",
+  "t_index": 3,
+  "master_k": {
+    "path": "/workspace/artifacts/tmp/nfe_p0_e107/F0000_master.png",
+    "sha256": "0a51c6ea3f028cd0518d782a41c2241fe724e2afb62ab172c70f9b51faf5f454",
+    "t_index": 0,
+    "frame_origin": "master",
+    "asset_id": "1e8853a5-3897-48c0-aabd-aa20dda21723"
+  },
+  "current_f": {
+    "path": "/workspace/artifacts/tmp/nfe_p0_e107/accepted/F0003.png",
+    "sha256": "88e8a50c6c4c09eb2ff1d126cb87ac674448af3c8e6db21f70d4b61474c94e0c",
+    "t_index": 3,
+    "frame_origin": "i2i_next_still",
+    "asset_id": null
+  },
+  "prev_f": {
+    "path": "/workspace/artifacts/tmp/nfe_p0_e107/accepted/F0002.png",
+    "sha256": "df92db8fe5657ffafb53badf44837adf98718e60010aaf04e307ca17ae8a0cdd",
+    "t_index": 2,
+    "frame_origin": "i2i_next_still",
+    "asset_id": null
+  },
+  "history": [
+    {
+      "path": "/workspace/artifacts/tmp/nfe_p0_e107/F0000_master.png",
+      "sha256": "0a51c6ea3f028cd0518d782a41c2241fe724e2afb62ab172c70f9b51faf5f454",
+      "t_index": 0,
+      "frame_origin": "master",
+      "asset_id": "1e8853a5-3897-48c0-aabd-aa20dda21723"
+    },
+    {
+      "path": "/workspace/artifacts/tmp/nfe_p0_e107/accepted/F0001.png",
+      "sha256": "8252cec7401c4edfc8b23fe9914f2e7f45dc16e3e0e29e10d5a54a6ea27c036c",
+      "t_index": 1,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "/workspace/artifacts/tmp/nfe_p0_e107/accepted/F0002.png",
+      "sha256": "df92db8fe5657ffafb53badf44837adf98718e60010aaf04e307ca17ae8a0cdd",
+      "t_index": 2,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    },
+    {
+      "path": "/workspace/artifacts/tmp/nfe_p0_e107/accepted/F0003.png",
+      "sha256": "88e8a50c6c4c09eb2ff1d126cb87ac674448af3c8e6db21f70d4b61474c94e0c",
+      "t_index": 3,
+      "frame_origin": "i2i_next_still",
+      "asset_id": null
+    }
+  ],
+  "camera": {
+    "model": "locked",
+    "note": "static anchors only"
+  },
+  "phase": "accepted_t3",
+  "delta_s": {
+    "phase": "hammer_sink_hair",
+    "static_lock": [
+      "camera",
+      "horizon",
+      "ground_plane"
+    ],
+    "dynamic_allow": {
+      "hammer": "sink_hair",
+      "ripples": "outward"
+    },
+    "identity_lock": [
+      "face",
+      "armor_pattern",
+      "body_pose_family"
+    ],
+    "max_global_flow_p50_hint": 2.0,
+    "prompt_suffix": ""
+  },
+  "not_image_to_video": true,
+  "frame_origin_policy": "declare_every_frame_origin",
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "reanchor_every": 4
+}

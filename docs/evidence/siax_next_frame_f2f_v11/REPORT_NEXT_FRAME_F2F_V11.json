@@ -1,0 +1,428 @@
+{
+  "format": "ige.siax.next_frame_f2f",
+  "format_version": "1.1",
+  "created_at_utc": "2026-11-03T16:48:19Z",
+  "mode": "next_frame_f2f",
+  "not_spatial_extend": true,
+  "source_video": "dfe82060-d1d7-4c7f-973f-d221d731509e",
+  "dt_s_between_selected": 0.25,
+  "frames": [
+    {
+      "id": "T00",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_001.png",
+      "t_index": 0,
+      "t_s": 0.0,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "c95cb71fdccad46f9a5d0bc082359748d8db7d7ba94fddb9144897ee16865147"
+    },
+    {
+      "id": "T01",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_002.png",
+      "t_index": 1,
+      "t_s": 0.25,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "96740e17801740aa0d00c2e8672c6d771ae36f25d3ae80729079f77d19af76ce"
+    },
+    {
+      "id": "T02",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_003.png",
+      "t_index": 2,
+      "t_s": 0.5,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e268b44e562f44d3defdfd99d231fa607745c3842d2db2428c942c613e45b3ef"
+    },
+    {
+      "id": "T03",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_004.png",
+      "t_index": 3,
+      "t_s": 0.75,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "1a744a4a3522ab2e23c09ab26906faa6efdb44831aba6ac77acc7c4fa524a008"
+    },
+    {
+      "id": "T04",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_005.png",
+      "t_index": 4,
+      "t_s": 1.0,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "efeeaad89d330658e7b451ecbfb44a27bd51ec4cfa965ba021ba9d013df52e50"
+    },
+    {
+      "id": "T05",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_006.png",
+      "t_index": 5,
+      "t_s": 1.25,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "4d080c64964a01fb0fcf706327053b125e92cc4bd29278d8b7b5ba16c78529b9"
+    },
+    {
+      "id": "T06",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_007.png",
+      "t_index": 6,
+      "t_s": 1.5,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "d7c18fad7f4373b6da8d003c23aa08e0e10c1ee7f43448ffe646eeb4c570d851"
+    },
+    {
+      "id": "T07",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_008.png",
+      "t_index": 7,
+      "t_s": 1.75,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "787abfba7e4ab46a662129e200784bae2fea5f33f349e91cf330357ffd8732ad"
+    },
+    {
+      "id": "T08",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_009.png",
+      "t_index": 8,
+      "t_s": 2.0,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "1752a7a367dacb9978c480f3bfa1b0102447a44f4d672b9854e23c84f3dc8f4c"
+    },
+    {
+      "id": "T09",
+      "source": "/workspace/artifacts/tmp/cinema_f2f_v11/frames/f_010.png",
+      "t_index": 9,
+      "t_s": 2.25,
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "caf6381d992ccd623e1b221d25852d83e804cc47df3089be723a968c3f6ea17e"
+    }
+  ],
+  "pair_pixel_residual": [
+    {
+      "pair": "T00->T01",
+      "t_from": 0.0,
+      "t_to": 0.25,
+      "mae": 10.96053409576416,
+      "p50": 4.0,
+      "p95": 49.33333206176758,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T00_T01.png",
+      "flow_mean_px": 2.5781466960906982,
+      "flow_p50_px": 0.721534788608551,
+      "flow_p95_px": 12.88530158996582,
+      "flow_max_px": 25.665546417236328
+    },
+    {
+      "pair": "T01->T02",
+      "t_from": 0.25,
+      "t_to": 0.5,
+      "mae": 16.057302474975586,
+      "p50": 8.333333015441895,
+      "p95": 59.66666793823242,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T01_T02.png",
+      "flow_mean_px": 3.5350089073181152,
+      "flow_p50_px": 0.667168378829956,
+      "flow_p95_px": 19.71518325805664,
+      "flow_max_px": 38.01889419555664
+    },
+    {
+      "pair": "T02->T03",
+      "t_from": 0.5,
+      "t_to": 0.75,
+      "mae": 16.47857666015625,
+      "p50": 9.666666984558105,
+      "p95": 63.66666793823242,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T02_T03.png",
+      "flow_mean_px": 3.282951593399048,
+      "flow_p50_px": 0.6175892353057861,
+      "flow_p95_px": 16.95650291442871,
+      "flow_max_px": 49.782493591308594
+    },
+    {
+      "pair": "T03->T04",
+      "t_from": 0.75,
+      "t_to": 1.0,
+      "mae": 14.523445129394531,
+      "p50": 6.0,
+      "p95": 63.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T03_T04.png",
+      "flow_mean_px": 3.495413064956665,
+      "flow_p50_px": 0.6145523190498352,
+      "flow_p95_px": 21.351383209228516,
+      "flow_max_px": 42.33837890625
+    },
+    {
+      "pair": "T04->T05",
+      "t_from": 1.0,
+      "t_to": 1.25,
+      "mae": 15.291715621948242,
+      "p50": 7.666666507720947,
+      "p95": 66.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T04_T05.png",
+      "flow_mean_px": 3.1767539978027344,
+      "flow_p50_px": 0.7104836702346802,
+      "flow_p95_px": 19.042457580566406,
+      "flow_max_px": 43.69738006591797
+    },
+    {
+      "pair": "T05->T06",
+      "t_from": 1.25,
+      "t_to": 1.5,
+      "mae": 15.536294937133789,
+      "p50": 7.333333492279053,
+      "p95": 66.66666412353516,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T05_T06.png",
+      "flow_mean_px": 2.7777657508850098,
+      "flow_p50_px": 0.6469770669937134,
+      "flow_p95_px": 14.316856384277344,
+      "flow_max_px": 38.501346588134766
+    },
+    {
+      "pair": "T06->T07",
+      "t_from": 1.5,
+      "t_to": 1.75,
+      "mae": 16.814746856689453,
+      "p50": 8.333333015441895,
+      "p95": 69.0,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T06_T07.png",
+      "flow_mean_px": 2.99149227142334,
+      "flow_p50_px": 0.6994994282722473,
+      "flow_p95_px": 16.300434112548828,
+      "flow_max_px": 39.702396392822266
+    },
+    {
+      "pair": "T07->T08",
+      "t_from": 1.75,
+      "t_to": 2.0,
+      "mae": 14.617610931396484,
+      "p50": 5.333333492279053,
+      "p95": 68.66666412353516,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T07_T08.png",
+      "flow_mean_px": 2.7244720458984375,
+      "flow_p50_px": 0.7248727083206177,
+      "flow_p95_px": 13.780813217163086,
+      "flow_max_px": 38.23179244995117
+    },
+    {
+      "pair": "T08->T09",
+      "t_from": 2.0,
+      "t_to": 2.25,
+      "mae": 20.45429039001465,
+      "p50": 13.333333015441895,
+      "p95": 67.66666412353516,
+      "heat": "docs/evidence/siax_next_frame_f2f_v11/figures/FIG2_residual_T08_T09.png",
+      "flow_mean_px": 2.446892261505127,
+      "flow_p50_px": 0.81800377368927,
+      "flow_p95_px": 12.288777351379395,
+      "flow_max_px": 29.874202728271484
+    }
+  ],
+  "sift_consecutive": [
+    {
+      "pair": "T00->T01",
+      "n_anchors": 251,
+      "status": "ok"
+    },
+    {
+      "pair": "T01->T02",
+      "n_anchors": 286,
+      "status": "ok"
+    },
+    {
+      "pair": "T02->T03",
+      "n_anchors": 297,
+      "status": "ok"
+    },
+    {
+      "pair": "T03->T04",
+      "n_anchors": 291,
+      "status": "ok"
+    },
+    {
+      "pair": "T04->T05",
+      "n_anchors": 289,
+      "status": "ok"
+    },
+    {
+      "pair": "T05->T06",
+      "n_anchors": 303,
+      "status": "ok"
+    },
+    {
+      "pair": "T06->T07",
+      "n_anchors": 308,
+      "status": "ok"
+    },
+    {
+      "pair": "T07->T08",
+      "n_anchors": 264,
+      "status": "ok"
+    },
+    {
+      "pair": "T08->T09",
+      "n_anchors": 274,
+      "status": "ok"
+    }
+  ],
+  "motion_similarity_per_pair": [
+    {
+      "pair": "T00__T01",
+      "n_anchors": 251,
+      "scale": 0.9982870666213374,
+      "rotation_deg": -0.07998515340792564,
+      "tx": -0.4257230004649273,
+      "ty": 1.3740566085259616,
+      "p95_residual": 2.6560108892504086,
+      "median_residual": 0.9220017928369013
+    },
+    {
+      "pair": "T01__T02",
+      "n_anchors": 286,
+      "scale": 0.9991102182782252,
+      "rotation_deg": -0.04687425179525681,
+      "tx": -0.5037145416857811,
+      "ty": 0.7330079290234721,
+      "p95_residual": 2.6154374089424235,
+      "median_residual": 0.7664693580111586
+    },
+    {
+      "pair": "T02__T03",
+      "n_anchors": 297,
+      "scale": 0.9990578069605228,
+      "rotation_deg": -0.04734257774967567,
+      "tx": -0.19271894486007568,
+      "ty": 0.6417773004627065,
+      "p95_residual": 1.9468455089279773,
+      "median_residual": 0.4997954133863602
+    },
+    {
+      "pair": "T03__T04",
+      "n_anchors": 291,
+      "scale": 0.9990594960632373,
+      "rotation_deg": -0.024459662031724397,
+      "tx": 0.3959411727720408,
+      "ty": 0.2997889300089014,
+      "p95_residual": 1.8498588636538753,
+      "median_residual": 0.4341185122539381
+    },
+    {
+      "pair": "T04__T05",
+      "n_anchors": 289,
+      "scale": 0.9992340463145286,
+      "rotation_deg": 0.016429954898826152,
+      "tx": 1.0336725623449183,
+      "ty": -0.25477912001025516,
+      "p95_residual": 1.8778138217610434,
+      "median_residual": 0.5728525926183019
+    },
+    {
+      "pair": "T05__T06",
+      "n_anchors": 303,
+      "scale": 0.9992220568568122,
+      "rotation_deg": 0.022644408958470003,
+      "tx": 1.0857946992455254,
+      "ty": -0.28155847908135456,
+      "p95_residual": 2.3709731975170105,
+      "median_residual": 0.7335755356440647
+    },
+    {
+      "pair": "T06__T07",
+      "n_anchors": 308,
+      "scale": 0.9990429374039235,
+      "rotation_deg": 0.03543742126098282,
+      "tx": 1.495659867368886,
+      "ty": -0.4411037594485947,
+      "p95_residual": 2.4460410582693526,
+      "median_residual": 0.9061608353841344
+    },
+    {
+      "pair": "T07__T08",
+      "n_anchors": 264,
+      "scale": 1.000425325142167,
+      "rotation_deg": 0.08888530915534405,
+      "tx": 1.4263839979827253,
+      "ty": -1.540474097150934,
+      "p95_residual": 2.504550619635402,
+      "median_residual": 1.2315877159725714
+    },
+    {
+      "pair": "T08__T09",
+      "n_anchors": 274,
+      "scale": 0.9992687938173174,
+      "rotation_deg": 0.0723617169167029,
+      "tx": 1.9089320467722928,
+      "ty": -1.0550622543727286,
+      "p95_residual": 2.9543115385592995,
+      "median_residual": 1.1804387814544923
+    }
+  ],
+  "ddxx_models": [
+    {
+      "model": "similarity",
+      "train_p95": 2.5568,
+      "holdout_p95": 2.4086,
+      "gate": "pass",
+      "ok": true,
+      "n_edges": 9,
+      "algorithm_id": "DDXX_MV_GLOBAL_SIMILARITY_V1"
+    },
+    {
+      "model": "homography",
+      "train_p95": 2.2576,
+      "holdout_p95": 2.1556,
+      "gate": "pass",
+      "ok": true,
+      "n_edges": 9,
+      "algorithm_id": "DDXX_MV_GLOBAL_HOMOGRAPHY_V0_2"
+    },
+    {
+      "model": "local_mesh",
+      "train_p95": 2.5568,
+      "holdout_p95": 2.4086,
+      "gate": "pass",
+      "ok": true,
+      "n_edges": 9,
+      "algorithm_id": "DDXX_MV_LOCAL_MESH_SIMTILE_V0_2"
+    }
+  ],
+  "formulas": {
+    "similarity": "x' = s R(θ) x + t",
+    "homography": "x~' ~ H [x y 1]^T",
+    "sift": "mutual SIFT + ratio + RANSAC on consecutive frames only",
+    "flow": "Farneback dense optical flow magnitude",
+    "f2f_mae": "mean |I_t - I_{t+1}| (identity residual; motion raises this)"
+  },
+  "acceptance": {
+    "next_frame_f2f_demo": true,
+    "spatial_extend": false,
+    "cinematic_product": false,
+    "quality_qualified": false,
+    "native_4k_success": false,
+    "final_acceptance": false,
+    "note": "Temporal F2F geometry/motion metrics only; not film-grade continuity pass."
+  },
+  "paths": {
+    "out_dir": "docs/evidence/siax_next_frame_f2f_v11",
+    "artifacts": "/workspace/artifacts/tmp/cinema_f2f_v11"
+  }
+}

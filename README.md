@@ -159,3 +159,17 @@ This partial DETAIL6 path emits a lossless working PNG, q98 and q100 JPEG 4:4:4 
 ## Source project
 
 See docs/LEGACY_SOURCE_POLICY.md. The historical repository is not a dependency and will never be automatically pulled into this repository.
+
+
+## SIAX multi-image geometric registration + ComfyUI (experimental)
+
+A separate DDXX-derived registration engine now prototypes multi-image geometry: mutual SIFT/ratio matches + RANSAC propose pairwise anchors; weighted Umeyama + Huber fits each pair; a global pose-graph jointly solves image transforms; edge closure and unverified graph bridges gate the output. It is intentionally separate from the existing candidate-to-BASE dimension registration gate.
+
+The ComfyUI workflow and five custom nodes are in:
+- `workflows/SIAX_MultiImage_Geometric_Registration_v0.1.json`
+- `custom_nodes/ComfyUI-SIAX-MultiImage/`
+- `docs/SIAX_MULTIVIEW_GEOMETRY_ENGINE.md`
+
+Install the optional matcher dependency with `python -m pip install -e ".[registration]"`, copy the custom-node folder into ComfyUI's `custom_nodes`, restart ComfyUI, then open the workflow JSON. The graph begins with a zero residual threshold so transforms remain pending until a project-specific threshold is explicitly supplied. It also blocks 3+ image graphs containing unverified bridge edges by default.
+
+This is geometry registration and basic feather candidate compositing only. It does not solve perspective/parallax/non-rigid scenes, synthesize missing content, or certify final seam quality. ComfyUI's live UI import and replay on project-owned image sets remain separate validation steps.

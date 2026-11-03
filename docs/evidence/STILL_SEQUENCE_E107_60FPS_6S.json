@@ -1,0 +1,84 @@
+{
+  "format": "ige.still_sequence_f2f_multi",
+  "format_version": "1.1",
+  "mode": "still_sequence_f2f_multi_60fps",
+  "not_image_to_video": true,
+  "image_to_video_tools_called_this_run": [],
+  "imagine_still_gen_this_run": false,
+  "imagine_still_gen_blocked": true,
+  "source_asset_id": "1e8853a5-3897-48c0-aabd-aa20dda21723",
+  "n_keyframes_unique": 12,
+  "n_frames": 360,
+  "fps_playback": 60,
+  "duration_s_target": 6.0,
+  "duration_s_probe": 6.0,
+  "motion_source": "still_playback_multi_different_stills",
+  "keyframe_method": "procedural_remap_rain_splash_hair_phase_from_master",
+  "interp_method": "farneback_forward_backward_blend",
+  "audio": "silence_anullsrc",
+  "volume_detect": [
+    "[Parsed_volumedetect_0 @ 0x7fb784001ac0] mean_volume: -91.0 dB",
+    "[Parsed_volumedetect_0 @ 0x7fb784001ac0] max_volume: -91.0 dB"
+  ],
+  "metrics": {
+    "n_pairs": 63,
+    "mae_p50": 0.9322822690010071,
+    "mae_mean": 0.8622952406368558,
+    "flow_p50_median": 0.07580624520778656,
+    "pairs_head": [
+      {
+        "pair": "T0000->T0001",
+        "mae": 1.3881549835205078,
+        "p95": 4.0,
+        "flow_p50": 0.07594114542007446
+      },
+      {
+        "pair": "T0001->T0002",
+        "mae": 1.319711685180664,
+        "p95": 4.0,
+        "flow_p50": 0.07905112206935883
+      },
+      {
+        "pair": "T0002->T0003",
+        "mae": 1.2537102699279785,
+        "p95": 4.0,
+        "flow_p50": 0.08176884055137634
+      },
+      {
+        "pair": "T0003->T0004",
+        "mae": 1.1913342475891113,
+        "p95": 4.0,
+        "flow_p50": 0.08398301899433136
+      }
+    ],
+    "pairs_tail": [
+      {
+        "pair": "T0340->T0341",
+        "mae": 0.4381018579006195,
+        "p95": 2.0,
+        "flow_p50": 0.005940891802310944
+      },
+      {
+        "pair": "T0350->T0351",
+        "mae": 0.5498188138008118,
+        "p95": 2.0,
+        "flow_p50": 0.009091392159461975
+      }
+    ]
+  },
+  "sha_sample": {
+    "T0": "336b5c2ecc661b10032993ee0ed6454be90d858736d6ac9cf971712193b8dbbc",
+    "T1": "6510d98e9eccdb5214af25c74cc76618c64d523f935a5eb04952fe87ef2efacc",
+    "T180": "eeab31791bf96fdcc3bb8d117b10581009bfea81891f1185cc31dc98e3b68d1e",
+    "T359": "8979d8735ca67d46c99ee452e6f205e2dd0c9abd73aaf60e385c29e4ce3bad69"
+  },
+  "outputs": {
+    "mp4": "/workspace/artifacts/tmp/still_f2f_e107_60fps_6s/STILL_F2F_E107_60fps_6s.mp4",
+    "filmstrip": "/workspace/artifacts/tmp/still_f2f_e107_60fps_6s/FIG_filmstrip_60fps6s.png",
+    "summary": "/workspace/artifacts/tmp/still_f2f_e107_60fps_6s/FIG_summary.png",
+    "kit_report": "/workspace/artifacts/tmp/still_f2f_e107_60fps_6s/kit_out/REPORT_STILL_SEQUENCE_F2F.json"
+  },
+  "quality_qualified": false,
+  "final_acceptance": false,
+  "e3_speed_claim": false
+}
