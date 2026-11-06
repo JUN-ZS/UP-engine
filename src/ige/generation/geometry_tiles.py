@@ -118,8 +118,11 @@ def _validate_contract(
 ) -> dict[str, Any]:
     if not isinstance(raw, dict) or raw.get("schema_version") != "ige-object-geometry/1.0":
         raise GeometryTileError("schema_version must be ige-object-geometry/1.0")
-    if raw.get("geometry_status") != "human_verified":
-        raise GeometryTileError("object geometry must be human_verified; model proposals cannot create locks")
+    geometry_status = raw.get("geometry_status")
+    if geometry_status not in {"human_verified", "assistant_provisional"}:
+        raise GeometryTileError(
+            "geometry_status must be human_verified or assistant_provisional; model proposals cannot create locks"
+        )
     source = raw.get("source")
     if not isinstance(source, dict):
         raise GeometryTileError("source metadata is required")
@@ -191,7 +194,7 @@ def _validate_contract(
 
     return {
         "schema_version": raw["schema_version"],
-        "geometry_status": "human_verified",
+        "geometry_status": geometry_status,
         "source": {"sha256": source_sha256, "width": width, "height": height},
         "object": {
             "id": obj["id"],
@@ -402,6 +405,11 @@ def plan_two_tile_generation(
             "height": height,
         },
         "geometry_contract": contract,
+        "geometry_gate": (
+            "pass_human_verified"
+            if contract["geometry_status"] == "human_verified"
+            else "pending_operator_confirmation"
+        ),
         "tiling": {
             "strategy": "two_vertical_tiles_with_overlap_and_disjoint_cores",
             "split_x": split_x,
@@ -661,9 +669,12 @@ def audit_tile_observations(
         overlap_iou >= tolerance["overlap_silhouette_iou_min"]
         and shared_max <= tolerance["overlap_landmark_max_px"]
     )
+    measured_status = "PASS_WITHIN_DECLARED_TOLERANCES" if overlap_ok else "FAIL_OVERLAP_INCONSISTENCY"
+    if overlap_ok and plan.get("geometry_gate") != "pass_human_verified":
+        measured_status = "MEASURED_WITHIN_TOLERANCES_PENDING_OPERATOR_CONFIRMATION"
     return {
         "schema_version": "ige-geometry-tile-audit/0.1",
-        "status": "PASS_WITHIN_DECLARED_TOLERANCES" if overlap_ok else "FAIL_OVERLAP_INCONSISTENCY",
+        "status": measured_status,
         "tile_reports": tile_reports,
         "overlap_report": {
             "overlap_xyxy_global": overlap,

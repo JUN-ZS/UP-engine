@@ -107,6 +107,34 @@ class GeometryLockedTileTests(unittest.TestCase):
         self.assertEqual(report["tile_reports"][1]["status"], "outside_declared_tolerance")
         self.assertEqual(report["overlap_report"]["status"], "not_evaluated")
 
+    def test_assistant_provisional_geometry_can_plan_but_never_final_pass(self):
+        raw = json.loads(self.contract_path.read_text(encoding="utf-8"))
+        raw["geometry_status"] = "assistant_provisional"
+        raw["provenance"] = {"source": "assistant_visual_annotation", "operator_confirmation": "pending"}
+        self.contract_path.write_text(json.dumps(raw), encoding="utf-8")
+        out = self.root / "provisional-plan"
+        plan = plan_two_tile_generation(
+            self.image_path, self.contract_path, out, split_x=50, overlap_px=12
+        )
+        self.assertEqual(plan["geometry_gate"], "pending_operator_confirmation")
+        observations_path = self.root / "provisional-observations.json"
+        observations_path.write_text(json.dumps({
+            "observations": [
+                {
+                    "tile_id": tile["tile_id"],
+                    "bbox_xyxy": tile["object_geometry_local"]["bbox_xyxy"],
+                    "polygon_xy": tile["object_geometry_local"]["polygon_xy"],
+                    "landmarks": tile["object_geometry_local"]["landmarks"],
+                }
+                for tile in plan["tiles"]
+            ]
+        }), encoding="utf-8")
+        report = audit_tile_observations(out / "plan.json", observations_path)
+        self.assertEqual(
+            report["status"],
+            "MEASURED_WITHIN_TOLERANCES_PENDING_OPERATOR_CONFIRMATION",
+        )
+
     def test_model_candidate_cannot_be_promoted_to_geometry_lock(self):
         raw = json.loads(self.contract_path.read_text(encoding="utf-8"))
         raw["geometry_status"] = "candidate"

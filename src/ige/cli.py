@@ -653,6 +653,7 @@ def main() -> int:
             "source_sha256": plan["source"]["sha256"],
             "canvas": [plan["source"]["width"], plan["source"]["height"]],
             "tile_count": len(plan["tiles"]),
+            "geometry_gate": plan["geometry_gate"],
             "tiles": [
                 {"tile_id": tile["tile_id"], "crop_xyxy": tile["crop_xyxy"],
                  "core_xyxy_global": tile["core_xyxy_global"], "image": tile["image_path"],

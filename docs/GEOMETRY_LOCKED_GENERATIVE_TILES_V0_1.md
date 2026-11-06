@@ -121,3 +121,8 @@ A geometry audit pass means only that the supplied measurements fall within the 
 ## Next integration gate
 
 Export the ComfyUI workflow in API format, bind its input-image and generation-parameter nodes to the task packet, submit both tiles through one controlled runner, collect generated outputs, and feed independently measured observations back to this audit. Do not mark that integration live until a real local ComfyUI replay has produced output files and hashes.
+
+
+## Provisional annotation gate
+
+A visually traced but not yet operator-confirmed object may use `geometry_status: assistant_provisional`. The planner emits `geometry_gate=pending_operator_confirmation`. Even perfect measured observations return `MEASURED_WITHIN_TOLERANCES_PENDING_OPERATOR_CONFIRMATION`, never an acceptance PASS. Model-generated proposals remain rejected as locks. Change the contract to `human_verified` only after an operator confirms/corrects the target polygon, bbox and landmarks.
