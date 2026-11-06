@@ -126,3 +126,13 @@ Export the ComfyUI workflow in API format, bind its input-image and generation-p
 ## Provisional annotation gate
 
 A visually traced but not yet operator-confirmed object may use `geometry_status: assistant_provisional`. The planner emits `geometry_gate=pending_operator_confirmation`. Even perfect measured observations return `MEASURED_WITHIN_TOLERANCES_PENDING_OPERATOR_CONFIRMATION`, never an acceptance PASS. Model-generated proposals remain rejected as locks. Change the contract to `human_verified` only after an operator confirms/corrects the target polygon, bbox and landmarks.
+
+## Object-focused ROI mode
+
+For a single-object crossing test, pass an explicit global ROI:
+
+    ige geometry-tile-plan source_16mp.png object_geometry.json \
+      --out runs/object-roi --split-x 2680 --overlap-px 144 \
+      --region 1664 960 3696 1984
+
+The two tiles cover only the ROI while the geometry contract remains in full-canvas coordinates. The ROI stitcher verifies the original source SHA and preserves every pixel outside the ROI from the exact source master. This prevents a one-object geometry experiment from allocating two unnecessarily large half-frame diffusion jobs.

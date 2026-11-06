@@ -272,6 +272,7 @@ def plan_two_tile_generation(
     *,
     split_x: int,
     overlap_px: int,
+    region_xyxy: tuple[int, int, int, int] | None = None,
 ) -> dict[str, Any]:
     """Create two overlapping generation crops with disjoint reconstruction cores.
 
@@ -302,17 +303,29 @@ def plan_two_tile_generation(
         raise GeometryTileError("split_x must be an integer inside the canvas")
     if not isinstance(overlap_px, int) or overlap_px < 1:
         raise GeometryTileError("overlap_px must be a positive integer")
+    region = [0, 0, width, height] if region_xyxy is None else list(region_xyxy)
+    if len(region) != 4 or any(not isinstance(v, int) for v in region):
+        raise GeometryTileError("region_xyxy must contain four integer canvas coordinates")
+    rx0, ry0, rx1, ry1 = region
+    if not (0 <= rx0 < rx1 <= width and 0 <= ry0 < ry1 <= height):
+        raise GeometryTileError("region_xyxy must be a positive rectangle inside the canvas")
 
     obj_bbox = contract["object"]["bbox_xyxy"]
+    if not (rx0 <= obj_bbox[0] and ry0 <= obj_bbox[1] and rx1 >= obj_bbox[2] and ry1 >= obj_bbox[3]):
+        raise GeometryTileError("region_xyxy must fully contain the locked object bbox")
     if not (obj_bbox[0] < split_x < obj_bbox[2]):
         raise GeometryTileError(
             "the experiment requires the split line to cross the object's global bbox"
         )
-    overlap_left = max(0, split_x - overlap_px)
-    overlap_right = min(width, split_x + overlap_px)
+    if not (rx0 < split_x < rx1):
+        raise GeometryTileError("split_x must lie inside region_xyxy")
+    overlap_left = max(rx0, split_x - overlap_px)
+    overlap_right = min(rx1, split_x + overlap_px)
     if overlap_right <= overlap_left:
         raise GeometryTileError("the two tile crops have no shared overlap")
-    shared_rect = [overlap_left, 0, overlap_right, height]
+    shared_rect = [overlap_left, ry0, overlap_right, ry1]
+    if not (overlap_left <= obj_bbox[0] and overlap_right >= obj_bbox[2]):
+        raise GeometryTileError("the shared tile overlap must contain the full object bbox for this two-tile consistency experiment")
     if _clip_bbox(obj_bbox, [float(v) for v in shared_rect]) is None:
         raise GeometryTileError("the shared tile overlap does not intersect the object")
     shared_object_polygon = _clip_polygon(contract["object"]["polygon_xy"], [float(v) for v in shared_rect])
@@ -323,14 +336,14 @@ def plan_two_tile_generation(
         {
             "tile_id": "tile_left",
             "side": "left",
-            "crop_xyxy": [0, 0, overlap_right, height],
-            "core_xyxy_global": [0, 0, split_x, height],
+            "crop_xyxy": [rx0, ry0, overlap_right, ry1],
+            "core_xyxy_global": [rx0, ry0, split_x, ry1],
         },
         {
             "tile_id": "tile_right",
             "side": "right",
-            "crop_xyxy": [overlap_left, 0, width, height],
-            "core_xyxy_global": [split_x, 0, width, height],
+            "crop_xyxy": [overlap_left, ry0, rx1, ry1],
+            "core_xyxy_global": [split_x, ry0, rx1, ry1],
         },
     ]
 
@@ -412,10 +425,15 @@ def plan_two_tile_generation(
         ),
         "tiling": {
             "strategy": "two_vertical_tiles_with_overlap_and_disjoint_cores",
+            "region_xyxy": region if region != [0, 0, width, height] else None,
             "split_x": split_x,
             "requested_overlap_px": overlap_px,
             "actual_overlap_xyxy": shared_rect,
-            "core_coverage": "exact_non_overlapping_full_canvas",
+            "core_coverage": (
+                "exact_non_overlapping_roi"
+                if region != [0, 0, width, height]
+                else "exact_non_overlapping_full_canvas"
+            ),
         },
         "generator": {
             "backend": "comfyui",
@@ -445,10 +463,11 @@ def stitch_two_tile_cores(
 ) -> dict[str, Any]:
     """Reconstruct a candidate from the two disjoint generated write cores.
 
-    The two generated images must retain their exact planned crop dimensions.
+    For an ROI plan, the exact source master is retained outside the ROI.
     No resizing, registration, feathering or hidden overlap averaging occurs.
     """
-    plan = json.loads(Path(plan_path).read_text(encoding="utf-8"))
+    plan_file = Path(plan_path)
+    plan = json.loads(plan_file.read_text(encoding="utf-8"))
     if plan.get("schema_version") != "ige-geometry-tile-plan/0.1":
         raise GeometryTileError("unsupported geometry tile plan schema")
     tiles = plan.get("tiles")
@@ -478,14 +497,46 @@ def stitch_two_tile_cores(
 
         canvas_width = int(plan["source"]["width"])
         canvas_height = int(plan["source"]["height"])
-        canvas = Image.new("RGB", (canvas_width, canvas_height))
+        region = plan.get("tiling", {}).get("region_xyxy")
+        if region is not None:
+            if (
+                not isinstance(region, list) or len(region) != 4
+                or not (0 <= region[0] < region[2] <= canvas_width
+                        and 0 <= region[1] < region[3] <= canvas_height)
+            ):
+                raise GeometryTileError("plan region_xyxy is invalid")
+            source_path = Path(plan["source"]["path"])
+            if not source_path.is_absolute():
+                source_path = plan_file.parent / source_path
+            if not source_path.is_file():
+                raise FileNotFoundError(source_path)
+            if _sha256(source_path) != plan["source"]["sha256"]:
+                raise GeometryTileError("source master SHA-256 does not match the geometry tile plan")
+            with Image.open(source_path) as opened:
+                canvas = ImageOps.exif_transpose(opened).convert("RGB")
+            if canvas.size != (canvas_width, canvas_height):
+                raise GeometryTileError("source master dimensions do not match the geometry tile plan")
+            rx0, ry0, rx1, ry1 = region
+            expected_cores = [
+                [rx0, ry0, plan["tiling"]["split_x"], ry1],
+                [plan["tiling"]["split_x"], ry0, rx1, ry1],
+            ]
+            coverage_area = (rx1 - rx0) * (ry1 - ry0)
+        else:
+            canvas = Image.new("RGB", (canvas_width, canvas_height))
+            expected_cores = [
+                [0, 0, plan["tiling"]["split_x"], canvas_height],
+                [plan["tiling"]["split_x"], 0, canvas_width, canvas_height],
+            ]
+            coverage_area = canvas_width * canvas_height
+
         occupied_area = 0
         cores = []
-        for tile, generated in zip(tiles, opened_images):
+        for tile, generated, expected_core in zip(tiles, opened_images, expected_cores):
             gx0, gy0, gx1, gy1 = tile["core_xyxy_global"]
             lx0, ly0, lx1, ly1 = tile["core_xyxy_local"]
-            if not (0 <= gx0 < gx1 <= canvas_width and 0 <= gy0 < gy1 <= canvas_height):
-                raise GeometryTileError("global write core lies outside the planned canvas")
+            if [gx0, gy0, gx1, gy1] != expected_core:
+                raise GeometryTileError("write cores do not match the exact planned coverage region")
             if not (0 <= lx0 < lx1 <= generated.width and 0 <= ly0 < ly1 <= generated.height):
                 raise GeometryTileError("local write core lies outside its generated tile")
             if (gx1 - gx0, gy1 - gy0) != (lx1 - lx0, ly1 - ly0):
@@ -494,13 +545,8 @@ def stitch_two_tile_cores(
             occupied_area += (gx1 - gx0) * (gy1 - gy0)
             canvas.paste(generated.crop((lx0, ly0, lx1, ly1)), (gx0, gy0))
 
-        a, b = cores
-        overlap_w = min(a[2], b[2]) - max(a[0], b[0])
-        overlap_h = min(a[3], b[3]) - max(a[1], b[1])
-        if overlap_w > 0 and overlap_h > 0:
-            raise GeometryTileError("write cores overlap; output ownership is ambiguous")
-        if occupied_area != canvas_width * canvas_height:
-            raise GeometryTileError("write cores do not cover the full canvas exactly")
+        if occupied_area != coverage_area:
+            raise GeometryTileError("write cores do not cover the planned region exactly")
 
         canvas.save(output, format="PNG")
         report = {
@@ -514,6 +560,8 @@ def stitch_two_tile_cores(
                 tiles[1]["tile_id"]: _sha256(generated_paths[1]),
             },
             "write_cores_global": cores,
+            "coverage_region_xyxy": region or [0, 0, canvas_width, canvas_height],
+            "outside_region_policy": "preserve_exact_source_master" if region is not None else "not_applicable",
             "ownership": "disjoint_core_copy_no_blend_no_resize_no_warp",
             "geometry_audit": "not_run",
             "final_acceptance": False,
@@ -527,6 +575,7 @@ def stitch_two_tile_cores(
         return report
     finally:
         opened_images.clear()
+
 
 
 def audit_tile_observations(

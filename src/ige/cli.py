@@ -247,6 +247,9 @@ def build_parser() -> argparse.ArgumentParser:
     geometry_plan.add_argument("--out", type=Path, required=True)
     geometry_plan.add_argument("--split-x", type=int, required=True, help="global canvas x-coordinate crossed by the object")
     geometry_plan.add_argument("--overlap-px", type=int, required=True, help="shared context width on each side of split_x")
+    geometry_plan.add_argument("--region", type=int, nargs=4, default=None,
+                                metavar=("X0", "Y0", "X1", "Y1"),
+                                help="optional object-focused global ROI; only this area is reconstructed")
 
     geometry_audit = sub.add_parser(
         "geometry-tile-audit",
@@ -646,6 +649,7 @@ def main() -> int:
             args.out,
             split_x=args.split_x,
             overlap_px=args.overlap_px,
+            region_xyxy=tuple(args.region) if args.region else None,
         )
         print(_json.dumps({
             "plan": str((args.out / "plan.json").resolve()),

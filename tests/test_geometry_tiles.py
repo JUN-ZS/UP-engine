@@ -169,6 +169,44 @@ class GeometryLockedTileTests(unittest.TestCase):
         self.assertEqual(report["status"], "FAIL_OR_INCOMPLETE")
         self.assertEqual(report["tile_reports"][1]["status"], "incomplete")
 
+    def test_roi_planner_creates_small_tiles_with_full_object_inside_shared_context(self):
+        out = self.root / "roi-plan"
+        plan = plan_two_tile_generation(
+            self.image_path, self.contract_path, out,
+            split_x=50, overlap_px=18, region_xyxy=(10, 10, 90, 70),
+        )
+        left, right = plan["tiles"]
+        self.assertEqual(left["crop_xyxy"], [10, 10, 68, 70])
+        self.assertEqual(right["crop_xyxy"], [32, 10, 90, 70])
+        self.assertEqual(left["core_xyxy_global"], [10, 10, 50, 70])
+        self.assertEqual(right["core_xyxy_global"], [50, 10, 90, 70])
+        self.assertEqual(plan["tiling"]["region_xyxy"], [10, 10, 90, 70])
+        self.assertEqual(plan["tiling"]["core_coverage"], "exact_non_overlapping_roi")
+        self.assertEqual(left["object_geometry_local"]["bbox_xyxy"], [25, 10, 55, 45])
+        self.assertEqual(right["object_geometry_local"]["bbox_xyxy"], [3, 10, 33, 45])
+
+    def test_roi_stitch_preserves_pixels_outside_roi(self):
+        out = self.root / "roi-plan"
+        plan_two_tile_generation(
+            self.image_path, self.contract_path, out,
+            split_x=50, overlap_px=18, region_xyxy=(10, 10, 90, 70),
+        )
+        left = self.root / "roi-left-generated.png"
+        right = self.root / "roi-right-generated.png"
+        Image.new("RGB", (58, 60), (255, 0, 0)).save(left)
+        Image.new("RGB", (58, 60), (0, 0, 255)).save(right)
+        output = self.root / "roi-master.png"
+        report = stitch_two_tile_cores(out / "plan.json", left, right, output)
+        with Image.open(output) as image:
+            self.assertEqual(image.size, (100, 80))
+            self.assertEqual(image.getpixel((5, 5)), (40, 70, 90))
+            self.assertEqual(image.getpixel((20, 20)), (255, 0, 0))
+            self.assertEqual(image.getpixel((49, 20)), (255, 0, 0))
+            self.assertEqual(image.getpixel((50, 20)), (0, 0, 255))
+            self.assertEqual(image.getpixel((95, 75)), (40, 70, 90))
+        self.assertEqual(report["coverage_region_xyxy"], [10, 10, 90, 70])
+        self.assertEqual(report["outside_region_policy"], "preserve_exact_source_master")
+
     def test_disjoint_core_stitch_reconstructs_canvas_without_blending(self):
         left = self.root / "left_generated.png"
         right = self.root / "right_generated.png"
@@ -202,6 +240,13 @@ class GeometryLockedTileTests(unittest.TestCase):
         ])
         self.assertEqual(plan_args.command, "geometry-tile-plan")
         self.assertEqual(plan_args.split_x, 50)
+        self.assertIsNone(plan_args.region)
+        roi_args = parser.parse_args([
+            "geometry-tile-plan", "source.png", "contract.json",
+            "--out", "tiles-roi", "--split-x", "50", "--overlap-px", "12",
+            "--region", "10", "10", "90", "70",
+        ])
+        self.assertEqual(roi_args.region, [10, 10, 90, 70])
         audit_args = parser.parse_args([
             "geometry-tile-audit", "tiles/plan.json", "observations.json",
             "--out", "audit.json",
