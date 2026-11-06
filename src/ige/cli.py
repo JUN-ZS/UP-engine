@@ -256,6 +256,15 @@ def build_parser() -> argparse.ArgumentParser:
     geometry_audit.add_argument("observations", type=Path, help="JSON containing per-tile local bbox, polygon and landmarks")
     geometry_audit.add_argument("--out", type=Path, required=True, help="audit JSON output")
 
+    geometry_stitch = sub.add_parser(
+        "geometry-tile-stitch",
+        help="reconstruct a candidate by copying only the two disjoint planned tile cores",
+    )
+    geometry_stitch.add_argument("plan", type=Path)
+    geometry_stitch.add_argument("left_generated", type=Path)
+    geometry_stitch.add_argument("right_generated", type=Path)
+    geometry_stitch.add_argument("--out", type=Path, required=True)
+
     return parser
 
 
@@ -668,6 +677,22 @@ def main() -> int:
             "overlap": report["overlap_report"]["status"],
         }, ensure_ascii=False, indent=2))
         return 0 if report["status"] == "PASS_WITHIN_DECLARED_TOLERANCES" else 2
+
+    if args.command == "geometry-tile-stitch":
+        from .generation.geometry_tiles import stitch_two_tile_cores
+        import json as _json
+
+        report = stitch_two_tile_cores(
+            args.plan, args.left_generated, args.right_generated, args.out
+        )
+        print(_json.dumps({
+            "output": report["output_path"],
+            "sha256": report["output_sha256"],
+            "status": report["status"],
+            "ownership": report["ownership"],
+            "geometry_audit": report["geometry_audit"],
+        }, ensure_ascii=False, indent=2))
+        return 0
 
     parser.error(f"unsupported command: {args.command}")
     return 2

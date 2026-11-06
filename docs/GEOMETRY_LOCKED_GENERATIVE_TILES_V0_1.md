@@ -92,6 +92,14 @@ Then run:
     ige geometry-tile-audit runs/geometry_tiles_001/plan.json observations.json \
       --out runs/geometry_tiles_001/audit.json
 
+Reconstruct the full candidate by copying only each tile's disjoint write core (no blending or resizing):
+
+    ige geometry-tile-stitch runs/geometry_tiles_001/plan.json \
+      runs/geometry_tiles_001/generated_left.png runs/geometry_tiles_001/generated_right.png \
+      --out runs/geometry_tiles_001/generated_master.png
+
+The stitcher requires exact generated crop dimensions and writes a SHA-256 sidecar. Its output status remains COMPOSITE_CANDIDATE_NOT_GEOMETRY_ACCEPTED; run the geometry audit separately.
+
 The audit measures tile-local bbox IoU, silhouette IoU and landmark displacement, then compares both generated silhouettes and any shared landmarks in global overlap coordinates. Missing tile observations are incomplete, never PASS.
 
 The annotation source can be a human-marked polygon/landmark set or a segmentation proposal that has been independently reviewed. A VLM's self-reported geometry or prompt-following statement is not measurement evidence.

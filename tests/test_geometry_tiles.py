@@ -10,6 +10,7 @@ from ige.generation.geometry_tiles import (
     GeometryTileError,
     audit_tile_observations,
     plan_two_tile_generation,
+    stitch_two_tile_cores,
 )
 from ige.cli import build_parser
 
@@ -140,6 +141,31 @@ class GeometryLockedTileTests(unittest.TestCase):
         self.assertEqual(report["status"], "FAIL_OR_INCOMPLETE")
         self.assertEqual(report["tile_reports"][1]["status"], "incomplete")
 
+    def test_disjoint_core_stitch_reconstructs_canvas_without_blending(self):
+        left = self.root / "left_generated.png"
+        right = self.root / "right_generated.png"
+        Image.new("RGB", (62, 80), (255, 0, 0)).save(left)
+        Image.new("RGB", (62, 80), (0, 0, 255)).save(right)
+        output = self.root / "stitched.png"
+        report = stitch_two_tile_cores(self.out / "plan.json", left, right, output)
+        with Image.open(output) as image:
+            self.assertEqual(image.size, (100, 80))
+            self.assertEqual(image.getpixel((10, 40)), (255, 0, 0))
+            self.assertEqual(image.getpixel((49, 40)), (255, 0, 0))
+            self.assertEqual(image.getpixel((50, 40)), (0, 0, 255))
+            self.assertEqual(image.getpixel((99, 40)), (0, 0, 255))
+        self.assertEqual(report["status"], "COMPOSITE_CANDIDATE_NOT_GEOMETRY_ACCEPTED")
+        self.assertFalse(report["final_acceptance"])
+        self.assertTrue(Path(str(output) + ".audit.json").is_file())
+
+    def test_stitch_rejects_generated_dimensions_that_do_not_match_plan(self):
+        left = self.root / "wrong_left.png"
+        right = self.root / "right.png"
+        Image.new("RGB", (61, 80), (255, 0, 0)).save(left)
+        Image.new("RGB", (62, 80), (0, 0, 255)).save(right)
+        with self.assertRaisesRegex(GeometryTileError, "no implicit resize"):
+            stitch_two_tile_cores(self.out / "plan.json", left, right, self.root / "bad.png")
+
     def test_cli_parses_plan_and_audit_commands(self):
         parser = build_parser()
         plan_args = parser.parse_args([
@@ -153,6 +179,11 @@ class GeometryLockedTileTests(unittest.TestCase):
             "--out", "audit.json",
         ])
         self.assertEqual(audit_args.command, "geometry-tile-audit")
+        stitch_args = parser.parse_args([
+            "geometry-tile-stitch", "tiles/plan.json", "left.png", "right.png",
+            "--out", "master.png",
+        ])
+        self.assertEqual(stitch_args.command, "geometry-tile-stitch")
 
     def test_existing_nonempty_output_is_not_overwritten(self):
         with self.assertRaises(FileExistsError):

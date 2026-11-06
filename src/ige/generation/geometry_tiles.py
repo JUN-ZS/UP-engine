@@ -427,6 +427,100 @@ def plan_two_tile_generation(
     return plan
 
 
+
+
+def stitch_two_tile_cores(
+    plan_path: str | Path,
+    left_generated_path: str | Path,
+    right_generated_path: str | Path,
+    output_path: str | Path,
+) -> dict[str, Any]:
+    """Reconstruct a candidate from the two disjoint generated write cores.
+
+    The two generated images must retain their exact planned crop dimensions.
+    No resizing, registration, feathering or hidden overlap averaging occurs.
+    """
+    plan = json.loads(Path(plan_path).read_text(encoding="utf-8"))
+    if plan.get("schema_version") != "ige-geometry-tile-plan/0.1":
+        raise GeometryTileError("unsupported geometry tile plan schema")
+    tiles = plan.get("tiles")
+    if not isinstance(tiles, list) or len(tiles) != 2:
+        raise GeometryTileError("two-tile stitch requires exactly two planned tiles")
+    output = Path(output_path)
+    report_path = Path(str(output) + ".audit.json")
+    if output.exists() or report_path.exists():
+        raise FileExistsError("stitch output or its audit sidecar already exists")
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    generated_paths = [Path(left_generated_path), Path(right_generated_path)]
+    opened_images = []
+    try:
+        for tile, generated_path in zip(tiles, generated_paths):
+            if not generated_path.is_file():
+                raise FileNotFoundError(generated_path)
+            with Image.open(generated_path) as opened:
+                image = ImageOps.exif_transpose(opened).convert("RGB")
+            expected_size = (tile["size"]["width"], tile["size"]["height"])
+            if image.size != expected_size:
+                raise GeometryTileError(
+                    f'{tile["tile_id"]} generated dimensions {image.size} '
+                    f"do not match planned crop {expected_size}; no implicit resize is allowed"
+                )
+            opened_images.append(image)
+
+        canvas_width = int(plan["source"]["width"])
+        canvas_height = int(plan["source"]["height"])
+        canvas = Image.new("RGB", (canvas_width, canvas_height))
+        occupied_area = 0
+        cores = []
+        for tile, generated in zip(tiles, opened_images):
+            gx0, gy0, gx1, gy1 = tile["core_xyxy_global"]
+            lx0, ly0, lx1, ly1 = tile["core_xyxy_local"]
+            if not (0 <= gx0 < gx1 <= canvas_width and 0 <= gy0 < gy1 <= canvas_height):
+                raise GeometryTileError("global write core lies outside the planned canvas")
+            if not (0 <= lx0 < lx1 <= generated.width and 0 <= ly0 < ly1 <= generated.height):
+                raise GeometryTileError("local write core lies outside its generated tile")
+            if (gx1 - gx0, gy1 - gy0) != (lx1 - lx0, ly1 - ly0):
+                raise GeometryTileError("global and local write-core dimensions do not match")
+            cores.append([gx0, gy0, gx1, gy1])
+            occupied_area += (gx1 - gx0) * (gy1 - gy0)
+            canvas.paste(generated.crop((lx0, ly0, lx1, ly1)), (gx0, gy0))
+
+        a, b = cores
+        overlap_w = min(a[2], b[2]) - max(a[0], b[0])
+        overlap_h = min(a[3], b[3]) - max(a[1], b[1])
+        if overlap_w > 0 and overlap_h > 0:
+            raise GeometryTileError("write cores overlap; output ownership is ambiguous")
+        if occupied_area != canvas_width * canvas_height:
+            raise GeometryTileError("write cores do not cover the full canvas exactly")
+
+        canvas.save(output, format="PNG")
+        report = {
+            "schema_version": "ige-geometry-tile-stitch/0.1",
+            "status": "COMPOSITE_CANDIDATE_NOT_GEOMETRY_ACCEPTED",
+            "output_path": str(output.resolve()),
+            "output_sha256": _sha256(output),
+            "source_sha256": plan["source"]["sha256"],
+            "generated_tile_sha256": {
+                tiles[0]["tile_id"]: _sha256(generated_paths[0]),
+                tiles[1]["tile_id"]: _sha256(generated_paths[1]),
+            },
+            "write_cores_global": cores,
+            "ownership": "disjoint_core_copy_no_blend_no_resize_no_warp",
+            "geometry_audit": "not_run",
+            "final_acceptance": False,
+            "limitations": [
+                "Only disjoint tile cores were copied; the shared context overlap was not averaged.",
+                "This is a composite candidate, not proof of geometry, identity, perceptual quality or seam acceptance.",
+                "Generated-image dimensions must exactly match planned crop dimensions.",
+            ],
+        }
+        report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        return report
+    finally:
+        opened_images.clear()
+
+
 def audit_tile_observations(
     plan_path: str | Path,
     observations_path: str | Path,
