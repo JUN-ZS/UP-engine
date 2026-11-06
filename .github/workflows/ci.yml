@@ -32,6 +32,8 @@ jobs:
       - run: ige siax-distribute-plan --help
       - run: ige siax-distribute-worker --help
       - run: ige siax-distribute-stitch --help
+      - run: ige geometry-tile-plan --help
+      - run: ige geometry-tile-audit --help
       - run: ige detail6 --help
       - run: python -c "import json,pathlib; json.loads(pathlib.Path('src/ige/data/legacy_reference_catalog.json').read_text(encoding='utf-8')); print('reference catalog valid')"
       - name: Mark live xAI API E2E status
