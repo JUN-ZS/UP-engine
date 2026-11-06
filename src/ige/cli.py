@@ -660,7 +660,7 @@ def main() -> int:
 
         report = audit_tile_observations(args.plan, args.observations)
         args.out.parent.mkdir(parents=True, exist_ok=True)
-        args.out.write_text(_json.dumps(report, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        args.out.write_text(_json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(_json.dumps({
             "audit": str(args.out.resolve()),
             "status": report["status"],

@@ -102,8 +102,9 @@ class GeometryLockedTileTests(unittest.TestCase):
         observations_path = self.root / "shifted.json"
         observations_path.write_text(json.dumps(observations), encoding="utf-8")
         report = audit_tile_observations(self.out / "plan.json", observations_path)
-        self.assertNotEqual(report["status"], "PASS_WITHIN_DECLARED_TOLERANCES")
-        self.assertNotEqual(report["overlap_report"]["silhouette_iou"], 1.0)
+        self.assertEqual(report["status"], "FAIL_OR_INCOMPLETE")
+        self.assertEqual(report["tile_reports"][1]["status"], "outside_declared_tolerance")
+        self.assertEqual(report["overlap_report"]["status"], "not_evaluated")
 
     def test_model_candidate_cannot_be_promoted_to_geometry_lock(self):
         raw = json.loads(self.contract_path.read_text(encoding="utf-8"))
