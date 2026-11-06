@@ -324,8 +324,8 @@ def plan_two_tile_generation(
     if overlap_right <= overlap_left:
         raise GeometryTileError("the two tile crops have no shared overlap")
     shared_rect = [overlap_left, ry0, overlap_right, ry1]
-    if not (overlap_left <= obj_bbox[0] and overlap_right >= obj_bbox[2]):
-        raise GeometryTileError("the shared tile overlap must contain the full object bbox for this two-tile consistency experiment")
+    if region_xyxy is not None and not (overlap_left <= obj_bbox[0] and overlap_right >= obj_bbox[2]):
+        raise GeometryTileError("the shared tile overlap must contain the full object bbox for ROI consistency experiments")
     if _clip_bbox(obj_bbox, [float(v) for v in shared_rect]) is None:
         raise GeometryTileError("the shared tile overlap does not intersect the object")
     shared_object_polygon = _clip_polygon(contract["object"]["polygon_xy"], [float(v) for v in shared_rect])
