@@ -238,6 +238,36 @@ def build_parser() -> argparse.ArgumentParser:
     dist_stitch.add_argument("job_dir", type=Path)
     dist_stitch.add_argument("--out", type=Path, required=True)
 
+    geometry_plan = sub.add_parser(
+        "geometry-tile-plan",
+        help="plan two overlapping high-resolution generation tiles from a human-verified global object contract",
+    )
+    geometry_plan.add_argument("source_image", type=Path)
+    geometry_plan.add_argument("contract", type=Path, help="ige-object-geometry/1.0 JSON")
+    geometry_plan.add_argument("--out", type=Path, required=True)
+    geometry_plan.add_argument("--split-x", type=int, required=True, help="global canvas x-coordinate crossed by the object")
+    geometry_plan.add_argument("--overlap-px", type=int, required=True, help="shared context width on each side of split_x")
+    geometry_plan.add_argument("--region", type=int, nargs=4, default=None,
+                                metavar=("X0", "Y0", "X1", "Y1"),
+                                help="optional object-focused global ROI; only this area is reconstructed")
+
+    geometry_audit = sub.add_parser(
+        "geometry-tile-audit",
+        help="audit measured geometry from two generated tiles against the global contract and overlap",
+    )
+    geometry_audit.add_argument("plan", type=Path, help="plan.json produced by geometry-tile-plan")
+    geometry_audit.add_argument("observations", type=Path, help="JSON containing per-tile local bbox, polygon and landmarks")
+    geometry_audit.add_argument("--out", type=Path, required=True, help="audit JSON output")
+
+    geometry_stitch = sub.add_parser(
+        "geometry-tile-stitch",
+        help="reconstruct a candidate by copying only the two disjoint planned tile cores",
+    )
+    geometry_stitch.add_argument("plan", type=Path)
+    geometry_stitch.add_argument("left_generated", type=Path)
+    geometry_stitch.add_argument("right_generated", type=Path)
+    geometry_stitch.add_argument("--out", type=Path, required=True)
+
     return parser
 
 
@@ -608,6 +638,66 @@ def main() -> int:
         print("Visual quality review:", report["visual_quality_review"])
         print("Note: HF-energy change is diagnostic only, not an acceptance score.")
         return 0 if report["execution_complete"] else 2
+
+    if args.command == "geometry-tile-plan":
+        from .generation.geometry_tiles import plan_two_tile_generation
+        import json as _json
+
+        plan = plan_two_tile_generation(
+            args.source_image,
+            args.contract,
+            args.out,
+            split_x=args.split_x,
+            overlap_px=args.overlap_px,
+            region_xyxy=tuple(args.region) if args.region else None,
+        )
+        print(_json.dumps({
+            "plan": str((args.out / "plan.json").resolve()),
+            "status": plan["status"],
+            "source_sha256": plan["source"]["sha256"],
+            "canvas": [plan["source"]["width"], plan["source"]["height"]],
+            "tile_count": len(plan["tiles"]),
+            "geometry_gate": plan["geometry_gate"],
+            "tiles": [
+                {"tile_id": tile["tile_id"], "crop_xyxy": tile["crop_xyxy"],
+                 "core_xyxy_global": tile["core_xyxy_global"], "image": tile["image_path"],
+                 "task": tile["task_path"]}
+                for tile in plan["tiles"]
+            ],
+            "generator_state": plan["generator"]["state"],
+        }, ensure_ascii=False, indent=2))
+        return 0
+
+    if args.command == "geometry-tile-audit":
+        from .generation.geometry_tiles import audit_tile_observations
+        import json as _json
+
+        report = audit_tile_observations(args.plan, args.observations)
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(_json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(_json.dumps({
+            "audit": str(args.out.resolve()),
+            "status": report["status"],
+            "tile_statuses": [item["status"] for item in report["tile_reports"]],
+            "overlap": report["overlap_report"]["status"],
+        }, ensure_ascii=False, indent=2))
+        return 0 if report["status"] == "PASS_WITHIN_DECLARED_TOLERANCES" else 2
+
+    if args.command == "geometry-tile-stitch":
+        from .generation.geometry_tiles import stitch_two_tile_cores
+        import json as _json
+
+        report = stitch_two_tile_cores(
+            args.plan, args.left_generated, args.right_generated, args.out
+        )
+        print(_json.dumps({
+            "output": report["output_path"],
+            "sha256": report["output_sha256"],
+            "status": report["status"],
+            "ownership": report["ownership"],
+            "geometry_audit": report["geometry_audit"],
+        }, ensure_ascii=False, indent=2))
+        return 0
 
     parser.error(f"unsupported command: {args.command}")
     return 2
