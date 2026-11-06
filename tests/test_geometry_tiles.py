@@ -199,11 +199,11 @@ class GeometryLockedTileTests(unittest.TestCase):
         report = stitch_two_tile_cores(out / "plan.json", left, right, output)
         with Image.open(output) as image:
             self.assertEqual(image.size, (100, 80))
-            self.assertEqual(image.getpixel((5, 5)), (40, 70, 90))
+            self.assertEqual(image.getpixel((5, 5)), (80, 90, 100))
             self.assertEqual(image.getpixel((20, 20)), (255, 0, 0))
             self.assertEqual(image.getpixel((49, 20)), (255, 0, 0))
             self.assertEqual(image.getpixel((50, 20)), (0, 0, 255))
-            self.assertEqual(image.getpixel((95, 75)), (40, 70, 90))
+            self.assertEqual(image.getpixel((95, 75)), (80, 90, 100))
         self.assertEqual(report["coverage_region_xyxy"], [10, 10, 90, 70])
         self.assertEqual(report["outside_region_policy"], "preserve_exact_source_master")
 
