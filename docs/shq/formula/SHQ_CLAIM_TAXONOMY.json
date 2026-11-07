@@ -1,0 +1,36 @@
+{
+  "formal": "SHQ_CLAIM_TAXONOMY_V1",
+  "write_id": "01389",
+  "definition": "claim=dialogue/filename/PASS slogan; fact=reproducible SHA+backend+S7",
+  "levels": [
+    "C0_DIALOGUE",
+    "C1_FOSSIL_SIM",
+    "C2_DONOR_XFER",
+    "C3_BACKEND_LOG",
+    "C4_S7",
+    "C5_GOLD_REPLAY"
+  ],
+  "forbid_codes": [
+    "E-CLAIM-01",
+    "E-CLAIM-02",
+    "E-CLAIM-03",
+    "E-CLAIM-04",
+    "E-CLAIM-05",
+    "E-CLAIM-06",
+    "E-CLAIM-07",
+    "E-CLAIM-08"
+  ],
+  "paths": [
+    "PATH_A_SIAX",
+    "PATH_B_HR_TILE_DIFFUSION",
+    "PATH_C_DONOR_MULTIBAND"
+  ],
+  "four_anti": "optional skill via registry, not mandatory pipeline",
+  "param_sep": [
+    "model_scale",
+    "object_transform",
+    "tile_size",
+    "tile_context"
+  ],
+  "ACCEPT_FULL_HD": false
+}
