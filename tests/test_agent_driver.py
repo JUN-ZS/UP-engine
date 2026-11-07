@@ -121,6 +121,20 @@ class AgentDriverTests(unittest.TestCase):
         self.assertFalse(report["execution_allowed"])
         self.assertIn("workflow_candidate", report["stages"][0]["reasons"][0])
 
+    def test_unreviewed_entrypoint_blocks_even_in_plan_only_mode(self):
+        payload = dict(self.registry.payload)
+        payload["methods"] = [dict(method) for method in payload["methods"]]
+        siax = next(m for m in payload["methods"] if m["method_id"] == "SIAX4X_TILE_CORE_SR")
+        siax["entrypoint"] = "builtins::open"
+        tampered_registry = MethodRegistry(payload)
+        with tempfile.TemporaryDirectory() as directory:
+            manifest, checkpoint = self._manifest(Path(directory))
+            with patch("ige.agent_driver.sha256_file", side_effect=lambda p: SIAX_SHA if Path(p) == checkpoint else sha(Path(p))):
+                report = run_agent_manifest(manifest, execute=False, registry=tampered_registry)
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertIn("not in the reviewed callable allowlist", report["stages"][0]["reasons"][0])
+        self.assertFalse(report["execution_allowed"])
+
     def test_overlapping_approved_and_protected_masks_block(self):
         with tempfile.TemporaryDirectory() as directory:
             manifest, checkpoint = self._manifest(Path(directory))
