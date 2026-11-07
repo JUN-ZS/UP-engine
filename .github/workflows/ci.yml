@@ -18,6 +18,8 @@ jobs:
       - run: node --check tools/read-studio/app.js
       - run: python -c "import json,pathlib; [json.loads(p.read_text(encoding='utf-8')) for root in ('schemas','configs','examples') for p in pathlib.Path(root).rglob('*.json')]; print('JSON files valid')"
       - run: ige validate-manifest examples/peep_manifest.json
+      - run: ige validate-method-registry
+      - run: ige audit-s0-s7 --help
       - run: ige read-image --help
       - run: ige compile-generation --help
       - run: ige generate-candidate --help
