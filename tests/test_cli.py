@@ -7,6 +7,11 @@ class CliParserTests(unittest.TestCase):
     def test_all_pipeline_commands_are_registered(self):
         parser = build_parser()
         self.assertEqual(parser.prog, "ige")
+        registry = parser.parse_args(["validate-method-registry"])
+        self.assertEqual(registry.command, "validate-method-registry")
+        audit = parser.parse_args(["audit-s0-s7", "evidence.json", "--method-registry", "registry.json", "--out", "audit.json"])
+        self.assertEqual(audit.command, "audit-s0-s7")
+        self.assertEqual(audit.evidence.name, "evidence.json")
         read = parser.parse_args([
             "read-image", "source.png", "--out", "runs/read-1",
             "--reasoner", "grok"
@@ -74,8 +79,10 @@ class CliParserTests(unittest.TestCase):
 
         refs = parser.parse_args(["ref-search", "--skill", "DETAIL6"])
         self.assertEqual(refs.command, "ref-search")
-        plan = parser.parse_args(["skill-plan", "source.png", "--diagnosis", "diagnosis.json"])
+        plan = parser.parse_args(["skill-plan", "source.png", "--diagnosis", "diagnosis.json", "--method-registry", "registry.json", "--license-review-acknowledged"])
         self.assertEqual(plan.command, "skill-plan")
+        self.assertEqual(plan.method_registry.name, "registry.json")
+        self.assertTrue(plan.license_review_acknowledged)
         upscale = parser.parse_args(["upscale-siax", "source.png", "--checkpoint", "s iax.pth", "--out", "4x.png"])
         self.assertEqual(upscale.command, "upscale-siax")
         detail6 = parser.parse_args(["detail6", "source.png", "--upscaled", "4x.png", "--masks", "masks.json", "--out", "detail6"])

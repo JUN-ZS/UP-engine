@@ -19,6 +19,20 @@ def build_parser() -> argparse.ArgumentParser:
     )
     validate.add_argument("path", type=Path)
 
+    validate_registry = sub.add_parser(
+        "validate-method-registry",
+        help="validate the versioned S0-S7 Method Registry",
+    )
+    validate_registry.add_argument("--path", type=Path, default=None)
+
+    audit_s0_s7 = sub.add_parser(
+        "audit-s0-s7",
+        help="audit source-bound S0-S7 receipts; missing evidence blocks acceptance",
+    )
+    audit_s0_s7.add_argument("evidence", type=Path, help="S0-S7 evidence bundle JSON")
+    audit_s0_s7.add_argument("--method-registry", type=Path, default=None)
+    audit_s0_s7.add_argument("--out", type=Path, default=None)
+
     read = sub.add_parser(
         "read-image",
         help="inspect a still image and export auditable regions, proposals, relations and masks",
@@ -186,6 +200,8 @@ def build_parser() -> argparse.ArgumentParser:
     skill_plan.add_argument("--checkpoint", type=Path, default=None)
     skill_plan.add_argument("--upscaled", type=Path, default=None)
     skill_plan.add_argument("--masks", type=Path, default=None)
+    skill_plan.add_argument("--method-registry", type=Path, default=None, help="override the packaged Method Registry JSON")
+    skill_plan.add_argument("--license-review-acknowledged", action="store_true", help="record explicit checkpoint/license review; does not grant edit permission")
     skill_plan.add_argument("--out", type=Path, default=None)
 
     upscale = sub.add_parser(
@@ -225,6 +241,33 @@ def main() -> int:
             f"parent={manifest.parent_asset_id}"
         )
         return 0
+
+    if args.command == "validate-method-registry":
+        from .method_registry import MethodRegistry
+        registry = MethodRegistry.load(args.path)
+        print(
+            f"VALID: registry={registry.payload.get('registry_id')} "
+            f"version={registry.payload.get('registry_version')} "
+            f"methods={len(registry.methods)} policy={registry.payload['policy']} "
+            "edit_permission=never-granted"
+        )
+        return 0
+
+    if args.command == "audit-s0-s7":
+        from .method_registry import MethodRegistry, evaluate_s0_s7
+        import json as _json
+
+        evidence = _json.loads(args.evidence.read_text(encoding="utf-8"))
+        registry = MethodRegistry.load(args.method_registry)
+        report = evaluate_s0_s7(evidence, registry)
+        rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(rendered, encoding="utf-8")
+            print(f"S0-S7 audit written: {args.out}")
+        else:
+            print(rendered, end="")
+        return 0 if report["status"] == "ACCEPTED_CANDIDATE" else 2
 
     if args.command == "read-image":
         from .read import run_read
@@ -502,6 +545,8 @@ def main() -> int:
         report = plan_skills(
             args.image, args.diagnosis, checkpoint_path=args.checkpoint,
             upscaled_path=args.upscaled, masks_path=args.masks,
+            method_registry_path=args.method_registry,
+            license_review_acknowledged=args.license_review_acknowledged,
         )
         rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
         if args.out:

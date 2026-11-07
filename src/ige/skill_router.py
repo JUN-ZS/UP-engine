@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 from typing import Any
 
 from PIL import Image, ImageOps
 
+from .method_registry import MethodRegistry
 from .references import ReferenceCatalog
 from .upscale.strategy_catalog import build_strategy_portfolio
 
@@ -83,20 +85,16 @@ def load_diagnosis(path: str | Path, image_path: str | Path) -> dict[str, Any]:
     }
 
 
-SKILL_REGISTRY: dict[str, dict[str, Any]] = {
-    "OTL0": {"stage": "topology", "execution": "contract_only", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.31", "purpose": "lock object topology, part count and connectivity before enhancement"},
-    "TEX4": {"stage": "reconstruction", "execution": "documented_only", "source_section": "FOUR_SKILL_TEX_ALIGN.md §0.12.50", "purpose": "combine IP donor, virtual fitting, RRT topology correction and P_G mapping"},
-    "PATH1E": {"stage": "identity", "execution": "documented_only", "source_section": "PATH1E_PLATE_ECC_LAW.md §0.12.17", "purpose": "a8b-derived face plate, ECC alignment and protected identity composite"},
-    "PIXEL_CTRL": {"stage": "pixel_protection", "execution": "documented_only", "source_section": "PIXEL_CTRL_LAW.md §0.12.16", "purpose": "pixel-class protection; sclera is restored from the structural base"},
-    "SIAX4X": {"stage": "super_resolution", "execution": "implemented_optional_runtime", "source_section": "GRID_SIAX_CORRECT_PROCESS.md §0.12.15", "purpose": "4x_NMKD-Siax_200k.pth true 4x model inference"},
-    "GRID_SIAX": {"stage": "detail_hybrid", "execution": "documented_only", "source_section": "GRID_SIAX_CORRECT_PROCESS.md §0.12.15–18", "purpose": "multi-region detail donor and hybrid composition with pixel-class protection"},
-    "DETAIL6": {"stage": "detail_delivery", "execution": "partial", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.19", "purpose": "detail-only residual on approved material zones plus high-quality 4:4:4 delivery"},
-    "SKIN_MAT": {"stage": "skin_material", "execution": "documented_only", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.20", "purpose": "same-composition pore plate, plate-dominant reconstruction and face-zone proof"},
-}
-
-
-def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: ReferenceCatalog | None = None, checkpoint_path: str | Path | None = None, upscaled_path: str | Path | None = None, masks_path: str | Path | None = None) -> dict[str, Any]:
+def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: ReferenceCatalog | None = None, checkpoint_path: str | Path | None = None, upscaled_path: str | Path | None = None, masks_path: str | Path | None = None, method_registry_path: str | Path | None = None, license_review_acknowledged: bool = False) -> dict[str, Any]:
     catalog = catalog or ReferenceCatalog.load()
+    method_registry = MethodRegistry.load(method_registry_path)
+    try:
+        siax_adapter_available = (
+            importlib.util.find_spec("torch") is not None
+            and importlib.util.find_spec("spandrel") is not None
+        )
+    except (ImportError, ValueError, ModuleNotFoundError):
+        siax_adapter_available = False
     diagnosis = load_diagnosis(diagnosis_path, image_path)
     observations = diagnosis["observations"]
     steps: list[dict[str, Any]] = []
@@ -108,18 +106,98 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
         return observations.get(name, {}).get("verification") == "human_verified"
 
     def add(skill: str, reason: str, prerequisites: list[str], *, stop_downstream: bool = False) -> None:
-        definition = SKILL_REGISTRY[skill]
+        method = method_registry.resolve_skill(skill)
+        maturity = method["maturity"]
         all_verified = all(verified(name) for name in prerequisites if name in observations)
-        status = "ready" if definition["execution"] == "implemented" else "partial_not_full_legacy_skill" if definition["execution"] == "partial" else "blocked_not_imported"
-        if definition["execution"] == "implemented_optional_runtime":
+        if maturity == "optional_runtime":
             if upscaled_path and Path(upscaled_path).is_file():
                 status = "upscaled_master_available"
             else:
-                status = "ready" if checkpoint_path and Path(checkpoint_path).is_file() else "blocked_missing_checkpoint"
+                status = "checkpoint_available_review_required" if checkpoint_path and Path(checkpoint_path).is_file() else "blocked_missing_checkpoint"
+        elif maturity == "partial":
+            status = "partial_not_full_legacy_skill"
+        elif maturity == "experimental":
+            status = "review_required_experimental"
+        elif maturity == "candidate_only":
+            status = "candidate_only"
+        elif maturity in {"workflow_candidate", "research_only", "external_donor_research", "documented_only", "proxy_only", "contract_only"}:
+            status = "blocked_not_imported"
+        else:
+            status = "blocked_unknown_maturity"
         if not all_verified:
             status = "review_required"
         refs = catalog.search(skill=skill, limit=8)
-        steps.append({"skill": skill, "stage": definition["stage"], "reason": reason, "execution": definition["execution"], "status": status, "required_observations": prerequisites, "references": [item["asset_id"] for item in refs], "source_section": definition["source_section"], "stop_downstream": stop_downstream})
+
+        topology = observations.get("topology_error", {})
+        topology_verified = (
+            isinstance(topology, dict)
+            and topology.get("state") in {"absent", "resolved"}
+            and topology.get("verification") == "human_verified"
+        )
+        checkpoint_hash_verified = False
+        if skill == "SIAX4X" and checkpoint_path and Path(checkpoint_path).is_file():
+            try:
+                from .upscale.siax import MODEL_SHA256, file_sha256
+                checkpoint_hash_verified = file_sha256(checkpoint_path) == MODEL_SHA256
+            except (ImportError, OSError, ValueError):
+                checkpoint_hash_verified = False
+        verified_master = False
+        if skill == "DETAIL6" and upscaled_path and Path(upscaled_path).is_file():
+            sidecar = Path(upscaled_path).with_suffix(".upscale.json")
+            if sidecar.is_file():
+                try:
+                    receipt = json.loads(sidecar.read_text(encoding="utf-8"))
+                    verified_master = (
+                        receipt.get("acceptance") == "candidate_only"
+                        and receipt.get("output_sha256") == _sha256(Path(upscaled_path))
+                        and receipt.get("scale") == 4
+                    )
+                except (OSError, json.JSONDecodeError):
+                    verified_master = False
+
+        # Skill planning has no S0 freeze, S2 human geometry contract or S3
+        # source-bound human mask approval. File existence is not permission.
+        method_context = {
+            "s0_source_sha_verified": False,
+            "topology_verified": topology_verified,
+            "topology_state": topology.get("state", "unknown") if isinstance(topology, dict) else "unknown",
+            "topology_human_verified": topology_verified,
+            "geometry_contract_verified": False,
+            "human_permission": False,
+            "approved_masks_verified": False,
+            "checkpoint_sha_verified": checkpoint_hash_verified,
+            "license_acknowledged": bool(license_review_acknowledged),
+            "verified_4x_master_available": verified_master,
+            "backend_adapter_available": siax_adapter_available if skill == "SIAX4X" else False,
+            "tile_plan_verified": False,
+            "comfy_nodes_available": False,
+            "backend_model_inventory_verified": False,
+            "tile_conditioning_verified": False,
+            "global_noise_field_verified": False,
+            "identity_reference_bytes_verified": False,
+            "donor_bytes_verified": False,
+            "donor_backend_receipt_verified": False,
+            "donor_part_mapping_verified": False,
+            "paired_edit_provenance_verified": False,
+        }
+        method_decision = method_registry.evaluate(method["method_id"], method_context)
+        steps.append({
+            "skill": skill,
+            "method_id": method["method_id"],
+            "method_maturity": method["maturity"],
+            "method_decision": method_decision,
+            "registry_status": method_decision["status"],
+            "registry_blockers": method_decision["blockers"],
+            "execution_authorized": False,
+            "stage": method["route_stage"],
+            "reason": reason,
+            "execution": maturity,
+            "status": status,
+            "required_observations": prerequisites,
+            "references": [item["asset_id"] for item in refs],
+            "source_section": method["source_section"],
+            "stop_downstream": stop_downstream,
+        })
 
     if present("topology_error"):
         add("OTL0", observations["topology_error"]["evidence"], ["topology_error"], stop_downstream=True)
@@ -172,19 +250,30 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
         has_material_masks=bool(masks_path and Path(masks_path).is_file()),
     )
     return {
-        "plan_version": "1.1",
+        "plan_version": "1.2",
+        "method_registry": {
+            "registry_schema": method_registry.payload["registry_schema"],
+            "registry_id": method_registry.payload.get("registry_id"),
+            "registry_version": method_registry.payload.get("registry_version"),
+            "source": method_registry.source,
+            "method_count": len(method_registry.methods),
+        },
         "image": diagnosis["image"],
         "diagnosis_source": diagnosis["diagnosis_source"],
         "observations": diagnosis["observations"],
         "steps": steps,
         "strategy_portfolio": strategy_portfolio,
         "overall_status": overall,
+        "execution_readiness": "BLOCKED_S0_S3_EVIDENCE_REQUIRED",
+        "execution_authorized": False,
         "non_claims": [
             "Raster dimensions are observed; semantic defects require evidence-bearing diagnosis.",
             "Grok Vision candidates are not human_verified and cannot authorize irreversible skill execution.",
             "A reference UUID is not proof that its image bytes are locally available.",
             "A 4x file or large byte-size does not prove visual quality.",
             "The strategy portfolio lists distinct method families; it does not imply every runtime is installed.",
-            "Strategy eligibility is not an empirical quality ranking."
+            "Strategy eligibility is not an empirical quality ranking.",
+            "A skill plan is not an S0 freeze, S2 geometry contract, S3 human permission, or S7 acceptance.",
+            "Registry method eligibility never grants pixel-edit permission; S3 permission remains independently required."
         ]
     }
