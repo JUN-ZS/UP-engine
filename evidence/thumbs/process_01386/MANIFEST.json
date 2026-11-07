@@ -1,0 +1,157 @@
+{
+  "write_id": "01386",
+  "entries": [
+    {
+      "id": "01_MATRIX_4_有無頭背",
+      "file": "evidence/thumbs/process_01386/01_MATRIX_4_有無頭背.jpg",
+      "caption": "四態：有背有頭 / 除 / 無背 / 反扣",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/anti/MATRIX_4_有無頭背.jpg",
+      "thumb_wh": [
+        320,
+        320
+      ]
+    },
+    {
+      "id": "02_HOLE_TO_HOLE_CONCEPT",
+      "file": "evidence/thumbs/process_01386/02_HOLE_TO_HOLE_CONCEPT.jpg",
+      "caption": "洞回洞概念探索",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/HOLE_TO_HOLE_01370/CONCEPT_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        153
+      ]
+    },
+    {
+      "id": "03_EDIT_MULTILAYER_RELATION",
+      "file": "evidence/thumbs/process_01386/03_EDIT_MULTILAYER_RELATION.jpg",
+      "caption": "EDIT 多層有頭×無頭 關係",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/EDIT_MULTILAYER_HOLE_01381/RELATION_MATRIX.jpg",
+      "thumb_wh": [
+        320,
+        142
+      ]
+    },
+    {
+      "id": "04_HOLE_INPAINT_PIPELINE",
+      "file": "evidence/thumbs/process_01386/04_HOLE_INPAINT_PIPELINE.jpg",
+      "caption": "洞內 INPAINT 鏈",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/HOLE_INPAINT_ELEV_01382/U0_PIPELINE_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        45
+      ]
+    },
+    {
+      "id": "05_GO_REF_PIPELINE_01384",
+      "file": "evidence/thumbs/process_01386/05_GO_REF_PIPELINE_01384.jpg",
+      "caption": "01384 舊頭 REF 升 — 後發現變大",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/GO_HOLE_INPAINT_REF_01384/return/PIPELINE_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        64
+      ]
+    },
+    {
+      "id": "06_SIZE_FAIL_VS_LOCK",
+      "file": "evidence/thumbs/process_01386/06_SIZE_FAIL_VS_LOCK.jpg",
+      "caption": "試錯：freeframe 頭變大 vs 鎖尺",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/SIZE_FAIL_VS_LOCK.jpg",
+      "thumb_wh": [
+        320,
+        80
+      ]
+    },
+    {
+      "id": "07_ANTI_4STATE_BOARD",
+      "file": "evidence/thumbs/process_01386/07_ANTI_4STATE_BOARD.jpg",
+      "caption": "洞除扣生全鏈 + 反查",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/ANTI_4STATE_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        35
+      ]
+    },
+    {
+      "id": "08_STRUCT_LOCK",
+      "file": "evidence/thumbs/process_01386/08_STRUCT_LOCK.jpg",
+      "caption": "結構鎖洞探索",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/STRUCT_LOCK_HOLE_ELEV_01373/BOTH_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        128
+      ]
+    },
+    {
+      "id": "09_ROI_EDGE",
+      "file": "evidence/thumbs/process_01386/09_ROI_EDGE.jpg",
+      "caption": "ROI 邊權試錯（後改全洞）",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/ROI_EDGE_WEIGHT_ELEV_01371/BOTH_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        182
+      ]
+    },
+    {
+      "id": "10_GEO_MATFILL",
+      "file": "evidence/thumbs/process_01386/10_GEO_MATFILL.jpg",
+      "caption": "geometry-locked material fill",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/GEO_MATFILL_BOTH_01379/BOTH_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        106
+      ]
+    },
+    {
+      "id": "11_POSELOCK_DENSIFY",
+      "file": "evidence/thumbs/process_01386/11_POSELOCK_DENSIFY.jpg",
+      "caption": "pose-lock densify 試",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/U0_POSELOCK_DENSIFY_01377/U0_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        53
+      ]
+    },
+    {
+      "id": "12_FULL_HOLE_HD",
+      "file": "evidence/thumbs/process_01386/12_FULL_HOLE_HD.jpg",
+      "caption": "全洞 HD 回",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FULL_HOLE_HD_01380/BOTH_BOARD.jpg",
+      "thumb_wh": [
+        320,
+        80
+      ]
+    },
+    {
+      "id": "13_PEEP_LOCKED",
+      "file": "evidence/thumbs/process_01386/13_PEEP_LOCKED.jpg",
+      "caption": "鎖尺 peep 洞框",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/ref/peep_有背_洞框_LOCKED.jpg",
+      "thumb_wh": [
+        320,
+        344
+      ]
+    },
+    {
+      "id": "14_ZOOM_BEST_SCALELOCK",
+      "file": "evidence/thumbs/process_01386/14_ZOOM_BEST_SCALELOCK.jpg",
+      "caption": "鎖尺回洞 zoom",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/ZOOM_BEST.jpg",
+      "thumb_wh": [
+        320,
+        335
+      ]
+    },
+    {
+      "id": "15_BEST_RETURN_SCALELOCK",
+      "file": "evidence/thumbs/process_01386/15_BEST_RETURN_SCALELOCK.jpg",
+      "caption": "鎖尺 BEST 全圖（縮圖）",
+      "source": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/BEST_RETURN.jpg",
+      "thumb_wh": [
+        320,
+        180
+      ]
+    }
+  ],
+  "contact": "00_CONTACT_SHEET.jpg",
+  "note": "thumbnails only for process explore/fail/fix"
+}
