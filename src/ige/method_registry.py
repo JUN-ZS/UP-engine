@@ -6,6 +6,8 @@ import re
 from pathlib import Path
 from typing import Any, Mapping
 
+from PIL import Image, ImageChops, ImageOps
+
 REGISTRY_SCHEMA = "ige-method-registry/0.2"
 STAGES = {f"S{i}" for i in range(8)}
 MATURITY = {
@@ -83,6 +85,8 @@ def validate_registry_payload(data: Mapping[str, Any]) -> list[str]:
             errors.append(f"{p}.maturity is invalid")
         if method.get("edit_permission") is not False:
             errors.append(f"{p}.edit_permission must be false; Registry cannot grant permission")
+        if "model_sha256" in method and not is_sha256(method.get("model_sha256")):
+            errors.append(f"{p}.model_sha256 must be a valid SHA-256 when supplied")
         if not isinstance(method.get("requires_human_permission"), bool):
             errors.append(f"{p}.requires_human_permission must be boolean")
         if not isinstance(method.get("acceptance"), str) or not method.get("acceptance", "").strip():
@@ -202,6 +206,68 @@ def _local_hash_matches(path: Any, expected: Any) -> bool:
         return False
 
 
+def _binary_mask(path: Any, expected_size: tuple[int, int]) -> Image.Image | None:
+    if not isinstance(path, str) or not Path(path).is_file():
+        return None
+    try:
+        with Image.open(path) as opened:
+            mask = opened.convert("L")
+        if mask.size != expected_size:
+            return None
+        histogram = mask.histogram()
+        if sum(histogram[1:255]) != 0:
+            return None
+        return mask
+    except (OSError, ValueError):
+        return None
+
+
+def _validate_permission_masks(
+    canvas_path: Any, approved_path: Any, protected_path: Any
+) -> tuple[bool, str]:
+    if not isinstance(canvas_path, str) or not Path(canvas_path).is_file():
+        return False, "geometry coordinate canvas file is missing"
+    try:
+        with Image.open(canvas_path) as opened:
+            size = opened.size
+    except OSError:
+        return False, "geometry coordinate canvas cannot be decoded"
+    approved = _binary_mask(approved_path, size)
+    protected = _binary_mask(protected_path, size)
+    if approved is None or protected is None:
+        return False, "approved/protected masks must be binary, decodable and match canvas dimensions"
+    overlap = ImageChops.multiply(approved, protected)
+    if sum(overlap.histogram()[1:]) != 0:
+        return False, "approved edit mask overlaps protected mask"
+    return True, ""
+
+
+def _audit_return_pixels(canvas_path: str, output_path: str, approved_mask_path: str) -> dict[str, Any] | None:
+    try:
+        with Image.open(canvas_path) as opened:
+            base = opened.convert("RGB")
+        with Image.open(output_path) as opened:
+            output = opened.convert("RGB")
+        if base.size != output.size:
+            return None
+        approved = _binary_mask(approved_mask_path, base.size)
+        if approved is None:
+            return None
+        diff = ImageChops.difference(base, output).convert("L")
+        outside = ImageChops.multiply(diff, ImageOps.invert(approved))
+        changed_inside = ImageChops.multiply(diff, approved)
+        outside_hist = outside.histogram()
+        inside_hist = changed_inside.histogram()
+        return {
+            "width": base.width, "height": base.height,
+            "changed_pixels_inside_authorized_region": sum(inside_hist[1:]),
+            "changed_pixels_outside_authorized_region": sum(outside_hist[1:]),
+            "max_outside_rgb_diff": max(outside.getextrema()[1], 0),
+        }
+    except (OSError, ValueError):
+        return None
+
+
 def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None = None) -> dict[str, Any]:
     """Fail-closed S0-S7 audit. Receipts are checked; no inference is performed here."""
     registry = registry or MethodRegistry.load()
@@ -234,12 +300,15 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
     g = s2.get("geometry_contract", {}) if isinstance(s2, dict) else {}
     geometry_ok = (
         isinstance(g, dict) and g.get("source_sha256") == source_sha
-        and is_sha256(g.get("canvas_sha256")) and isinstance(g.get("coordinate_frame"), str)
-        and g.get("geometry_human_verified") is True and isinstance(g.get("object_transform"), dict)
-        and isinstance(g.get("model_scale"), (int, float)) and g.get("model_scale", 0) > 0
-        and isinstance(g.get("tile_size"), int) and g.get("tile_size", 0) > 0
-        and isinstance(g.get("tile_context"), int) and g.get("tile_context", -1) >= 0
-        and (g.get("delivery_resampled") is not True or isinstance(g.get("delivery_transform"), dict))
+        and is_sha256(g.get("canvas_sha256"))
+        and _local_hash_matches(g.get("canvas_path"), g.get("canvas_sha256"))
+        and isinstance(g.get("coordinate_frame"), str) and bool(g.get("coordinate_frame"))
+        and g.get("geometry_human_verified") is True
+        and isinstance(g.get("object_transform"), dict) and bool(g.get("object_transform"))
+        and isinstance(g.get("model_scale"), (int, float)) and not isinstance(g.get("model_scale"), bool) and g.get("model_scale", 0) > 0
+        and isinstance(g.get("tile_size"), int) and not isinstance(g.get("tile_size"), bool) and g.get("tile_size", 0) > 0
+        and isinstance(g.get("tile_context"), int) and not isinstance(g.get("tile_context"), bool) and g.get("tile_context", -1) >= 0
+        and (g.get("delivery_resampled") is not True or (isinstance(g.get("delivery_transform"), dict) and bool(g.get("delivery_transform"))))
     )
     if not geometry_ok:
         stages.append(_result("S2", "BLOCKED", ["global geometry incomplete; model_scale, object_transform, tile_size and tile_context must remain independent"]))
@@ -255,7 +324,11 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
         and is_sha256(p.get("approved_edit_mask_sha256")) and is_sha256(p.get("protected_mask_sha256"))
         and _local_hash_matches(p.get("approved_edit_mask_path"), p.get("approved_edit_mask_sha256"))
         and _local_hash_matches(p.get("protected_mask_path"), p.get("protected_mask_sha256"))
+        and _validate_permission_masks(g.get("canvas_path"), p.get("approved_edit_mask_path"), p.get("protected_mask_path"))[0]
         and isinstance(p.get("target_regions"), list) and bool(p.get("target_regions"))
+        and len(p.get("target_regions", [])) == len(set(p.get("target_regions", [])))
+        and isinstance(p.get("reviewer_ref"), str) and bool(p.get("reviewer_ref"))
+        and isinstance(p.get("reviewed_at"), str) and bool(p.get("reviewed_at"))
     )
     if not permission_ok:
         stages.append(_result("S3", "BLOCKED", ["human-reviewed, source-bound approved/protected masks missing or inconsistent"]))
@@ -296,10 +369,15 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
             isinstance(r, dict) and r.get("real_backend_call") is True and r.get("receipt_verified") is True
             and r.get("backend_id") == method.get("backend_id")
             and isinstance(r.get("model_id"), str) and bool(r.get("model_id"))
-            and is_sha256(r.get("model_sha256")) and r.get("parent_source_sha256") == source_sha
+            and is_sha256(r.get("model_sha256"))
+            and (not method.get("model_sha256") or r.get("model_sha256") == method.get("model_sha256"))
+            and _local_hash_matches(r.get("model_path"), r.get("model_sha256"))
+            and r.get("parent_source_sha256") == source_sha
             and isinstance(r.get("input_sha256s"), list) and bool(r.get("input_sha256s"))
             and all(is_sha256(x) for x in r.get("input_sha256s", []))
+            and source_sha in r.get("input_sha256s", [])
             and is_sha256(r.get("output_sha256"))
+            and _local_hash_matches(r.get("output_path"), r.get("output_sha256"))
             and isinstance(r.get("request_id"), str) and bool(r.get("request_id"))
             and isinstance(r.get("parameters"), dict)
         )
@@ -310,10 +388,15 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
         r = s5.get("operation_receipt", {}) if isinstance(s5, dict) else {}
         receipt_ok = (
             isinstance(r, dict) and r.get("execution_verified") is True and r.get("method_id") == method_id
-            and is_sha256(r.get("implementation_sha256")) and r.get("parent_source_sha256") == source_sha
+            and is_sha256(r.get("implementation_sha256"))
+            and _local_hash_matches(r.get("implementation_path"), r.get("implementation_sha256"))
+            and r.get("parent_source_sha256") == source_sha
             and isinstance(r.get("input_sha256s"), list) and bool(r.get("input_sha256s"))
             and all(is_sha256(x) for x in r.get("input_sha256s", []))
-            and is_sha256(r.get("output_sha256")) and isinstance(r.get("operation_parameters"), dict)
+            and source_sha in r.get("input_sha256s", [])
+            and is_sha256(r.get("output_sha256"))
+            and _local_hash_matches(r.get("output_path"), r.get("output_sha256"))
+            and isinstance(r.get("operation_parameters"), dict)
         )
         output_sha = r.get("output_sha256") if isinstance(r, dict) else None
         detail = {"execution_kind": method.get("execution_kind"), "output_sha256": output_sha} if isinstance(r, dict) else {}
@@ -326,18 +409,28 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
 
     s6 = evidence.get("S6", {})
     a = s6.get("return_audit", {}) if isinstance(s6, dict) else {}
+    pixel_audit = None
+    if isinstance(a, dict) and isinstance(g, dict):
+        pixel_audit = _audit_return_pixels(g.get("canvas_path"), a.get("output_path"), p.get("approved_edit_mask_path"))
+    tile_counts_ok = isinstance(a, dict) and all(
+        type(a.get(key)) is int and a.get(key) == 0
+        for key in ("halo_write_pixels", "core_overlap_pixels", "coverage_gap_pixels")
+    )
     return_ok = (
         isinstance(a, dict) and a.get("source_sha256") == source_sha and a.get("output_sha256") == output_sha
-        and a.get("core_only_writes") is True and a.get("halo_write_pixels") == 0
-        and a.get("core_overlap_pixels") == 0 and a.get("coverage_gap_pixels") == 0
-        and a.get("outside_authorized_changed_pixels") == 0
+        and _local_hash_matches(a.get("output_path"), output_sha)
+        and a.get("output_path") == (r.get("output_path") if isinstance(r, dict) else None)
+        and a.get("core_only_writes") is True and tile_counts_ok
+        and pixel_audit is not None
+        and pixel_audit["changed_pixels_outside_authorized_region"] == 0
+        and a.get("outside_authorized_changed_pixels") == pixel_audit["changed_pixels_outside_authorized_region"]
         and a.get("implicit_resize") is False and a.get("implicit_flip") is False
     )
     if not return_ok:
         stages.append(_result("S6", "BLOCKED", ["core-only return, coverage, or pixel-preservation audit failed/incomplete"]))
         stages.extend(_not_run(7))
         return {"status": "BLOCKED", "stages": stages, "selected_method": method_id, "method_decision": decision, "execution_allowed": False}
-    stages.append(_result("S6", "PASS", []))
+    stages.append(_result("S6", "PASS", [], pixel_audit=pixel_audit))
 
     s7 = evidence.get("S7", {})
     ac = s7.get("acceptance", {}) if isinstance(s7, dict) else {}
@@ -346,7 +439,11 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
     accepted = (
         isinstance(ac, dict) and ac.get("independent_reloaded") is True
         and ac.get("source_sha256") == source_sha and ac.get("saved_output_sha256") == a.get("output_sha256")
+        and _local_hash_matches(ac.get("saved_output_path"), ac.get("saved_output_sha256"))
+        and ac.get("saved_output_path") == a.get("output_path")
         and ac.get("human_visual_review") == "PASS" and ac.get("visual_review_source") == "human"
+        and isinstance(ac.get("reviewer_ref"), str) and bool(ac.get("reviewer_ref"))
+        and isinstance(ac.get("reviewed_at"), str) and bool(ac.get("reviewed_at"))
         and gates_ok
     )
     if not accepted:
@@ -356,6 +453,6 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
     stages.append(_result("S7", "PASS", [], accepted_output_sha256=ac["saved_output_sha256"]))
     return {
         "status": "ACCEPTED_CANDIDATE", "stages": stages, "selected_method": method_id,
-        "method_decision": decision, "execution_allowed": True, "edit_permission": False,
+        "method_decision": decision, "execution_allowed": False, "candidate_accepted": True, "edit_permission": False,
         "note": "S7 acceptance audits a candidate; Registry never grants edit permission.",
     }
