@@ -17,7 +17,8 @@
 3. **本檔** — 執行 checklist 同回報格式  
 4. **最新 Gemini 源** — [19-turn pack](https://github.com/JUN-ZS/UP-engine/tree/feat/shq-geometry-lock-program-guidance-v0.1/docs/sources/gemini-share-nutrRjsw676R/)（research provenance；唔係 production runtime）  
 5. **SHQ Agent Driver** — [執行控制文件](./SHQ_AGENT_DRIVER.md)，以 Manifest 提交候選，預設只做 preflight  
-6. **`research/shq_v9/`** — 設計化石／實驗日誌；對照契約睇，**禁止**把 Lanczos／CLAHE 路徑當可交貨後端
+6. **Comfy Cloud Adapter** — [Cloud API preflight／diagnostic runner](./COMFY_CLOUD_LIVE_ADAPTER.md)；diagnostic run 不等於 S6/S7 acceptance  
+7. **`research/shq_v9/`** — 設計化石／實驗日誌；對照契約睇，**禁止**把 Lanczos／CLAHE 路徑當可交貨後端
 
 讀完先動手改 code／開 runner／寫驗收。
 
