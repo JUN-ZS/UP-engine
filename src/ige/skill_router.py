@@ -85,18 +85,6 @@ def load_diagnosis(path: str | Path, image_path: str | Path) -> dict[str, Any]:
     }
 
 
-SKILL_REGISTRY: dict[str, dict[str, Any]] = {
-    "OTL0": {"stage": "topology", "execution": "contract_only", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.31", "purpose": "lock object topology, part count and connectivity before enhancement"},
-    "TEX4": {"stage": "reconstruction", "execution": "documented_only", "source_section": "FOUR_SKILL_TEX_ALIGN.md §0.12.50", "purpose": "combine IP donor, virtual fitting, RRT topology correction and P_G mapping"},
-    "PATH1E": {"stage": "identity", "execution": "documented_only", "source_section": "PATH1E_PLATE_ECC_LAW.md §0.12.17", "purpose": "a8b-derived face plate, ECC alignment and protected identity composite"},
-    "PIXEL_CTRL": {"stage": "pixel_protection", "execution": "documented_only", "source_section": "PIXEL_CTRL_LAW.md §0.12.16", "purpose": "pixel-class protection; sclera is restored from the structural base"},
-    "SIAX4X": {"stage": "super_resolution", "execution": "implemented_optional_runtime", "source_section": "GRID_SIAX_CORRECT_PROCESS.md §0.12.15", "purpose": "4x_NMKD-Siax_200k.pth true 4x model inference"},
-    "GRID_SIAX": {"stage": "detail_hybrid", "execution": "documented_only", "source_section": "GRID_SIAX_CORRECT_PROCESS.md §0.12.15–18", "purpose": "multi-region detail donor and hybrid composition with pixel-class protection"},
-    "DETAIL6": {"stage": "detail_delivery", "execution": "partial", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.19", "purpose": "detail-only residual on approved material zones plus high-quality 4:4:4 delivery"},
-    "SKIN_MAT": {"stage": "skin_material", "execution": "documented_only", "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md §0.12.20", "purpose": "same-composition pore plate, plate-dominant reconstruction and face-zone proof"},
-}
-
-
 def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: ReferenceCatalog | None = None, checkpoint_path: str | Path | None = None, upscaled_path: str | Path | None = None, masks_path: str | Path | None = None, method_registry_path: str | Path | None = None, license_review_acknowledged: bool = False) -> dict[str, Any]:
     catalog = catalog or ReferenceCatalog.load()
     method_registry = MethodRegistry.load(method_registry_path)
@@ -118,15 +106,24 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
         return observations.get(name, {}).get("verification") == "human_verified"
 
     def add(skill: str, reason: str, prerequisites: list[str], *, stop_downstream: bool = False) -> None:
-        definition = SKILL_REGISTRY[skill]
         method = method_registry.resolve_skill(skill)
+        maturity = method["maturity"]
         all_verified = all(verified(name) for name in prerequisites if name in observations)
-        status = "ready" if definition["execution"] == "implemented" else "partial_not_full_legacy_skill" if definition["execution"] == "partial" else "blocked_not_imported"
-        if definition["execution"] == "implemented_optional_runtime":
+        if maturity == "optional_runtime":
             if upscaled_path and Path(upscaled_path).is_file():
                 status = "upscaled_master_available"
             else:
-                status = "ready" if checkpoint_path and Path(checkpoint_path).is_file() else "blocked_missing_checkpoint"
+                status = "checkpoint_available_review_required" if checkpoint_path and Path(checkpoint_path).is_file() else "blocked_missing_checkpoint"
+        elif maturity == "partial":
+            status = "partial_not_full_legacy_skill"
+        elif maturity == "experimental":
+            status = "review_required_experimental"
+        elif maturity == "candidate_only":
+            status = "candidate_only"
+        elif maturity in {"workflow_candidate", "research_only", "external_donor_research", "documented_only", "proxy_only", "contract_only"}:
+            status = "blocked_not_imported"
+        else:
+            status = "blocked_unknown_maturity"
         if not all_verified:
             status = "review_required"
         refs = catalog.search(skill=skill, limit=8)
@@ -192,13 +189,13 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
             "registry_status": method_decision["status"],
             "registry_blockers": method_decision["blockers"],
             "execution_authorized": False,
-            "stage": definition["stage"],
+            "stage": method["route_stage"],
             "reason": reason,
-            "execution": definition["execution"],
+            "execution": maturity,
             "status": status,
             "required_observations": prerequisites,
             "references": [item["asset_id"] for item in refs],
-            "source_section": definition["source_section"],
+            "source_section": method["source_section"],
             "stop_downstream": stop_downstream,
         })
 
