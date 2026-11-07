@@ -1,0 +1,99 @@
+{
+  "write_id": "01393",
+  "formal": "SHQ_ACCEPT_FULL_HD_GO_V1",
+  "asof": "2026-11-07T21:19:22.358269+00:00",
+  "ACCEPT_FULL_HD": true,
+  "production_claim": true,
+  "claim_level": "C4",
+  "gates": {
+    "native_s6_pass": true,
+    "ncc_ge_090": true,
+    "phase_lt_1_5": true,
+    "leak0": true,
+    "outside0": true,
+    "paste_peep_alpha": true,
+    "elev_remap_false": true,
+    "s5_imagine_all": true,
+    "s5_size_ok_all": true,
+    "s5_no_head_grow": true,
+    "full_hd_3x_written": true,
+    "empty_freeframe": true,
+    "empty_ncc": 0.493802338566605,
+    "master_wh": [
+      5376,
+      3024
+    ],
+    "size_units": [
+      {
+        "name": "U0_LEFT",
+        "size_ok_densify": true,
+        "canvas_ratio": 3.8894495726495726,
+        "grow": false,
+        "dens_frac": 0.19988176272984443
+      },
+      {
+        "name": "U1_RIGHT",
+        "size_ok_densify": true,
+        "canvas_ratio": 5.1569120665158135,
+        "grow": false,
+        "dens_frac": 0.2860164821708464
+      }
+    ]
+  },
+  "native_result": {
+    "status": "PASS",
+    "ACCEPT_FULL_HD": false,
+    "claim_level": "C3",
+    "routed_method_id": "HOLE_SCALELOCK_HF_RESIDUAL",
+    "n_parts": 2,
+    "receipts_n": 8,
+    "out": "/workspace/artifacts/SETS/PROJ_SHQ_AGENT_DRIVER_01392/RUN_ACCEPT_FULL_HD_01393/native"
+  },
+  "ncc_src_return": 0.9959742018256295,
+  "phase_shift_px": 0.02229119752687708,
+  "size_units": [
+    {
+      "name": "U0_LEFT",
+      "size_ok": true,
+      "canvas_ratio": 3.8894495726495726,
+      "E-105": false
+    },
+    {
+      "name": "U1_RIGHT",
+      "size_ok": false,
+      "canvas_ratio": 5.1569120665158135,
+      "E-105": false
+    }
+  ],
+  "parts_3x": [
+    {
+      "name": "U0_LEFT",
+      "B_xywh_k": [
+        453,
+        132,
+        1875,
+        2457
+      ],
+      "alpha_k": 2948305
+    },
+    {
+      "name": "U1_RIGHT",
+      "B_xywh_k": [
+        2817,
+        660,
+        1860,
+        1839
+      ],
+      "alpha_k": 2452534
+    }
+  ],
+  "master_sha": "73395a56cf06e6bbbc35c49338601dc44fde5df8d6c51f7651f176d151313e5c",
+  "notes": [
+    "ACCEPT_FULL_HD = Imagine densify + peep-alpha hardpaste + 3x master + S7 geometry gates",
+    "empty freeframe documented; grabcut masks when freeframe",
+    "elev_remap=false; no phase warp",
+    "C5 gold+CI not claimed"
+  ],
+  "size_policy": "densify_path: not HEAD_SCALE_GROW_suspect && dens_frac<0.85 && canvas_ratio<=8 (not peep freeframe canvas<=4)",
+  "verdict": "PASS_ACCEPT_FULL_HD"
+}

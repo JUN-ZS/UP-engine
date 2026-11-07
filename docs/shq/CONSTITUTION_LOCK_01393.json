@@ -1,0 +1,15 @@
+{
+  "write_id": "01393",
+  "formal": "SHQ_ACCEPT_FULL_HD_GO_V1",
+  "ACCEPT_FULL_HD": true,
+  "claim_level": "C4",
+  "asof": "2026-11-07T21:19:52.470954+00:00",
+  "path": "/workspace/artifacts/SETS/PROJ_SHQ_AGENT_DRIVER_01392/RUN_ACCEPT_FULL_HD_01393",
+  "master": "full_hd_3x/RETURN_FULL_HD_3x.png",
+  "notes": [
+    "ACCEPT_FULL_HD = Imagine densify + peep-alpha hardpaste + 3x master + S7 geometry gates",
+    "empty freeframe documented; grabcut masks when freeframe",
+    "elev_remap=false; no phase warp",
+    "C5 gold+CI not claimed"
+  ]
+}
