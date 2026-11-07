@@ -7,6 +7,18 @@ class CliParserTests(unittest.TestCase):
     def test_all_pipeline_commands_are_registered(self):
         parser = build_parser()
         self.assertEqual(parser.prog, "ige")
+        comfy_manifest = parser.parse_args([
+            "comfy-cloud-manifest", "--workflow", "api.json",
+            "--tile", "233=left.png", "--tile", "5000=right.png",
+            "--out", "manifest.json",
+        ])
+        self.assertEqual(comfy_manifest.command, "comfy-cloud-manifest")
+        self.assertEqual(comfy_manifest.tile, ["233=left.png", "5000=right.png"])
+        comfy_preflight = parser.parse_args(["comfy-cloud-preflight", "manifest.json", "--out", "preflight.json"])
+        self.assertEqual(comfy_preflight.command, "comfy-cloud-preflight")
+        comfy_diag = parser.parse_args(["comfy-cloud-diagnostic", "manifest.json", "--diagnostic-submit", "--timeout", "900"])
+        self.assertTrue(comfy_diag.diagnostic_submit)
+        self.assertEqual(comfy_diag.timeout, 900)
         agent_plan = parser.parse_args(["agent-run", "manifest.json", "--out", "report.json"])
         self.assertEqual(agent_plan.command, "agent-run")
         self.assertFalse(agent_plan.execute)
