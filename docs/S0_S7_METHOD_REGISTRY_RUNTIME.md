@@ -73,7 +73,7 @@ S2's \`canvas_path\` defines the exact raster on which S3 masks are drawn. For a
 
 The S6 pixel audit decodes the coordinate canvas, final output and approved binary mask. It rejects dimension mismatch, soft/feathered mask values and any changed pixel outside the approved mask. The protected mask must also be binary, non-empty, same-sized and disjoint from the approved mask.
 
-Tile-specific counts (halo writes, core overlap and coverage gaps) are still receipts supplied by the tile compositor; this module does not reconstruct tile provenance from the final raster alone. The Core/Halo ledger (`ige-tile-core-halo-ledger/0.2`, see `docs/TILE_CORE_HALO_LEDGER.md`) carries per-tile read/core/halo bounds, **required** `output_sha256`, S2 `canvas_sha256` + `coordinate_frame` bind, and exact-once core coverage via a scanline/interval-union region engine (8K-safe). For Tile methods (`SIAX4X_TILE_CORE_SR`, `GEOMETRY_LOCKED_TILE_PLAN_RETURN`, `FLUX_HR_TILE_IMG2IMG`, …) the ledger is **mandatory** on S6 — missing ledger fails closed (`E_TILE_LEDGER_REQUIRED`). When supplied (required or optional on non-tile methods), `evaluate_s0_s7` audits it fail-closed and binds it to S2. Integer counter receipts alone are not a substitute for the ledger on Tile methods. Synthetic ledger PASS ≠ live GPU compositor / pixel write-back proof; `execution_allowed` remains false.
+Tile-specific counts (halo writes, core overlap and coverage gaps) are still receipts supplied by the tile compositor; this module does not reconstruct tile provenance from the final raster alone. The Core/Halo ledger (`ige-tile-core-halo-ledger/0.2`, see `docs/TILE_CORE_HALO_LEDGER.md`) carries per-tile read/core/halo bounds, **required** `output_sha256`, S2 `canvas_sha256` + `coordinate_frame` bind, optional `canvas_size_wh` / `evidence_grade`, and exact-once core coverage via a scanline/interval-union region engine (8K-safe). For Tile methods (`SIAX4X_TILE_CORE_SR`, `GEOMETRY_LOCKED_TILE_PLAN_RETURN`, `FLUX_HR_TILE_IMG2IMG`, …) the ledger is **mandatory** on S6 — missing ledger fails closed (`E_TILE_LEDGER_REQUIRED`). The Registry also marks `SIAX4X_TILE_CORE_SR.tile_ledger_required=true`; when that flag is set, S5 must bind the ledger path/SHA to the Siax adapter sidecar and the tile trace from the same inference/write loop, and S6 must reuse that exact path/SHA while verifying S2 frame/canvas and in-canvas bounds. Integer counter receipts alone are not a substitute for the ledger on Tile methods. Synthetic ledger PASS ≠ live GPU compositor / pixel write-back proof; `execution_allowed` remains false.
 
 ## Registry is the single routing authority
 
@@ -118,3 +118,15 @@ Before enabling the Flux method:
 5. Execute at least one real holdout through S0-S7 and retain model, node, prompt, seed, inputs, tile, output and acceptance receipts.
 
 Until then, the user does not need to run a ComfyUI test merely to validate the Registry/Router work. ComfyUI becomes necessary for the next live-inference proof.
+
+
+## SHQ Agent Driver v0.1 (stacked integration)
+
+The Driver is implemented in `src/ige/agent_driver.py` and exposed as `ige agent-run`. See `docs/SHQ_AGENT_DRIVER.md` and `schemas/agent_run_manifest.schema.json`.
+
+- Plan-only is the default. `--execute` is explicit.
+- Registry entrypoint strings are never evaluated. The Driver resolves the exact callable against a reviewed code allowlist, even in plan-only mode.
+- Current allowlist: existing pinned Siax 4x adapter only.
+- The Driver runs S0–S4 preflight and can invoke S5 Siax candidate inference. It does not claim S6/S7 completion.
+- S5 emits the backend receipt, adapter metadata hash, canonical tile-trace hash and instrumented Core/Halo ledger hash.
+- FLUX_HR_TILE_IMG2IMG remains `workflow_candidate`; this Driver cannot call ComfyUI and does not promote it.
