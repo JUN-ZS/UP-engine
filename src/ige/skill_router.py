@@ -257,9 +257,7 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
         "steps": steps,
         "strategy_portfolio": strategy_portfolio,
         "overall_status": overall,
-        "execution_readiness": "BLOCKED" if any(
-            step.get("method_decision", {}).get("execution_allowed") is not True for step in steps if step.get("method_id")
-        ) else "READY_FOR_CANDIDATE_EXECUTION",
+        "execution_readiness": "BLOCKED_S0_S3_EVIDENCE_REQUIRED",
         "execution_authorized": False,
         "non_claims": [
             "Raster dimensions are observed; semantic defects require evidence-bearing diagnosis.",
