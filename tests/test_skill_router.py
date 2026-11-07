@@ -107,7 +107,7 @@ class SkillRouterTests(unittest.TestCase):
             self.assertEqual(by_skill["DETAIL6"]["method_id"], "DETAIL6_MATERIAL_RESIDUAL")
             self.assertFalse(by_skill["SIAX4X"]["method_decision"]["execution_allowed"])
             self.assertFalse(plan["execution_authorized"])
-            self.assertEqual(plan["execution_readiness"], "BLOCKED")
+            self.assertEqual(plan["execution_readiness"], "BLOCKED_S0_S3_EVIDENCE_REQUIRED")
             self.assertTrue(all(step["execution_authorized"] is False for step in plan["steps"] if "method_id" in step))
 
 
