@@ -1,7 +1,7 @@
 {
   "registry_schema": "ige-method-registry/0.1",
   "registry_id": "SHQ_METHOD_REGISTRY_V1",
-  "registry_version": "0.1.0-01392",
+  "registry_version": "0.1.0-01392+claim-01397",
   "policy": "fail_closed",
   "edit_permission_default": false,
   "write_id": "01392",
@@ -240,7 +240,22 @@
       "forbidden_non_claims": [
         "soft_alpha_fix",
         "halo_double_write"
-      ]
+      ],
+      "claim_block": {
+        "skill_family": "D",
+        "frequency_layer": "alpha_guard",
+        "allowed_claims": [
+          "alpha_xor_0",
+          "outside_bitexact",
+          "elev_remap_false"
+        ],
+        "forbidden_non_claims": [
+          "content_quality_from_D_alone"
+        ],
+        "requires_skill_d": true,
+        "invariant": true
+      },
+      "claim_doctrine_write_id": "01397"
     },
     {
       "method_id": "SKILL_A_NEURAL_SR_BASE_4X",
@@ -275,7 +290,22 @@
       ],
       "forbidden_non_claims": [
         "lanczos_as_gen"
-      ]
+      ],
+      "claim_block": {
+        "skill_family": "A",
+        "frequency_layer": "L_base",
+        "allowed_claims": [
+          "neural_sr_L_base_with_adapter",
+          "resolution_uplift_under_D"
+        ],
+        "forbidden_non_claims": [
+          "lanczos_as_gen",
+          "material_authorship",
+          "ACCEPT_FULL_HD_alone"
+        ],
+        "requires_skill_d": true
+      },
+      "claim_doctrine_write_id": "01397"
     },
     {
       "method_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
@@ -312,7 +342,21 @@
       "forbidden_non_claims": [
         "size_from_ai",
         "contour_from_ai"
-      ]
+      ],
+      "claim_block": {
+        "skill_family": "B",
+        "frequency_layer": "M_material",
+        "allowed_claims": [
+          "material_rgb_under_frozen_alpha",
+          "alpha_xor_0"
+        ],
+        "forbidden_non_claims": [
+          "alpha_or_silhouette_from_AI",
+          "freeframe_geometry"
+        ],
+        "requires_skill_d": true
+      },
+      "claim_doctrine_write_id": "01397"
     },
     {
       "method_id": "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
@@ -345,7 +389,21 @@
       ],
       "forbidden_non_claims": [
         "detail_gain_as_quality"
-      ]
+      ],
+      "claim_block": {
+        "skill_family": "C",
+        "frequency_layer": "H_detail",
+        "allowed_claims": [
+          "detail_residual_layer",
+          "ablation_H_independent"
+        ],
+        "forbidden_non_claims": [
+          "topology_repair_via_detail",
+          "whole_part_redraw"
+        ],
+        "requires_skill_d": true
+      },
+      "claim_doctrine_write_id": "01397"
     },
     {
       "method_id": "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
@@ -509,7 +567,20 @@
       ],
       "forbidden_non_claims": [
         "required_for_accept"
-      ]
+      ],
+      "claim_block": {
+        "skill_family": "INPAINT_OPTIONAL",
+        "frequency_layer": "optional_repair",
+        "allowed_claims": [
+          "optional_occlusion_fill"
+        ],
+        "forbidden_non_claims": [
+          "main_elev_chain",
+          "playing_A_B_C_D"
+        ],
+        "requires_skill_d": true
+      },
+      "claim_doctrine_write_id": "01397"
     },
     {
       "method_id": "SIAX4X_TILE_CORE_SR",
@@ -762,5 +833,9 @@
     }
   ],
   "wired_to_src_ige": false,
-  "ACCEPT_FULL_HD": false
+  "ACCEPT_FULL_HD": false,
+  "claim_doctrine": "SHQ_4SKILL_CLAIM_DOCTRINE.md",
+  "claim_levels": "SHQ_CLAIM_LEVELS.json",
+  "inpaint_role": "OPTIONAL_ONLY_NOT_MAIN_CHAIN",
+  "skill_d_invariant": true
 }

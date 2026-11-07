@@ -1,0 +1,100 @@
+{
+  "C0": {
+    "name": "SPEC_ONLY",
+    "may_claim": [
+      "doctrine written",
+      "router decided method_id"
+    ],
+    "must_not_claim": [
+      "any HD improvement",
+      "ACCEPT"
+    ],
+    "ACCEPT_FULL_HD": false
+  },
+  "C1": {
+    "name": "DIAG_CHAIN",
+    "may_claim": [
+      "S0–S7 receipts",
+      "D geometry gates",
+      "outside bit-exact",
+      "elev_remap=false"
+    ],
+    "must_not_claim": [
+      "true SR backend",
+      "material authorship",
+      "C5"
+    ],
+    "ACCEPT_FULL_HD": false,
+    "requires": [
+      "Skill D PASS"
+    ]
+  },
+  "C2": {
+    "name": "ADAPTER_A_SR",
+    "may_claim": [
+      "Skill A ran with backend log",
+      "L_base isolatable"
+    ],
+    "must_not_claim": [
+      "B/C quality",
+      "ACCEPT_FULL_HD"
+    ],
+    "ACCEPT_FULL_HD": false,
+    "requires": [
+      "C1",
+      "Skill A backend adapter log",
+      "size contract"
+    ]
+  },
+  "C3": {
+    "name": "ADAPTER_A_PLUS_B_OR_DENSIFY",
+    "may_claim": [
+      "A+B or densify adapter under D",
+      "ablation L vs L+M"
+    ],
+    "must_not_claim": [
+      "full production ACCEPT without S7 gold"
+    ],
+    "ACCEPT_FULL_HD": false,
+    "requires": [
+      "C2 or densify adapter",
+      "alpha_xor=0",
+      "Skill D"
+    ]
+  },
+  "C4": {
+    "name": "A_B_C_ABLATION",
+    "may_claim": [
+      "L+M+H independent control",
+      "H ablation improves without geometry move"
+    ],
+    "must_not_claim": [
+      "ACCEPT_FULL_HD without gold+CI"
+    ],
+    "ACCEPT_FULL_HD": false,
+    "requires": [
+      "C3",
+      "three-layer ablation board",
+      "S7 quantitative"
+    ]
+  },
+  "C5": {
+    "name": "GOLD_CI",
+    "may_claim": [
+      "ACCEPT_FULL_HD",
+      "production claim under frozen fixture"
+    ],
+    "must_not_claim": [
+      "universal any-image auto C5"
+    ],
+    "ACCEPT_FULL_HD": true,
+    "requires": [
+      "C4",
+      "gold fixture replay",
+      "S7 independent",
+      "Skill D invariant",
+      "no edit_permission self-grant",
+      "backend logs for A/B/C as claimed"
+    ]
+  }
+}
