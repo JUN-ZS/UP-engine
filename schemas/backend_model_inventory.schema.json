@@ -23,6 +23,11 @@
     "inventory_id": {"type": "string", "minLength": 1},
     "inventory_version": {"type": "string", "minLength": 1},
     "policy": {"const": "fail_closed"},
+    "evidence_grade": {
+      "type": "string",
+      "const": "declared_record",
+      "description": "Hand-authored or fixture record. Not a disk-capture receipt. CI does not re-read operator PC files."
+    },
     "method_id_context": {
       "type": "string",
       "description": "Optional method this inventory is intended to precondition; recording SHAs does not promote maturity."

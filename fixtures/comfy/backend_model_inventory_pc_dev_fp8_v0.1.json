@@ -3,11 +3,12 @@
   "inventory_id": "pc_dev_fp8_desktop_gnmq0pf",
   "inventory_version": "0.1.0",
   "policy": "fail_closed",
+  "evidence_grade": "declared_record",
   "method_id_context": "FLUX_HR_TILE_IMG2IMG",
   "host": {
     "hostname": "DESKTOP-GNMQ0PF",
     "os": "Windows",
-    "notes": "Offline SHA inventory of ComfyUI models used by workflow_ige_v03_dev_fp8; not a GPU run."
+    "notes": "DECLARED RECORD only: SHA strings were supplied for offline filename/pin checks. Not a capture receipt. CI does not re-read these PC paths. Use `ige capture-model-inventory` for disk_capture evidence."
   },
   "models_root": "C:\\Users\\user\\Documents\\ComfyUI\\models",
   "custom_nodes_root": "C:\\Users\\user\\Documents\\ComfyUI\\custom_nodes",

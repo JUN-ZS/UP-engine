@@ -103,3 +103,11 @@ ige audit-tile-ledger path/to/ledger.json --out /tmp/tile_ledger_audit.json
 
 None of these promote `FLUX_HR_TILE_IMG2IMG` or set `execution_allowed=true`.
 
+
+
+## Backend inventory evidence grades
+
+- `--model-inventory` → `evidence_grade=declared_record` (fixture/hand-authored; not CI re-hash of PC files)
+- `--capture-receipt` → `evidence_grade=disk_capture` (from `ige capture-model-inventory`)
+- Either way: `execution_allowed=false`; Flux remains `workflow_candidate`
+- Details: `docs/BACKEND_MODEL_INVENTORY.md`

@@ -43,7 +43,19 @@ def build_parser() -> argparse.ArgumentParser:
         "--model-inventory",
         type=Path,
         default=None,
-        help="optional offline backend_model_inventory JSON (filenames+SHA); never unlocks execution",
+        help=(
+            "optional declared backend_model_inventory JSON (evidence_grade=declared_record); "
+            "filename/pin checks only — not live disk proof; never unlocks execution"
+        ),
+    )
+    audit_comfy.add_argument(
+        "--capture-receipt",
+        type=Path,
+        default=None,
+        help=(
+            "optional model_inventory_capture receipt from `ige capture-model-inventory` "
+            "(evidence_grade=disk_capture); never unlocks execution"
+        ),
     )
     audit_comfy.add_argument("--out", type=Path, default=None, help="optional audit report JSON path")
 
@@ -63,6 +75,39 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=None,
         help="optional API prompt to cross-check filenames",
+    )
+
+    capture_inv = sub.add_parser(
+        "capture-model-inventory",
+        help=(
+            "read weight files from --models-root, stream SHA-256, write a disk-capture receipt "
+            "(never runs GPU; never unlocks execution)"
+        ),
+    )
+    capture_inv.add_argument(
+        "--models-root",
+        type=Path,
+        required=True,
+        help="ComfyUI models directory to read (e.g. C:\\Users\\user\\Documents\\ComfyUI\\models)",
+    )
+    capture_inv.add_argument("--out", type=Path, required=True, help="capture receipt JSON output path")
+    capture_inv.add_argument(
+        "--expect-relative",
+        action="append",
+        default=None,
+        help="relative path under models-root to capture; repeatable (default: Dev FP8 + Siax set)",
+    )
+    capture_inv.add_argument(
+        "--manifest",
+        type=Path,
+        default=None,
+        help="optional JSON manifest with assets[{asset_id,role,relative_path,expected_size_bytes?}]",
+    )
+    capture_inv.add_argument(
+        "--chunk-size",
+        type=int,
+        default=None,
+        help="SHA-256 stream chunk size in bytes (default 8MiB)",
     )
 
     audit_tile = sub.add_parser(
@@ -331,10 +376,13 @@ def main() -> int:
         if report is not None:
             siax = (report.get("backend_model_inventory") or {}).get("siax_registry_pin")
         print(
-            f"VALID_SCHEMA: inventory_id={summary['inventory_id']} "
+            f"DECLARED_RECORD: inventory_id={summary['inventory_id']} "
             f"version={summary['inventory_version']} assets={summary['asset_count']} "
             f"custom_nodes={summary['custom_node_count']} "
-            f"verified={result['verified']} execution_allowed={result['execution_allowed']}"
+            f"evidence_grade={result.get('evidence_grade')} "
+            f"inventory_declared_ok={result.get('inventory_declared_ok')} "
+            f"inventory_live_verified={result.get('inventory_live_verified')} "
+            f"execution_allowed={result['execution_allowed']}"
         )
         if siax is not None:
             print(
@@ -348,10 +396,50 @@ def main() -> int:
                 f"merged_audit inventory_status={report['inventory_status']} "
                 f"overall={report['overall_status']} execution_allowed={report['execution_allowed']}"
             )
-        if not result["verified"]:
+        if not result.get("inventory_declared_ok", result.get("verified")):
             return 2
         if report is not None and report.get("inventory_status") != "PASS_STATIC_INVENTORY":
             return 2
+        return 0
+
+    if args.command == "capture-model-inventory":
+        from .comfy.model_inventory_capture import (
+            CaptureInventoryError,
+            capture_model_inventory,
+            write_capture_receipt,
+            DEFAULT_CHUNK_SIZE,
+        )
+        import json as _json
+
+        try:
+            manifest = None
+            if args.manifest is not None:
+                manifest = _json.loads(args.manifest.read_text(encoding="utf-8"))
+            kwargs = {
+                "expect_relative": args.expect_relative,
+                "manifest": manifest,
+            }
+            if args.chunk_size is not None:
+                kwargs["chunk_size"] = args.chunk_size
+            receipt = capture_model_inventory(args.models_root, **kwargs)
+            write_capture_receipt(receipt, args.out)
+        except CaptureInventoryError as exc:
+            print(f"CAPTURE_FAILED: {exc}")
+            return 2
+        print(
+            f"CAPTURE_OK: evidence_grade={receipt['evidence_grade']} "
+            f"receipt_kind={receipt['receipt_kind']} "
+            f"host={receipt['host']['hostname']} "
+            f"models_root={receipt['models_root']} "
+            f"assets={len(receipt['assets'])} "
+            f"captured_at={receipt['captured_at']} "
+            f"out={args.out} execution_allowed=false"
+        )
+        for asset in receipt["assets"]:
+            print(
+                f"  {asset['asset_id']}: {asset['relative_path']} "
+                f"size={asset['size_bytes']} sha256={asset['sha256'][:12]}…"
+            )
         return 0
 
     if args.command == "audit-tile-ledger":
@@ -383,6 +471,7 @@ def main() -> int:
             ui_path=args.ui,
             api_path=args.api,
             model_inventory_path=args.model_inventory,
+            capture_receipt_path=getattr(args, "capture_receipt", None),
         )
         rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
         if args.out:
@@ -396,6 +485,8 @@ def main() -> int:
         print(
             f"method={report['method_id']} inventory={report['inventory_status']} "
             f"backend_model_inventory={backend_status} "
+            f"evidence_grade={backend.get('evidence_grade', 'omitted')} "
+            f"inventory_live_verified={backend.get('inventory_live_verified', False)} "
             f"overall={report['overall_status']} execution_allowed={report['execution_allowed']} "
             f"maturity_remains={report['maturity_remains']}"
         )

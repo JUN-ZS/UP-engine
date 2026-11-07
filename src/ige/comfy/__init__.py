@@ -8,10 +8,20 @@ from .global_noise_contract import (
     classify_noise_evidence,
 )
 from .model_inventory import (
+    EVIDENCE_GRADE_DECLARED,
+    EVIDENCE_GRADE_DISK,
     FAILURE_BACKEND_INVENTORY,
     backend_model_inventory_verified,
     load_model_inventory,
+    validate_declared_inventory,
     verify_against_workflow_audit,
+)
+from .model_inventory_capture import (
+    CAPTURE_SCHEMA,
+    RECEIPT_KIND,
+    capture_model_inventory,
+    load_capture_receipt,
+    validate_capture_receipt,
 )
 from .tile_core_halo_ledger import (
     CODE_CORE_NOT_SUBSET,
@@ -33,27 +43,35 @@ from .workflow_static_audit import (
 )
 
 __all__ = [
+    "CAPTURE_SCHEMA",
     "CODE_CORE_NOT_SUBSET",
     "CODE_CORE_OVERLAP",
     "CODE_COVERAGE_GAP",
     "CODE_HALO_WRITE",
     "CODE_SCHEMA",
+    "EVIDENCE_GRADE_DECLARED",
+    "EVIDENCE_GRADE_DISK",
     "EXPECTED_DEV_FP8_MODELS",
     "FAILURE_BACKEND_INVENTORY",
     "FAILURE_NOISE",
     "FIELD_KIND_COORDINATE_INDEXED",
     "FIELD_KIND_SHARED_SEED_ONLY",
     "LEDGER_SCHEMA",
+    "RECEIPT_KIND",
     "REQUIRED_FLUX_HR_TILE_CLASSES",
     "TEST_ID_NOISE",
     "UMBRELLA_FAILURE",
     "audit_comfy_workflows",
     "audit_ledger",
     "backend_model_inventory_verified",
+    "capture_model_inventory",
     "classify_noise_evidence",
     "ledger_passes",
+    "load_capture_receipt",
     "load_ledger",
     "load_model_inventory",
     "load_workflow_json",
+    "validate_capture_receipt",
+    "validate_declared_inventory",
     "verify_against_workflow_audit",
 ]

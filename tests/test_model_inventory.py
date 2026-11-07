@@ -8,10 +8,12 @@ from tempfile import TemporaryDirectory
 
 from ige.cli import build_parser, main
 from ige.comfy.model_inventory import (
+    EVIDENCE_GRADE_DECLARED,
     FAILURE_BACKEND_INVENTORY,
     ModelInventoryError,
     backend_model_inventory_verified,
     load_model_inventory,
+    validate_declared_inventory,
     validate_inventory_payload,
     verify_against_workflow_audit,
     verify_siax_registry_pin,
@@ -31,6 +33,7 @@ class BackendModelInventoryTests(unittest.TestCase):
         payload = load_model_inventory(INVENTORY)
         self.assertEqual(payload["schema"], "ige-backend-model-inventory/0.1")
         self.assertEqual(payload["policy"], "fail_closed")
+        self.assertEqual(payload.get("evidence_grade"), EVIDENCE_GRADE_DECLARED)
         self.assertEqual(len(payload["assets"]), 5)
         self.assertGreaterEqual(len(payload["custom_nodes"]), 9)
         self.assertEqual(payload["load_options"]["unet_weight_dtype"], "fp8_e4m3fn_fast")
@@ -108,6 +111,9 @@ class BackendModelInventoryTests(unittest.TestCase):
         self.assertEqual(report["overall_status"], "BLOCKED_WORKFLOW_CANDIDATE")
         backend = report["backend_model_inventory"]
         self.assertEqual(backend["status"], "PASS")
+        self.assertEqual(backend["evidence_grade"], EVIDENCE_GRADE_DECLARED)
+        self.assertFalse(backend["inventory_live_verified"])
+        self.assertTrue(backend["inventory_declared_ok"])
         check = next(c for c in report["checks"] if c["code"] == FAILURE_BACKEND_INVENTORY)
         self.assertEqual(check["status"], "PASS")
         siax = backend["siax_registry_pin"]
@@ -140,9 +146,15 @@ class BackendModelInventoryTests(unittest.TestCase):
             load_model_inventory(INVENTORY),
             static_audit_report=audit_comfy_workflows(ui_path=UI, api_path=API),
         )
-        self.assertTrue(verified["verified"])
+        # Declared record may pass filename/pin checks, but is NOT live-verified.
+        self.assertTrue(verified["inventory_declared_ok"])
+        self.assertFalse(verified["inventory_live_verified"])
+        self.assertFalse(verified["verified"])  # alias of live_verified
+        self.assertEqual(verified["evidence_grade"], EVIDENCE_GRADE_DECLARED)
         self.assertFalse(verified["execution_allowed"])
         self.assertTrue(verified["maturity_unchanged"])
+        declared = validate_declared_inventory(load_model_inventory(INVENTORY))
+        self.assertEqual(declared["status"], "DECLARED_RECORD_VALID")
 
     def test_cli_validate_model_inventory(self):
         import sys

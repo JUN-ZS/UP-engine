@@ -460,6 +460,7 @@ def audit_comfy_workflows(
     ui_path: str | Path | None = None,
     api_path: str | Path | None = None,
     model_inventory_path: str | Path | None = None,
+    capture_receipt_path: str | Path | None = None,
 ) -> dict[str, Any]:
     if ui_path is None and api_path is None:
         raise ValueError("at least one of ui_path or api_path is required")
@@ -512,32 +513,46 @@ def audit_comfy_workflows(
     )
 
     backend_inventory_summary: dict[str, Any] | None = None
+    provisional = {
+        "inventories": {
+            ("ui" if inv["format"] == "ui_graph" else "api"): {
+                "models": inv.get("models"),
+            }
+            for inv in inventories
+        }
+    }
+
     if model_inventory_path is not None:
         from .model_inventory import (
+            EVIDENCE_GRADE_DECLARED,
             load_model_inventory,
             summarize_inventory,
+            validate_declared_inventory,
             verify_against_workflow_audit,
         )
 
-        # Temporary report shell so filename matching can read inventories/models.
-        provisional = {
-            "inventories": {
-                ("ui" if inv["format"] == "ui_graph" else "api"): {
-                    "models": inv.get("models"),
-                }
-                for inv in inventories
-            }
-        }
         inv_payload = load_model_inventory(model_inventory_path)
+        declared = validate_declared_inventory(inv_payload)
         backend_check = verify_against_workflow_audit(inv_payload, provisional)
+        # Filename/role alignment still contributes to structural inventory status,
+        # but evidence_grade remains declared_record (not live disk proof).
         checks.append(backend_check)
         backend_inventory_summary = {
             "path": str(Path(model_inventory_path)),
             "filename": Path(model_inventory_path).name,
             "sha256": file_sha256(model_inventory_path),
             "status": backend_check["status"],
+            "evidence_grade": EVIDENCE_GRADE_DECLARED,
+            "inventory_declared_ok": declared["inventory_declared_ok"]
+            and backend_check["status"] == "PASS",
+            "inventory_capture_present": False,
+            "inventory_live_verified": False,
             "summary": summarize_inventory(inv_payload),
             "siax_registry_pin": (backend_check.get("evidence") or {}).get("siax_registry_pin"),
+            "note": (
+                "Declared inventory record only — SHA strings were not re-hashed from "
+                "operator PC disk by this audit. Use --capture-receipt for disk_capture."
+            ),
         }
         sources["backend_model_inventory"] = {
             "path": str(Path(model_inventory_path)),
@@ -546,6 +561,70 @@ def audit_comfy_workflows(
             "bytes": Path(model_inventory_path).stat().st_size,
             "inventory_id": inv_payload.get("inventory_id"),
             "inventory_version": inv_payload.get("inventory_version"),
+            "evidence_grade": EVIDENCE_GRADE_DECLARED,
+        }
+
+    if capture_receipt_path is not None:
+        from .model_inventory import EVIDENCE_GRADE_DISK
+        from .model_inventory_capture import (
+            load_capture_receipt,
+            siax_matches_registry_pin,
+            verify_capture_against_workflow,
+        )
+
+        receipt = load_capture_receipt(capture_receipt_path)
+        capture_check = verify_capture_against_workflow(receipt, provisional)
+        checks.append(
+            {
+                **capture_check,
+                "code": "E_BACKEND_MODEL_CAPTURE",
+                "detail": (
+                    capture_check.get("detail")
+                    or "disk-capture receipt workflow alignment"
+                ),
+            }
+        )
+        siax = siax_matches_registry_pin(receipt)
+        capture_summary = {
+            "path": str(Path(capture_receipt_path)),
+            "filename": Path(capture_receipt_path).name,
+            "sha256": file_sha256(capture_receipt_path),
+            "status": capture_check["status"],
+            "evidence_grade": EVIDENCE_GRADE_DISK,
+            "inventory_declared_ok": backend_inventory_summary.get("inventory_declared_ok")
+            if backend_inventory_summary
+            else None,
+            "inventory_capture_present": True,
+            "inventory_live_verified": capture_check["status"] == "PASS",
+            "receipt_kind": receipt.get("receipt_kind"),
+            "capture_tool": receipt.get("capture_tool"),
+            "host": (receipt.get("host") or {}).get("hostname"),
+            "models_root": receipt.get("models_root"),
+            "captured_at": receipt.get("captured_at"),
+            "asset_count": len(receipt.get("assets") or []),
+            "siax_registry_pin": siax,
+            "note": (
+                "Disk-capture receipt present. Provenance validated; optional --rehash "
+                "against the same host is separate. CI never reads operator PC weights."
+            ),
+        }
+        if backend_inventory_summary is None:
+            backend_inventory_summary = capture_summary
+        else:
+            backend_inventory_summary["capture"] = capture_summary
+            backend_inventory_summary["inventory_capture_present"] = True
+            backend_inventory_summary["inventory_live_verified"] = capture_summary[
+                "inventory_live_verified"
+            ]
+            # Prefer disk_capture grade when receipt supplied
+            backend_inventory_summary["evidence_grade"] = EVIDENCE_GRADE_DISK
+        sources["model_inventory_capture_receipt"] = {
+            "path": str(Path(capture_receipt_path)),
+            "filename": Path(capture_receipt_path).name,
+            "sha256": file_sha256(capture_receipt_path),
+            "bytes": Path(capture_receipt_path).stat().st_size,
+            "evidence_grade": EVIDENCE_GRADE_DISK,
+            "receipt_kind": receipt.get("receipt_kind"),
         }
 
     noise_field_kind = "unknown"
@@ -562,6 +641,7 @@ def audit_comfy_workflows(
         FAILURE_MODEL_MISMATCH,
         "E_UI_API_VALUE_MISMATCH",
         "E_BACKEND_MODEL_INVENTORY",
+        "E_BACKEND_MODEL_CAPTURE",
     }
     structural_fail = [
         c for c in checks if c["code"] in structural_codes and c["status"] == "FAIL"
@@ -604,7 +684,7 @@ def audit_comfy_workflows(
         "noise_field_reason": noise_field_detail,
         "structural_blockers": [c["code"] for c in structural_fail],
         "remaining_live_blockers": [
-            "Offline weight SHAs may be recorded via backend_model_inventory; live ComfyUI load + runtime node proof still required.",
+            "Declared inventory ≠ disk capture; even a capture receipt still requires live ComfyUI load + runtime node proof.",
             "Live proof that each tile's conditioning is independently routed (not only static prompts).",
             "Coordinate-consistent global noise field (shared_seed_only ≠ coordinate_indexed; see docs/GLOBAL_NOISE_FIELD_CONTRACT.md).",
             "Core-only write / halo non-write / full coverage on real GPU outputs.",
@@ -614,7 +694,8 @@ def audit_comfy_workflows(
         "non_claims": [
             "No GPU inference was run.",
             "No Siax / Flux weights were loaded into a runtime for inference.",
-            "Model filename inventory alone is not weight SHA verification; optional --model-inventory records offline SHAs without unlocking execution.",
+            "Optional --model-inventory is evidence_grade=declared_record only; it does not prove CI re-hashed operator PC weights.",
+            "Optional --capture-receipt is evidence_grade=disk_capture; still never sets execution_allowed=true.",
             "Per-tile CLIPTextEncode text is static evidence only.",
             "Same RandomNoise seed is classified as noise_field_kind=shared_seed_only and is not a global noise-field proof.",
             "FLUX_HR_TILE_IMG2IMG remains workflow_candidate; execution_allowed=false.",

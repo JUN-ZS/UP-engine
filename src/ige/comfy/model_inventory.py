@@ -1,8 +1,15 @@
-"""Offline backend model inventory (filenames + SHA-256 + custom node packs).
+"""Offline backend model inventory — declared records vs disk-capture receipts.
 
-Fail-closed helper for future preconditions. NEVER runs ComfyUI, NEVER loads
-GPU weights, NEVER sets execution_allowed=True, and NEVER promotes Method
-Registry maturity or edit_permission.
+Hand-authored / fixture JSON is a **declared_record** only. It validates
+schema + filename↔workflow alignment, but does **not** prove that CI or this
+process re-read operator PC weight files.
+
+Live disk evidence requires `ige capture-model-inventory` → a capture receipt
+(`evidence_grade=disk_capture`). See `model_inventory_capture.py`.
+
+NEVER runs ComfyUI, NEVER loads GPU weights for inference, NEVER sets
+execution_allowed=True, and NEVER promotes Method Registry maturity or
+edit_permission.
 """
 
 from __future__ import annotations
@@ -14,6 +21,8 @@ from typing import Any, Mapping, Sequence
 
 INVENTORY_SCHEMA = "ige-backend-model-inventory/0.1"
 FAILURE_BACKEND_INVENTORY = "E_BACKEND_MODEL_INVENTORY"
+EVIDENCE_GRADE_DECLARED = "declared_record"
+EVIDENCE_GRADE_DISK = "disk_capture"
 
 # Workflow model keys declared by static UI/API audit → inventory roles.
 ROLE_WORKFLOW_KEYS: dict[str, tuple[str, ...]] = {
@@ -367,19 +376,56 @@ def verify_against_workflow_audit(
     )
 
 
+def validate_declared_inventory(data: Mapping[str, Any]) -> dict[str, Any]:
+    """Validate a hand-authored / fixture inventory JSON (declared_record).
+
+    Returns status DECLARED_RECORD_VALID or DECLARED_RECORD_INVALID.
+    Does **not** set inventory_live_verified / never unlocks execution.
+    """
+    errors = validate_inventory_payload(data)
+    grade = data.get("evidence_grade")
+    # Legacy fixtures may omit evidence_grade; treat as declared_record.
+    if grade == EVIDENCE_GRADE_DISK:
+        errors.append(
+            "declared inventory must not use evidence_grade=disk_capture "
+            "(use a capture receipt instead)"
+        )
+    elif grade is not None and grade != EVIDENCE_GRADE_DECLARED:
+        errors.append(f"unknown evidence_grade for declared inventory: {grade}")
+    status = "DECLARED_RECORD_VALID" if not errors else "DECLARED_RECORD_INVALID"
+    return {
+        "status": status,
+        "evidence_grade": EVIDENCE_GRADE_DECLARED,
+        "errors": errors,
+        "inventory_declared_ok": not errors,
+        "inventory_live_verified": False,
+        "execution_allowed": False,
+    }
+
+
 def backend_model_inventory_verified(
     inventory: Mapping[str, Any],
     *,
     static_audit_report: Mapping[str, Any] | None = None,
     registry: Any | None = None,
     required_roles: Sequence[str] | None = None,
+    capture_receipt: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Precondition helper: returns verified flag + blockers; never unlocks execution."""
-    schema_errors = validate_inventory_payload(inventory)
-    blockers: list[str] = [f"schema:{e}" for e in schema_errors]
+    """Precondition helper with evidence-grade split; never unlocks execution.
+
+    Flags:
+      - inventory_declared_ok: declared JSON schema + role/filename (+ optional workflow) OK
+      - inventory_capture_present: a capture receipt was supplied
+      - inventory_live_verified: capture receipt provenance OK (+ workflow match when asked)
+      - verified: **alias of inventory_live_verified only** (declared fixture alone is False)
+
+    Declared fixture SHA strings are NOT treated as live disk proof.
+    """
+    declared = validate_declared_inventory(inventory)
+    blockers: list[str] = [f"schema:{e}" for e in declared["errors"]]
 
     check: dict[str, Any] | None = None
-    if static_audit_report is not None and not schema_errors:
+    if static_audit_report is not None and not declared["errors"]:
         check = verify_against_workflow_audit(
             inventory,
             static_audit_report,
@@ -387,8 +433,7 @@ def backend_model_inventory_verified(
             required_roles=required_roles,
         )
         blockers.extend(list((check.get("evidence") or {}).get("blockers") or []))
-    elif static_audit_report is None and not schema_errors:
-        # Schema-only path still pin-checks Siax when registry available.
+    elif static_audit_report is None and not declared["errors"]:
         siax = verify_siax_registry_pin(inventory, registry=registry)
         if not siax["matched"]:
             blockers.append("siax_registry_pin_mismatch")
@@ -398,15 +443,68 @@ def backend_model_inventory_verified(
             if not by_role.get(role):
                 blockers.append(f"missing_required_role:{role}")
 
-    verified = len(blockers) == 0
+    inventory_declared_ok = len(blockers) == 0
+
+    inventory_capture_present = False
+    inventory_live_verified = False
+    capture_errors: list[str] = []
+    capture_check: dict[str, Any] | None = None
+    if capture_receipt is not None:
+        from .model_inventory_capture import (
+            validate_capture_receipt,
+            verify_capture_against_workflow,
+            siax_matches_registry_pin as siax_pin_capture,
+        )
+
+        inventory_capture_present = True
+        capture_errors = validate_capture_receipt(capture_receipt)
+        if capture_errors:
+            blockers.extend(f"capture:{e}" for e in capture_errors)
+        else:
+            if static_audit_report is not None:
+                capture_check = verify_capture_against_workflow(
+                    capture_receipt,
+                    static_audit_report,
+                    registry=registry,
+                    required_roles=required_roles,
+                )
+                cap_blockers = list((capture_check.get("evidence") or {}).get("blockers") or [])
+                blockers.extend(f"capture_workflow:{b}" for b in cap_blockers)
+                inventory_live_verified = not cap_blockers
+            else:
+                siax = siax_pin_capture(capture_receipt, registry=registry)
+                roles = tuple(required_roles) if required_roles is not None else DEFAULT_REQUIRED_ROLES
+                # reuse role presence via projected view
+                from .model_inventory_capture import receipt_as_inventory_view
+
+                view = receipt_as_inventory_view(capture_receipt)
+                by_role = assets_by_role(view)
+                role_blockers = [f"missing_required_role:{r}" for r in roles if not by_role.get(r)]
+                if not siax["matched"]:
+                    role_blockers.append("siax_registry_pin_mismatch")
+                blockers.extend(f"capture:{b}" for b in role_blockers)
+                inventory_live_verified = not role_blockers
+
     return {
-        "verified": verified,
+        # Live gate only — declared fixture alone must stay False.
+        "verified": inventory_live_verified,
+        "inventory_declared_ok": inventory_declared_ok,
+        "inventory_capture_present": inventory_capture_present,
+        "inventory_live_verified": inventory_live_verified,
+        "evidence_grade": (
+            EVIDENCE_GRADE_DISK if inventory_capture_present else EVIDENCE_GRADE_DECLARED
+        ),
         "blockers": blockers,
         "execution_allowed": False,
         "maturity_unchanged": True,
         "check": check,
+        "capture_check": capture_check,
+        "capture_errors": capture_errors,
         "non_claims": [
             "backend_model_inventory_verified never sets execution_allowed=true",
+            "Declared inventory JSON is evidence_grade=declared_record, not live disk proof",
+            "inventory_live_verified requires a capture receipt from ige capture-model-inventory",
+            "CI does not re-read operator PC weight files",
             "Inventory SHA recording does not promote FLUX_HR_TILE_IMG2IMG maturity",
             "Registry edit_permission remains false",
         ],
@@ -442,6 +540,7 @@ def summarize_inventory(inventory: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "inventory_id": inventory.get("inventory_id"),
         "inventory_version": inventory.get("inventory_version"),
+        "evidence_grade": inventory.get("evidence_grade") or EVIDENCE_GRADE_DECLARED,
         "host": (inventory.get("host") or {}).get("hostname")
         if isinstance(inventory.get("host"), Mapping)
         else None,
