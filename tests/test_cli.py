@@ -7,6 +7,11 @@ class CliParserTests(unittest.TestCase):
     def test_all_pipeline_commands_are_registered(self):
         parser = build_parser()
         self.assertEqual(parser.prog, "ige")
+        agent_plan = parser.parse_args(["agent-run", "manifest.json", "--out", "report.json"])
+        self.assertEqual(agent_plan.command, "agent-run")
+        self.assertFalse(agent_plan.execute)
+        agent_execute = parser.parse_args(["agent-run", "manifest.json", "--execute"])
+        self.assertTrue(agent_execute.execute)
         registry = parser.parse_args(["validate-method-registry"])
         self.assertEqual(registry.command, "validate-method-registry")
         audit = parser.parse_args(["audit-s0-s7", "evidence.json", "--method-registry", "registry.json", "--out", "audit.json"])

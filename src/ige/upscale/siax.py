@@ -79,6 +79,7 @@ def run_siax_upscale(input_path: str | Path, checkpoint_path: str | Path, output
     # full-size float conversion during PNG encoding.
     output_canvas = allocate_output_canvas(w, h, scale=4)
     tile_count = 0
+    tile_trace: list[dict[str, Any]] = []
     with torch.inference_mode():
         for y0 in range(0, h, tile_size):
             y1 = min(y0 + tile_size, h)
@@ -93,6 +94,13 @@ def run_siax_upscale(input_path: str | Path, checkpoint_path: str | Path, output
                 patch = tile_out[0, :, cy0:cy1, cx0:cx1].permute(1, 2, 0).numpy()
                 patch = np.clip(patch * 255.0 + 0.5, 0, 255).astype(np.uint8)
                 output_canvas[y0 * 4:y1 * 4, x0 * 4:x1 * 4] = patch
+                # Bounds use the 4x output-canvas coordinate frame. The trace is
+                # emitted from the same loop that performs the actual core write.
+                tile_trace.append({
+                    "tile_id": f"tile-{tile_count:05d}",
+                    "read_bounds": [ex0 * 4, ey0 * 4, ex1 * 4, ey1 * 4],
+                    "core_bounds": [x0 * 4, y0 * 4, x1 * 4, y1 * 4],
+                })
                 tile_count += 1
                 del tile, tile_out, patch
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -106,6 +114,7 @@ def run_siax_upscale(input_path: str | Path, checkpoint_path: str | Path, output
         "output_path": str(output.resolve()), "output_sha256": file_sha256(output),
         "output_dimensions": {"width": w * 4, "height": h * 4},
         "runtime": {"torch": torch.__version__, "device": selected_device, "tile_size": tile_size, "tile_pad": tile_pad, "tile_count": tile_count, "output_canvas_dtype": "uint8", "output_canvas_bytes": int(output_canvas.nbytes)},
+        "tile_trace": tile_trace,
         "acceptance": "candidate_only",
         "limitations": ["Model inference does not prove identity, topology or perceptual quality.", "Checkpoint must be recognized as ESRGAN and expose exact 4x scale; otherwise it is rejected.", "The Hugging Face mirror labels its repository MIT; original upstream model terms still require user review."]
     }

@@ -92,6 +92,8 @@ def validate_registry_payload(data: Mapping[str, Any]) -> list[str]:
             errors.append(f"{p}.model_sha256 must be a valid SHA-256 when supplied")
         if not isinstance(method.get("requires_human_permission"), bool):
             errors.append(f"{p}.requires_human_permission must be boolean")
+        if "tile_ledger_required" in method and not isinstance(method.get("tile_ledger_required"), bool):
+            errors.append(f"{p}.tile_ledger_required must be boolean when supplied")
         if not isinstance(method.get("acceptance"), str) or not method.get("acceptance", "").strip():
             errors.append(f"{p}.acceptance must be non-empty")
         stages = method.get("stage")
@@ -207,6 +209,76 @@ def _local_hash_matches(path: Any, expected: Any) -> bool:
         return p.is_file() and file_sha256(p) == expected.lower()
     except OSError:
         return False
+
+
+def _canonical_json_sha256(value: Any) -> str:
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _validate_instrumented_tile_s5_receipt(
+    receipt: Mapping[str, Any],
+    *,
+    source_sha256: str,
+    output_sha256: str,
+    method: Mapping[str, Any],
+    geometry: Mapping[str, Any],
+) -> tuple[bool, list[str]]:
+    """Bind a tiled S5 receipt to the adapter sidecar and the actual tile trace."""
+    errors: list[str] = []
+    metadata_path = receipt.get("adapter_metadata_path")
+    metadata_sha = receipt.get("adapter_metadata_sha256")
+    ledger_path = receipt.get("tile_ledger_path")
+    ledger_sha = receipt.get("tile_ledger_sha256")
+    trace_sha = receipt.get("tile_trace_sha256")
+    if not _local_hash_matches(metadata_path, metadata_sha):
+        errors.append("S5 adapter metadata file/SHA is missing or inconsistent")
+        return False, errors
+    if not _local_hash_matches(ledger_path, ledger_sha):
+        errors.append("S5 instrumented tile ledger file/SHA is missing or inconsistent")
+        return False, errors
+    try:
+        metadata = json.loads(Path(metadata_path).read_text(encoding="utf-8"))
+        ledger = json.loads(Path(ledger_path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return False, [f"S5 metadata/ledger cannot be read: {exc}"]
+    trace = metadata.get("tile_trace")
+    if (
+        metadata.get("input_sha256") != source_sha256
+        or metadata.get("output_sha256") != output_sha256
+        or metadata.get("checkpoint_sha256") != receipt.get("model_sha256")
+        or metadata.get("model_id") != receipt.get("model_id")
+        or not isinstance(trace, list)
+        or _canonical_json_sha256(trace) != trace_sha
+    ):
+        errors.append("S5 adapter sidecar does not match source/model/output/tile trace hashes")
+    if ledger.get("evidence_grade") != "runtime_instrumented_adapter":
+        errors.append("S5 tile ledger evidence_grade is not runtime_instrumented_adapter")
+    if ledger.get("coordinate_frame") != geometry.get("coordinate_frame"):
+        errors.append("S5 tile ledger coordinate_frame does not match S2")
+    if ledger.get("canvas_sha256") != geometry.get("canvas_sha256"):
+        errors.append("S5 tile ledger canvas_sha256 does not match S2")
+    try:
+        with Image.open(geometry.get("canvas_path")) as canvas:
+            canvas_size = canvas.size
+        if ledger.get("canvas_size_wh") != [canvas_size[0], canvas_size[1]]:
+            errors.append("S5 tile ledger dimensions do not match S2 coordinate canvas")
+    except (OSError, ValueError):
+        errors.append("S2 coordinate canvas cannot be read for S5 tile binding")
+    ledger_tiles = ledger.get("tiles")
+    if not isinstance(trace, list) or not isinstance(ledger_tiles, list) or len(trace) != len(ledger_tiles):
+        errors.append("S5 tile ledger count does not match adapter tile trace")
+    else:
+        for index, (trace_item, ledger_item) in enumerate(zip(trace, ledger_tiles)):
+            expected_id = trace_item.get("tile_id")
+            if (
+                ledger_item.get("tile_id") != expected_id
+                or ledger_item.get("read_bounds") != trace_item.get("read_bounds")
+                or ledger_item.get("core_bounds") != trace_item.get("core_bounds")
+            ):
+                errors.append(f"S5 ledger tile {index} does not match adapter tile trace")
+                break
+    return not errors, errors
 
 
 def _binary_mask(path: Any, expected_size: tuple[int, int]) -> Image.Image | None:
@@ -391,8 +463,17 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
             and isinstance(r.get("parameters"), dict)
         )
         output_sha = r.get("output_sha256") if isinstance(r, dict) else None
+        tile_proof_ok, tile_proof_errors = (True, [])
+        if isinstance(r, dict) and method.get("tile_ledger_required") is True:
+            tile_proof_ok, tile_proof_errors = _validate_instrumented_tile_s5_receipt(
+                r, source_sha256=source_sha, output_sha256=output_sha or "",
+                method=method, geometry=g,
+            )
+        receipt_ok = receipt_ok and tile_proof_ok
         detail = {"backend_id": r.get("backend_id"), "model_id": r.get("model_id"), "output_sha256": output_sha} if isinstance(r, dict) else {}
         why = "real backend/model/input/output receipt incomplete or method-mismatched"
+        if tile_proof_errors:
+            why += "; " + "; ".join(tile_proof_errors)
     else:
         r = s5.get("operation_receipt", {}) if isinstance(s5, dict) else {}
         receipt_ok = (
@@ -428,16 +509,21 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
     # Core/Halo ledger: MANDATORY for Tile methods (fail-closed if absent).
     # Non-tile methods keep the legacy integer-counter path when no ledger is attached.
     # Ledger is always bound to S2 geometry canvas (SHA + coordinate_frame) when audited.
+    # Registry flag tile_ledger_required is an additional explicit signal (Driver / Siax)
+    # and, when set, also requires S5↔S6 path/SHA identity for instrumented ledgers.
     from .comfy.tile_core_halo_ledger import (
         audit_ledger,
         ledger_passes,
         method_requires_tile_core_halo_ledger,
         missing_ledger_failure,
+        parse_bounds,
         resolve_optional_ledger_from_s6,
     )
     tile_ledger_report = None
     tile_ledger_ok = True
-    ledger_required = method_requires_tile_core_halo_ledger(method_id)
+    ledger_required = method_requires_tile_core_halo_ledger(method_id) or (
+        method.get("tile_ledger_required") is True
+    )
     ledger_declared = isinstance(a, dict) and (
         a.get("tile_core_halo_ledger") is not None or a.get("tile_core_halo_ledger_path")
     )
@@ -468,6 +554,66 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
                     require_s2_bind=True,
                 )
                 tile_ledger_ok = ledger_passes(tile_ledger_report)
+                # Driver instrumented path: when tile_ledger_required, also bind
+                # S6 path/SHA to the S5 receipt and enforce canvas geometry extras.
+                if method.get("tile_ledger_required") is True:
+                    bind_errors: list[str] = []
+                    ledger_path = a.get("tile_core_halo_ledger_path") if isinstance(a, dict) else None
+                    ledger_sha = a.get("tile_core_halo_ledger_sha256") if isinstance(a, dict) else None
+                    s5_receipt = r if isinstance(r, dict) else {}
+                    if ledger_path != s5_receipt.get("tile_ledger_path") or ledger_sha != s5_receipt.get(
+                        "tile_ledger_sha256"
+                    ):
+                        bind_errors.append("S6 ledger path/SHA does not match the S5-bound tile ledger")
+                    if not ledger_sha or not ledger_path or not _local_hash_matches(ledger_path, ledger_sha):
+                        bind_errors.append("tile ledger file SHA-256 mismatch or missing")
+                    try:
+                        with Image.open(g.get("canvas_path")) as canvas_image:
+                            canvas_width, canvas_height = canvas_image.size
+                        if ledger_payload.get("canvas_size_wh") is not None and ledger_payload.get(
+                            "canvas_size_wh"
+                        ) != [canvas_width, canvas_height]:
+                            bind_errors.append(
+                                "ledger canvas_size_wh does not match S2 coordinate canvas"
+                            )
+                        rectangles = list(
+                            (ledger_payload.get("coverage_target") or {}).get("rects") or []
+                        )
+                        for tile in ledger_payload.get("tiles") or []:
+                            rectangles.extend(
+                                tile.get(key)
+                                for key in ("read_bounds", "core_bounds", "halo_bounds")
+                                if tile.get(key) is not None
+                            )
+                        for index, raw_bounds in enumerate(rectangles):
+                            bounds = parse_bounds(raw_bounds, label=f"ledger bounds[{index}]")
+                            if isinstance(bounds, str):
+                                bind_errors.append(bounds)
+                                continue
+                            x0, y0, x1, y1 = bounds
+                            if x0 < 0 or y0 < 0 or x1 > canvas_width or y1 > canvas_height:
+                                bind_errors.append(
+                                    f"ledger bounds[{index}] lie outside S2 canvas"
+                                )
+                                break
+                    except Exception as exc:  # noqa: BLE001 — surface bind failure
+                        bind_errors.append(f"cannot bind ledger bounds to S2 canvas: {exc}")
+                    if bind_errors:
+                        tile_ledger_ok = False
+                        if not isinstance(tile_ledger_report, dict):
+                            tile_ledger_report = {
+                                "overall_status": "FAIL",
+                                "blockers": [],
+                                "execution_allowed": False,
+                            }
+                        tile_ledger_report["overall_status"] = "FAIL"
+                        tile_ledger_report.setdefault("blockers", []).append(
+                            "E_TILE_LEDGER_CANVAS_BINDING"
+                        )
+                        tile_ledger_report["blockers"] = list(
+                            dict.fromkeys(tile_ledger_report["blockers"])
+                        )
+                        tile_ledger_report["binding_errors"] = bind_errors
     return_ok = (
         isinstance(a, dict) and a.get("source_sha256") == source_sha and a.get("output_sha256") == output_sha
         and _local_hash_matches(a.get("output_path"), output_sha)

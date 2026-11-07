@@ -335,7 +335,8 @@
       "acceptance": "S7 geometry, coverage, return and visual-quality gates; 4x alone is not geometry acceptance.",
       "model_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
       "route_stage": "super_resolution",
-      "source_section": "GRID_SIAX_CORRECT_PROCESS.md section 0.12.15; PR5 src/ige/upscale/siax.py"
+      "source_section": "GRID_SIAX_CORRECT_PROCESS.md section 0.12.15; PR5 src/ige/upscale/siax.py",
+      "tile_ledger_required": true
     },
     {
       "method_id": "GRID_SIAX_REGION_DONOR_COMPOSITE",

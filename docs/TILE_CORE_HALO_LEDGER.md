@@ -121,3 +121,32 @@ fail-closed with S2 bind.
 - `docs/COMFY_WORKFLOW_STATIC_AUDIT.md`
 - `docs/GLOBAL_NOISE_FIELD_CONTRACT.md`
 - Method `GEOMETRY_LOCKED_TILE_PLAN_RETURN` failure / test ids
+
+
+## Driver / Siax instrumented binding
+
+When the Registry marks `tile_ledger_required=true` (currently
+`SIAX4X_TILE_CORE_SR`), the SHQ Agent Driver path additionally requires:
+
+- S5 `backend_receipt.tile_ledger_path` / `tile_ledger_sha256` bound to the
+  Siax adapter sidecar (`adapter_metadata_*`) and the canonical `tile_trace`
+  emitted from the same inference/write loop (`evidence_grade`:
+  `runtime_instrumented_adapter`).
+- S6 `tile_core_halo_ledger_path` / `tile_core_halo_ledger_sha256` identical to
+  that S5 ledger identity.
+- Optional `canvas_size_wh` must match the S2 coordinate canvas when present;
+  read/core/halo/coverage rectangles must lie inside the S2 canvas.
+
+Self-reported integer counts alone are not enough for that instrumented path.
+Unit fixtures prove validator behaviour only; they are not live device output.
+
+## Evidence grades
+
+- `synthetic`: generated test fixture; never a live backend proof.
+- `runtime_instrumented_adapter`: exact trace emitted from the adapter's
+  inference/write loop and bound to its sidecar and parent S2 canvas.
+- `runtime_backend_receipt`: reserved for a future live backend compositor
+  receipt (not claimed here).
+- A Comfy ledger must not claim `runtime_instrumented_adapter` unless a live
+  Comfy compositor itself emits equivalent write instrumentation. The current
+  FLUX workflow does not do so and remains `workflow_candidate`.
