@@ -75,6 +75,10 @@ The S6 pixel audit decodes the coordinate canvas, final output and approved bina
 
 Tile-specific counts (halo writes, core overlap and coverage gaps) are still receipts supplied by the tile compositor; this module does not reconstruct tile provenance from the final raster alone. A future tile ledger should carry per-tile read bounds, disjoint core bounds, output hashes and exact-once core coverage.
 
+## Registry is the single routing authority
+
+The JSON Registry is the single source for skill aliases, route-stage labels, source-document references, method maturity, preconditions and acceptance descriptions. The legacy hard-coded `SKILL_REGISTRY` table has been removed from `skill_router.py`; an unmapped alias now fails closed instead of falling back to a hidden default.
+
 ## Method maturity is not a single boolean
 
 The Registry records distinct maturity classes:
