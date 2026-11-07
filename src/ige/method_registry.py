@@ -425,20 +425,74 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
         type(a.get(key)) is int and a.get(key) == 0
         for key in ("halo_write_pixels", "core_overlap_pixels", "coverage_gap_pixels")
     )
+    # Core/Halo ledger: MANDATORY for Tile methods (fail-closed if absent).
+    # Non-tile methods keep the legacy integer-counter path when no ledger is attached.
+    # Ledger is always bound to S2 geometry canvas (SHA + coordinate_frame) when audited.
+    from .comfy.tile_core_halo_ledger import (
+        audit_ledger,
+        ledger_passes,
+        method_requires_tile_core_halo_ledger,
+        missing_ledger_failure,
+        resolve_optional_ledger_from_s6,
+    )
+    tile_ledger_report = None
+    tile_ledger_ok = True
+    ledger_required = method_requires_tile_core_halo_ledger(method_id)
+    ledger_declared = isinstance(a, dict) and (
+        a.get("tile_core_halo_ledger") is not None or a.get("tile_core_halo_ledger_path")
+    )
+    if ledger_required or ledger_declared:
+        if not ledger_declared:
+            tile_ledger_ok = False
+            tile_ledger_report = missing_ledger_failure(method_id=str(method_id))
+        else:
+            try:
+                ledger_payload = resolve_optional_ledger_from_s6(a)
+            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                tile_ledger_ok = False
+                tile_ledger_report = {
+                    "overall_status": "FAIL",
+                    "blockers": ["E_TILE_LEDGER_SCHEMA"],
+                    "detail": f"tile ledger load failed: {exc}",
+                    "execution_allowed": False,
+                }
+                ledger_payload = None
+            if ledger_payload is not None:
+                s2_bind = {
+                    "coordinate_frame": g.get("coordinate_frame"),
+                    "canvas_sha256": g.get("canvas_sha256"),
+                }
+                tile_ledger_report = audit_ledger(
+                    ledger_payload,
+                    s2_geometry=s2_bind,
+                    require_s2_bind=True,
+                )
+                tile_ledger_ok = ledger_passes(tile_ledger_report)
     return_ok = (
         isinstance(a, dict) and a.get("source_sha256") == source_sha and a.get("output_sha256") == output_sha
         and _local_hash_matches(a.get("output_path"), output_sha)
-        and a.get("core_only_writes") is True and tile_counts_ok
+        and a.get("core_only_writes") is True and tile_counts_ok and tile_ledger_ok
         and pixel_audit is not None
         and pixel_audit["changed_pixels_outside_authorized_region"] == 0
         and a.get("outside_authorized_changed_pixels") == pixel_audit["changed_pixels_outside_authorized_region"]
         and a.get("implicit_resize") is False and a.get("implicit_flip") is False
     )
     if not return_ok:
-        stages.append(_result("S6", "BLOCKED", ["core-only return, coverage, or pixel-preservation audit failed/incomplete"]))
+        reasons = ["core-only return, coverage, or pixel-preservation audit failed/incomplete"]
+        if ledger_required and not ledger_declared:
+            reasons.append(
+                "tile_core_halo_ledger required for Tile method but missing "
+                "(E_TILE_LEDGER_REQUIRED / E_PR11_TILE_PLAN_CORE_HALO)"
+            )
+        elif ledger_declared and not tile_ledger_ok:
+            reasons.append(
+                "tile_core_halo_ledger audit failed "
+                "(E_PR11_TILE_PLAN_CORE_HALO / specific E_TILE_* incl. S2 bind / output SHA)"
+            )
+        stages.append(_result("S6", "BLOCKED", reasons, tile_ledger=tile_ledger_report))
         stages.extend(_not_run(7))
         return {"status": "BLOCKED", "stages": stages, "selected_method": method_id, "method_decision": decision, "execution_allowed": False}
-    stages.append(_result("S6", "PASS", [], pixel_audit=pixel_audit))
+    stages.append(_result("S6", "PASS", [], pixel_audit=pixel_audit, tile_ledger=tile_ledger_report))
 
     s7 = evidence.get("S7", {})
     ac = s7.get("acceptance", {}) if isinstance(s7, dict) else {}

@@ -1,0 +1,84 @@
+{
+  "schema": "ige-model-inventory-capture-receipt/0.1",
+  "receipt_kind": "model_inventory_capture",
+  "evidence_grade": "disk_capture",
+  "capture_tool": "ige.capture-model-inventory",
+  "capture_tool_version": "0.1.0",
+  "package_version": "0.5.0-grok-adapter",
+  "policy": "fail_closed",
+  "host": {
+    "hostname": "DESKTOP-GNMQ0PF",
+    "os": "Windows",
+    "notes": "Disk capture via ige capture-model-inventory; not a GPU run."
+  },
+  "models_root": "C:\\Users\\user\\Documents\\ComfyUI\\models",
+  "captured_at": "2026-11-08T04:39:44+08:00",
+  "algorithm": "sha256",
+  "chunk_size_bytes": 8388608,
+  "assets": [
+    {
+      "asset_id": "SIAX4X",
+      "role": "upscale",
+      "relative_path": "upscale_models/4x_NMKD-Siax_200k.pth",
+      "filename": "4x_NMKD-Siax_200k.pth",
+      "size_bytes": 66957746,
+      "sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+      "hashed_at": "2026-11-08T04:39:07+08:00",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\upscale_models\\4x_NMKD-Siax_200k.pth"
+    },
+    {
+      "asset_id": "FLUX_AE",
+      "role": "vae",
+      "relative_path": "vae/ae.safetensors",
+      "filename": "ae.safetensors",
+      "size_bytes": 335304388,
+      "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+      "hashed_at": "2026-11-08T04:39:07+08:00",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\vae\\ae.safetensors"
+    },
+    {
+      "asset_id": "CLIP_L",
+      "role": "clip",
+      "relative_path": "clip/clip_l.safetensors",
+      "filename": "clip_l.safetensors",
+      "size_bytes": 246144152,
+      "sha256": "660c6f5b1abae9dc498ac2d21e1347d2abdb0cf6c0c0c8576cd796491d9a6cdd",
+      "hashed_at": "2026-11-08T04:39:07+08:00",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\clip\\clip_l.safetensors"
+    },
+    {
+      "asset_id": "T5XXL_FP16",
+      "role": "clip",
+      "relative_path": "clip/t5xxl_fp16.safetensors",
+      "filename": "t5xxl_fp16.safetensors",
+      "size_bytes": 9787841024,
+      "sha256": "6e480b09fae049a72d2a8c5fbccb8d3e92febeb233bbe9dfe7256958a9167635",
+      "hashed_at": "2026-11-08T04:39:07+08:00",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\clip\\t5xxl_fp16.safetensors"
+    },
+    {
+      "asset_id": "FLUX1_DEV",
+      "role": "unet",
+      "relative_path": "diffusion_models/flux1-dev.safetensors",
+      "filename": "flux1-dev.safetensors",
+      "size_bytes": 23802932552,
+      "sha256": "4610115bb0c89560703c892c59ac2742fa821e60ef5871b33493ba544683abd7",
+      "hashed_at": "2026-11-08T04:39:18+08:00",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\diffusion_models\\flux1-dev.safetensors"
+    }
+  ],
+  "custom_nodes": [],
+  "load_options": {
+    "unet_weight_dtype": "fp8_e4m3fn_fast"
+  },
+  "non_claims": [
+    "No ComfyUI / GPU inference was run during capture.",
+    "Filenames and digests do not prove live ComfyUI load readiness.",
+    "ae.safetensors SHA does not claim equivalence to ae.sft.",
+    "Capture receipt never sets execution_allowed=true.",
+    "Capture receipt does not promote FLUX_HR_TILE_IMG2IMG maturity.",
+    "Registry edit_permission remains false.",
+    "CI unit tests use tiny temporary files only; CI does not read operator PC weights."
+  ],
+  "method_id_context": "FLUX_HR_TILE_IMG2IMG"
+}

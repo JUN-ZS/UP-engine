@@ -33,6 +33,90 @@ def build_parser() -> argparse.ArgumentParser:
     audit_s0_s7.add_argument("--method-registry", type=Path, default=None)
     audit_s0_s7.add_argument("--out", type=Path, default=None)
 
+    audit_comfy = sub.add_parser(
+        "audit-comfy-workflow",
+        help="static ComfyUI UI/API inventory audit for FLUX_HR_TILE candidate (no GPU; never unlocks execution)",
+    )
+    audit_comfy.add_argument("--ui", type=Path, default=None, help="ComfyUI UI workflow graph JSON")
+    audit_comfy.add_argument("--api", type=Path, default=None, help="ComfyUI API prompt JSON")
+    audit_comfy.add_argument(
+        "--model-inventory",
+        type=Path,
+        default=None,
+        help=(
+            "optional declared backend_model_inventory JSON (evidence_grade=declared_record); "
+            "filename/pin checks only — not live disk proof; never unlocks execution"
+        ),
+    )
+    audit_comfy.add_argument(
+        "--capture-receipt",
+        type=Path,
+        default=None,
+        help=(
+            "optional model_inventory_capture receipt from `ige capture-model-inventory` "
+            "(evidence_grade=disk_capture); never unlocks execution"
+        ),
+    )
+    audit_comfy.add_argument("--out", type=Path, default=None, help="optional audit report JSON path")
+
+    validate_inv = sub.add_parser(
+        "validate-model-inventory",
+        help="validate offline backend_model_inventory JSON (filenames+SHA; never unlocks execution)",
+    )
+    validate_inv.add_argument("--path", type=Path, required=True, help="backend_model_inventory JSON")
+    validate_inv.add_argument(
+        "--against-ui",
+        type=Path,
+        default=None,
+        help="optional UI workflow to cross-check filenames",
+    )
+    validate_inv.add_argument(
+        "--against-api",
+        type=Path,
+        default=None,
+        help="optional API prompt to cross-check filenames",
+    )
+
+    capture_inv = sub.add_parser(
+        "capture-model-inventory",
+        help=(
+            "read weight files from --models-root, stream SHA-256, write a disk-capture receipt "
+            "(never runs GPU; never unlocks execution)"
+        ),
+    )
+    capture_inv.add_argument(
+        "--models-root",
+        type=Path,
+        required=True,
+        help="ComfyUI models directory to read (e.g. C:\\Users\\user\\Documents\\ComfyUI\\models)",
+    )
+    capture_inv.add_argument("--out", type=Path, required=True, help="capture receipt JSON output path")
+    capture_inv.add_argument(
+        "--expect-relative",
+        action="append",
+        default=None,
+        help="relative path under models-root to capture; repeatable (default: Dev FP8 + Siax set)",
+    )
+    capture_inv.add_argument(
+        "--manifest",
+        type=Path,
+        default=None,
+        help="optional JSON manifest with assets[{asset_id,role,relative_path,expected_size_bytes?}]",
+    )
+    capture_inv.add_argument(
+        "--chunk-size",
+        type=int,
+        default=None,
+        help="SHA-256 stream chunk size in bytes (default 8MiB)",
+    )
+
+    audit_tile = sub.add_parser(
+        "audit-tile-ledger",
+        help="audit Core/Halo tile write-back ledger (exact-once coverage; never unlocks execution)",
+    )
+    audit_tile.add_argument("path", type=Path, help="tile_core_halo_ledger JSON")
+    audit_tile.add_argument("--out", type=Path, default=None, help="optional audit report JSON path")
+
     read = sub.add_parser(
         "read-image",
         help="inspect a still image and export auditable regions, proposals, relations and masks",
@@ -268,6 +352,145 @@ def main() -> int:
         else:
             print(rendered, end="")
         return 0 if report["status"] == "ACCEPTED_CANDIDATE" else 2
+
+    if args.command == "validate-model-inventory":
+        from .comfy.model_inventory import (
+            backend_model_inventory_verified,
+            load_model_inventory,
+            summarize_inventory,
+        )
+        from .comfy.workflow_static_audit import audit_comfy_workflows
+        import json as _json
+
+        inventory = load_model_inventory(args.path)
+        report = None
+        if args.against_ui is not None or args.against_api is not None:
+            report = audit_comfy_workflows(
+                ui_path=args.against_ui,
+                api_path=args.against_api,
+                model_inventory_path=args.path,
+            )
+        result = backend_model_inventory_verified(inventory, static_audit_report=report)
+        summary = summarize_inventory(inventory)
+        siax = None
+        if report is not None:
+            siax = (report.get("backend_model_inventory") or {}).get("siax_registry_pin")
+        print(
+            f"DECLARED_RECORD: inventory_id={summary['inventory_id']} "
+            f"version={summary['inventory_version']} assets={summary['asset_count']} "
+            f"custom_nodes={summary['custom_node_count']} "
+            f"evidence_grade={result.get('evidence_grade')} "
+            f"inventory_declared_ok={result.get('inventory_declared_ok')} "
+            f"inventory_live_verified={result.get('inventory_live_verified')} "
+            f"execution_allowed={result['execution_allowed']}"
+        )
+        if siax is not None:
+            print(
+                f"siax_pin={siax.get('status')} matched={siax.get('matched')} "
+                f"sha={(siax.get('evidence') or {}).get('inventory_sha256')}"
+            )
+        if result["blockers"]:
+            print("blockers=" + ",".join(result["blockers"]))
+        if report is not None:
+            print(
+                f"merged_audit inventory_status={report['inventory_status']} "
+                f"overall={report['overall_status']} execution_allowed={report['execution_allowed']}"
+            )
+        if not result.get("inventory_declared_ok", result.get("verified")):
+            return 2
+        if report is not None and report.get("inventory_status") != "PASS_STATIC_INVENTORY":
+            return 2
+        return 0
+
+    if args.command == "capture-model-inventory":
+        from .comfy.model_inventory_capture import (
+            CaptureInventoryError,
+            capture_model_inventory,
+            write_capture_receipt,
+            DEFAULT_CHUNK_SIZE,
+        )
+        import json as _json
+
+        try:
+            manifest = None
+            if args.manifest is not None:
+                manifest = _json.loads(args.manifest.read_text(encoding="utf-8"))
+            kwargs = {
+                "expect_relative": args.expect_relative,
+                "manifest": manifest,
+            }
+            if args.chunk_size is not None:
+                kwargs["chunk_size"] = args.chunk_size
+            receipt = capture_model_inventory(args.models_root, **kwargs)
+            write_capture_receipt(receipt, args.out)
+        except CaptureInventoryError as exc:
+            print(f"CAPTURE_FAILED: {exc}")
+            return 2
+        print(
+            f"CAPTURE_OK: evidence_grade={receipt['evidence_grade']} "
+            f"receipt_kind={receipt['receipt_kind']} "
+            f"host={receipt['host']['hostname']} "
+            f"models_root={receipt['models_root']} "
+            f"assets={len(receipt['assets'])} "
+            f"captured_at={receipt['captured_at']} "
+            f"out={args.out} execution_allowed=false"
+        )
+        for asset in receipt["assets"]:
+            print(
+                f"  {asset['asset_id']}: {asset['relative_path']} "
+                f"size={asset['size_bytes']} sha256={asset['sha256'][:12]}…"
+            )
+        return 0
+
+    if args.command == "audit-tile-ledger":
+        from .comfy.tile_core_halo_ledger import audit_ledger, load_ledger, ledger_passes
+        import json as _json
+
+        ledger = load_ledger(args.path)
+        report = audit_ledger(ledger)
+        rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(rendered, encoding="utf-8")
+            print(f"Tile ledger audit written: {args.out}")
+        else:
+            print(rendered, end="")
+        print(
+            f"overall={report['overall_status']} blockers={','.join(report.get('blockers') or []) or 'none'} "
+            f"execution_allowed={report['execution_allowed']} edit_permission={report['edit_permission']}"
+        )
+        return 0 if ledger_passes(report) else 2
+
+    if args.command == "audit-comfy-workflow":
+        from .comfy.workflow_static_audit import audit_comfy_workflows, structural_inventory_ok
+        import json as _json
+
+        if args.ui is None and args.api is None:
+            parser.error("audit-comfy-workflow requires --ui and/or --api")
+        report = audit_comfy_workflows(
+            ui_path=args.ui,
+            api_path=args.api,
+            model_inventory_path=args.model_inventory,
+            capture_receipt_path=getattr(args, "capture_receipt", None),
+        )
+        rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(rendered, encoding="utf-8")
+            print(f"Comfy workflow static audit written: {args.out}")
+        else:
+            print(rendered, end="")
+        backend = report.get("backend_model_inventory") or {}
+        backend_status = backend.get("status", "omitted")
+        print(
+            f"method={report['method_id']} inventory={report['inventory_status']} "
+            f"backend_model_inventory={backend_status} "
+            f"evidence_grade={backend.get('evidence_grade', 'omitted')} "
+            f"inventory_live_verified={backend.get('inventory_live_verified', False)} "
+            f"overall={report['overall_status']} execution_allowed={report['execution_allowed']} "
+            f"maturity_remains={report['maturity_remains']}"
+        )
+        return 0 if structural_inventory_ok(report) else 2
 
     if args.command == "read-image":
         from .read import run_read

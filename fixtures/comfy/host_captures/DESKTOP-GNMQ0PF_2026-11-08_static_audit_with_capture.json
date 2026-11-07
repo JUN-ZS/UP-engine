@@ -1,0 +1,433 @@
+{
+  "schema": "ige-comfy-workflow-static-audit/0.1",
+  "method_id": "FLUX_HR_TILE_IMG2IMG",
+  "maturity_remains": "workflow_candidate",
+  "execution_allowed": false,
+  "inventory_status": "PASS_STATIC_INVENTORY",
+  "overall_status": "BLOCKED_WORKFLOW_CANDIDATE",
+  "sources": {
+    "ui": {
+      "path": "fixtures/comfy/workflow_ige_v03_dev_fp8.json",
+      "filename": "workflow_ige_v03_dev_fp8.json",
+      "sha256": "fc6d7e1a9145139cb5bf998e71df7ffe1bd25b14e42a2da558ce6cfa6a9d48c0",
+      "bytes": 100609,
+      "format": "ui_graph",
+      "node_count": 60
+    },
+    "api": {
+      "path": "fixtures/comfy/workflow_cloud_api_prompt_v0.5.json",
+      "filename": "workflow_cloud_api_prompt_v0.5.json",
+      "sha256": "8f252ae6b56d6d58decaaf5cea7dff789bc7158d2f491e1ebb10a1855d8f7fbf",
+      "bytes": 8002,
+      "format": "api_prompt",
+      "node_count": 22
+    },
+    "model_inventory_capture_receipt": {
+      "path": "/workspace/model_inventory_capture_receipt.json",
+      "filename": "model_inventory_capture_receipt.json",
+      "sha256": "142ec1c35107d75eee3e5183c3fd7f4460569c219881b28f83f37d99d8c4d202",
+      "bytes": 3455,
+      "evidence_grade": "disk_capture",
+      "receipt_kind": "model_inventory_capture"
+    }
+  },
+  "inventories": {
+    "ui": {
+      "format": "ui_graph",
+      "node_count": 60,
+      "class_counts": {
+        "BasicGuider": 2,
+        "BasicScheduler": 1,
+        "CLIPTextEncode": 2,
+        "DualCLIPLoader": 1,
+        "FluxGuidance": 2,
+        "IGE_ApplyLogicGate": 1,
+        "IGE_GlobalAcceptanceAudit": 1,
+        "IGE_GlobalLogicCompiler": 1,
+        "IGE_GlobalReconciler": 1,
+        "IGE_IterationFeedback": 1,
+        "IGE_LogicMapPreview": 1,
+        "IGE_TTPSubsetProjector": 1,
+        "IGE_TileNoiseMask": 1,
+        "Image Comparer (rgthree)": 5,
+        "ImageListToImageBatch": 2,
+        "ImageResizeKJ": 1,
+        "ImageScaleToTotalPixels": 1,
+        "ImageUpscaleWithModel": 1,
+        "KSamplerSelect": 1,
+        "LayerUtility: PurgeVRAM": 1,
+        "LoadImage": 1,
+        "Lora Loader Stack (rgthree)": 2,
+        "LoraLoader": 1,
+        "RandomNoise": 1,
+        "Reroute": 1,
+        "SamplerCustomAdvanced": 2,
+        "SaveImage": 4,
+        "SetLatentNoiseMask": 1,
+        "ShowText|pysssss": 8,
+        "TTP_Image_Assy": 2,
+        "TTP_Image_Tile_Batch": 1,
+        "TTP_Tile_image_size": 1,
+        "UNETLoader": 1,
+        "UpscaleModelLoader": 1,
+        "VAEDecodeTiled": 2,
+        "VAEEncode": 1,
+        "VAELoader": 1,
+        "easy imageBatchToImageList": 1
+      },
+      "models": {
+        "vae_name": "ae.safetensors",
+        "noise_seed": 909424749197426,
+        "noise_mode": "fixed",
+        "upscale_model": "4x_NMKD-Siax_200k.pth",
+        "unet_name": "flux1-dev.safetensors",
+        "weight_dtype": "fp8_e4m3fn_fast",
+        "clip_name1": "t5xxl_fp16.safetensors",
+        "clip_name2": "clip_l.safetensors",
+        "clip_type": "flux"
+      },
+      "clip_text_encodes": [
+        {
+          "id": 42,
+          "title": null,
+          "text_preview": "",
+          "text_len": 0,
+          "nonempty": false
+        },
+        {
+          "id": 313,
+          "title": "CLIPTextEncode · Global Logic B",
+          "text_preview": "",
+          "text_len": 0,
+          "nonempty": false
+        }
+      ],
+      "noise_nodes": [
+        {
+          "id": 70,
+          "noise_seed": 909424749197426,
+          "noise_mode": "fixed"
+        }
+      ],
+      "has_ige_tile_noise_mask": true,
+      "has_set_latent_noise_mask": true,
+      "has_ttp_tile_batch": true
+    },
+    "api": {
+      "format": "api_prompt",
+      "node_count": 22,
+      "class_counts": {
+        "BasicGuider": 2,
+        "BasicScheduler": 1,
+        "CLIPTextEncode": 2,
+        "DualCLIPLoader": 1,
+        "FluxGuidance": 2,
+        "KSamplerSelect": 1,
+        "LoadImage": 2,
+        "RandomNoise": 1,
+        "SamplerCustomAdvanced": 2,
+        "SaveImage": 2,
+        "UNETLoader": 1,
+        "VAEDecodeTiled": 2,
+        "VAEEncode": 2,
+        "VAELoader": 1
+      },
+      "models": {
+        "vae_name": "ae.safetensors",
+        "noise_seed": 909424749197426,
+        "unet_name": "flux1-dev.safetensors",
+        "weight_dtype": "fp8_e4m3fn_fast",
+        "clip_name1": "t5xxl_fp16.safetensors",
+        "clip_name2": "clip_l.safetensors",
+        "clip_type": "flux"
+      },
+      "clip_text_encodes": [
+        {
+          "id": "42",
+          "text_preview": "Faithful high-resolution img2img refinement of this exact source crop. Preserve the original camera viewpoint, perspective, composition, architecture, skybridge...",
+          "text_len": 1303,
+          "nonempty": true,
+          "mentions_tile_origin": true
+        },
+        {
+          "id": "5005",
+          "text_preview": "Faithful high-resolution img2img refinement of this exact source crop. Preserve the original camera viewpoint, perspective, composition, architecture, skybridge...",
+          "text_len": 1287,
+          "nonempty": true,
+          "mentions_tile_origin": true
+        }
+      ],
+      "noise_nodes": [
+        {
+          "id": "70",
+          "noise_seed": 909424749197426
+        }
+      ],
+      "has_ige_tile_noise_mask": false,
+      "has_set_latent_noise_mask": false,
+      "has_ttp_tile_batch": false,
+      "distinct_guider_conditioning_refs": 2,
+      "guider_conditionings": [
+        {
+          "id": "72",
+          "conditioning": [
+            "73",
+            0
+          ],
+          "model": [
+            "77",
+            0
+          ]
+        },
+        {
+          "id": "5007",
+          "conditioning": [
+            "5006",
+            0
+          ],
+          "model": [
+            "77",
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "code": "E_COMFY_NODE_MISSING",
+      "status": "PASS",
+      "detail": "required Flux HR tile inventory classes are present in at least one supplied graph",
+      "evidence": {
+        "required": [
+          "UNETLoader",
+          "VAELoader",
+          "DualCLIPLoader",
+          "RandomNoise",
+          "SamplerCustomAdvanced",
+          "CLIPTextEncode"
+        ]
+      }
+    },
+    {
+      "code": "INVENTORY_OPTIONAL_NODES",
+      "status": "PASS",
+      "detail": "optional core/halo / tile / mask nodes recorded as inventory only (not live proof)",
+      "evidence": {
+        "optional_present": {
+          "UpscaleModelLoader": 1,
+          "IGE_TileNoiseMask": 1,
+          "SetLatentNoiseMask": 1,
+          "TTP_Image_Tile_Batch": 1,
+          "TTP_Tile_image_size": 1,
+          "TTP_Image_Assy": 2,
+          "VAEEncode": 3,
+          "VAEDecodeTiled": 4,
+          "BasicGuider": 4,
+          "FluxGuidance": 4,
+          "KSamplerSelect": 2,
+          "BasicScheduler": 2
+        },
+        "ige_tile_noise_mask": true,
+        "set_latent_noise_mask": true,
+        "ttp_tile_batch": true
+      }
+    },
+    {
+      "code": "E_MODEL_INVENTORY_MISMATCH",
+      "status": "PASS",
+      "detail": "declared Dev FP8 model filenames/dtype match expected inventory (filenames only; weight SHA NOT verified)",
+      "evidence": {
+        "observed": {
+          "unet_name": "flux1-dev.safetensors",
+          "weight_dtype": "fp8_e4m3fn_fast",
+          "vae_name": "ae.safetensors",
+          "clip_name1": "t5xxl_fp16.safetensors",
+          "clip_name2": "clip_l.safetensors",
+          "clip_type": "flux"
+        }
+      }
+    },
+    {
+      "code": "E_UI_API_VALUE_MISMATCH",
+      "status": "PASS",
+      "detail": "UI and API agree on shared Dev FP8 model/noise inventory keys (upscale_model excluded)",
+      "evidence": {
+        "ui": {
+          "unet_name": "flux1-dev.safetensors",
+          "weight_dtype": "fp8_e4m3fn_fast",
+          "vae_name": "ae.safetensors",
+          "clip_name1": "t5xxl_fp16.safetensors",
+          "clip_name2": "clip_l.safetensors",
+          "clip_type": "flux"
+        },
+        "api": {
+          "unet_name": "flux1-dev.safetensors",
+          "weight_dtype": "fp8_e4m3fn_fast",
+          "vae_name": "ae.safetensors",
+          "clip_name1": "t5xxl_fp16.safetensors",
+          "clip_name2": "clip_l.safetensors",
+          "clip_type": "flux"
+        },
+        "noise_seed_ui": 909424749197426,
+        "noise_seed_api": 909424749197426
+      }
+    },
+    {
+      "code": "E_TILE_CONDITIONING_UNROUTED",
+      "status": "PASS",
+      "detail": "static evidence of per-tile prompts present; NOT live routing proof",
+      "evidence": {
+        "clip_text_encode_count": 2,
+        "nonempty_prompt_count": 2,
+        "tile_origin_hint_count": 2,
+        "distinct_guider_conditioning_refs": 2,
+        "claim": "static_per_tile_prompt_evidence_only"
+      }
+    },
+    {
+      "code": "E_NOISE_FIELD_NOT_GLOBAL",
+      "status": "FAIL",
+      "detail": "RandomNoise seed present but insufficient: same seed alone does not prove a coordinate-consistent global noise field (noise_field_kind=shared_seed_only)",
+      "evidence": {
+        "field_kind": "shared_seed_only",
+        "observed_seeds": [
+          909424749197426,
+          909424749197426
+        ],
+        "unique_seed_count": 1,
+        "rule": "same RandomNoise seed ≠ coordinate-consistent global noise field",
+        "test_id": "NOISE_FIELD_NOT_GLOBAL",
+        "failure_code": "E_NOISE_FIELD_NOT_GLOBAL"
+      }
+    },
+    {
+      "code": "E_BACKEND_MODEL_CAPTURE",
+      "status": "PASS",
+      "detail": "offline inventory filenames/SHAs align with workflow model declarations and Siax registry pin",
+      "evidence": {
+        "blockers": [],
+        "matched_assets": [
+          {
+            "workflow_key": "unet_name",
+            "filename": "flux1-dev.safetensors",
+            "asset_id": "FLUX1_DEV",
+            "role": "unet",
+            "sha256": "4610115bb0c89560703c892c59ac2742fa821e60ef5871b33493ba544683abd7"
+          },
+          {
+            "workflow_key": "vae_name",
+            "filename": "ae.safetensors",
+            "asset_id": "FLUX_AE",
+            "role": "vae",
+            "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38"
+          },
+          {
+            "workflow_key": "clip_name1",
+            "filename": "t5xxl_fp16.safetensors",
+            "asset_id": "T5XXL_FP16",
+            "role": "clip",
+            "sha256": "6e480b09fae049a72d2a8c5fbccb8d3e92febeb233bbe9dfe7256958a9167635"
+          },
+          {
+            "workflow_key": "clip_name2",
+            "filename": "clip_l.safetensors",
+            "asset_id": "CLIP_L",
+            "role": "clip",
+            "sha256": "660c6f5b1abae9dc498ac2d21e1347d2abdb0cf6c0c0c8576cd796491d9a6cdd"
+          },
+          {
+            "workflow_key": "upscale_model",
+            "filename": "4x_NMKD-Siax_200k.pth",
+            "asset_id": "SIAX4X",
+            "role": "upscale",
+            "sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e"
+          }
+        ],
+        "mismatches": [],
+        "workflow_models": {
+          "vae_name": "ae.safetensors",
+          "noise_seed": 909424749197426,
+          "noise_mode": "fixed",
+          "upscale_model": "4x_NMKD-Siax_200k.pth",
+          "unet_name": "flux1-dev.safetensors",
+          "weight_dtype": "fp8_e4m3fn_fast",
+          "clip_name1": "t5xxl_fp16.safetensors",
+          "clip_name2": "clip_l.safetensors",
+          "clip_type": "flux"
+        },
+        "load_option_unet_weight_dtype": "fp8_e4m3fn_fast",
+        "workflow_weight_dtype": "fp8_e4m3fn_fast",
+        "weight_dtype_ok": true,
+        "siax_registry_pin": {
+          "status": "PASS",
+          "matched": true,
+          "detail": "SIAX4X inventory SHA-256 exactly matches Method Registry pin",
+          "evidence": {
+            "method_id": "SIAX4X_TILE_CORE_SR",
+            "registry_model_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+            "inventory_asset_id": "SIAX4X",
+            "inventory_filename": "4x_NMKD-Siax_200k.pth",
+            "inventory_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e"
+          }
+        },
+        "non_claims_echo": [
+          "No ComfyUI / GPU inference was run during capture.",
+          "Filenames and digests do not prove live ComfyUI load readiness.",
+          "ae.safetensors SHA does not claim equivalence to ae.sft."
+        ]
+      }
+    }
+  ],
+  "noise_field_kind": "shared_seed_only",
+  "noise_field_reason": "RandomNoise seed present but insufficient: same seed alone does not prove a coordinate-consistent global noise field (noise_field_kind=shared_seed_only)",
+  "structural_blockers": [],
+  "remaining_live_blockers": [
+    "Declared inventory ≠ disk capture; even a capture receipt still requires live ComfyUI load + runtime node proof.",
+    "Live proof that each tile's conditioning is independently routed (not only static prompts).",
+    "Coordinate-consistent global noise field (shared_seed_only ≠ coordinate_indexed; see docs/GLOBAL_NOISE_FIELD_CONTRACT.md).",
+    "Core-only write / halo non-write / full coverage on real GPU outputs.",
+    "Independent S7 acceptance on real GPU outputs.",
+    "Method Registry maturity promotion is out of scope for this static audit."
+  ],
+  "non_claims": [
+    "No GPU inference was run.",
+    "No Siax / Flux weights were loaded into a runtime for inference.",
+    "Optional --model-inventory is evidence_grade=declared_record only; it does not prove CI re-hashed operator PC weights.",
+    "Optional --capture-receipt is evidence_grade=disk_capture; still never sets execution_allowed=true.",
+    "Per-tile CLIPTextEncode text is static evidence only.",
+    "Same RandomNoise seed is classified as noise_field_kind=shared_seed_only and is not a global noise-field proof.",
+    "FLUX_HR_TILE_IMG2IMG remains workflow_candidate; execution_allowed=false.",
+    "This audit does not modify Method Registry edit_permission.",
+    "ae.safetensors SHA (when inventoried) does not claim equivalence to ae.sft."
+  ],
+  "backend_model_inventory": {
+    "path": "/workspace/model_inventory_capture_receipt.json",
+    "filename": "model_inventory_capture_receipt.json",
+    "sha256": "142ec1c35107d75eee3e5183c3fd7f4460569c219881b28f83f37d99d8c4d202",
+    "status": "PASS",
+    "evidence_grade": "disk_capture",
+    "inventory_declared_ok": null,
+    "inventory_capture_present": true,
+    "inventory_live_verified": true,
+    "receipt_kind": "model_inventory_capture",
+    "capture_tool": "ige.capture-model-inventory",
+    "host": "DESKTOP-GNMQ0PF",
+    "models_root": "C:\\Users\\user\\Documents\\ComfyUI\\models",
+    "captured_at": "2026-11-08T04:39:44+08:00",
+    "asset_count": 5,
+    "siax_registry_pin": {
+      "status": "PASS",
+      "matched": true,
+      "detail": "SIAX4X inventory SHA-256 exactly matches Method Registry pin",
+      "evidence": {
+        "method_id": "SIAX4X_TILE_CORE_SR",
+        "registry_model_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+        "inventory_asset_id": "SIAX4X",
+        "inventory_filename": "4x_NMKD-Siax_200k.pth",
+        "inventory_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e"
+      }
+    },
+    "note": "Disk-capture receipt present. Provenance validated; optional --rehash against the same host is separate. CI never reads operator PC weights."
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/tile_core_halo_ledger.schema.json",
+  "title": "UP-engine tile core/halo write-back ledger",
+  "description": "Per-tile read/core/halo bounds + exact-once coverage receipts for S6 compositor audits. Fail-closed. Requires S2 canvas_sha256 + coordinate_frame bind and per-tile output_sha256. Region coverage is scanline/interval-union (8K-safe). Never grants execution or edit permission. Offline / synthetic in this revision — ledger PASS ≠ live pixel write-back PASS.",
+  "type": "object",
+  "required": [
+    "schema",
+    "coordinate_frame",
+    "canvas_sha256",
+    "coverage_target",
+    "tiles",
+    "non_claims"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "ige-tile-core-halo-ledger/0.2"},
+    "coordinate_frame": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Must match S2 geometry_contract.coordinate_frame."
+    },
+    "canvas_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "Required SHA-256 of the S2 coordinate canvas (bind)."
+    },
+    "coverage_target": {
+      "type": "object",
+      "required": ["kind", "rects"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"const": "rect_union"},
+        "rects": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {"type": "integer"},
+            "description": "Half-open [x0, y0, x1, y1) write-region rectangle."
+          }
+        }
+      }
+    },
+    "tiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["tile_id", "read_bounds", "core_bounds", "output_sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "tile_id": {"type": "string", "minLength": 1},
+          "read_bounds": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {"type": "integer"},
+            "description": "Half-open [x0,y0,x1,y1); may include halo context."
+          },
+          "core_bounds": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {"type": "integer"},
+            "description": "Half-open disjoint write core; must be ⊆ read_bounds."
+          },
+          "halo_bounds": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {"type": "integer"},
+            "description": "Optional declared halo region; read-only; ⊆ read_bounds."
+          },
+          "output_sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$",
+            "description": "Required declared tile output digest. Synthetic digests allowed in CI; not live pixel write-back proof."
+          },
+          "coordinate_frame": {
+            "type": "string",
+            "minLength": 1,
+            "description": "If present must equal top-level coordinate_frame."
+          },
+          "halo_write_pixels": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Must be 0; any >0 fails E_TILE_HALO_WRITE."
+          },
+          "wrote_halo": {
+            "type": "boolean",
+            "description": "Must be false / omitted; true fails E_TILE_HALO_WRITE."
+          },
+          "write_receipt": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "wrote_core": {"type": "boolean"},
+              "wrote_halo": {"type": "boolean"},
+              "halo_write_pixels": {"type": "integer", "minimum": 0}
+            }
+          }
+        }
+      }
+    },
+    "non_claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

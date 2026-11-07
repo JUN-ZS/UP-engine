@@ -1,0 +1,563 @@
+{
+  "schema": "ige-comfy-workflow-inventory/0.1",
+  "method_id": "FLUX_HR_TILE_IMG2IMG",
+  "maturity_remains": "workflow_candidate",
+  "execution_allowed": false,
+  "sources": {
+    "ui": {
+      "filename": "workflow_ige_v03_dev_fp8.json",
+      "sha256": "fc6d7e1a9145139cb5bf998e71df7ffe1bd25b14e42a2da558ce6cfa6a9d48c0",
+      "bytes": 100609
+    },
+    "api": {
+      "filename": "workflow_cloud_api_prompt_v0.5.json",
+      "sha256": "8f252ae6b56d6d58decaaf5cea7dff789bc7158d2f491e1ebb10a1855d8f7fbf",
+      "bytes": 8002
+    }
+  },
+  "ui": {
+    "format": "comfy_ui_graph",
+    "class_counts": {
+      "TTP_Tile_image_size": 1,
+      "TTP_Image_Tile_Batch": 1,
+      "ImageListToImageBatch": 2,
+      "Reroute": 1,
+      "VAELoader": 1,
+      "easy imageBatchToImageList": 1,
+      "RandomNoise": 1,
+      "SaveImage": 4,
+      "TTP_Image_Assy": 2,
+      "BasicGuider": 2,
+      "VAEDecodeTiled": 2,
+      "ImageUpscaleWithModel": 1,
+      "VAEEncode": 1,
+      "SamplerCustomAdvanced": 2,
+      "LayerUtility: PurgeVRAM": 1,
+      "Lora Loader Stack (rgthree)": 2,
+      "UpscaleModelLoader": 1,
+      "KSamplerSelect": 1,
+      "Image Comparer (rgthree)": 5,
+      "UNETLoader": 1,
+      "LoraLoader": 1,
+      "DualCLIPLoader": 1,
+      "ImageResizeKJ": 1,
+      "ImageScaleToTotalPixels": 1,
+      "FluxGuidance": 2,
+      "BasicScheduler": 1,
+      "CLIPTextEncode": 2,
+      "LoadImage": 1,
+      "IGE_GlobalLogicCompiler": 1,
+      "IGE_TTPSubsetProjector": 1,
+      "IGE_TileNoiseMask": 1,
+      "SetLatentNoiseMask": 1,
+      "IGE_ApplyLogicGate": 1,
+      "IGE_GlobalReconciler": 1,
+      "IGE_GlobalAcceptanceAudit": 1,
+      "IGE_IterationFeedback": 1,
+      "IGE_LogicMapPreview": 1,
+      "ShowText|pysssss": 8
+    },
+    "models": {
+      "vae_name": "ae.safetensors",
+      "noise_seed": 909424749197426,
+      "noise_mode": "fixed",
+      "upscale_model": "4x_NMKD-Siax_200k.pth",
+      "unet_name": "flux1-dev.safetensors",
+      "weight_dtype": "fp8_e4m3fn_fast",
+      "clip_name1": "t5xxl_fp16.safetensors",
+      "clip_name2": "clip_l.safetensors",
+      "clip_type": "flux"
+    },
+    "interesting_nodes": [
+      {
+        "id": 111,
+        "class_type": "TTP_Tile_image_size",
+        "title": null,
+        "widgets_values": [
+          2,
+          3,
+          0.05
+        ]
+      },
+      {
+        "id": 36,
+        "class_type": "TTP_Image_Tile_Batch",
+        "title": null,
+        "widgets_values": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "id": 31,
+        "class_type": "VAELoader",
+        "title": null,
+        "widgets_values": [
+          "ae.safetensors"
+        ]
+      },
+      {
+        "id": 70,
+        "class_type": "RandomNoise",
+        "title": null,
+        "widgets_values": [
+          909424749197426,
+          "fixed"
+        ]
+      },
+      {
+        "id": 127,
+        "class_type": "TTP_Image_Assy",
+        "title": null,
+        "widgets_values": [
+          125
+        ]
+      },
+      {
+        "id": 67,
+        "class_type": "SamplerCustomAdvanced",
+        "title": null,
+        "widgets_values": null
+      },
+      {
+        "id": 133,
+        "class_type": "UpscaleModelLoader",
+        "title": null,
+        "widgets_values": [
+          "4x_NMKD-Siax_200k.pth"
+        ]
+      },
+      {
+        "id": 77,
+        "class_type": "UNETLoader",
+        "title": "UNETLoader · FLUX Dev FP8 baseline (not CC_V1 parity)",
+        "widgets_values": [
+          "flux1-dev.safetensors",
+          "fp8_e4m3fn_fast"
+        ]
+      },
+      {
+        "id": 78,
+        "class_type": "DualCLIPLoader",
+        "title": null,
+        "widgets_values": [
+          "t5xxl_fp16.safetensors",
+          "clip_l.safetensors",
+          "flux",
+          "default"
+        ]
+      },
+      {
+        "id": 42,
+        "class_type": "CLIPTextEncode",
+        "title": null,
+        "widgets_values": [
+          ""
+        ]
+      },
+      {
+        "id": 300,
+        "class_type": "IGE_GlobalLogicCompiler",
+        "title": "IGE · Global Logic Compiler",
+        "widgets_values": [
+          "object_geometry.provisional.json",
+          "global_logic_policy.json",
+          "{}"
+        ]
+      },
+      {
+        "id": 301,
+        "class_type": "IGE_TTPSubsetProjector",
+        "title": "IGE · TTP Global-to-Subset Projector",
+        "widgets_values": []
+      },
+      {
+        "id": 308,
+        "class_type": "IGE_TileNoiseMask",
+        "title": "IGE · Tile Latent Noise Mask",
+        "widgets_values": [
+          1.0,
+          0.25,
+          1.0
+        ]
+      },
+      {
+        "id": 309,
+        "class_type": "SetLatentNoiseMask",
+        "title": "Set Tile Noise Mask · Candidate B",
+        "widgets_values": []
+      },
+      {
+        "id": 310,
+        "class_type": "SamplerCustomAdvanced",
+        "title": "SamplerCustomAdvanced · Candidate B",
+        "widgets_values": null
+      },
+      {
+        "id": 313,
+        "class_type": "CLIPTextEncode",
+        "title": "CLIPTextEncode · Global Logic B",
+        "widgets_values": [
+          ""
+        ]
+      },
+      {
+        "id": 302,
+        "class_type": "IGE_ApplyLogicGate",
+        "title": "IGE · Tile Logic Gate",
+        "widgets_values": []
+      },
+      {
+        "id": 303,
+        "class_type": "IGE_GlobalReconciler",
+        "title": "IGE · Global Consensus Reconciler",
+        "widgets_values": []
+      },
+      {
+        "id": 304,
+        "class_type": "IGE_GlobalAcceptanceAudit",
+        "title": "IGE · Global Acceptance Audit",
+        "widgets_values": [
+          "{}"
+        ]
+      },
+      {
+        "id": 305,
+        "class_type": "IGE_IterationFeedback",
+        "title": "IGE · Iteration Feedback Compiler",
+        "widgets_values": [
+          "{}"
+        ]
+      },
+      {
+        "id": 306,
+        "class_type": "IGE_LogicMapPreview",
+        "title": "IGE · Global Logic Map Preview",
+        "widgets_values": []
+      },
+      {
+        "id": 327,
+        "class_type": "TTP_Image_Assy",
+        "title": "B · Same TTP Assembly (Logic Gate only)",
+        "widgets_values": [
+          125
+        ]
+      }
+    ],
+    "node_count": 60
+  },
+  "api": {
+    "format": "comfy_api_prompt",
+    "class_counts": {
+      "VAELoader": 1,
+      "RandomNoise": 1,
+      "BasicGuider": 2,
+      "SamplerCustomAdvanced": 2,
+      "VAEDecodeTiled": 2,
+      "VAEEncode": 2,
+      "SaveImage": 2,
+      "KSamplerSelect": 1,
+      "UNETLoader": 1,
+      "DualCLIPLoader": 1,
+      "BasicScheduler": 1,
+      "FluxGuidance": 2,
+      "CLIPTextEncode": 2,
+      "LoadImage": 2
+    },
+    "models": {
+      "vae_name": "ae.safetensors",
+      "noise_seed": 909424749197426,
+      "unet_name": "flux1-dev.safetensors",
+      "weight_dtype": "fp8_e4m3fn_fast",
+      "clip_name1": "t5xxl_fp16.safetensors",
+      "clip_name2": "clip_l.safetensors",
+      "clip_type": "flux"
+    },
+    "nodes": [
+      {
+        "id": "31",
+        "class_type": "VAELoader",
+        "inputs": {
+          "vae_name": "ae.safetensors"
+        }
+      },
+      {
+        "id": "70",
+        "class_type": "RandomNoise",
+        "inputs": {
+          "noise_seed": 909424749197426
+        }
+      },
+      {
+        "id": "72",
+        "class_type": "BasicGuider",
+        "inputs": {
+          "model": [
+            "77",
+            0
+          ],
+          "conditioning": [
+            "73",
+            0
+          ]
+        }
+      },
+      {
+        "id": "67",
+        "class_type": "SamplerCustomAdvanced",
+        "inputs": {
+          "noise": [
+            "70",
+            0
+          ],
+          "guider": [
+            "72",
+            0
+          ],
+          "sampler": [
+            "68",
+            0
+          ],
+          "sigmas": [
+            "69",
+            0
+          ],
+          "latent_image": [
+            "129",
+            0
+          ]
+        }
+      },
+      {
+        "id": "96",
+        "class_type": "VAEDecodeTiled",
+        "inputs": {
+          "samples": [
+            "67",
+            0
+          ],
+          "vae": [
+            "31",
+            0
+          ],
+          "tile_size": 1024,
+          "overlap": 64,
+          "temporal_size": 64,
+          "temporal_overlap": 8
+        }
+      },
+      {
+        "id": "129",
+        "class_type": "VAEEncode",
+        "inputs": {
+          "pixels": [
+            "233",
+            0
+          ],
+          "vae": [
+            "31",
+            0
+          ]
+        }
+      },
+      {
+        "id": "128",
+        "class_type": "SaveImage",
+        "inputs": {
+          "images": [
+            "96",
+            0
+          ],
+          "filename_prefix": "geometry_locked_city/tile_left_refined"
+        }
+      },
+      {
+        "id": "68",
+        "class_type": "KSamplerSelect",
+        "inputs": {
+          "sampler_name": "dpm_adaptive"
+        }
+      },
+      {
+        "id": "77",
+        "class_type": "UNETLoader",
+        "inputs": {
+          "unet_name": "flux1-dev.safetensors",
+          "weight_dtype": "fp8_e4m3fn_fast"
+        }
+      },
+      {
+        "id": "78",
+        "class_type": "DualCLIPLoader",
+        "inputs": {
+          "clip_name1": "t5xxl_fp16.safetensors",
+          "clip_name2": "clip_l.safetensors",
+          "type": "flux",
+          "device": "default"
+        }
+      },
+      {
+        "id": "69",
+        "class_type": "BasicScheduler",
+        "inputs": {
+          "model": [
+            "77",
+            0
+          ],
+          "scheduler": "normal",
+          "steps": 47,
+          "denoise": 0.33000000000000007
+        }
+      },
+      {
+        "id": "73",
+        "class_type": "FluxGuidance",
+        "inputs": {
+          "conditioning": [
+            "42",
+            0
+          ],
+          "guidance": 6.2
+        }
+      },
+      {
+        "id": "42",
+        "class_type": "CLIPTextEncode",
+        "inputs": {
+          "clip": [
+            "78",
+            0
+          ],
+          "text": "Faithful high-resolution img2img refinement of this exact source crop. Preserve the original camera viewpoint, perspective, composition, architecture, skybridge, rails, signage, lighting and color relationships. Refine plausible fine material texture, edge clarity and surface detail only. Do not add, remove, duplicate, move, resize, rotate, reshape or reinterpret visible objects.\nTILE: tile_left; tile-local image dimensions 1168x1024 pixels. GLOBAL TILE ORIGIN: [1656, 960]. TARGET OBJECT: central_woman_on_skybridge. OBJECT TILE-LOCAL BBOX XYXY: [973.7, 221.6, 1070.6, 557.1]. TILE-LOCAL LANDMARKS (pixel coordinates): {\"head_top\": [1016.6, 221.6], \"head_center\": [1020.4, 246.4], \"shoulder_center\": [1021.3, 291.4], \"waist_center\": [1020.4, 370.7], \"hip_center\": [1022.6, 422.1], \"left_foot_contact\": [999.0, 550.7], \"right_foot_contact\": [1055.6, 550.3]}. SIMPLIFIED TILE-LOCAL SILHOUETTE ANCHORS: [[1016.6, 221.6], [1030.7, 270.4], [1061.6, 336.4], [1056.4, 394.7], [1051.7, 533.6], [1030.7, 538.7], [1007.6, 471.0], [983.6, 556.7], [987.9, 416.1], [977.6, 344.6], [999.9, 277.3], [1008.4, 227.1]]. These coordinates are soft text-conditioning hints only, not hard constraints. The supplied image pixels remain the visual source of truth; never hallucinate missing limbs or duplicate the person."
+        }
+      },
+      {
+        "id": "233",
+        "class_type": "LoadImage",
+        "inputs": {
+          "image": "tile_left.png"
+        }
+      },
+      {
+        "id": "5000",
+        "class_type": "LoadImage",
+        "inputs": {
+          "image": "tile_right.png"
+        }
+      },
+      {
+        "id": "5001",
+        "class_type": "VAEEncode",
+        "inputs": {
+          "pixels": [
+            "5000",
+            0
+          ],
+          "vae": [
+            "31",
+            0
+          ]
+        }
+      },
+      {
+        "id": "5002",
+        "class_type": "SamplerCustomAdvanced",
+        "inputs": {
+          "noise": [
+            "70",
+            0
+          ],
+          "guider": [
+            "5007",
+            0
+          ],
+          "sampler": [
+            "68",
+            0
+          ],
+          "sigmas": [
+            "69",
+            0
+          ],
+          "latent_image": [
+            "5001",
+            0
+          ]
+        }
+      },
+      {
+        "id": "5003",
+        "class_type": "VAEDecodeTiled",
+        "inputs": {
+          "samples": [
+            "5002",
+            0
+          ],
+          "vae": [
+            "31",
+            0
+          ],
+          "tile_size": 1024,
+          "overlap": 64,
+          "temporal_size": 64,
+          "temporal_overlap": 8
+        }
+      },
+      {
+        "id": "5004",
+        "class_type": "SaveImage",
+        "inputs": {
+          "images": [
+            "5003",
+            0
+          ],
+          "filename_prefix": "geometry_locked_city/tile_right_refined"
+        }
+      },
+      {
+        "id": "5005",
+        "class_type": "CLIPTextEncode",
+        "inputs": {
+          "clip": [
+            "78",
+            0
+          ],
+          "text": "Faithful high-resolution img2img refinement of this exact source crop. Preserve the original camera viewpoint, perspective, composition, architecture, skybridge, rails, signage, lighting and color relationships. Refine plausible fine material texture, edge clarity and surface detail only. Do not add, remove, duplicate, move, resize, rotate, reshape or reinterpret visible objects.\nTILE: tile_right; tile-local image dimensions 1168x1024 pixels. GLOBAL TILE ORIGIN: [2536, 960]. TARGET OBJECT: central_woman_on_skybridge. OBJECT TILE-LOCAL BBOX XYXY: [93.7, 221.6, 190.6, 557.1]. TILE-LOCAL LANDMARKS (pixel coordinates): {\"head_top\": [136.6, 221.6], \"head_center\": [140.4, 246.4], \"shoulder_center\": [141.3, 291.4], \"waist_center\": [140.4, 370.7], \"hip_center\": [142.6, 422.1], \"left_foot_contact\": [119.0, 550.7], \"right_foot_contact\": [175.6, 550.3]}. SIMPLIFIED TILE-LOCAL SILHOUETTE ANCHORS: [[136.6, 221.6], [150.7, 270.4], [181.6, 336.4], [176.4, 394.7], [171.7, 533.6], [150.7, 538.7], [127.6, 471.0], [103.6, 556.7], [107.9, 416.1], [97.6, 344.6], [119.9, 277.3], [128.4, 227.1]]. These coordinates are soft text-conditioning hints only, not hard constraints. The supplied image pixels remain the visual source of truth; never hallucinate missing limbs or duplicate the person."
+        }
+      },
+      {
+        "id": "5006",
+        "class_type": "FluxGuidance",
+        "inputs": {
+          "conditioning": [
+            "5005",
+            0
+          ],
+          "guidance": 6.2
+        }
+      },
+      {
+        "id": "5007",
+        "class_type": "BasicGuider",
+        "inputs": {
+          "model": [
+            "77",
+            0
+          ],
+          "conditioning": [
+            "5006",
+            0
+          ]
+        }
+      }
+    ],
+    "node_count": 22
+  },
+  "non_claims": [
+    "No GPU inference was run.",
+    "Model filenames are inventory only; SHA of weight files was NOT verified.",
+    "Same RandomNoise seed is not proof of a coordinate-consistent global noise field.",
+    "Per-tile CLIPTextEncode text is static evidence only; live conditioning routing is unverified.",
+    "FLUX_HR_TILE_IMG2IMG remains workflow_candidate; execution_allowed stays false."
+  ]
+}
