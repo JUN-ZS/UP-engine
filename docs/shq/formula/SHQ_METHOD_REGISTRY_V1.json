@@ -1,0 +1,404 @@
+{
+  "formal": "SHQ_METHOD_REGISTRY_V1",
+  "version": "0.1.0",
+  "write_id": "01389",
+  "asof": "2026-11-07T19:07:23.492518+00:00",
+  "source_prs": [
+    "#12",
+    "#15",
+    "#5",
+    "#11",
+    "#7",
+    "#9",
+    "#10"
+  ],
+  "rule": "method_id → preconditions → callable → test_ids → acceptance_gate; implementation_status required",
+  "implementation_status_enum": [
+    "implemented",
+    "partial",
+    "research_only",
+    "blocked"
+  ],
+  "claim_level_enum": [
+    "C0",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5"
+  ],
+  "edit_permission_default": false,
+  "paths": {
+    "PATH_A_SIAX": "M_PATH_A_SIAX4X",
+    "PATH_B_HR_TILE_DIFFUSION": "M_PATH_B_FLUX_HR_TILE",
+    "PATH_C_DONOR_MULTIBAND": "M_PATH_C_DONOR_MULTIBAND"
+  },
+  "methods": [
+    {
+      "id": "M_S0_BASE_FREEZE",
+      "version": "1.0",
+      "stage": "S0",
+      "title": "BASE freeze SHA",
+      "implementation_status": "partial",
+      "claim_level_max": "C3",
+      "inputs": [
+        "I0",
+        "empty_bg_opt"
+      ],
+      "outputs": [
+        "sha256",
+        "size",
+        "colorspace"
+      ],
+      "edit_permission": false,
+      "routes_on": [],
+      "failure_codes": [
+        "E-24",
+        "E-39"
+      ],
+      "test_ids": [
+        "T_SHA_REREAD"
+      ],
+      "evidence": [
+        "I0_SHA",
+        "empty_SHA"
+      ],
+      "callable": "shq_e1_teach_reinterpret.freeze_base",
+      "notes": "skill has freeze-base; ige not wired"
+    },
+    {
+      "id": "M_S1_OBJECT_READ",
+      "version": "0.2",
+      "stage": "S1",
+      "title": "Vision READ candidates",
+      "implementation_status": "research_only",
+      "claim_level_max": "C1",
+      "inputs": [
+        "I0_frozen"
+      ],
+      "outputs": [
+        "candidate_nodes",
+        "evidence_boxes"
+      ],
+      "edit_permission": false,
+      "routes_on": [
+        "identity_drift",
+        "topology_error"
+      ],
+      "failure_codes": [
+        "E-91"
+      ],
+      "test_ids": [
+        "T_READ_CANDIDATE"
+      ],
+      "evidence": [
+        "evidence_box"
+      ],
+      "callable": "shq_read_and_skill_router (fossil)",
+      "notes": "no Grok/Gemini vision call inside fossil; needs PR#5"
+    },
+    {
+      "id": "M_S2_GEOMETRY_LOCK",
+      "version": "0.3",
+      "stage": "S2",
+      "title": "HR mask + 4corner/5D proxy",
+      "implementation_status": "partial",
+      "claim_level_max": "C2",
+      "inputs": [
+        "READ",
+        "model_scale"
+      ],
+      "outputs": [
+        "M_HR",
+        "corners_4",
+        "DNA_proxy"
+      ],
+      "edit_permission": false,
+      "routes_on": [],
+      "failure_codes": [
+        "E-66",
+        "E-67"
+      ],
+      "test_ids": [
+        "T_HR_EXACT_TRANSFORM"
+      ],
+      "evidence": [
+        "mask_sha",
+        "corners"
+      ],
+      "callable": "geometry_tiles / partmap 4corner",
+      "notes": "5D is proxy not calibrated 3D"
+    },
+    {
+      "id": "M_S3_PERMISSION",
+      "version": "0.1",
+      "stage": "S3",
+      "title": "Permission compiler",
+      "implementation_status": "research_only",
+      "claim_level_max": "C1",
+      "inputs": [
+        "candidates",
+        "human_verify"
+      ],
+      "outputs": [
+        "approved_edit_mask",
+        "protected_mask"
+      ],
+      "edit_permission": false,
+      "routes_on": [
+        "unverified_candidate"
+      ],
+      "failure_codes": [
+        "E-CLAIM-08"
+      ],
+      "test_ids": [
+        "T_NO_SELF_GRANT"
+      ],
+      "evidence": [
+        "permission_json"
+      ],
+      "callable": "router policy skeleton",
+      "notes": "AI must not self-grant write"
+    },
+    {
+      "id": "M_S4_ROUTER_TILE",
+      "version": "0.2",
+      "stage": "S4",
+      "title": "Method registry resolve + tile plan",
+      "implementation_status": "blocked",
+      "claim_level_max": "C0",
+      "inputs": [
+        "defect",
+        "evidence",
+        "permission",
+        "history",
+        "backends"
+      ],
+      "outputs": [
+        "method_id",
+        "tile_core_halo"
+      ],
+      "edit_permission": false,
+      "routes_on": [
+        "topology_error",
+        "identity_drift"
+      ],
+      "failure_codes": [
+        "E-CLAIM-07"
+      ],
+      "test_ids": [
+        "T_REGISTRY_LOAD"
+      ],
+      "evidence": [
+        "method_hit_log"
+      ],
+      "callable": "SHQ_METHOD_REGISTRY_V1.json (this file)",
+      "notes": "was doc-only; this JSON is contract v0.1 — not yet src/ige loader"
+    },
+    {
+      "id": "M_PATH_A_SIAX4X",
+      "version": "0.4",
+      "stage": "S5",
+      "title": "Neural super-res Siax 4x",
+      "implementation_status": "partial",
+      "claim_level_max": "C3",
+      "inputs": [
+        "tile_core",
+        "weights_sha"
+      ],
+      "outputs": [
+        "tile_hr",
+        "backend_log"
+      ],
+      "edit_permission": false,
+      "routes_on": [
+        "detail_only"
+      ],
+      "failure_codes": [
+        "E-28",
+        "E-34",
+        "E-CLAIM-04"
+      ],
+      "test_ids": [
+        "T_SIAX_ADAPTER"
+      ],
+      "evidence": [
+        "backend_id",
+        "weight_sha",
+        "seed"
+      ],
+      "callable": "SIAX NCNN adapter (sibling PR)",
+      "notes": "real path A; Lanczos forbidden"
+    },
+    {
+      "id": "M_PATH_B_FLUX_HR_TILE",
+      "version": "0.1",
+      "stage": "S5",
+      "title": "HR tile diffusion Flux/Imagine",
+      "implementation_status": "blocked",
+      "claim_level_max": "C0",
+      "inputs": [
+        "HR_tile",
+        "geometry_contract",
+        "conditioning"
+      ],
+      "outputs": [
+        "tile_gen",
+        "vae_decode",
+        "backend_log"
+      ],
+      "edit_permission": false,
+      "routes_on": [
+        "need_new_detail"
+      ],
+      "failure_codes": [
+        "E-CLAIM-02",
+        "E-CLAIM-05"
+      ],
+      "test_ids": [
+        "T_FLUX_TILE_GEN"
+      ],
+      "evidence": [
+        "model",
+        "seed",
+        "prompt",
+        "tile_xy"
+      ],
+      "callable": "ComfyUI Flux TBD",
+      "notes": "true generative goal; not donor transfer"
+    },
+    {
+      "id": "M_PATH_C_DONOR_MULTIBAND",
+      "version": "0.3",
+      "stage": "S5",
+      "title": "AI donor multiband transfer",
+      "implementation_status": "research_only",
+      "claim_level_max": "C2",
+      "inputs": [
+        "donor_rgba",
+        "part_mask"
+      ],
+      "outputs": [
+        "filled_rgb",
+        "xor0"
+      ],
+      "edit_permission": false,
+      "routes_on": [
+        "have_external_donor"
+      ],
+      "failure_codes": [
+        "E-CLAIM-05"
+      ],
+      "test_ids": [
+        "T_DONOR_XFER"
+      ],
+      "evidence": [
+        "donor_sha",
+        "size_hw"
+      ],
+      "callable": "shq_all24 fossil / material_fill",
+      "notes": "auxiliary only; not PATH_B"
+    },
+    {
+      "id": "M_HOLE_FOUR_ANTI",
+      "version": "1.0",
+      "stage": "S4-S6",
+      "title": "洞除扣生 optional skill",
+      "implementation_status": "partial",
+      "claim_level_max": "C2",
+      "inputs": [
+        "pair_edit",
+        "scale_lock_peep"
+      ],
+      "outputs": [
+        "m_hole",
+        "return"
+      ],
+      "edit_permission": false,
+      "routes_on": [
+        "need_hole_mask",
+        "missing_part"
+      ],
+      "failure_codes": [
+        "E-100",
+        "E-105",
+        "E-106"
+      ],
+      "test_ids": [
+        "T_HOLE_SIZE_LOCK"
+      ],
+      "evidence": [
+        "peep_wh",
+        "densify_inject"
+      ],
+      "callable": "shq_edit_hole_four_anti_debug.py",
+      "notes": "skill not global pipeline; HF residual ≠ diffusion"
+    },
+    {
+      "id": "M_S6_EDGE_WHOLE_RETURN",
+      "version": "0.5",
+      "stage": "S6",
+      "title": "EDGE→WHOLE→LOCATE→RETURN",
+      "implementation_status": "partial",
+      "claim_level_max": "C3",
+      "inputs": [
+        "locked_alpha",
+        "core_tiles"
+      ],
+      "outputs": [
+        "master_compose"
+      ],
+      "edit_permission": false,
+      "routes_on": [],
+      "failure_codes": [
+        "E-63",
+        "E-64"
+      ],
+      "test_ids": [
+        "T_CORE_ONLY_WRITE"
+      ],
+      "evidence": [
+        "outside_diff0",
+        "no_flip"
+      ],
+      "callable": "hardpaste / recursive_layer_return",
+      "notes": "halo never double-write"
+    },
+    {
+      "id": "M_S7_INDEPENDENT_ACCEPT",
+      "version": "0.2",
+      "stage": "S7",
+      "title": "Independent S7 audit",
+      "implementation_status": "partial",
+      "claim_level_max": "C4",
+      "inputs": [
+        "master_out",
+        "contracts"
+      ],
+      "outputs": [
+        "S7_AUDIT_REPORT.json"
+      ],
+      "edit_permission": false,
+      "routes_on": [],
+      "failure_codes": [
+        "E-CLAIM-01",
+        "E-38"
+      ],
+      "test_ids": [
+        "T_S7_REREAD"
+      ],
+      "evidence": [
+        "sha",
+        "ghost",
+        "flip",
+        "coverage",
+        "claim_level"
+      ],
+      "callable": "evaluate_gates + S7 JSON",
+      "notes": "empty {{}} without observations = FAIL"
+    }
+  ],
+  "resolver_equation": "Method = f(Defect, Evidence, Geometry, Permission, History, AvailableBackend)",
+  "ACCEPT_FULL_HD": false,
+  "wired_to_src_ige": false
+}

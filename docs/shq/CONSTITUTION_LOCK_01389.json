@@ -1,0 +1,13 @@
+{
+  "write_id": "01389",
+  "formal": "SHQ_CLAIM_TAXONOMY_V1 + SHQ_METHOD_REGISTRY_V1",
+  "upstream": "UP-engine PR#12 SHQ_AI_USAGE_GUIDE.md",
+  "files": [
+    "SHQ_CLAIM_TAXONOMY_V1.md",
+    "SHQ_CLAIM_TAXONOMY.json",
+    "SHQ_METHOD_REGISTRY_V1.json"
+  ],
+  "ACCEPT_FULL_HD": false,
+  "wired_to_src_ige": false,
+  "asof": "2026-11-07T19:07:23.492518+00:00"
+}
