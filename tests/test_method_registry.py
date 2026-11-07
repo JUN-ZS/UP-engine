@@ -312,6 +312,7 @@ class MethodRegistryTests(unittest.TestCase):
                 coordinate_frame="native_4x_master",
                 canvas_sha256="f" * 64,  # not the real S2 canvas sha
             )
+            # Embedded ledger wins over path for audit payload; S5 still uses good path ledger.
             bundle["S6"]["return_audit"]["tile_core_halo_ledger"] = bad
             report = self._audit(bundle)
         self.assertEqual(report["stages"][6]["status"], "BLOCKED")
@@ -320,7 +321,7 @@ class MethodRegistryTests(unittest.TestCase):
         self.assertIn(CODE_S2_BIND, ledger.get("blockers") or [])
         self.assertFalse(report["execution_allowed"])
 
-def test_tile_ledger_with_wrong_s2_canvas_hash_blocks_s5(self):
+    def test_tile_ledger_with_wrong_s2_canvas_hash_blocks_s5(self):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
             ledger_path = Path(bundle["S5"]["backend_receipt"]["tile_ledger_path"])
@@ -337,21 +338,24 @@ def test_tile_ledger_with_wrong_s2_canvas_hash_blocks_s5(self):
     def test_mandatory_tile_ledger_halo_write_blocks_s6(self):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
-            # Halo-write ledger must still carry matching S2 bind fields to reach halo check.
-            canvas_sha = bundle["S2"]["geometry_contract"]["canvas_sha256"]
-            failing = synthetic_halo_write_ledger()
-            failing["coordinate_frame"] = "native_4x_master"
-            failing["canvas_sha256"] = canvas_sha
-            for tile in failing["tiles"]:
-                tile["coordinate_frame"] = "native_4x_master"
-            bundle["S6"]["return_audit"]["tile_core_halo_ledger"] = failing
+            ledger_path = Path(bundle["S5"]["backend_receipt"]["tile_ledger_path"])
+            ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+            ledger["tiles"][0]["halo_write_pixels"] = 12
+            ledger["tiles"][0]["wrote_halo"] = True
+            ledger["tiles"][0]["write_receipt"] = {
+                "wrote_core": True, "wrote_halo": True, "halo_write_pixels": 12
+            }
+            ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+            digest = file_sha256(ledger_path)
+            bundle["S5"]["backend_receipt"]["tile_ledger_sha256"] = digest
+            bundle["S6"]["return_audit"]["tile_core_halo_ledger_sha256"] = digest
             report = self._audit(bundle)
         self.assertEqual(report["stages"][6]["status"], "BLOCKED")
         self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
         self.assertFalse(report["execution_allowed"])
-        ledger = report["stages"][6].get("tile_ledger") or {}
-        self.assertEqual(ledger.get("overall_status"), "FAIL")
-        self.assertIn("E_TILE_HALO_WRITE", ledger.get("blockers") or [])
+        ledger_report = report["stages"][6].get("tile_ledger") or {}
+        self.assertEqual(ledger_report.get("overall_status"), "FAIL")
+        self.assertIn("E_TILE_HALO_WRITE", ledger_report.get("blockers") or [])
 
     def test_missing_s7_gate_never_accepts(self):
         with tempfile.TemporaryDirectory() as directory:
