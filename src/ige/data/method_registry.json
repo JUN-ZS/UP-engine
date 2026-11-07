@@ -1,0 +1,712 @@
+{
+  "registry_schema": "ige-method-registry/0.2",
+  "registry_id": "IGE_S0_S7_METHOD_REGISTRY",
+  "registry_version": "0.2.0",
+  "authority": "PR12_S0_S7_CONTRACT",
+  "policy": "fail_closed",
+  "default_edit_permission": false,
+  "methods": [
+    {
+      "method_id": "READ_LAYERED_EVIDENCE",
+      "version": "0.2.0",
+      "skill_aliases": [],
+      "stage": [
+        "S0",
+        "S1"
+      ],
+      "capability": "candidate_semantic_spatial_observation",
+      "maturity": "candidate_only",
+      "execution_kind": "observation",
+      "entrypoint": "src/ige/read/skill_diagnosis.py::load_diagnosis",
+      "preconditions": [
+        "s0_source_sha_verified"
+      ],
+      "inputs": [
+        "frozen_base",
+        "role_labelled_references"
+      ],
+      "outputs": [
+        "candidate_nodes",
+        "candidate_relations",
+        "evidence_boxes",
+        "unknown_states"
+      ],
+      "requires_human_permission": false,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_READ_SOURCE_SHA_MATCH",
+        "E_READ_CANDIDATE_ONLY",
+        "E_READ_UNKNOWN_WITHOUT_EVIDENCE"
+      ],
+      "test_ids": [
+        "READ_SOURCE_SHA_MATCH",
+        "READ_CANDIDATE_ONLY",
+        "READ_UNKNOWN_WITHOUT_EVIDENCE"
+      ],
+      "acceptance": "Candidate observations only; never grants edit permission."
+    },
+    {
+      "method_id": "OTL0_TOPOLOGY_LOCK",
+      "version": "0.2.0",
+      "skill_aliases": [
+        "OTL0"
+      ],
+      "stage": [
+        "S1",
+        "S2",
+        "S4"
+      ],
+      "capability": "object_topology_part_count_connectivity_lock",
+      "maturity": "contract_only",
+      "execution_kind": "geometry_contract",
+      "entrypoint": "legacy BOUNDARY_WALKER_UNIFIED_RULES.md section 0.12.31",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "topology_verified"
+      ],
+      "inputs": [
+        "read_scene_graph",
+        "human_verified_topology"
+      ],
+      "outputs": [
+        "topology_contract"
+      ],
+      "requires_human_permission": false,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_OTL0_NO_GUESS_FROM_RASTER",
+        "E_OTL0_PART_COUNT_LOCK"
+      ],
+      "test_ids": [
+        "OTL0_NO_GUESS_FROM_RASTER",
+        "OTL0_PART_COUNT_LOCK"
+      ],
+      "acceptance": "Contract specification only; no runtime implementation claimed."
+    },
+    {
+      "method_id": "TEX4_GARMENT_TOPOLOGY",
+      "version": "0.2.0",
+      "skill_aliases": [
+        "TEX4"
+      ],
+      "stage": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "garment_pattern_and_topology_reconstruction",
+      "maturity": "documented_only",
+      "execution_kind": "research",
+      "entrypoint": "legacy FOUR_SKILL_TEX_ALIGN.md section 0.12.50",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "topology_verified",
+        "geometry_contract_verified",
+        "human_permission"
+      ],
+      "inputs": [
+        "base",
+        "garment_donor",
+        "part_geometry",
+        "approved_mask"
+      ],
+      "outputs": [
+        "garment_candidate",
+        "geometry_receipt"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_TEX4_NOT_IMPORTED",
+        "E_TEX4_TOPOLOGY_BEFORE_TEXTURE"
+      ],
+      "test_ids": [
+        "TEX4_NOT_IMPORTED",
+        "TEX4_TOPOLOGY_BEFORE_TEXTURE"
+      ],
+      "acceptance": "Documented-only; blocked until implementation and independent holdout."
+    },
+    {
+      "method_id": "PATH1E_IDENTITY_ECC_LOCK",
+      "version": "0.2.0",
+      "skill_aliases": [
+        "PATH1E"
+      ],
+      "stage": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "identity_reference_alignment_and_protected_composite",
+      "maturity": "documented_only",
+      "execution_kind": "research",
+      "entrypoint": "legacy PATH1E_PLATE_ECC_LAW.md section 0.12.17",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "geometry_contract_verified",
+        "human_permission",
+        "identity_reference_bytes_verified"
+      ],
+      "inputs": [
+        "base",
+        "identity_reference",
+        "approved_face_mask",
+        "protected_mask"
+      ],
+      "outputs": [
+        "identity_aligned_candidate",
+        "registration_receipt"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_PATH1E_NOT_IMPORTED",
+        "E_PATH1E_REFERENCE_SHA",
+        "E_PATH1E_FACE_PROTECTION"
+      ],
+      "test_ids": [
+        "PATH1E_NOT_IMPORTED",
+        "PATH1E_REFERENCE_SHA",
+        "PATH1E_FACE_PROTECTION"
+      ],
+      "acceptance": "Documented-only; a reference UUID alone cannot authorize face editing."
+    },
+    {
+      "method_id": "PIXEL_CTRL_PROTECTED_PIXEL_RESTORE",
+      "version": "0.2.0",
+      "skill_aliases": [
+        "PIXEL_CTRL"
+      ],
+      "stage": [
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "pixel_class_protection_and_restore",
+      "maturity": "documented_only",
+      "execution_kind": "research",
+      "entrypoint": "legacy PIXEL_CTRL_LAW.md section 0.12.16",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "geometry_contract_verified",
+        "human_permission",
+        "approved_masks_verified"
+      ],
+      "inputs": [
+        "base",
+        "pixel_class_masks",
+        "protected_mask"
+      ],
+      "outputs": [
+        "protected_pixel_composite",
+        "pixel_audit"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_PIXEL_CTRL_NOT_IMPORTED",
+        "E_PIXEL_CTRL_FACE_PROTECTION",
+        "E_PIXEL_CTRL_OUTSIDE_MASK_BIT_EXACT"
+      ],
+      "test_ids": [
+        "PIXEL_CTRL_NOT_IMPORTED",
+        "PIXEL_CTRL_FACE_PROTECTION",
+        "PIXEL_CTRL_OUTSIDE_MASK_BIT_EXACT"
+      ],
+      "acceptance": "Documented-only; protected-region proof requires exact saved-byte comparison."
+    },
+    {
+      "method_id": "GEOMETRY_LOCKED_TILE_PLAN_RETURN",
+      "version": "0.2.0",
+      "skill_aliases": [],
+      "stage": [
+        "S2",
+        "S4",
+        "S6",
+        "S7"
+      ],
+      "capability": "global_geometry_tile_planning_and_exact_core_return",
+      "maturity": "experimental",
+      "execution_kind": "geometry_contract",
+      "entrypoint": "PR11 two-tile geometry experiment",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "topology_verified",
+        "geometry_contract_verified",
+        "tile_plan_verified"
+      ],
+      "inputs": [
+        "frozen_base",
+        "object_geometry_contract",
+        "split_halo_plan",
+        "tile_candidates"
+      ],
+      "outputs": [
+        "tile_tasks",
+        "disjoint_write_cores",
+        "stitched_candidate",
+        "geometry_audit"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_PR11_TILE_PLAN_CORE_HALO",
+        "E_PR11_NO_IMPLICIT_RESIZE",
+        "E_PR11_OUTSIDE_ROI_BIT_EXACT"
+      ],
+      "test_ids": [
+        "PR11_TILE_PLAN_CORE_HALO",
+        "PR11_NO_IMPLICIT_RESIZE",
+        "PR11_OUTSIDE_ROI_BIT_EXACT"
+      ],
+      "acceptance": "Experimental only; no live Comfy verification claimed."
+    },
+    {
+      "method_id": "SIAX4X_TILE_CORE_SR",
+      "version": "0.2.0",
+      "skill_aliases": [
+        "SIAX4X"
+      ],
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "neural_super_resolution",
+      "maturity": "optional_runtime",
+      "execution_kind": "neural_sr",
+      "entrypoint": "src/ige/upscale/siax.py::run_siax_upscale",
+      "backend_id": "spandrel_siax_4x",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "topology_verified",
+        "checkpoint_sha_verified",
+        "license_acknowledged",
+        "geometry_contract_verified",
+        "tile_plan_verified",
+        "approved_masks_verified"
+      ],
+      "inputs": [
+        "frozen_base",
+        "pinned_4x_siax_checkpoint",
+        "tile_core_halo_plan",
+        "approved_masks"
+      ],
+      "outputs": [
+        "native_4x_master_candidate",
+        "model_receipt",
+        "tile_audit"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_PR5_SIAX_EXACT_4X",
+        "E_PR5_SIAX_NO_FALLBACK",
+        "E_PR5_SIAX_HASH_SIDECAR"
+      ],
+      "test_ids": [
+        "PR5_SIAX_EXACT_4X",
+        "PR5_SIAX_NO_FALLBACK",
+        "PR5_SIAX_HASH_SIDECAR"
+      ],
+      "acceptance": "S7 geometry, coverage, return and visual-quality gates; 4x alone is not geometry acceptance."
+    },
+    {
+      "method_id": "GRID_SIAX_REGION_DONOR_COMPOSITE",
+      "version": "0.2.0",
+      "skill_aliases": [
+        "GRID_SIAX"
+      ],
+      "stage": [
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "region_aware_detail_donor_and_material_composite",
+      "maturity": "documented_only",
+      "execution_kind": "research",
+      "entrypoint": "legacy GRID_SIAX_CORRECT_PROCESS.md sections 0.12.15-18",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "geometry_contract_verified",
+        "human_permission",
+        "approved_masks_verified",
+        "donor_bytes_verified"
+      ],
+      "inputs": [
+        "base",
+        "region_masks",
+        "verified_part_donors",
+        "protected_masks"
+      ],
+      "outputs": [
+        "region_detail_candidate",
+        "donor_provenance"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_GRID_SIAX_NOT_IMPORTED",
+        "E_GRID_SIAX_DONOR_ROLE",
+        "E_GRID_SIAX_PROTECTED_PIXELS"
+      ],
+      "test_ids": [
+        "GRID_SIAX_NOT_IMPORTED",
+        "GRID_SIAX_DONOR_ROLE",
+        "GRID_SIAX_PROTECTED_PIXELS"
+      ],
+      "acceptance": "Documented-only until donor selection, materialization and independent return are wired."
+    },
+    {
+      "method_id": "DETAIL6_MATERIAL_RESIDUAL",
+      "version": "0.2.0",
+      "skill_aliases": [
+        "DETAIL6"
+      ],
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "partial_material_masked_high_frequency_residual",
+      "maturity": "partial",
+      "execution_kind": "deterministic_residual",
+      "entrypoint": "src/ige/upscale/detail6.py::run_detail6",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "topology_verified",
+        "geometry_contract_verified",
+        "approved_masks_verified",
+        "verified_4x_master_available"
+      ],
+      "inputs": [
+        "native_4x_master",
+        "material_masks",
+        "face_skin_eye_protection_masks",
+        "gain"
+      ],
+      "outputs": [
+        "lossless_working_png",
+        "q98_q100_jpeg_444",
+        "zone_metrics",
+        "pixel_audit"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_DETAIL6_EXACT_4X",
+        "E_DETAIL6_PROTECTED_PIXELS",
+        "E_DETAIL6_MASK_REQUIREMENTS",
+        "E_DETAIL6_NO_GENERATIVE_CLAIM"
+      ],
+      "test_ids": [
+        "DETAIL6_EXACT_4X",
+        "DETAIL6_PROTECTED_PIXELS",
+        "DETAIL6_MASK_REQUIREMENTS",
+        "DETAIL6_NO_GENERATIVE_CLAIM"
+      ],
+      "acceptance": "Partial non-generative path; HF gain is diagnostic only, never diffusion."
+    },
+    {
+      "method_id": "SKIN_MATERIAL_PLATE",
+      "version": "0.2.0",
+      "skill_aliases": [
+        "SKIN_MAT"
+      ],
+      "stage": [
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "same_composition_skin_material_plate",
+      "maturity": "documented_only",
+      "execution_kind": "research",
+      "entrypoint": "legacy BOUNDARY_WALKER_UNIFIED_RULES.md section 0.12.20",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "geometry_contract_verified",
+        "human_permission",
+        "identity_reference_bytes_verified"
+      ],
+      "inputs": [
+        "base",
+        "same_composition_face_plate",
+        "protected_face_mask"
+      ],
+      "outputs": [
+        "skin_material_candidate",
+        "identity_audit"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_SKIN_MAT_NOT_IMPORTED",
+        "E_SKIN_MAT_SAME_COMPOSITION",
+        "E_SKIN_MAT_IDENTITY_LOCK"
+      ],
+      "test_ids": [
+        "SKIN_MAT_NOT_IMPORTED",
+        "SKIN_MAT_SAME_COMPOSITION",
+        "SKIN_MAT_IDENTITY_LOCK"
+      ],
+      "acceptance": "Documented-only; independent identity review is mandatory."
+    },
+    {
+      "method_id": "FLUX_HR_TILE_IMG2IMG",
+      "version": "0.2.0",
+      "skill_aliases": [],
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "high_resolution_tile_diffusion",
+      "maturity": "workflow_candidate",
+      "execution_kind": "diffusion",
+      "entrypoint": "user-supplied ComfyUI Flux HR tile graph; live API workflow not yet verified",
+      "backend_id": "comfyui_flux_dev_img2img",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "topology_verified",
+        "geometry_contract_verified",
+        "tile_plan_verified",
+        "comfy_nodes_available",
+        "backend_model_inventory_verified",
+        "tile_conditioning_verified",
+        "global_noise_field_verified",
+        "approved_masks_verified"
+      ],
+      "inputs": [
+        "high_resolution_read_tiles",
+        "global_geometry_contract",
+        "tile_local_contracts",
+        "conditioning",
+        "latent_noise_mask",
+        "sampler_profile"
+      ],
+      "outputs": [
+        "raw_decoded_tile_candidates",
+        "per_tile_backend_receipts"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_COMFY_NODE_MISSING",
+        "E_MODEL_INVENTORY_MISMATCH",
+        "E_TILE_CONDITIONING_UNROUTED",
+        "E_NOISE_FIELD_NOT_GLOBAL",
+        "E_GENERATION_RECEIPT_MISSING",
+        "E_GEOMETRY_DRIFT"
+      ],
+      "test_ids": [
+        "COMFY_NODE_MISSING",
+        "MODEL_INVENTORY_MISMATCH",
+        "TILE_CONDITIONING_UNROUTED",
+        "NOISE_FIELD_NOT_GLOBAL",
+        "GENERATION_RECEIPT_MISSING",
+        "GEOMETRY_DRIFT"
+      ],
+      "acceptance": "Blocked until actual Comfy inference, per-tile conditioning/noise evidence, receipts and S7 holdout."
+    },
+    {
+      "method_id": "HOLE_FOUR_ANTI_EVIDENCE",
+      "version": "0.2.0",
+      "skill_aliases": [],
+      "stage": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S6",
+        "S7"
+      ],
+      "capability": "paired_edit_difference_mask_countercheck",
+      "maturity": "research_only",
+      "execution_kind": "research",
+      "entrypoint": "research/shq_v9/shq_edit_hole_four_anti_debug.py",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "geometry_contract_verified",
+        "paired_edit_provenance_verified",
+        "human_permission",
+        "approved_masks_verified"
+      ],
+      "inputs": [
+        "L0_with_part",
+        "L1_native_empty_background",
+        "global_geometry_contract",
+        "human_review"
+      ],
+      "outputs": [
+        "candidate_difference_support",
+        "candidate_hole_mask",
+        "anti_hole_mask",
+        "scale_lock_report"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_HOLE_PAIR_SIZE_STRICT",
+        "E_HOLE_CAMERA_SHIFT_REJECT",
+        "E_HOLE_BG_CHANGE_REJECT",
+        "E_HOLE_MASK_COMPLEMENT"
+      ],
+      "test_ids": [
+        "HOLE_PAIR_SIZE_STRICT",
+        "HOLE_CAMERA_SHIFT_REJECT",
+        "HOLE_BG_CHANGE_REJECT",
+        "HOLE_MASK_COMPLEMENT"
+      ],
+      "acceptance": "Conditional research evidence route; DIFF is not permission and not production-wired."
+    },
+    {
+      "method_id": "HOLE_SCALELOCK_HF_RESIDUAL",
+      "version": "0.2.0",
+      "skill_aliases": [],
+      "stage": [
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "non_generative_masked_high_frequency_residual",
+      "maturity": "research_only",
+      "execution_kind": "deterministic_residual",
+      "entrypoint": "research/shq_v9/shq_edit_hole_four_anti_debug.py::execute_hole_scalelock_hf_pipeline",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "geometry_contract_verified",
+        "human_permission",
+        "approved_masks_verified"
+      ],
+      "inputs": [
+        "frozen_base",
+        "human_verified_hole_mask",
+        "detail_strength"
+      ],
+      "outputs": [
+        "masked_residual_candidate",
+        "hardpaste_candidate",
+        "diagnostic_audit"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_HF_RESIDUAL_MISLABELLED_AS_GENERATION",
+        "E_MASK_SHAPE_MISMATCH",
+        "E_OUTSIDE_PIXEL_CHANGE"
+      ],
+      "test_ids": [
+        "HF_RESIDUAL_MISLABELLED_AS_GENERATION",
+        "MASK_SHAPE_MISMATCH",
+        "OUTSIDE_PIXEL_CHANGE"
+      ],
+      "acceptance": "Research-only Gaussian HF residual; cannot be promoted as diffusion."
+    },
+    {
+      "method_id": "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+      "version": "0.2.0",
+      "skill_aliases": [],
+      "stage": [
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "external_ai_donor_guided_multiband_transfer",
+      "maturity": "external_donor_research",
+      "execution_kind": "external_transfer",
+      "entrypoint": "research/shq_v9/shq_all24_true_generative_upscale_return.py",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "geometry_contract_verified",
+        "donor_bytes_verified",
+        "donor_backend_receipt_verified",
+        "donor_part_mapping_verified",
+        "human_permission"
+      ],
+      "inputs": [
+        "frozen_base",
+        "external_ai_donors",
+        "part_masks",
+        "locate_contract"
+      ],
+      "outputs": [
+        "multiband_transferred_part_candidates",
+        "hardpaste_return",
+        "donor_transfer_receipt"
+      ],
+      "requires_human_permission": true,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_DONOR_BACKEND_PROVENANCE_MISSING",
+        "E_DONOR_NATIVE_SIZE_UNVERIFIED",
+        "E_DONOR_PART_MAPPING_UNVERIFIED",
+        "E_TRANSFER_NOT_GENERATION"
+      ],
+      "test_ids": [
+        "DONOR_BACKEND_PROVENANCE_MISSING",
+        "DONOR_NATIVE_SIZE_UNVERIFIED",
+        "DONOR_PART_MAPPING_UNVERIFIED",
+        "TRANSFER_NOT_GENERATION"
+      ],
+      "acceptance": "Auxiliary donor transfer only; never evidence that Flux ran on destination HR tiles."
+    },
+    {
+      "method_id": "BOX_FREE_5D_LOCATE_PROXY",
+      "version": "0.2.0",
+      "skill_aliases": [],
+      "stage": [
+        "S1",
+        "S2",
+        "S4",
+        "S7"
+      ],
+      "capability": "2d_derived_uv_depth_and_locate_proxy",
+      "maturity": "proxy_only",
+      "execution_kind": "geometry_contract",
+      "entrypoint": "research/shq_v9/shq_object_extractor.py",
+      "preconditions": [
+        "s0_source_sha_verified",
+        "geometry_contract_verified"
+      ],
+      "inputs": [
+        "source_mask",
+        "appearance",
+        "2d_distance_transform"
+      ],
+      "outputs": [
+        "uv_depth_proxy",
+        "pixel_inertia_dna"
+      ],
+      "requires_human_permission": false,
+      "edit_permission": false,
+      "failure_codes": [
+        "E_PROXY_MISLABELLED_AS_PHYSICAL_3D",
+        "E_CAMERA_SPACE_UNCALIBRATED"
+      ],
+      "test_ids": [
+        "PROXY_MISLABELLED_AS_PHYSICAL_3D",
+        "CAMERA_SPACE_UNCALIBRATED"
+      ],
+      "acceptance": "Proxy-only; derived UV/depth is not calibrated physical 3D geometry."
+    }
+  ]
+}
