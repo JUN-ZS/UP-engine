@@ -222,6 +222,36 @@ class MethodRegistryTests(unittest.TestCase):
         self.assertEqual(report["status"], "BLOCKED")
         self.assertEqual(report["stages"][7]["status"], "BLOCKED")
 
+    def test_soft_mask_and_approved_protected_overlap_block_s3(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            approved_path = Path(bundle["S3"]["permission"]["approved_edit_mask_path"])
+            soft = Image.new("L", (16, 16), 0)
+            soft.putpixel((0, 0), 128)
+            soft.save(approved_path)
+            bundle["S3"]["permission"]["approved_edit_mask_sha256"] = file_sha256(approved_path)
+            report = self._audit(bundle)
+            self.assertEqual(report["stages"][3]["status"], "BLOCKED")
+
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            protected_path = Path(bundle["S3"]["permission"]["protected_mask_path"])
+            with Image.open(protected_path) as opened:
+                protected = opened.convert("L")
+            protected.putpixel((0, 0), 255)
+            protected.save(protected_path)
+            bundle["S3"]["permission"]["protected_mask_sha256"] = file_sha256(protected_path)
+            report = self._audit(bundle)
+            self.assertEqual(report["stages"][3]["status"], "BLOCKED")
+
+    def test_registry_pinned_model_hash_mismatch_blocks_s5(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            bundle["S5"]["backend_receipt"]["model_sha256"] = "0" * 64
+            report = self._audit(bundle)
+        self.assertEqual(report["stages"][5]["status"], "BLOCKED")
+        self.assertEqual(report["stages"][6]["status"], "NOT_RUN")
+
 
 if __name__ == "__main__":
     unittest.main()
