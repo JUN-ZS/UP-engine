@@ -1,26 +1,33 @@
 """Core/Halo tile write-back ledger contract (offline / synthetic).
 
-Normative rules:
+Normative rules (ige-tile-core-halo-ledger/0.2):
 - Each tile declares read_bounds (may include halo) and core_bounds (write region).
+- Each tile MUST carry output_sha256 (synthetic hash OK; NOT live pixel proof).
+- Ledger MUST bind to S2 Geometry Canvas via canvas_sha256 + coordinate_frame.
 - Cores across the plan are pairwise disjoint.
 - Union of cores equals the declared coverage_target (exact-once: no overlap, no gap).
 - Halo is read-only: any receipt claiming halo writes → FAIL.
 - core_bounds must be nested inside read_bounds (core ⊆ read).
+- Coverage audit uses scanline / interval-union region math (8K-safe); never expands
+  rectangles into per-pixel Python sets.
+- For Tile methods, S6 requires this ledger (fail-closed if absent).
 - Ledger alone never grants edit_permission and never sets execution_allowed=true.
+- Ledger PASS ≠ actual pixel write-back PASS.
 
 Aligned Registry / S6 codes:
 - Umbrella: E_PR11_TILE_PLAN_CORE_HALO (GEOMETRY_LOCKED_TILE_PLAN_RETURN)
-- Specific check codes: E_TILE_CORE_OVERLAP, E_TILE_COVERAGE_GAP,
-  E_TILE_HALO_WRITE, E_TILE_CORE_NOT_SUBSET_READ, E_TILE_LEDGER_SCHEMA
+- Specific: E_TILE_CORE_OVERLAP, E_TILE_COVERAGE_GAP, E_TILE_HALO_WRITE,
+  E_TILE_CORE_NOT_SUBSET_READ, E_TILE_LEDGER_SCHEMA, E_TILE_LEDGER_REQUIRED,
+  E_TILE_S2_BIND, E_TILE_OUTPUT_SHA
 """
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
-LEDGER_SCHEMA = "ige-tile-core-halo-ledger/0.1"
+LEDGER_SCHEMA = "ige-tile-core-halo-ledger/0.2"
 UMBRELLA_FAILURE = "E_PR11_TILE_PLAN_CORE_HALO"
 TEST_ID_UMBRELLA = "PR11_TILE_PLAN_CORE_HALO"
 
@@ -29,11 +36,34 @@ CODE_CORE_OVERLAP = "E_TILE_CORE_OVERLAP"
 CODE_COVERAGE_GAP = "E_TILE_COVERAGE_GAP"
 CODE_HALO_WRITE = "E_TILE_HALO_WRITE"
 CODE_CORE_NOT_SUBSET = "E_TILE_CORE_NOT_SUBSET_READ"
+CODE_LEDGER_REQUIRED = "E_TILE_LEDGER_REQUIRED"
+CODE_S2_BIND = "E_TILE_S2_BIND"
+CODE_OUTPUT_SHA = "E_TILE_OUTPUT_SHA"
 
 STATUS_PASS = "PASS"
 STATUS_FAIL = "FAIL"
 
+# Methods whose S6 path must carry a Core/Halo ledger (fail-closed if missing).
+# Maturity / execution_allowed are unchanged by this requirement alone.
+TILE_LEDGER_REQUIRED_METHOD_IDS = frozenset(
+    {
+        "SIAX4X_TILE_CORE_SR",
+        "GEOMETRY_LOCKED_TILE_PLAN_RETURN",
+        "FLUX_HR_TILE_IMG2IMG",
+    }
+)
+
 Bounds = tuple[int, int, int, int]  # half-open [x0, y0, x1, y1)
+
+
+def method_requires_tile_core_halo_ledger(method_id: str | None) -> bool:
+    """True when S6 must supply and pass a Core/Halo ledger for this method."""
+    if not isinstance(method_id, str) or not method_id:
+        return False
+    if method_id in TILE_LEDGER_REQUIRED_METHOD_IDS:
+        return True
+    # Defensive: any future *TILE* method id inherits the mandatory ledger gate.
+    return "TILE" in method_id.upper()
 
 
 def _check(
@@ -83,16 +113,113 @@ def bounds_intersect(a: Bounds, b: Bounds) -> Bounds | None:
     return (x0, y0, x1, y1)
 
 
-def bounds_pixels(b: Bounds) -> set[tuple[int, int]]:
-    x0, y0, x1, y1 = b
-    return {(x, y) for y in range(y0, y1) for x in range(x0, x1)}
+def _is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(c in "0123456789abcdefABCDEF" for c in value)
+    )
 
 
-def union_rects(rects: Sequence[Bounds]) -> set[tuple[int, int]]:
-    out: set[tuple[int, int]] = set()
-    for rect in rects:
-        out |= bounds_pixels(rect)
-    return out
+# --- Region coverage (scanline / interval-union; 8K-safe) -----------------
+
+
+def merge_x_intervals(intervals: Sequence[tuple[int, int]]) -> list[tuple[int, int]]:
+    """Merge half-open [x0, x1) intervals; touching intervals coalesce."""
+    if not intervals:
+        return []
+    ordered = sorted((int(a), int(b)) for a, b in intervals if b > a)
+    if not ordered:
+        return []
+    merged: list[tuple[int, int]] = [ordered[0]]
+    for a, b in ordered[1:]:
+        la, lb = merged[-1]
+        if a <= lb:
+            merged[-1] = (la, max(lb, b))
+        else:
+            merged.append((a, b))
+    return merged
+
+
+def intervals_length(intervals: Sequence[tuple[int, int]]) -> int:
+    return sum(b - a for a, b in intervals)
+
+
+def union_area(rects: Sequence[Bounds]) -> int:
+    """Axis-aligned rectangle union area via horizontal sweep + x-interval merge.
+
+    Memory/time are O(n^2) in rectangle count for the naive active list, NOT O(pixels).
+    Safe for ~8K canvases described by a modest number of tile rects.
+    """
+    if not rects:
+        return 0
+    # Events: (y, typ, x0, x1). typ 0 = enter, 1 = leave. Process enters before leaves at same y.
+    events: list[tuple[int, int, int, int]] = []
+    for x0, y0, x1, y1 in rects:
+        events.append((y0, 0, x0, x1))
+        events.append((y1, 1, x0, x1))
+    events.sort(key=lambda e: (e[0], e[1]))
+
+    active: list[tuple[int, int]] = []
+    area = 0
+    prev_y = events[0][0]
+    i = 0
+    n = len(events)
+    while i < n:
+        y = events[i][0]
+        if y > prev_y and active:
+            area += intervals_length(merge_x_intervals(active)) * (y - prev_y)
+        while i < n and events[i][0] == y:
+            _, typ, x0, x1 = events[i]
+            if typ == 0:
+                active.append((x0, x1))
+            else:
+                # Remove one matching interval (multiset semantics for identical spans).
+                try:
+                    active.remove((x0, x1))
+                except ValueError:
+                    pass
+            i += 1
+        prev_y = y
+    return area
+
+
+def rect_covered_by_union(inner: Bounds, cover: Sequence[Bounds]) -> bool:
+    """True iff every pixel of inner lies in the union of cover (region math)."""
+    clips: list[Bounds] = []
+    for c in cover:
+        inter = bounds_intersect(inner, c)
+        if inter is not None:
+            clips.append(inter)
+    return union_area(clips) == bounds_area(inner)
+
+
+def exact_once_region_coverage(
+    cores: Sequence[Bounds],
+    target_rects: Sequence[Bounds],
+) -> dict[str, Any]:
+    """Exact-once coverage without per-pixel sets.
+
+    Requires pairwise-disjoint cores (caller reports overlap separately), each core
+    ⊆ target union, and sum(core areas) == union_area(target).
+    """
+    target_area = union_area(target_rects)
+    core_areas = [bounds_area(c) for c in cores]
+    core_area_sum = sum(core_areas)
+    not_subset: list[int] = []
+    for i, core in enumerate(cores):
+        if not rect_covered_by_union(core, target_rects):
+            not_subset.append(i)
+    # Pairwise multi-cover detection is the overlap check; here we only need area+subset.
+    ok = not not_subset and core_area_sum == target_area
+    return {
+        "ok": ok,
+        "target_area": target_area,
+        "core_area_sum": core_area_sum,
+        "cores_outside_target_indices": not_subset,
+        "gap_or_extra": core_area_sum != target_area or bool(not_subset),
+        "engine": "scanline_interval_union",
+    }
 
 
 def load_ledger(path: str | Path) -> dict[str, Any]:
@@ -110,6 +237,7 @@ def validate_ledger_payload(data: Mapping[str, Any]) -> list[str]:
     required = (
         "schema",
         "coordinate_frame",
+        "canvas_sha256",
         "coverage_target",
         "tiles",
         "non_claims",
@@ -121,13 +249,8 @@ def validate_ledger_payload(data: Mapping[str, Any]) -> list[str]:
         errors.append(f"schema must be {LEDGER_SCHEMA}")
     if not isinstance(data.get("coordinate_frame"), str) or not str(data.get("coordinate_frame")).strip():
         errors.append("coordinate_frame must be a non-empty string")
-    canvas = data.get("canvas_sha256")
-    if canvas is not None and not (
-        isinstance(canvas, str)
-        and len(canvas) == 64
-        and all(c in "0123456789abcdefABCDEF" for c in canvas)
-    ):
-        errors.append("canvas_sha256 must be a 64-char hex digest when present")
+    if not _is_sha256(data.get("canvas_sha256")):
+        errors.append("canvas_sha256 must be a 64-char hex digest (S2 geometry canvas bind)")
     if not isinstance(data.get("non_claims"), list) or not data.get("non_claims"):
         errors.append("non_claims must be a non-empty array")
     elif any(not isinstance(x, str) or not x.strip() for x in data["non_claims"]):
@@ -175,12 +298,11 @@ def validate_ledger_payload(data: Mapping[str, Any]) -> list[str]:
             if isinstance(parsed, str):
                 errors.append(parsed)
         out_sha = tile.get("output_sha256")
-        if out_sha is not None and not (
-            isinstance(out_sha, str)
-            and len(out_sha) == 64
-            and all(c in "0123456789abcdefABCDEF" for c in out_sha)
-        ):
-            errors.append(f"{p}.output_sha256 must be a 64-char hex digest when present")
+        if not _is_sha256(out_sha):
+            errors.append(
+                f"{p}.output_sha256 is required (64-char hex); "
+                "synthetic digests allowed — not live pixel write-back proof"
+            )
         if "halo_write_pixels" in tile and type(tile.get("halo_write_pixels")) is not int:
             errors.append(f"{p}.halo_write_pixels must be an int when present")
         if "wrote_halo" in tile and not isinstance(tile.get("wrote_halo"), bool):
@@ -211,8 +333,73 @@ def _tile_halo_write_claim(tile: Mapping[str, Any]) -> tuple[bool, str]:
     return False, ""
 
 
-def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
-    """Audit a tile core/halo ledger. Always execution_allowed=false."""
+def bind_ledger_to_s2(
+    ledger: Mapping[str, Any],
+    s2_geometry: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    """Verify ledger.canvas_sha256 + coordinate_frame against S2 geometry canvas evidence.
+
+    Returns a check dict (PASS/FAIL). When s2_geometry is None, FAIL — Tile S6 bind
+    requires an S2 evidence object (standalone CLI may pass an explicit bind object).
+    """
+    ledger_frame = ledger.get("coordinate_frame")
+    ledger_canvas = ledger.get("canvas_sha256")
+    if not isinstance(s2_geometry, Mapping):
+        return _check(
+            CODE_S2_BIND,
+            STATUS_FAIL,
+            "S2 geometry bind required but no S2 geometry evidence was supplied",
+            evidence={"ledger_coordinate_frame": ledger_frame, "ledger_canvas_sha256": ledger_canvas},
+        )
+    s2_frame = s2_geometry.get("coordinate_frame")
+    s2_canvas = s2_geometry.get("canvas_sha256")
+    mismatches: list[str] = []
+    if not isinstance(s2_frame, str) or not s2_frame.strip():
+        mismatches.append("S2.coordinate_frame missing/empty")
+    elif s2_frame != ledger_frame:
+        mismatches.append(
+            f"coordinate_frame mismatch ledger={ledger_frame!r} s2={s2_frame!r}"
+        )
+    if not _is_sha256(s2_canvas):
+        mismatches.append("S2.canvas_sha256 missing/invalid")
+    elif s2_canvas != ledger_canvas:
+        mismatches.append("canvas_sha256 mismatch vs S2 geometry canvas")
+    if mismatches:
+        return _check(
+            CODE_S2_BIND,
+            STATUS_FAIL,
+            "ledger not bound to S2 Geometry Canvas",
+            evidence={
+                "mismatches": mismatches,
+                "ledger_coordinate_frame": ledger_frame,
+                "ledger_canvas_sha256": ledger_canvas,
+                "s2_coordinate_frame": s2_frame,
+                "s2_canvas_sha256": s2_canvas,
+            },
+        )
+    return _check(
+        CODE_S2_BIND,
+        STATUS_PASS,
+        "ledger.coordinate_frame and canvas_sha256 match S2 geometry canvas",
+        evidence={
+            "coordinate_frame": ledger_frame,
+            "canvas_sha256": ledger_canvas,
+        },
+    )
+
+
+def audit_ledger(
+    ledger: Mapping[str, Any],
+    *,
+    s2_geometry: Mapping[str, Any] | None = None,
+    require_s2_bind: bool = False,
+) -> dict[str, Any]:
+    """Audit a tile core/halo ledger. Always execution_allowed=false.
+
+    When require_s2_bind is True (S6 tile-method path), ledger must match the
+    provided S2 geometry canvas SHA + coordinate_frame.
+    Standalone audits without S2 evidence skip the bind check unless require_s2_bind.
+    """
     checks: list[dict[str, Any]] = []
     blockers: list[str] = []
 
@@ -227,6 +414,17 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
             )
         )
         blockers.append(CODE_SCHEMA)
+        # Still surface missing output SHA distinctly when that is the only theme.
+        if any("output_sha256" in e for e in schema_errors):
+            checks.append(
+                _check(
+                    CODE_OUTPUT_SHA,
+                    STATUS_FAIL,
+                    "one or more tiles missing/invalid output_sha256",
+                    evidence={"errors": [e for e in schema_errors if "output_sha256" in e]},
+                )
+            )
+            blockers.append(CODE_OUTPUT_SHA)
         return {
             "schema": LEDGER_SCHEMA,
             "overall_status": "FAIL",
@@ -237,11 +435,29 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
             "stats": {},
             "execution_allowed": False,
             "edit_permission": False,
+            "coverage_engine": "scanline_interval_union",
             "non_claims": list(ledger.get("non_claims") or [])
             or ["Ledger audit does not grant execution or edit permission."],
+            "note": (
+                "Ledger PASS would still not prove live pixel write-back; "
+                "this revision is contract + synthetic CI only."
+            ),
         }
 
     checks.append(_check(CODE_SCHEMA, STATUS_PASS, "ledger schema/structure OK"))
+    checks.append(
+        _check(
+            CODE_OUTPUT_SHA,
+            STATUS_PASS,
+            "every tile declares output_sha256 (synthetic allowed; not live pixel proof)",
+        )
+    )
+
+    if require_s2_bind or s2_geometry is not None:
+        bind_check = bind_ledger_to_s2(ledger, s2_geometry)
+        checks.append(bind_check)
+        if bind_check["status"] != STATUS_PASS:
+            blockers.append(CODE_S2_BIND)
 
     tiles = list(ledger["tiles"])
     target = ledger["coverage_target"]
@@ -250,7 +466,6 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
         parsed = parse_bounds(rect, label="coverage")
         assert not isinstance(parsed, str)
         target_rects.append(parsed)
-    target_pixels = union_rects(target_rects)
 
     # Per-tile nesting + halo write claims.
     cores: list[tuple[str, Bounds]] = []
@@ -277,8 +492,6 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
         if claimed:
             halo_fail_tiles.append({"tile_id": tid, "reason": reason})
 
-        # Optional halo_bounds must also sit inside read and not overlap core write semantics
-        # (halo is context only). We only require halo_bounds ⊆ read when present.
         if tile.get("halo_bounds") is not None:
             halo_b = parse_bounds(tile["halo_bounds"], label="halo")
             if not isinstance(halo_b, str) and not bounds_contains(read_b, halo_b):
@@ -329,7 +542,7 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
             )
         )
 
-    # Pairwise disjoint cores.
+    # Pairwise disjoint cores (rectangle intersection; not per-pixel).
     overlaps: list[dict[str, Any]] = []
     for i in range(len(cores)):
         for j in range(i + 1, len(cores)):
@@ -342,7 +555,7 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
                         "tile_a": tid_a,
                         "tile_b": tid_b,
                         "intersection": list(inter),
-                        "intersection_pixels": bounds_area(inter),
+                        "intersection_area": bounds_area(inter),
                     }
                 )
     if overlaps:
@@ -364,25 +577,24 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
             )
         )
 
-    # Exact-once coverage vs declared target.
-    core_pixels: set[tuple[int, int]] = set()
-    multi_covered = 0
-    for _, core_b in cores:
-        pix = bounds_pixels(core_b)
-        multi_covered += len(core_pixels & pix)
-        core_pixels |= pix
-    gap = sorted(target_pixels - core_pixels)
-    extra = sorted(core_pixels - target_pixels)
-    # Overlap already counted via pairwise; multi_covered>0 also means not exact-once.
-    coverage_ok = not gap and not extra and multi_covered == 0 and not overlaps
+    # Exact-once coverage via region engine (no per-pixel sets).
+    core_bounds_only = [b for _, b in cores]
+    coverage = exact_once_region_coverage(core_bounds_only, target_rects)
+    coverage_ok = coverage["ok"] and not overlaps
     if not coverage_ok:
         detail_parts = []
-        if gap:
-            detail_parts.append(f"gap_pixels={len(gap)}")
-        if extra:
-            detail_parts.append(f"extra_outside_target={len(extra)}")
-        if multi_covered:
-            detail_parts.append(f"multi_covered_pixels={multi_covered}")
+        if coverage["cores_outside_target_indices"]:
+            detail_parts.append(
+                f"cores_outside_target={coverage['cores_outside_target_indices']}"
+            )
+        if coverage["core_area_sum"] < coverage["target_area"]:
+            detail_parts.append(
+                f"gap_area={coverage['target_area'] - coverage['core_area_sum']}"
+            )
+        if coverage["core_area_sum"] > coverage["target_area"]:
+            detail_parts.append(
+                f"extra_area={coverage['core_area_sum'] - coverage['target_area']}"
+            )
         if overlaps:
             detail_parts.append("core_overlap_present")
         checks.append(
@@ -391,13 +603,10 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
                 STATUS_FAIL,
                 "exact-once coverage vs coverage_target failed: " + ", ".join(detail_parts),
                 evidence={
-                    "gap_pixel_count": len(gap),
-                    "extra_pixel_count": len(extra),
-                    "multi_covered_pixels": multi_covered,
-                    "gap_sample": gap[:16],
-                    "extra_sample": extra[:16],
-                    "target_pixel_count": len(target_pixels),
-                    "core_union_pixel_count": len(core_pixels),
+                    "target_area": coverage["target_area"],
+                    "core_area_sum": coverage["core_area_sum"],
+                    "cores_outside_target_indices": coverage["cores_outside_target_indices"],
+                    "engine": coverage["engine"],
                 },
             )
         )
@@ -407,10 +616,11 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
             _check(
                 CODE_COVERAGE_GAP,
                 STATUS_PASS,
-                "union of cores equals coverage_target with exact-once coverage",
+                "union of cores equals coverage_target with exact-once coverage (region engine)",
                 evidence={
-                    "target_pixel_count": len(target_pixels),
-                    "core_union_pixel_count": len(core_pixels),
+                    "target_area": coverage["target_area"],
+                    "core_area_sum": coverage["core_area_sum"],
+                    "engine": coverage["engine"],
                 },
             )
         )
@@ -422,20 +632,25 @@ def audit_ledger(ledger: Mapping[str, Any]) -> dict[str, Any]:
         "umbrella_failure_code": UMBRELLA_FAILURE,
         "test_id": TEST_ID_UMBRELLA,
         "coordinate_frame": ledger.get("coordinate_frame"),
+        "canvas_sha256": ledger.get("canvas_sha256"),
         "checks": checks,
         "blockers": blockers,
         "stats": {
             "tile_count": len(tiles),
-            "target_pixel_count": len(target_pixels),
-            "core_union_pixel_count": len(core_pixels),
-            "gap_pixel_count": len(gap),
-            "extra_pixel_count": len(extra),
+            "target_area": coverage["target_area"],
+            "core_area_sum": coverage["core_area_sum"],
             "overlap_pair_count": len(overlaps),
+            "coverage_engine": "scanline_interval_union",
         },
         "execution_allowed": False,
         "edit_permission": False,
         "maturity_unchanged": True,
+        "coverage_engine": "scanline_interval_union",
         "non_claims": list(ledger.get("non_claims")),
+        "note": (
+            "Ledger contract PASS is not live Core/Halo pixel write-back proof; "
+            "output_sha256 fields are declared digests only in this revision."
+        ),
     }
 
 
@@ -443,15 +658,51 @@ def ledger_passes(report: Mapping[str, Any]) -> bool:
     return report.get("overall_status") == STATUS_PASS and not report.get("blockers")
 
 
+def missing_ledger_failure(*, method_id: str) -> dict[str, Any]:
+    """S6 fail-closed report when a Tile method omits the Core/Halo ledger."""
+    return {
+        "schema": LEDGER_SCHEMA,
+        "overall_status": STATUS_FAIL,
+        "umbrella_failure_code": UMBRELLA_FAILURE,
+        "test_id": TEST_ID_UMBRELLA,
+        "checks": [
+            _check(
+                CODE_LEDGER_REQUIRED,
+                STATUS_FAIL,
+                f"Tile method {method_id} requires tile_core_halo_ledger "
+                "(or tile_core_halo_ledger_path); legacy counter-only path is closed",
+                evidence={"method_id": method_id},
+            )
+        ],
+        "blockers": [CODE_LEDGER_REQUIRED],
+        "stats": {},
+        "execution_allowed": False,
+        "edit_permission": False,
+        "maturity_unchanged": True,
+        "non_claims": [
+            "Missing ledger blocks S6 for Tile methods; does not unlock Flux.",
+            "Does not set execution_allowed=true.",
+        ],
+    }
+
+
 # --- Synthetic fixtures -------------------------------------------------
 
 
 _NON_CLAIMS = [
     "Synthetic ledger only; no real compositor / GPU write-back.",
+    "output_sha256 values are declared synthetic digests, not live pixel proofs.",
     "Does not grant edit_permission.",
     "Does not set execution_allowed=true.",
     "Does not promote FLUX_HR_TILE_IMG2IMG maturity.",
+    "Ledger PASS ≠ actual Core/Halo pixel write-back PASS.",
 ]
+
+# Stable synthetic digests for fixtures (not real file hashes).
+_SYN_CANVAS = "a" * 64
+_SYN_OUT_T0 = "b" * 64
+_SYN_OUT_T1 = "c" * 64
+_SYN_OUT_T2 = "d" * 64
 
 
 def _base_ledger(
@@ -459,63 +710,89 @@ def _base_ledger(
     tiles: list[dict[str, Any]],
     coverage_rects: list[list[int]],
     coordinate_frame: str = "global_canvas_xy",
+    canvas_sha256: str = _SYN_CANVAS,
 ) -> dict[str, Any]:
     return {
         "schema": LEDGER_SCHEMA,
         "coordinate_frame": coordinate_frame,
+        "canvas_sha256": canvas_sha256,
         "coverage_target": {"kind": "rect_union", "rects": coverage_rects},
         "tiles": tiles,
         "non_claims": list(_NON_CLAIMS),
     }
 
 
-def synthetic_valid_two_tile_ledger() -> dict[str, Any]:
+def _tile(
+    tile_id: str,
+    read_bounds: list[int],
+    core_bounds: list[int],
+    *,
+    output_sha256: str,
+    halo_bounds: list[int] | None = None,
+    halo_write_pixels: int = 0,
+    wrote_halo: bool = False,
+    coordinate_frame: str = "global_canvas_xy",
+    write_receipt: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    item: dict[str, Any] = {
+        "tile_id": tile_id,
+        "read_bounds": read_bounds,
+        "core_bounds": core_bounds,
+        "output_sha256": output_sha256,
+        "halo_write_pixels": halo_write_pixels,
+        "wrote_halo": wrote_halo,
+        "coordinate_frame": coordinate_frame,
+    }
+    if halo_bounds is not None:
+        item["halo_bounds"] = halo_bounds
+    if write_receipt is not None:
+        item["write_receipt"] = write_receipt
+    else:
+        item["write_receipt"] = {
+            "wrote_core": True,
+            "wrote_halo": wrote_halo,
+            "halo_write_pixels": halo_write_pixels,
+        }
+    return item
+
+
+def synthetic_valid_two_tile_ledger(
+    *,
+    coordinate_frame: str = "global_canvas_xy",
+    canvas_sha256: str = _SYN_CANVAS,
+) -> dict[str, Any]:
     """Positive: two tiles with overlapping reads, disjoint cores, full coverage."""
-    # Canvas coverage target 0..8 x 0..4
-    # Tile A: read [-2,-1,6,5] conceptually clamped → use [0,0,6,4] read with core [0,0,4,4]
-    # Tile B: read [2,0,8,4], core [4,0,8,4]
     tiles = [
-        {
-            "tile_id": "t0",
-            "read_bounds": [0, 0, 6, 4],
-            "core_bounds": [0, 0, 4, 4],
-            "halo_bounds": [4, 0, 6, 4],
-            "halo_write_pixels": 0,
-            "wrote_halo": False,
-            "write_receipt": {"wrote_core": True, "wrote_halo": False, "halo_write_pixels": 0},
-            "coordinate_frame": "global_canvas_xy",
-        },
-        {
-            "tile_id": "t1",
-            "read_bounds": [2, 0, 8, 4],
-            "core_bounds": [4, 0, 8, 4],
-            "halo_bounds": [2, 0, 4, 4],
-            "halo_write_pixels": 0,
-            "wrote_halo": False,
-            "write_receipt": {"wrote_core": True, "wrote_halo": False, "halo_write_pixels": 0},
-            "coordinate_frame": "global_canvas_xy",
-        },
+        _tile(
+            "t0",
+            [0, 0, 6, 4],
+            [0, 0, 4, 4],
+            output_sha256=_SYN_OUT_T0,
+            halo_bounds=[4, 0, 6, 4],
+            coordinate_frame=coordinate_frame,
+        ),
+        _tile(
+            "t1",
+            [2, 0, 8, 4],
+            [4, 0, 8, 4],
+            output_sha256=_SYN_OUT_T1,
+            halo_bounds=[2, 0, 4, 4],
+            coordinate_frame=coordinate_frame,
+        ),
     ]
-    return _base_ledger(tiles=tiles, coverage_rects=[[0, 0, 8, 4]])
+    return _base_ledger(
+        tiles=tiles,
+        coverage_rects=[[0, 0, 8, 4]],
+        coordinate_frame=coordinate_frame,
+        canvas_sha256=canvas_sha256,
+    )
 
 
 def synthetic_core_overlap_ledger() -> dict[str, Any]:
     """Counterexample: cores overlap on [3,0,5,4]."""
     tiles = [
-        {
-            "tile_id": "t0",
-            "read_bounds": [0, 0, 6, 4],
-            "core_bounds": [0, 0, 5, 4],
-            "halo_write_pixels": 0,
-            "wrote_halo": False,
-        },
-        {
-            "tile_id": "t1",
-            "read_bounds": [2, 0, 8, 4],
-            "core_bounds": [3, 0, 8, 4],
-            "halo_write_pixels": 0,
-            "wrote_halo": False,
-        },
+        _tile("t0", [0, 0, 6, 4], [0, 0, 5, 4], output_sha256=_SYN_OUT_T0),
+        _tile("t1", [2, 0, 8, 4], [3, 0, 8, 4], output_sha256=_SYN_OUT_T1),
     ]
     return _base_ledger(tiles=tiles, coverage_rects=[[0, 0, 8, 4]])
 
@@ -523,20 +800,8 @@ def synthetic_core_overlap_ledger() -> dict[str, Any]:
 def synthetic_coverage_gap_ledger() -> dict[str, Any]:
     """Counterexample: cores leave a gap column at x=4..5."""
     tiles = [
-        {
-            "tile_id": "t0",
-            "read_bounds": [0, 0, 5, 4],
-            "core_bounds": [0, 0, 4, 4],
-            "halo_write_pixels": 0,
-            "wrote_halo": False,
-        },
-        {
-            "tile_id": "t1",
-            "read_bounds": [4, 0, 8, 4],
-            "core_bounds": [5, 0, 8, 4],
-            "halo_write_pixels": 0,
-            "wrote_halo": False,
-        },
+        _tile("t0", [0, 0, 5, 4], [0, 0, 4, 4], output_sha256=_SYN_OUT_T0),
+        _tile("t1", [4, 0, 8, 4], [5, 0, 8, 4], output_sha256=_SYN_OUT_T1),
     ]
     return _base_ledger(tiles=tiles, coverage_rects=[[0, 0, 8, 4]])
 
@@ -557,28 +822,62 @@ def synthetic_halo_write_ledger() -> dict[str, Any]:
 def synthetic_core_not_subset_read_ledger() -> dict[str, Any]:
     """Counterexample: core extends outside read_bounds."""
     tiles = [
-        {
-            "tile_id": "t0",
-            "read_bounds": [0, 0, 4, 4],
-            "core_bounds": [0, 0, 5, 4],  # x1=5 > read x1=4
-            "halo_write_pixels": 0,
-            "wrote_halo": False,
-        },
-        {
-            "tile_id": "t1",
-            "read_bounds": [4, 0, 8, 4],
-            "core_bounds": [5, 0, 8, 4],
-            "halo_write_pixels": 0,
-            "wrote_halo": False,
-        },
+        _tile("t0", [0, 0, 4, 4], [0, 0, 5, 4], output_sha256=_SYN_OUT_T0),
+        _tile("t1", [4, 0, 8, 4], [5, 0, 8, 4], output_sha256=_SYN_OUT_T1),
     ]
     return _base_ledger(tiles=tiles, coverage_rects=[[0, 0, 8, 4]])
 
 
-def resolve_optional_ledger_from_s6(return_audit: Mapping[str, Any]) -> dict[str, Any] | None:
-    """Extract optional embedded ledger or load from path on S6.return_audit.
+def synthetic_missing_output_sha_ledger() -> dict[str, Any]:
+    """Counterexample: valid geometry but output_sha256 omitted."""
+    ledger = synthetic_valid_two_tile_ledger()
+    del ledger["tiles"][0]["output_sha256"]
+    return ledger
 
-    Returns None when no ledger was supplied (existing S6 path unchanged).
+
+def synthetic_large_canvas_grid_ledger(
+    *,
+    canvas_w: int = 8192,
+    canvas_h: int = 8192,
+    tiles_x: int = 4,
+    tiles_y: int = 4,
+    halo: int = 64,
+    coordinate_frame: str = "global_canvas_xy",
+    canvas_sha256: str = _SYN_CANVAS,
+) -> dict[str, Any]:
+    """8K-friendly grid: many large cores without expanding to pixel sets."""
+    if canvas_w % tiles_x or canvas_h % tiles_y:
+        raise ValueError("canvas dims must divide evenly by tile grid")
+    tw, th = canvas_w // tiles_x, canvas_h // tiles_y
+    tiles: list[dict[str, Any]] = []
+    for ty in range(tiles_y):
+        for tx in range(tiles_x):
+            x0, y0 = tx * tw, ty * th
+            x1, y1 = x0 + tw, y0 + th
+            rx0, ry0 = max(0, x0 - halo), max(0, y0 - halo)
+            rx1, ry1 = min(canvas_w, x1 + halo), min(canvas_h, y1 + halo)
+            digest = f"{(ty * tiles_x + tx):064x}"
+            tiles.append(
+                _tile(
+                    f"t{ty}_{tx}",
+                    [rx0, ry0, rx1, ry1],
+                    [x0, y0, x1, y1],
+                    output_sha256=digest,
+                    coordinate_frame=coordinate_frame,
+                )
+            )
+    return _base_ledger(
+        tiles=tiles,
+        coverage_rects=[[0, 0, canvas_w, canvas_h]],
+        coordinate_frame=coordinate_frame,
+        canvas_sha256=canvas_sha256,
+    )
+
+
+def resolve_optional_ledger_from_s6(return_audit: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Extract embedded ledger or load from path on S6.return_audit.
+
+    Returns None when no ledger was supplied.
     Raises ValueError if a path is declared but unreadable / non-object.
     """
     if not isinstance(return_audit, Mapping):
@@ -592,3 +891,7 @@ def resolve_optional_ledger_from_s6(return_audit: Mapping[str, Any]) -> dict[str
     if not isinstance(path, str):
         raise ValueError("tile_core_halo_ledger_path must be a string")
     return load_ledger(path)
+
+
+# Back-compat alias name used by older tests / call sites.
+resolve_ledger_from_s6 = resolve_optional_ledger_from_s6

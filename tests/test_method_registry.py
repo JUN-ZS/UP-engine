@@ -14,6 +14,8 @@ from ige.method_registry import (
     validate_registry_payload,
 )
 from ige.comfy.tile_core_halo_ledger import (
+    CODE_LEDGER_REQUIRED,
+    CODE_S2_BIND,
     synthetic_halo_write_ledger,
     synthetic_valid_two_tile_ledger,
 )
@@ -146,6 +148,11 @@ class MethodRegistryTests(unittest.TestCase):
                 "core_only_writes": True, "halo_write_pixels": 0, "core_overlap_pixels": 0,
                 "coverage_gap_pixels": 0, "outside_authorized_changed_pixels": 0,
                 "implicit_resize": False, "implicit_flip": False,
+                # Tile method SIAX4X_TILE_CORE_SR requires Core/Halo ledger bound to S2.
+                "tile_core_halo_ledger": synthetic_valid_two_tile_ledger(
+                    coordinate_frame="native_4x_master",
+                    canvas_sha256=canvas_sha,
+                ),
             }},
             "S7": {"acceptance": {
                 "independent_reloaded": True, "source_sha256": source_sha, "saved_output_sha256": output_sha,
@@ -218,10 +225,9 @@ class MethodRegistryTests(unittest.TestCase):
         self.assertEqual(report["stages"][6]["status"], "BLOCKED")
         self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
 
-    def test_optional_tile_ledger_pass_does_not_grant_permission(self):
+    def test_mandatory_tile_ledger_pass_does_not_grant_permission(self):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
-            bundle["S6"]["return_audit"]["tile_core_halo_ledger"] = synthetic_valid_two_tile_ledger()
             report = self._audit(bundle)
         self.assertEqual(report["status"], "ACCEPTED_CANDIDATE")
         self.assertEqual(report["stages"][6]["status"], "PASS")
@@ -230,10 +236,48 @@ class MethodRegistryTests(unittest.TestCase):
         self.assertFalse(report["execution_allowed"])
         self.assertFalse(report["edit_permission"])
 
-    def test_optional_tile_ledger_halo_write_blocks_s6(self):
+    def test_mandatory_tile_ledger_missing_blocks_s6(self):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
-            bundle["S6"]["return_audit"]["tile_core_halo_ledger"] = synthetic_halo_write_ledger()
+            bundle["S6"]["return_audit"].pop("tile_core_halo_ledger", None)
+            bundle["S6"]["return_audit"].pop("tile_core_halo_ledger_path", None)
+            report = self._audit(bundle)
+        self.assertEqual(report["stages"][6]["status"], "BLOCKED")
+        self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
+        self.assertFalse(report["execution_allowed"])
+        ledger = report["stages"][6].get("tile_ledger") or {}
+        self.assertEqual(ledger.get("overall_status"), "FAIL")
+        self.assertIn(CODE_LEDGER_REQUIRED, ledger.get("blockers") or [])
+        self.assertTrue(
+            any("E_TILE_LEDGER_REQUIRED" in r for r in report["stages"][6].get("reasons") or [])
+        )
+
+    def test_tile_ledger_s2_bind_mismatch_blocks_s6(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            bad = synthetic_valid_two_tile_ledger(
+                coordinate_frame="native_4x_master",
+                canvas_sha256="f" * 64,  # not the real S2 canvas sha
+            )
+            bundle["S6"]["return_audit"]["tile_core_halo_ledger"] = bad
+            report = self._audit(bundle)
+        self.assertEqual(report["stages"][6]["status"], "BLOCKED")
+        ledger = report["stages"][6].get("tile_ledger") or {}
+        self.assertEqual(ledger.get("overall_status"), "FAIL")
+        self.assertIn(CODE_S2_BIND, ledger.get("blockers") or [])
+        self.assertFalse(report["execution_allowed"])
+
+    def test_mandatory_tile_ledger_halo_write_blocks_s6(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            # Halo-write ledger must still carry matching S2 bind fields to reach halo check.
+            canvas_sha = bundle["S2"]["geometry_contract"]["canvas_sha256"]
+            failing = synthetic_halo_write_ledger()
+            failing["coordinate_frame"] = "native_4x_master"
+            failing["canvas_sha256"] = canvas_sha
+            for tile in failing["tiles"]:
+                tile["coordinate_frame"] = "native_4x_master"
+            bundle["S6"]["return_audit"]["tile_core_halo_ledger"] = failing
             report = self._audit(bundle)
         self.assertEqual(report["stages"][6]["status"], "BLOCKED")
         self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
