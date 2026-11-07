@@ -5,7 +5,8 @@
 **Title:** 物件導向幾何約束升頻架構  
 **Transcript (latest):** [`docs/sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md`](./sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md)  
 **AI agent usage guide:** [`docs/SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md)  
-**Research fossils:** [`research/shq_v9/`](../research/shq_v9/) (10 scripts; + battlefield self-part traceability)  
+**Verifiable reference package:** [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) (5-layer L0→L4; research-only)  
+**Research fossils:** [`research/shq_v9/`](../research/shq_v9/) (10 scripts; earlier single-file experiments)  
 **Status:** implementer contract / design lock. Not a runtime merge.
 
 **v0.1 refresh note:** packs through XMyk add (1) **Method Registry** + Skill Router / holdout, (2) **true generative 8K** donors, (3) **strict claim boundary** + anti-tautology + `delivery_transform`, (4) **Rule 01380** + four-skill frequency layers \(L+M+H\), (5) **battlefield self-part** chain 生/除/扣/洞/反 with **1:1 method→program→test→accept** traceability. Stage naming emphasizes **S7 independent ACCEPT**; this doc’s S0–S6 map still applies — cover freeze→read→lock→route→infer→return→independent accept.
@@ -267,8 +268,9 @@ When implementing, cite this doc’s stage ids (`S0`–`S6`) and forbidden list 
 - [x] Guidance stages + gates written  
 - [x] Forbidden practices explicit  
 - [x] AI usage guide (`SHQ_AI_USAGE_GUIDE.md`)  
-- [x] Latest source pack `hC9HlUpskKK9` (17 turns) + prior pack retained  
-- [x] `research/shq_v9` fossils ×7 + README (not production-wired)  
+- [x] Latest source pack `XMyk6HVn2J9S` (20 turns) + prior packs retained  
+- [x] `research/ige_shq_github_verifiable_package_v1.0` five-layer package (research-only)  
+- [x] `research/shq_v9` fossils ×10 + README (not production-wired)  
 - [ ] Runtime wiring into `src/ige` — **out of scope**  
 - [ ] Real Siax backend proof in CI — **belongs to runner PRs**
 
@@ -307,3 +309,14 @@ Reference fossil: `research/shq_v9/shq_battlefield_self_part_traceability_engine
 ### 10.5 Four-state edit evidence
 
 Prefer the explicit chain **KEEP → REMOVE → DIFF → HOLE** (生/除/扣/洞) with `diff_grants_edit_permission = False` until S3 compiles permission. When a verified closed silhouette already exists, skipping REMOVE→DIFF is allowed only if recorded (`four_state_remove_diff_skipped_because_mask_verified=True`).
+
+
+### 10.6 Current verifiable reference implementation (package v1.0)
+
+Point implementers at **`research/ige_shq_github_verifiable_package_v1.0/`** as the **current end-to-end verifiable reference** (still research; not `src/ige` production wiring):
+
+- Run: `python3 run_all_verifications.py --strict` from the package root (after `registry/validate_registry.py`).
+- Layers: L0 S0 four-way anti-hole → L1 S1/S2 18-part + geometry lock → L2 S3 permission + registry → L3 Skills A/B/C dense registration + \(L+M+H\) → L4 Skill D Rule 01380 return + S7 disk reverse QA.
+- Fixes vs earlier fossils: full upper+lower self-part HR plates; per-part template + dense optical-flow registration; relative paths only.
+
+Hub notes: [`research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md`](../research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md). AI checklist: [`SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md) §9.

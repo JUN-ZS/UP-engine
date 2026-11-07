@@ -4,7 +4,8 @@
 **Normative contract:** [`SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md)  
 **Latest source:** [`sources/gemini-share-XMyk6HVn2J9S/`](./sources/gemini-share-XMyk6HVn2J9S/)（**20 turns**；+1 vs nutr：戰場自身部件追溯／生除扣洞反 + 方法一對一追溯）  
 **Prior sources:** [`nutrRjsw676R`](./sources/gemini-share-nutrRjsw676R/)（19）、[`hC9HlUpskKK9`](./sources/gemini-share-hC9HlUpskKK9/)（17）、[`47yxULPlPy0W`](./sources/gemini-share-47yxULPlPy0W/)（15）  
-**Fossils:** [`../research/shq_v9/`](../research/shq_v9/) — **唔係** production runtime（×10）
+**Verifiable package:** [`../research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) — **research-only** 五層可重現包（優先用呢個驗）  
+**Fossils:** [`../research/shq_v9/`](../research/shq_v9/) — 早期單檔化石 ×10；**唔係** production runtime
 
 ---
 
@@ -14,6 +15,7 @@
 |----|------|
 | Turn 19 新測 | 複雜人機**戰場圖**：`生→除→扣→洞→自身高清部件三層升級→01380 硬邊回位→反` |
 | 新化石 | `shq_battlefield_self_part_traceability_engine.py` |
+| **可驗證包** | [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) — 五層聯動 + 下半身 HR 母本 + dense registration（見 §9） |
 | 追溯硬規 | 每階段必須 **同一 `method_id` → 同一 `entrypoint` → 同一 `test_id` → 同一 `acceptance_gate_id`**（一對一；唔可以「方法表有、程式另一套」） |
 | 宣稱 | 可宣稱「大圖由**自身**高清部件升級組成回去」——前提係上述追溯 + S7 磁碟反扣全 PASS；否則屬越權宣稱 |
 
@@ -219,7 +221,7 @@ Registry 缺失或 schema 失敗 → Router **RuntimeError**（唔准 silent fal
 
 ## 8. 快速自檢（開工前 30 秒）
 
-- [ ] 已讀 INDEX → PROGRAM_GUIDANCE → 最新 share（XMyk Turn 17–19）→ fossils  
+- [ ] 已讀 INDEX → PROGRAM_GUIDANCE → 最新 share（XMyk）→ **可驗證包** `run_all_verifications.py --strict` → fossils  
 - [ ] 清楚五參數分離（含 `delivery_transform`）  
 - [ ] empty-BG 係原生編輯；四態生除扣洞齊  
 - [ ] 計劃咗真 backend；**無** Lanczos 捷徑  
@@ -229,3 +231,39 @@ Registry 缺失或 schema 失敗 → Router **RuntimeError**（唔准 silent fal
 - [ ] 準備 S7 磁碟反扣 + Claim／Non-claim 表  
 
 任何一項做唔到 → **停**，先補契約證據，唔好發明 shortcut。
+
+---
+
+## 9. 五層 GitHub 可驗證包（現行參考實作）
+
+**路徑：** [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/)  
+**狀態：** research-only；**未**接 `src/ige`。任何外部 AI／工程師應以呢包做端到端重現，而唔係只開 `shq_v9` 單檔。
+
+### 9.1 必跑指令
+
+```bash
+cd research/ige_shq_github_verifiable_package_v1.0
+python3 registry/validate_registry.py registry/method_registry.json
+python3 run_all_verifications.py --strict
+```
+
+預期：registry PASS（22 methods）；**12/12** unittest OK；**8/8** 階段閘 PASS；`exit_code = 0`。依賴：`opencv-python`（或 headless）、`numpy`、`Pillow`。
+
+### 9.2 Layer ↔ 階段／技能／Rule 01380
+
+| Layer | 模組 | 階段／技能 | 驗收門檻（例） |
+|-------|------|-----------|----------------|
+| **L0** | `l0_s0_four_way_anti_hole.py` | S0 生/除/扣/洞/反洞 | `ACCEPT_BF_S0_HOLE_AND_ANTIHOLE_COMPLEMENT` |
+| **L1** | `l1_s1_s2_part_hierarchy_and_geometry_lock.py` | S1 18-part；S2 幾何鎖 | `ACCEPT_BF_S1_…` / `ACCEPT_BF_S2_…` |
+| **L2** | `l2_s3_s4_permission_and_registry_router.py` | S3 權限；載入 registry | `ACCEPT_BF_S3_DISJOINT_EDIT_AND_PRESERVE_PERMISSIONS` |
+| **L3** | `l3_s4_self_part_dense_registration_and_3freq_engine.py` | Skills **A/B/C**；\(L+M+H\)；逐部件 template+光流 | `ACCEPT_SKILL_A/B/C_…` |
+| **L4** | `l4_s5_s6_s7_rule01380_return_and_reverse_qa.py` | Skill **D**；Rule **01380** 回位；S7 磁碟反扣 | `ACCEPT_SKILL_D_RULE_01380_AND_S7_DISK_REVERSE_QA` |
+
+### 9.3 三大 DEBUG 根因（做同類升清時必須避開）
+
+1. **上半身裁切套全身 bbox** → 下半身腿甲／戰靴垂直錯位。必須有完整自身 HR 母本（本包：`B0_UPPER/LOWER`、`B1_UPPER/LOWER`、`B2_FULL` 覆蓋 P01–P18）。  
+2. **粗框縮放無逐部件稠密配準** → 「真」高清寫唔準入大圖。必須 per-part `matchTemplate` + Farneback／等效非剛性對齊。  
+3. **硬編碼絕對路徑** → 外部 AI 下載即 `FileNotFoundError`。必須相對路徑五層模組 + 可攜 runner。
+
+詳見包內 [`README.md`](../research/ige_shq_github_verifiable_package_v1.0/README.md) 與 [`HUB_NOTES.md`](../research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md)。
+

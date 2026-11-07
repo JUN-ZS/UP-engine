@@ -12,7 +12,8 @@
 | [sources/gemini-share-nutrRjsw676R/](./sources/gemini-share-nutrRjsw676R/) | 上一包（19 turns；PR #12／宣稱再測 + 三技能／頻率層）— 保留作 provenance |
 | [sources/gemini-share-hC9HlUpskKK9/](./sources/gemini-share-hC9HlUpskKK9/) | 更早包（17 turns；Method Registry + 真生成 8K）— 保留作 provenance |
 | [sources/gemini-share-47yxULPlPy0W/](./sources/gemini-share-47yxULPlPy0W/) | 更早包（15 turns）— 保留作 provenance |
-| [../research/shq_v9/README.md](../research/shq_v9/README.md) | Reference Python artifacts ×10（not production-wired） |
+| [../research/ige_shq_github_verifiable_package_v1.0/](../research/ige_shq_github_verifiable_package_v1.0/) | **Current verifiable reference package** — 5-layer L0→L4 + registry + tests + assets（research-only; run `python3 run_all_verifications.py --strict`） |
+| [../research/shq_v9/README.md](../research/shq_v9/README.md) | Earlier single-script fossils ×10（not production-wired; superseded for end-to-end verify by package above） |
 
 ## Sibling open PRs (do not treat as duplicates)
 
