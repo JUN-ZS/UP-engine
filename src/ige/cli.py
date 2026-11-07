@@ -33,6 +33,14 @@ def build_parser() -> argparse.ArgumentParser:
     audit_s0_s7.add_argument("--method-registry", type=Path, default=None)
     audit_s0_s7.add_argument("--out", type=Path, default=None)
 
+    audit_comfy = sub.add_parser(
+        "audit-comfy-workflow",
+        help="static ComfyUI UI/API inventory audit for FLUX_HR_TILE candidate (no GPU; never unlocks execution)",
+    )
+    audit_comfy.add_argument("--ui", type=Path, default=None, help="ComfyUI UI workflow graph JSON")
+    audit_comfy.add_argument("--api", type=Path, default=None, help="ComfyUI API prompt JSON")
+    audit_comfy.add_argument("--out", type=Path, default=None, help="optional audit report JSON path")
+
     read = sub.add_parser(
         "read-image",
         help="inspect a still image and export auditable regions, proposals, relations and masks",
@@ -268,6 +276,27 @@ def main() -> int:
         else:
             print(rendered, end="")
         return 0 if report["status"] == "ACCEPTED_CANDIDATE" else 2
+
+    if args.command == "audit-comfy-workflow":
+        from .comfy.workflow_static_audit import audit_comfy_workflows, structural_inventory_ok
+        import json as _json
+
+        if args.ui is None and args.api is None:
+            parser.error("audit-comfy-workflow requires --ui and/or --api")
+        report = audit_comfy_workflows(ui_path=args.ui, api_path=args.api)
+        rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(rendered, encoding="utf-8")
+            print(f"Comfy workflow static audit written: {args.out}")
+        else:
+            print(rendered, end="")
+        print(
+            f"method={report['method_id']} inventory={report['inventory_status']} "
+            f"overall={report['overall_status']} execution_allowed={report['execution_allowed']} "
+            f"maturity_remains={report['maturity_remains']}"
+        )
+        return 0 if structural_inventory_ok(report) else 2
 
     if args.command == "read-image":
         from .read import run_read

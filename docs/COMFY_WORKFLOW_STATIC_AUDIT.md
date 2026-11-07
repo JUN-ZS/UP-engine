@@ -1,0 +1,69 @@
+# ComfyUI workflow static audit (FLUX_HR_TILE candidate)
+
+## Purpose
+
+Provide a **fail-closed, non-GPU** inventory audit of ComfyUI UI graphs and API
+prompts that may later back `FLUX_HR_TILE_IMG2IMG`.
+
+This sits on top of the S0–S7 Method Registry runtime (PR #17). It does **not**
+promote method maturity and does **not** grant edit permission.
+
+## CLI
+
+```bash
+ige audit-comfy-workflow \
+  --ui fixtures/comfy/workflow_ige_v03_dev_fp8.json \
+  --api fixtures/comfy/workflow_cloud_api_prompt_v0.5.json \
+  --out /tmp/comfy_static_audit.json
+```
+
+Exit codes:
+
+- `0` — structural candidate inventory OK (required nodes + Dev FP8 filenames)
+- `2` — structural inventory blockers (`E_COMFY_NODE_MISSING`,
+  `E_MODEL_INVENTORY_MISMATCH`, or UI/API value mismatch)
+- Help / argparse errors follow argparse defaults
+
+Even on exit `0`, the report always includes:
+
+- `execution_allowed: false`
+- `maturity_remains: workflow_candidate`
+- `overall_status: BLOCKED_WORKFLOW_CANDIDATE`
+
+## Checks (mapped to Registry failure codes where possible)
+
+| Code | Meaning in this static audit |
+|------|------------------------------|
+| `E_COMFY_NODE_MISSING` | Required inventory classes absent from supplied graphs |
+| `E_MODEL_INVENTORY_MISMATCH` | Declared UNET/VAE/CLIP/dtype filenames ≠ expected Dev FP8 set (**filenames only**) |
+| `E_TILE_CONDITIONING_UNROUTED` | PASS only as *static* per-tile prompt evidence; never live routing proof |
+| `E_NOISE_FIELD_NOT_GLOBAL` | Same `RandomNoise` seed alone is **FAIL / insufficient** — not a coordinate-consistent global field |
+
+Optional UI inventory (recorded, not execution proof): `IGE_TileNoiseMask`,
+`SetLatentNoiseMask`, TTP tile nodes, `UpscaleModelLoader` (Siax filename).
+
+## Non-claims
+
+- No ComfyUI process started; no GPU inference.
+- No Flux / Siax weight files loaded; no weight SHA verification.
+- No S7 acceptance; no halo/core pixel proof on real outputs.
+- Static per-tile `CLIPTextEncode` text ≠ live independent conditioning routes.
+- Same seed ≠ global noise field.
+- Does not modify `src/ige/data/method_registry.json`.
+- Does not unblock `FLUX_HR_TILE_IMG2IMG`.
+
+## Fixtures
+
+See `fixtures/comfy/README.md`. Primary sources:
+
+- UI: `workflow_ige_v03_dev_fp8.json` (PC Dev FP8 + IGE v0.3)
+- API: `workflow_cloud_api_prompt_v0.5.json` (geometry-locked two-tile cloud)
+
+## Remaining blockers before any live GPU step
+
+1. Host has matching custom nodes + weight files; verify weight SHAs.
+2. Prove each tile's conditioning is independently routed at runtime.
+3. Prove coordinate-consistent global noise (not seed equality alone).
+4. Prove core-only write / halo non-write / coverage on real outputs.
+5. Independent S7 on real GPU outputs.
+6. Explicit Method Registry maturity change (out of scope here).
