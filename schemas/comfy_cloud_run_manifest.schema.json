@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ige-comfy-cloud-run-manifest/0.1",
+  "title": "IGE Comfy Cloud diagnostic run manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "run_id", "workflow_path", "tile_inputs", "output_dir", "diagnostic_only"],
+  "properties": {
+    "schema": {"const": "ige-comfy-cloud-run-manifest/0.1"},
+    "run_id": {"type": "string", "minLength": 1},
+    "workflow_path": {"type": "string", "minLength": 1},
+    "tile_inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node_id", "path", "sha256"],
+        "properties": {
+          "node_id": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"}
+        }
+      }
+    },
+    "output_dir": {"type": "string", "minLength": 1},
+    "diagnostic_only": {"const": true}
+  }
+}
