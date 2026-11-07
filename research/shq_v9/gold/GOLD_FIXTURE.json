@@ -1,0 +1,27 @@
+{
+  "write_id": "01395",
+  "formal": "SHQ_C5_GOLD_FIXTURE_V1",
+  "src_sha": "1d064dd6bdf74ce5c3ec9ff985ef9175b4d1f6c9dc3f7fd6ec9e44bb0c45520b",
+  "empty_sha": "fac1702e976ec703052f9ca2b8de10c6a762f7fdbe3278e254628aa4623bcd2e",
+  "return_sha": "e1e241efd4f26683207667cd9e8a09379324a0df1ace5346f714b9b2325d856e",
+  "wh": [
+    1792,
+    1008
+  ],
+  "expected": {
+    "ncc_src_return_min": 0.99,
+    "phase_shift_px_max": 0.5,
+    "outside_max_absdiff": 0,
+    "leak_total": 0,
+    "elev_remap": false,
+    "paste_mode": "peep_alpha_at_corners_4_only",
+    "empty_ncc_bg_min": 0.9,
+    "n_parts_min": 2,
+    "mask_coverage_max": 0.4
+  },
+  "method_id": "HOLE_SCALELOCK_HF_RESIDUAL",
+  "parts": [
+    "U0_LEFT",
+    "U1_RIGHT"
+  ]
+}
