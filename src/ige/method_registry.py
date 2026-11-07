@@ -262,7 +262,7 @@ def _audit_return_pixels(canvas_path: str, output_path: str, approved_mask_path:
             "width": base.width, "height": base.height,
             "changed_pixels_inside_authorized_region": sum(inside_hist[1:]),
             "changed_pixels_outside_authorized_region": sum(outside_hist[1:]),
-            "max_outside_rgb_diff": max(outside.getextrema()[1], 0),
+            "max_outside_rgb_diff": outside.getextrema()[1],
         }
     except (OSError, ValueError):
         return None
@@ -326,6 +326,7 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
         and _local_hash_matches(p.get("protected_mask_path"), p.get("protected_mask_sha256"))
         and _validate_permission_masks(g.get("canvas_path"), p.get("approved_edit_mask_path"), p.get("protected_mask_path"))[0]
         and isinstance(p.get("target_regions"), list) and bool(p.get("target_regions"))
+        and all(isinstance(x, str) and x.strip() for x in p.get("target_regions", []))
         and len(p.get("target_regions", [])) == len(set(p.get("target_regions", [])))
         and isinstance(p.get("reviewer_ref"), str) and bool(p.get("reviewer_ref"))
         and isinstance(p.get("reviewed_at"), str) and bool(p.get("reviewed_at"))
