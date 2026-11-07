@@ -1,0 +1,240 @@
+{
+  "write_id": "01387",
+  "formal": "SHQ_TECHNIQUE_LINEAGE_FROM_ORIGIN_V1",
+  "origin_asset": "64daf29a-53b6-47f6-bcd6-a1cd95c311eb",
+  "entries": [
+    {
+      "phase": "ORIGIN",
+      "id": "00_ORIGIN_SPHERE",
+      "path": "/workspace/artifacts/imagine_images/64daf29a-53b6-47f6-bcd6-a1cd95c311eb.jpg",
+      "caption": "起點：水晶球／多層世界（技法探索之源）",
+      "question": "Q: 何謂「層」與「回位」？物件能否獨立升清再回？",
+      "thumb": "thumbs/00_ORIGIN_00_ORIGIN_SPHERE.jpg",
+      "idx": 0,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "01_SRC_MECHA_BASE",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/base/00_SRC_BASE_1920x1080.jpg",
+      "caption": "轉測床：金網女×機甲 1920 凍結 S0",
+      "question": "Q: 16:9 BASE 如何凍結？",
+      "thumb": "thumbs/01_EXPLORE_01_SRC_MECHA_BASE.jpg",
+      "idx": 1,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "02_EMPTY_HINT",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/base/01_EMPTY_NO_SUBJECTS.jpg",
+      "caption": "S1 去主體 empty 探索",
+      "question": "Q: empty 是否同機位？NCC 閘？",
+      "thumb": "thumbs/02_EXPLORE_02_EMPTY_HINT.jpg",
+      "idx": 2,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "03_TEACH_CLIP",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_mask_elev/00_TEACH_CLIP_CHAIN.jpg",
+      "caption": "CLIP 教學鏈：去背→只留件→回扣",
+      "question": "Q: clip 是剪影還是外框？",
+      "thumb": "thumbs/03_EXPLORE_03_TEACH_CLIP.jpg",
+      "idx": 3,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "04_PAIR_REVERSE_TEACH",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_pair_reverse/00_TEACH_PAIR_REVERSE.jpg",
+      "caption": "一對 reverse 教學",
+      "question": "Q: M_iso × M_slot 能否配？",
+      "thumb": "thumbs/04_EXPLORE_04_PAIR_REVERSE_TEACH.jpg",
+      "idx": 4,
+      "path_exists": true
+    },
+    {
+      "phase": "FAIL",
+      "id": "05_DEBUG_OUTER_VS_HOLLOW",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_pair_reverse/DEBUG_FRAME_VS_HOLLOW/DEBUG_OUTER_VS_HOLLOW.jpg",
+      "caption": "試錯：外框 reverse ≠ 鏤空剪影",
+      "question": "Q: 為何 peep 框不能當洞？",
+      "thumb": "thumbs/05_FAIL_05_DEBUG_OUTER_VS_HOLLOW.jpg",
+      "idx": 5,
+      "path_exists": true
+    },
+    {
+      "phase": "FAIL",
+      "id": "06_DEBUG_WORDS",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_pair_reverse/DEBUG_FRAME_VS_HOLLOW/DEBUG_WORDS_BOARD.jpg",
+      "caption": "字詞 DEBUG 板（框/洞混淆）",
+      "question": "Q: 字詞是否鎖死？",
+      "thumb": "thumbs/06_FAIL_06_DEBUG_WORDS.jpg",
+      "idx": 6,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "07_CLIP_BEFORE_AFTER",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_mask_elev/06_BEFORE_AFTER.jpg",
+      "caption": "clip elev 前後",
+      "question": "Q: elev_remap 有無偷動座標？",
+      "thumb": "thumbs/07_EXPLORE_07_CLIP_BEFORE_AFTER.jpg",
+      "idx": 7,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "08_HEAD_ZOOM_BA",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_mask_elev/07_HEAD_ZOOM_BEFORE_AFTER.jpg",
+      "caption": "頭 zoom 前後",
+      "question": "Q: 銳度過閘靠什麼？",
+      "thumb": "thumbs/08_EXPLORE_08_HEAD_ZOOM_BA.jpg",
+      "idx": 8,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "09_HOLE_TO_HOLE",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/HOLE_TO_HOLE_01370/CONCEPT_BOARD.jpg",
+      "caption": "洞回洞概念確立",
+      "question": "Q: 洞回洞 vs 框回？",
+      "thumb": "thumbs/09_EXPLORE_09_HOLE_TO_HOLE.jpg",
+      "idx": 9,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "10_EDIT_MULTILAYER",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/EDIT_MULTILAYER_HOLE_01381/RELATION_MATRIX.jpg",
+      "caption": "EDIT 多層：有頭×無頭×有背×無背",
+      "question": "Q: 魔棒/色相能否代替手剪影？",
+      "thumb": "thumbs/10_EXPLORE_10_EDIT_MULTILAYER.jpg",
+      "idx": 10,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "11_HOLE_INPAINT",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/HOLE_INPAINT_ELEV_01382/U0_PIPELINE_BOARD.jpg",
+      "caption": "洞內 INPAINT 鏈",
+      "question": "Q: 生是否在洞座標系？",
+      "thumb": "thumbs/11_EXPLORE_11_HOLE_INPAINT.jpg",
+      "idx": 11,
+      "path_exists": true
+    },
+    {
+      "phase": "FAIL",
+      "id": "12_REF_01384_PIPELINE",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/GO_HOLE_INPAINT_REF_01384/return/PIPELINE_BOARD.jpg",
+      "caption": "01384 舊頭 REF 生成級升 — 後確認尺度漂",
+      "question": "Q: freeframe densify 是否變大？",
+      "thumb": "thumbs/12_FAIL_12_REF_01384_PIPELINE.jpg",
+      "idx": 12,
+      "path_exists": true
+    },
+    {
+      "phase": "FAIL",
+      "id": "13_SIZE_FAIL_LOCK",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/SIZE_FAIL_VS_LOCK.jpg",
+      "caption": "試錯標定：頭變大 vs 鎖尺",
+      "question": "Q: E-105 HEAD_SCALE_GROW？",
+      "thumb": "thumbs/13_FAIL_13_SIZE_FAIL_LOCK.jpg",
+      "idx": 13,
+      "path_exists": true
+    },
+    {
+      "phase": "ASK",
+      "id": "14_MATRIX_4",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/anti/MATRIX_4_有無頭背.jpg",
+      "caption": "四態質問落盤：有背有頭/除/無背/反扣",
+      "question": "Q0–Q9 留燈不阻跑",
+      "thumb": "thumbs/14_ASK_14_MATRIX_4.jpg",
+      "idx": 14,
+      "path_exists": true
+    },
+    {
+      "phase": "ASK",
+      "id": "15_ANTI_4STATE",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/ANTI_4STATE_BOARD.jpg",
+      "caption": "洞/除/扣/生 全鏈反查條",
+      "question": "Q: 每態是否都有反？",
+      "thumb": "thumbs/15_ASK_15_ANTI_4STATE.jpg",
+      "idx": 15,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "16_STRUCT_LOCK",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/STRUCT_LOCK_HOLE_ELEV_01373/BOTH_BOARD.jpg",
+      "caption": "結構鎖探索",
+      "question": "Q: peep LF + dens HF？",
+      "thumb": "thumbs/16_EXPLORE_16_STRUCT_LOCK.jpg",
+      "idx": 16,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "17_ROI_EDGE",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/ROI_EDGE_WEIGHT_ELEV_01371/BOTH_BOARD.jpg",
+      "caption": "ROI 邊弱試（後改全洞 w=1）",
+      "question": "Q: 邊弱是否誤凍低清？",
+      "thumb": "thumbs/17_EXPLORE_17_ROI_EDGE.jpg",
+      "idx": 17,
+      "path_exists": true
+    },
+    {
+      "phase": "EXPLORE",
+      "id": "18_GEO_MATFILL",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/GEO_MATFILL_BOTH_01379/BOTH_BOARD.jpg",
+      "caption": "凍 alpha 只刷 RGB matfill",
+      "question": "Q: alpha XOR=0？",
+      "thumb": "thumbs/18_EXPLORE_18_GEO_MATFILL.jpg",
+      "idx": 18,
+      "path_exists": true
+    },
+    {
+      "phase": "FIX",
+      "id": "19_PEEP_LOCKED",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/ref/peep_有背_洞框_LOCKED.jpg",
+      "caption": "最終：洞框鎖尺 peep",
+      "question": "尺度在 peep，不在 densify",
+      "thumb": "thumbs/19_FIX_19_PEEP_LOCKED.jpg",
+      "idx": 19,
+      "path_exists": true
+    },
+    {
+      "phase": "FIX",
+      "id": "20_ZOOM_BEST",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/ZOOM_BEST.jpg",
+      "caption": "最終：鎖尺 HF 回洞 zoom",
+      "question": "size_ok · leak=0",
+      "thumb": "thumbs/20_FIX_20_ZOOM_BEST.jpg",
+      "idx": 20,
+      "path_exists": true
+    },
+    {
+      "phase": "LOCK",
+      "id": "21_BEST_RETURN",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/BEST_RETURN.jpg",
+      "caption": "最終方案回位全圖（縮圖）",
+      "question": "ACCEPT_FULL_HD=false · 技法鎖尺成立",
+      "thumb": "thumbs/21_LOCK_21_BEST_RETURN.jpg",
+      "idx": 21,
+      "path_exists": true
+    },
+    {
+      "phase": "LOCK",
+      "id": "22_CONTACT_01386",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/00_CONTACT_SHEET_HUB.jpg",
+      "caption": "01386 子接觸板",
+      "question": "Hub thumbs 子集",
+      "thumb": "thumbs/22_LOCK_22_CONTACT_01386.jpg",
+      "idx": 22,
+      "path_exists": true
+    }
+  ],
+  "n": 23,
+  "contact": "00_LINEAGE_CONTACT.jpg",
+  "story_strip": "01_STORY_STRIP.jpg"
+}

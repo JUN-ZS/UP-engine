@@ -1,0 +1,19 @@
+{
+  "write_id": "01386",
+  "formal": "SHQ_EDIT_HOLE_FOUR_ANTI_DEBUG_V1",
+  "constitution": "SHQ_EDIT_HOLE_FOUR_ANTI_DEBUG.md",
+  "py": "shq_edit_hole_four_anti_debug.py",
+  "function_codes": "docs/GROK_IMAGINE_FUNCTION_CODES.md \u00a719l",
+  "debug_blocks_runtime_default": false,
+  "strict_flag": "--strict",
+  "E": [
+    "E-99",
+    "E-100",
+    "E-105",
+    "E-106",
+    "E-107",
+    "E-108"
+  ],
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-07T16:06:12.530851+00:00"
+}
