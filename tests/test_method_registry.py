@@ -320,6 +320,20 @@ class MethodRegistryTests(unittest.TestCase):
         self.assertIn(CODE_S2_BIND, ledger.get("blockers") or [])
         self.assertFalse(report["execution_allowed"])
 
+def test_tile_ledger_with_wrong_s2_canvas_hash_blocks_s5(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            ledger_path = Path(bundle["S5"]["backend_receipt"]["tile_ledger_path"])
+            ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+            ledger["canvas_sha256"] = "f" * 64
+            ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+            digest = file_sha256(ledger_path)
+            bundle["S5"]["backend_receipt"]["tile_ledger_sha256"] = digest
+            bundle["S6"]["return_audit"]["tile_core_halo_ledger_sha256"] = digest
+            report = self._audit(bundle)
+        self.assertEqual(report["stages"][5]["status"], "BLOCKED")
+        self.assertEqual(report["stages"][6]["status"], "NOT_RUN")
+
     def test_mandatory_tile_ledger_halo_write_blocks_s6(self):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
