@@ -28,6 +28,32 @@ def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def bound_siax_ledger(canvas_sha: str) -> dict:
+    """Single-tile instrumented ledger matching the Driver S5 fixture (schema 0.2)."""
+    return {
+        "schema": "ige-tile-core-halo-ledger/0.2",
+        "coordinate_frame": "native_4x_master",
+        "canvas_sha256": canvas_sha,
+        "canvas_size_wh": [16, 16],
+        "coverage_target": {"kind": "rect_union", "rects": [[0, 0, 16, 16]]},
+        "tiles": [{
+            "tile_id": "whole-canvas",
+            "read_bounds": [0, 0, 16, 16],
+            "core_bounds": [0, 0, 16, 16],
+            "output_sha256": "b" * 64,
+            "halo_write_pixels": 0,
+            "wrote_halo": False,
+            "coordinate_frame": "native_4x_master",
+            "write_receipt": {"wrote_core": True, "wrote_halo": False, "halo_write_pixels": 0},
+        }],
+        "evidence_grade": "runtime_instrumented_adapter",
+        "non_claims": [
+            "Synthetic unit-test ledger; not live Siax inference proof.",
+            "Does not unlock Flux or set execution_allowed=true.",
+        ],
+    }
+
+
 class MethodRegistryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -114,6 +140,27 @@ class MethodRegistryTests(unittest.TestCase):
         model.write_bytes(b"synthetic-model-fixture")
         model_sha = SIAX_SHA256  # mocked below; fixture is not the real checkpoint
 
+        tile_trace = [{
+            "tile_id": "whole-canvas",
+            "read_bounds": [0, 0, 16, 16],
+            "core_bounds": [0, 0, 16, 16],
+        }]
+        ledger = bound_siax_ledger(canvas_sha)
+        ledger_path = root / "runtime_tile_ledger.json"
+        ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+        metadata = {
+            "model_id": "4x_NMKD-Siax_200k",
+            "checkpoint_sha256": model_sha,
+            "input_sha256": source_sha,
+            "output_sha256": output_sha,
+            "tile_trace": tile_trace,
+        }
+        metadata_path = root / "siax_metadata.json"
+        metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+        tile_trace_sha = hashlib.sha256(
+            json.dumps(tile_trace, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+
         return {
             "S0": {"source_path": str(base), "source_sha256": source_sha, "source_frozen": True, "immutable": True},
             "S1": {"read_receipt": {"source_sha256": source_sha, "candidate_only": True, "observations": {
@@ -142,17 +189,17 @@ class MethodRegistryTests(unittest.TestCase):
                 "parent_source_sha256": source_sha, "input_sha256s": [source_sha, sha(b"tile")],
                 "output_sha256": output_sha, "output_path": str(output), "request_id": "fixture-run-1",
                 "parameters": {"scale": 4, "tile_size": 256, "tile_pad": 8},
+                "adapter_metadata_path": str(metadata_path), "adapter_metadata_sha256": file_sha256(metadata_path),
+                "tile_trace_sha256": tile_trace_sha,
+                "tile_ledger_path": str(ledger_path), "tile_ledger_sha256": file_sha256(ledger_path),
             }},
             "S6": {"return_audit": {
                 "source_sha256": source_sha, "output_sha256": output_sha, "output_path": str(output),
                 "core_only_writes": True, "halo_write_pixels": 0, "core_overlap_pixels": 0,
                 "coverage_gap_pixels": 0, "outside_authorized_changed_pixels": 0,
                 "implicit_resize": False, "implicit_flip": False,
-                # Tile method SIAX4X_TILE_CORE_SR requires Core/Halo ledger bound to S2.
-                "tile_core_halo_ledger": synthetic_valid_two_tile_ledger(
-                    coordinate_frame="native_4x_master",
-                    canvas_sha256=canvas_sha,
-                ),
+                "tile_core_halo_ledger_path": str(ledger_path),
+                "tile_core_halo_ledger_sha256": file_sha256(ledger_path),
             }},
             "S7": {"acceptance": {
                 "independent_reloaded": True, "source_sha256": source_sha, "saved_output_sha256": output_sha,
@@ -219,6 +266,11 @@ class MethodRegistryTests(unittest.TestCase):
             candidate.save(output)
             new_sha = file_sha256(output)
             bundle["S5"]["backend_receipt"]["output_sha256"] = new_sha
+            metadata_path = Path(bundle["S5"]["backend_receipt"]["adapter_metadata_path"])
+            metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+            metadata["output_sha256"] = new_sha
+            metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+            bundle["S5"]["backend_receipt"]["adapter_metadata_sha256"] = file_sha256(metadata_path)
             bundle["S6"]["return_audit"]["output_sha256"] = new_sha
             bundle["S7"]["acceptance"]["saved_output_sha256"] = new_sha
             report = self._audit(bundle)
@@ -241,6 +293,7 @@ class MethodRegistryTests(unittest.TestCase):
             bundle = self._bundle(Path(directory))
             bundle["S6"]["return_audit"].pop("tile_core_halo_ledger", None)
             bundle["S6"]["return_audit"].pop("tile_core_halo_ledger_path", None)
+            bundle["S6"]["return_audit"].pop("tile_core_halo_ledger_sha256", None)
             report = self._audit(bundle)
         self.assertEqual(report["stages"][6]["status"], "BLOCKED")
         self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
