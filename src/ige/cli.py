@@ -117,6 +117,15 @@ def build_parser() -> argparse.ArgumentParser:
     audit_tile.add_argument("path", type=Path, help="tile_core_halo_ledger JSON")
     audit_tile.add_argument("--out", type=Path, default=None, help="optional audit report JSON path")
 
+    agent_run = sub.add_parser(
+        "agent-run",
+        help="preflight or execute a SHQ manifest through the central fail-closed Driver",
+    )
+    agent_run.add_argument("manifest", type=Path, help="S0-S4 agent run manifest JSON")
+    agent_run.add_argument("--execute", action="store_true", help="execute only an explicitly allowlisted and Registry-approved adapter")
+    agent_run.add_argument("--method-registry", type=Path, default=None, help="optional Method Registry override")
+    agent_run.add_argument("--out", type=Path, default=None, help="optional agent run report JSON path")
+
     read = sub.add_parser(
         "read-image",
         help="inspect a still image and export auditable regions, proposals, relations and masks",
@@ -317,6 +326,33 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
+
+    if args.command == "agent-run":
+        from .agent_driver import run_agent_manifest_file
+        import json as _json
+
+        report = run_agent_manifest_file(
+            args.manifest,
+            execute=args.execute,
+            report_path=args.out,
+            registry_path=args.method_registry,
+        )
+        rendered = _json.dumps(report, ensure_ascii=False, indent=2)
+        if args.out is None:
+            print(rendered)
+        else:
+            print(f"Agent run report written: {args.out}")
+        stages = report.get("stages") or []
+        summary = " | ".join(
+            f"{stage.get('stage')}={stage.get('status')}" for stage in stages
+        )
+        print(
+            f"run_id={report.get('run_id')} method={report.get('selected_method')} "
+            f"status={report.get('status')} stages={summary} "
+            f"execution_allowed={report.get('execution_allowed')} "
+            f"edit_permission={report.get('edit_permission')}"
+        )
+        return 0 if report.get("status") in {"READY_FOR_EXPLICIT_EXECUTION", "S5_COMPLETE_AWAITING_S6_S7"} else 2
 
     if args.command == "validate-manifest":
         manifest = load_manifest(args.path)
