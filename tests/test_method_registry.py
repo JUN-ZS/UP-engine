@@ -5,10 +5,17 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from ige.method_registry import MethodRegistry, MethodRegistryError, evaluate_s0_s7, validate_registry_payload
+from PIL import Image
+
+from ige.method_registry import (
+    MethodRegistry, MethodRegistryError, evaluate_s0_s7, file_sha256,
+    validate_registry_payload,
+)
 
 REGISTRY = Path(__file__).parents[1] / "src" / "ige" / "data" / "method_registry.json"
+SIAX_SHA256 = "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e"
 
 
 def sha(data: bytes) -> str:
@@ -25,6 +32,7 @@ class MethodRegistryTests(unittest.TestCase):
         self.assertEqual(validate_registry_payload(self.payload), [])
         self.assertEqual(self.registry.resolve_skill("SIAX4X")["method_id"], "SIAX4X_TILE_CORE_SR")
         self.assertEqual(self.registry.resolve_skill("DETAIL6")["method_id"], "DETAIL6_MATERIAL_RESIDUAL")
+        self.assertEqual(self.registry.resolve("SIAX4X_TILE_CORE_SR")["model_sha256"], SIAX_SHA256)
 
     def test_duplicate_method_alias_and_permission_grant_rejected(self):
         duplicate = json.loads(json.dumps(self.payload))
@@ -76,27 +84,47 @@ class MethodRegistryTests(unittest.TestCase):
         base = root / "base.png"
         base.write_bytes(b"base-fixture")
         source_sha = sha(base.read_bytes())
-        canvas_sha = sha(b"native-4x-coordinate-canvas")
-        approved, protected = root / "approved.bin", root / "protected.bin"
-        approved.write_bytes(b"approved-mask")
-        protected.write_bytes(b"protected-mask")
-        output_sha = sha(b"candidate-output")
+
+        canvas = root / "coordinate-canvas.png"
+        Image.new("RGB", (16, 16), (16, 16, 16)).save(canvas)
+        canvas_sha = file_sha256(canvas)
+
+        approved = root / "approved.png"
+        approved_image = Image.new("L", (16, 16), 0)
+        approved_image.putpixel((0, 0), 255)
+        approved_image.save(approved)
+        protected = root / "protected.png"
+        protected_image = Image.new("L", (16, 16), 0)
+        protected_image.putpixel((15, 15), 255)
+        protected_image.save(protected)
+
+        output = root / "candidate.png"
+        candidate_image = Image.new("RGB", (16, 16), (16, 16, 16))
+        candidate_image.putpixel((0, 0), (250, 250, 250))
+        candidate_image.save(output)
+        output_sha = file_sha256(output)
+
+        model = root / "fixture-model.bin"
+        model.write_bytes(b"synthetic-model-fixture")
+        model_sha = SIAX_SHA256  # mocked below; fixture is not the real checkpoint
+
         return {
             "S0": {"source_path": str(base), "source_sha256": source_sha, "source_frozen": True, "immutable": True},
             "S1": {"read_receipt": {"source_sha256": source_sha, "candidate_only": True, "observations": {
                 "topology_error": {"state": "absent", "verification": "human_verified"}
             }}},
             "S2": {"geometry_contract": {
-                "source_sha256": source_sha, "canvas_sha256": canvas_sha, "coordinate_frame": "native_4x_master",
-                "geometry_human_verified": True, "model_scale": 4,
-                "object_transform": {"kind": "identity"}, "tile_size": 256, "tile_context": 8,
-                "delivery_resampled": False,
+                "source_sha256": source_sha, "canvas_path": str(canvas), "canvas_sha256": canvas_sha,
+                "coordinate_frame": "native_4x_master", "geometry_human_verified": True, "model_scale": 4,
+                "object_transform": {"kind": "identity", "matrix": [[1, 0, 0], [0, 1, 0], [0, 0, 1]]},
+                "tile_size": 256, "tile_context": 8, "delivery_resampled": False,
             }},
             "S3": {"permission": {
                 "human_reviewed": True, "permission_granted": True, "base_sha256": source_sha,
+                "reviewer_ref": "synthetic-test-reviewer", "reviewed_at": "2026-11-08T00:00:00+08:00",
                 "coordinate_canvas_sha256": canvas_sha, "approved_edit_mask_path": str(approved),
-                "approved_edit_mask_sha256": sha(approved.read_bytes()), "protected_mask_path": str(protected),
-                "protected_mask_sha256": sha(protected.read_bytes()), "target_regions": ["metal_mesh"],
+                "approved_edit_mask_sha256": file_sha256(approved), "protected_mask_path": str(protected),
+                "protected_mask_sha256": file_sha256(protected), "target_regions": ["metal_mesh"],
             }},
             "S4": {"method_id": "SIAX4X_TILE_CORE_SR", "method_context": {
                 "checkpoint_sha_verified": True, "license_acknowledged": True,
@@ -104,19 +132,21 @@ class MethodRegistryTests(unittest.TestCase):
             }},
             "S5": {"backend_receipt": {
                 "real_backend_call": True, "receipt_verified": True, "backend_id": "spandrel_siax_4x",
-                "model_id": "4x_NMKD-Siax_200k", "model_sha256": sha(b"model"),
+                "model_id": "4x_NMKD-Siax_200k", "model_sha256": model_sha, "model_path": str(model),
                 "parent_source_sha256": source_sha, "input_sha256s": [source_sha, sha(b"tile")],
-                "output_sha256": output_sha, "request_id": "fixture-run-1",
+                "output_sha256": output_sha, "output_path": str(output), "request_id": "fixture-run-1",
                 "parameters": {"scale": 4, "tile_size": 256, "tile_pad": 8},
             }},
             "S6": {"return_audit": {
-                "source_sha256": source_sha, "output_sha256": output_sha, "core_only_writes": True,
-                "halo_write_pixels": 0, "core_overlap_pixels": 0, "coverage_gap_pixels": 0,
-                "outside_authorized_changed_pixels": 0, "implicit_resize": False, "implicit_flip": False,
+                "source_sha256": source_sha, "output_sha256": output_sha, "output_path": str(output),
+                "core_only_writes": True, "halo_write_pixels": 0, "core_overlap_pixels": 0,
+                "coverage_gap_pixels": 0, "outside_authorized_changed_pixels": 0,
+                "implicit_resize": False, "implicit_flip": False,
             }},
             "S7": {"acceptance": {
                 "independent_reloaded": True, "source_sha256": source_sha, "saved_output_sha256": output_sha,
-                "human_visual_review": "PASS", "visual_review_source": "human",
+                "saved_output_path": str(output), "human_visual_review": "PASS", "visual_review_source": "human",
+                "reviewer_ref": "synthetic-test-reviewer", "reviewed_at": "2026-11-08T00:01:00+08:00",
                 "gate_results": {k: "PASS" for k in (
                     "identity", "pose", "topology", "geometry", "coverage",
                     "permission", "protected_region", "provenance", "visual_quality",
@@ -124,18 +154,31 @@ class MethodRegistryTests(unittest.TestCase):
             }},
         }
 
-    def test_complete_s0_s7_evidence_bundle_passes_as_audited_candidate(self):
+    def _audit(self, bundle):
+        real_hash = file_sha256
+        model_path = bundle["S5"]["backend_receipt"]["model_path"]
+        def hash_with_fixture(path):
+            if Path(path) == Path(model_path):
+                return SIAX_SHA256
+            return real_hash(path)
+        with patch("ige.method_registry.file_sha256", side_effect=hash_with_fixture):
+            return evaluate_s0_s7(bundle, self.registry)
+
+    def test_complete_s0_s7_evidence_bundle_passes_pixel_audit_but_grants_no_permission(self):
         with tempfile.TemporaryDirectory() as directory:
-            report = evaluate_s0_s7(self._bundle(Path(directory)), self.registry)
+            report = self._audit(self._bundle(Path(directory)))
         self.assertEqual(report["status"], "ACCEPTED_CANDIDATE")
         self.assertTrue(all(stage["status"] == "PASS" for stage in report["stages"]))
+        self.assertEqual(report["stages"][6]["pixel_audit"]["changed_pixels_outside_authorized_region"], 0)
         self.assertFalse(report["edit_permission"])
+        self.assertFalse(report["execution_allowed"])
+        self.assertTrue(report["candidate_accepted"])
 
     def test_invalid_source_freeze_blocks_s0(self):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
             bundle["S0"]["source_sha256"] = "0" * 64
-            report = evaluate_s0_s7(bundle, self.registry)
+            report = self._audit(bundle)
         self.assertEqual(report["stages"][0]["status"], "BLOCKED")
         self.assertEqual(report["stages"][1]["status"], "NOT_RUN")
 
@@ -143,7 +186,7 @@ class MethodRegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
             bundle["S3"]["permission"]["base_sha256"] = "f" * 64
-            report = evaluate_s0_s7(bundle, self.registry)
+            report = self._audit(bundle)
         self.assertEqual(report["stages"][3]["status"], "BLOCKED")
         self.assertTrue(all(stage["status"] == "NOT_RUN" for stage in report["stages"][4:]))
 
@@ -151,7 +194,23 @@ class MethodRegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
             bundle["S6"]["return_audit"]["halo_write_pixels"] = 1
-            report = evaluate_s0_s7(bundle, self.registry)
+            report = self._audit(bundle)
+        self.assertEqual(report["stages"][6]["status"], "BLOCKED")
+        self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
+
+    def test_actual_outside_pixel_change_blocks_even_when_json_claims_zero(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            output = Path(bundle["S6"]["return_audit"]["output_path"])
+            with Image.open(output) as opened:
+                candidate = opened.convert("RGB")
+            candidate.putpixel((8, 8), (255, 0, 0))  # outside the approved one-pixel mask
+            candidate.save(output)
+            new_sha = file_sha256(output)
+            bundle["S5"]["backend_receipt"]["output_sha256"] = new_sha
+            bundle["S6"]["return_audit"]["output_sha256"] = new_sha
+            bundle["S7"]["acceptance"]["saved_output_sha256"] = new_sha
+            report = self._audit(bundle)
         self.assertEqual(report["stages"][6]["status"], "BLOCKED")
         self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
 
@@ -159,7 +218,7 @@ class MethodRegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             bundle = self._bundle(Path(directory))
             bundle["S7"]["acceptance"]["gate_results"].pop("visual_quality")
-            report = evaluate_s0_s7(bundle, self.registry)
+            report = self._audit(bundle)
         self.assertEqual(report["status"], "BLOCKED")
         self.assertEqual(report["stages"][7]["status"], "BLOCKED")
 
