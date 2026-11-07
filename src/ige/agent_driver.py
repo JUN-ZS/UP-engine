@@ -48,6 +48,11 @@ def _is_sha(value: Any) -> bool:
     )
 
 
+def _canonical_json_sha256(value: Any) -> str:
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def _require_file(path_value: Any, label: str) -> Path:
     if not isinstance(path_value, str) or not path_value.strip():
         raise AgentDriverError(f"{label} path is required")
@@ -405,12 +410,29 @@ def run_agent_manifest(
         ledger_path.parent.mkdir(parents=True, exist_ok=True)
         ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         ledger_sha = sha256_file(ledger_path)
+        metadata_path = _require_file(result.get("metadata_path"), "Siax adapter metadata")
+        metadata_payload = json.loads(metadata_path.read_text(encoding="utf-8"))
+        if (
+            metadata_payload.get("output_sha256") != output_sha
+            or metadata_payload.get("checkpoint_sha256") != facts["checkpoint_sha256"]
+            or metadata_payload.get("tile_trace") != tile_trace
+        ):
+            raise AgentDriverError("Siax sidecar metadata does not match the returned output/checkpoint/tile trace")
+        metadata_sha = sha256_file(metadata_path)
+        tile_trace_sha = _canonical_json_sha256(tile_trace)
+        backend_receipt.update({
+            "adapter_metadata_path": str(metadata_path),
+            "adapter_metadata_sha256": metadata_sha,
+            "tile_trace_sha256": tile_trace_sha,
+            "tile_ledger_path": str(ledger_path),
+            "tile_ledger_sha256": ledger_sha,
+        })
         s5_path = report_path.with_name(report_path.stem + ".S5_backend_receipt.json")
         s5_path.write_text(json.dumps(backend_receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         s5_sha = sha256_file(s5_path)
         stages.extend([
             {"stage": "S5", "status": "PASS", "backend_receipt": backend_receipt, "receipt_path": str(s5_path), "receipt_sha256": s5_sha},
-            {"stage": "S6", "status": "NOT_RUN", "tile_ledger_path": str(ledger_path), "tile_ledger_sha256": ledger_sha, "reason": "compose/return and protected-pixel audit require a separate S6 evidence bundle"},
+            {"stage": "S6", "status": "NOT_RUN", "tile_ledger_path": str(ledger_path), "tile_ledger_sha256": ledger_sha, "reason": "S6 must consume this exact S5-bound ledger and prove compose/return plus protected-pixel preservation"},
             {"stage": "S7", "status": "NOT_RUN", "reason": "independent disk reload and human visual acceptance have not been performed"},
         ])
         return {
