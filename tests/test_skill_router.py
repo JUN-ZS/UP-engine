@@ -81,6 +81,35 @@ class SkillRouterTests(unittest.TestCase):
             detail = [step for step in plan["steps"] if step["skill"] == "DETAIL6"][0]
             self.assertEqual(detail["status"], "blocked_missing_4x_master_or_masks")
 
+    def test_plan_resolves_method_registry_but_never_grants_edit_permission(self):
+        with tempfile.TemporaryDirectory() as directory:
+            observations = {
+                "metal_detail_low": {
+                    "state": "present",
+                    "evidence": "mesh detail visibly unresolved",
+                    "source": "human",
+                    "verification": "human_verified",
+                },
+                "topology_error": {
+                    "state": "absent",
+                    "evidence": "all inspected parts remain connected",
+                    "source": "human",
+                    "verification": "human_verified",
+                },
+            }
+            image, diagnosis = self._inputs(Path(directory), observations)
+            plan = plan_skills(image, diagnosis)
+            self.assertEqual(plan["plan_version"], "1.2")
+            self.assertEqual(plan["method_registry"]["registry_version"], "0.2.0")
+            by_skill = {step["skill"]: step for step in plan["steps"]}
+            self.assertEqual(by_skill["SIAX4X"]["method_id"], "SIAX4X_TILE_CORE_SR")
+            self.assertEqual(by_skill["GRID_SIAX"]["method_maturity"], "documented_only")
+            self.assertEqual(by_skill["DETAIL6"]["method_id"], "DETAIL6_MATERIAL_RESIDUAL")
+            self.assertFalse(by_skill["SIAX4X"]["method_decision"]["execution_allowed"])
+            self.assertFalse(plan["execution_authorized"])
+            self.assertEqual(plan["execution_readiness"], "BLOCKED")
+            self.assertTrue(all(step["execution_authorized"] is False for step in plan["steps"] if "method_id" in step))
+
 
 if __name__ == "__main__":
     unittest.main()
