@@ -25,8 +25,8 @@ BLOCKED = {
     "contract_only": "BLOCKED_CONTRACT_ONLY",
 }
 REQUIRED = {
-    "method_id", "version", "skill_aliases", "stage", "capability", "maturity",
-    "execution_kind", "entrypoint", "preconditions", "inputs", "outputs",
+    "method_id", "version", "skill_aliases", "stage", "route_stage", "source_section",
+    "capability", "maturity", "execution_kind", "entrypoint", "preconditions", "inputs", "outputs",
     "requires_human_permission", "edit_permission", "failure_codes",
     "test_ids", "acceptance",
 }
@@ -83,6 +83,9 @@ def validate_registry_payload(data: Mapping[str, Any]) -> list[str]:
             ids.add(mid)
         if method.get("maturity") not in MATURITY:
             errors.append(f"{p}.maturity is invalid")
+        for key in ("route_stage", "source_section"):
+            if not isinstance(method.get(key), str) or not method.get(key, "").strip():
+                errors.append(f"{p}.{key} must be a non-empty string")
         if method.get("edit_permission") is not False:
             errors.append(f"{p}.edit_permission must be false; Registry cannot grant permission")
         if "model_sha256" in method and not is_sha256(method.get("model_sha256")):
