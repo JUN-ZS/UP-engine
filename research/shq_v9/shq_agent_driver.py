@@ -156,6 +156,101 @@ class AgentDriver:
             return "SIAX4X_TILE_CORE_SR"
         return "HOLE_SCALELOCK_HF_RESIDUAL"
 
+    def empty_is_freeframe(self, src: np.ndarray, empty: np.ndarray) -> bool:
+        """True empty must share pose/layout with SRC. Freeframe hangar fails NCC."""
+        if src.shape[:2] != empty.shape[:2]:
+            return True
+        gs = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY).astype(np.float32)
+        ge = cv2.cvtColor(empty, cv2.COLOR_BGR2GRAY).astype(np.float32)
+        ncc = float(np.corrcoef(gs.ravel(), ge.ravel())[0, 1])
+        self.state["empty_ncc"] = ncc
+        return ncc < 0.85
+
+    def subject_mask_grabcut(self, bgr: np.ndarray, side: str) -> tuple:
+        """Tight subject prior: GrabCut + definite BG on floor/edges + color assist."""
+        H, W = bgr.shape[:2]
+        mask = np.full((H, W), cv2.GC_PR_BGD, np.uint8)
+        if side == "L":
+            # silver mecha typically left-center
+            rect = (int(W * 0.08), int(H * 0.05), int(W * 0.32), int(H * 0.78))
+            x0, x1 = 0, W // 2
+        else:
+            rect = (int(W * 0.52), int(H * 0.12), int(W * 0.40), int(H * 0.78))
+            x0, x1 = W // 2, W
+        # definite background: borders + floor band + other half
+        mask[:, :] = cv2.GC_BGD
+        mask[rect[1]:rect[1]+rect[3], rect[0]:rect[0]+rect[2]] = cv2.GC_PR_FGD
+        # small sure FG seed in rect center
+        cx, cy = rect[0] + rect[2] // 2, rect[1] + rect[3] // 2
+        cv2.circle(mask, (cx, cy), max(20, min(rect[2], rect[3]) // 8), int(cv2.GC_FGD), -1)
+        # floor always BG
+        mask[int(H * 0.82):, :] = cv2.GC_BGD
+        # opposite half BG
+        if side == "L":
+            mask[:, W // 2 :] = cv2.GC_BGD
+        else:
+            mask[:, : W // 2] = cv2.GC_BGD
+        bgd = np.zeros((1, 65), np.float64)
+        fgd = np.zeros((1, 65), np.float64)
+        try:
+            cv2.grabCut(bgr, mask, None, bgd, fgd, 8, cv2.GC_INIT_WITH_MASK)
+            m = np.where((mask == cv2.GC_FGD) | (mask == cv2.GC_PR_FGD), 255, 0).astype(np.uint8)
+        except Exception:
+            m = np.zeros((H, W), np.uint8)
+            x, y, w, h = rect
+            m[y:y+h, x:x+w] = 255
+        # color assist: silver high L / red high a*
+        lab = cv2.cvtColor(bgr, cv2.COLOR_BGR2LAB)
+        L, A, B = cv2.split(lab)
+        if side == "L":
+            col = ((L > 90) & (np.abs(A.astype(np.int16) - 128) < 25)).astype(np.uint8) * 255
+        else:
+            col = ((A > 145) & (L > 40)).astype(np.uint8) * 255
+        col[:, :x0] = 0
+        col[:, x1:] = 0
+        col[int(H * 0.85):, :] = 0
+        m = cv2.bitwise_or(m, cv2.bitwise_and(col, col))
+        m[int(H * 0.88):, :] = 0
+        if side == "L":
+            m[:, W // 2 :] = 0
+        else:
+            m[:, : W // 2] = 0
+        m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
+        m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+        n, labc, st, _ = cv2.connectedComponentsWithStats((m > 0).astype(np.uint8), 8)
+        if n > 1:
+            # pick largest CC that intersects sure seed
+            best, best_a = 0, 0
+            for i in range(1, n):
+                a = int(st[i, cv2.CC_STAT_AREA])
+                if a > best_a:
+                    best, best_a = i, a
+            m = (labc == best).astype(np.uint8) * 255
+        # erode slightly to avoid floor halo
+        m = cv2.erode(m, np.ones((3, 3), np.uint8), iterations=1)
+        area = int((m > 0).sum())
+        x, y, w, h = cv2.boundingRect(m) if area else (0, 0, 0, 0)
+        return m, area, [int(x), int(y), int(w), int(h)]
+
+    def elev_same_pose(self, peep: np.ndarray, dens: np.ndarray, alpha: np.ndarray, hf: float = 1.25) -> np.ndarray:
+        """Geometry-locked elev: NO phaseCorrelate warp. peep owns pose/scale."""
+        th, tw = peep.shape[:2]
+        if dens.shape[:2] != (th, tw):
+            dens = cv2.resize(dens, (tw, th), interpolation=cv2.INTER_LANCZOS4)
+        pf = peep.astype(np.float32)
+        mf = dens.astype(np.float32)
+        # peep-dominant: protect pose; HF residual only
+        out = cv2.GaussianBlur(pf, (0, 0), 0.8) + (mf - cv2.GaussianBlur(mf, (0, 0), 0.8)) * hf
+        out = np.clip(out * 0.15 + mf * 0.10 + pf * 0.75, 0, 255).astype(np.uint8)
+        if alpha is not None:
+            if alpha.shape[:2] != (th, tw):
+                alpha = cv2.resize(alpha, (tw, th), interpolation=cv2.INTER_NEAREST)
+            a = alpha > 0
+            mix = peep.copy()
+            mix[a] = out[a]
+            return mix
+        return out
+
     def _receipt(self, **kw) -> StageReceipt:
         r = StageReceipt(**kw)
         self.receipts.append(r)
@@ -203,41 +298,60 @@ class AgentDriver:
             allowed_claims=["s0_freeze_receipt"], forbidden_non_claims=["accept_full_hd"],
         )
 
+
     def s1_diff_read(self, out: Path) -> StageReceipt:
         src = cv2.imread(self.state["src"])
         empty_p = self.state.get("empty")
-        if not empty_p:
-            return self._receipt(stage="S1", method_id="S1_OBJECT_READ_DIFF_CANDIDATE", status="BLOCK",
-                                 claim_level="C0", edit_permission=False, error="empty required for DIFF")
-        empty = cv2.imread(empty_p)
-        m, heat = self.four.anti_diff(src, empty, thr=14)
         H, W = src.shape[:2]
-        mid = W // 2
-        mL, mR = m.copy(), m.copy()
-        mL[:, mid:] = 0
-        mR[:, :mid] = 0
-
-        def largest(mm):
-            n, lab, st, _ = cv2.connectedComponentsWithStats((mm > 0).astype(np.uint8), 8)
-            if n <= 1:
-                return np.zeros_like(mm), 0, [0, 0, 0, 0]
-            i = 1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA]))
-            mask = (lab == i).astype(np.uint8) * 255
-            x, y, w, h, area = st[i]
-            return mask, int(area), [int(x), int(y), int(w), int(h)]
-
-        parts = []
-        for name, mm in (("U0_LEFT", mL), ("U1_RIGHT", mR)):
-            mask, area, box = largest(mm)
-            if area >= 2500:
-                parts.append({"name": name, "area": area, "xywh": box, "mask": mask})
-        if not parts:
-            mask, area, box = largest(m)
-            parts.append({"name": "U0_UNION", "area": area, "xywh": box, "mask": mask})
-
         mout = out / "s1"
         mout.mkdir(parents=True, exist_ok=True)
-        cv2.imwrite(str(mout / "HEAT.jpg"), heat)
+        method = "EMPTY_REVERSE_DIFF"
+        freeframe = False
+        heat = None
+        m = None
+        if empty_p:
+            empty = cv2.imread(empty_p)
+            freeframe = self.empty_is_freeframe(src, empty)
+            m, heat = self.four.anti_diff(src, empty, thr=14)
+            cv2.imwrite(str(mout / "HEAT.jpg"), heat)
+            if freeframe:
+                method = "SRC_GRABCUT_DUAL_PRIOR (empty freeframe NCC low)"
+        else:
+            freeframe = True
+            method = "SRC_GRABCUT_DUAL_PRIOR (no empty)"
+
+        parts = []
+        if freeframe:
+            for name, side in (("U0_LEFT", "L"), ("U1_RIGHT", "R")):
+                mask, area, box = self.subject_mask_grabcut(src, side)
+                if area >= 2500:
+                    parts.append({"name": name, "area": area, "xywh": box, "mask": mask})
+        else:
+            mid = W // 2
+            mL, mR = m.copy(), m.copy()
+            mL[:, mid:] = 0
+            mR[:, :mid] = 0
+
+            def largest(mm):
+                n, lab, st, _ = cv2.connectedComponentsWithStats((mm > 0).astype(np.uint8), 8)
+                if n <= 1:
+                    return np.zeros_like(mm), 0, [0, 0, 0, 0]
+                i = 1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA]))
+                mask = (lab == i).astype(np.uint8) * 255
+                x, y, w, h, area = st[i]
+                return mask, int(area), [int(x), int(y), int(w), int(h)]
+
+            for name, mm in (("U0_LEFT", mL), ("U1_RIGHT", mR)):
+                mask, area, box = largest(mm)
+                if area >= 2500:
+                    parts.append({"name": name, "area": area, "xywh": box, "mask": mask})
+
+        if not parts:
+            # last resort: center rects
+            for name, side in (("U0_LEFT", "L"), ("U1_RIGHT", "R")):
+                mask, area, box = self.subject_mask_grabcut(src, side)
+                parts.append({"name": name, "area": area, "xywh": box, "mask": mask})
+
         union = np.zeros((H, W), np.uint8)
         meta_parts = []
         for p in parts:
@@ -246,12 +360,22 @@ class AgentDriver:
             meta_parts.append({k: v for k, v in p.items() if k != "mask"})
             p["mask_path"] = str(mout / f"{p['name']}_cand.png")
         cv2.imwrite(str(mout / "M_UNION.png"), union)
+        cov = float((union > 0).mean())
         self.state["parts"] = parts
         self.state["union_mask"] = str(mout / "M_UNION.png")
+        self.state["empty_freeframe"] = freeframe
+        self.state["mask_coverage"] = cov
+        status = "PASS"
+        if cov > 0.36:
+            status = "WARN"  # still bloated
         return self._receipt(
-            stage="S1", method_id="S1_OBJECT_READ_DIFF_CANDIDATE", status="PASS",
+            stage="S1", method_id="S1_OBJECT_READ_DIFF_CANDIDATE", status=status,
             claim_level="C1", edit_permission=False,
-            outputs={"n_parts": len(parts), "parts": meta_parts},
+            outputs={
+                "n_parts": len(parts), "parts": meta_parts, "method": method,
+                "empty_freeframe": freeframe, "empty_ncc": self.state.get("empty_ncc"),
+                "mask_coverage": cov,
+            },
             allowed_claims=["diff_candidate_mask"],
             forbidden_non_claims=["human_verified_identity", "edit_permission"],
         )
@@ -351,7 +475,8 @@ class AgentDriver:
                 claim = "C1"
                 adapter = False
             sz = self.four.check_size_grow(peep, dens)
-            elev = self.four.scale_lock_map(peep, dens, am, hf=1.35)
+            # NO phaseCorrelate warp — peep owns pose (return bug fix 01392b)
+            elev = self.elev_same_pose(peep, dens, am, hf=0.55)
             cv2.imwrite(str(ref / f"{p['name']}_DENS.png"), dens)
             cv2.imwrite(str(ref / f"{p['name']}_ELEV.png"), elev)
             p["elev"] = elev
@@ -369,46 +494,79 @@ class AgentDriver:
             forbidden_non_claims=["true_diffusion_8k", "accept_full_hd"],
         )
 
+
     def s6_return(self, out: Path) -> StageReceipt:
+        """Hardpaste ONLY peep alpha at frozen corners_4. Never paste full bloated CC mask."""
         src = cv2.imread(self.state["src"])
         out_img = src.copy()
+        H, W = src.shape[:2]
         leak_total = 0
+        paste_logs = []
+        peep_union = np.zeros((H, W), np.uint8)
         for p in self.state.get("parts", []):
             x0, y0, x1, y1 = p["bbox"]
             elev, am = p["elev"], p["am"]
             ch, cw = y1 - y0, x1 - x0
             if elev.shape[:2] != (ch, cw):
                 elev = cv2.resize(elev, (cw, ch), interpolation=cv2.INTER_LINEAR)
+            if am.shape[:2] != (ch, cw):
                 am = cv2.resize(am, (cw, ch), interpolation=cv2.INTER_NEAREST)
+            # full-frame peep hole only
+            m_full = np.zeros((H, W), np.uint8)
+            m_full[y0:y1, x0:x1] = am
+            peep_union = cv2.bitwise_or(peep_union, m_full)
             hd = src.copy()
             reg = hd[y0:y1, x0:x1]
             m = am > 0
             reg[m] = elev[m]
             hd[y0:y1, x0:x1] = reg
-            out_img, leak = self.four.hardpaste_hole(out_img, hd, p["mask"])
+            out_img, leak = self.four.hardpaste_hole(out_img, hd, m_full)
             leak_total += leak
-        union = np.zeros(src.shape[:2], np.uint8)
-        for p in self.state.get("parts", []):
-            union = cv2.bitwise_or(union, p["mask"])
-        outside = union == 0
+            paste_logs.append({
+                "name": p["name"], "leak": leak, "corners_4": p["corners_4"],
+                "peep_alpha_area": int((am > 0).sum()),
+            })
+        outside = peep_union == 0
         max_out = int(np.abs(out_img[outside].astype(np.int16) - src[outside].astype(np.int16)).max()) if outside.any() else 0
+        # alignment health vs SRC
+        gs = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY).astype(np.float32)
+        gr = cv2.cvtColor(out_img, cv2.COLOR_BGR2GRAY).astype(np.float32)
+        ncc = float(np.corrcoef(gs.ravel(), gr.ravel())[0, 1])
+        (dx, dy), _ = cv2.phaseCorrelate(gs, gr)
+        phase = float(np.hypot(dx, dy))
         s6 = out / "s6"
         s6.mkdir(parents=True, exist_ok=True)
         cv2.imwrite(str(s6 / "RETURN_HARDPASTE.png"), out_img)
         cv2.imwrite(str(s6 / "BEFORE_AFTER.jpg"), np.hstack([
             cv2.resize(src, (640, 360)), cv2.resize(out_img, (640, 360))
         ]))
+        # peep-union overlay debug
+        dbg = src.copy()
+        dbg[peep_union > 0] = (0.55 * src[peep_union > 0] + 0.45 * np.array([0, 255, 0])).astype(np.uint8)
+        cv2.imwrite(str(s6 / "PEEP_HOLE_OVERLAY.jpg"), dbg)
         self.state["return_path"] = str(s6 / "RETURN_HARDPASTE.png")
         self.state["return_img"] = out_img
-        ok = leak_total == 0 and max_out == 0
+        self.state["peep_union"] = peep_union
+        # FAIL closed if pose drifted
+        ok = leak_total == 0 and max_out == 0 and ncc >= 0.90 and phase < 1.5
+        status = "PASS" if ok else "FAIL"
         return self._receipt(
             stage="S6", method_id="SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD",
-            status="PASS" if ok else "WARN",
+            status=status,
             claim_level=self.receipts[-1].claim_level if self.receipts else "C1",
             edit_permission=False,
-            outputs={"leak_total": leak_total, "outside_max_absdiff": max_out, "elev_remap": False},
+            outputs={
+                "leak_total": leak_total,
+                "outside_max_absdiff": max_out,
+                "elev_remap": False,
+                "ncc_src_return": ncc,
+                "phase_shift_px": phase,
+                "paste_logs": paste_logs,
+                "paste_mode": "peep_alpha_at_corners_4_only",
+            },
             allowed_claims=["geometry_guard"],
-            forbidden_non_claims=["soft_alpha_fix", "halo_double_write"],
+            forbidden_non_claims=["soft_alpha_fix", "halo_double_write", "full_cc_mask_paste"],
+            error="" if ok else f"return align fail ncc={ncc:.4f} phase={phase:.3f}",
         )
 
     def s7_accept(self, out: Path) -> StageReceipt:
@@ -430,11 +588,22 @@ class AgentDriver:
         if s6r:
             checks["outside_max_absdiff"] = s6r.outputs.get("outside_max_absdiff")
             checks["leak_total"] = s6r.outputs.get("leak_total")
+        s6r = next((r for r in self.receipts if r.stage == "S6"), None)
+        checks["ncc_src_return"] = (s6r.outputs.get("ncc_src_return") if s6r else None)
+        checks["phase_shift_px"] = (s6r.outputs.get("phase_shift_px") if s6r else None)
+        checks["empty_freeframe"] = self.state.get("empty_freeframe")
+        checks["mask_coverage"] = self.state.get("mask_coverage")
+        checks["paste_mode"] = (s6r.outputs.get("paste_mode") if s6r else None)
+        ncc = checks.get("ncc_src_return") or 0.0
+        phase = checks.get("phase_shift_px") or 99.0
         diag_ok = (
             checks["return_exists"] and checks["reread_sha_match"]
             and not checks["any_edit_permission_true"]
             and (checks.get("leak_total", 1) == 0)
             and (checks.get("outside_max_absdiff", 1) == 0)
+            and ncc >= 0.90
+            and phase < 1.5
+            and (checks.get("mask_coverage") or 1) < 0.36
         )
         claim = max((r.claim_level for r in self.receipts if r.claim_level.startswith("C")), default="C0")
         # coerce claim rank
