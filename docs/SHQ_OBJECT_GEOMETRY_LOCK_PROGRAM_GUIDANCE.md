@@ -1,14 +1,14 @@
 # SHQ Object Geometry Lock — Program Guidance v0.1
 
-**Latest source conversation:** Gemini share `hC9HlUpskKK9` → `49fb97a58dbe` (**17 turns**)  
-**Prior pack (kept):** `47yxULPlPy0W` → `970343afbbef` (15 turns)  
+**Latest source conversation:** Gemini share `XMyk6HVn2J9S` → `381865631306` (**20 turns**)  
+**Prior packs (kept):** `nutrRjsw676R` → `f5fb21d16408` (19); `hC9HlUpskKK9` → `49fb97a58dbe` (17); `47yxULPlPy0W` → `970343afbbef` (15)  
 **Title:** 物件導向幾何約束升頻架構  
-**Transcript (latest):** [`docs/sources/gemini-share-hC9HlUpskKK9/Gemini-完整對話.md`](./sources/gemini-share-hC9HlUpskKK9/Gemini-完整對話.md)  
+**Transcript (latest):** [`docs/sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md`](./sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md)  
 **AI agent usage guide:** [`docs/SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md)  
-**Research fossils:** [`research/shq_v9/`](../research/shq_v9/) (7 scripts; + Method Registry / true-gen 8K from latest pack)  
+**Research fossils:** [`research/shq_v9/`](../research/shq_v9/) (10 scripts; + battlefield self-part traceability)  
 **Status:** implementer contract / design lock. Not a runtime merge.
 
-**v0.1 refresh note:** latest share adds (1) unified **Method Registry** + Skill Router / holdout four-failure separation, (2) **true generative 8K** mother plates through S0–S7 with real AI diffusion donors (Lanczos stand-ins still forbidden). Stage naming in the share emphasizes **S7 independent ACCEPT**; this doc’s S0–S6 map still applies — cover both (freeze→read→lock→route→infer→return→independent accept).
+**v0.1 refresh note:** packs through XMyk add (1) **Method Registry** + Skill Router / holdout, (2) **true generative 8K** donors, (3) **strict claim boundary** + anti-tautology + `delivery_transform`, (4) **Rule 01380** + four-skill frequency layers \(L+M+H\), (5) **battlefield self-part** chain 生/除/扣/洞/反 with **1:1 method→program→test→accept** traceability. Stage naming emphasizes **S7 independent ACCEPT**; this doc’s S0–S6 map still applies — cover freeze→read→lock→route→infer→return→independent accept.
 
 ---
 
@@ -28,8 +28,11 @@ Never let one knob play two roles.
 | `object_transform` | Per-object pose / size / silhouette on target canvas | **Yes** |
 | `tile_size` | Inference window / VRAM | **No** |
 | `tile_context` (prepadding / halo) | Extra border context for the model | Empirically / model-driven |
+| `delivery_transform` | Optional resample for delivery / preview only | **No** — never rewrite native `model_scale` provenance |
 
 **Forbidden confusion:** increasing `-t` / tile size must **not** be treated as “make the object larger.”
+
+**Forbidden claim:** a downsampled delivery plate must **not** be labeled “unmodified native 4×”; mark `delivery_resampled_…_NOT_unmodified_native_4x`.
 
 Global affine for plain Siax 4×:
 
@@ -183,6 +186,11 @@ Mark **BLOCK** if any appear in production paths:
 7. Inpaint / 補邊 / “fix edges on the wrong mask” instead of regenerating CLIPPING MASK REVERSE root.  
 8. Letting `tile_size` mutate `object_transform`.  
 9. Stale polygon donors after empty-BG / DNA formula change.
+10. **Rule 01380 violation:** leaving the hole border at low-res / eroding an `interior_core` / using feather to fake a correct edge. Every pixel **inside** \(M_{hole}\) is a legal upgrade site; freeze **boundary geometry**, not near-edge resolution.
+11. **Tautological proofs:** `m_hole` vs `m_hole` IoU=1.0, or copying source alpha, sold as geometry lock evidence.
+12. Auto-promoting `DIFF` masks to `edit_permission=True` without S3 human compile.
+13. Method Registry / entrypoint / test / acceptance IDs that do **not** line up 1:1.
+14. Claiming “master composed from self HR parts” without the full 生/除/扣/洞/反 + traceability table PASS.
 
 ---
 
@@ -263,3 +271,39 @@ When implementing, cite this doc’s stage ids (`S0`–`S6`) and forbidden list 
 - [x] `research/shq_v9` fossils ×7 + README (not production-wired)  
 - [ ] Runtime wiring into `src/ige` — **out of scope**  
 - [ ] Real Siax backend proof in CI — **belongs to runner PRs**
+
+---
+
+## 10. Additive rules from nutr / XMyk packs (v0.1 refresh)
+
+These do **not** replace §§0–9; they tighten acceptance language.
+
+### 10.1 Rule 01380 — hole border is not a low-res protect zone
+
+- \(M_{hole}\) marks **where RGB may change**; it does **not** prescribe the generative method.  
+- Do **not** leave a low-res ring inside the hole (`eroded_low_res_border_pixels = 0`, `boundary_ring_upgraded_ratio = 1.0`, `feather_px = 0`).  
+- Soft feather is **not** a substitute for a correct hard edge.
+
+### 10.2 Frequency-layer composite
+
+\[
+\mathrm{RGB}_{\mathrm{final}} = L_{\mathrm{base}} + M_{\mathrm{material}} + H_{\mathrm{detail}}
+\]
+
+Layers must be independently controllable and rollback-able (attenuate \(H\) without blurring \(L\)/\(M\)). Map to skills A/B/C + guard D; demote `INPAINT` to optional hole-fill only.
+
+### 10.3 Strict claim boundary
+
+Publish **Verified Claims** vs **Explicit Non-Claims** in every S7 / traceability report. Disk re-read + SHA evidence required for any claim that a master is rebuilt from **self** HR parts.
+
+### 10.4 1:1 method traceability (battlefield pattern)
+
+For each stage, record the same quartet:
+
+`method_id` → `entrypoint` → `test_id` → `acceptance_gate_id`
+
+Reference fossil: `research/shq_v9/shq_battlefield_self_part_traceability_engine.py` (生/除/扣/洞 → self-part \(L+M+H\) → 01380 return → 反 / anti_diff).
+
+### 10.5 Four-state edit evidence
+
+Prefer the explicit chain **KEEP → REMOVE → DIFF → HOLE** (生/除/扣/洞) with `diff_grants_edit_permission = False` until S3 compiles permission. When a verified closed silhouette already exists, skipping REMOVE→DIFF is allowed only if recorded (`four_state_remove_diff_skipped_because_mask_verified=True`).

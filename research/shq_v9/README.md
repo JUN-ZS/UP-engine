@@ -6,20 +6,21 @@
 
 **Latest pack** (preferred):
 
-- Short: https://share.gemini.google/nutrRjsw676R
-- Share id: `f5fb21d16408`
+- Short: https://share.gemini.google/XMyk6HVn2J9S
+- Share id: `381865631306`
 - Title: 物件導向幾何約束升頻架構
-- Turns: **19** (+2 vs prior hC9H: **PR #12 / 宣稱定義再測**, **三技能／頻率層引擎**)
-- Transcript: `docs/sources/gemini-share-nutrRjsw676R/Gemini-完整對話.md`
-- Extract notes: `docs/sources/gemini-share-nutrRjsw676R/EXTRACT.md`
-- Media previews: `docs/sources/gemini-share-nutrRjsw676R/media/`
+- Turns: **20** (+1 vs nutr: **battlefield self-part traceability** / 生除扣洞反 + method→program→test→accept)
+- Transcript: `docs/sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md`
+- Extract notes: `docs/sources/gemini-share-XMyk6HVn2J9S/EXTRACT.md`
+- Media previews: `docs/sources/gemini-share-XMyk6HVn2J9S/media/`
 
 **Prior packs** (kept under docs for provenance):
 
+- https://share.gemini.google/nutrRjsw676R → `f5fb21d16408` (19 turns；PR #12 宣稱 + 四技能／頻率層)
 - https://share.gemini.google/hC9HlUpskKK9 → `49fb97a58dbe` (17 turns)
 - https://share.gemini.google/47yxULPlPy0W → `970343afbbef` (15 turns)
 
-## Files (9)
+## Files (10)
 
 | File | Role |
 |------|------|
@@ -30,8 +31,9 @@
 | `shq_edit_hole_four_anti_debug.py` | Hole / remove / deduct / gen six-check audit (`strict` fail-closed) |
 | `shq_5group_test_and_holdout_suite.py` | 5-group + holdout four-failure-mode separation tests |
 | `shq_all24_true_generative_upscale_return.py` | True AI-gen 8K donors → geometry-locked return demo (S0–S7) |
-| `shq_4skill_frequency_layer_engine.py` | **New** — 三技能頻率層（超分重建／幾何鎖定材質／微細節）+ 邊界保護器 |
-| `validate_registry.py` | **New** — Method Registry 驗收輔助 |
+| `shq_4skill_frequency_layer_engine.py` | 三／四技能頻率層（超分／材質／微細節）+ Rule 01380 邊界保護 |
+| `validate_registry.py` | Method Registry schema 驗收輔助 |
+| `shq_battlefield_self_part_traceability_engine.py` | **New** — 戰場自身部件升級 + 生除扣洞反 + 一對一方法追溯 |
 
 ## Important caveats (from the share critique)
 
