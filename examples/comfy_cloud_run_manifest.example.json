@@ -1,0 +1,19 @@
+{
+  "schema": "ige-comfy-cloud-run-manifest/0.1",
+  "run_id": "ige-flux-tile-diagnostic-v01",
+  "workflow_path": "../../fixtures/comfy/workflow_cloud_api_prompt_v0.5.json",
+  "tile_inputs": [
+    {
+      "node_id": "233",
+      "path": "tile_left.png",
+      "sha256": "REPLACE_WITH_64_HEX_SHA256"
+    },
+    {
+      "node_id": "5000",
+      "path": "tile_right.png",
+      "sha256": "REPLACE_WITH_64_HEX_SHA256"
+    }
+  ],
+  "output_dir": "runs/comfy-cloud-diagnostic",
+  "diagnostic_only": true
+}
