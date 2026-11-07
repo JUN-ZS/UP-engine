@@ -151,6 +151,7 @@ class CallableDispatcher:
 def _preflight(
     manifest: Mapping[str, Any],
     registry: MethodRegistry,
+    dispatcher: CallableDispatcher,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     source = manifest["source"]
     geometry = manifest["geometry_contract"]
@@ -227,6 +228,9 @@ def _preflight(
         raise DispatchBlocked(
             "ComfyUI/Flux is workflow_candidate: static inventory, disk model capture and synthetic tests do not authorize execution"
         )
+    # Resolve the code-reviewed callable even in plan-only mode. A syntactically
+    # valid Registry entrypoint string is not proof that a Python method exists.
+    dispatcher.resolve(method)
     checkpoint_path = _require_file(backend.get("checkpoint_path"), "backend checkpoint")
     checkpoint_sha = _check_file_hash(checkpoint_path, backend.get("checkpoint_sha256"), "backend checkpoint")
     if backend.get("license_review_acknowledged") is not True:
@@ -324,7 +328,7 @@ def run_agent_manifest(
     stages: list[dict[str, Any]] = []
 
     try:
-        method, decision, facts = _preflight(payload, registry)
+        method, decision, facts = _preflight(payload, registry, dispatcher)
     except (AgentDriverError, MethodRegistryError, OSError) as exc:
         return {
             "schema": "ige-agent-run-report/0.1", "run_id": payload["run_id"],
