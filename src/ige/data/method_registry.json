@@ -320,7 +320,8 @@
         "PR5_SIAX_NO_FALLBACK",
         "PR5_SIAX_HASH_SIDECAR"
       ],
-      "acceptance": "S7 geometry, coverage, return and visual-quality gates; 4x alone is not geometry acceptance."
+      "acceptance": "S7 geometry, coverage, return and visual-quality gates; 4x alone is not geometry acceptance.",
+      "model_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e"
     },
     {
       "method_id": "GRID_SIAX_REGION_DONOR_COMPOSITE",
