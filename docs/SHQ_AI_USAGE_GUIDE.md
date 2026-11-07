@@ -15,8 +15,9 @@
 1. **[`SHQ_INDEX.md`](./SHQ_INDEX.md)** — 地圖、sibling PRs、邊份 doc 係契約  
 2. **[`SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md)** — 階段閘門、禁令、模組對位（**權威**）  
 3. **本檔** — 執行 checklist 同回報格式  
-4. **最新 Gemini 源** — `sources/gemini-share-hC9HlUpskKK9/EXTRACT.md` → `Gemini-完整對話.md`（尤其最後兩輪：Method Registry、真生成 8K）  
-5. **`research/shq_v9/`** — 設計化石／實驗日誌；對照契約睇，**禁止**把 Lanczos／CLAHE 路徑當可交貨後端
+4. **最新 Gemini 源** — [19-turn pack](https://github.com/JUN-ZS/UP-engine/tree/feat/shq-geometry-lock-program-guidance-v0.1/docs/sources/gemini-share-nutrRjsw676R/)（research provenance；唔係 production runtime）  
+5. **SHQ Agent Driver** — [執行控制文件](./SHQ_AGENT_DRIVER.md)，以 Manifest 提交候選，預設只做 preflight  
+6. **`research/shq_v9/`** — 設計化石／實驗日誌；對照契約睇，**禁止**把 Lanczos／CLAHE 路徑當可交貨後端
 
 讀完先動手改 code／開 runner／寫驗收。
 
