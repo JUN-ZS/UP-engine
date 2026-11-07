@@ -1,10 +1,14 @@
 # SHQ Object Geometry Lock — Program Guidance v0.1
 
-**Source conversation:** Gemini share `47yxULPlPy0W` → `970343afbbef`  
+**Latest source conversation:** Gemini share `hC9HlUpskKK9` → `49fb97a58dbe` (**17 turns**)  
+**Prior pack (kept):** `47yxULPlPy0W` → `970343afbbef` (15 turns)  
 **Title:** 物件導向幾何約束升頻架構  
-**Transcript:** [`docs/sources/gemini-share-47yxULPlPy0W/Gemini-完整對話.md`](./sources/gemini-share-47yxULPlPy0W/Gemini-完整對話.md)  
-**Research fossils:** [`research/shq_v9/`](../research/shq_v9/)  
+**Transcript (latest):** [`docs/sources/gemini-share-hC9HlUpskKK9/Gemini-完整對話.md`](./sources/gemini-share-hC9HlUpskKK9/Gemini-完整對話.md)  
+**AI agent usage guide:** [`docs/SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md)  
+**Research fossils:** [`research/shq_v9/`](../research/shq_v9/) (7 scripts; + Method Registry / true-gen 8K from latest pack)  
 **Status:** implementer contract / design lock. Not a runtime merge.
+
+**v0.1 refresh note:** latest share adds (1) unified **Method Registry** + Skill Router / holdout four-failure separation, (2) **true generative 8K** mother plates through S0–S7 with real AI diffusion donors (Lanczos stand-ins still forbidden). Stage naming in the share emphasizes **S7 independent ACCEPT**; this doc’s S0–S6 map still applies — cover both (freeze→read→lock→route→infer→return→independent accept).
 
 ---
 
@@ -202,7 +206,10 @@ Mark **BLOCK** if any appear in production paths:
 | Orchestrator / boards | `shq_v2_self_consistent_engine.py` (`run_v9_full_pipeline`) | Engine runner / studio boards (bootstrap #1, REF router #5) |
 | Whole-part / reverse mask / DNA / 3D·5D contracts | `shq_object_extractor.py` | READ + geometry contracts (#2, #3) |
 | Guided return / hardpaste / L3→L2 | `shq_recursive_layer_return.py` | Pixel-safe reconstruction (#3), geometry-locked tiles (#11) |
-| Real 4× inference | *(missing / faked in early share)* | Siax runners (#7, #9), DDXX/Comfy (#10), PBI (#6) |
+| READ + Skill Router / Method Registry | `shq_read_and_skill_router.py`, `shq_5group_test_and_holdout_suite.py` | READ / REF router (#2, #5); failure memory ↔ registry |
+| Hole / anti-debug audits (S7) | `shq_edit_hole_four_anti_debug.py` | Acceptance boards / strict CI gates |
+| True generative 8K → locked return | `shq_all24_true_generative_upscale_return.py` | Geometry-locked tiles (#11) + real Siax/Comfy donors (#7, #9, #10) |
+| Real 4× inference | *(early share faked; latest demo uses true AI donors — still wire production via runners)* | Siax runners (#7, #9), DDXX/Comfy (#10), PBI (#6) |
 
 **This PR does not wire fossils into `src/ige`.** It freezes the **program guidance** so those PRs converge on the same gates.
 
@@ -251,7 +258,8 @@ When implementing, cite this doc’s stage ids (`S0`–`S6`) and forbidden list 
 
 - [x] Guidance stages + gates written  
 - [x] Forbidden practices explicit  
-- [x] Source transcript + EXTRACT provenance committed  
-- [x] `research/shq_v9` fossils + README (not production-wired)  
+- [x] AI usage guide (`SHQ_AI_USAGE_GUIDE.md`)  
+- [x] Latest source pack `hC9HlUpskKK9` (17 turns) + prior pack retained  
+- [x] `research/shq_v9` fossils ×7 + README (not production-wired)  
 - [ ] Runtime wiring into `src/ige` — **out of scope**  
 - [ ] Real Siax backend proof in CI — **belongs to runner PRs**

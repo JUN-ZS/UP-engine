@@ -2,14 +2,15 @@
 
 `main` stays minimal. Object-geometry-locked upscaling work lives in docs + research on feature branches, and in sibling open PRs.
 
-## This branch (v0.1 program guidance)
+## This branch (v0.1 program guidance + latest Gemini pack)
 
 | Doc | Purpose |
 |-----|---------|
 | [SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md) | Actionable pipeline stages, gates, forbidden practices, module map |
-| [sources/gemini-share-47yxULPlPy0W/EXTRACT.md](./sources/gemini-share-47yxULPlPy0W/EXTRACT.md) | How the Gemini share was extracted + SHA-256 |
-| [sources/gemini-share-47yxULPlPy0W/Gemini-完整對話.md](./sources/gemini-share-47yxULPlPy0W/Gemini-完整對話.md) | Cleaned 15-turn transcript |
-| [../research/shq_v9/README.md](../research/shq_v9/README.md) | Reference Python artifacts (not production-wired) |
+| [SHQ_AI_USAGE_GUIDE.md](./SHQ_AI_USAGE_GUIDE.md) | **給 AI agent 嘅使用引導**：讀序、硬閘、S0–S7、Registry、回報格式 |
+| [sources/gemini-share-hC9HlUpskKK9/](./sources/gemini-share-hC9HlUpskKK9/) | **最新** Gemini 源（17 turns；Method Registry + 真生成 8K）；raw/payload 只留 SHA |
+| [sources/gemini-share-47yxULPlPy0W/](./sources/gemini-share-47yxULPlPy0W/) | 上一包（15 turns）— 保留作 provenance |
+| [../research/shq_v9/README.md](../research/shq_v9/README.md) | Reference Python artifacts ×7（not production-wired） |
 
 ## Sibling open PRs (do not treat as duplicates)
 
