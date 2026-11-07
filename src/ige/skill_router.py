@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 from typing import Any
@@ -99,6 +100,13 @@ SKILL_REGISTRY: dict[str, dict[str, Any]] = {
 def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: ReferenceCatalog | None = None, checkpoint_path: str | Path | None = None, upscaled_path: str | Path | None = None, masks_path: str | Path | None = None, method_registry_path: str | Path | None = None, license_review_acknowledged: bool = False) -> dict[str, Any]:
     catalog = catalog or ReferenceCatalog.load()
     method_registry = MethodRegistry.load(method_registry_path)
+    try:
+        siax_adapter_available = (
+            importlib.util.find_spec("torch") is not None
+            and importlib.util.find_spec("spandrel") is not None
+        )
+    except (ImportError, ValueError, ModuleNotFoundError):
+        siax_adapter_available = False
     diagnosis = load_diagnosis(diagnosis_path, image_path)
     observations = diagnosis["observations"]
     steps: list[dict[str, Any]] = []
@@ -163,7 +171,7 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
             "checkpoint_sha_verified": checkpoint_hash_verified,
             "license_acknowledged": bool(license_review_acknowledged),
             "verified_4x_master_available": verified_master,
-            "backend_adapter_available": False,
+            "backend_adapter_available": siax_adapter_available if skill == "SIAX4X" else False,
             "tile_plan_verified": False,
             "comfy_nodes_available": False,
             "backend_model_inventory_verified": False,
@@ -181,6 +189,8 @@ def plan_skills(image_path: str | Path, diagnosis_path: str | Path, *, catalog: 
             "method_id": method["method_id"],
             "method_maturity": method["maturity"],
             "method_decision": method_decision,
+            "registry_status": method_decision["status"],
+            "registry_blockers": method_decision["blockers"],
             "execution_authorized": False,
             "stage": definition["stage"],
             "reason": reason,
