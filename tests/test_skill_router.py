@@ -106,6 +106,8 @@ class SkillRouterTests(unittest.TestCase):
             self.assertEqual(by_skill["GRID_SIAX"]["method_maturity"], "documented_only")
             self.assertEqual(by_skill["DETAIL6"]["method_id"], "DETAIL6_MATERIAL_RESIDUAL")
             self.assertFalse(by_skill["SIAX4X"]["method_decision"]["execution_allowed"])
+            self.assertEqual(by_skill["SIAX4X"]["registry_status"], "BLOCKED_PRECONDITIONS")
+            self.assertIn("E_HUMAN_EDIT_PERMISSION_MISSING", by_skill["SIAX4X"]["registry_blockers"])
             self.assertFalse(plan["execution_authorized"])
             self.assertEqual(plan["execution_readiness"], "BLOCKED_S0_S3_EVIDENCE_REQUIRED")
             self.assertTrue(all(step["execution_authorized"] is False for step in plan["steps"] if "method_id" in step))
