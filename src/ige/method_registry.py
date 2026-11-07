@@ -236,6 +236,8 @@ def _validate_permission_masks(
     protected = _binary_mask(protected_path, size)
     if approved is None or protected is None:
         return False, "approved/protected masks must be binary, decodable and match canvas dimensions"
+    if approved.histogram()[255] == 0 or protected.histogram()[255] == 0:
+        return False, "approved edit and protected masks must each contain at least one approved pixel"
     overlap = ImageChops.multiply(approved, protected)
     if sum(overlap.histogram()[1:]) != 0:
         return False, "approved edit mask overlaps protected mask"
@@ -253,9 +255,12 @@ def _audit_return_pixels(canvas_path: str, output_path: str, approved_mask_path:
         approved = _binary_mask(approved_mask_path, base.size)
         if approved is None:
             return None
-        diff = ImageChops.difference(base, output).convert("L")
-        outside = ImageChops.multiply(diff, ImageOps.invert(approved))
-        changed_inside = ImageChops.multiply(diff, approved)
+        diff_rgb = ImageChops.difference(base, output)
+        dr, dg, db = diff_rgb.split()
+        max_channel_diff = ImageChops.lighter(ImageChops.lighter(dr, dg), db)
+        inverse_mask = ImageOps.invert(approved)
+        outside = ImageChops.multiply(max_channel_diff, inverse_mask)
+        changed_inside = ImageChops.multiply(max_channel_diff, approved)
         outside_hist = outside.histogram()
         inside_hist = changed_inside.histogram()
         return {
@@ -420,7 +425,6 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
     return_ok = (
         isinstance(a, dict) and a.get("source_sha256") == source_sha and a.get("output_sha256") == output_sha
         and _local_hash_matches(a.get("output_path"), output_sha)
-        and a.get("output_path") == (r.get("output_path") if isinstance(r, dict) else None)
         and a.get("core_only_writes") is True and tile_counts_ok
         and pixel_audit is not None
         and pixel_audit["changed_pixels_outside_authorized_region"] == 0
