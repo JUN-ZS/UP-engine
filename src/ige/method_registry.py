@@ -92,6 +92,8 @@ def validate_registry_payload(data: Mapping[str, Any]) -> list[str]:
             errors.append(f"{p}.model_sha256 must be a valid SHA-256 when supplied")
         if not isinstance(method.get("requires_human_permission"), bool):
             errors.append(f"{p}.requires_human_permission must be boolean")
+        if "tile_ledger_required" in method and not isinstance(method.get("tile_ledger_required"), bool):
+            errors.append(f"{p}.tile_ledger_required must be boolean when supplied")
         if not isinstance(method.get("acceptance"), str) or not method.get("acceptance", "").strip():
             errors.append(f"{p}.acceptance must be non-empty")
         stages = method.get("stage")
@@ -428,6 +430,7 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
     # Core/Halo ledger: MANDATORY for Tile methods (fail-closed if absent).
     # Non-tile methods keep the legacy integer-counter path when no ledger is attached.
     # Ledger is always bound to S2 geometry canvas (SHA + coordinate_frame) when audited.
+    # Registry flag tile_ledger_required is an additional explicit signal (Driver / Siax).
     from .comfy.tile_core_halo_ledger import (
         audit_ledger,
         ledger_passes,
@@ -437,7 +440,9 @@ def evaluate_s0_s7(evidence: Mapping[str, Any], registry: MethodRegistry | None 
     )
     tile_ledger_report = None
     tile_ledger_ok = True
-    ledger_required = method_requires_tile_core_halo_ledger(method_id)
+    ledger_required = method_requires_tile_core_halo_ledger(method_id) or (
+        method.get("tile_ledger_required") is True
+    )
     ledger_declared = isinstance(a, dict) and (
         a.get("tile_core_halo_ledger") is not None or a.get("tile_core_halo_ledger_path")
     )
