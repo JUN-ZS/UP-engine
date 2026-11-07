@@ -43,7 +43,9 @@
         "READ_CANDIDATE_ONLY",
         "READ_UNKNOWN_WITHOUT_EVIDENCE"
       ],
-      "acceptance": "Candidate observations only; never grants edit permission."
+      "acceptance": "Candidate observations only; never grants edit permission.",
+      "route_stage": "read",
+      "source_section": "PR12 docs/SHQ_AI_USAGE_GUIDE.md S0-S1"
     },
     {
       "method_id": "OTL0_TOPOLOGY_LOCK",
@@ -81,7 +83,9 @@
         "OTL0_NO_GUESS_FROM_RASTER",
         "OTL0_PART_COUNT_LOCK"
       ],
-      "acceptance": "Contract specification only; no runtime implementation claimed."
+      "acceptance": "Contract specification only; no runtime implementation claimed.",
+      "route_stage": "topology",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md section 0.12.31"
     },
     {
       "method_id": "TEX4_GARMENT_TOPOLOGY",
@@ -127,7 +131,9 @@
         "TEX4_NOT_IMPORTED",
         "TEX4_TOPOLOGY_BEFORE_TEXTURE"
       ],
-      "acceptance": "Documented-only; blocked until implementation and independent holdout."
+      "acceptance": "Documented-only; blocked until implementation and independent holdout.",
+      "route_stage": "garment_reconstruction",
+      "source_section": "FOUR_SKILL_TEX_ALIGN.md section 0.12.50"
     },
     {
       "method_id": "PATH1E_IDENTITY_ECC_LOCK",
@@ -176,7 +182,9 @@
         "PATH1E_REFERENCE_SHA",
         "PATH1E_FACE_PROTECTION"
       ],
-      "acceptance": "Documented-only; a reference UUID alone cannot authorize face editing."
+      "acceptance": "Documented-only; a reference UUID alone cannot authorize face editing.",
+      "route_stage": "identity",
+      "source_section": "PATH1E_PLATE_ECC_LAW.md section 0.12.17"
     },
     {
       "method_id": "PIXEL_CTRL_PROTECTED_PIXEL_RESTORE",
@@ -223,7 +231,9 @@
         "PIXEL_CTRL_FACE_PROTECTION",
         "PIXEL_CTRL_OUTSIDE_MASK_BIT_EXACT"
       ],
-      "acceptance": "Documented-only; protected-region proof requires exact saved-byte comparison."
+      "acceptance": "Documented-only; protected-region proof requires exact saved-byte comparison.",
+      "route_stage": "pixel_protection",
+      "source_section": "PIXEL_CTRL_LAW.md section 0.12.16"
     },
     {
       "method_id": "GEOMETRY_LOCKED_TILE_PLAN_RETURN",
@@ -269,7 +279,9 @@
         "PR11_NO_IMPLICIT_RESIZE",
         "PR11_OUTSIDE_ROI_BIT_EXACT"
       ],
-      "acceptance": "Experimental only; no live Comfy verification claimed."
+      "acceptance": "Experimental only; no live Comfy verification claimed.",
+      "route_stage": "geometry_tiles",
+      "source_section": "PR11 feat/geometry-locked-two-tile experiment; review required"
     },
     {
       "method_id": "SIAX4X_TILE_CORE_SR",
@@ -321,7 +333,9 @@
         "PR5_SIAX_HASH_SIDECAR"
       ],
       "acceptance": "S7 geometry, coverage, return and visual-quality gates; 4x alone is not geometry acceptance.",
-      "model_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e"
+      "model_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+      "route_stage": "super_resolution",
+      "source_section": "GRID_SIAX_CORRECT_PROCESS.md section 0.12.15; PR5 src/ige/upscale/siax.py"
     },
     {
       "method_id": "GRID_SIAX_REGION_DONOR_COMPOSITE",
@@ -370,7 +384,9 @@
         "GRID_SIAX_DONOR_ROLE",
         "GRID_SIAX_PROTECTED_PIXELS"
       ],
-      "acceptance": "Documented-only until donor selection, materialization and independent return are wired."
+      "acceptance": "Documented-only until donor selection, materialization and independent return are wired.",
+      "route_stage": "detail_hybrid",
+      "source_section": "GRID_SIAX_CORRECT_PROCESS.md sections 0.12.15-18"
     },
     {
       "method_id": "DETAIL6_MATERIAL_RESIDUAL",
@@ -421,7 +437,9 @@
         "DETAIL6_MASK_REQUIREMENTS",
         "DETAIL6_NO_GENERATIVE_CLAIM"
       ],
-      "acceptance": "Partial non-generative path; HF gain is diagnostic only, never diffusion."
+      "acceptance": "Partial non-generative path; HF gain is diagnostic only, never diffusion.",
+      "route_stage": "detail_delivery",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md section 0.12.19; PR5 src/ige/upscale/detail6.py"
     },
     {
       "method_id": "SKIN_MATERIAL_PLATE",
@@ -468,7 +486,9 @@
         "SKIN_MAT_SAME_COMPOSITION",
         "SKIN_MAT_IDENTITY_LOCK"
       ],
-      "acceptance": "Documented-only; independent identity review is mandatory."
+      "acceptance": "Documented-only; independent identity review is mandatory.",
+      "route_stage": "skin_material",
+      "source_section": "BOUNDARY_WALKER_UNIFIED_RULES.md section 0.12.20"
     },
     {
       "method_id": "FLUX_HR_TILE_IMG2IMG",
@@ -526,7 +546,9 @@
         "GENERATION_RECEIPT_MISSING",
         "GEOMETRY_DRIFT"
       ],
-      "acceptance": "Blocked until actual Comfy inference, per-tile conditioning/noise evidence, receipts and S7 holdout."
+      "acceptance": "Blocked until actual Comfy inference, per-tile conditioning/noise evidence, receipts and S7 holdout.",
+      "route_stage": "generative_hr_tiles",
+      "source_section": "PR12 Gemini 17-turn final discussion; ComfyUI workflow candidate only"
     },
     {
       "method_id": "HOLE_FOUR_ANTI_EVIDENCE",
@@ -577,7 +599,9 @@
         "HOLE_BG_CHANGE_REJECT",
         "HOLE_MASK_COMPLEMENT"
       ],
-      "acceptance": "Conditional research evidence route; DIFF is not permission and not production-wired."
+      "acceptance": "Conditional research evidence route; DIFF is not permission and not production-wired.",
+      "route_stage": "mask_evidence",
+      "source_section": "PR12 research/shq_v9/shq_edit_hole_four_anti_debug.py; research only"
     },
     {
       "method_id": "HOLE_SCALELOCK_HF_RESIDUAL",
@@ -620,7 +644,9 @@
         "MASK_SHAPE_MISMATCH",
         "OUTSIDE_PIXEL_CHANGE"
       ],
-      "acceptance": "Research-only Gaussian HF residual; cannot be promoted as diffusion."
+      "acceptance": "Research-only Gaussian HF residual; cannot be promoted as diffusion.",
+      "route_stage": "non_generative_residual",
+      "source_section": "PR12 research/shq_v9/shq_edit_hole_four_anti_debug.py; Gaussian HF residual only"
     },
     {
       "method_id": "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
@@ -668,7 +694,9 @@
         "DONOR_PART_MAPPING_UNVERIFIED",
         "TRANSFER_NOT_GENERATION"
       ],
-      "acceptance": "Auxiliary donor transfer only; never evidence that Flux ran on destination HR tiles."
+      "acceptance": "Auxiliary donor transfer only; never evidence that Flux ran on destination HR tiles.",
+      "route_stage": "donor_transfer",
+      "source_section": "PR12 research/shq_v9/shq_all24_true_generative_upscale_return.py; donor transfer only"
     },
     {
       "method_id": "BOX_FREE_5D_LOCATE_PROXY",
@@ -707,7 +735,9 @@
         "PROXY_MISLABELLED_AS_PHYSICAL_3D",
         "CAMERA_SPACE_UNCALIBRATED"
       ],
-      "acceptance": "Proxy-only; derived UV/depth is not calibrated physical 3D geometry."
+      "acceptance": "Proxy-only; derived UV/depth is not calibrated physical 3D geometry.",
+      "route_stage": "proxy_geometry",
+      "source_section": "PR12 research/shq_v9/shq_object_extractor.py; derived 2D proxy only"
     }
   ]
 }
