@@ -126,6 +126,33 @@ def build_parser() -> argparse.ArgumentParser:
     agent_run.add_argument("--method-registry", type=Path, default=None, help="optional Method Registry override")
     agent_run.add_argument("--out", type=Path, default=None, help="optional agent run report JSON path")
 
+    comfy_manifest = sub.add_parser(
+        "comfy-cloud-manifest",
+        help="create a Comfy Cloud diagnostic manifest and compute tile input SHA-256 values",
+    )
+    comfy_manifest.add_argument("--workflow", type=Path, required=True, help="API prompt JSON")
+    comfy_manifest.add_argument("--tile", action="append", required=True, metavar="NODE_ID=IMAGE_PATH", help="bind one local tile image to a LoadImage node; repeat for every tile")
+    comfy_manifest.add_argument("--output-dir", type=Path, default=Path("runs/comfy-cloud-diagnostic"))
+    comfy_manifest.add_argument("--run-id", default=None)
+    comfy_manifest.add_argument("--out", type=Path, required=True, help="manifest JSON destination")
+
+    comfy_preflight = sub.add_parser(
+        "comfy-cloud-preflight",
+        help="inspect live Comfy Cloud node/model availability and audit API workflow before submitting",
+    )
+    comfy_preflight.add_argument("manifest", type=Path)
+    comfy_preflight.add_argument("--out", type=Path, default=None)
+
+    comfy_diagnostic = sub.add_parser(
+        "comfy-cloud-diagnostic",
+        help="explicitly submit a diagnostic-only Comfy Cloud job and save actual outputs/receipts",
+    )
+    comfy_diagnostic.add_argument("manifest", type=Path)
+    comfy_diagnostic.add_argument("--diagnostic-submit", action="store_true", help="explicit consent to submit a non-accepted diagnostic job; may consume Cloud credits")
+    comfy_diagnostic.add_argument("--timeout", type=float, default=1800)
+    comfy_diagnostic.add_argument("--poll-interval", type=float, default=2)
+    comfy_diagnostic.add_argument("--out", type=Path, default=None)
+
     read = sub.add_parser(
         "read-image",
         help="inspect a still image and export auditable regions, proposals, relations and masks",
@@ -326,6 +353,90 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
+
+    if args.command == "comfy-cloud-manifest":
+        from .comfy.workflow_runtime import create_comfy_cloud_manifest
+        import json as _json
+
+        tile_bindings = []
+        for item in args.tile:
+            if "=" not in item:
+                parser.error(f"--tile must be NODE_ID=IMAGE_PATH, got: {item}")
+            node_id, image_path = item.split("=", 1)
+            if not node_id or not image_path:
+                parser.error(f"--tile must have a non-empty node id and image path, got: {item}")
+            tile_bindings.append((node_id, image_path))
+        try:
+            result = create_comfy_cloud_manifest(
+                workflow_path=args.workflow,
+                tile_bindings=tile_bindings,
+                manifest_path=args.out,
+                output_dir=args.output_dir,
+                run_id=args.run_id,
+            )
+        except Exception as exc:
+            print(f"COMFY_CLOUD_MANIFEST_FAILED: {exc}")
+            return 2
+        print(_json.dumps(result, ensure_ascii=False, indent=2))
+        print(
+            f"manifest={result['manifest_path']} sha256={result['manifest_sha256']} "
+            f"tiles={len(result['manifest']['tile_inputs'])} diagnostic_only=true"
+        )
+        return 0
+
+    if args.command == "comfy-cloud-preflight":
+        from .comfy.workflow_runtime import preflight_comfy_cloud
+        from .comfy.cloud_client import ComfyCloudClient
+        import json as _json
+
+        try:
+            report = preflight_comfy_cloud(args.manifest, client=ComfyCloudClient())
+        except Exception as exc:
+            print(f"COMFY_CLOUD_PREFLIGHT_FAILED: {exc}")
+            return 2
+        rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\\n"
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(rendered, encoding="utf-8")
+            print(f"Comfy Cloud preflight written: {args.out}")
+        else:
+            print(rendered, end="")
+        audit = report.get("runtime_audit") or {}
+        print(
+            f"workflow={report.get('workflow_sha256')} cloud={report.get('cloud', {}).get('status')} "
+            f"overall={audit.get('overall_status')} blockers={','.join(audit.get('blockers') or []) or 'none'} "
+            f"execution_allowed=false"
+        )
+        return 0 if not audit.get("blockers") else 2
+
+    if args.command == "comfy-cloud-diagnostic":
+        from .comfy.workflow_runtime import run_comfy_cloud_diagnostic
+        from .comfy.cloud_client import ComfyCloudClient
+        import json as _json
+
+        try:
+            receipt = run_comfy_cloud_diagnostic(
+                args.manifest,
+                diagnostic_submit=args.diagnostic_submit,
+                client=ComfyCloudClient(),
+                timeout_seconds=args.timeout,
+                poll_interval_seconds=args.poll_interval,
+            )
+        except Exception as exc:
+            print(f"COMFY_CLOUD_DIAGNOSTIC_FAILED: {exc}")
+            return 2
+        rendered = _json.dumps(receipt, ensure_ascii=False, indent=2) + "\\n"
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(rendered, encoding="utf-8")
+            print(f"Comfy Cloud diagnostic receipt written: {args.out}")
+        else:
+            print(rendered, end="")
+        print(
+            f"prompt_id={receipt['prompt_id']} outputs={len(receipt['output_receipts'])} "
+            f"diagnostic_only=true candidate_accepted=false maturity={receipt['maturity_remains']}"
+        )
+        return 0
 
     if args.command == "agent-run":
         from .agent_driver import run_agent_manifest_file

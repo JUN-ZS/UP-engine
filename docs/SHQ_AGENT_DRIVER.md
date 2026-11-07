@@ -44,3 +44,9 @@ Registry entrypoint strings are untrusted data. The Dispatcher does not eval or 
 ## ComfyUI claim boundary
 
 No ComfyUI execution is implemented by this Driver. It does not call a Comfy server, submit API prompts, or infer tiles. A later Comfy adapter must separately prove: live node inventory, loaded model hashes, true sampler-to-conditioning routes, coordinate-indexed global noise, instrumented core-only writes, and independent S7. Until all of those exist, Flux remains workflow_candidate.
+
+## Comfy Cloud diagnostic adapter
+
+The separate [Comfy Cloud adapter](./COMFY_CLOUD_LIVE_ADAPTER.md) can query the remote node/model catalog, audit the API graph and, only with explicit `--diagnostic-submit`, run a diagnostic-only Cloud job. That command is deliberately outside the production Callable Dispatcher.
+
+A real Cloud job receipt is not a production method acceptance. FLUX remains `workflow_candidate` until coordinate-indexed global noise, weight identity evidence, exact-once core composition, protected-pixel S6 and independent S7 are all proven.
