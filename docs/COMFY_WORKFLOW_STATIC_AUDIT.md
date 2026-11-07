@@ -67,3 +67,27 @@ See `fixtures/comfy/README.md`. Primary sources:
 4. Prove core-only write / halo non-write / coverage on real outputs.
 5. Independent S7 on real GPU outputs.
 6. Explicit Method Registry maturity change (out of scope here).
+
+## Offline backend model inventory
+
+Optional `--model-inventory` attaches a host-recorded
+`backend_model_inventory` JSON (filenames + SHA-256 + custom node packs).
+
+```bash
+ige audit-comfy-workflow \
+  --ui fixtures/comfy/workflow_ige_v03_dev_fp8.json \
+  --api fixtures/comfy/workflow_cloud_api_prompt_v0.5.json \
+  --model-inventory fixtures/comfy/backend_model_inventory_pc_dev_fp8_v0.1.json
+```
+
+Adds check `E_BACKEND_MODEL_INVENTORY`. Standalone validator:
+
+```bash
+ige validate-model-inventory --path fixtures/comfy/backend_model_inventory_pc_dev_fp8_v0.1.json
+```
+
+See `docs/BACKEND_MODEL_INVENTORY.md`. Inventory PASS still leaves
+`execution_allowed=false` and Flux as `workflow_candidate`. Siax SHA in the
+v0.1 PC fixture exactly matches the Method Registry pin for
+`SIAX4X_TILE_CORE_SR`.
+

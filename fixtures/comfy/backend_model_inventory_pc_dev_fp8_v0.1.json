@@ -1,0 +1,149 @@
+{
+  "schema": "ige-backend-model-inventory/0.1",
+  "inventory_id": "pc_dev_fp8_desktop_gnmq0pf",
+  "inventory_version": "0.1.0",
+  "policy": "fail_closed",
+  "method_id_context": "FLUX_HR_TILE_IMG2IMG",
+  "host": {
+    "hostname": "DESKTOP-GNMQ0PF",
+    "os": "Windows",
+    "notes": "Offline SHA inventory of ComfyUI models used by workflow_ige_v03_dev_fp8; not a GPU run."
+  },
+  "models_root": "C:\\Users\\user\\Documents\\ComfyUI\\models",
+  "custom_nodes_root": "C:\\Users\\user\\Documents\\ComfyUI\\custom_nodes",
+  "hashed_at": "2026-11-08T03:53:02+08:00",
+  "assets": [
+    {
+      "asset_id": "SIAX4X",
+      "role": "upscale",
+      "filename": "4x_NMKD-Siax_200k.pth",
+      "relative_path": "upscale_models/4x_NMKD-Siax_200k.pth",
+      "size_bytes": 66957746,
+      "sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\upscale_models\\4x_NMKD-Siax_200k.pth",
+      "hashed_at": "2026-11-08T03:49:02+08:00"
+    },
+    {
+      "asset_id": "FLUX_AE",
+      "role": "vae",
+      "filename": "ae.safetensors",
+      "relative_path": "vae/ae.safetensors",
+      "size_bytes": 335304388,
+      "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\vae\\ae.safetensors",
+      "hashed_at": "2026-11-08T03:49:16+08:00"
+    },
+    {
+      "asset_id": "CLIP_L",
+      "role": "clip",
+      "filename": "clip_l.safetensors",
+      "relative_path": "clip/clip_l.safetensors",
+      "size_bytes": 246144152,
+      "sha256": "660c6f5b1abae9dc498ac2d21e1347d2abdb0cf6c0c0c8576cd796491d9a6cdd",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\clip\\clip_l.safetensors",
+      "hashed_at": "2026-11-08T03:49:26+08:00"
+    },
+    {
+      "asset_id": "T5XXL_FP16",
+      "role": "clip",
+      "filename": "t5xxl_fp16.safetensors",
+      "relative_path": "clip/t5xxl_fp16.safetensors",
+      "size_bytes": 9787841024,
+      "sha256": "6e480b09fae049a72d2a8c5fbccb8d3e92febeb233bbe9dfe7256958a9167635",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\clip\\t5xxl_fp16.safetensors",
+      "hashed_at": "2026-11-08T03:50:47+08:00"
+    },
+    {
+      "asset_id": "FLUX1_DEV",
+      "role": "unet",
+      "filename": "flux1-dev.safetensors",
+      "relative_path": "diffusion_models/flux1-dev.safetensors",
+      "size_bytes": 23802932552,
+      "sha256": "4610115bb0c89560703c892c59ac2742fa821e60ef5871b33493ba544683abd7",
+      "absolute_path": "C:\\Users\\user\\Documents\\ComfyUI\\models\\diffusion_models\\flux1-dev.safetensors",
+      "hashed_at": "2026-11-08T03:53:02+08:00"
+    }
+  ],
+  "custom_nodes": [
+    {
+      "pack_id": "ComfyUI-Custom-Scripts",
+      "present": true,
+      "git_sha": "609f3afaa74b2f88ef9ce8d939626065e3247469",
+      "remote_hint": "pythongosssss"
+    },
+    {
+      "pack_id": "ComfyUI-Easy-Use",
+      "present": true,
+      "git_sha": "b0b47ca1372117fce575d9e744655344ebff6bef",
+      "remote_hint": "yolain"
+    },
+    {
+      "pack_id": "ComfyUI-Impact-Pack",
+      "present": true,
+      "git_sha": "eace4a9059908330936c6514f35f5e0c84935394",
+      "remote_hint": null
+    },
+    {
+      "pack_id": "ComfyUI-Impact-Subpack",
+      "present": true,
+      "git_sha": "50c7b71a6a224734cc9b21963c6d1926816a97f1",
+      "remote_hint": null
+    },
+    {
+      "pack_id": "ComfyUI-KJNodes",
+      "present": true,
+      "git_sha": "ab72eda7ffad6280422d71ab7d54d3fb87c0ba18",
+      "remote_hint": null
+    },
+    {
+      "pack_id": "ComfyUI_LayerStyle",
+      "present": true,
+      "git_sha": "c7b8f73af0badaf2a59bee6111ecdd004be15ab3",
+      "remote_hint": null
+    },
+    {
+      "pack_id": "Comfyui_TTP_Toolset",
+      "present": true,
+      "git_sha": "c8889e40e90e293226cc6810c7d27b9c17300da6",
+      "remote_hint": null
+    },
+    {
+      "pack_id": "rgthree-comfy",
+      "present": true,
+      "git_sha": "bc48c6aaeca87bedbc14245d89f9bc6be37a630e",
+      "remote_hint": null
+    },
+    {
+      "pack_id": "ComfyUI_IGE_GlobalLogicCoordinator",
+      "present": true,
+      "git_sha": null,
+      "remote_hint": null,
+      "notes": "Present on host; no git remote/SHA recorded."
+    },
+    {
+      "pack_id": "comfyui-frame-interpolation",
+      "present": true,
+      "git_sha": null,
+      "remote_hint": null
+    },
+    {
+      "pack_id": "comfyui-videohelpersuite",
+      "present": true,
+      "git_sha": null,
+      "remote_hint": null
+    }
+  ],
+  "load_options": {
+    "unet_weight_dtype": "fp8_e4m3fn_fast",
+    "notes": "UNETLoader widget value only; not a weight-file SHA."
+  },
+  "non_claims": [
+    "No GPU inference was run while producing this inventory.",
+    "Recording weight SHAs does not promote FLUX_HR_TILE_IMG2IMG out of workflow_candidate.",
+    "execution_allowed remains false; Registry edit_permission is never granted by inventory.",
+    "ae.safetensors SHA is recorded; equivalence to any ae.sft alias is NOT claimed.",
+    "Custom-node git SHAs are install fingerprints only; they are not live node-execution proof.",
+    "Absolute Windows paths are host_metadata only; CI validates relative_path + filename + sha256.",
+    "Siax SHA matching the Method Registry pin is a precondition check only; it does not authorize pixel edits."
+  ]
+}

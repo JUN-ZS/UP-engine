@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/backend_model_inventory.schema.json",
+  "title": "UP-engine offline backend model inventory",
+  "description": "Host-recorded ComfyUI weight filenames + SHA-256 and custom-node pack inventory. Offline only; never grants execution or edit permission.",
+  "type": "object",
+  "required": [
+    "schema",
+    "inventory_id",
+    "inventory_version",
+    "policy",
+    "host",
+    "models_root",
+    "hashed_at",
+    "assets",
+    "custom_nodes",
+    "load_options",
+    "non_claims"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "ige-backend-model-inventory/0.1"},
+    "inventory_id": {"type": "string", "minLength": 1},
+    "inventory_version": {"type": "string", "minLength": 1},
+    "policy": {"const": "fail_closed"},
+    "method_id_context": {
+      "type": "string",
+      "description": "Optional method this inventory is intended to precondition; recording SHAs does not promote maturity."
+    },
+    "host": {
+      "type": "object",
+      "required": ["hostname"],
+      "additionalProperties": false,
+      "properties": {
+        "hostname": {"type": "string", "minLength": 1},
+        "os": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    },
+    "models_root": {
+      "type": "string",
+      "description": "Host metadata only; CI validation uses relative_path + filename + sha256."
+    },
+    "custom_nodes_root": {
+      "type": "string",
+      "description": "Host metadata only."
+    },
+    "hashed_at": {
+      "type": "string",
+      "description": "ISO-8601 timestamp in Asia/Hong_Kong (UTC+8) when hashes were computed."
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["asset_id", "role", "filename", "relative_path", "size_bytes", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "asset_id": {"type": "string", "minLength": 1},
+          "role": {"enum": ["unet", "vae", "clip", "upscale", "other"]},
+          "filename": {"type": "string", "minLength": 1},
+          "relative_path": {"type": "string", "minLength": 1},
+          "size_bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+          "absolute_path": {
+            "type": "string",
+            "description": "Optional host_metadata; never required for CI validation."
+          },
+          "hashed_at": {"type": "string"}
+        }
+      }
+    },
+    "custom_nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["pack_id", "present"],
+        "additionalProperties": false,
+        "properties": {
+          "pack_id": {"type": "string", "minLength": 1},
+          "present": {"type": "boolean"},
+          "git_sha": {"type": ["string", "null"]},
+          "remote_hint": {"type": ["string", "null"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "load_options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "unet_weight_dtype": {
+          "type": "string",
+          "description": "ComfyUI UNETLoader weight_dtype widget value (not a file SHA)."
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "non_claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

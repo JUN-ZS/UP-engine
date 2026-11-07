@@ -39,7 +39,31 @@ def build_parser() -> argparse.ArgumentParser:
     )
     audit_comfy.add_argument("--ui", type=Path, default=None, help="ComfyUI UI workflow graph JSON")
     audit_comfy.add_argument("--api", type=Path, default=None, help="ComfyUI API prompt JSON")
+    audit_comfy.add_argument(
+        "--model-inventory",
+        type=Path,
+        default=None,
+        help="optional offline backend_model_inventory JSON (filenames+SHA); never unlocks execution",
+    )
     audit_comfy.add_argument("--out", type=Path, default=None, help="optional audit report JSON path")
+
+    validate_inv = sub.add_parser(
+        "validate-model-inventory",
+        help="validate offline backend_model_inventory JSON (filenames+SHA; never unlocks execution)",
+    )
+    validate_inv.add_argument("--path", type=Path, required=True, help="backend_model_inventory JSON")
+    validate_inv.add_argument(
+        "--against-ui",
+        type=Path,
+        default=None,
+        help="optional UI workflow to cross-check filenames",
+    )
+    validate_inv.add_argument(
+        "--against-api",
+        type=Path,
+        default=None,
+        help="optional API prompt to cross-check filenames",
+    )
 
     read = sub.add_parser(
         "read-image",
@@ -277,13 +301,63 @@ def main() -> int:
             print(rendered, end="")
         return 0 if report["status"] == "ACCEPTED_CANDIDATE" else 2
 
+    if args.command == "validate-model-inventory":
+        from .comfy.model_inventory import (
+            backend_model_inventory_verified,
+            load_model_inventory,
+            summarize_inventory,
+        )
+        from .comfy.workflow_static_audit import audit_comfy_workflows
+        import json as _json
+
+        inventory = load_model_inventory(args.path)
+        report = None
+        if args.against_ui is not None or args.against_api is not None:
+            report = audit_comfy_workflows(
+                ui_path=args.against_ui,
+                api_path=args.against_api,
+                model_inventory_path=args.path,
+            )
+        result = backend_model_inventory_verified(inventory, static_audit_report=report)
+        summary = summarize_inventory(inventory)
+        siax = None
+        if report is not None:
+            siax = (report.get("backend_model_inventory") or {}).get("siax_registry_pin")
+        print(
+            f"VALID_SCHEMA: inventory_id={summary['inventory_id']} "
+            f"version={summary['inventory_version']} assets={summary['asset_count']} "
+            f"custom_nodes={summary['custom_node_count']} "
+            f"verified={result['verified']} execution_allowed={result['execution_allowed']}"
+        )
+        if siax is not None:
+            print(
+                f"siax_pin={siax.get('status')} matched={siax.get('matched')} "
+                f"sha={(siax.get('evidence') or {}).get('inventory_sha256')}"
+            )
+        if result["blockers"]:
+            print("blockers=" + ",".join(result["blockers"]))
+        if report is not None:
+            print(
+                f"merged_audit inventory_status={report['inventory_status']} "
+                f"overall={report['overall_status']} execution_allowed={report['execution_allowed']}"
+            )
+        if not result["verified"]:
+            return 2
+        if report is not None and report.get("inventory_status") != "PASS_STATIC_INVENTORY":
+            return 2
+        return 0
+
     if args.command == "audit-comfy-workflow":
         from .comfy.workflow_static_audit import audit_comfy_workflows, structural_inventory_ok
         import json as _json
 
         if args.ui is None and args.api is None:
             parser.error("audit-comfy-workflow requires --ui and/or --api")
-        report = audit_comfy_workflows(ui_path=args.ui, api_path=args.api)
+        report = audit_comfy_workflows(
+            ui_path=args.ui,
+            api_path=args.api,
+            model_inventory_path=args.model_inventory,
+        )
         rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
         if args.out:
             args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -291,8 +365,11 @@ def main() -> int:
             print(f"Comfy workflow static audit written: {args.out}")
         else:
             print(rendered, end="")
+        backend = report.get("backend_model_inventory") or {}
+        backend_status = backend.get("status", "omitted")
         print(
             f"method={report['method_id']} inventory={report['inventory_status']} "
+            f"backend_model_inventory={backend_status} "
             f"overall={report['overall_status']} execution_allowed={report['execution_allowed']} "
             f"maturity_remains={report['maturity_remains']}"
         )

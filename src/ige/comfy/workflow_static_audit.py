@@ -1,7 +1,8 @@
 """Static audit of ComfyUI UI graphs and API prompts for FLUX_HR_TILE_IMG2IMG.
 
-This module NEVER runs ComfyUI, NEVER loads GPU weights, NEVER verifies model
-file SHAs on disk, and NEVER sets execution_allowed=True. Maturity remains
+This module NEVER runs ComfyUI, NEVER loads GPU weights for inference, and
+NEVER sets execution_allowed=True. Optional offline backend_model_inventory
+may record weight SHAs for precondition checks only. Maturity remains
 workflow_candidate regardless of inventory PASS.
 """
 
@@ -484,6 +485,7 @@ def audit_comfy_workflows(
     *,
     ui_path: str | Path | None = None,
     api_path: str | Path | None = None,
+    model_inventory_path: str | Path | None = None,
 ) -> dict[str, Any]:
     if ui_path is None and api_path is None:
         raise ValueError("at least one of ui_path or api_path is required")
@@ -535,7 +537,49 @@ def audit_comfy_workflows(
         api_models=api_models,
     )
 
-    structural_codes = {FAILURE_COMFY_NODE_MISSING, FAILURE_MODEL_MISMATCH, "E_UI_API_VALUE_MISMATCH"}
+    backend_inventory_summary: dict[str, Any] | None = None
+    if model_inventory_path is not None:
+        from .model_inventory import (
+            load_model_inventory,
+            summarize_inventory,
+            verify_against_workflow_audit,
+        )
+
+        # Temporary report shell so filename matching can read inventories/models.
+        provisional = {
+            "inventories": {
+                ("ui" if inv["format"] == "ui_graph" else "api"): {
+                    "models": inv.get("models"),
+                }
+                for inv in inventories
+            }
+        }
+        inv_payload = load_model_inventory(model_inventory_path)
+        backend_check = verify_against_workflow_audit(inv_payload, provisional)
+        checks.append(backend_check)
+        backend_inventory_summary = {
+            "path": str(Path(model_inventory_path)),
+            "filename": Path(model_inventory_path).name,
+            "sha256": file_sha256(model_inventory_path),
+            "status": backend_check["status"],
+            "summary": summarize_inventory(inv_payload),
+            "siax_registry_pin": (backend_check.get("evidence") or {}).get("siax_registry_pin"),
+        }
+        sources["backend_model_inventory"] = {
+            "path": str(Path(model_inventory_path)),
+            "filename": Path(model_inventory_path).name,
+            "sha256": file_sha256(model_inventory_path),
+            "bytes": Path(model_inventory_path).stat().st_size,
+            "inventory_id": inv_payload.get("inventory_id"),
+            "inventory_version": inv_payload.get("inventory_version"),
+        }
+
+    structural_codes = {
+        FAILURE_COMFY_NODE_MISSING,
+        FAILURE_MODEL_MISMATCH,
+        "E_UI_API_VALUE_MISMATCH",
+        "E_BACKEND_MODEL_INVENTORY",
+    }
     structural_fail = [
         c for c in checks if c["code"] in structural_codes and c["status"] == "FAIL"
     ]
@@ -575,7 +619,7 @@ def audit_comfy_workflows(
         "checks": checks,
         "structural_blockers": [c["code"] for c in structural_fail],
         "remaining_live_blockers": [
-            "Actual ComfyUI custom-node install + weight files on the execution host (SHA verify).",
+            "Offline weight SHAs may be recorded via backend_model_inventory; live ComfyUI load + runtime node proof still required.",
             "Live proof that each tile's conditioning is independently routed (not only static prompts).",
             "Coordinate-consistent global noise field (same seed alone is insufficient).",
             "Core-only write / halo non-write / full coverage on real GPU outputs.",
@@ -584,14 +628,17 @@ def audit_comfy_workflows(
         ],
         "non_claims": [
             "No GPU inference was run.",
-            "No Siax / Flux weights were loaded.",
-            "Model filename inventory is not weight SHA verification.",
+            "No Siax / Flux weights were loaded into a runtime for inference.",
+            "Model filename inventory alone is not weight SHA verification; optional --model-inventory records offline SHAs without unlocking execution.",
             "Per-tile CLIPTextEncode text is static evidence only.",
             "Same RandomNoise seed is not a global noise-field proof.",
             "FLUX_HR_TILE_IMG2IMG remains workflow_candidate; execution_allowed=false.",
             "This audit does not modify Method Registry edit_permission.",
+            "ae.safetensors SHA (when inventoried) does not claim equivalence to ae.sft.",
         ],
     }
+    if backend_inventory_summary is not None:
+        report["backend_model_inventory"] = backend_inventory_summary
     return report
 
 
