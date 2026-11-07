@@ -37,7 +37,7 @@ Even on exit `0`, the report always includes:
 | `E_COMFY_NODE_MISSING` | Required inventory classes absent from supplied graphs |
 | `E_MODEL_INVENTORY_MISMATCH` | Declared UNET/VAE/CLIP/dtype filenames ≠ expected Dev FP8 set (**filenames only**) |
 | `E_TILE_CONDITIONING_UNROUTED` | PASS only as *static* per-tile prompt evidence; never live routing proof |
-| `E_NOISE_FIELD_NOT_GLOBAL` | Same `RandomNoise` seed alone → `noise_field_kind=shared_seed_only` → **FAIL** (see `docs/GLOBAL_NOISE_FIELD_CONTRACT.md`) |
+| `E_NOISE_FIELD_NOT_GLOBAL` | Same `RandomNoise` seed alone → `noise_field_kind=shared_seed_only` → **FAIL**. Surfaces: `noise_synthetic_ok` ≠ `noise_live_verified` (see `docs/GLOBAL_NOISE_FIELD_CONTRACT.md`) |
 
 Optional UI inventory (recorded, not execution proof): `IGE_TileNoiseMask`,
 `SetLatentNoiseMask`, TTP tile nodes, `UpscaleModelLoader` (Siax filename).
@@ -49,6 +49,7 @@ Optional UI inventory (recorded, not execution proof): `IGE_TileNoiseMask`,
 - No S7 acceptance; no halo/core pixel proof on real outputs.
 - Static per-tile `CLIPTextEncode` text ≠ live independent conditioning routes.
 - Same seed ≠ global noise field (`shared_seed_only` ≠ `coordinate_indexed`).
+- Synthetic PASS (`noise_synthetic_ok` / `synthetic_contract`) ≠ Live PASS (`noise_live_verified` / `live_capture`); CI never sets live true here.
 - Does not modify `src/ige/data/method_registry.json`.
 - Does not unblock `FLUX_HR_TILE_IMG2IMG`.
 
@@ -63,7 +64,7 @@ See `fixtures/comfy/README.md`. Primary sources:
 
 1. Host has matching custom nodes + weight files; verify weight SHAs.
 2. Prove each tile's conditioning is independently routed at runtime.
-3. Prove coordinate-consistent global noise (not seed equality alone).
+3. Prove coordinate-consistent global noise **live** (`noise_live_verified`; not seed equality alone; synthetic catalog ≠ live).
 4. Prove core-only write / halo non-write / coverage on real outputs.
 5. Independent S7 on real GPU outputs.
 6. Explicit Method Registry maturity change (out of scope here).
@@ -94,7 +95,7 @@ v0.1 PC fixture exactly matches the Method Registry pin for
 ## Related offline contracts (PR #18 steps 1–3)
 
 - `docs/BACKEND_MODEL_INVENTORY.md` — offline weight SHA inventory
-- `docs/GLOBAL_NOISE_FIELD_CONTRACT.md` — same seed ≠ global noise field
+- `docs/GLOBAL_NOISE_FIELD_CONTRACT.md` — same seed ≠ global noise field; Synthetic≠Live; three mechanism contracts
 - `docs/TILE_CORE_HALO_LEDGER.md` — Core/Halo exact-once write-back ledger (synthetic S6 gates)
 
 ```bash

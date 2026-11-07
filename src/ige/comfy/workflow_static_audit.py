@@ -446,6 +446,7 @@ def evaluate_checks(
 
     # Noise: same seed alone is insufficient / FAIL for global field proof.
     # Delegates classification to the global noise field contract module.
+    # Synthetic PASS ≠ Live PASS — see noise_* surfaces on the audit report.
     from .global_noise_contract import classify_noise_evidence
 
     noise_classification = classify_noise_evidence(
@@ -627,14 +628,29 @@ def audit_comfy_workflows(
             "receipt_kind": receipt.get("receipt_kind"),
         }
 
-    noise_field_kind = "unknown"
-    noise_field_detail = None
-    for c in checks:
-        if c.get("code") == FAILURE_NOISE:
-            evidence = c.get("evidence") or {}
-            noise_field_kind = evidence.get("field_kind") or "unknown"
-            noise_field_detail = c.get("detail")
-            break
+    from .global_noise_contract import (
+        classify_noise_evidence as _classify_noise_evidence,
+        evaluate_all_mechanism_synthetic_acceptances,
+    )
+
+    # Re-classify from inventories so report surfaces match the E_NOISE check.
+    noise_classification = _classify_noise_evidence(
+        workflow_static_bits={"inventories": list(inventories)},
+    )
+    noise_field_kind = noise_classification.get("field_kind") or "unknown"
+    noise_field_detail = noise_classification.get("detail")
+    noise_evidence_grade = (
+        noise_classification.get("evidence_grade") or "static_seed_only"
+    )
+    noise_synthetic_ok = bool(noise_classification.get("noise_synthetic_ok"))
+    noise_live_verified = bool(noise_classification.get("noise_live_verified"))
+    noise_synthetic_status = noise_classification.get("synthetic_status") or "FAIL"
+    noise_live_status = noise_classification.get("live_status") or "UNVERIFIED"
+    noise_mechanism = noise_classification.get("mechanism")
+
+    # CI mechanism catalog: Synthetic can PASS while Live stays unverified.
+    # Informational only — does NOT claim the workflow implements a mechanism.
+    noise_mechanism_contracts = evaluate_all_mechanism_synthetic_acceptances()
 
     structural_codes = {
         FAILURE_COMFY_NODE_MISSING,
@@ -682,11 +698,36 @@ def audit_comfy_workflows(
         "checks": checks,
         "noise_field_kind": noise_field_kind,
         "noise_field_reason": noise_field_detail,
+        "noise_evidence_grade": noise_evidence_grade,
+        "noise_synthetic_ok": noise_synthetic_ok,
+        "noise_live_verified": noise_live_verified,
+        "noise_synthetic_status": noise_synthetic_status,
+        "noise_live_status": noise_live_status,
+        "noise_mechanism": noise_mechanism,
+        "noise_mechanism_contracts": {
+            "noise_synthetic_ok": noise_mechanism_contracts.get("noise_synthetic_ok"),
+            "noise_live_verified": False,
+            "synthetic_status": noise_mechanism_contracts.get("synthetic_status"),
+            "live_status": "UNVERIFIED",
+            "note": noise_mechanism_contracts.get("note"),
+            "mechanisms": {
+                mid: {
+                    "synthetic_status": m.get("synthetic_status"),
+                    "live_status": "UNVERIFIED",
+                    "noise_synthetic_ok": m.get("noise_synthetic_ok"),
+                    "noise_live_verified": False,
+                    "architectural_vs_seed_tweak": m.get("architectural_vs_seed_tweak"),
+                    "title": m.get("title"),
+                    "cost_notes": m.get("cost_notes"),
+                }
+                for mid, m in (noise_mechanism_contracts.get("mechanisms") or {}).items()
+            },
+        },
         "structural_blockers": [c["code"] for c in structural_fail],
         "remaining_live_blockers": [
             "Declared inventory ≠ disk capture; even a capture receipt still requires live ComfyUI load + runtime node proof.",
             "Live proof that each tile's conditioning is independently routed (not only static prompts).",
-            "Coordinate-consistent global noise field (shared_seed_only ≠ coordinate_indexed; see docs/GLOBAL_NOISE_FIELD_CONTRACT.md).",
+            "Coordinate-consistent global noise field live proof (noise_live_verified; shared_seed_only ≠ coordinate_indexed; synthetic_pass ≠ live_pass; see docs/GLOBAL_NOISE_FIELD_CONTRACT.md).",
             "Core-only write / halo non-write / full coverage on real GPU outputs.",
             "Independent S7 acceptance on real GPU outputs.",
             "Method Registry maturity promotion is out of scope for this static audit.",
@@ -698,6 +739,8 @@ def audit_comfy_workflows(
             "Optional --capture-receipt is evidence_grade=disk_capture; still never sets execution_allowed=true.",
             "Per-tile CLIPTextEncode text is static evidence only.",
             "Same RandomNoise seed is classified as noise_field_kind=shared_seed_only and is not a global noise-field proof.",
+            "noise_synthetic_ok (synthetic_contract / CI) ≠ noise_live_verified (live_capture); CI never sets live true here.",
+            "noise_mechanism_contracts Synthetic PASS is CI catalog coverage only — not workflow live noise proof.",
             "FLUX_HR_TILE_IMG2IMG remains workflow_candidate; execution_allowed=false.",
             "This audit does not modify Method Registry edit_permission.",
             "ae.safetensors SHA (when inventoried) does not claim equivalence to ae.sft.",

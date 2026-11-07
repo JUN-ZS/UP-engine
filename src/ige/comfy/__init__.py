@@ -1,11 +1,18 @@
 """Static ComfyUI workflow / API-prompt inventory audits (no GPU)."""
 
 from .global_noise_contract import (
+    EVIDENCE_GRADE_LIVE,
+    EVIDENCE_GRADE_STATIC,
+    EVIDENCE_GRADE_SYNTHETIC,
     FAILURE_NOISE,
     FIELD_KIND_COORDINATE_INDEXED,
     FIELD_KIND_SHARED_SEED_ONLY,
+    MECHANISM_COORDINATE_INDEXED_GENERATOR,
+    MECHANISM_GLOBAL_LATENT_CROP,
+    MECHANISM_GLOBAL_THEN_LOCAL_REFINEMENT,
     TEST_ID_NOISE,
     classify_noise_evidence,
+    evaluate_all_mechanism_synthetic_acceptances,
 )
 from .model_inventory import (
     EVIDENCE_GRADE_DECLARED,
@@ -61,6 +68,12 @@ __all__ = [
     "EXPECTED_DEV_FP8_MODELS",
     "FAILURE_BACKEND_INVENTORY",
     "FAILURE_NOISE",
+    "MECHANISM_GLOBAL_THEN_LOCAL_REFINEMENT",
+    "MECHANISM_GLOBAL_LATENT_CROP",
+    "MECHANISM_COORDINATE_INDEXED_GENERATOR",
+    "EVIDENCE_GRADE_SYNTHETIC",
+    "EVIDENCE_GRADE_STATIC",
+    "EVIDENCE_GRADE_LIVE",
     "FIELD_KIND_COORDINATE_INDEXED",
     "FIELD_KIND_SHARED_SEED_ONLY",
     "LEDGER_SCHEMA",
@@ -73,6 +86,7 @@ __all__ = [
     "backend_model_inventory_verified",
     "capture_model_inventory",
     "classify_noise_evidence",
+    "evaluate_all_mechanism_synthetic_acceptances",
     "ledger_passes",
     "method_requires_tile_core_halo_ledger",
     "load_capture_receipt",

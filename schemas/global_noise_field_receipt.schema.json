@@ -2,19 +2,27 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/JUN-ZS/UP-engine/schemas/global_noise_field_receipt.schema.json",
   "title": "UP-engine global noise field receipt",
-  "description": "Evidence object for whether tile noise is a coordinate-consistent global field. Fail-closed: verified defaults/remains false until overlap proof. Never grants execution or edit permission.",
+  "description": "Evidence object for whether tile noise is a coordinate-consistent global field. Pass surfaces are split: noise_synthetic_ok (CI/synthetic_contract) ≠ noise_live_verified (live_capture). Fail-closed. Never grants execution or edit permission. No GPU in this revision.",
   "type": "object",
   "required": [
     "schema",
     "field_kind",
+    "evidence_grade",
     "coordinate_frame",
     "tile_origins",
     "verified",
+    "noise_synthetic_ok",
+    "noise_live_verified",
     "non_claims"
   ],
-  "additionalProperties": false,
+  "additionalProperties": true,
   "properties": {
-    "schema": {"const": "ige-global-noise-field-receipt/0.1"},
+    "schema": {
+      "enum": [
+        "ige-global-noise-field-receipt/0.2",
+        "ige-global-noise-field-receipt/0.1"
+      ]
+    },
     "field_kind": {
       "enum": [
         "coordinate_indexed",
@@ -23,6 +31,18 @@
         "unknown"
       ],
       "description": "shared_seed_only = RandomNoise seed present without coordinate indexing proof. coordinate_indexed requires global XY→noise mapping with overlap equality."
+    },
+    "evidence_grade": {
+      "enum": ["static_seed_only", "synthetic_contract", "live_capture"],
+      "description": "static_seed_only = observed RandomNoise seed. synthetic_contract = CI synthetic proof. live_capture = host tensor/generator receipt. synthetic ≠ live."
+    },
+    "mechanism": {
+      "enum": [
+        "global_latent_once_crop",
+        "coordinate_indexed_generator",
+        "global_then_local_refinement"
+      ],
+      "description": "Which of the three mechanism contracts this receipt claims. global_then_local_refinement is architectural, not a seed tweak."
     },
     "coordinate_frame": {
       "type": "string",
@@ -57,6 +77,19 @@
         "items": {"type": "integer", "minimum": 1}
       }
     },
+    "global_latent_shape": {
+      "type": "array",
+      "items": {"type": "integer", "minimum": 1},
+      "description": "For global_latent_once_crop: declared [H, W, C] of the synthetic/global buffer."
+    },
+    "global_stage": {
+      "type": "object",
+      "description": "For global_then_local_refinement: stage-1 global field evidence."
+    },
+    "local_refinement_stage": {
+      "type": "object",
+      "description": "For global_then_local_refinement: stage-2 architectural refinement evidence (not reseed)."
+    },
     "overlap_probe": {
       "type": "object",
       "additionalProperties": true,
@@ -71,12 +104,42 @@
     },
     "verified": {
       "type": "boolean",
-      "description": "Must remain false until a coordinate-indexed field with non-empty overlap equality is proven. verified=true only allowed with field_kind=coordinate_indexed."
+      "description": "Legacy/umbrella flag. On synthetic_contract it means synthetic overlap only. Live PASS requires noise_live_verified=true separately."
     },
     "synthetic": {
       "type": "boolean",
       "description": "True when proof used a synthetic deterministic field (not live Comfy noise)."
     },
+    "noise_synthetic_ok": {
+      "type": "boolean",
+      "description": "Synthetic PASS surface. CI may set true. Does NOT imply live PASS."
+    },
+    "noise_live_verified": {
+      "type": "boolean",
+      "description": "Live PASS surface. True ONLY with evidence_grade=live_capture + host tensor/generator proof. CI must not set true in this revision."
+    },
+    "host_id": {
+      "type": "string",
+      "description": "Required for live_capture when claiming noise_live_verified."
+    },
+    "captured_at": {
+      "description": "ISO-8601 capture timestamp for live_capture."
+    },
+    "tensor_or_generator_proof": {
+      "type": "object",
+      "description": "Live proof payload: sha256 of captured noise tensor and/or generator_id.",
+      "properties": {
+        "sha256": {"type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$"},
+        "generator_id": {"type": ["string", "null"]},
+        "note": {"type": "string"}
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "cost_notes": {"type": "string"},
+    "architectural_vs_seed_tweak": {"type": "boolean"},
     "failure_code": {
       "const": "E_NOISE_FIELD_NOT_GLOBAL"
     },
