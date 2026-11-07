@@ -73,7 +73,7 @@ S2's \`canvas_path\` defines the exact raster on which S3 masks are drawn. For a
 
 The S6 pixel audit decodes the coordinate canvas, final output and approved binary mask. It rejects dimension mismatch, soft/feathered mask values and any changed pixel outside the approved mask. The protected mask must also be binary, non-empty, same-sized and disjoint from the approved mask.
 
-Tile-specific counts (halo writes, core overlap and coverage gaps) are still receipts supplied by the tile compositor; this module does not reconstruct tile provenance from the final raster alone. A future tile ledger should carry per-tile read bounds, disjoint core bounds, output hashes and exact-once core coverage.
+Tile-specific counts (halo writes, core overlap and coverage gaps) are still receipts supplied by the tile compositor; this module does not reconstruct tile provenance from the final raster alone. The optional Core/Halo ledger (`ige-tile-core-halo-ledger/0.1`, see `docs/TILE_CORE_HALO_LEDGER.md`) carries per-tile read bounds, disjoint core bounds, optional output hashes and exact-once core coverage. When `S6.return_audit.tile_core_halo_ledger` or `tile_core_halo_ledger_path` is supplied, `evaluate_s0_s7` audits it fail-closed; absent ledger leaves the legacy integer receipts path unchanged. Synthetic ledger PASS ≠ live GPU compositor proof.
 
 ## Registry is the single routing authority
 
@@ -114,7 +114,7 @@ Before enabling the Flux method:
 1. Import the actual ComfyUI workflow and compare serialized API prompt values with the visible widget values (including UNET/VAE filenames).
 2. Verify required custom nodes and model file SHA-256 inventory on the actual runner.
 3. Prove conditioning and geometry contracts are routed per tile/subset, and prove whether the noise field is globally coordinate-consistent.
-4. Prove disjoint core-only writes and exact-once coverage; halo is read-only.
+4. Prove disjoint core-only writes and exact-once coverage on **real** outputs (offline ledger contract exists; live compositor receipts still required); halo is read-only.
 5. Execute at least one real holdout through S0-S7 and retain model, node, prompt, seed, inputs, tile, output and acceptance receipts.
 
 Until then, the user does not need to run a ComfyUI test merely to validate the Registry/Router work. ComfyUI becomes necessary for the next live-inference proof.

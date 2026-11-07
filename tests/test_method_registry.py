@@ -13,6 +13,10 @@ from ige.method_registry import (
     MethodRegistry, MethodRegistryError, evaluate_s0_s7, file_sha256,
     validate_registry_payload,
 )
+from ige.comfy.tile_core_halo_ledger import (
+    synthetic_halo_write_ledger,
+    synthetic_valid_two_tile_ledger,
+)
 
 REGISTRY = Path(__file__).parents[1] / "src" / "ige" / "data" / "method_registry.json"
 SIAX_SHA256 = "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e"
@@ -213,6 +217,30 @@ class MethodRegistryTests(unittest.TestCase):
             report = self._audit(bundle)
         self.assertEqual(report["stages"][6]["status"], "BLOCKED")
         self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
+
+    def test_optional_tile_ledger_pass_does_not_grant_permission(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            bundle["S6"]["return_audit"]["tile_core_halo_ledger"] = synthetic_valid_two_tile_ledger()
+            report = self._audit(bundle)
+        self.assertEqual(report["status"], "ACCEPTED_CANDIDATE")
+        self.assertEqual(report["stages"][6]["status"], "PASS")
+        self.assertIsNotNone(report["stages"][6].get("tile_ledger"))
+        self.assertEqual(report["stages"][6]["tile_ledger"]["overall_status"], "PASS")
+        self.assertFalse(report["execution_allowed"])
+        self.assertFalse(report["edit_permission"])
+
+    def test_optional_tile_ledger_halo_write_blocks_s6(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = self._bundle(Path(directory))
+            bundle["S6"]["return_audit"]["tile_core_halo_ledger"] = synthetic_halo_write_ledger()
+            report = self._audit(bundle)
+        self.assertEqual(report["stages"][6]["status"], "BLOCKED")
+        self.assertEqual(report["stages"][7]["status"], "NOT_RUN")
+        self.assertFalse(report["execution_allowed"])
+        ledger = report["stages"][6].get("tile_ledger") or {}
+        self.assertEqual(ledger.get("overall_status"), "FAIL")
+        self.assertIn("E_TILE_HALO_WRITE", ledger.get("blockers") or [])
 
     def test_missing_s7_gate_never_accepts(self):
         with tempfile.TemporaryDirectory() as directory:

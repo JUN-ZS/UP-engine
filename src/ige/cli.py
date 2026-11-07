@@ -65,6 +65,13 @@ def build_parser() -> argparse.ArgumentParser:
         help="optional API prompt to cross-check filenames",
     )
 
+    audit_tile = sub.add_parser(
+        "audit-tile-ledger",
+        help="audit Core/Halo tile write-back ledger (exact-once coverage; never unlocks execution)",
+    )
+    audit_tile.add_argument("path", type=Path, help="tile_core_halo_ledger JSON")
+    audit_tile.add_argument("--out", type=Path, default=None, help="optional audit report JSON path")
+
     read = sub.add_parser(
         "read-image",
         help="inspect a still image and export auditable regions, proposals, relations and masks",
@@ -346,6 +353,25 @@ def main() -> int:
         if report is not None and report.get("inventory_status") != "PASS_STATIC_INVENTORY":
             return 2
         return 0
+
+    if args.command == "audit-tile-ledger":
+        from .comfy.tile_core_halo_ledger import audit_ledger, load_ledger, ledger_passes
+        import json as _json
+
+        ledger = load_ledger(args.path)
+        report = audit_ledger(ledger)
+        rendered = _json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(rendered, encoding="utf-8")
+            print(f"Tile ledger audit written: {args.out}")
+        else:
+            print(rendered, end="")
+        print(
+            f"overall={report['overall_status']} blockers={','.join(report.get('blockers') or []) or 'none'} "
+            f"execution_allowed={report['execution_allowed']} edit_permission={report['edit_permission']}"
+        )
+        return 0 if ledger_passes(report) else 2
 
     if args.command == "audit-comfy-workflow":
         from .comfy.workflow_static_audit import audit_comfy_workflows, structural_inventory_ok

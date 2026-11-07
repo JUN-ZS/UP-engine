@@ -66,4 +66,4 @@ Registry maturity fields are **not** rewritten by this inventory.
 - No ComfyUI / GPU inference.
 - Inventory PASS ≠ execution_allowed.
 - Custom-node git SHAs are install fingerprints only.
-- Does not start steps for global-noise contract or core/halo ledger.
+- Global-noise contract and core/halo ledger are separate offline modules; inventory alone never unlocks them.

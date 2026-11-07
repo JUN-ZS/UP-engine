@@ -21,6 +21,14 @@ class CliParserTests(unittest.TestCase):
         self.assertEqual(comfy.command, "audit-comfy-workflow")
         self.assertEqual(comfy.ui.name, "ui.json")
         self.assertEqual(comfy.api.name, "api.json")
+        tile = parser.parse_args([
+            "audit-tile-ledger",
+            "ledger.json",
+            "--out", "tile_ledger_audit.json",
+        ])
+        self.assertEqual(tile.command, "audit-tile-ledger")
+        self.assertEqual(tile.path.name, "ledger.json")
+        self.assertEqual(tile.out.name, "tile_ledger_audit.json")
         read = parser.parse_args([
             "read-image", "source.png", "--out", "runs/read-1",
             "--reasoner", "grok"

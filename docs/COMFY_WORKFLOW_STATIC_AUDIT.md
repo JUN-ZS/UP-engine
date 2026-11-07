@@ -91,3 +91,15 @@ See `docs/BACKEND_MODEL_INVENTORY.md`. Inventory PASS still leaves
 v0.1 PC fixture exactly matches the Method Registry pin for
 `SIAX4X_TILE_CORE_SR`.
 
+## Related offline contracts (PR #18 steps 1–3)
+
+- `docs/BACKEND_MODEL_INVENTORY.md` — offline weight SHA inventory
+- `docs/GLOBAL_NOISE_FIELD_CONTRACT.md` — same seed ≠ global noise field
+- `docs/TILE_CORE_HALO_LEDGER.md` — Core/Halo exact-once write-back ledger (synthetic S6 gates)
+
+```bash
+ige audit-tile-ledger path/to/ledger.json --out /tmp/tile_ledger_audit.json
+```
+
+None of these promote `FLUX_HR_TILE_IMG2IMG` or set `execution_allowed=true`.
+
