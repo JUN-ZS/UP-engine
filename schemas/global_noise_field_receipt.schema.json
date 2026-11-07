@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JUN-ZS/UP-engine/schemas/global_noise_field_receipt.schema.json",
+  "title": "UP-engine global noise field receipt",
+  "description": "Evidence object for whether tile noise is a coordinate-consistent global field. Fail-closed: verified defaults/remains false until overlap proof. Never grants execution or edit permission.",
+  "type": "object",
+  "required": [
+    "schema",
+    "field_kind",
+    "coordinate_frame",
+    "tile_origins",
+    "verified",
+    "non_claims"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "ige-global-noise-field-receipt/0.1"},
+    "field_kind": {
+      "enum": [
+        "coordinate_indexed",
+        "independent_seed_per_tile",
+        "shared_seed_only",
+        "unknown"
+      ],
+      "description": "shared_seed_only = RandomNoise seed present without coordinate indexing proof. coordinate_indexed requires global XY→noise mapping with overlap equality."
+    },
+    "coordinate_frame": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the coordinate system used for indexing (e.g. global_canvas_xy, latent_xy)."
+    },
+    "canvas_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "Optional SHA-256 of the BASE canvas / coordinate frame binding."
+    },
+    "seed": {
+      "description": "Optional RNG seed observed or used; presence alone never proves a global field."
+    },
+    "tile_origins": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {"type": "integer"}
+      },
+      "description": "Global origins [x, y] for tiles participating in the probe."
+    },
+    "tile_sizes": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {"type": "integer", "minimum": 1}
+      }
+    },
+    "overlap_probe": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "overlap_count": {"type": "integer", "minimum": 0},
+        "equal_count": {"type": "integer", "minimum": 0},
+        "mismatch_count": {"type": "integer", "minimum": 0},
+        "all_equal": {"type": "boolean"},
+        "first_mismatch": {},
+        "reason": {"type": "string"}
+      }
+    },
+    "verified": {
+      "type": "boolean",
+      "description": "Must remain false until a coordinate-indexed field with non-empty overlap equality is proven. verified=true only allowed with field_kind=coordinate_indexed."
+    },
+    "synthetic": {
+      "type": "boolean",
+      "description": "True when proof used a synthetic deterministic field (not live Comfy noise)."
+    },
+    "failure_code": {
+      "const": "E_NOISE_FIELD_NOT_GLOBAL"
+    },
+    "test_id": {
+      "const": "NOISE_FIELD_NOT_GLOBAL"
+    },
+    "non_claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

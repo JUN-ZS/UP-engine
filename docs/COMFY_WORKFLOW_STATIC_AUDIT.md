@@ -37,7 +37,7 @@ Even on exit `0`, the report always includes:
 | `E_COMFY_NODE_MISSING` | Required inventory classes absent from supplied graphs |
 | `E_MODEL_INVENTORY_MISMATCH` | Declared UNET/VAE/CLIP/dtype filenames ≠ expected Dev FP8 set (**filenames only**) |
 | `E_TILE_CONDITIONING_UNROUTED` | PASS only as *static* per-tile prompt evidence; never live routing proof |
-| `E_NOISE_FIELD_NOT_GLOBAL` | Same `RandomNoise` seed alone is **FAIL / insufficient** — not a coordinate-consistent global field |
+| `E_NOISE_FIELD_NOT_GLOBAL` | Same `RandomNoise` seed alone → `noise_field_kind=shared_seed_only` → **FAIL** (see `docs/GLOBAL_NOISE_FIELD_CONTRACT.md`) |
 
 Optional UI inventory (recorded, not execution proof): `IGE_TileNoiseMask`,
 `SetLatentNoiseMask`, TTP tile nodes, `UpscaleModelLoader` (Siax filename).
@@ -48,7 +48,7 @@ Optional UI inventory (recorded, not execution proof): `IGE_TileNoiseMask`,
 - No Flux / Siax weight files loaded; no weight SHA verification.
 - No S7 acceptance; no halo/core pixel proof on real outputs.
 - Static per-tile `CLIPTextEncode` text ≠ live independent conditioning routes.
-- Same seed ≠ global noise field.
+- Same seed ≠ global noise field (`shared_seed_only` ≠ `coordinate_indexed`).
 - Does not modify `src/ige/data/method_registry.json`.
 - Does not unblock `FLUX_HR_TILE_IMG2IMG`.
 

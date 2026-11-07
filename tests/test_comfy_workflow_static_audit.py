@@ -48,6 +48,10 @@ class ComfyWorkflowStaticAuditTests(unittest.TestCase):
         self.assertEqual(noise["status"], "FAIL")
         self.assertIn("same seed", noise["detail"].lower())
         self.assertIn("≠", noise["evidence"]["rule"])
+        self.assertEqual(noise["evidence"]["field_kind"], "shared_seed_only")
+        self.assertEqual(noise["evidence"]["test_id"], "NOISE_FIELD_NOT_GLOBAL")
+        self.assertEqual(report["noise_field_kind"], "shared_seed_only")
+        self.assertIn("shared_seed_only", (report.get("noise_field_reason") or ""))
 
     def test_flux_remains_non_executable(self):
         report = audit_comfy_workflows(ui_path=UI, api_path=API)

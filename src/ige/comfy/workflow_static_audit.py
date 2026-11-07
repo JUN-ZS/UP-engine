@@ -445,39 +445,13 @@ def evaluate_checks(
         )
 
     # Noise: same seed alone is insufficient / FAIL for global field proof.
-    seeds: list[Any] = []
-    for inv in inventories:
-        for noise in inv.get("noise_nodes") or []:
-            seeds.append(noise.get("noise_seed"))
-        seed = (inv.get("models") or {}).get("noise_seed")
-        if seed is not None and seed not in seeds:
-            seeds.append(seed)
+    # Delegates classification to the global noise field contract module.
+    from .global_noise_contract import classify_noise_evidence
 
-    unique_seeds = list({json.dumps(s, sort_keys=True): s for s in seeds}.values()) if seeds else []
-    noise_evidence = {
-        "observed_seeds": seeds,
-        "unique_seed_count": len(unique_seeds),
-        "rule": "same RandomNoise seed ≠ coordinate-consistent global noise field",
-    }
-    if not seeds:
-        checks.append(
-            _check(
-                FAILURE_NOISE,
-                "FAIL",
-                "no RandomNoise seed found in supplied graphs",
-                evidence=noise_evidence,
-            )
-        )
-    else:
-        checks.append(
-            _check(
-                FAILURE_NOISE,
-                "FAIL",
-                "RandomNoise seed present but insufficient: same seed alone does not prove a coordinate-consistent global noise field",
-                evidence=noise_evidence,
-            )
-        )
-
+    noise_classification = classify_noise_evidence(
+        workflow_static_bits={"inventories": list(inventories)},
+    )
+    checks.append(noise_classification["check"])
     return checks
 
 
@@ -574,6 +548,15 @@ def audit_comfy_workflows(
             "inventory_version": inv_payload.get("inventory_version"),
         }
 
+    noise_field_kind = "unknown"
+    noise_field_detail = None
+    for c in checks:
+        if c.get("code") == FAILURE_NOISE:
+            evidence = c.get("evidence") or {}
+            noise_field_kind = evidence.get("field_kind") or "unknown"
+            noise_field_detail = c.get("detail")
+            break
+
     structural_codes = {
         FAILURE_COMFY_NODE_MISSING,
         FAILURE_MODEL_MISMATCH,
@@ -617,11 +600,13 @@ def audit_comfy_workflows(
             for inv in inventories
         },
         "checks": checks,
+        "noise_field_kind": noise_field_kind,
+        "noise_field_reason": noise_field_detail,
         "structural_blockers": [c["code"] for c in structural_fail],
         "remaining_live_blockers": [
             "Offline weight SHAs may be recorded via backend_model_inventory; live ComfyUI load + runtime node proof still required.",
             "Live proof that each tile's conditioning is independently routed (not only static prompts).",
-            "Coordinate-consistent global noise field (same seed alone is insufficient).",
+            "Coordinate-consistent global noise field (shared_seed_only ≠ coordinate_indexed; see docs/GLOBAL_NOISE_FIELD_CONTRACT.md).",
             "Core-only write / halo non-write / full coverage on real GPU outputs.",
             "Independent S7 acceptance on real GPU outputs.",
             "Method Registry maturity promotion is out of scope for this static audit.",
@@ -631,7 +616,7 @@ def audit_comfy_workflows(
             "No Siax / Flux weights were loaded into a runtime for inference.",
             "Model filename inventory alone is not weight SHA verification; optional --model-inventory records offline SHAs without unlocking execution.",
             "Per-tile CLIPTextEncode text is static evidence only.",
-            "Same RandomNoise seed is not a global noise-field proof.",
+            "Same RandomNoise seed is classified as noise_field_kind=shared_seed_only and is not a global noise-field proof.",
             "FLUX_HR_TILE_IMG2IMG remains workflow_candidate; execution_allowed=false.",
             "This audit does not modify Method Registry edit_permission.",
             "ae.safetensors SHA (when inventoried) does not claim equivalence to ae.sft.",
