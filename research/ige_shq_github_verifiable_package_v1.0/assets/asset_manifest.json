@@ -1,0 +1,173 @@
+{
+  "manifest_schema": "ige-shq-asset-manifest/1.0",
+  "package_version": "1.0.0-pr12-hub-aligned",
+  "total_required_assets": 13,
+  "live_siax_ncnn_or_comfyui_flux_invoked_at_runtime": false,
+  "package_execution_scope": "verifies_pre_generated_hd_donor_registration_3layer_frequency_transfer_rule01380_return_and_s7_reverse_qa",
+  "anti_spoofing_rules": {
+    "forbid_substituting_b0_upper_for_b0_gl": true,
+    "forbid_substituting_b2_full_for_b2_gl": true,
+    "b0_gl_sha256": "bf9c57e884f9ce8f0dd1267837c4c2b272fb3b75d4187133ecfccb84570c4851",
+    "b0_upper_sha256": "234b3eb7ad8bd672fe21d78a59c067a22262b211a47539b7c98dce9829061a3e",
+    "b2_gl_sha256": "deac10fc09dd2859bed0a64adc5a1460ba4bdccc6cd6800207693099862d539a",
+    "b2_full_sha256": "c389e0e439d86384487df952886cdd9f81b81a266b5b54ea54aaed3d17c13ffe"
+  },
+  "assets": [
+    {
+      "file_name": "s0_battlefield_keep_1376x768.jpg",
+      "role": "S0_BASE_KEEP_1X_SCENE",
+      "sha256": "f9f24da281878e6583ae17386b76593c9285e509d4feb7a1cea42f848944b90f",
+      "dimensions_wh": [
+        1376,
+        768
+      ],
+      "channels": 3,
+      "size_bytes": 964438,
+      "is_geometry_locked_donor": false
+    },
+    {
+      "file_name": "s0_battlefield_remove_empty_bg_1376x768.jpg",
+      "role": "S0_PAIRED_REMOVE_EMPTY_BG_1X",
+      "sha256": "98bf4fc0d69c2760bf2c66461111b8c90c3934c4155664434115dd48828a2ada",
+      "dimensions_wh": [
+        1376,
+        768
+      ],
+      "channels": 3,
+      "size_bytes": 692953,
+      "is_geometry_locked_donor": false
+    },
+    {
+      "file_name": "s1_battlefield_18part_locate_sheet_1376x768.jpg",
+      "role": "S1_18PART_ANATOMICAL_LOCATE_SHEET",
+      "sha256": "fb3a204b733189d3a1d2f88b9f8d2ec8cdbda267aaf09e033529a48634f3ebd0",
+      "dimensions_wh": [
+        1376,
+        768
+      ],
+      "channels": 3,
+      "size_bytes": 786949,
+      "is_geometry_locked_donor": false
+    },
+    {
+      "file_name": "s4_rule01380_4skill_architecture_1376x768.jpg",
+      "role": "S4_RULE01380_4SKILL_ARCHITECTURE_BLUEPRINT",
+      "sha256": "876c5db4c1c4eaa2476c9109d657cd770609188ab8732e142d0fa036e09f00c5",
+      "dimensions_wh": [
+        1376,
+        768
+      ],
+      "channels": 3,
+      "size_bytes": 777094,
+      "is_geometry_locked_donor": false
+    },
+    {
+      "file_name": "s4_self_part_hr_b0_geometry_locked_1200x896.jpg",
+      "role": "S4_B0_GEOMETRY_LOCKED_FULL_BODY_HR_DONOR",
+      "sha256": "bf9c57e884f9ce8f0dd1267837c4c2b272fb3b75d4187133ecfccb84570c4851",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 826529,
+      "is_geometry_locked_donor": true
+    },
+    {
+      "file_name": "s4_self_part_hr_b0_lower_legs_boots_1200x896.jpg",
+      "role": "S4_B0_LOWER_LEGS_BOOTS_MACRO_HR_DONOR",
+      "sha256": "e3da38cbbc89bc4bb7285c6f96f689dcd4308b0e209945e42c029f5d95df69d6",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 802695,
+      "is_geometry_locked_donor": false
+    },
+    {
+      "file_name": "s4_self_part_hr_b0_upper_1200x896.jpg",
+      "role": "S4_B0_UPPER_TORSO_SHIELD_MACRO_HR_DONOR",
+      "sha256": "234b3eb7ad8bd672fe21d78a59c067a22262b211a47539b7c98dce9829061a3e",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 770663,
+      "is_geometry_locked_donor": false
+    },
+    {
+      "file_name": "s4_self_part_hr_b1_lower_thighs_greaves_1200x896.jpg",
+      "role": "S4_B1_LOWER_THIGHS_GREAVES_GEOMETRY_LOCKED_HR_DONOR",
+      "sha256": "f5074e6bb585d881f11ca13e6a6b33e94f48c4895fbda78b73549629f0048e21",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 901310,
+      "is_geometry_locked_donor": true
+    },
+    {
+      "file_name": "s4_self_part_hr_b1_upper_1200x896.jpg",
+      "role": "S4_B1_UPPER_HEAD_TORSO_GEOMETRY_LOCKED_HR_DONOR",
+      "sha256": "137e7ce6c13e14ff07863390251ab20207ab7d443c44815974c26315072f01b9",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 805921,
+      "is_geometry_locked_donor": true
+    },
+    {
+      "file_name": "s4_self_part_hr_b2_full_siege_mecha_1200x896.jpg",
+      "role": "S4_B2_FULL_SIEGE_MECHA_MACRO_HR_DONOR",
+      "sha256": "c389e0e439d86384487df952886cdd9f81b81a266b5b54ea54aaed3d17c13ffe",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 837356,
+      "is_geometry_locked_donor": false
+    },
+    {
+      "file_name": "s4_self_part_hr_b2_geometry_locked_1200x896.jpg",
+      "role": "S4_B2_GEOMETRY_LOCKED_FULL_BODY_HR_DONOR",
+      "sha256": "deac10fc09dd2859bed0a64adc5a1460ba4bdccc6cd6800207693099862d539a",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 821445,
+      "is_geometry_locked_donor": true
+    },
+    {
+      "file_name": "s4_skill_b_material_ref_sheet_1200x896.jpg",
+      "role": "S4_SKILL_B_MATERIAL_RGB_REFERENCE_SHEET",
+      "sha256": "5763ee281830d151c14bb29f282716af6d195430496adb571c3189d1f62ebed3",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 901346,
+      "is_geometry_locked_donor": false
+    },
+    {
+      "file_name": "s4_skill_c_micro_detail_sheet_1200x896.jpg",
+      "role": "S4_SKILL_C_3X2_MACRO_MICRO_DETAIL_GRID",
+      "sha256": "b03445fddf3f3c776f75f787474123ea731d579b9c7855acadfb9484608ea8b3",
+      "dimensions_wh": [
+        1200,
+        896
+      ],
+      "channels": 3,
+      "size_bytes": 1016348,
+      "is_geometry_locked_donor": false
+    }
+  ]
+}

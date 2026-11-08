@@ -63,5 +63,20 @@ class TestMethodRegistrySchema(unittest.TestCase):
         self.assertIn("acts_as_the_primary_or_sole_high_resolution_upscaling_material_or_detail_engine", inp["forbidden_non_claims"])
 
 
+
+    def test_05_preflight_check_passes_all_13_assets_and_anti_spoofing(self):
+        pf_path = _PKG_ROOT / "preflight_check.py"
+        spec = importlib.util.spec_from_file_location("preflight_check", str(pf_path))
+        pf_mod = importlib.util.module_from_spec(spec)
+        sys.modules["preflight_check"] = pf_mod
+        spec.loader.exec_module(pf_mod)
+        res = pf_mod.run_preflight(_PKG_ROOT)
+        self.assertEqual(res["status"], "PASS", f"Preflight failed: {res['errors']}")
+        self.assertEqual(res["exit_code"], 0)
+        self.assertEqual(res["total_assets_verified"], 13)
+        self.assertEqual(res["b0_gl_status"], "PASS")
+        self.assertEqual(res["b2_gl_status"], "PASS")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

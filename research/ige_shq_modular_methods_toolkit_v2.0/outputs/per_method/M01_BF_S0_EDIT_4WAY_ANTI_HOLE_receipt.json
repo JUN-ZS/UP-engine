@@ -1,0 +1,35 @@
+{
+  "code": "M01",
+  "method_id": "BF_S0_EDIT_4WAY_ANTI_HOLE",
+  "category": "cat01_s0_anti_hole_and_base",
+  "stage": [
+    "S0"
+  ],
+  "title_zh": "戰場 S0 四向正反空背景求洞與反洞凍結",
+  "summary_zh": "對照同鏡頭戰場原圖 (Keep) 與移除人物機甲之空背景圖 (Remove)，精確求出 3 主體閉合剪影洞 M_hole 與反洞保護區 M_anti_hole (M_hole ^ M_anti_hole == 255)。",
+  "module_file": "methods/cat01_s0_anti_hole_and_base/m01_bf_s0_edit_4way_anti_hole.py",
+  "cli_invoke_command": "python invoke_method.py --run M01 --part B1_P08_GOLDMESH_CARBON_TORSO",
+  "direct_py_command": "python methods/cat01_s0_anti_hole_and_base/m01_bf_s0_edit_4way_anti_hole.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+  "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+  "status": "PASS",
+  "metrics": {
+    "keep_sha256": "f9f24da281878e6583ae17386b76593c9285e509d4feb7a1cea42f848944b90f",
+    "remove_sha256": "98bf4fc0d69c2760bf2c66461111b8c90c3934c4155664434115dd48828a2ada",
+    "camera_shift_px": 0.0476,
+    "hole_foreground_pixels": 415272,
+    "anti_hole_background_pixels": 641496,
+    "hole_and_antihole_exact_complement": true,
+    "diff_grants_edit_permission": false
+  },
+  "allowed_claims": [
+    "extracts_organic_closed_silhouettes_m_hole_and_exact_complement_m_anti_hole_via_paired_bg_removal",
+    "freezes_s0_sha256_and_verifies_camera_shift_sub_0.1px"
+  ],
+  "forbidden_non_claims": [
+    "diff_mask_automatically_grants_edit_permission",
+    "silent_resize_allowed_on_mismatched_inputs"
+  ],
+  "acceptance_gate": "ACCEPT_BF_S0_HOLE_AND_ANTIHOLE_COMPLEMENT: status==PASS; camera_shift_px<=0.1; (m_hole ^ m_anti_hole)==255; diff_grants_edit_permission==False",
+  "preview_image_file": "outputs/per_method/M01_BF_S0_EDIT_4WAY_ANTI_HOLE_preview.png",
+  "receipt_json_file": "outputs/per_method/M01_BF_S0_EDIT_4WAY_ANTI_HOLE_receipt.json"
+}

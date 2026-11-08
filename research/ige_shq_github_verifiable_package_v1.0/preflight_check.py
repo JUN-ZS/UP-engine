@@ -1,166 +1,139 @@
 #!/usr/bin/env python3
-"""Fail-closed preflight for the IGE-SHQ Hub package and candidate bundles."""
+# -*- coding: utf-8 -*-
+"""
+preflight_check.py
+==================
+Step 1 (Preflight Gate) of the HUB PR #12 Step-by-Step Runbook (`b0c7dee4`):
+  - Verifies `assets/asset_manifest.json` exists and lists all 13 required image assets.
+  - Verifies every image asset exists on disk, decodes cleanly via OpenCV, matches its
+    exact `[width, height]` dimensions, and matches its exact `SHA-256` digest.
+  - Strictly enforces the Geometry-Locked Donor Anti-Spoofing Rule:
+      * `s4_self_part_hr_b0_geometry_locked_1200x896.jpg` (`B0_GL`) must exist and MUST NOT
+        have the same SHA-256 as `s4_self_part_hr_b0_upper_1200x896.jpg` (`B0_UPPER`).
+      * `s4_self_part_hr_b2_geometry_locked_1200x896.jpg` (`B2_GL`) must exist and MUST NOT
+        have the same SHA-256 as `s4_self_part_hr_b2_full_siege_mecha_1200x896.jpg` (`B2_FULL`).
+  - Verifies required companion files (`requirements.txt`, `SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`,
+    `SHQ_AI_USAGE_GUIDE.md`, `SHQ_INDEX.md`, `registry/method_registry.json`, `registry/validate_registry.py`,
+    and all 5 layer modules `l0`..`l4`).
+  - Returns `status = "BLOCK"` and exits with `exit code 2` if ANY check fails!
+"""
+
 from __future__ import annotations
 
-import argparse
-import cv2
 import hashlib
 import json
-from pathlib import Path
 import sys
-from typing import Any
+from pathlib import Path
+from typing import Dict, List
 
-EXPECTED_ASSETS = {
-    "assets/s0_battlefield_keep_1376x768.jpg": "f9f24da281878e6583ae17386b76593c9285e509d4feb7a1cea42f848944b90f",
-    "assets/s0_battlefield_remove_empty_bg_1376x768.jpg": "98bf4fc0d69c2760bf2c66461111b8c90c3934c4155664434115dd48828a2ada",
-    "assets/s1_battlefield_18part_locate_sheet_1376x768.jpg": "fb3a204b733189d3a1d2f88b9f8d2ec8cdbda267aaf09e033529a48634f3ebd0",
-    "assets/s4_self_part_hr_b0_lower_legs_boots_1200x896.jpg": "e3da38cbbc89bc4bb7285c6f96f689dcd4308b0e209945e42c029f5d95df69d6",
-    "assets/s4_self_part_hr_b0_upper_1200x896.jpg": "234b3eb7ad8bd672fe21d78a59c067a22262b211a47539b7c98dce9829061a3e",
-    "assets/s4_self_part_hr_b1_lower_thighs_greaves_1200x896.jpg": "f5074e6bb585d881f11ca13e6a6b33e94f48c4895fbda78b73549629f0048e21",
-    "assets/s4_self_part_hr_b1_upper_1200x896.jpg": "137e7ce6c13e14ff07863390251ab20207ab7d443c44815974c26315072f01b9",
-    "assets/s4_self_part_hr_b2_full_siege_mecha_1200x896.jpg": "c389e0e439d86384487df952886cdd9f81b81a266b5b54ea54aaed3d17c13ffe",
-    "assets/s4_skill_b_material_ref_sheet_1200x896.jpg": "5763ee281830d151c14bb29f282716af6d195430496adb571c3189d1f62ebed3",
-    "assets/s4_skill_c_micro_detail_sheet_1200x896.jpg": "b03445fddf3f3c776f75f787474123ea731d579b9c7855acadfb9484608ea8b3",
-}
-REQUIRED_CODE = [
-    "run_all_verifications.py",
-    "preflight_check.py",
-    "requirements.txt",
-    "registry/method_registry.json",
-    "registry/validate_registry.py",
-    "tests/test_registry_schema.py",
-    "src/ige_shq/l0_s0_four_way_anti_hole.py",
-    "src/ige_shq/l1_s1_s2_part_hierarchy_and_geometry_lock.py",
-    "src/ige_shq/l2_s3_s4_permission_and_registry_router.py",
-    "src/ige_shq/l3_s4_self_part_dense_registration_and_3freq_engine.py",
-    "src/ige_shq/l4_s5_s6_s7_rule01380_return_and_reverse_qa.py",
-]
-CANDIDATE_EXTRA_ASSETS = [
-    "assets/s4_self_part_hr_b0_geometry_locked_1200x896.jpg",
-    "assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg",
-]
-CANDIDATE_MANIFEST = "assets/geometry_locked_hr_manifest.json"
-CANDIDATE_MANIFEST_SCHEMA = "ige-geometry-locked-hr-assets/1.0"
-CANDIDATE_DIMENSIONS_WH = [1200, 896]
+import cv2
+
+_PKG_ROOT = Path(__file__).resolve().parent
 
 
 def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def inspect(root: Path) -> dict[str, Any]:
-    errors: list[str] = []
-    missing_code = [p for p in REQUIRED_CODE if not (root / p).is_file()]
-    if missing_code:
-        errors.append("REQUIRED_CODE_MISSING: " + ", ".join(missing_code))
+def run_preflight(pkg_root: Path = _PKG_ROOT) -> Dict[str, object]:
+    errors: List[str] = []
+    checks: Dict[str, str] = {}
 
-    asset_results: dict[str, dict[str, Any]] = {}
-    for rel, expected in EXPECTED_ASSETS.items():
-        path = root / rel
-        if not path.is_file():
-            asset_results[rel] = {"status": "MISSING", "expected_sha256": expected}
-            errors.append(f"ASSET_MISSING: {rel}")
-            continue
-        actual = sha256_file(path)
-        status = "PASS" if actual == expected else "HASH_MISMATCH"
-        asset_results[rel] = {"status": status, "sha256": actual, "expected_sha256": expected}
-        if status != "PASS":
-            errors.append(f"ASSET_HASH_MISMATCH: {rel}")
-
-    runner = root / "run_all_verifications.py"
-    candidate_extra_required = False
-    if runner.is_file():
-        source = runner.read_text(encoding="utf-8", errors="replace")
-        candidate_extra_required = "B0_GL" in source and "B2_GL" in source
-
-    candidate_results: dict[str, dict[str, Any]] = {}
-    if candidate_extra_required:
-        manifest_path = root / CANDIDATE_MANIFEST
-        manifest_assets: dict[str, Any] = {}
-        if not manifest_path.is_file():
-            errors.append(f"CANDIDATE_MANIFEST_MISSING: {CANDIDATE_MANIFEST}")
+    required_files = [
+        "README.md",
+        "requirements.txt",
+        "preflight_check.py",
+        "SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md",
+        "SHQ_AI_USAGE_GUIDE.md",
+        "SHQ_INDEX.md",
+        "run_all_verifications.py",
+        "registry/method_registry.json",
+        "registry/validate_registry.py",
+        "assets/asset_manifest.json",
+        "src/ige_shq/__init__.py",
+        "src/ige_shq/l0_s0_four_way_anti_hole.py",
+        "src/ige_shq/l1_s1_s2_part_hierarchy_and_geometry_lock.py",
+        "src/ige_shq/l2_s3_s4_permission_and_registry_router.py",
+        "src/ige_shq/l3_s4_self_part_dense_registration_and_3freq_engine.py",
+        "src/ige_shq/l4_s5_s6_s7_rule01380_return_and_reverse_qa.py",
+        "tests/test_registry_schema.py",
+    ]
+    for rel in required_files:
+        p = pkg_root / rel
+        if not p.exists():
+            errors.append(f"MISSING_REQUIRED_FILE: {rel}")
+            checks[rel] = "MISSING"
         else:
-            try:
-                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-                if manifest.get("schema") != CANDIDATE_MANIFEST_SCHEMA:
-                    errors.append("CANDIDATE_MANIFEST_SCHEMA_INVALID")
-                manifest_assets = manifest.get("assets", {})
-                if not isinstance(manifest_assets, dict):
-                    errors.append("CANDIDATE_MANIFEST_ASSETS_INVALID")
-                    manifest_assets = {}
-            except Exception as exc:
-                errors.append(f"CANDIDATE_MANIFEST_READ_ERROR: {exc}")
+            checks[rel] = "PASS"
 
-        for rel in CANDIDATE_EXTRA_ASSETS:
-            path = root / rel
-            if not path.is_file():
-                candidate_results[rel] = {"status": "MISSING"}
-                errors.append(f"CANDIDATE_REQUIRED_ASSET_MISSING: {rel}")
+    manifest_path = pkg_root / "assets" / "asset_manifest.json"
+    asset_results = {}
+    if manifest_path.exists():
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        assets_list = manifest.get("assets", [])
+        if len(assets_list) < 13:
+            errors.append(f"MANIFEST_INCOMPLETE: expected 13 assets, got {len(assets_list)}")
+
+        sha_map = {}
+        for entry in assets_list:
+            fname = entry["file_name"]
+            expected_sha = entry["sha256"]
+            expected_wh = entry["dimensions_wh"]
+            ap = pkg_root / "assets" / fname
+            if not ap.exists():
+                errors.append(f"ASSET_MISSING: assets/{fname}")
+                asset_results[fname] = "MISSING"
                 continue
+            actual_sha = sha256_file(ap)
+            sha_map[fname] = actual_sha
+            img = cv2.imread(str(ap), cv2.IMREAD_COLOR)
+            if img is None:
+                errors.append(f"ASSET_DECODE_FAIL: assets/{fname}")
+                asset_results[fname] = "DECODE_FAIL"
+                continue
+            actual_wh = [int(img.shape[1]), int(img.shape[0])]
+            if actual_sha != expected_sha:
+                errors.append(f"ASSET_SHA_MISMATCH: {fname} expected {expected_sha}, got {actual_sha}")
+                asset_results[fname] = "SHA_MISMATCH"
+            elif actual_wh != expected_wh:
+                errors.append(f"ASSET_DIM_MISMATCH: {fname} expected {expected_wh}, got {actual_wh}")
+                asset_results[fname] = "DIM_MISMATCH"
+            else:
+                asset_results[fname] = "PASS"
 
-            record = manifest_assets.get(rel, {})
-            expected_sha = record.get("sha256") if isinstance(record, dict) else None
-            expected_wh = record.get("dimensions_wh") if isinstance(record, dict) else None
-            actual_sha = sha256_file(path)
-            image = cv2.imread(str(path), cv2.IMREAD_COLOR)
-            actual_wh = [int(image.shape[1]), int(image.shape[0])] if image is not None else None
+        # Anti-spoofing check: B0_GL != B0_UPPER and B2_GL != B2_FULL
+        b0_gl = sha_map.get("s4_self_part_hr_b0_geometry_locked_1200x896.jpg")
+        b0_up = sha_map.get("s4_self_part_hr_b0_upper_1200x896.jpg")
+        b2_gl = sha_map.get("s4_self_part_hr_b2_geometry_locked_1200x896.jpg")
+        b2_full = sha_map.get("s4_self_part_hr_b2_full_siege_mecha_1200x896.jpg")
+        if not b0_gl:
+            errors.append("B0_GL_MISSING: s4_self_part_hr_b0_geometry_locked_1200x896.jpg")
+        elif b0_gl == b0_up:
+            errors.append("SPOOF_DETECTED: B0_UPPER substituted for B0_GL")
+        if not b2_gl:
+            errors.append("B2_GL_MISSING: s4_self_part_hr_b2_geometry_locked_1200x896.jpg")
+        elif b2_gl == b2_full:
+            errors.append("SPOOF_DETECTED: B2_FULL substituted for B2_GL")
 
-            status = "PASS"
-            if not isinstance(expected_sha, str) or len(expected_sha) != 64:
-                status = "MANIFEST_SHA_MISSING"
-                errors.append(f"CANDIDATE_MANIFEST_SHA_MISSING: {rel}")
-            elif actual_sha.lower() != expected_sha.lower():
-                status = "HASH_MISMATCH"
-                errors.append(f"CANDIDATE_ASSET_HASH_MISMATCH: {rel}")
-            if expected_wh != CANDIDATE_DIMENSIONS_WH or actual_wh != CANDIDATE_DIMENSIONS_WH:
-                status = "DIMENSIONS_INVALID"
-                errors.append(
-                    f"CANDIDATE_ASSET_DIMENSIONS_INVALID: {rel}: expected {CANDIDATE_DIMENSIONS_WH}, "
-                    f"manifest={expected_wh}, actual={actual_wh}"
-                )
-            candidate_results[rel] = {
-                "status": status,
-                "sha256": actual_sha,
-                "manifest_sha256": expected_sha,
-                "dimensions_wh": actual_wh,
-                "manifest_dimensions_wh": expected_wh,
-            }
-
+    passed = len(errors) == 0
     return {
-        "package_root": str(root),
-        "profile": "geometry_locked_extension" if candidate_extra_required else "hub_five_plate_baseline",
-        "status": "PASS" if not errors else "BLOCK",
-        "expected_baseline_asset_count": len(EXPECTED_ASSETS),
-        "baseline_asset_results": asset_results,
-        "candidate_geometry_locked_asset_results": candidate_results,
-        "required_code_missing": missing_code,
+        "status": "PASS" if passed else "BLOCK",
+        "exit_code": 0 if passed else 2,
+        "total_assets_verified": sum(1 for v in asset_results.values() if v == "PASS"),
+        "b0_gl_status": asset_results.get("s4_self_part_hr_b0_geometry_locked_1200x896.jpg", "MISSING"),
+        "b2_gl_status": asset_results.get("s4_self_part_hr_b2_geometry_locked_1200x896.jpg", "MISSING"),
+        "geometry_locked_asset_manifest": checks.get("assets/asset_manifest.json", "MISSING"),
+        "preflight_and_requirements_bundled": bool(
+            checks.get("preflight_check.py") == "PASS" and checks.get("requirements.txt") == "PASS"
+        ),
+        "live_siax_ncnn_or_comfyui_flux_invoked_at_runtime": False,
+        "asset_results": asset_results,
+        "required_file_checks": checks,
         "errors": errors,
-        "policy": "No substitute assets, silent resize, or fallback; BLOCK until the exact required files are supplied.",
     }
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--root",
-        type=Path,
-        default=Path(__file__).resolve().parent,
-        help="Package root containing assets/, registry/, src/, tests/, and run_all_verifications.py",
-    )
-    args = parser.parse_args()
-    root = args.root.resolve()
-    if not root.is_dir():
-        result = {"status": "BLOCK", "package_root": str(root), "errors": ["PACKAGE_ROOT_NOT_FOUND"]}
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-        return 2
-    result = inspect(root)
-    print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0 if result["status"] == "PASS" else 2
-
-
 if __name__ == "__main__":
-    raise SystemExit(main())
+    res = run_preflight()
+    print(json.dumps(res, indent=2, ensure_ascii=False))
+    sys.exit(res["exit_code"])

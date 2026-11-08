@@ -6,6 +6,8 @@
 **Prior sources:** [`nutrRjsw676R`](./sources/gemini-share-nutrRjsw676R/)（19）、[`hC9HlUpskKK9`](./sources/gemini-share-hC9HlUpskKK9/)（17）、[`47yxULPlPy0W`](./sources/gemini-share-47yxULPlPy0W/)（15）  
 **Verifiable package:** [`../research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) — **research-only** 五層可重現包（優先用呢個驗）  
 **Other-AI runbook:** [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) — clone、preflight、逐步 RUN L0→L4、S7、回報格式及 BLOCK 規則  
+**Verifiable package content:** **v1.1 Complete13Assets**（13 張母本含 `B0_GL`／`B2_GL` + `asset_manifest.json`）  
+**Modular toolkit:** [`../research/ige_shq_modular_methods_toolkit_v2.0/`](../research/ige_shq_modular_methods_toolkit_v2.0/) — M01–M22 + R01–R03 + `invoke_method.py`（research-only）  
 **Fossils:** [`../research/shq_v9/`](../research/shq_v9/) — 早期單檔化石 ×10；**唔係** production runtime
 
 ---
@@ -222,7 +224,8 @@ Registry 缺失或 schema 失敗 → Router **RuntimeError**（唔准 silent fal
 ## 8. 快速自檢（開工前 30 秒）
 
 - [ ] 已讀 INDEX → PROGRAM_GUIDANCE → AI_USAGE_GUIDE → OTHER_AI_RUNBOOK  
-- [ ] 已執行 `preflight_check.py` → Registry → package tests → `run_all_verifications.py --strict`  
+- [ ] 已執行 `preflight_check.py` → Registry → package tests → `run_all_verifications.py --strict`（v1.1：13/13 含 B0_GL／B2_GL）
+- [ ] （可選）Modular toolkit：`python3 invoke_method.py --list` / `--run M12 --part P08`  
 - [ ] 已核對最新 share（XMyk）及 fossils，並理解套件不會自行呼叫 live Siax／Comfy／Flux backend  
 - [ ] 清楚五參數分離（含 `delivery_transform`）  
 - [ ] empty-BG 係原生編輯；四態生除扣洞齊  
@@ -236,7 +239,7 @@ Registry 缺失或 schema 失敗 → Router **RuntimeError**（唔准 silent fal
 
 ---
 
-## 9. 五層 GitHub 可驗證包（現行參考實作）
+## 9. 五層 GitHub 可驗證包（現行參考實作 · v1.1 Complete13Assets）
 
 **路徑：** [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/)  
 **狀態：** research-only；**未**接 `src/ige`。任何外部 AI／工程師應以呢包做端到端重現，而唔係只開 `shq_v9` 單檔。
@@ -287,3 +290,42 @@ Hub baseline 儲存報告曾記錄 **12/12** runner unit tests、**8/8** strict 
 ### 9.4 生成後端宣稱邊界
 
 五層套件使用已存在於 `assets/` 的自身 HR 母本作 dense registration、頻率層轉移、幾何回位及反扣驗收。單靠執行此 PY 套件，**唔代表**本次有呼叫 Siax／NCNN、ComfyUI／Flux、Imagine 或其他 live diffusion backend。若要宣稱本次有真生成，必須另附真實 adapter log、模型／權重 SHA、seed、參數及新生成圖 SHA。頻率 RMS、Sobel 或 detail_gain 只係診斷量，唔可以單獨證明語義細節正確。
+
+---
+
+## 10. Modular Methods Toolkit v2.0（逐方法試用）
+
+**路徑：** [`research/ige_shq_modular_methods_toolkit_v2.0/`](../research/ige_shq_modular_methods_toolkit_v2.0/)  
+**狀態：** research-only；**未**接 `src/ige`。同 §9 五層包互補：五層包做聯動閘門；本 toolkit 把 22 個方法拆成可單獨 `--run` 嘅應用。
+
+### 10.1 結構
+
+| 目錄 | 代號 | 職責 |
+|------|------|------|
+| `methods/cat01_s0_anti_hole_and_base/` | M01–M02 | S0 生／除／扣／洞／反洞 + 四反防呆 |
+| `methods/cat02_s1_s2_part_read_and_5d_lock/` | M03–M07 | S1–S2 18 部件、5D、4× 幾何鎖 |
+| `methods/cat03_s3_s4_permission_and_routing/` | M08–M10 | S3–S4 權限／OTL0／選用 Inpaint |
+| `methods/cat04_s4_s5_true_hd_upgrade_engines/` | M11–M20 | Skills A/B/C/C2/C3 + 母本轉移／契約守衛 |
+| `methods/cat05_s6_s7_geometry_locked_return_and_audit/` | M21–M22 | Rule 01380 回位 + Skill D／S7 |
+| `recipes/` | R01–R03 | 單部件／全 18 部件／四階消融 |
+
+### 10.2 CLI（`invoke_method.py`）
+
+```bash
+cd research/ige_shq_modular_methods_toolkit_v2.0
+python3 invoke_method.py --list
+python3 invoke_method.py --list-parts          # P01..P18
+python3 invoke_method.py --info M12
+python3 invoke_method.py --run M12 --part P08
+python3 invoke_method.py --category cat04 --part P08
+python3 invoke_method.py --recipe R01 --part P08
+python3 try_all_methods_one_by_one.py --part P08
+```
+
+詳見 [`SHQ_MODULAR_METHODS_GUIDE.md`](../research/ige_shq_modular_methods_toolkit_v2.0/SHQ_MODULAR_METHODS_GUIDE.md) 與 [`HUB_NOTES.md`](../research/ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md)。
+
+### 10.3 紅線（同 §9 Runbook）
+
+- Fail-Closed：單方法 FAIL／BLOCK → 停機回報。  
+- 嚴禁用 `B0_UPPER` 冒充 `B0_GL`、用 `B2_FULL` 冒充 `B2_GL`。  
+- 離線契約模式（Siax／Flux）唔好宣稱為即時 GPU 擴散推理。

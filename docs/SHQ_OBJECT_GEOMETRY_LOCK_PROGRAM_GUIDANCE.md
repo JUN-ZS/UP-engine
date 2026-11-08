@@ -5,7 +5,8 @@
 **Title:** 物件導向幾何約束升頻架構  
 **Transcript (latest):** [`docs/sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md`](./sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md)  
 **AI agent usage guide:** [`docs/SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md)  
-**Verifiable reference package:** [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) (5-layer L0→L4; research-only)  
+**Verifiable reference package:** [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) (v1.1 Complete13Assets; 5-layer L0→L4; research-only)  
+**Modular toolkit:** [`research/ige_shq_modular_methods_toolkit_v2.0/`](../research/ige_shq_modular_methods_toolkit_v2.0/) (M01–M22 + R01–R03; research-only)  
 **Research fossils:** [`research/shq_v9/`](../research/shq_v9/) (10 scripts; earlier single-file experiments)  
 **Status:** implementer contract / design lock. Not a runtime merge.
 
@@ -269,7 +270,8 @@ When implementing, cite this doc’s stage ids (`S0`–`S6`) and forbidden list 
 - [x] Forbidden practices explicit  
 - [x] AI usage guide (`SHQ_AI_USAGE_GUIDE.md`)  
 - [x] Latest source pack `XMyk6HVn2J9S` (20 turns) + prior packs retained  
-- [x] `research/ige_shq_github_verifiable_package_v1.0` five-layer package (research-only)  
+- [x] `research/ige_shq_github_verifiable_package_v1.0` five-layer package v1.1 Complete13Assets (research-only)
+- [x] `research/ige_shq_modular_methods_toolkit_v2.0` M01–M22 + R01–R03 (research-only)  
 - [x] `research/shq_v9` fossils ×10 + README (not production-wired)  
 - [ ] Runtime wiring into `src/ige` — **out of scope**  
 - [ ] Real Siax backend proof in CI — **belongs to runner PRs**
@@ -311,12 +313,20 @@ Reference fossil: `research/shq_v9/shq_battlefield_self_part_traceability_engine
 Prefer the explicit chain **KEEP → REMOVE → DIFF → HOLE** (生/除/扣/洞) with `diff_grants_edit_permission = False` until S3 compiles permission. When a verified closed silhouette already exists, skipping REMOVE→DIFF is allowed only if recorded (`four_state_remove_diff_skipped_because_mask_verified=True`).
 
 
-### 10.6 Current verifiable reference implementation (package v1.0)
+### 10.6 Current verifiable + modular research references
 
-Point implementers at **`research/ige_shq_github_verifiable_package_v1.0/`** as the **current end-to-end verifiable reference** (still research; not `src/ige` production wiring):
+Point implementers at these **research-only** trees (not `src/ige` production wiring):
 
-- Run: `python3 run_all_verifications.py --strict` from the package root (after `registry/validate_registry.py`).
-- Layers: L0 S0 four-way anti-hole → L1 S1/S2 18-part + geometry lock → L2 S3 permission + registry → L3 Skills A/B/C dense registration + \(L+M+H\) → L4 Skill D Rule 01380 return + S7 disk reverse QA.
-- Fixes vs earlier fossils: full upper+lower self-part HR plates; per-part template + dense optical-flow registration; relative paths only.
+1. **`research/ige_shq_github_verifiable_package_v1.0/`** — folder name kept for continuity; **content = v1.1 Complete13Assets**.
+   - Fail-Closed runbook (package `SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`):  
+     `preflight_check.py` → `registry/validate_registry.py` → `unittest discover -s tests -v` → `run_all_verifications.py --strict`.
+   - Requires all **13** assets; Geometry-Locked donors `B0_GL` / `B2_GL` must exist and **must not** share SHA-256 with `B0_UPPER` / `B2_FULL` (anti-spoof).
+   - Layers: L0 S0 four-way anti-hole → L1 S1/S2 18-part + geometry lock → L2 S3 permission + registry → L3 Skills A/B/C dense registration + \(L+M+H\) → L4 Skill D Rule 01380 return + S7 disk reverse QA.
+   - Runtime boundary: verifies donor registration / frequency transfer / 01380 / S7 — **no** live Siax/NCNN or ComfyUI/Flux claim.
+   - Prior incomplete ZIP omitted `B0_GL`/`B2_GL` due to FUSE `rglob` cache; v1.1 rebuilds from native `/tmp` fresh extract.
 
-Hub notes: [`research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md`](../research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md). AI checklist: [`SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md) §9.
+2. **`research/ige_shq_modular_methods_toolkit_v2.0/`** — M01–M22 categorized methods + R01–R03 recipes + `invoke_method.py`.
+   - CLI: `--list` / `--list-parts` / `--info` / `--run Mxx --part Pyy` / `--category cat0N` / `--recipe R0N`.
+   - See package `SHQ_MODULAR_METHODS_GUIDE.md` and hub `HUB_NOTES.md`.
+
+Hub notes: [`ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md`](../research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md), [`ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md`](../research/ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md). AI checklist: [`SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md) §9–§10.

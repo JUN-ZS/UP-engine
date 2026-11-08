@@ -13,12 +13,13 @@
 | [sources/gemini-share-nutrRjsw676R/](./sources/gemini-share-nutrRjsw676R/) | 上一包（19 turns；PR #12／宣稱再測 + 三技能／頻率層）— 保留作 provenance |
 | [sources/gemini-share-hC9HlUpskKK9/](./sources/gemini-share-hC9HlUpskKK9/) | 更早包（17 turns；Method Registry + 真生成 8K）— 保留作 provenance |
 | [sources/gemini-share-47yxULPlPy0W/](./sources/gemini-share-47yxULPlPy0W/) | 更早包（15 turns）— 保留作 provenance |
-| [../research/ige_shq_github_verifiable_package_v1.0/](../research/ige_shq_github_verifiable_package_v1.0/) | **Current verifiable reference package** — 5-layer L0→L4 + registry + tests + assets + `preflight_check.py` + pinned requirements（research-only） |
-| [../research/shq_v9/README.md](../research/shq_v9/README.md) | Earlier single-script fossils ×10（not production-wired; superseded for end-to-end verify by package above） |
+| [../research/ige_shq_github_verifiable_package_v1.0/](../research/ige_shq_github_verifiable_package_v1.0/) | **Current verifiable reference package (v1.1 Complete13Assets)** — 5-layer L0→L4 + registry + tests + **13** assets incl. `B0_GL`/`B2_GL` + `preflight_check.py`（research-only; Fail-Closed: `preflight` → `validate_registry` → unittest → `run_all_verifications.py --strict`） |
+| [../research/ige_shq_modular_methods_toolkit_v2.0/](../research/ige_shq_modular_methods_toolkit_v2.0/) | **Modular Methods Toolkit v2.0** — M01–M22 + R01–R03 + `invoke_method.py` / `try_all_methods_one_by_one.py`（research-only; CLI `--list` / `--run` / `--recipe` / `--category`） |
+| [../research/shq_v9/README.md](../research/shq_v9/README.md) | Earlier single-script fossils ×10（not production-wired; superseded for end-to-end verify by packages above） |
 
 ### External-AI execution rule
 
-External agents must read the Runbook and run `preflight_check.py` before any long pipeline. A missing or mismatched asset is `BLOCK`, not a warning. The attached candidate ZIP audited on 2026-11-08 has SHA-256 `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8` and is missing `B0_GL` / `B2_GL`; it is not a replacement for the expanded Hub baseline. See Runbook §0.
+External agents must read the Runbook and run `preflight_check.py` before any long pipeline. A missing or mismatched asset is `BLOCK`, not a warning. An earlier candidate ZIP audited on 2026-11-08 (SHA-256 `6f13bd5c…`) was missing `B0_GL` / `B2_GL` and must not replace the Hub baseline. **Current Hub content = v1.1 Complete13Assets** (13/13 assets + anti-spoof preflight PASS). See Runbook §0 and `research/.../HUB_NOTES.md`.
 
 ## Sibling open PRs (do not treat as duplicates)
 

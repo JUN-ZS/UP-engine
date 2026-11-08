@@ -1,28 +1,58 @@
-# Hub notes — IGE_SHQ_GitHub_Verifiable_Package_v1.0
+# Hub notes — IGE_SHQ_GitHub_Verifiable_Package (v1.1 Complete13Assets)
 
 **Status:** research-only reference implementation. **Not** wired into `src/ige` production.
 
-**Provenance:** Gemini share [`XMyk6HVn2J9S`](../../docs/sources/gemini-share-XMyk6HVn2J9S/) (battlefield self-part / dense registration / five-layer package turn; continues nutr + hC9 packs). The Hub-stored ZIP has its own historical SHA-256: `5ef8601d818c4ffb05b1fb25182cee600668be71ccd021d5d5065f4c84f4ba1c`. It is **not** byte-identical to the separately attached candidate ZIP audited below.
+**Folder name:** `research/ige_shq_github_verifiable_package_v1.0/` (kept for PR continuity).  
+**Content version:** **v1.1 Complete13Assets** — full **13** image assets including Geometry-Locked donors `B0_GL` + `B2_GL`, `assets/asset_manifest.json`, and `preflight_check.py`.
 
-**What this is:** portable five-layer Python package (`src/ige_shq/l0`→`l4`) + relative-path assets + Method Registry + unit tests + one-command runner. External AI/engineer can unzip (or clone this tree) and run:
+**Zip artifacts in this folder:**
+- `IGE_SHQ_GitHub_Verifiable_Package_v1.1_Complete13Assets.zip` (canonical complete package)
+- `IGE_SHQ_GitHub_Verifiable_Package_v1.0.zip` (same bytes / continuity name)
 
-```bash
-python3 registry/validate_registry.py registry/method_registry.json
-python3 run_all_verifications.py --strict
-```
+**Provenance:** Gemini share [`XMyk6HVn2J9S`](../../docs/sources/gemini-share-XMyk6HVn2J9S/). Earlier Hub ZIP SHA-256 `5ef8601d…` was incomplete relative to the Geometry-Locked preflight contract.
 
-**Stored Hub report:** records registry PASS (22 methods), **12/12** runner unit tests, **8/8** strict stage gates and `exit_code = 0`. Treat this as historical evidence; every external AI must run a fresh `preflight_check.py` and `run_all_verifications.py --strict` and hash the newly generated outputs.
+## Historical blocker (candidate / incomplete ZIP)
 
-**Three DEBUG root causes fixed in this package (vs earlier single-script fossils):**
+An earlier attached candidate lacked `B0_GL`, `B2_GL`, bundled `preflight_check.py` / `requirements.txt`, and a complete manifest. Hub preflight correctly returned **BLOCK** (exit 2). Do **not** substitute `B0_UPPER` / `B2_FULL` for Geometry-Locked donors.
 
-1. Upper-only self-part crop applied to full-body bbox → add `B0_LOWER` / `B1_LOWER` so 5 HR plates cover P01–P18.
-2. Coarse whole-character scale without per-part dense registration → Layer 3 `matchTemplate` + Farneback optical flow per part.
-3. Hardcoded absolute `/working_dir/...` paths → five relative-path modules + portable runner.
+## Why previous ZIP missed B0_GL / B2_GL
 
-**Layer map (quick):** L0=S0 four-way anti-hole → L1=S1/S2 18-part + geometry lock → L2=S3 permission + registry → L3=Skills A/B/C dense reg + \(L+M+H\) → L4=Skill D Rule 01380 return + S7 disk reverse QA.
+**Root cause — FUSE / virtual FS `Path.rglob` directory-entry cache:** after writing new Geometry-Locked donors, direct `cv2.imread(path)` could read the new files, but packaging via `Path.rglob("*")` still saw a **stale** directory listing (first ~10 images). The published ZIP therefore omitted:
 
-**External candidate ZIP audit (2026-11-08):** attached SHA-256 `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`. All 10 baseline asset hashes match. Hub preflight returns `BLOCK` (exit 2): the ZIP lacks the newly required `preflight_check.py`, `requirements.txt`, both geometry-locked HR images (`assets/s4_self_part_hr_b0_geometry_locked_1200x896.jpg` and `assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg`) and `assets/geometry_locked_hr_manifest.json`. Registry validation passes (22 methods) and package Registry tests pass (4/4), but its `--strict` run fails at L3. Do not substitute `B0_UPPER` / `B2_FULL`, do not silently resize, and do not promote this ZIP over the Hub baseline until the exact files and `assets/geometry_locked_hr_manifest.json` with real SHA-256 / 1200×896 evidence are committed.
+- `assets/s4_self_part_hr_b0_geometry_locked_1200x896.jpg` (`B0_GL`)
+- `assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg` (`B2_GL`)
 
-**External AI instructions:** [`docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](../../docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md). Preflight script: [`preflight_check.py`](./preflight_check.py). Pinned dependencies: [`requirements.txt`](./requirements.txt).
+**Fix:** rebuild on native `/tmp`, include all 13 JPGs + `asset_manifest.json` + `preflight_check.py`, then re-verify from a **fresh blank extract** before publishing.
 
-See also: [`docs/SHQ_AI_USAGE_GUIDE.md`](../../docs/SHQ_AI_USAGE_GUIDE.md) §9; [`docs/SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](../../docs/SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md) §10.6; package [`README.md`](./README.md).
+## Anti-spoofing (Geometry-Locked donors)
+
+| Asset | Role | SHA-256 (prefix) | Must differ from |
+|-------|------|------------------|------------------|
+| `s4_self_part_hr_b0_geometry_locked_1200x896.jpg` | `B0_GL` | `bf9c57e884f9ce8f…` | `B0_UPPER` (`234b3eb7ad8bd672…`) |
+| `s4_self_part_hr_b2_geometry_locked_1200x896.jpg` | `B2_GL` | `deac10fc09dd2859…` | `B2_FULL` (`c389e0e439d86384…`) |
+
+`preflight_check.py` enforces existence, decode, exact dimensions, exact SHA-256, and **B0_GL ≠ B0_UPPER** / **B2_GL ≠ B2_FULL**. Failure → `status=BLOCK`, **exit code 2**.
+
+## Hub verification (v1.1 on this PR)
+
+Fresh extract: `/tmp/clean_verify_v1.1` (not FUSE-cached packaging). Deps: `opencv-python-headless`, `numpy`.
+
+| Command | Result |
+|---------|--------|
+| `python3 preflight_check.py` | **PASS** · exit **0** · 13/13 |
+| `python3 registry/validate_registry.py registry/method_registry.json` | **PASS** · exit **0** · 22 methods |
+| `python3 -m unittest discover -s tests -v` | **OK** · exit **0** |
+| `python3 run_all_verifications.py --strict` | **PASS** · exit **0** · 8/8 · `accept_full_hd=true` |
+
+**Runtime boundary:** verifies donor windowing, dense registration, \(L+M+H\), Rule 01380 return, S7 disk reverse QA. Does **not** invoke live Siax/NCNN or ComfyUI/Flux — do not claim live diffusion.
+
+## Companion modular toolkit
+
+[`../ige_shq_modular_methods_toolkit_v2.0/`](../ige_shq_modular_methods_toolkit_v2.0/) — M01–M22 + R01–R03 + `invoke_method.py` (research-only).
+
+## Docs
+
+- Package runbook: [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) (Fail-Closed 1→8)
+- Hub AI guide: [`docs/SHQ_AI_USAGE_GUIDE.md`](../../docs/SHQ_AI_USAGE_GUIDE.md) §9 / §10
+- Program guidance: [`docs/SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](../../docs/SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md) §10.6
+- External AI runbook (hub copy if present): [`docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](../../docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md)
