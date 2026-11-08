@@ -26,6 +26,8 @@ assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg
 
 Do **not** rename `B0_UPPER` to `B0_GL` or `B2_FULL` to `B2_GL`. They are not equivalent source images. Do not generate placeholder files, resize another plate, or edit the runner to silently fall back. Even after both image paths exist, preflight will still `BLOCK` unless `assets/geometry_locked_hr_manifest.json` records the exact SHA-256 and `[1200, 896]` dimensions for each file. Until the exact two images and valid manifest are committed, the attached ZIP must remain `BLOCK` and must not replace the Hub baseline.
 
+**Update (v1.1 Complete13Assets on this PR):** the Hub tree `research/ige_shq_github_verifiable_package_v1.0/` now contains both Geometry-Locked donors (`B0_GL` / `B2_GL`), bundled `preflight_check.py` + `requirements.txt`, and `assets/asset_manifest.json` (13/13). Fresh `/tmp` extract verification: `preflight_check.py`, `validate_registry.py`, `unittest`, and `run_all_verifications.py --strict` all exit **0**. Companion modular toolkit: `research/ige_shq_modular_methods_toolkit_v2.0/` (`invoke_method.py` M01–M22 / R01–R03). The incomplete candidate ZIP `6f13bd5c…` remains historical evidence only.
+
 ## 1. Clone the Hub branch
 
 Run from a clean working directory:
