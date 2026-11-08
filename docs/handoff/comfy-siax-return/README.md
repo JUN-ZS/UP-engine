@@ -121,3 +121,7 @@ Key PC files mirrored under `pc_高清探/`:
 - https://github.com/JUN-ZS/UP-engine/pull/22  
 
 One-liner for peers: *Follow UP-engine #12→#22 and Desktop 高清探 Siax+IGE return; current blocker is canvas mismatch 5376 vs 3862 — fix alignment, do not bypass core.*
+
+## Follow-on Draft patch: geometry preflight + resource gate
+
+See [PREFLIGHT_RESOURCE_GUARD_V0.1.md](PREFLIGHT_RESOURCE_GUARD_V0.1.md) and the new `*_preflight.json` workflow variants. These add a fail-closed source/hash/geometry/authorization barrier before TTP/VAE/samplers and a conservative one-tile/free-memory admission gate. The existing source workflows remain unchanged. The one-tile gate intentionally BLOCKs the legacy all-tiles batch until a sequential tile runner is implemented; it is not an OOM-proof claim.
