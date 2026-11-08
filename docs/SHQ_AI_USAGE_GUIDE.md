@@ -262,7 +262,7 @@ python run_all_verifications.py --strict
 
 Hub baseline 儲存報告曾記錄 **12/12** runner unit tests、**8/8** strict stage checks PASS。呢個係歷史報告紀錄，**唔係每次新環境自動保證**；每個 AI clone 後都必須重跑並核對新 report。依賴由套件根目錄 `requirements.txt` 固定（NumPy、OpenCV headless）。
 
-**另注意：** 2026-11-08 新附上的 candidate ZIP（SHA-256 `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`）缺少 `B0_GL`、`B2_GL` 兩張幾何鎖定母本；Registry 和 package 4 tests 雖可通過，完整 strict runner 會在 L3 失敗。該 ZIP 唔可以取代目前 HUB 五母本 baseline。詳見 Runbook §0。
+**另注意：** 2026-11-08 新附上的 candidate ZIP（SHA-256 `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`）雖然 10 張 baseline 素材 SHA 全部匹配，但缺少 Hub preflight／requirements、`B0_GL`／`B2_GL` 兩張母本及 geometry-locked asset manifest。Registry 22 methods PASS、package tests 4/4 PASS，但 Hub preflight 回傳 BLOCK（exit 2），完整 strict runner 亦會在 L3 失敗。該 ZIP 唔可以取代目前 HUB 五母本 baseline。詳見 Runbook §0。
 
 ### 9.2 Layer ↔ 階段／技能／Rule 01380
 
