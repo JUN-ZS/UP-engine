@@ -5,6 +5,7 @@
 **Latest source:** [`sources/gemini-share-XMyk6HVn2J9S/`](./sources/gemini-share-XMyk6HVn2J9S/)（**20 turns**；+1 vs nutr：戰場自身部件追溯／生除扣洞反 + 方法一對一追溯）  
 **Prior sources:** [`nutrRjsw676R`](./sources/gemini-share-nutrRjsw676R/)（19）、[`hC9HlUpskKK9`](./sources/gemini-share-hC9HlUpskKK9/)（17）、[`47yxULPlPy0W`](./sources/gemini-share-47yxULPlPy0W/)（15）  
 **Verifiable package:** [`../research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) — **research-only** 五層可重現包（優先用呢個驗）  
+**Other-AI runbook:** [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) — clone、preflight、逐步 RUN L0→L4、S7、回報格式及 BLOCK 規則
 **Fossils:** [`../research/shq_v9/`](../research/shq_v9/) — 早期單檔化石 ×10；**唔係** production runtime
 
 ---
@@ -25,17 +26,16 @@ nutr 已有、本包延續（務必保留）：**嚴格宣稱邊界**、**Anti-T
 
 ## 1. 必讀順序（Read order）
 
-嚴格跟呢個次序；唔好一開始就開 fossil Python「照抄當 production」。
+嚴格跟呢個次序；未做 preflight 前唔可以直接跑長流程。
 
-1. **[`SHQ_INDEX.md`](./SHQ_INDEX.md)** — 地圖、sibling PRs、邊份 doc 係契約  
-2. **[`SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md)** — 階段閘門、禁令、模組對位（**權威**）  
-3. **本檔** — 執行 checklist 同回報格式  
-4. **最新 Gemini 源** — `sources/gemini-share-XMyk6HVn2J9S/EXTRACT.md` → `Gemini-完整對話.md`（尤其 **Turn 17–19**：宣稱／頻率層／戰場追溯）  
-5. **`research/shq_v9/`** — 設計化石／實驗日誌；對照契約睇，**禁止**把 Lanczos／CLAHE 路徑當可交貨後端
+1. **[`SHQ_INDEX.md`](./SHQ_INDEX.md)** — HUB 地圖、PR 關係及現行套件入口  
+2. **[`SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md)** — 權威階段契約、硬閘及禁令  
+3. **本檔** — AI 閱讀、證據、候選、權限、技能路由及宣稱邊界  
+4. **[`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md)** — 外部 AI 必須照做：Clone → Environment → Preflight → Registry → Unit Tests → L0–L4 Strict RUN → Fresh S7 Evidence  
+5. **最新 Gemini 源** — `sources/gemini-share-XMyk6HVn2J9S/EXTRACT.md` → `Gemini-完整對話.md`（20 turns；戰場自身部件、一對一追溯）  
+6. **可驗證套件** — `research/ige_shq_github_verifiable_package_v1.0/`：先讀 `README.md`／`HUB_NOTES.md`／Registry，再讀 L0–L4 實作；`research/shq_v9/` 只作歷史化石，不可直接當 production runtime
 
-讀完先動手改 code／開 runner／寫驗收。
-
----
+讀文件係理解契約；執行結果必須由當前 clone 的新輸出、SHA、測試及 strict exit code 證明。
 
 ## 2. 一句意圖（唔好偏題）
 
@@ -239,15 +239,28 @@ Registry 缺失或 schema 失敗 → Router **RuntimeError**（唔准 silent fal
 **路徑：** [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/)  
 **狀態：** research-only；**未**接 `src/ige`。任何外部 AI／工程師應以呢包做端到端重現，而唔係只開 `shq_v9` 單檔。
 
-### 9.1 必跑指令
+### 9.1 外部 AI 必須按次序執行
+
+先在套件根目錄安裝固定依賴，再依序執行；不可跳過 preflight：
 
 ```bash
-cd research/ige_shq_github_verifiable_package_v1.0
-python3 registry/validate_registry.py registry/method_registry.json
-python3 run_all_verifications.py --strict
+python -m pip install -r requirements.txt
+python preflight_check.py
+python registry/validate_registry.py registry/method_registry.json
+python -m unittest discover -s tests -v
+python run_all_verifications.py --strict
 ```
 
-預期：registry PASS（22 methods）；**12/12** unittest OK；**8/8** 階段閘 PASS；`exit_code = 0`。依賴：`opencv-python`（或 headless）、`numpy`、`Pillow`。
+**停機規則：**
+
+- Preflight 非 `PASS`：立即 `BLOCK`，唔准執行下游。
+- Registry 非 `PASS`、unit tests 有 FAIL／ERROR／SKIP：停機，唔准叫 pipeline accepted。
+- Strict runner 非零退出、任何 WARN／SKIP／BLOCK 或缺少新產物：唔准宣稱完成。
+- 只可以用當前執行新產生嘅 master、board、report 和 SHA；舊 report 只係歷史證據。
+
+Hub baseline 儲存報告曾記錄 **12/12** runner unit tests、**8/8** strict stage checks PASS。呢個係歷史報告紀錄，**唔係每次新環境自動保證**；每個 AI clone 後都必須重跑並核對新 report。依賴由套件根目錄 `requirements.txt` 固定（NumPy、OpenCV headless）。
+
+**另注意：** 2026-11-08 新附上的 candidate ZIP（SHA-256 `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`）缺少 `B0_GL`、`B2_GL` 兩張幾何鎖定母本；Registry 和 package 4 tests 雖可通過，完整 strict runner 會在 L3 失敗。該 ZIP 唔可以取代目前 HUB 五母本 baseline。詳見 Runbook §0。
 
 ### 9.2 Layer ↔ 階段／技能／Rule 01380
 
@@ -267,3 +280,8 @@ python3 run_all_verifications.py --strict
 
 詳見包內 [`README.md`](../research/ige_shq_github_verifiable_package_v1.0/README.md) 與 [`HUB_NOTES.md`](../research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md)。
 
+
+
+### 9.4 生成後端宣稱邊界
+
+五層套件使用已存在於 `assets/` 的自身 HR 母本作 dense registration、頻率層轉移、幾何回位及反扣驗收。單靠執行此 PY 套件，**唔代表**本次有呼叫 Siax／NCNN、ComfyUI／Flux、Imagine 或其他 live diffusion backend。若要宣稱本次有真生成，必須另附真實 adapter log、模型／權重 SHA、seed、參數及新生成圖 SHA。頻率 RMS、Sobel 或 detail_gain 只係診斷量，唔可以單獨證明語義細節正確。
