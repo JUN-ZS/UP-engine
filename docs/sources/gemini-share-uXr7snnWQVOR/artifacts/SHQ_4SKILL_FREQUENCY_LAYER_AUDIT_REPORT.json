@@ -1,0 +1,338 @@
+{
+  "specification_reverse_engineering_ledger": {
+    "already_covered_in_prior_round": [
+      "Hole (M_hole) defines ONLY where editing is permitted, not how HD content is generated",
+      "Immutable 4x Alpha Guard (alpha_final = alpha_original_4x, alpha_xor = 0, outside_hole_rgb_diff = 0)",
+      "Non-tautological S6/S7 disk re-read and contour re-extraction"
+    ],
+    "newly_exposed_gaps_fixed_in_this_round": [
+      "Rule 01380 Fix: Removed 1.5px interior erosion ring (eroded_low_res_border_pixels = 0, boundary_ring_upgraded_ratio = 1.0, feather_px = 0) so 100% of pixels inside M_hole right up to the hard edge receive full HD upgrade",
+      "4-Skill Separation & Additive Frequency Layer Decomposition: Explicitly separated L_base (Skill A: Neural SR) + M_material (Skill B: Geometry-Locked Material RGB) + H_detail (Skill C: Multi-Scale Wavelet/Laplacian & Normal/Depth Detail Residual) + Skill D (Immutable Alpha Guard)",
+      "Section 4 5-State Detail Routing & Rollback: Added all 5 head/part states including excess surface noise rollback (0.25 * H_detail without blurring L_base or M_material) and demoting INPAINT to INPAINT_HOLE_REPAIR_OPTIONAL"
+    ]
+  },
+  "generated_visual_assets_honest_dimensions": {
+    "skill_b_material_rgb_sheet": {
+      "file": "watermarked_img_2335785879114476604.jpg",
+      "actual_dimensions_wh": [
+        1200,
+        896
+      ],
+      "sha256": "5763ee281830d151c14bb29f282716af6d195430496adb571c3189d1f62ebed3"
+    },
+    "skill_c_multiscale_detail_sheet": {
+      "file": "watermarked_img_8435044000942099530.jpg",
+      "actual_dimensions_wh": [
+        1200,
+        896
+      ],
+      "sha256": "b03445fddf3f3c776f75f787474123ea731d579b9c7855acadfb9484608ea8b3"
+    },
+    "four_skill_architecture_diagram": {
+      "file": "watermarked_img_18408535663404657126.jpg",
+      "actual_dimensions_wh": [
+        1376,
+        768
+      ],
+      "sha256": "876c5db4c1c4eaa2476c9109d657cd770609188ab8732e142d0fa036e09f00c5"
+    },
+    "full_scene_4x_master_output": {
+      "file": "SHQ_4SKILL_FULL_SCENE_4X_MASTER_5504x3072.png",
+      "actual_dimensions_wh": [
+        5504,
+        3072
+      ],
+      "sha256": "c05b1ec32efc866f2b527558898b24f935bf20644445a9ecb113442714bfa031"
+    }
+  },
+  "ablation_frequency_metrics": {
+    "stage1_sr_only": {
+      "low_freq_structural_ncc": 0.99978,
+      "mid_freq_material_rms": 18.5638,
+      "high_freq_detail_rms": 8.0297,
+      "sobel_gradient_gain_ratio_diagnostic": 1.1178
+    },
+    "stage2_sr_plus_material": {
+      "low_freq_structural_ncc": 0.9977,
+      "mid_freq_material_rms": 22.1132,
+      "high_freq_detail_rms": 9.8354,
+      "sobel_gradient_gain_ratio_diagnostic": 1.3381
+    },
+    "stage3_sr_plus_material_plus_detail": {
+      "low_freq_structural_ncc": 0.99688,
+      "mid_freq_material_rms": 22.8042,
+      "high_freq_detail_rms": 11.2412,
+      "sobel_gradient_gain_ratio_diagnostic": 1.4256
+    },
+    "stage4_surface_noise_rollback": {
+      "low_freq_structural_ncc": 0.99752,
+      "mid_freq_material_rms": 22.2901,
+      "high_freq_detail_rms": 10.1872,
+      "sobel_gradient_gain_ratio_diagnostic": 1.3582
+    }
+  },
+  "rule_01380_and_skill_d_guard_receipts": {
+    "stage1_sr_only": {
+      "rule_01380_enforced": true,
+      "feather_px": 0,
+      "soft_alpha_pixels": 0,
+      "alpha_xor_pixels": 0,
+      "eroded_low_res_border_pixels": 0,
+      "boundary_ring_upgraded_ratio": 1.0,
+      "max_outside_hole_rgb_diff": 0
+    },
+    "stage2_sr_plus_material": {
+      "rule_01380_enforced": true,
+      "feather_px": 0,
+      "soft_alpha_pixels": 0,
+      "alpha_xor_pixels": 0,
+      "eroded_low_res_border_pixels": 0,
+      "boundary_ring_upgraded_ratio": 1.0,
+      "max_outside_hole_rgb_diff": 0
+    },
+    "stage3_sr_plus_material_plus_detail": {
+      "rule_01380_enforced": true,
+      "feather_px": 0,
+      "soft_alpha_pixels": 0,
+      "alpha_xor_pixels": 0,
+      "eroded_low_res_border_pixels": 0,
+      "boundary_ring_upgraded_ratio": 1.0,
+      "max_outside_hole_rgb_diff": 0
+    },
+    "stage4_surface_noise_rollback": {
+      "rule_01380_enforced": true,
+      "feather_px": 0,
+      "soft_alpha_pixels": 0,
+      "alpha_xor_pixels": 0,
+      "eroded_low_res_border_pixels": 0,
+      "boundary_ring_upgraded_ratio": 1.0,
+      "max_outside_hole_rgb_diff": 0
+    }
+  },
+  "s6_reverse_qa_disk_audit_receipts": {
+    "stage1_sr_only": {
+      "status": "PASS",
+      "re_read_from_saved_disk_bytes": true,
+      "saved_file_name": "SHQ_4SKILL_STAGE1_SR_ONLY_4X.png",
+      "saved_file_sha256": "b8b90fe2ee5597c1f4c9e2b06b017b448c474070779385eedf37ee565c73c898",
+      "alpha_xor_pixels": 0,
+      "soft_alpha_pixels": 0,
+      "max_outside_hole_rgb_diff_4x": 0,
+      "rule_01380_eroded_low_res_border_pixels": 0,
+      "rule_01380_boundary_ring_upgraded_ratio": 1.0,
+      "reverse_qa_re_extracted_silhouette_iou": 1.0,
+      "reverse_qa_re_extracted_boundary_f1": 1.0,
+      "reverse_qa_hausdorff_px": 0.0,
+      "is_self_comparison_tautology": false,
+      "phase_shift_px": 0.0016
+    },
+    "stage2_sr_plus_material": {
+      "status": "PASS",
+      "re_read_from_saved_disk_bytes": true,
+      "saved_file_name": "SHQ_4SKILL_STAGE2_SR_PLUS_MATERIAL_4X.png",
+      "saved_file_sha256": "aa8f54ee7f55ae89d8b1849a2743ccc4cda656f7085ffd54c7a6b3901ade5214",
+      "alpha_xor_pixels": 0,
+      "soft_alpha_pixels": 0,
+      "max_outside_hole_rgb_diff_4x": 0,
+      "rule_01380_eroded_low_res_border_pixels": 0,
+      "rule_01380_boundary_ring_upgraded_ratio": 1.0,
+      "reverse_qa_re_extracted_silhouette_iou": 1.0,
+      "reverse_qa_re_extracted_boundary_f1": 1.0,
+      "reverse_qa_hausdorff_px": 1.0,
+      "is_self_comparison_tautology": false,
+      "phase_shift_px": 0.0092
+    },
+    "stage3_sr_plus_material_plus_detail": {
+      "status": "PASS",
+      "re_read_from_saved_disk_bytes": true,
+      "saved_file_name": "SHQ_4SKILL_FULL_SCENE_4X_MASTER_5504x3072.png",
+      "saved_file_sha256": "c05b1ec32efc866f2b527558898b24f935bf20644445a9ecb113442714bfa031",
+      "alpha_xor_pixels": 0,
+      "soft_alpha_pixels": 0,
+      "max_outside_hole_rgb_diff_4x": 0,
+      "rule_01380_eroded_low_res_border_pixels": 0,
+      "rule_01380_boundary_ring_upgraded_ratio": 1.0,
+      "reverse_qa_re_extracted_silhouette_iou": 1.0,
+      "reverse_qa_re_extracted_boundary_f1": 1.0,
+      "reverse_qa_hausdorff_px": 1.0,
+      "is_self_comparison_tautology": false,
+      "phase_shift_px": 0.011
+    },
+    "stage4_surface_noise_rollback": {
+      "status": "PASS",
+      "re_read_from_saved_disk_bytes": true,
+      "saved_file_name": "SHQ_4SKILL_STAGE4_NOISE_ROLLBACK_4X.png",
+      "saved_file_sha256": "077db65858ca23ad1a0f0e95937303184ead338ebda8fb96c4c17bf6824d8c54",
+      "alpha_xor_pixels": 0,
+      "soft_alpha_pixels": 0,
+      "max_outside_hole_rgb_diff_4x": 0,
+      "rule_01380_eroded_low_res_border_pixels": 0,
+      "rule_01380_boundary_ring_upgraded_ratio": 1.0,
+      "reverse_qa_re_extracted_silhouette_iou": 1.0,
+      "reverse_qa_re_extracted_boundary_f1": 1.0,
+      "reverse_qa_hausdorff_px": 1.0,
+      "is_self_comparison_tautology": false,
+      "phase_shift_px": 0.0094
+    }
+  },
+  "section4_router_5state_decisions": {
+    "state1_shape_clear_pixels_low": {
+      "selected_skill_id": "SKILL_A_NEURAL_SR_BASE_4X",
+      "registry_method_id": "SKILL_A_NEURAL_SR_BASE_4X",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "implemented_candidate_only_in_pr5",
+      "capability": "neural_super_resolution_4x_base_layer_L_base",
+      "execution_status": "execute_authorized",
+      "four_state_remove_diff_skipped_because_mask_verified": true,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [
+        "INPAINT_HOLE_REPAIR_OPTIONAL"
+      ],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "reconstructs_4x_low_frequency_base_form_L_base_in_locked_4x_coordinates",
+        "preserves_original_part_proportions_and_sub_0.05px_phase_alignment"
+      ],
+      "forbidden_non_claims": [
+        "modifies_alpha_or_outer_silhouette",
+        "substitutes_for_mid_frequency_material_or_micro_detail_layers"
+      ],
+      "rationale": "Section 4 State 1: shape_clear_pixels_low=present -> route to SKILL_A_NEURAL_SR_BASE_4X -> SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN -> SKILL_C_MULTISCALE_DETAIL_SYNTHESIS -> SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD."
+    },
+    "state2_material_blurry": {
+      "selected_skill_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+      "registry_method_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "implemented_candidate_only_in_pr5",
+      "capability": "geometry_locked_mid_frequency_material_rgb_M_material",
+      "execution_status": "execute_authorized",
+      "four_state_remove_diff_skipped_because_mask_verified": true,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [
+        "INPAINT_HOLE_REPAIR_OPTIONAL"
+      ],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "synthesizes_mid_frequency_surface_material_reflectance_M_material_rgb_only",
+        "zero_authority_over_alpha_silhouette_or_part_coordinates"
+      ],
+      "forbidden_non_claims": [
+        "ai_material_generator_can_alter_alpha_or_silhouette",
+        "modifies_pixels_outside_m_hole"
+      ],
+      "rationale": "Section 4 State 2: material_blurry_texture_lacking=present -> route to SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN followed by SKILL_C_MULTISCALE_DETAIL_SYNTHESIS (RGB only, zero Alpha authority)."
+    },
+    "state3_seams_mesh_missing": {
+      "selected_skill_id": "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
+      "registry_method_id": "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "implemented_candidate_only_in_pr5",
+      "capability": "normal_and_depth_guided_structural_seam_mesh_detail",
+      "execution_status": "execute_authorized",
+      "four_state_remove_diff_skipped_because_mask_verified": true,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [
+        "INPAINT_HOLE_REPAIR_OPTIONAL"
+      ],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "guides_micro_seams_screws_and_gold_mesh_filaments_via_2d_normal_depth_gradients"
+      ],
+      "forbidden_non_claims": [
+        "claims_calibrated_metric_lidar_3d_reconstruction_from_single_2d_image"
+      ],
+      "rationale": "Section 4 State 3: structural_seams_mesh_cracks_missing=present -> route to 3D/Normal/Depth-guided structural detail synthesis inside locked M_hole."
+    },
+    "state4_outer_shape_broken": {
+      "selected_skill_id": "OTL0_TOPOLOGY_REPAIR",
+      "registry_method_id": "OTL0_TOPOLOGY_REPAIR",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "implemented_candidate_only_in_pr5",
+      "capability": "topology_and_boundary_repair_before_detail",
+      "execution_status": "execute_authorized",
+      "four_state_remove_diff_skipped_because_mask_verified": true,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [
+        "SIAX4X_TILE_CORE_SR",
+        "FLUX_HR_TILE_IMG2IMG",
+        "DETAIL6_MATERIAL_RESIDUAL",
+        "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+        "HOLE_SCALELOCK_HF_RESIDUAL",
+        "SKILL_A_NEURAL_SR_BASE_4X",
+        "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+        "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+        "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
+        "INPAINT_HOLE_REPAIR_OPTIONAL"
+      ],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "blocks_downstream_detail_enhancers_when_topology_is_broken"
+      ],
+      "forbidden_non_claims": [
+        "sharpening_broken_topology_counts_as_improvement"
+      ],
+      "rationale": "Counterfactual Law (Section 4): outer_shape_broken/topology_error=present returns to EDIT 4-way anti-diff / OTL0 and strictly blocks all SR, Material, and Detail skills."
+    },
+    "state5_surface_noise_excessive": {
+      "selected_skill_id": "SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+      "registry_method_id": "SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "implemented_candidate_only_in_pr5",
+      "capability": "selective_high_frequency_detail_layer_attenuation",
+      "execution_status": "execute_authorized",
+      "four_state_remove_diff_skipped_because_mask_verified": true,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [
+        "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+        "INPAINT_HOLE_REPAIR_OPTIONAL"
+      ],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "reduces_high_frequency_noise_by_scaling_H_detail_only_while_preserving_L_base_M_material_and_geometry"
+      ],
+      "forbidden_non_claims": [
+        "blurs_base_structure_or_alters_part_silhouette"
+      ],
+      "rationale": "Section 4 State 5: surface_noise_excessive=present -> attenuate high-frequency H_detail layer while preserving L_base, M_material, and immutable 4x geometry."
+    },
+    "state6_optional_inpaint": {
+      "selected_skill_id": "INPAINT_HOLE_REPAIR_OPTIONAL",
+      "registry_method_id": "INPAINT_HOLE_REPAIR_OPTIONAL",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "implemented_candidate_only_in_pr5",
+      "capability": "optional_missing_occlusion_hole_completion_only",
+      "execution_status": "execute_authorized",
+      "four_state_remove_diff_skipped_because_mask_verified": true,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "serves_strictly_as_an_optional_hole_completion_tool_when_occluded_structure_is_missing"
+      ],
+      "forbidden_non_claims": [
+        "acts_as_the_primary_or_sole_high_resolution_upscaling_material_or_detail_engine"
+      ],
+      "rationale": "Demoted INPAINT policy: routed strictly for optional missing-occlusion hole completion, never as the primary HD upscaler."
+    }
+  },
+  "strict_diag_summary": {
+    "strict_mode": true,
+    "total_checks": 12,
+    "counts": {
+      "PASS": 12,
+      "FAIL": 0,
+      "BLOCK": 0,
+      "WARN": 0,
+      "SKIP": 0
+    },
+    "warn_or_skip_treated_as_failure_in_strict": true,
+    "accept_full_hd": true,
+    "exit_code": 0
+  }
+}

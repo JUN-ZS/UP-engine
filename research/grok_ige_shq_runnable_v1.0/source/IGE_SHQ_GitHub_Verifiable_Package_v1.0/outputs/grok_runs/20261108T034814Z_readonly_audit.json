@@ -1,0 +1,51 @@
+{
+  "schema": "grok-ige-shq-readonly-audit/1.0",
+  "started_utc": "2026-11-08T03:48:14.061817+00:00",
+  "source_package": "/workspace/GROK_IGE_SHQ_RUNNABLE_v1.0/source/IGE_SHQ_GitHub_Verifiable_Package_v1.0",
+  "scope": "read-only asset and registry checks; no method/recipe image-write execution",
+  "steps": [
+    {
+      "label": "preflight",
+      "argv": [
+        "/workspace/GROK_IGE_SHQ_RUNNABLE_v1.0/.venv/bin/python",
+        "preflight_check.py"
+      ],
+      "started_utc": "2026-11-08T03:48:14.061853+00:00",
+      "ended_utc": "2026-11-08T03:48:14.275109+00:00",
+      "exit_code": 0,
+      "status": "PASS_COMMAND_EXIT_0",
+      "stdout_file": "outputs/grok_runs/20261108T034814Z_preflight.stdout.txt",
+      "stderr_file": "outputs/grok_runs/20261108T034814Z_preflight.stderr.txt",
+      "stdout_tail": "{\n  \"status\": \"PASS\",\n  \"exit_code\": 0,\n  \"total_assets_verified\": 13,\n  \"b0_gl_status\": \"PASS\",\n  \"b2_gl_status\": \"PASS\",\n  \"geometry_locked_asset_manifest\": \"PASS\",\n  \"preflight_and_requirements_bundled\": true,\n  \"live_siax_ncnn_or_comfyui_flux_invoked_at_runtime\": false,\n  \"asset_results\": {\n    \"s0_battlefield_keep_1376x768.jpg\": \"PASS\",\n    \"s0_battlefield_remove_empty_bg_1376x768.jpg\": \"PASS\",\n    \"s1_battlefield_18part_locate_sheet_1376x768.jpg\": \"PASS\",\n    \"s4_rule01380_4skill_architecture_1376x768.jpg\": \"PASS\",\n    \"s4_self_part_hr_b0_geometry_locked_1200x896.jpg\": \"PASS\",\n    \"s4_self_part_hr_b0_lower_legs_boots_1200x896.jpg\": \"PASS\",\n    \"s4_self_part_hr_b0_upper_1200x896.jpg\": \"PASS\",\n    \"s4_self_part_hr_b1_lower_thighs_greaves_1200x896.jpg\": \"PASS\",\n    \"s4_self_part_hr_b1_upper_1200x896.jpg\": \"PASS\",\n    \"s4_self_part_hr_b2_full_siege_mecha_1200x896.jpg\": \"PASS\",\n    \"s4_self_part_hr_b2_geometry_locked_1200x896.jpg\": \"PASS\",\n    \"s4_skill_b_material_ref_sheet_1200x896.jpg\": \"PASS\",\n    \"s4_skill_c_micro_detail_sheet_1200x896.jpg\": \"PASS\"\n  },\n  \"required_file_checks\": {\n    \"README.md\": \"PASS\",\n    \"requirements.txt\": \"PASS\",\n    \"preflight_check.py\": \"PASS\",\n    \"SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md\": \"PASS\",\n    \"SHQ_AI_USAGE_GUIDE.md\": \"PASS\",\n    \"SHQ_INDEX.md\": \"PASS\",\n    \"run_all_verifications.py\": \"PASS\",\n    \"registry/method_registry.json\": \"PASS\",\n    \"registry/validate_registry.py\": \"PASS\",\n    \"assets/asset_manifest.json\": \"PASS\",\n    \"src/ige_shq/__init__.py\": \"PASS\",\n    \"src/ige_shq/l0_s0_four_way_anti_hole.py\": \"PASS\",\n    \"src/ige_shq/l1_s1_s2_part_hierarchy_and_geometry_lock.py\": \"PASS\",\n    \"src/ige_shq/l2_s3_s4_permission_and_registry_router.py\": \"PASS\",\n    \"src/ige_shq/l3_s4_self_part_dense_registration_and_3freq_engine.py\": \"PASS\",\n    \"src/ige_shq/l4_s5_s6_s7_rule01380_return_and_reverse_qa.py\": \"PASS\",\n    \"tests/test_registry_schema.py\": \"PASS\"\n  },\n  \"errors\": []\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "registry",
+      "argv": [
+        "/workspace/GROK_IGE_SHQ_RUNNABLE_v1.0/.venv/bin/python",
+        "registry/validate_registry.py",
+        "registry/method_registry.json"
+      ],
+      "started_utc": "2026-11-08T03:48:14.275433+00:00",
+      "ended_utc": "2026-11-08T03:48:14.293668+00:00",
+      "exit_code": 0,
+      "status": "PASS_COMMAND_EXIT_0",
+      "stdout_file": "outputs/grok_runs/20261108T034814Z_registry.stdout.txt",
+      "stderr_file": "outputs/grok_runs/20261108T034814Z_registry.stderr.txt",
+      "stdout_tail": "{\n  \"status\": \"PASS\",\n  \"registry_id\": \"IGE_S0_S7_METHOD_REGISTRY\",\n  \"registry_version\": \"1.0.0-github-layered-package\",\n  \"method_count\": 22,\n  \"errors\": [],\n  \"production_wired_in_local_router\": true,\n  \"upstream_github_src_ige_merged\": false\n}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "status": "READ_ONLY_CHECKS_PASS_EXECUTION_BLOCKED",
+  "execution_gate": {
+    "status": "BLOCKED",
+    "blockers": [
+      "S3 permission is hard-coded to human_verified=True in methods/common_runtime.py",
+      "No visible signed human-approval artifact verifier is wired into the shared runtime",
+      "Existing master/report artifact path may be reused as a cache pair without content-addressed source validation"
+    ],
+    "method_execution_allowed_by_launcher": false,
+    "note": "A launcher-side flag cannot substitute for signed human review. Repair the S3 gate in source before enabling write methods."
+  },
+  "finished_utc": "2026-11-08T03:48:14.295203+00:00"
+}

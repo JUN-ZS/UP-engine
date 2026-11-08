@@ -1,0 +1,4723 @@
+{
+  "schema_version": "SHQ_V3.2_EXTREME_5LAYER_54NODES_RGBA_PACK_RECEIPT",
+  "status": "SHQ_V3_2_EXTREME_54NODES_SEAMLESS_BOTTOM_UP_OK",
+  "total_exported_rgba_png_layers": 54,
+  "layer_pack_zip_file": "SHQ_V3_2_EXTREME_4X_RGBA_LAYER_PACK.zip",
+  "layer_pack_zip_sha256": "fabb0de00700f27bf5d90fc5762ccc2d7e5f6641a5111d7bc05907d7db4988d9",
+  "hierarchy_breakdown": {
+    "L0_WORLD_MASTER": 1,
+    "L1_FULL_TUIDI_OBJECTS": 3,
+    "L2_STRUCTURAL_PARTS": 15,
+    "L3_SUBASSEMBLIES": 12,
+    "L4_LEAF_MICRO_COMPONENTS": 24,
+    "total_verified_nodes": 55
+  },
+  "gates_summary": {
+    "E36_golden_replay_pass": true,
+    "E77_binary_alpha_xor_zero_all_54_layers": true,
+    "E86_horizontal_flip_and_chirality_lock_pass": true,
+    "E87_bottom_up_L4_to_L3_to_L2_to_L1_to_L0_bit_exact": true,
+    "E88_tuidi_foreground_only_zero_box_bleed": true,
+    "E89_continuous_parent_field_zero_internal_seam": true
+  },
+  "objects_5layer_receipts": [
+    {
+      "object_id": "U0_WEATHERED_WHITE_MECHA",
+      "l1_png_file": "U0_WEATHERED_WHITE_MECHA__L1_FULL_OBJECT_4x_RGBA.png",
+      "l1_png_sha256": "5e6b05776e5601e4769d7b29f9343277dc9634386a750ac05cc16d6b5fdea5f4",
+      "reconstructed_from_24_subnodes_bit_exact": true,
+      "zero_internal_seam_verified": true,
+      "ddxx_fit_1x": {
+        "scale_a": 0.351011,
+        "scene_scale_S": 2.8489,
+        "rotation_deg": 1.1107,
+        "det_R": 1.0,
+        "weighted_rmse_1x_px": 3.4008
+      },
+      "ddxx_fit_4x": {
+        "scale_a_to_4x": 1.404043,
+        "weighted_rmse_4x_px": 13.6033
+      },
+      "l1_elevation_metrics": {
+        "node_id": "U0_WEATHERED_WHITE_MECHA",
+        "resolution_4x_wh": [
+          2040,
+          2848
+        ],
+        "coherent_generative_fg_ratio": 0.2725,
+        "laplacian_micro_variance_ratio_vs_lanczos4x": 24.9983,
+        "soft_alpha_pixels": 0,
+        "alpha_xor_pixels": 0
+      },
+      "return_hop_to_l0_world": {
+        "hop": "U0_WEATHERED_WHITE_MECHA -> L0_WORLD_SCENE",
+        "level": "L1_OBJECT",
+        "target_xywh_in_parent_4x": [
+          136,
+          120,
+          2040,
+          2848
+        ],
+        "corners_4_rel": [
+          [
+            0.024709302325581394,
+            0.0390625
+          ],
+          [
+            0.3953488372093023,
+            0.0390625
+          ],
+          [
+            0.3953488372093023,
+            0.9661458333333334
+          ],
+          [
+            0.024709302325581394,
+            0.9661458333333334
+          ]
+        ],
+        "active_tuidi_pixels_written": 5803360,
+        "core_write_integrity": true,
+        "background_outside_tuidi_untouched": true,
+        "elev_remap": false
+      },
+      "l2_parts": [
+        {
+          "contract": {
+            "node_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS",
+            "level": "L2_PART",
+            "parent_id": "U0_WEATHERED_WHITE_MECHA",
+            "bbox_in_parent_xywh": [
+              122,
+              0,
+              265,
+              170
+            ],
+            "parent_wh": [
+              510,
+              712
+            ],
+            "corners_4_rel": [
+              [
+                0.23921568627450981,
+                0.0
+              ],
+              [
+                0.7588235294117647,
+                0.0
+              ],
+              [
+                0.7588235294117647,
+                0.23876404494382023
+              ],
+              [
+                0.23921568627450981,
+                0.23876404494382023
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.058862,
+              -0.066336
+            ],
+            "mask_sha256": "fc4d76c1e01e9fa577e4f3caf443b370b8e4312b2823d020b3d7b69b3f64190a",
+            "rgb_sha256": "32fea1ac9db590f21b63c7fb9cab548d469664784b48ecc9d77085db7bb9b389"
+          },
+          "png_file": "U0_WEATHERED_WHITE_MECHA__L2_HEAD_AND_CANNONS_4x_RGBA.png",
+          "png_sha256": "1d1895a020aec7503e2181f19b07a4a363ae253237a01270320bf10aff84e65c",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS -> U0_WEATHERED_WHITE_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              488,
+              0,
+              1060,
+              680
+            ],
+            "corners_4_rel": [
+              [
+                0.23921568627450981,
+                0.0
+              ],
+              [
+                0.7588235294117647,
+                0.0
+              ],
+              [
+                0.7588235294117647,
+                0.23876404494382023
+              ],
+              [
+                0.23921568627450981,
+                0.23876404494382023
+              ]
+            ],
+            "active_tuidi_pixels_written": 714240,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": [
+            {
+              "contract": {
+                "node_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS",
+                "bbox_in_parent_xywh": [
+                  0,
+                  0,
+                  265,
+                  85
+                ],
+                "parent_wh": [
+                  265,
+                  170
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  -0.040715,
+                  0.001836
+                ],
+                "mask_sha256": "ef53f780680b48e164125b7687aeb536018591319d3da08962d4099ce9f20377",
+                "rgb_sha256": "a4009bbd6b51aa42c4a8c9ed55dd318f1ae58c2ca82d1a1ed3a0aa3dd36c8eb9"
+              },
+              "png_file": "U0_WEATHERED_WHITE_MECHA__L2_HEAD_AND_CANNONS__L3_UPPER_SUBPART_4x_RGBA.png",
+              "png_sha256": "9fd3ebf542de51b0f525bf9a8231cfb9499520b39bcfe4113e08c0ae003c92c3",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART -> U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  0,
+                  1060,
+                  340
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "active_tuidi_pixels_written": 353840,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      132,
+                      85
+                    ],
+                    "parent_wh": [
+                      265,
+                      85
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.026542,
+                      0.140995
+                    ],
+                    "mask_sha256": "88c18b4710ad9a3af6520bfa980e008b325720128c79e18cfbbf1853fbcb2367",
+                    "rgb_sha256": "1cea08f58ee32a51e891e17348c4febd43cda3daa77a33cfe6aff622530849e0"
+                  },
+                  "png_file": "U0_WEATHERED_WHITE_MECHA__L2_HEAD_AND_CANNONS__L3_UPPER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "c74ba8f355749889ce3e916674b1d1691c4ec1e0a3858f8079c430c1652ee9bc",
+                  "return_hop_to_l3": {
+                    "hop": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART.L4_LEFT_LEAF -> U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      528,
+                      340
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 179520,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      132,
+                      0,
+                      133,
+                      85
+                    ],
+                    "parent_wh": [
+                      265,
+                      85
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.115739,
+                      0.119441
+                    ],
+                    "mask_sha256": "0e5d30c38952195ed7e2e7f5db82c4ed367a03707892655e85ae18e61d9704a7",
+                    "rgb_sha256": "e01e043c30ff283492b13b7c202da3a514117fc658439f34fed154a679c8ed2b"
+                  },
+                  "png_file": "U0_WEATHERED_WHITE_MECHA__L2_HEAD_AND_CANNONS__L3_UPPER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "9c53bffc5d9a5e15fd151b2727971a93b762c7bf5842dd0daaad82dcb21cec4b",
+                  "return_hop_to_l3": {
+                    "hop": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART.L4_RIGHT_LEAF -> U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      528,
+                      0,
+                      532,
+                      340
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 174320,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            },
+            {
+              "contract": {
+                "node_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS",
+                "bbox_in_parent_xywh": [
+                  0,
+                  85,
+                  265,
+                  85
+                ],
+                "parent_wh": [
+                  265,
+                  170
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  -0.080148,
+                  -0.134509
+                ],
+                "mask_sha256": "e8560a102430ad2dde6cb8ef10432286fb804798027a565c659547377b47bb68",
+                "rgb_sha256": "cc56bf447dd4c4d91b35d3284e75269fca7de655bb2a4248e09bcbf24d993ca3"
+              },
+              "png_file": "U0_WEATHERED_WHITE_MECHA__L2_HEAD_AND_CANNONS__L3_LOWER_SUBPART_4x_RGBA.png",
+              "png_sha256": "83b4d3050b9d49bfb1f44fb1b397447fa1433ff82108e09a584b3ad6e20260e1",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART -> U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  340,
+                  1060,
+                  340
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "active_tuidi_pixels_written": 360400,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      132,
+                      85
+                    ],
+                    "parent_wh": [
+                      265,
+                      85
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.039282,
+                      -0.010793
+                    ],
+                    "mask_sha256": "88c18b4710ad9a3af6520bfa980e008b325720128c79e18cfbbf1853fbcb2367",
+                    "rgb_sha256": "fd4853e4c913eca6e06ea07e308623805e781c24d8e6e8159d038091c8ea484a"
+                  },
+                  "png_file": "U0_WEATHERED_WHITE_MECHA__L2_HEAD_AND_CANNONS__L3_LOWER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "78df72febe8d86b632fa9f1f624e861ef15b116ae8a6fcbf25d09316024d3126",
+                  "return_hop_to_l3": {
+                    "hop": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART.L4_LEFT_LEAF -> U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      528,
+                      340
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 179520,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      132,
+                      0,
+                      133,
+                      85
+                    ],
+                    "parent_wh": [
+                      265,
+                      85
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.108739,
+                      -0.13753
+                    ],
+                    "mask_sha256": "3893fe922000ecef18582ca11ee0ae82910508c5d4b08d376131b3b978f3ea84",
+                    "rgb_sha256": "d27f181f36c0a5600005793c2fca1fc3185e5281317e80330f7f53e286caed29"
+                  },
+                  "png_file": "U0_WEATHERED_WHITE_MECHA__L2_HEAD_AND_CANNONS__L3_LOWER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "aebab70978250b3f3d9b4bea8b741e94c906abd0366eced620f94cf7ef7448f7",
+                  "return_hop_to_l3": {
+                    "hop": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART.L4_RIGHT_LEAF -> U0_WEATHERED_WHITE_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      528,
+                      0,
+                      532,
+                      340
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 180880,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "contract": {
+            "node_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR",
+            "level": "L2_PART",
+            "parent_id": "U0_WEATHERED_WHITE_MECHA",
+            "bbox_in_parent_xywh": [
+              122,
+              170,
+              265,
+              228
+            ],
+            "parent_wh": [
+              510,
+              712
+            ],
+            "corners_4_rel": [
+              [
+                0.23921568627450981,
+                0.23876404494382023
+              ],
+              [
+                0.7588235294117647,
+                0.23876404494382023
+              ],
+              [
+                0.7588235294117647,
+                0.5589887640449438
+              ],
+              [
+                0.23921568627450981,
+                0.5589887640449438
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              0.005558,
+              0.027723
+            ],
+            "mask_sha256": "6e6fca004938e7a7e5ca7c7222b369470601a352adf8a6ba9620472daecc95a0",
+            "rgb_sha256": "bab92536717e9851f5652816f2d25b3460ecc1f35a9f53ddf86ba76b456ad5de"
+          },
+          "png_file": "U0_WEATHERED_WHITE_MECHA__L2_TORSO_CORE_ARMOR_4x_RGBA.png",
+          "png_sha256": "2e0ca9d05c6d7a3e05fcd495c133ab897d0159a5f024a9ec0c593f8ee3970524",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR -> U0_WEATHERED_WHITE_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              488,
+              680,
+              1060,
+              912
+            ],
+            "corners_4_rel": [
+              [
+                0.23921568627450981,
+                0.23876404494382023
+              ],
+              [
+                0.7588235294117647,
+                0.23876404494382023
+              ],
+              [
+                0.7588235294117647,
+                0.5589887640449438
+              ],
+              [
+                0.23921568627450981,
+                0.5589887640449438
+              ]
+            ],
+            "active_tuidi_pixels_written": 966720,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": [
+            {
+              "contract": {
+                "node_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR",
+                "bbox_in_parent_xywh": [
+                  0,
+                  0,
+                  265,
+                  114
+                ],
+                "parent_wh": [
+                  265,
+                  228
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  0.006021,
+                  -0.073343
+                ],
+                "mask_sha256": "56116cd54d6a6a6b9946d19a3e4d74349738ade873d4e10fafc62951b4a2e8bf",
+                "rgb_sha256": "20db50bbd6ec6b81a9cab978feda00524da24d2b426ab2853bf6a80a572907cb"
+              },
+              "png_file": "U0_WEATHERED_WHITE_MECHA__L2_TORSO_CORE_ARMOR__L3_UPPER_SUBPART_4x_RGBA.png",
+              "png_sha256": "4283296c9d04eda286d0d4122c315c6f82208342eefc8ab9406f942e1a30b3d6",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART -> U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  0,
+                  1060,
+                  456
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "active_tuidi_pixels_written": 483360,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      132,
+                      114
+                    ],
+                    "parent_wh": [
+                      265,
+                      114
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.003497,
+                      0.162154
+                    ],
+                    "mask_sha256": "8869dc57775c697860832835f3a9a12726469ce723fbc99e76f70a11a062efdc",
+                    "rgb_sha256": "5cd60b631bc4fc2a2ccef477c9ce8b686987596e000945cd94abcf6231027956"
+                  },
+                  "png_file": "U0_WEATHERED_WHITE_MECHA__L2_TORSO_CORE_ARMOR__L3_UPPER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "6b5dd01f41171c92bb1dc46763b5fa33575d296f39a8d6666b50937c890b702a",
+                  "return_hop_to_l3": {
+                    "hop": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART.L4_LEFT_LEAF -> U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      528,
+                      456
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 240768,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      132,
+                      0,
+                      133,
+                      114
+                    ],
+                    "parent_wh": [
+                      265,
+                      114
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.009375,
+                      -0.1456
+                    ],
+                    "mask_sha256": "f9a7b03b49bf10ba65c6d662d692d52b2da9068398242c631789194e8327a249",
+                    "rgb_sha256": "af13f04896baabc11622de2b39eb058c51ecc94fc31fa88049c212183ded307e"
+                  },
+                  "png_file": "U0_WEATHERED_WHITE_MECHA__L2_TORSO_CORE_ARMOR__L3_UPPER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "3e4eb53e24466a7c2c6abc4cad148ed6e91e55a75306f2f9f420197d3bc9bff1",
+                  "return_hop_to_l3": {
+                    "hop": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART.L4_RIGHT_LEAF -> U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      528,
+                      0,
+                      532,
+                      456
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 242592,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            },
+            {
+              "contract": {
+                "node_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR",
+                "bbox_in_parent_xywh": [
+                  0,
+                  114,
+                  265,
+                  114
+                ],
+                "parent_wh": [
+                  265,
+                  228
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  0.005664,
+                  0.128789
+                ],
+                "mask_sha256": "56116cd54d6a6a6b9946d19a3e4d74349738ade873d4e10fafc62951b4a2e8bf",
+                "rgb_sha256": "83e6d6b961ac798682d0109458af6045f75ce9eedf38a2e343aeaca582815baa"
+              },
+              "png_file": "U0_WEATHERED_WHITE_MECHA__L2_TORSO_CORE_ARMOR__L3_LOWER_SUBPART_4x_RGBA.png",
+              "png_sha256": "89ecbe1edc20f316cfaf0772b7d9d0d1f78a529e26c0e09285a57289c5326e21",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART -> U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  456,
+                  1060,
+                  456
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "active_tuidi_pixels_written": 483360,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      132,
+                      114
+                    ],
+                    "parent_wh": [
+                      265,
+                      114
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.006801,
+                      0.034909
+                    ],
+                    "mask_sha256": "8869dc57775c697860832835f3a9a12726469ce723fbc99e76f70a11a062efdc",
+                    "rgb_sha256": "b47bc0618c486e5a455a220d7b08fc607b3962866d40940814913ea15c19c1d4"
+                  },
+                  "png_file": "U0_WEATHERED_WHITE_MECHA__L2_TORSO_CORE_ARMOR__L3_LOWER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "ba054408b33d41fdbd8a8d7a2d857b0dc1be7d1404e69b12336889d3608f5c0e",
+                  "return_hop_to_l3": {
+                    "hop": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART.L4_LEFT_LEAF -> U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      528,
+                      456
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 240768,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      132,
+                      0,
+                      133,
+                      114
+                    ],
+                    "parent_wh": [
+                      265,
+                      114
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.005597,
+                      -0.026073
+                    ],
+                    "mask_sha256": "f9a7b03b49bf10ba65c6d662d692d52b2da9068398242c631789194e8327a249",
+                    "rgb_sha256": "bf6ad26c5429080743081b53bd8345441edde94489bd7d7f3ecbcc7ce860b92a"
+                  },
+                  "png_file": "U0_WEATHERED_WHITE_MECHA__L2_TORSO_CORE_ARMOR__L3_LOWER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "53ec4259d7b2d4a90768294d59b10f7270ce94436ac652879a8ad20f9770f698",
+                  "return_hop_to_l3": {
+                    "hop": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART.L4_RIGHT_LEAF -> U0_WEATHERED_WHITE_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      528,
+                      0,
+                      532,
+                      456
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4981132075471698,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4981132075471698,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 242592,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "contract": {
+            "node_id": "U0_WEATHERED_WHITE_MECHA.L2_LEFT_SHOULDER_ARM",
+            "level": "L2_PART",
+            "parent_id": "U0_WEATHERED_WHITE_MECHA",
+            "bbox_in_parent_xywh": [
+              0,
+              0,
+              122,
+              398
+            ],
+            "parent_wh": [
+              510,
+              712
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.23921568627450981,
+                0.0
+              ],
+              [
+                0.23921568627450981,
+                0.5589887640449438
+              ],
+              [
+                0.0,
+                0.5589887640449438
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.001016,
+              -0.053279
+            ],
+            "mask_sha256": "63405a4f1ad34b705bbf2c5faf7993d3bc2333f8ba3a2dbad34c794bcfc922df",
+            "rgb_sha256": "c120cdf46a6287b1cea7ae1ed5862f5c625e260fb225c85b99d6618b52cb0278"
+          },
+          "png_file": "U0_WEATHERED_WHITE_MECHA__L2_LEFT_SHOULDER_ARM_4x_RGBA.png",
+          "png_sha256": "2dc1334909095224a86b688723e877a27104f2bbb52f00419549790428243cc9",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U0_WEATHERED_WHITE_MECHA.L2_LEFT_SHOULDER_ARM -> U0_WEATHERED_WHITE_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              0,
+              0,
+              488,
+              1592
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.23921568627450981,
+                0.0
+              ],
+              [
+                0.23921568627450981,
+                0.5589887640449438
+              ],
+              [
+                0.0,
+                0.5589887640449438
+              ]
+            ],
+            "active_tuidi_pixels_written": 776896,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        },
+        {
+          "contract": {
+            "node_id": "U0_WEATHERED_WHITE_MECHA.L2_RIGHT_SHOULDER_ARM",
+            "level": "L2_PART",
+            "parent_id": "U0_WEATHERED_WHITE_MECHA",
+            "bbox_in_parent_xywh": [
+              387,
+              0,
+              123,
+              398
+            ],
+            "parent_wh": [
+              510,
+              712
+            ],
+            "corners_4_rel": [
+              [
+                0.7588235294117647,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.5589887640449438
+              ],
+              [
+                0.7588235294117647,
+                0.5589887640449438
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.099425,
+              -0.044162
+            ],
+            "mask_sha256": "137e8b5a1b663af9ab04fc0c6caa400b08493f68ffa8fd2753de1cd017ca2fef",
+            "rgb_sha256": "184a5f4ed6f19dde1b2b946dbe7ffc67add20653d99a2153ce25401bd160f403"
+          },
+          "png_file": "U0_WEATHERED_WHITE_MECHA__L2_RIGHT_SHOULDER_ARM_4x_RGBA.png",
+          "png_sha256": "95dbd7c7cd59a9beede80e3cd48b41136cc8873ec6aad07b21244d72dfb3e14f",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U0_WEATHERED_WHITE_MECHA.L2_RIGHT_SHOULDER_ARM -> U0_WEATHERED_WHITE_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              1548,
+              0,
+              492,
+              1592
+            ],
+            "corners_4_rel": [
+              [
+                0.7588235294117647,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.5589887640449438
+              ],
+              [
+                0.7588235294117647,
+                0.5589887640449438
+              ]
+            ],
+            "active_tuidi_pixels_written": 783264,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        },
+        {
+          "contract": {
+            "node_id": "U0_WEATHERED_WHITE_MECHA.L2_LEGS_CHASSIS",
+            "level": "L2_PART",
+            "parent_id": "U0_WEATHERED_WHITE_MECHA",
+            "bbox_in_parent_xywh": [
+              0,
+              398,
+              510,
+              314
+            ],
+            "parent_wh": [
+              510,
+              712
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.5589887640449438
+              ],
+              [
+                1.0,
+                0.5589887640449438
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              0.007612,
+              -0.031549
+            ],
+            "mask_sha256": "83b9598af32737871902c850e392e5fe80a6a29c1f43467af9832f228348399c",
+            "rgb_sha256": "9c56b81a0c1581e622938cf4ff73e26dc002f63b837c25d776c8d40ae62908e6"
+          },
+          "png_file": "U0_WEATHERED_WHITE_MECHA__L2_LEGS_CHASSIS_4x_RGBA.png",
+          "png_sha256": "db2bb54b563704ca711cc3ee6344a5c30b9fa04c7e6fd2f231febdec1cd2d42a",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U0_WEATHERED_WHITE_MECHA.L2_LEGS_CHASSIS -> U0_WEATHERED_WHITE_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              0,
+              1592,
+              2040,
+              1256
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.5589887640449438
+              ],
+              [
+                1.0,
+                0.5589887640449438
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ]
+            ],
+            "active_tuidi_pixels_written": 2562240,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        }
+      ]
+    },
+    {
+      "object_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "l1_png_file": "U1_GOLDMESH_FEMALE_PILOT__L1_FULL_OBJECT_4x_RGBA.png",
+      "l1_png_sha256": "3bc4a0fd9cbf4d7ed95ccc09476de9ae1ee844581b3b0a20c645800a83bbba60",
+      "reconstructed_from_24_subnodes_bit_exact": true,
+      "zero_internal_seam_verified": true,
+      "ddxx_fit_1x": {
+        "scale_a": 0.440336,
+        "scene_scale_S": 2.271,
+        "rotation_deg": 0.0951,
+        "det_R": 1.0,
+        "weighted_rmse_1x_px": 0.1639
+      },
+      "ddxx_fit_4x": {
+        "scale_a_to_4x": 1.761344,
+        "weighted_rmse_4x_px": 0.6556
+      },
+      "l1_elevation_metrics": {
+        "node_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "resolution_4x_wh": [
+          896,
+          2384
+        ],
+        "coherent_generative_fg_ratio": 0.7118,
+        "laplacian_micro_variance_ratio_vs_lanczos4x": 14.2502,
+        "soft_alpha_pixels": 0,
+        "alpha_xor_pixels": 0
+      },
+      "return_hop_to_l0_world": {
+        "hop": "U1_GOLDMESH_FEMALE_PILOT -> L0_WORLD_SCENE",
+        "level": "L1_OBJECT",
+        "target_xywh_in_parent_4x": [
+          2160,
+          672,
+          896,
+          2384
+        ],
+        "corners_4_rel": [
+          [
+            0.39244186046511625,
+            0.21875
+          ],
+          [
+            0.5552325581395349,
+            0.21875
+          ],
+          [
+            0.5552325581395349,
+            0.9947916666666666
+          ],
+          [
+            0.39244186046511625,
+            0.9947916666666666
+          ]
+        ],
+        "active_tuidi_pixels_written": 2136064,
+        "core_write_integrity": true,
+        "background_outside_tuidi_untouched": true,
+        "elev_remap": false
+      },
+      "l2_parts": [
+        {
+          "contract": {
+            "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE",
+            "level": "L2_PART",
+            "parent_id": "U1_GOLDMESH_FEMALE_PILOT",
+            "bbox_in_parent_xywh": [
+              44,
+              0,
+              135,
+              149
+            ],
+            "parent_wh": [
+              224,
+              596
+            ],
+            "corners_4_rel": [
+              [
+                0.19642857142857142,
+                0.0
+              ],
+              [
+                0.7991071428571429,
+                0.0
+              ],
+              [
+                0.7991071428571429,
+                0.25
+              ],
+              [
+                0.19642857142857142,
+                0.25
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              0.014767,
+              -0.154389
+            ],
+            "mask_sha256": "16248683a8055af1f5a3b3ffb9bf9615758dd88be00f81adad2c528f709ceb31",
+            "rgb_sha256": "9d45eb00c9eda6528d84d2362e0870f791a957ac45deb0ca5bebb1af1903bf8c"
+          },
+          "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_HEAD_FACE_4x_RGBA.png",
+          "png_sha256": "5a52ba4b56836830efc55bcfd68e84dda2dc72803324ded134857f116c1e0f00",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE -> U1_GOLDMESH_FEMALE_PILOT",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              176,
+              0,
+              540,
+              596
+            ],
+            "corners_4_rel": [
+              [
+                0.19642857142857142,
+                0.0
+              ],
+              [
+                0.7991071428571429,
+                0.0
+              ],
+              [
+                0.7991071428571429,
+                0.25
+              ],
+              [
+                0.19642857142857142,
+                0.25
+              ]
+            ],
+            "active_tuidi_pixels_written": 321840,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": [
+            {
+              "contract": {
+                "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE",
+                "bbox_in_parent_xywh": [
+                  0,
+                  0,
+                  135,
+                  74
+                ],
+                "parent_wh": [
+                  135,
+                  149
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.4966442953020134
+                  ],
+                  [
+                    0.0,
+                    0.4966442953020134
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  0.014697,
+                  -0.102746
+                ],
+                "mask_sha256": "4d719df49f0be62dea1d143e7c797f166cf623c5b0e6845624139f93aceef78b",
+                "rgb_sha256": "7b99cdcf47ba83b2c48198e3feac0287320ea3a6d9d0b97a3e12c1236236db7f"
+              },
+              "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_HEAD_FACE__L3_UPPER_SUBPART_4x_RGBA.png",
+              "png_sha256": "2d076321d76beec0ab543768ce6617b56fa5d33993f238a707f2c671c0d6a91e",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART -> U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  0,
+                  540,
+                  296
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.4966442953020134
+                  ],
+                  [
+                    0.0,
+                    0.4966442953020134
+                  ]
+                ],
+                "active_tuidi_pixels_written": 159840,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      67,
+                      74
+                    ],
+                    "parent_wh": [
+                      135,
+                      74
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.149124,
+                      0.137629
+                    ],
+                    "mask_sha256": "66e84789b3357000074a39cccb2bdcaaa088bd75add339f772ba296d035634d4",
+                    "rgb_sha256": "cfef4355adc7a44eee6cb3c4ad0b1c870064d3627435967ed776d5ff57ec5744"
+                  },
+                  "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_HEAD_FACE__L3_UPPER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "0ed5efd39867fc538d3d1ac7da1bb43bbfb95941bd8537050dcb61a61d4a0c64",
+                  "return_hop_to_l3": {
+                    "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART.L4_LEFT_LEAF -> U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      268,
+                      296
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 79328,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      67,
+                      0,
+                      68,
+                      74
+                    ],
+                    "parent_wh": [
+                      135,
+                      74
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.122545,
+                      0.041158
+                    ],
+                    "mask_sha256": "0e7a0938054c5f77fd78daa9bcade42aa03f3b68830cae8ced7e9c3c3c2e5ffa",
+                    "rgb_sha256": "c177a914345ed7282b619e89f21bb2314b5e02e43c4a95fa7a552dc5956286a7"
+                  },
+                  "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_HEAD_FACE__L3_UPPER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "561c18695531f6e21477e0e026ccc92c791e7e10eafa8c7c93f6cc2509849cc2",
+                  "return_hop_to_l3": {
+                    "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART.L4_RIGHT_LEAF -> U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      268,
+                      0,
+                      272,
+                      296
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 80512,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            },
+            {
+              "contract": {
+                "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE",
+                "bbox_in_parent_xywh": [
+                  0,
+                  74,
+                  135,
+                  75
+                ],
+                "parent_wh": [
+                  135,
+                  149
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.4966442953020134
+                  ],
+                  [
+                    1.0,
+                    0.4966442953020134
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  0.015264,
+                  -0.205343
+                ],
+                "mask_sha256": "976c2d00425311fd8963613f0663b461fc8d482c6685f510d82c08f5f2f75754",
+                "rgb_sha256": "d56f05b0b50428ab7c06d8882842f4a99ea2effef0e9d46edbbb01a34916fa5e"
+              },
+              "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_HEAD_FACE__L3_LOWER_SUBPART_4x_RGBA.png",
+              "png_sha256": "4e08336c59d5c8d640fa850f14619b8128b22b7a7ff52cbbeaebdfa36a3b0d90",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART -> U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  296,
+                  540,
+                  300
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.4966442953020134
+                  ],
+                  [
+                    1.0,
+                    0.4966442953020134
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "active_tuidi_pixels_written": 162000,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      67,
+                      75
+                    ],
+                    "parent_wh": [
+                      135,
+                      75
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.033131,
+                      0.113648
+                    ],
+                    "mask_sha256": "1d845f9642286ca2304ac675649f2da69bfcb2c5d36ead5efef735a5a79509fa",
+                    "rgb_sha256": "a7db4a14a4d69f9203143ea3a8d62090d84bb6bf77407da7da9522acb556f620"
+                  },
+                  "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_HEAD_FACE__L3_LOWER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "4ce7070808b40c195ce8ac2e75849b1140626480dd4dff88d72709de99e6affb",
+                  "return_hop_to_l3": {
+                    "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART.L4_LEFT_LEAF -> U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      268,
+                      300
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 80400,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      67,
+                      0,
+                      68,
+                      75
+                    ],
+                    "parent_wh": [
+                      135,
+                      75
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.041785,
+                      0.024384
+                    ],
+                    "mask_sha256": "4fe6d9ccbf62f19b0159205f6dd70d9926409c258dc68b0d9928ceb26ca3ef09",
+                    "rgb_sha256": "bf059ac840026fe2441c170b901c26f24801f39f596d3b4c1a224624965c6899"
+                  },
+                  "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_HEAD_FACE__L3_LOWER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "b73b668fdfbfdf8917a7458d4cac8fbb0ababfedada5903b0e1a745a3f703d88",
+                  "return_hop_to_l3": {
+                    "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART.L4_RIGHT_LEAF -> U1_GOLDMESH_FEMALE_PILOT.L2_HEAD_FACE.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      268,
+                      0,
+                      272,
+                      300
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 81600,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "contract": {
+            "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO",
+            "level": "L2_PART",
+            "parent_id": "U1_GOLDMESH_FEMALE_PILOT",
+            "bbox_in_parent_xywh": [
+              44,
+              149,
+              135,
+              208
+            ],
+            "parent_wh": [
+              224,
+              596
+            ],
+            "corners_4_rel": [
+              [
+                0.19642857142857142,
+                0.25
+              ],
+              [
+                0.7991071428571429,
+                0.25
+              ],
+              [
+                0.7991071428571429,
+                0.5989932885906041
+              ],
+              [
+                0.19642857142857142,
+                0.5989932885906041
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.061332,
+              -0.109968
+            ],
+            "mask_sha256": "0215fae9dd72de7356c45c2080941019d16316c87b4ed4743effc5a5bf1e8013",
+            "rgb_sha256": "1a01ada97b58b616ceee44ec363dc53ab353398a6db5b71c729361997ab07049"
+          },
+          "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_GOLDMESH_TORSO_4x_RGBA.png",
+          "png_sha256": "3c1fdc82edce80c538ed2a34ac031c66df13b17820a7aa9bcff96b5c7f4e6692",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO -> U1_GOLDMESH_FEMALE_PILOT",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              176,
+              596,
+              540,
+              832
+            ],
+            "corners_4_rel": [
+              [
+                0.19642857142857142,
+                0.25
+              ],
+              [
+                0.7991071428571429,
+                0.25
+              ],
+              [
+                0.7991071428571429,
+                0.5989932885906041
+              ],
+              [
+                0.19642857142857142,
+                0.5989932885906041
+              ]
+            ],
+            "active_tuidi_pixels_written": 449280,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": [
+            {
+              "contract": {
+                "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO",
+                "bbox_in_parent_xywh": [
+                  0,
+                  0,
+                  135,
+                  104
+                ],
+                "parent_wh": [
+                  135,
+                  208
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  -0.062072,
+                  -0.127562
+                ],
+                "mask_sha256": "811c2e6273e3f00fc969308db29e12f36d6513a0814d4c83f6980f2a850b6f7f",
+                "rgb_sha256": "413ab407f162dd649cdf1a2f02db82dafcfd9222cbe01b22815a44ef4ec22764"
+              },
+              "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_GOLDMESH_TORSO__L3_UPPER_SUBPART_4x_RGBA.png",
+              "png_sha256": "aedce91e7a5090ccaa03b6233431dfc813cc84edf0a44f08c9aabcee20642d80",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART -> U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  0,
+                  540,
+                  416
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "active_tuidi_pixels_written": 224640,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      67,
+                      104
+                    ],
+                    "parent_wh": [
+                      135,
+                      104
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.028874,
+                      0.016886
+                    ],
+                    "mask_sha256": "a778c191ff4881c1395a48b2a29ba808c8e8bc9331e1bc7987b36c42c2fac6f9",
+                    "rgb_sha256": "27a6d4744d641c04ea511e5facc058a82f2f77c12d29388ecd6f740ea395ca7b"
+                  },
+                  "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_GOLDMESH_TORSO__L3_UPPER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "d32c2f4496b36ef3174ea35a745c585d6f2ee5a15ef4dcb498d3f4248cee1ea9",
+                  "return_hop_to_l3": {
+                    "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART.L4_LEFT_LEAF -> U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      268,
+                      416
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 111488,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      67,
+                      0,
+                      68,
+                      104
+                    ],
+                    "parent_wh": [
+                      135,
+                      104
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.14024,
+                      -0.042364
+                    ],
+                    "mask_sha256": "dbaf7a47fee6fed21b81c75b6a43f2f125626ea938d3a3fd3e603b293614cb59",
+                    "rgb_sha256": "2212d207bc2b9265d160d1d5829e164085a472e4cb6de47c39f287ed0983cfb1"
+                  },
+                  "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_GOLDMESH_TORSO__L3_UPPER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "e7259ce5940e70d0d87714f513bb8dbf4a72be68a8ca70a4d3824b24cb2273ec",
+                  "return_hop_to_l3": {
+                    "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART.L4_RIGHT_LEAF -> U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      268,
+                      0,
+                      272,
+                      416
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 113152,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            },
+            {
+              "contract": {
+                "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO",
+                "bbox_in_parent_xywh": [
+                  0,
+                  104,
+                  135,
+                  104
+                ],
+                "parent_wh": [
+                  135,
+                  208
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  -0.058022,
+                  -0.092374
+                ],
+                "mask_sha256": "811c2e6273e3f00fc969308db29e12f36d6513a0814d4c83f6980f2a850b6f7f",
+                "rgb_sha256": "32cc99e011cbee83d8dcac8f7ffeeced948ad76bfa28c533617e50c296581d1d"
+              },
+              "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_GOLDMESH_TORSO__L3_LOWER_SUBPART_4x_RGBA.png",
+              "png_sha256": "f7343fb22772993ff901998bea4e077411070e8d5707120847b06957e3101445",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART -> U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  416,
+                  540,
+                  416
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "active_tuidi_pixels_written": 224640,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      67,
+                      104
+                    ],
+                    "parent_wh": [
+                      135,
+                      104
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.045676,
+                      0.077561
+                    ],
+                    "mask_sha256": "a778c191ff4881c1395a48b2a29ba808c8e8bc9331e1bc7987b36c42c2fac6f9",
+                    "rgb_sha256": "4b115208e30cda3875f2d0b12a8c184f3969d5201627d840b099b37c31499d3f"
+                  },
+                  "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_GOLDMESH_TORSO__L3_LOWER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "cfcc4933c04182cb3a4f006e953780f07b6e5f9bea5e6728cecc25e9cd5fa6da",
+                  "return_hop_to_l3": {
+                    "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART.L4_LEFT_LEAF -> U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      268,
+                      416
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 111488,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      67,
+                      0,
+                      68,
+                      104
+                    ],
+                    "parent_wh": [
+                      135,
+                      104
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.064097,
+                      -0.065936
+                    ],
+                    "mask_sha256": "dbaf7a47fee6fed21b81c75b6a43f2f125626ea938d3a3fd3e603b293614cb59",
+                    "rgb_sha256": "e9d983e4d1ea36de7938689d4698dbff197dc10ebc7643b076cf02fcb8e342b8"
+                  },
+                  "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_GOLDMESH_TORSO__L3_LOWER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "b56809cf04229c37c0e6fe2b8672037849b34d9b629617a3ed81e47c71fd8b7c",
+                  "return_hop_to_l3": {
+                    "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART.L4_RIGHT_LEAF -> U1_GOLDMESH_FEMALE_PILOT.L2_GOLDMESH_TORSO.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      268,
+                      0,
+                      272,
+                      416
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.4962962962962963,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.4962962962962963,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 113152,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "contract": {
+            "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_SLEEVE_RIGHT",
+            "level": "L2_PART",
+            "parent_id": "U1_GOLDMESH_FEMALE_PILOT",
+            "bbox_in_parent_xywh": [
+              0,
+              0,
+              44,
+              357
+            ],
+            "parent_wh": [
+              224,
+              596
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.19642857142857142,
+                0.0
+              ],
+              [
+                0.19642857142857142,
+                0.5989932885906041
+              ],
+              [
+                0.0,
+                0.5989932885906041
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.062141,
+              0.049811
+            ],
+            "mask_sha256": "5a7816d74fb55a8a94ddda0f1c438742aba34caae643c21a1dec94190b849540",
+            "rgb_sha256": "27d85b4beeecbfa9db0784b8857cd370785c54c733a7220003e46ee88bb186cb"
+          },
+          "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_SLEEVE_RIGHT_4x_RGBA.png",
+          "png_sha256": "09afc5556e00cf307db6288736a5605fe5ce04c313dd3e73838d4231da51f4e9",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_SLEEVE_RIGHT -> U1_GOLDMESH_FEMALE_PILOT",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              0,
+              0,
+              176,
+              1428
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.19642857142857142,
+                0.0
+              ],
+              [
+                0.19642857142857142,
+                0.5989932885906041
+              ],
+              [
+                0.0,
+                0.5989932885906041
+              ]
+            ],
+            "active_tuidi_pixels_written": 251328,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        },
+        {
+          "contract": {
+            "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_SLEEVE_LEFT",
+            "level": "L2_PART",
+            "parent_id": "U1_GOLDMESH_FEMALE_PILOT",
+            "bbox_in_parent_xywh": [
+              179,
+              0,
+              45,
+              357
+            ],
+            "parent_wh": [
+              224,
+              596
+            ],
+            "corners_4_rel": [
+              [
+                0.7991071428571429,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.5989932885906041
+              ],
+              [
+                0.7991071428571429,
+                0.5989932885906041
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.029807,
+              0.04068
+            ],
+            "mask_sha256": "bf2387016c22766964773cced5058b025aa69de00584e403e2c8bd439b0f48f3",
+            "rgb_sha256": "abd46636b5ec0245c26a9cf9eda66edea410660d02e70875a69a16a62d21adf6"
+          },
+          "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_SLEEVE_LEFT_4x_RGBA.png",
+          "png_sha256": "df26819a028ef7a3731f90875cd78be9c6a238c9b0035efec7ee0862175f4b4e",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_SLEEVE_LEFT -> U1_GOLDMESH_FEMALE_PILOT",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              716,
+              0,
+              180,
+              1428
+            ],
+            "corners_4_rel": [
+              [
+                0.7991071428571429,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.5989932885906041
+              ],
+              [
+                0.7991071428571429,
+                0.5989932885906041
+              ]
+            ],
+            "active_tuidi_pixels_written": 257040,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        },
+        {
+          "contract": {
+            "node_id": "U1_GOLDMESH_FEMALE_PILOT.L2_LOWER_SUIT_LEGS",
+            "level": "L2_PART",
+            "parent_id": "U1_GOLDMESH_FEMALE_PILOT",
+            "bbox_in_parent_xywh": [
+              0,
+              357,
+              224,
+              239
+            ],
+            "parent_wh": [
+              224,
+              596
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.5989932885906041
+              ],
+              [
+                1.0,
+                0.5989932885906041
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.011638,
+              -0.011323
+            ],
+            "mask_sha256": "533d1bc2f73cc6e26a9bc5bffd9cf5c5785040a4335db20ee618a54fb55cd8e3",
+            "rgb_sha256": "95f3b811e1f804e96bbfb419f1951ad5c0a5fbe1259f422fa92cc6d04068ce37"
+          },
+          "png_file": "U1_GOLDMESH_FEMALE_PILOT__L2_LOWER_SUIT_LEGS_4x_RGBA.png",
+          "png_sha256": "53b9bcd8504e3ac644090abf17b9f55f49cf1882dbc3e1527cf06837cd054ad7",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U1_GOLDMESH_FEMALE_PILOT.L2_LOWER_SUIT_LEGS -> U1_GOLDMESH_FEMALE_PILOT",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              0,
+              1428,
+              896,
+              956
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.5989932885906041
+              ],
+              [
+                1.0,
+                0.5989932885906041
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ]
+            ],
+            "active_tuidi_pixels_written": 856576,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        }
+      ]
+    },
+    {
+      "object_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "l1_png_file": "U2_HEAVY_ARTILLERY_MECHA__L1_FULL_OBJECT_4x_RGBA.png",
+      "l1_png_sha256": "ab14a710a45b518903683c3414f510d87b9de53a47003e60cb80178c080eded4",
+      "reconstructed_from_24_subnodes_bit_exact": true,
+      "zero_internal_seam_verified": true,
+      "ddxx_fit_1x": {
+        "scale_a": 0.333184,
+        "scene_scale_S": 3.0013,
+        "rotation_deg": -0.0143,
+        "det_R": 1.0,
+        "weighted_rmse_1x_px": 0.1787
+      },
+      "ddxx_fit_4x": {
+        "scale_a_to_4x": 1.332735,
+        "weighted_rmse_4x_px": 0.715
+      },
+      "l1_elevation_metrics": {
+        "node_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "resolution_4x_wh": [
+          2176,
+          2904
+        ],
+        "coherent_generative_fg_ratio": 0.135,
+        "laplacian_micro_variance_ratio_vs_lanczos4x": 30.4294,
+        "soft_alpha_pixels": 0,
+        "alpha_xor_pixels": 0
+      },
+      "return_hop_to_l0_world": {
+        "hop": "U2_HEAVY_ARTILLERY_MECHA -> L0_WORLD_SCENE",
+        "level": "L1_OBJECT",
+        "target_xywh_in_parent_4x": [
+          3264,
+          56,
+          2176,
+          2904
+        ],
+        "corners_4_rel": [
+          [
+            0.5930232558139535,
+            0.018229166666666668
+          ],
+          [
+            0.9883720930232558,
+            0.018229166666666668
+          ],
+          [
+            0.9883720930232558,
+            0.9635416666666666
+          ],
+          [
+            0.5930232558139535,
+            0.9635416666666666
+          ]
+        ],
+        "active_tuidi_pixels_written": 5762064,
+        "core_write_integrity": true,
+        "background_outside_tuidi_untouched": true,
+        "elev_remap": false
+      },
+      "l2_parts": [
+        {
+          "contract": {
+            "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS",
+            "level": "L2_PART",
+            "parent_id": "U2_HEAVY_ARTILLERY_MECHA",
+            "bbox_in_parent_xywh": [
+              130,
+              0,
+              283,
+              174
+            ],
+            "parent_wh": [
+              544,
+              726
+            ],
+            "corners_4_rel": [
+              [
+                0.23897058823529413,
+                0.0
+              ],
+              [
+                0.7591911764705882,
+                0.0
+              ],
+              [
+                0.7591911764705882,
+                0.2396694214876033
+              ],
+              [
+                0.23897058823529413,
+                0.2396694214876033
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.098113,
+              -0.004148
+            ],
+            "mask_sha256": "4b5dc60a3553f50f8213220dcf4c89f054ecc6f8444a45dd22d0e462737ce156",
+            "rgb_sha256": "5e76e34ca21ad8753d833c2d28985cff3e3f7563e68178839665d48853139449"
+          },
+          "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_HEAD_AND_CANNONS_4x_RGBA.png",
+          "png_sha256": "ca3c88ff761dfa1a7ee4bdd252d979a236b3707406d26c80ec4c70b95cfb4ea8",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS -> U2_HEAVY_ARTILLERY_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              520,
+              0,
+              1132,
+              696
+            ],
+            "corners_4_rel": [
+              [
+                0.23897058823529413,
+                0.0
+              ],
+              [
+                0.7591911764705882,
+                0.0
+              ],
+              [
+                0.7591911764705882,
+                0.2396694214876033
+              ],
+              [
+                0.23897058823529413,
+                0.2396694214876033
+              ]
+            ],
+            "active_tuidi_pixels_written": 511456,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": [
+            {
+              "contract": {
+                "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS",
+                "bbox_in_parent_xywh": [
+                  0,
+                  0,
+                  283,
+                  87
+                ],
+                "parent_wh": [
+                  283,
+                  174
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 42,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 0,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  -0.144188,
+                  -0.023852
+                ],
+                "mask_sha256": "ff9380fc88acf7733ac1cb874cc984ae1e860dc274722831e03ca272ee4519d1",
+                "rgb_sha256": "58b77c5c54b0962782c4555d2cbc69e405bec2aecff2e2df37de8b41bd6fa83b"
+              },
+              "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_HEAD_AND_CANNONS__L3_UPPER_SUBPART_4x_RGBA.png",
+              "png_sha256": "bc4dc60c5591f0c3b2af025857b3b828297a8dc408f5b8102b0912ac73ddfa98",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART -> U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  0,
+                  1132,
+                  348
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "active_tuidi_pixels_written": 128368,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      141,
+                      87
+                    ],
+                    "parent_wh": [
+                      283,
+                      87
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 42,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 0,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.090881,
+                      -0.036761
+                    ],
+                    "mask_sha256": "66d7c36a37ad009ec00cc3e597af9b2ff5f673a7010727367b4f7b59c686f2ce",
+                    "rgb_sha256": "7f1abd830ba378871b3d8dd95c2f87dd8107d4a6189ca8d9d37612e9f8a4d91e"
+                  },
+                  "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_HEAD_AND_CANNONS__L3_UPPER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "073b35a9630a561d29fe5ba2079a1b3209016dfb877f2d6d9cb7e313f215d3a1",
+                  "return_hop_to_l3": {
+                    "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART.L4_LEFT_LEAF -> U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      564,
+                      348
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 75232,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      141,
+                      0,
+                      142,
+                      87
+                    ],
+                    "parent_wh": [
+                      283,
+                      87
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 11,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 0,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.170511,
+                      0.055633
+                    ],
+                    "mask_sha256": "1b614dbfc906f32b03ddda25c46258c8ef1bd87b26683ed2651f0e2193466fbd",
+                    "rgb_sha256": "efaccca5c15dc31611adbada775c3fdb248e05db19fc820a3c91c1e37e2bc1ff"
+                  },
+                  "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_HEAD_AND_CANNONS__L3_UPPER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "e1d2bba7733901c8c01a97fd48ea8fc8b42aad37662861813dd90cd9e4e3dcef",
+                  "return_hop_to_l3": {
+                    "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART.L4_RIGHT_LEAF -> U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      564,
+                      0,
+                      568,
+                      348
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 53136,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            },
+            {
+              "contract": {
+                "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS",
+                "bbox_in_parent_xywh": [
+                  0,
+                  87,
+                  283,
+                  87
+                ],
+                "parent_wh": [
+                  283,
+                  174
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  -0.081562,
+                  0.015556
+                ],
+                "mask_sha256": "bcbb0e2781774c5ac31e13f49e4a9a716711f37952dca6404ad9bc26cc22b31a",
+                "rgb_sha256": "88957d94f8377cc49a5a108e4d7c7b3072f6cc678dffa88dfefb88ede6c05cbd"
+              },
+              "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_HEAD_AND_CANNONS__L3_LOWER_SUBPART_4x_RGBA.png",
+              "png_sha256": "3f576913e99a20c1b3c1cfcb73c3c2d16de489e0c40a081b6e710d9f4d858b09",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART -> U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  348,
+                  1132,
+                  348
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "active_tuidi_pixels_written": 383088,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      141,
+                      87
+                    ],
+                    "parent_wh": [
+                      283,
+                      87
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.118904,
+                      -0.052413
+                    ],
+                    "mask_sha256": "8e7217b930923e987cb1a63ed6bd7d7553f5bd2f45eed25970120d7f4cade06f",
+                    "rgb_sha256": "44cf02f2756f0318ca15baa141aa62893821014bd53b35f2338c43c65a87101e"
+                  },
+                  "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_HEAD_AND_CANNONS__L3_LOWER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "7e4f5276c1420c63d686537f462e2e98c8ce66cdf72c16880add84216e9e1fcc",
+                  "return_hop_to_l3": {
+                    "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART.L4_LEFT_LEAF -> U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      564,
+                      348
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 187616,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      141,
+                      0,
+                      142,
+                      87
+                    ],
+                    "parent_wh": [
+                      283,
+                      87
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.052032,
+                      0.016767
+                    ],
+                    "mask_sha256": "299599dd3db38fe55d06667aa71250ab56d418478aabaf36ae9ecebc93d03afb",
+                    "rgb_sha256": "a543c2009cdaa77b0cd019848f4f19fbd6fb37c5fb328dc2019a758a663688d5"
+                  },
+                  "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_HEAD_AND_CANNONS__L3_LOWER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "cbfb5e3113e0565bb21a777c771bdfd5b069f00f0cae04621d14ef02518eab4b",
+                  "return_hop_to_l3": {
+                    "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART.L4_RIGHT_LEAF -> U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_AND_CANNONS.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      564,
+                      0,
+                      568,
+                      348
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 195472,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "contract": {
+            "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR",
+            "level": "L2_PART",
+            "parent_id": "U2_HEAVY_ARTILLERY_MECHA",
+            "bbox_in_parent_xywh": [
+              130,
+              174,
+              283,
+              232
+            ],
+            "parent_wh": [
+              544,
+              726
+            ],
+            "corners_4_rel": [
+              [
+                0.23897058823529413,
+                0.2396694214876033
+              ],
+              [
+                0.7591911764705882,
+                0.2396694214876033
+              ],
+              [
+                0.7591911764705882,
+                0.559228650137741
+              ],
+              [
+                0.23897058823529413,
+                0.559228650137741
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              0.004517,
+              -0.109908
+            ],
+            "mask_sha256": "f6db511ab034e6207a7fc89f18722f3e996630316ece3a882f2fc304793506bd",
+            "rgb_sha256": "051f92e1be3552dcc0ee8385accf2bb684984bae540477f8a9a2cf66f537b4f4"
+          },
+          "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_TORSO_CORE_ARMOR_4x_RGBA.png",
+          "png_sha256": "dd3afd5a37ce33bc09517ddfe2165f0daa90fcd0e05736749b58e68fd3986952",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR -> U2_HEAVY_ARTILLERY_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              520,
+              696,
+              1132,
+              928
+            ],
+            "corners_4_rel": [
+              [
+                0.23897058823529413,
+                0.2396694214876033
+              ],
+              [
+                0.7591911764705882,
+                0.2396694214876033
+              ],
+              [
+                0.7591911764705882,
+                0.559228650137741
+              ],
+              [
+                0.23897058823529413,
+                0.559228650137741
+              ]
+            ],
+            "active_tuidi_pixels_written": 1050496,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": [
+            {
+              "contract": {
+                "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR",
+                "bbox_in_parent_xywh": [
+                  0,
+                  0,
+                  283,
+                  116
+                ],
+                "parent_wh": [
+                  283,
+                  232
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  -0.001132,
+                  -0.137726
+                ],
+                "mask_sha256": "26230f0073fb452d9feee0c74e7393e3c4398c639b05f5880c50522a54f2b07b",
+                "rgb_sha256": "435a1d92077986d61b2c86835ac5a2143e1859bd69361d9ea6bd6090598dd224"
+              },
+              "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_TORSO_CORE_ARMOR__L3_UPPER_SUBPART_4x_RGBA.png",
+              "png_sha256": "a4aa876ac8152fb947bbbc249962f08292a4bbde47dd6ca4c2a5dedc2fbb0c30",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART -> U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  0,
+                  1132,
+                  464
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    0.0,
+                    0.5
+                  ]
+                ],
+                "active_tuidi_pixels_written": 525248,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      141,
+                      116
+                    ],
+                    "parent_wh": [
+                      283,
+                      116
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.0037,
+                      -0.08738
+                    ],
+                    "mask_sha256": "19517384874910d70cc6bfca4fbb479beef85a3d4458e575f88b0df149c63a7c",
+                    "rgb_sha256": "91ba169fab392d479f56d33d1e23794dcf1264a8304a9406cf5b8df508c19120"
+                  },
+                  "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_TORSO_CORE_ARMOR__L3_UPPER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "db427b8966ac52f6d827de4a9a7401b8ba838e00a651069ce6143a7d943b6431",
+                  "return_hop_to_l3": {
+                    "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART.L4_LEFT_LEAF -> U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      564,
+                      464
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 261696,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      141,
+                      0,
+                      142,
+                      116
+                    ],
+                    "parent_wh": [
+                      283,
+                      116
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      -0.000705,
+                      0.137782
+                    ],
+                    "mask_sha256": "15fb96f30fcd0a330ec55f6bdc8ae44f537a23c2179ff2ba7d7eccb92e0d355d",
+                    "rgb_sha256": "523f57562625e98beb8058056ae7d6041dd7d1dcf8852af2348b2407b6267c43"
+                  },
+                  "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_TORSO_CORE_ARMOR__L3_UPPER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "45f5317646ce69bc64f5c52e22305376d2bc6aff1f5db0c73f73ce6906bc0fdd",
+                  "return_hop_to_l3": {
+                    "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART.L4_RIGHT_LEAF -> U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_UPPER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      564,
+                      0,
+                      568,
+                      464
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 263552,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            },
+            {
+              "contract": {
+                "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                "level": "L3_SUBPART",
+                "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR",
+                "bbox_in_parent_xywh": [
+                  0,
+                  116,
+                  283,
+                  116
+                ],
+                "parent_wh": [
+                  283,
+                  232
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "raw_e40_margins_px": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0
+                },
+                "honest_pad_offsets_px": {
+                  "pad_left": 2,
+                  "pad_top": 2,
+                  "pad_right": 2,
+                  "pad_bottom": 2
+                },
+                "chirality_slope_dx_dy": [
+                  0.009609,
+                  -0.08209
+                ],
+                "mask_sha256": "26230f0073fb452d9feee0c74e7393e3c4398c639b05f5880c50522a54f2b07b",
+                "rgb_sha256": "a0835fad4ca2190e8b37a5c4fc585aadb8f1e657985084b3ab54ac9258bd6921"
+              },
+              "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_TORSO_CORE_ARMOR__L3_LOWER_SUBPART_4x_RGBA.png",
+              "png_sha256": "2a7786201c200ab9eddd3a4f60be16452aaf37f08f99c4b60712c3e139004823",
+              "reconstructed_from_l4_bit_exact": true,
+              "return_hop_to_l2": {
+                "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART -> U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR",
+                "level": "L3_SUBPART",
+                "target_xywh_in_parent_4x": [
+                  0,
+                  464,
+                  1132,
+                  464
+                ],
+                "corners_4_rel": [
+                  [
+                    0.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    0.5
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ]
+                ],
+                "active_tuidi_pixels_written": 525248,
+                "core_write_integrity": true,
+                "background_outside_tuidi_untouched": true,
+                "elev_remap": false
+              },
+              "l4_children": [
+                {
+                  "contract": {
+                    "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART.L4_LEFT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      0,
+                      0,
+                      141,
+                      116
+                    ],
+                    "parent_wh": [
+                      283,
+                      116
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.026591,
+                      0.076918
+                    ],
+                    "mask_sha256": "19517384874910d70cc6bfca4fbb479beef85a3d4458e575f88b0df149c63a7c",
+                    "rgb_sha256": "3c842c7ddd71dc983401247967424eb0e58c16bf978d4aecca53acf98a55f16f"
+                  },
+                  "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_TORSO_CORE_ARMOR__L3_LOWER_SUBPART__L4_LEFT_LEAF_4x_RGBA.png",
+                  "png_sha256": "1beaea02bb7adb0443591f93c13920fc579b56fd1ab63af07351bb4b29d96641",
+                  "return_hop_to_l3": {
+                    "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART.L4_LEFT_LEAF -> U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      0,
+                      0,
+                      564,
+                      464
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ],
+                      [
+                        0.0,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 261696,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                },
+                {
+                  "contract": {
+                    "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART.L4_RIGHT_LEAF",
+                    "level": "L4_LEAF_MICRO",
+                    "parent_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                    "bbox_in_parent_xywh": [
+                      141,
+                      0,
+                      142,
+                      116
+                    ],
+                    "parent_wh": [
+                      283,
+                      116
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ]
+                    ],
+                    "raw_e40_margins_px": {
+                      "left": 0,
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0
+                    },
+                    "honest_pad_offsets_px": {
+                      "pad_left": 2,
+                      "pad_top": 2,
+                      "pad_right": 2,
+                      "pad_bottom": 2
+                    },
+                    "chirality_slope_dx_dy": [
+                      0.001725,
+                      -0.137931
+                    ],
+                    "mask_sha256": "15fb96f30fcd0a330ec55f6bdc8ae44f537a23c2179ff2ba7d7eccb92e0d355d",
+                    "rgb_sha256": "b1a4fa94627dc2ddd633bdcf733f484ef12aecaa5402e0a458d79ae9565f37a2"
+                  },
+                  "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_TORSO_CORE_ARMOR__L3_LOWER_SUBPART__L4_RIGHT_LEAF_4x_RGBA.png",
+                  "png_sha256": "84e209be96ace45b86319e219cbed6a5b89213b1173a9ce4c365d376443a7fc6",
+                  "return_hop_to_l3": {
+                    "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART.L4_RIGHT_LEAF -> U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_CORE_ARMOR.L3_LOWER_SUBPART",
+                    "level": "L4_LEAF_MICRO",
+                    "target_xywh_in_parent_4x": [
+                      564,
+                      0,
+                      568,
+                      464
+                    ],
+                    "corners_4_rel": [
+                      [
+                        0.49823321554770317,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        0.0
+                      ],
+                      [
+                        1.0,
+                        1.0
+                      ],
+                      [
+                        0.49823321554770317,
+                        1.0
+                      ]
+                    ],
+                    "active_tuidi_pixels_written": 263552,
+                    "core_write_integrity": true,
+                    "background_outside_tuidi_untouched": true,
+                    "elev_remap": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "contract": {
+            "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_LEFT_SHOULDER_ARM",
+            "level": "L2_PART",
+            "parent_id": "U2_HEAVY_ARTILLERY_MECHA",
+            "bbox_in_parent_xywh": [
+              0,
+              0,
+              130,
+              406
+            ],
+            "parent_wh": [
+              544,
+              726
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.23897058823529413,
+                0.0
+              ],
+              [
+                0.23897058823529413,
+                0.559228650137741
+              ],
+              [
+                0.0,
+                0.559228650137741
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 38,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 0,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.030161,
+              0.045262
+            ],
+            "mask_sha256": "ce41b96a30dc7a0561fa1ed2e10f6a3842007cda66b83d3ebd2cabd12f04122a",
+            "rgb_sha256": "8bfd3c88643d190f6e341664ad5c3593b1d2d944f22be2c9ff4a39e4027384f5"
+          },
+          "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_LEFT_SHOULDER_ARM_4x_RGBA.png",
+          "png_sha256": "cfe3c78fe751f41e219c189e1c4bc41cd380d20fb879f12c8ca5fc27712927bd",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_LEFT_SHOULDER_ARM -> U2_HEAVY_ARTILLERY_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              0,
+              0,
+              520,
+              1624
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.23897058823529413,
+                0.0
+              ],
+              [
+                0.23897058823529413,
+                0.559228650137741
+              ],
+              [
+                0.0,
+                0.559228650137741
+              ]
+            ],
+            "active_tuidi_pixels_written": 708432,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        },
+        {
+          "contract": {
+            "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_RIGHT_SHOULDER_ARM",
+            "level": "L2_PART",
+            "parent_id": "U2_HEAVY_ARTILLERY_MECHA",
+            "bbox_in_parent_xywh": [
+              413,
+              0,
+              131,
+              406
+            ],
+            "parent_wh": [
+              544,
+              726
+            ],
+            "corners_4_rel": [
+              [
+                0.7591911764705882,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.559228650137741
+              ],
+              [
+                0.7591911764705882,
+                0.559228650137741
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 45,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 0,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.109041,
+              -0.090371
+            ],
+            "mask_sha256": "0eaf09b8de07650b7f729ed01112398985e99450537d9ee99424a87a42c6c0bd",
+            "rgb_sha256": "5e5b10d12e58007b76616ce68239f79016b3deaa16d14846cb0587728e10d433"
+          },
+          "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_RIGHT_SHOULDER_ARM_4x_RGBA.png",
+          "png_sha256": "7e74eb962a6c28243c39e4e2b7bbbd5973076974bc19fc4e3e349b5caccf9ea6",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_RIGHT_SHOULDER_ARM -> U2_HEAVY_ARTILLERY_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              1652,
+              0,
+              524,
+              1624
+            ],
+            "corners_4_rel": [
+              [
+                0.7591911764705882,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.559228650137741
+              ],
+              [
+                0.7591911764705882,
+                0.559228650137741
+              ]
+            ],
+            "active_tuidi_pixels_written": 706400,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        },
+        {
+          "contract": {
+            "node_id": "U2_HEAVY_ARTILLERY_MECHA.L2_LEGS_CHASSIS",
+            "level": "L2_PART",
+            "parent_id": "U2_HEAVY_ARTILLERY_MECHA",
+            "bbox_in_parent_xywh": [
+              0,
+              406,
+              544,
+              320
+            ],
+            "parent_wh": [
+              544,
+              726
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.559228650137741
+              ],
+              [
+                1.0,
+                0.559228650137741
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ]
+            ],
+            "raw_e40_margins_px": {
+              "left": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0
+            },
+            "honest_pad_offsets_px": {
+              "pad_left": 4,
+              "pad_top": 4,
+              "pad_right": 4,
+              "pad_bottom": 4
+            },
+            "chirality_slope_dx_dy": [
+              -0.012558,
+              -0.026047
+            ],
+            "mask_sha256": "b8fe125af32ca534b18212123befd510e67870166180f66dcec628267d7dcf23",
+            "rgb_sha256": "e3c97a31ffcd435159a60171f042b1998486179768a83a7fe3f1590a9df5f410"
+          },
+          "png_file": "U2_HEAVY_ARTILLERY_MECHA__L2_LEGS_CHASSIS_4x_RGBA.png",
+          "png_sha256": "81eaeac0f07aa30328b177e6f266bc1a119d32aadae1189fbcf52d6677bc728d",
+          "reconstructed_from_l3_bit_exact": true,
+          "return_hop_to_l1": {
+            "hop": "U2_HEAVY_ARTILLERY_MECHA.L2_LEGS_CHASSIS -> U2_HEAVY_ARTILLERY_MECHA",
+            "level": "L2_PART",
+            "target_xywh_in_parent_4x": [
+              0,
+              1624,
+              2176,
+              1280
+            ],
+            "corners_4_rel": [
+              [
+                0.0,
+                0.559228650137741
+              ],
+              [
+                1.0,
+                0.559228650137741
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ]
+            ],
+            "active_tuidi_pixels_written": 2785280,
+            "core_write_integrity": true,
+            "background_outside_tuidi_untouched": true,
+            "elev_remap": false
+          },
+          "l3_children": []
+        }
+      ]
+    }
+  ]
+}

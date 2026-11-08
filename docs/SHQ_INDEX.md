@@ -1,0 +1,38 @@
+# SHQ / Object Geometry Lock — docs index
+
+`main` stays minimal. Object-geometry-locked upscaling work lives in docs + research on feature branches, and in sibling open PRs.
+
+## This branch (v0.1 program guidance + latest Gemini pack)
+
+| Doc | Purpose |
+|-----|---------|
+| [SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md) | Actionable pipeline stages, gates, forbidden practices, module map |
+| [SHQ_AI_USAGE_GUIDE.md](./SHQ_AI_USAGE_GUIDE.md) | **給 AI agent 嘅理解規約**：讀序、硬閘、S0–S7、Registry、宣稱邊界 |
+| [SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) | **其他 AI 直接照做嘅操作手冊**：Clone、依賴、Preflight、Registry、測試、L0→L4 Strict RUN、S7 與回報 JSON |
+| [sources/gemini-share-uXr7snnWQVOR/](./sources/gemini-share-uXr7snnWQVOR/) | **最新** Gemini 源（26 turns；+6 vs XMyk：可驗證包 v1.0→v1.1 Complete13Assets、`preflight`／B0_GL‧B2_GL、Modular M01–M22、Grok runnable、Four-Plane Artifact DAG／獨立 PASS vs 聯動 FAIL）；raw/payload 只留 SHA；大 zip 只留 SHA |
+| [sources/gemini-share-XMyk6HVn2J9S/](./sources/gemini-share-XMyk6HVn2J9S/) | 上一包（20 turns；戰場自身部件追溯／生除扣洞反）— 保留作 provenance |
+| [sources/gemini-share-nutrRjsw676R/](./sources/gemini-share-nutrRjsw676R/) | 更早包（19 turns；PR #12／宣稱再測 + 三技能／頻率層）— 保留作 provenance |
+| [sources/gemini-share-hC9HlUpskKK9/](./sources/gemini-share-hC9HlUpskKK9/) | 更早包（17 turns；Method Registry + 真生成 8K）— 保留作 provenance |
+| [sources/gemini-share-47yxULPlPy0W/](./sources/gemini-share-47yxULPlPy0W/) | 更早包（15 turns）— 保留作 provenance |
+| [../research/ige_shq_github_verifiable_package_v1.0/](../research/ige_shq_github_verifiable_package_v1.0/) | **Current verifiable reference package (v1.1 Complete13Assets)** — 5-layer L0→L4 + registry + tests + **13** assets incl. `B0_GL`/`B2_GL` + `preflight_check.py`（research-only; Fail-Closed: `preflight` → `validate_registry` → unittest → `run_all_verifications.py --strict`） |
+| [../research/ige_shq_modular_methods_toolkit_v2.0/](../research/ige_shq_modular_methods_toolkit_v2.0/) | **Modular Methods Toolkit v2.0** — M01–M22 + R01–R03 + `invoke_method.py` / `try_all_methods_one_by_one.py`（research-only; CLI `--list` / `--run` / `--recipe` / `--category`） |
+| [../research/grok_ige_shq_runnable_v1.0/](../research/grok_ige_shq_runnable_v1.0/) | **Grok × Imagine × Canvas runnable ops pack v1.0** — `grok_shq_runner.py` + Start Here / Chat prompt / Canvas board / Imagine prompts; `source/` preserves original tree; write methods **BLOCKED** until S3 repair（research-only; first round: `--doctor`/`--audit`/`--catalog`/`--info M12`） |
+| [../research/shq_v9/README.md](../research/shq_v9/README.md) | Earlier single-script fossils ×10（not production-wired; superseded for end-to-end verify by packages above） |
+
+### External-AI execution rule
+
+External agents must read the Runbook and run `preflight_check.py` before any long pipeline. A missing or mismatched asset is `BLOCK`, not a warning. An earlier candidate ZIP audited on 2026-11-08 (SHA-256 `6f13bd5c…`) was missing `B0_GL` / `B2_GL` and must not replace the Hub baseline. **Current Hub content = v1.1 Complete13Assets** (13/13 assets + anti-spoof preflight PASS) + Modular Toolkit v2.0 + **GROK_IGE_SHQ_RUNNABLE_v1.0** ops layer. See Runbook §0 and each package `HUB_NOTES.md`.
+
+## Sibling open PRs (do not treat as duplicates)
+
+| PR | Theme |
+|----|--------|
+| [#3](https://github.com/JUN-ZS/UP-engine/pull/3) | READ v0.3 — spatial proposals, task geometry contracts, pixel-safe reconstruction |
+| [#11](https://github.com/JUN-ZS/UP-engine/pull/11) | Geometry-locked two-tile generative experiment |
+| [#10](https://github.com/JUN-ZS/UP-engine/pull/10) | SIAX DDXX multi-view geometry registration + ComfyUI |
+| [#7](https://github.com/JUN-ZS/UP-engine/pull/7) / [#9](https://github.com/JUN-ZS/UP-engine/pull/9) | Distributed / heterogeneous Siax tile runners |
+| [#6](https://github.com/JUN-ZS/UP-engine/pull/6) | Prevent blue injection on SIAX + DETAIL6 |
+| [#2](https://github.com/JUN-ZS/UP-engine/pull/2) / [#4](https://github.com/JUN-ZS/UP-engine/pull/4) / [#5](https://github.com/JUN-ZS/UP-engine/pull/5) | READ / Grok adapters / REF router |
+| [#1](https://github.com/JUN-ZS/UP-engine/pull/1) | Bootstrap scaffold |
+
+This guidance PR **references** those tracks; it does not replace their runtime code.

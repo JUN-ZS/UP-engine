@@ -1,0 +1,213 @@
+{
+  "engine_version": "IGE_SHQ_FourPlane_ArtifactDAG_v3.0",
+  "upstream_audit_commit_verified": "beb44c8cede7fac6bb6f07d2238c34e3efdeb3ed",
+  "formal_four_state_and_reverse_definition": {
+    "causal_forward_order": [
+      "1_SHENG_KEEP",
+      "2_CHU_REMOVE",
+      "3_KOU_DIFF",
+      "4_DONG_HOLE"
+    ],
+    "spatial_complement_mask": "M_anti_hole = 1 - M_hole (spatial protection complement, distinct from the x_REVERSE verification operator)",
+    "reverse_verification_operator_Q_4x_reverse": {
+      "R_KEEP": "Verifies final output outside M_hole is bit-identical (diff==0) and traces to frozen S0 KEEP SHA-256",
+      "R_REMOVE": "Verifies 0.0% resize tolerance, camera shift <= 0.15px, and 16-zone full-canvas background consistency (including central corridor)",
+      "R_DIFF": "Computes |Down_1x(Master_disk) - REMOVE| directly across the full canvas without copying in_1x into KEEP",
+      "R_HOLE": "Re-extracts silhouette mask directly from reverse diff and 4x boundary ring without referencing original M_hole",
+      "R_S7": "Full disk-reload audit with zero synthetic subpixel_wave checkerboard"
+    }
+  },
+  "six_root_causes_resolved": {
+    "RC1_shared_context_and_literal_pass": "Replaced with typed ArtifactRef SHA handoffs and computed PASS_INDEPENDENT_DAG / PASS_CONTRACT_ONLY / BLOCK grades",
+    "RC2_broken_recipe_handoff": "Recipes now pass upstream_artifact_shas step-by-step and R02_V3 executes all 18 part chains independently",
+    "RC3_hardcoded_s3_human_verified": "Replaced with HMAC-SHA256 ScopedApprovalToken bound to keep_sha, remove_sha, hole_sha, geom_sha, and approved_part_ids",
+    "RC4_s0_silent_resize_and_partial_bg_check": "Enforced 0% resize tolerance and 4x4 full-canvas background zone + disconnected blob guard",
+    "RC5_s7_tautological_in1x_copy_and_subpixel_wave": "Removed rev_test_1x[in_1x] copy and removed synthetic 2x2 subpixel_wave checkerboard",
+    "RC6_method_name_vs_algorithm_honesty": "Upgraded M07 to true cv2.findTransformECC and labeled M19/M20 as PASS_CONTRACT_ONLY"
+  },
+  "direct_q4x_reverse_summary": {
+    "R_KEEP_outside_hole_diff_zero": true,
+    "R_REMOVE_zero_resize_and_full_grid_bg_pass": true,
+    "R_DIFF_direct_master_vs_remove_without_in1x_copy": true,
+    "R_HOLE_direct_re_extracted_iou_1x": 0.9969,
+    "R_HOLE_direct_re_extracted_bf1_1x": 0.9959,
+    "R_HOLE_direct_hausdorff_px": 22.9845
+  },
+  "m07_true_ecc_summary": {
+    "status": "PASS",
+    "evidence_grade": "PASS_INDEPENDENT_TRUE_ECC",
+    "ecc_algorithm": "cv2.findTransformECC(MOTION_TRANSLATION)",
+    "ecc_correlation_coefficient": 0.99386,
+    "ecc_translation_xy_px": [
+      0.0129,
+      0.0565
+    ],
+    "ecc_shift_norm_px": 0.0579,
+    "warp_matrix_2x3": [
+      [
+        1.0,
+        0.0,
+        0.01288
+      ],
+      [
+        0.0,
+        1.0,
+        0.05649
+      ]
+    ]
+  },
+  "m07_missing_ref_gate": {
+    "status": "BLOCK",
+    "evidence_grade": "BLOCK",
+    "error_code": "E_M07_IDENTITY_REF_MISSING_FORCES_UNKNOWN",
+    "identity_state": "unknown"
+  },
+  "falsifiable_8_experiments_results": {
+    "Exp_A_S0_Resize_Injection": [
+      {
+        "injected_deviation_pct": "-0.5%",
+        "injected_remove_wh": [
+          1369,
+          764
+        ],
+        "old_v2_behavior": "SILENT_INTER_AREA_RESIZE_PASS",
+        "new_v3_status": "BLOCK",
+        "new_v3_error_code": "E_S0_SIZE_MISMATCH_RESIZE_FORBIDDEN"
+      },
+      {
+        "injected_deviation_pct": "-1.0%",
+        "injected_remove_wh": [
+          1362,
+          760
+        ],
+        "old_v2_behavior": "SILENT_INTER_AREA_RESIZE_PASS",
+        "new_v3_status": "BLOCK",
+        "new_v3_error_code": "E_S0_SIZE_MISMATCH_RESIZE_FORBIDDEN"
+      },
+      {
+        "injected_deviation_pct": "-2.0%",
+        "injected_remove_wh": [
+          1348,
+          753
+        ],
+        "old_v2_behavior": "BLOCK",
+        "new_v3_status": "BLOCK",
+        "new_v3_error_code": "E_S0_SIZE_MISMATCH_RESIZE_FORBIDDEN"
+      }
+    ],
+    "Exp_B_S0_Central_BG_Tamper": {
+      "tampered_region_xyxy": [
+        480,
+        150,
+        550,
+        230
+      ],
+      "inside_top_12pct_or_side_4pct_border": false,
+      "old_v2_status": "PASS",
+      "old_v2_bg_motion_energy_border_only": 5.06,
+      "new_v3_status": "BLOCK",
+      "new_v3_error_code": "E_S0_CENTRAL_OR_LOCAL_BG_TAMPER_DETECTED",
+      "new_v3_detected_extra_blob_area_px": 5443.0,
+      "new_v3_max_zone_bg_p90": 123.226
+    },
+    "Exp_C_S3_Approval_Token_Gates": {
+      "case1_missing_token": {
+        "status": "BLOCK",
+        "evidence_grade": "BLOCK",
+        "error_code": "E_S3_MISSING_APPROVAL_TOKEN"
+      },
+      "case2_human_verified_false": {
+        "status": "BLOCK",
+        "evidence_grade": "BLOCK",
+        "error_code": "E_S3_HUMAN_VERIFIED_FALSE",
+        "token_id": "S3_TOKEN_F8092F6C899A"
+      },
+      "case3_wrong_part_scope_p01_for_p08": {
+        "status": "BLOCK",
+        "evidence_grade": "BLOCK",
+        "error_code": "E_S3_PART_SCOPE_UNAUTHORIZED:B1_P08_GOLDMESH_CARBON_TORSO",
+        "token_id": "S3_TOKEN_C694534EC48D"
+      },
+      "case4_stale_hole_mask_sha": {
+        "status": "BLOCK",
+        "evidence_grade": "BLOCK",
+        "error_code": "E_S3_HOLE_MASK_SHA_MISMATCH",
+        "token_id": "S3_TOKEN_51E65662A665"
+      },
+      "case5_valid_scoped_token": {
+        "status": "PASS",
+        "evidence_grade": "PASS_INDEPENDENT",
+        "error_code": null,
+        "artifact_ref": {
+          "artifact_id": "ART_S3_PERMISSION_EFD74C9895F7",
+          "producer_method_id": "BF_S3_HUMAN_PERMISSION_COMPILER",
+          "stage": "S3",
+          "plane": "AUTHORITY_PLANE",
+          "content_sha256": "efd74c9895f7a0f5ca30066986d8d62f562dfbd7f6e07bd37d32135a7e45de55",
+          "upstream_artifact_shas": [
+            "7e762ebf4ceba4b46b058052985da83e0f21eb0cdc9a4a6ecb299227bbba2731",
+            "928bd47b4bd6de907bb2ffa4523eba3eb209020398a1f9043b7306997ad44d02"
+          ],
+          "coordinate_frame": "4X_5504x3072",
+          "canvas_wh": [
+            5504,
+            3072
+          ],
+          "part_scope": [
+            "B1_P08_GOLDMESH_CARBON_TORSO"
+          ],
+          "params_sha256": "ac22554223a39cf6856faa56b55ad87ddef3b5a04ac70926eed5113cd19a684a",
+          "evidence_grade": "PASS_INDEPENDENT",
+          "status": "PASS"
+        },
+        "edit_permission_sha256": "efd74c9895f7a0f5ca30066986d8d62f562dfbd7f6e07bd37d32135a7e45de55",
+        "token_id": "S3_TOKEN_928BD47B4BD6"
+      }
+    },
+    "Exp_D_Content_Addressed_Cache_1Byte_Invalidation": {
+      "original_cache_key": "97f8b3db34a47b7cf15cb900eaaa64c66af0fb8f9bcc7ca3fcd49525c6bfb954",
+      "after_1byte_donor_change_key": "ba1df69a7ce55439d6ddaa88c314754f745fc8564193167f6abf8d19b78342da",
+      "after_1byte_remove_change_key": "0a7e9876522b1fdaaafd889ef6705994a2b4ac4bef3ad5927ae274f982a2c23b",
+      "donor_1byte_invalidated_cache": true,
+      "remove_1byte_invalidated_cache": true
+    },
+    "Exp_E_M04_to_M05_Artifact_SHA_Tamper": {
+      "actual_m04_output_sha": "f9599e687d3184b7333e8458469a5b99355ed89eaabec78c818e4f5aac7e4476",
+      "expected_sha_passed_to_m05": "f9599e687d3184b7333e8458469a5b99355ed89eaabec78c818e4f5aac7effff",
+      "m05_status": "BLOCK",
+      "m05_error_code": "E_M05_UPSTREAM_PART_GRAPH_SHA_MISMATCH"
+    },
+    "Exp_F_S7_Reverse_1px_Boundary_Tamper": {
+      "clean_p08_status": "PASS",
+      "clean_p08_reverse_iou_4x": 1.0,
+      "tampered_1px_boundary_status": "BLOCK",
+      "tampered_1px_boundary_error_code": "E_S7_REVERSE_BOUNDARY_OR_OUTSIDE_TAMPER_DETECTED",
+      "tampered_leaked_outside_pixels_4x": 4216,
+      "tampered_reverse_iou_4x": 0.9727
+    },
+    "Exp_G_Standalone_vs_18Part_DAG_Equivalence": {
+      "r02_v3_total_parts_executed": 18,
+      "r02_v3_all_18_parts_passed": true,
+      "p08_standalone_vs_recipe_dag_shas_identical": true,
+      "p08_verified_artifact_chain_shas": {
+        "S0_HOLE_SHA": "1c75120aaa0502d4d4332e9100a8c9eaf086c580abfb2e5edee538b27b44e587",
+        "M04_PART_GRAPH_SHA": "f9599e687d3184b7333e8458469a5b99355ed89eaabec78c818e4f5aac7e4476",
+        "M05_GEOM_LOCK_SHA": "7e762ebf4ceba4b46b058052985da83e0f21eb0cdc9a4a6ecb299227bbba2731",
+        "M08_PERMISSION_SHA": "b2511ea92da95df1ea731f8920ca6dfed527505ced26bc68db3dd8584364ec6e",
+        "M11_L_BASE_SHA": "cf43b6f0807733175adccdbfb3203fcbc12bc43b6fa0ff2fb70eb1f88a0cfaa2",
+        "M12_DONOR_SHA": "1b93de1c09afddd459aa119c51de9ce50f8b167a3dd96ec8aa28aa9d7c6816ab",
+        "M12_M_MATERIAL_SHA": "8ae9ac63c9e01ecb5e03b435b5c918ebe6b6c395083871d1d4655617e0db3bf8",
+        "M13_H_DETAIL_SHA": "e959a0ee7a4c19d389e97333dd57732819f53922ddf050e7857ed9809c08a500",
+        "M22_COMPOSITE_4X_SHA": "785880f58f2c75f80bb463e072c5ad3197914c28c6b9df960adcfac6f8006c45"
+      }
+    },
+    "Exp_H_Counterfactual_Historical_Output_Swap": {
+      "swapped_historical_l_base_sha": "2983788fbdc731740bbb34b77ff795f9d9ca17e44a5d2af64130ad9650cb74f2",
+      "actual_current_m11_l_base_sha": "cf43b6f0807733175adccdbfb3203fcbc12bc43b6fa0ff2fb70eb1f88a0cfaa2",
+      "old_v2_recipe_behavior": "BLIND_PASS_IGNORES_STEP_OUTPUT_LINEAGE",
+      "new_v3_dag_recipe_status": "BLOCK",
+      "new_v3_dag_error_code": "E_LINEAGE_PROVENANCE_MISMATCH_ON_M11_TO_M12"
+    }
+  },
+  "all_8_falsifiable_experiments_verified": true
+}

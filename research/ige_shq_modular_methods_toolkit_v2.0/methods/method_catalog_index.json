@@ -1,0 +1,375 @@
+{
+  "categories": {
+    "cat01_s0_anti_hole_and_base": {
+      "order": 1,
+      "title_zh": "分類 01：S0 原圖凍結與正反對照空背景「生・除・扣・洞・反洞」類",
+      "stage_range": "S0–S1",
+      "desc_zh": "負責原圖 SHA-256 凍結、同鏡頭空背景對位、正反差分求閉合剪影洞 M_hole 與絕對保護反洞 M_anti_hole，以及四反防呆驗收。"
+    },
+    "cat02_s1_s2_part_read_and_5d_lock": {
+      "order": 2,
+      "title_zh": "分類 02：S1–S2 自身 18 部件流線拆解、無框 5D 定位與 4× 幾何鎖定類",
+      "stage_range": "S1–S2",
+      "desc_zh": "負責場景證據讀取、18 個無斷頭台平切之完整流線部件拆解、5D 測地線 UV/深度代理定位、ECC 地標鎖定與 5504×3072 (4×) 母畫布座標鎖定。"
+    },
+    "cat03_s3_s4_permission_and_routing": {
+      "order": 3,
+      "title_zh": "分類 03：S3–S4 人類核實權限編譯、拓撲守門與狀態技能路由類",
+      "stage_range": "S2–S4",
+      "desc_zh": "負責將 AI 候選觀察與人類核實修改權限分離、在輪廓破損時阻斷下游銳化、以及將 Inpaint 限制為選用修補器。"
+    },
+    "cat04_s4_s5_true_hd_upgrade_engines": {
+      "order": 4,
+      "title_zh": "分類 04：S4–S5 真升清核心引擎（三頻分解 A/B/C/C2/C3 與多源高清轉移類）",
+      "stage_range": "S2–S5",
+      "desc_zh": "負責把鎖定幾何內的部件真正升清：包含技能 A (4× 低頻基底 L_base)、技能 B (幾何鎖定中頻材質 M_material)、技能 C/C2/C3 (多尺度與法線導引微細節 H_detail 及無損回退)、多頻段母本轉移與外部推理契約守衛。"
+    },
+    "cat05_s6_s7_geometry_locked_return_and_audit": {
+      "order": 5,
+      "title_zh": "分類 05：S6–S7 規則 01380 鎖幾何併回大圖與磁碟重讀反驗類",
+      "stage_range": "S5–S7",
+      "desc_zh": "負責 Disjoint Core 無疊影分塊回位、技能 D 不可變 Alpha 守衛、規則 01380 全洞 100% 直達硬邊併回 5504×3072 大圖，以及 S7 磁碟重讀反向重抽驗收。"
+    }
+  },
+  "methods": [
+    {
+      "code": "M01",
+      "slug": "m01_bf_s0_edit_4way_anti_hole",
+      "method_id": "BF_S0_EDIT_4WAY_ANTI_HOLE",
+      "category": "cat01_s0_anti_hole_and_base",
+      "stage": [
+        "S0"
+      ],
+      "title_zh": "戰場 S0 四向正反空背景求洞與反洞凍結",
+      "summary_zh": "對照同鏡頭戰場原圖 (Keep) 與移除人物機甲之空背景圖 (Remove)，精確求出 3 主體閉合剪影洞 M_hole 與反洞保護區 M_anti_hole (M_hole ^ M_anti_hole == 255)。",
+      "core_role": "S0_FOUR_WAY_ANTI_HOLE"
+    },
+    {
+      "code": "M02",
+      "slug": "m02_hole_four_anti_evidence",
+      "method_id": "HOLE_FOUR_ANTI_EVIDENCE",
+      "category": "cat01_s0_anti_hole_and_base",
+      "stage": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "四反防呆差分證據驗收器（反偷縮放・反平移・反背景異動・反軟羽化）",
+      "summary_zh": "嚴格驗證正反差分對偶圖之相機零平移 (<=0.1px)、禁止偷縮放、禁止軟邊羽化，並強制規定差分圖僅為幾何證據而不自動授予修改權。",
+      "core_role": "FOUR_ANTI_GUARD"
+    },
+    {
+      "code": "M03",
+      "slug": "m03_read_layered_evidence",
+      "method_id": "READ_LAYERED_EVIDENCE",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S1"
+      ],
+      "title_zh": "S1 分層語義觀察與反過度宣稱讀取器",
+      "summary_zh": "讀取場景主體、部件與空間關係候選框，對不可見的 3D 背面或缺失參考強制輸出 unknown，嚴禁將 2D 框重疊直接宣稱為 3D 實體接觸。",
+      "core_role": "READ_SCENE_GRAPH"
+    },
+    {
+      "code": "M04",
+      "slug": "m04_bf_s1_self_18part_decompose_read",
+      "method_id": "BF_S1_SELF_18PART_DECOMPOSE_READ",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S1"
+      ],
+      "title_zh": "S1 戰場三主體 18 個完整流線自身部件拆解與非同義反覆驗收",
+      "summary_zh": "採用解剖/結構曲線接縫將 B0、B1、B2 拆解為 18 個互不重疊 (overlap=0)、無斷頭台水平平切 (guillotine_cuts=0) 的完整部件，並與獨立 GrabCut 基準驗證 IoU >= 0.90。",
+      "core_role": "DECOMPOSE_18PARTS"
+    },
+    {
+      "code": "M05",
+      "slug": "m05_bf_s2_self_part_4x_geometry_lock",
+      "method_id": "BF_S2_SELF_PART_4X_GEOMETRY_LOCK",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S2"
+      ],
+      "title_zh": "S2 自身 18 部件 4× 母畫布幾何鎖定與五參數分離契約",
+      "summary_zh": "將 18 個部件鎖定至 5504×3072 (4×) 母畫布之四角座標 TL/TR/BR/BL 與閉合遮罩，驗證 T_scene<-leaf 遞迴零誤差 (0.0px) 並強制分離五個尺度/分塊參數。",
+      "core_role": "GEOMETRY_LOCK_4X"
+    },
+    {
+      "code": "M06",
+      "slug": "m06_box_free_5d_locate_proxy",
+      "method_id": "BOX_FREE_5D_LOCATE_PROXY",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S2",
+        "S6"
+      ],
+      "title_zh": "無框 (Box-Free) 5D 測地線 UV 與球頂深度代理定位器",
+      "summary_zh": "由 2D 閉合部件剪影計算距離變換測地線 (u, v)、PCA 主軸角度 θ 與球頂深度/法線代理 (Normal/Depth Proxy)，輔助非矩形曲面結構對位。",
+      "core_role": "BOX_FREE_5D_UV"
+    },
+    {
+      "code": "M07",
+      "slug": "m07_path1e_identity_ecc_lock",
+      "method_id": "PATH1E_IDENTITY_ECC_LOCK",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S2",
+        "S4",
+        "S6"
+      ],
+      "title_zh": "人物面部與關鍵部件 ECC 亞像素身分地標對齊鎖",
+      "summary_zh": "針對 B1 指揮官面部與關鍵感測器部件執行亞像素相位與 ECC 結構對齊並防水平翻轉；若缺失身分參考圖則強制阻斷並標記 unknown。",
+      "core_role": "IDENTITY_ECC_LOCK"
+    },
+    {
+      "code": "M08",
+      "slug": "m08_bf_s3_human_permission_compiler",
+      "method_id": "BF_S3_HUMAN_PERMISSION_COMPILER",
+      "category": "cat03_s3_s4_permission_and_routing",
+      "stage": [
+        "S3"
+      ],
+      "title_zh": "S3 人類核實權限編譯器（互斥修改區與保護區編譯）",
+      "summary_zh": "將人類核實後的 4× 部件契約編譯為嚴格互斥的 edit_mask_4x 與 preserve_mask_4x；當 human_verified=False 時強制攔截一切生成與寫回操作。",
+      "core_role": "PERMISSION_COMPILER"
+    },
+    {
+      "code": "M09",
+      "slug": "m09_otl0_topology_repair_gate",
+      "method_id": "OTL0_TOPOLOGY_REPAIR",
+      "category": "cat03_s3_s4_permission_and_routing",
+      "stage": [
+        "S2",
+        "S4"
+      ],
+      "title_zh": "OTL0 拓撲與破邊守門器（先修邊、禁對破邊直接加細節）",
+      "summary_zh": "檢測部件外輪廓拓撲完整性；一旦發現 outer_shape_broken=True，立即阻斷下游高頻細節增強（SKILL_C / DETAIL6），防止將破邊銳化偽稱為升清。",
+      "core_role": "TOPOLOGY_GATE"
+    },
+    {
+      "code": "M10",
+      "slug": "m10_inpaint_hole_repair_optional",
+      "method_id": "INPAINT_HOLE_REPAIR_OPTIONAL",
+      "category": "cat03_s3_s4_permission_and_routing",
+      "stage": [
+        "S2"
+      ],
+      "title_zh": "受控選用之遮擋缺損低頻修補器（禁止充當主升清引擎）",
+      "summary_zh": "僅在部件存在被遮擋孔洞缺損時執行局部低頻結構補洞（Navier-Stokes/Telea 結構修補），並在路由層強制禁止 Inpaint 取代 A+B+C+D 主升清鏈。",
+      "core_role": "OPTIONAL_INPAINT"
+    },
+    {
+      "code": "M11",
+      "slug": "m11_skill_a_neural_sr_base_4x",
+      "method_id": "SKILL_A_NEURAL_SR_BASE_4X",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S2"
+      ],
+      "title_zh": "技能 A：4× 低頻形體結構基底重建 (L_base)",
+      "summary_zh": "在鎖定的 5504×3072 (4×) 座標系內重建零相位漂移 (phase_shift <= 0.05px) 的低頻形體與光影基底層 L_base，完全不改動 Alpha 與外輪廓。",
+      "core_role": "SKILL_A_L_BASE"
+    },
+    {
+      "code": "M12",
+      "slug": "m12_skill_b_geometry_locked_material_gen",
+      "method_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S3"
+      ],
+      "title_zh": "技能 B：幾何鎖定中頻材質層生成與密集光流對位 (M_material)",
+      "summary_zh": "從上下半身與幾何鎖定高清母本 (B0_GL/B2_GL/B0_UP/B0_LO/B1_UP/B1_LO/B2_FULL) 經模板匹配與 Farneback 密集光流對齊 (NCC >= 0.98) 提取中頻材質反射層 M_material。",
+      "core_role": "SKILL_B_M_MATERIAL"
+    },
+    {
+      "code": "M13",
+      "slug": "m13_skill_c_multiscale_detail_synthesis",
+      "method_id": "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4"
+      ],
+      "title_zh": "技能 C：多尺度零均值微細節殘差合成 (H_detail)",
+      "summary_zh": "合成與 L_base、M_material 正交分離的零均值高頻微細節層 H_detail（裝甲接縫、鉚釘、金絲網孔、戰損刮痕），洞外嚴格為 0。",
+      "core_role": "SKILL_C_H_DETAIL"
+    },
+    {
+      "code": "M14",
+      "slug": "m14_skill_c2_normal_depth_structural_detail",
+      "method_id": "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4"
+      ],
+      "title_zh": "技能 C2：2D 法線與深度梯度導引結構微浮雕細節",
+      "summary_zh": "根據部件表面切空間法線梯度 (Normal/Depth Gradient Proxy) 導引微接縫、螺絲凹槽與金網絲沿曲面方向貼合，消除平面貼圖感。",
+      "core_role": "SKILL_C2_NORMAL_DETAIL"
+    },
+    {
+      "code": "M15",
+      "slug": "m15_skill_c3_attenuate_hf_detail_layer",
+      "method_id": "SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4"
+      ],
+      "title_zh": "技能 C3：高頻細節層獨立無損衰減與降噪回退器",
+      "summary_zh": "當高頻表面噪點過強時，僅對 H_detail 乘上衰減係數 γ (如 0.45)，驗證 L_base 與 M_material 保持 Bit-Identical 零損壞。",
+      "core_role": "SKILL_C3_ATTENUATE"
+    },
+    {
+      "code": "M16",
+      "slug": "m16_all24_ai_donor_multiband_transfer",
+      "method_id": "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "AI 高清母本多頻段對位轉移引擎（含真實母本尺寸收據）",
+      "summary_zh": "將 1200×896 AI 高清母本以拉普拉斯多頻段金字塔轉移至鎖定部件剪影內，如實記錄母本原生尺寸與 SHA-256，絕不偽稱為即時 ComfyUI 8K 擴散。",
+      "core_role": "DONOR_MULTIBAND_TRANSFER"
+    },
+    {
+      "code": "M17",
+      "slug": "m17_detail6_material_residual",
+      "method_id": "DETAIL6_MATERIAL_RESIDUAL",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "DETAIL6 材質分區遮罩高頻投遞器（含面部皮膚零變動保護）",
+      "summary_zh": "在已驗證的 4× 母畫布上對金屬裝甲與金網絲區域投遞受控高頻能量，同時對 B1 指揮官面部皮膚與眼睛保護遮罩強制維持 0 像素變動。",
+      "core_role": "DETAIL6_PROTECTED_DELIVERY"
+    },
+    {
+      "code": "M18",
+      "slug": "m18_hole_scalelock_hf_residual",
+      "method_id": "HOLE_SCALELOCK_HF_RESIDUAL",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "非生成式比例鎖定高頻殘差對照基準 (Deterministic Control)",
+      "summary_zh": "僅使用純數學比例鎖定高頻殘差而不引入 AI 母本材質，作為衡量真 AI 升清（M12+M13）增益幅度的科學非生成式對照組。",
+      "core_role": "NON_GEN_HF_CONTROL"
+    },
+    {
+      "code": "M19",
+      "slug": "m19_siax4x_tile_core_sr_contract",
+      "method_id": "SIAX4X_TILE_CORE_SR",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "Siax 4× Tile-Core 超分契約與反插值偽造守衛",
+      "summary_zh": "生成 Siax 4× 分塊 Core+Halo 幾何契約並檢查模型權重 Sidecar；無實體 .pth 權重時明確標記離線契約模式，嚴禁以 Lanczos 插值冒充 Siax 推理。",
+      "core_role": "SIAX4X_CONTRACT_GUARD"
+    },
+    {
+      "code": "M20",
+      "slug": "m20_flux_hr_tile_img2img_contract",
+      "method_id": "FLUX_HR_TILE_IMG2IMG",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "Flux HR Tile Img2Img 高清分塊擴散契約與收據守衛",
+      "summary_zh": "建立 Flux1-dev 高清分塊 Core+Halo 讀取與 Disjoint Write-Core 寫回契約，強制檢查 SetLatentNoiseMask 非硬像素保護門檻，無 GPU 後端時誠實回報離線契約狀態。",
+      "core_role": "FLUX_TILE_CONTRACT_GUARD"
+    },
+    {
+      "code": "M21",
+      "slug": "m21_geometry_locked_tile_plan_return",
+      "method_id": "GEOMETRY_LOCKED_TILE_PLAN_RETURN",
+      "category": "cat05_s6_s7_geometry_locked_return_and_audit",
+      "stage": [
+        "S2",
+        "S4",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "全局幾何分塊規劃與 Disjoint Write-Core 零疊影精確回位器",
+      "summary_zh": "將 5504×3072 大圖切分為含 Halo 上下文之讀取塊 (Read Tile = Core + Halo)，寫回時嚴格裁除 Halo、僅寫入互斥且無縫拼接的 Write-Core，驗證 Core 重疊=0、缺口=0。",
+      "core_role": "TILE_PLAN_EXACT_CORE_RETURN"
+    },
+    {
+      "code": "M22",
+      "slug": "m22_skill_d_immutable_alpha_geometry_guard",
+      "method_id": "SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD",
+      "category": "cat05_s6_s7_geometry_locked_return_and_audit",
+      "stage": [
+        "S1",
+        "S5",
+        "S6"
+      ],
+      "title_zh": "技能 D：不可變 Alpha 幾何守衛 + 規則 01380 全洞滿填併回大圖 + S7 磁碟重讀反驗",
+      "summary_zh": "執行 I_4x = L_base + M_material + H_detail 全洞 100% 硬邊合成（eroded_low_res_border=0、soft_alpha=0、洞外差異=0），寫出 5504×3072 大圖並從磁碟重讀執行反扣驗收。",
+      "core_role": "SKILL_D_RULE01380_AND_S7_QA"
+    }
+  ],
+  "recipes": [
+    {
+      "code": "R01",
+      "slug": "r01_single_part_hd_upgrade_and_return",
+      "title_zh": "組合應用 R01：單一指定部件「真升清 (A+B+C) → 規則 01380 鎖幾何併回大圖 (D)」",
+      "summary_zh": "讓使用者任選 18 個部件之一（如 P01 機甲頭、P02 機甲胸艙、P07 指揮官頭、P08 金網絲胸甲、P14 重甲胸等），單獨執行三頻真升清並鎖幾何併回 4× 局部/全局畫布。",
+      "chain": [
+        "M01",
+        "M04",
+        "M05",
+        "M11",
+        "M12",
+        "M13",
+        "M22"
+      ]
+    },
+    {
+      "code": "R02",
+      "slug": "r02_full_18parts_battlefield_4x_return",
+      "title_zh": "組合應用 R02：全戰場 18 部件完整「生・除・扣・洞 → 密集光流真升清 → 併回 5504×3072 大圖 → S7 反驗」",
+      "summary_zh": "串聯 M01→M04→M05→M08→M11→M12→M13→M21→M22，一次完成全圖 18 個自身部件升清併回大圖並通過磁碟重讀反驗。",
+      "chain": [
+        "M01",
+        "M04",
+        "M05",
+        "M08",
+        "M11",
+        "M12",
+        "M13",
+        "M21",
+        "M22"
+      ]
+    },
+    {
+      "code": "R03",
+      "slug": "r03_ablation_compare_a_b_c_d",
+      "title_zh": "組合應用 R03：四技能三頻消融實驗 (Stage1 L_base vs Stage2 +M_mat vs Stage3 +H_det vs C3 降噪回退)",
+      "summary_zh": "針對指定部件同時輸出 Stage 1 (僅 SR)、Stage 2 (SR+材質)、Stage 3 (SR+材質+微細節) 與 Stage 4 (C3 高頻衰減 γ=0.45) 的量化頻率增益與視覺對比圖。",
+      "chain": [
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M22"
+      ]
+    }
+  ]
+}

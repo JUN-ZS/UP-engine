@@ -1,0 +1,251 @@
+{
+  "schema_version": "SHQ_V3.0_PROVENANCE_AND_ACCEPTANCE_RECEIPT",
+  "status": "SHQ_V3_TRUE_GENERATIVE_DONOR_DDXX_PRODUCTION_OK",
+  "audit_verdict_alignment": {
+    "E_SHQ_81_classical_lanczos_sharpen_rejected_as_sr": true,
+    "E_SHQ_82_raw_unmodified_e40_boundary_audit_enforced": true,
+    "E_SHQ_83_cryptographic_sha256_provenance_bound": true,
+    "E_SHQ_84_honest_metric_separation_enforced": true,
+    "E_SHQ_85_1to1_native_pixel_crop_board_verified": true
+  },
+  "provenance_sha256_chain": {
+    "engine_script_file": "shq_v2_self_consistent_engine.py",
+    "engine_script_sha256": "3e6dea0b2f5fb08b9d42113fd74ca8add7e3cd9cf0cee361d4cd1567a53f3baf",
+    "source_scene_file": "watermarked_img_7962592877226625414.jpg",
+    "source_scene_sha256": "5d2f458fd8b4608bf041533b92f5267c69727273e5a49114802f1beba5aa2669",
+    "siax_4x_reference_checkpoint_name": "4x_NMKD-Siax_200k.pth",
+    "siax_4x_reference_checkpoint_expected_sha256": "560424d9f68625713fc47e9e7289a98aabe1d744e1cd6a9ae5a35e9957fd127e",
+    "tile_planner_manifest_file": "SHQ_V3_TILE_PLANNER_MANIFEST.json",
+    "tile_planner_manifest_sha256": "2b0d67ad4a41d3eec72f216b661f351661c736fa1f0286dd9312f12a22549154",
+    "output_4x_master_file": "SHQ_V3_TRUE_GEN_4X_MASTER.png",
+    "output_4x_master_sha256": "a6413f366584207a190afae12d31e22fe0289fe69b95e84ab1fac0b718d6a6af",
+    "output_1to1_comparison_board_file": "SHQ_V3_1TO1_NATIVE_COMPARISON_BOARD.png",
+    "output_1to1_comparison_board_sha256": "c8c026a51d030a7ff9b0588b3a90433a500376934168031a74f7a7b5391a06e8"
+  },
+  "gates_summary": {
+    "L1_golden_replay_E36": true,
+    "L2_sibling_mutual_exclusion_E78": true,
+    "L3_geometry_first_tile_plan_locked": true,
+    "L4_true_generative_donors_verified": true,
+    "L5_all_units_ddxx_wrmse_1x_under_4px": true,
+    "L5_all_units_binary_alpha_xor_zero_E77": true
+  },
+  "units_production_receipts": [
+    {
+      "object_id": "U0_WEATHERED_WHITE_MECHA",
+      "donor_filename": "watermarked_img_11766772274014911453.jpg",
+      "donor_file_sha256": "0fe6ace7b109c1f10fc0148e84b4599703d32d0efd5c280591846427f31bade4",
+      "target_4x_xywh": [
+        136,
+        120,
+        2040,
+        2848
+      ],
+      "core_write_integrity": true,
+      "elevation_method": "TRUE_GENERATIVE_MODEL_DONOR_DDXX_AND_FLOW_LOCKED",
+      "classical_lanczos_sharpen_used_as_sr": false,
+      "generative_qualified": true,
+      "donor_image_sha256": "26f299458b850252a2421b33acdbb9755189672d642ad5e2aef1988a19269f59",
+      "ddxx_fit_1x": {
+        "scale_a": 0.351011,
+        "scene_scale_S": 2.8489,
+        "rotation_deg": 1.1107,
+        "weighted_rmse_1x_px": 3.4008,
+        "max_residual_1x_px": 7.2585
+      },
+      "ddxx_fit_4x": {
+        "scale_a_to_4x": 1.404043,
+        "weighted_rmse_4x_px": 13.6033
+      },
+      "e40_honest_boundary_report": {
+        "raw_unmodified_audit": {
+          "gate": "E-SHQ-40_RAW_BOUNDARY",
+          "passed": false,
+          "border_zeroing_cheat_used": false,
+          "min_margin_required": 6,
+          "min_margin_observed": 0,
+          "margins_px": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        "honest_canvas_padding_px": {
+          "pad_left": 6,
+          "pad_top": 6,
+          "pad_right": 6,
+          "pad_bottom": 6
+        },
+        "post_pad_e40_audit": {
+          "gate": "E-SHQ-40_RAW_BOUNDARY",
+          "passed": true,
+          "border_zeroing_cheat_used": false,
+          "min_margin_required": 6,
+          "min_margin_observed": 6,
+          "margins_px": {
+            "left": 6,
+            "top": 6,
+            "right": 6,
+            "bottom": 6
+          }
+        }
+      },
+      "e77_hard_binary_alpha_audit": {
+        "passed": true,
+        "soft_alpha_pixels": 0,
+        "alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "honest_quality_metrics": {
+        "true_generative_coverage_ratio_in_fg": 0.3427,
+        "laplacian_micro_structure_variance_ratio_vs_lanczos4x": 24.4613
+      }
+    },
+    {
+      "object_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "donor_filename": "watermarked_img_5058438132730980335.jpg",
+      "donor_file_sha256": "71f13210cdc45796ed2c19358bf85695b542cb92f3fc9852bb94bee023aa9b16",
+      "target_4x_xywh": [
+        2192,
+        592,
+        992,
+        2464
+      ],
+      "core_write_integrity": true,
+      "elevation_method": "TRUE_GENERATIVE_MODEL_DONOR_DDXX_AND_FLOW_LOCKED",
+      "classical_lanczos_sharpen_used_as_sr": false,
+      "generative_qualified": true,
+      "donor_image_sha256": "6f5ca163512b5ecd4dd908bd5d3bcee462d75a142614801a9f94f91f3d2ab989",
+      "ddxx_fit_1x": {
+        "scale_a": 0.457233,
+        "scene_scale_S": 2.1871,
+        "rotation_deg": -0.0995,
+        "weighted_rmse_1x_px": 0.9029,
+        "max_residual_1x_px": 2.0865
+      },
+      "ddxx_fit_4x": {
+        "scale_a_to_4x": 1.828931,
+        "weighted_rmse_4x_px": 3.6116
+      },
+      "e40_honest_boundary_report": {
+        "raw_unmodified_audit": {
+          "gate": "E-SHQ-40_RAW_BOUNDARY",
+          "passed": false,
+          "border_zeroing_cheat_used": false,
+          "min_margin_required": 6,
+          "min_margin_observed": 0,
+          "margins_px": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        "honest_canvas_padding_px": {
+          "pad_left": 6,
+          "pad_top": 6,
+          "pad_right": 6,
+          "pad_bottom": 6
+        },
+        "post_pad_e40_audit": {
+          "gate": "E-SHQ-40_RAW_BOUNDARY",
+          "passed": true,
+          "border_zeroing_cheat_used": false,
+          "min_margin_required": 6,
+          "min_margin_observed": 6,
+          "margins_px": {
+            "left": 6,
+            "top": 6,
+            "right": 6,
+            "bottom": 6
+          }
+        }
+      },
+      "e77_hard_binary_alpha_audit": {
+        "passed": true,
+        "soft_alpha_pixels": 0,
+        "alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "honest_quality_metrics": {
+        "true_generative_coverage_ratio_in_fg": 0.7971,
+        "laplacian_micro_structure_variance_ratio_vs_lanczos4x": 11.0864
+      }
+    },
+    {
+      "object_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "donor_filename": "watermarked_img_9857732739115596442.jpg",
+      "donor_file_sha256": "5395a2fe65ab072da29ec153633440d421795b57d29eaa9ee5537fa1aebdff0b",
+      "target_4x_xywh": [
+        3264,
+        56,
+        2176,
+        2904
+      ],
+      "core_write_integrity": true,
+      "elevation_method": "TRUE_GENERATIVE_MODEL_DONOR_DDXX_AND_FLOW_LOCKED",
+      "classical_lanczos_sharpen_used_as_sr": false,
+      "generative_qualified": true,
+      "donor_image_sha256": "7c165001ef5faab8d4da49ec0a053e8889fe22e898cd44d588abfc6322d49021",
+      "ddxx_fit_1x": {
+        "scale_a": 0.25185,
+        "scene_scale_S": 3.9706,
+        "rotation_deg": 0.0106,
+        "weighted_rmse_1x_px": 0.0289,
+        "max_residual_1x_px": 0.0482
+      },
+      "ddxx_fit_4x": {
+        "scale_a_to_4x": 1.007401,
+        "weighted_rmse_4x_px": 0.1155
+      },
+      "e40_honest_boundary_report": {
+        "raw_unmodified_audit": {
+          "gate": "E-SHQ-40_RAW_BOUNDARY",
+          "passed": false,
+          "border_zeroing_cheat_used": false,
+          "min_margin_required": 6,
+          "min_margin_observed": 0,
+          "margins_px": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        "honest_canvas_padding_px": {
+          "pad_left": 6,
+          "pad_top": 6,
+          "pad_right": 6,
+          "pad_bottom": 6
+        },
+        "post_pad_e40_audit": {
+          "gate": "E-SHQ-40_RAW_BOUNDARY",
+          "passed": true,
+          "border_zeroing_cheat_used": false,
+          "min_margin_required": 6,
+          "min_margin_observed": 6,
+          "margins_px": {
+            "left": 6,
+            "top": 6,
+            "right": 6,
+            "bottom": 6
+          }
+        }
+      },
+      "e77_hard_binary_alpha_audit": {
+        "passed": true,
+        "soft_alpha_pixels": 0,
+        "alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "honest_quality_metrics": {
+        "true_generative_coverage_ratio_in_fg": 0.1636,
+        "laplacian_micro_structure_variance_ratio_vs_lanczos4x": 94.0999
+      }
+    }
+  ]
+}

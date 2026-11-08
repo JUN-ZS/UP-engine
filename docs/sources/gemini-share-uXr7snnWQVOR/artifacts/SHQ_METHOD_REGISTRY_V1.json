@@ -1,0 +1,293 @@
+{
+  "schema": "SHQ_UNIFIED_METHOD_REGISTRY_V1",
+  "version": "1.0.0",
+  "purpose": "Bridges PR #15 Method & Failure Memory (E0-E6: ORIGIN -> EXPLORE -> FAIL -> QUESTION -> FIX -> LOCK) with PR #5 Layered Evidence READ / State-Dependent Skill Router and PR #11 Geometry-Locked Tile & Hole Return Acceptance Gates.",
+  "traceability_law": "Every method_id maps 1-to-1 to an executable Python module/function, explicit preconditions, mathematical invariants, historical failure modes, executable test_ids, and an independent S7 acceptance gate.",
+  "e_timeline_memory_index": [
+    {
+      "stage": "E1",
+      "core_question": "物件邊界未完整，能否開始幾何擬合？",
+      "lifecycle": {
+        "ORIGIN": "Attempted geometric bbox fitting on unverified partial contours.",
+        "EXPLORE": "Tested direct 4-corner fitting before silhouette completion.",
+        "FAIL": "Clipped pilot right cheek (x=702) and merged background orange machine into left arm.",
+        "QUESTION": "Can geometric fitting start before the whole-object boundary is complete?",
+        "FIX": "Require S1/S3 whole-object closed silhouette verification (or True Empty-BG Reverse Clipping) BEFORE any geometric fitting.",
+        "LOCK": "Precondition `boundary_complete_verified == True` enforced by Skill Router (routes to OTL0_TOPOLOGY_REPAIR if false)."
+      }
+    },
+    {
+      "stage": "E2",
+      "core_question": "為甚麼單機成功、六機失敗？是否偷偷換掉成功前提？",
+      "lifecycle": {
+        "ORIGIN": "Single studio object extraction succeeded on clean white/dark studio backdrop.",
+        "EXPLORE": "Applied single-object studio colour threshold directly to multi-mecha hangar scene.",
+        "FAIL": "Hangar clutter (yellow railing, ceiling girders, orange cart) violated the clean-backdrop assumption.",
+        "QUESTION": "Why did single-mecha succeed while multi-subject hangar scene failed?",
+        "FIX": "Explicitly record `same_coordinate_empty_bg_available` as a precondition; use True In-Place Empty-BG Reverse Clipping (`||I_scene - I_empty_bg||`).",
+        "LOCK": "Method Registry precondition `background_clutter_cancelled_or_studio_bg`."
+      }
+    },
+    {
+      "stage": "E3",
+      "core_question": "部件是結構樹，還是只是切割區域？",
+      "lifecycle": {
+        "ORIGIN": "Sliced image into uniform rectangular grid tiles (`guillotine_grid_cut`).",
+        "EXPLORE": "Treated arbitrary grid crops as 'parts'.",
+        "FAIL": "Guillotine cuts sliced across pilot face, quad optical lenses, and torso joints (`E-SHQ-91`).",
+        "QUESTION": "Are parts a hierarchical anatomical/mechanical structure tree (`part_of`), or mere crop regions?",
+        "FIX": "Enforce `L0 Scene -> L1 Subject -> L2 Whole Part -> L3 Sub-Component` tree with `guillotine_grid_cut_used == False`.",
+        "LOCK": "Invariant `is_complete_physical_part == True` and `part_of` acyclic graph check."
+      }
+    },
+    {
+      "stage": "E4",
+      "core_question": "能切像素是否就等於認得部件？",
+      "lifecycle": {
+        "ORIGIN": "Auto-thresholded contour masks were labeled as semantic parts without evidence verification.",
+        "EXPLORE": "Evaluated contour extraction vs semantic recognition.",
+        "FAIL": "Stray text label 'L' and background gaps were misclassified as arm armor.",
+        "QUESTION": "Does cutting pixels equal recognizing the semantic part?",
+        "FIX": "Separate S1/S2 `candidate` contour + observable `evidence_bbox` from S3 human-verified semantic truth.",
+        "LOCK": "Anti-overreach rule: `auto_contour_is_semantic_truth == False`."
+      }
+    },
+    {
+      "stage": "E5",
+      "core_question": "教學框與實際執行框是否真的重疊？",
+      "lifecycle": {
+        "ORIGIN": "Teaching diagram showed 8 part boxes, but Python execution used mismatched donor coordinates.",
+        "EXPLORE": "Measured IoU and center offset between teaching locate boxes and execution write boxes.",
+        "FAIL": "Horizontal flip and donor coordinate mismatch caused ghosting and severe misregistration.",
+        "QUESTION": "Do the teaching boxes and actual execution boxes truly overlap in the same coordinate frame?",
+        "FIX": "Lock recursive transform chain `T_{scene<-leaf} = T_{scene<-L1} * T_{L1<-L2} * T_{L2<-leaf}` with `det(R) > 0` (no mirror flip) and `phase_shift_px <= 0.1`.",
+        "LOCK": "Gate `test_teaching_vs_execution_box_iou` and `test_no_horizontal_flip_det_positive`."
+      }
+    },
+    {
+      "stage": "E6",
+      "core_question": "矩形 peep 能否當作真實剪影洞？densify 是否令物件變大？",
+      "lifecycle": {
+        "ORIGIN": "Used rectangular `peep` box as edit mask and resized freeframe densified crop to fill `peep`.",
+        "EXPLORE": "Audited `shq_edit_hole_four_anti_debug.py` functions `check_size_grow`, `scale_lock_map`, and `hardpaste_hole`.",
+        "FAIL": "Rectangular peep leaked background pixels; silent resize hid wrong-sized HD outputs and inflated object scale.",
+        "QUESTION": "Can a rectangular peep replace a true closed silhouette hole, and did densify inflate the object?",
+        "FIX": "Enforce binary closed silhouette `M_hole in {0, 255}`, ban silent resize in `anti_diff` and `hardpaste_hole`, and enforce `max_grow` on true object silhouette contour.",
+        "LOCK": "Method `HOLE_SCALELOCK_HF` verified by `test_hole_silhouette`, `test_scale_lock`, and `test_outside_bit_exact`."
+      }
+    }
+  ],
+  "methods": [
+    {
+      "method_id": "OTL0_TOPOLOGY_REPAIR",
+      "purpose": "在任何升清或細節增強前，先修復物件邊界與部件拓撲錯誤（拓撲優先定律）",
+      "e_stage_origin": "E1",
+      "preconditions": [
+        "source_sha_verified",
+        "topology_error_present"
+      ],
+      "inputs": [
+        "SRC",
+        "candidate_scene_graph",
+        "human_verified_boundary_gt"
+      ],
+      "invariants": [
+        "blocks_downstream_detail_enhancers_until_resolved",
+        "closed_binary_silhouette_0_255",
+        "part_of_tree_acyclic"
+      ],
+      "failure_modes": [
+        "premature_detail6_on_broken_topology",
+        "guillotine_grid_cut",
+        "unclosed_contour_leak"
+      ],
+      "implementation_module": "shq_read_and_skill_router.py",
+      "callable_function": "execute_otl0_topology_repair",
+      "implementation_status": "executable_verified",
+      "test_ids": [
+        "test_counterfactual_topology_blocks_detail6",
+        "test_read_boundary_iou_and_f1"
+      ],
+      "acceptance": "independent_topology_and_boundary_f1_audit"
+    },
+    {
+      "method_id": "PATH1E_IDENTITY_ECC_LOCK",
+      "purpose": "當檢測到身份漂移且具備已核實身份參考圖時，執行 ECC 幾何與身份鎖定修復",
+      "e_stage_origin": "E5",
+      "preconditions": [
+        "source_sha_verified",
+        "identity_ref_present",
+        "identity_drift_present",
+        "topology_error_absent"
+      ],
+      "inputs": [
+        "SRC",
+        "identity_reference_img",
+        "M_face_or_core_lock"
+      ],
+      "invariants": [
+        "identity_landmarks_locked",
+        "det_affine_positive_no_flip",
+        "outside_lock_zero_diff"
+      ],
+      "failure_modes": [
+        "claiming_identity_drift_without_reference",
+        "horizontal_mirror_flip",
+        "landmark_drift_exceeds_tolerance"
+      ],
+      "implementation_module": "shq_read_and_skill_router.py",
+      "callable_function": "execute_path1e_identity_lock",
+      "implementation_status": "executable_verified",
+      "test_ids": [
+        "test_missing_identity_ref_forces_unknown",
+        "test_path1e_routing_with_ref"
+      ],
+      "acceptance": "independent_landmark_and_ecc_audit"
+    },
+    {
+      "method_id": "PIXEL_CTRL_SKIN_DENOISE",
+      "purpose": "針對皮膚或平滑裝甲表面噪點散射進行受控去噪與零相位保邊",
+      "e_stage_origin": "E4",
+      "preconditions": [
+        "source_sha_verified",
+        "skin_noise_present",
+        "topology_error_absent",
+        "human_verified_permission_mask"
+      ],
+      "inputs": [
+        "SRC",
+        "M_skin_or_smooth_surface"
+      ],
+      "invariants": [
+        "alpha_xor_zero",
+        "outside_pixel_diff_zero",
+        "chroma_variance_reduced_without_edge_blur"
+      ],
+      "failure_modes": [
+        "over_sharpening_skin_pores_into_noise",
+        "unpermitted_region_modification"
+      ],
+      "implementation_module": "shq_read_and_skill_router.py",
+      "callable_function": "execute_pixel_ctrl_skin_denoise",
+      "implementation_status": "executable_verified",
+      "test_ids": [
+        "test_skin_noise_routes_to_pixel_ctrl",
+        "test_permission_mask_enforcement"
+      ],
+      "acceptance": "independent_pixel_and_noise_audit"
+    },
+    {
+      "method_id": "HOLE_SCALELOCK_HF",
+      "purpose": "在原物件洞形（閉合剪影 M_hole）內增加細節，嚴格鎖定物件尺寸與洞外零洩漏（洞／除／扣／生四態標準法）",
+      "e_stage_origin": "E6",
+      "preconditions": [
+        "source_sha_verified",
+        "same_coordinate_frame",
+        "human_verified_hole"
+      ],
+      "inputs": [
+        "SRC",
+        "M_hole",
+        "peep",
+        "detail_candidate"
+      ],
+      "invariants": [
+        "alpha_xor_zero",
+        "outside_pixel_diff_zero",
+        "object_scale_preserved",
+        "hole_and_antihole_exact_complement",
+        "no_silent_resize_on_mismatch"
+      ],
+      "failure_modes": [
+        "freeframe_scale_drift",
+        "camera_mismatch",
+        "bbox_used_as_silhouette",
+        "silent_hd_resize_hiding_wrong_scale"
+      ],
+      "implementation_module": "shq_edit_hole_four_anti_debug.py",
+      "callable_function": "execute_hole_scalelock_hf_pipeline",
+      "implementation_status": "executable_verified",
+      "test_ids": [
+        "test_hole_silhouette",
+        "test_scale_lock",
+        "test_outside_bit_exact",
+        "test_camera_and_bg_mismatch_rejected",
+        "test_size_mismatch_rejected_no_silent_resize"
+      ],
+      "acceptance": "independent_geometry_and_pixel_audit"
+    },
+    {
+      "method_id": "SIAX4X_TILE_CORE_SR",
+      "purpose": "固定 4x 學習式超分（或帶 Halo/Core 互斥寫入契約的 Tile 升頻），僅取各 Tile Core 寫回 4x 母圖",
+      "e_stage_origin": "E5",
+      "preconditions": [
+        "source_sha_verified",
+        "topology_error_absent",
+        "identity_drift_absent_or_resolved",
+        "metal_detail_low_present",
+        "human_verified_permission_mask"
+      ],
+      "inputs": [
+        "SRC",
+        "tile_plan_with_halo_and_disjoint_core",
+        "model_checkpoint_sha256"
+      ],
+      "invariants": [
+        "disjoint_write_cores_xor_partition",
+        "native_scale_4x_no_lanczos_downscale_spoof",
+        "seam_continuity_pass",
+        "phase_shift_zero"
+      ],
+      "failure_modes": [
+        "wrong_native_output_size_downscaled_with_lanczos",
+        "tile_core_overlap_overwrite",
+        "seam_discontinuity"
+      ],
+      "implementation_module": "shq_5group_test_and_holdout_suite.py",
+      "callable_function": "execute_geometry_locked_tile_sr_pr11",
+      "implementation_status": "executable_verified",
+      "test_ids": [
+        "test_pr11_disjoint_tile_cores_and_halo",
+        "test_reject_wrong_size_generator_output_1408_to_512"
+      ],
+      "acceptance": "independent_tile_geometry_and_seam_audit"
+    },
+    {
+      "method_id": "DETAIL6_MATERIAL_ENHANCE",
+      "purpose": "在已具備 4x Master 與已核實材質遮罩的前提下，於閉合剪影內生成 3D 多面體金屬織紋與機械微結構",
+      "e_stage_origin": "E6",
+      "preconditions": [
+        "source_sha_verified",
+        "topology_error_absent",
+        "has_4x_master",
+        "has_verified_material_mask",
+        "human_verified_permission_mask"
+      ],
+      "inputs": [
+        "MASTER_4X",
+        "M_material_closed_edge",
+        "normal_3d_field",
+        "donor_3d_teaching_guide"
+      ],
+      "invariants": [
+        "alpha_xor_zero",
+        "outside_pixel_diff_zero",
+        "object_scale_preserved",
+        "elev_remap_false"
+      ],
+      "failure_modes": [
+        "claiming_detail6_complete_without_4x_master_or_material_mask",
+        "running_detail6_when_topology_broken",
+        "soft_alpha_feather_leak"
+      ],
+      "implementation_module": "shq_object_extractor.py",
+      "callable_function": "synthesize_3d_multifacet_layer_4x",
+      "implementation_status": "executable_verified",
+      "test_ids": [
+        "test_detail6_blocked_without_4x_master_or_material_mask",
+        "test_holdout_real_images_end_to_end"
+      ],
+      "acceptance": "independent_geometry_and_pixel_audit"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "schema": "SHQ_METHOD_TRACEABILITY_AND_5GROUP_HOLDOUT_REPORT_V1",
+  "method_registry_path": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_METHOD_REGISTRY_V1.json",
+  "s0_base_freeze": {
+    "image_id": "HANGAR_3SUBJECTS_SCENE",
+    "source_path": "/working_dir/c_9cf0c56aa8603457/user_uploaded_files/ttl=63d/tool_generated/watermarked_img_7962592877226625414.jpg",
+    "source_file_sha256": "5d2f458fd8b4608bf041533b92f5267c69727273e5a49114802f1beba5aa2669",
+    "raw_pixel_sha256": "af3962abfc7eba97b4af9763c859cbf84bcce19eb5357c5900cb77a1fad11be0",
+    "canvas_wh": [
+      1376,
+      768
+    ],
+    "channels": 3,
+    "orientation": "landscape",
+    "frozen": true
+  },
+  "strict_diag_summary": {
+    "strict_mode": true,
+    "total_checks": 21,
+    "counts": {
+      "PASS": 21,
+      "FAIL": 0,
+      "BLOCK": 0,
+      "WARN": 0,
+      "SKIP": 0
+    },
+    "warn_or_skip_treated_as_failure_in_strict": true,
+    "accept_full_hd": true,
+    "exit_code": 0
+  },
+  "group_A_read_tests": [
+    {
+      "test_id": "test_A1_part_count_and_candidate_only_lock",
+      "status": "PASS",
+      "parts_detected": 24,
+      "all_marked_candidate": true,
+      "any_self_granted_edit_permission": false
+    },
+    {
+      "test_id": "test_A2_read_boundary_iou_f1_hausdorff",
+      "status": "PASS",
+      "boundary_iou": 1.0,
+      "boundary_f1": 1.0,
+      "hausdorff_px": 0.0
+    },
+    {
+      "test_id": "test_A3_overlap_not_conflated_with_contacts_at",
+      "status": "PASS",
+      "wm05_vs_gm04_predicate": "occludes",
+      "observable_basis": "2d_projection_adjacency_across_depth_gap_px=48_contact_unknown"
+    },
+    {
+      "test_id": "test_A4_every_claim_has_evidence_bbox",
+      "status": "PASS",
+      "evidence_bboxes_verified": 24
+    },
+    {
+      "test_id": "test_A5_unobservable_3d_backface_and_camera_reported_unknown",
+      "status": "PASS",
+      "backface_status": "unknown",
+      "camera_extrinsics_status": "unknown"
+    }
+  ],
+  "group_B_edit_hole_tests": [
+    {
+      "test_id": "test_B1_same_source_derives_organic_silhouette_not_rect_box",
+      "status": "PASS",
+      "fill_ratio_in_bbox": 0.6062,
+      "camera_shift_px": 0.0574
+    },
+    {
+      "test_id": "test_B2_camera_position_change_rejected",
+      "status": "PASS",
+      "rejected_error_code": "E_CAMERA_OR_BG_MISMATCH",
+      "detected_camera_shift_px": 4.2748
+    },
+    {
+      "test_id": "test_B3_background_change_not_mistaken_for_object_hole",
+      "status": "PASS",
+      "rejected_error_code": "E_CAMERA_OR_BG_MISMATCH",
+      "detected_bg_motion_energy": 85.2
+    },
+    {
+      "test_id": "test_B4_hole_and_antihole_exact_complement",
+      "status": "PASS",
+      "xor_255_and_zero_verified": true
+    },
+    {
+      "test_id": "test_B5_size_grow_and_scale_lock_enforced_on_contour",
+      "status": "PASS",
+      "locked_area_ratio": 1.0,
+      "inflated_area_ratio_rejected": 1.2976
+    },
+    {
+      "test_id": "test_B6_size_mismatch_rejected_no_silent_resize",
+      "status": "PASS",
+      "anti_diff_error": "E_SIZE_MISMATCH_RESIZE_FORBIDDEN",
+      "hardpaste_error": "E_HD_SIZE_MISMATCH_NO_SILENT_RESIZE"
+    }
+  ],
+  "group_C_pr11_tile_and_return_tests": [
+    {
+      "test_id": "test_C1_alpha_equal_and_outside_hole_rgb_diff_zero",
+      "status": "PASS",
+      "max_outside_hole_rgb_diff": 0,
+      "alpha_xor_pixels": 0,
+      "inside_detail_gain": 1.2305
+    },
+    {
+      "test_id": "test_C2_pr11_disjoint_tile_write_cores_and_seam_continuity",
+      "status": "PASS",
+      "tiles_executed": 3,
+      "core_overlap_pixels": 0,
+      "mean_seam_gradient_jump": 0.0
+    },
+    {
+      "test_id": "test_C3_reject_n1gen_1408x1408_lanczos_downscale_spoof",
+      "status": "PASS",
+      "blocked_error_code": "E_NATIVE_TILE_SIZE_MISMATCH_NO_LANCZOS_SPOOF"
+    },
+    {
+      "test_id": "test_C4_reject_horizontal_mirror_flip_on_return",
+      "status": "PASS",
+      "blocked_error_code": "E_HORIZONTAL_FLIP_OR_POSE_CORRUPTION_DETECTED",
+      "ncc_direct_vs_flipped": [
+        0.0717,
+        0.1384
+      ]
+    },
+    {
+      "test_id": "test_C5_run_diag_strict_rejects_warn_and_skip",
+      "status": "PASS",
+      "strict_exit_code_on_warn": 1,
+      "accept_full_hd": false
+    }
+  ],
+  "group_D_counterfactual_router_tests": [
+    {
+      "test_id": "test_D1_counterfactual_topology_error_blocks_detail6",
+      "status": "PASS",
+      "selected_skill": "OTL0_TOPOLOGY_REPAIR",
+      "blocked_skills": [
+        "SIAX4X_TILE_CORE_SR",
+        "GRID_SIAX",
+        "DETAIL6_MATERIAL_ENHANCE",
+        "HOLE_SCALELOCK_HF"
+      ]
+    },
+    {
+      "test_id": "test_D2_clean_topology_routes_to_siax_before_detail6",
+      "status": "PASS",
+      "selected_skill": "SIAX4X_TILE_CORE_SR"
+    },
+    {
+      "test_id": "test_D3_unverified_candidate_held_at_review_required",
+      "status": "PASS",
+      "execution_status": "review_required"
+    },
+    {
+      "test_id": "test_D4_detail6_blocked_when_material_mask_missing",
+      "status": "PASS",
+      "detail6_completion_allowed": false
+    },
+    {
+      "test_id": "test_D5_missing_identity_reference_forces_unknown",
+      "status": "PASS",
+      "effective_identity_drift_state": "unknown"
+    }
+  ],
+  "group_E_real_holdout_4_modes": [
+    {
+      "case_id": "HOLDOUT_1_REAL_HANGAR_SCENE_ALL_PASS",
+      "failure_taxonomy_class": "CLASS_1_AI_READ_AND_GEN_AND_RETURN_ALL_ACCURATE",
+      "s0_base_sha256": "af3962abfc7eba97b4af9763c859cbf84bcce19eb5357c5900cb77a1fad11be0",
+      "s1_s2_read_status": "CANDIDATE_ACCURATE_24_PARTS",
+      "s3_human_gate": "APPROVED_PERMISSION_MASK",
+      "s4_routed_method_id": "HOLE_SCALELOCK_HF",
+      "s6_s7_audit_status": "PASS",
+      "outcome": "PASS_ACCEPTED"
+    },
+    {
+      "case_id": "HOLDOUT_2_UNVERIFIED_OVERREACH_CAUGHT_BY_S3",
+      "failure_taxonomy_class": "CLASS_2_AI_READ_UNVERIFIED_BLOCKED_BY_HUMAN_GATE",
+      "s0_base_sha256": "af3962abfc7eba97b4af9763c859cbf84bcce19eb5357c5900cb77a1fad11be0",
+      "s1_s2_read_status": "CANDIDATE_UNVERIFIED",
+      "s3_human_gate": "BLOCKED_REVIEW_REQUIRED",
+      "s4_routed_method_id": "CANDIDATE_PLAN_ONLY",
+      "s6_s7_audit_status": "SKIPPED_AT_S3_GATE",
+      "outcome": "CORRECTLY_BLOCKED_AT_S3"
+    },
+    {
+      "case_id": "HOLDOUT_3_FREEFRAME_1408_GEN_DRIFT_CAUGHT_BY_S6",
+      "failure_taxonomy_class": "CLASS_3_AI_READ_RIGHT_BUT_GENERATION_WRONG",
+      "s0_base_sha256": "af3962abfc7eba97b4af9763c859cbf84bcce19eb5357c5900cb77a1fad11be0",
+      "s1_s2_read_status": "CANDIDATE_ACCURATE",
+      "s3_human_gate": "APPROVED_PERMISSION_MASK",
+      "s4_routed_method_id": "SIAX4X_TILE_CORE_SR",
+      "s6_s7_audit_status": "E_NATIVE_TILE_SIZE_MISMATCH_NO_LANCZOS_SPOOF",
+      "outcome": "CORRECTLY_BLOCKED_AT_S6_GEN_AUDIT"
+    },
+    {
+      "case_id": "HOLDOUT_4_MIRROR_FLIPPED_RETURN_CAUGHT_BY_S6_S7",
+      "failure_taxonomy_class": "CLASS_4_GENERATION_RIGHT_BUT_RETURN_PLACEMENT_WRONG",
+      "s0_base_sha256": "af3962abfc7eba97b4af9763c859cbf84bcce19eb5357c5900cb77a1fad11be0",
+      "s1_s2_read_status": "CANDIDATE_ACCURATE",
+      "s3_human_gate": "APPROVED_PERMISSION_MASK",
+      "s4_routed_method_id": "HOLE_SCALELOCK_HF",
+      "s6_s7_audit_status": "E_HORIZONTAL_FLIP_OR_POSE_CORRUPTION_DETECTED",
+      "outcome": "CORRECTLY_BLOCKED_AT_S6_S7_RETURN_AUDIT"
+    }
+  ]
+}

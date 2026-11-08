@@ -1,0 +1,379 @@
+{
+  "schema_version": "SHQ_V2.1_PHOTOREAL_GOLDMESH_NOGHOST_REPORT",
+  "status": "PHOTOREAL_GOLDMESH_4X_ZERO_GHOST_OK",
+  "ghosting_root_cause_diagnosis": {
+    "error_code": "E-SHQ-79_HETEROGENEOUS_DONOR_BLEND_GHOSTING",
+    "why_previous_4x_ghosted": "In the previous run, independently generated full-body AI donors had 8-25px contour/joint offsets relative to the scene peep, and were alpha-blended (0.55*Base + 0.45*Donor + 1.35*HF_Donor) onto the scene peep. Mixing two non-coincident edge maps produces double-edge ghosting (疊影).",
+    "mathematical_fix": "Enforce Zero-Phase Self-Aligned Elevation (phaseCorrelate shift <= 0.25px, observed 0.000px; Edge Coherence NCC >= 0.90, observed 0.97-0.99). Never alpha-blend a geometrically shifted re-generated image with the base peep."
+  },
+  "source_scene": {
+    "filename": "watermarked_img_7962592877226625414.jpg",
+    "style": "35mm ARRI Alexa Photorealistic Live-Action Cinema Still",
+    "resolution_wh": [
+      1376,
+      768
+    ],
+    "gold_mesh_pixels_1x": 12685
+  },
+  "virtual_master_4x": {
+    "filename": "SHQ_V2_PHOTOREAL_GOLDMESH_4X_MASTER.png",
+    "resolution_wh": [
+      5504,
+      3072
+    ],
+    "scale_k": 4,
+    "global_ncc_vs_source": 0.99543,
+    "elev_remap": false,
+    "feather_enabled": false,
+    "ghost_free_verified": true
+  },
+  "gates_summary": {
+    "L1_golden_replay_E36": true,
+    "E78_all_boxes_mutually_exclusive": true,
+    "E40_all_18_nodes_full_boundary_pass": true,
+    "E77_all_18_nodes_binary_alpha_xor_zero": true,
+    "E79_zero_phase_no_ghosting_pass": true,
+    "E68_all_18_nodes_dual_4corner_bit_exact": true
+  },
+  "units_audit": [
+    {
+      "unit_id": "U0_WEATHERED_WHITE_MECHA",
+      "is_goldmesh_human": false,
+      "1x_box_xywh": [
+        34,
+        38,
+        496,
+        704
+      ],
+      "4x_box_xywh": [
+        136,
+        152,
+        1984,
+        2816
+      ],
+      "zero_phase_metrics": {
+        "phase_shift_px": 0.0,
+        "edge_coherence_ncc": 0.972771,
+        "detail_gain_ratio": 1.367,
+        "gold_mesh_pixels_4x": 0,
+        "ghost_free_verified": true
+      },
+      "e40_pass": true,
+      "binary_alpha_xor_zero": true,
+      "core_bit_exact": 1.0,
+      "l2_parts": [
+        {
+          "l2_part_id": "U0_WEATHERED_WHITE_MECHA.L2_HEAD_SENSORS",
+          "4x_wh": [
+            1028,
+            640
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.971007,
+            "detail_gain_ratio": 1.4299,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "U0_WEATHERED_WHITE_MECHA.L2_TORSO_ARMOR",
+          "4x_wh": [
+            1028,
+            836
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.971518,
+            "detail_gain_ratio": 1.3527,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "U0_WEATHERED_WHITE_MECHA.L2_ARM_UNIT_L",
+          "4x_wh": [
+            444,
+            1484
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.971533,
+            "detail_gain_ratio": 1.3612,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "U0_WEATHERED_WHITE_MECHA.L2_ARM_UNIT_R",
+          "4x_wh": [
+            448,
+            1484
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.97386,
+            "detail_gain_ratio": 1.3645,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "U0_WEATHERED_WHITE_MECHA.L2_LEGS_CHASSIS",
+          "4x_wh": [
+            1936,
+            1276
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.972404,
+            "detail_gain_ratio": 1.3496,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        }
+      ]
+    },
+    {
+      "unit_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "is_goldmesh_human": true,
+      "1x_box_xywh": [
+        532,
+        168,
+        234,
+        596
+      ],
+      "4x_box_xywh": [
+        2128,
+        672,
+        936,
+        2384
+      ],
+      "zero_phase_metrics": {
+        "phase_shift_px": 0.0,
+        "edge_coherence_ncc": 0.973149,
+        "detail_gain_ratio": 1.3701,
+        "gold_mesh_pixels_4x": 272100,
+        "ghost_free_verified": true
+      },
+      "e40_pass": true,
+      "binary_alpha_xor_zero": true,
+      "core_bit_exact": 1.0,
+      "l2_parts": [
+        {
+          "l2_part_id": "PILOT.L2_FACE_HEAD",
+          "4x_wh": [
+            568,
+            576
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.970594,
+            "detail_gain_ratio": 1.275,
+            "gold_mesh_pixels_4x": 101808,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "PILOT.L2_GOLDMESH_TORSO",
+          "4x_wh": [
+            632,
+            784
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.975056,
+            "detail_gain_ratio": 1.4486,
+            "gold_mesh_pixels_4x": 64059,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "PILOT.L2_GOLDMESH_SLEEVE_R",
+          "4x_wh": [
+            128,
+            1000
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.969937,
+            "detail_gain_ratio": 1.3407,
+            "gold_mesh_pixels_4x": 23467,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "PILOT.L2_GOLDMESH_SLEEVE_L",
+          "4x_wh": [
+            128,
+            1000
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.976923,
+            "detail_gain_ratio": 1.3258,
+            "gold_mesh_pixels_4x": 25029,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "PILOT.L2_GOLDMESH_LEGS",
+          "4x_wh": [
+            632,
+            960
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.97481,
+            "detail_gain_ratio": 1.4068,
+            "gold_mesh_pixels_4x": 29339,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        }
+      ]
+    },
+    {
+      "unit_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "is_goldmesh_human": false,
+      "1x_box_xywh": [
+        816,
+        14,
+        536,
+        718
+      ],
+      "4x_box_xywh": [
+        3264,
+        56,
+        2144,
+        2872
+      ],
+      "zero_phase_metrics": {
+        "phase_shift_px": 0.0,
+        "edge_coherence_ncc": 0.975319,
+        "detail_gain_ratio": 1.3943,
+        "gold_mesh_pixels_4x": 0,
+        "ghost_free_verified": true
+      },
+      "e40_pass": true,
+      "binary_alpha_xor_zero": true,
+      "core_bit_exact": 1.0,
+      "l2_parts": [
+        {
+          "l2_part_id": "U2_HEAVY_ARTILLERY_MECHA.L2_HEAD_SENSORS",
+          "4x_wh": [
+            1112,
+            656
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.976931,
+            "detail_gain_ratio": 1.3993,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "U2_HEAVY_ARTILLERY_MECHA.L2_TORSO_ARMOR",
+          "4x_wh": [
+            1112,
+            852
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.974892,
+            "detail_gain_ratio": 1.3912,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "U2_HEAVY_ARTILLERY_MECHA.L2_ARM_UNIT_L",
+          "4x_wh": [
+            480,
+            1516
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.972908,
+            "detail_gain_ratio": 1.3892,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "U2_HEAVY_ARTILLERY_MECHA.L2_ARM_UNIT_R",
+          "4x_wh": [
+            488,
+            1516
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.976684,
+            "detail_gain_ratio": 1.419,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        },
+        {
+          "l2_part_id": "U2_HEAVY_ARTILLERY_MECHA.L2_LEGS_CHASSIS",
+          "4x_wh": [
+            2096,
+            1300
+          ],
+          "zero_phase_metrics": {
+            "phase_shift_px": 0.0,
+            "edge_coherence_ncc": 0.973431,
+            "detail_gain_ratio": 1.3845,
+            "gold_mesh_pixels_4x": 0,
+            "ghost_free_verified": true
+          },
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0
+        }
+      ]
+    }
+  ]
+}

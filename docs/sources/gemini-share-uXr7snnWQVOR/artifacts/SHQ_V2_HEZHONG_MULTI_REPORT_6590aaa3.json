@@ -1,0 +1,929 @@
+{
+  "schema_version": "SHQ_V2.0_HEZHONG_MULTI_MECHA_REPORT",
+  "status": "HEZHONG_4MECHA_32NODES_HARDLOCK_RETURN_OK",
+  "source_scene": {
+    "filename": "watermarked_img_7658921744255651472.jpg",
+    "resolution_wh": [
+      1376,
+      768
+    ],
+    "sha256": "7f04d634719854efb2e25870e42e187e69b55997d9b1af1b46a59addf45e2bc5"
+  },
+  "virtual_master_output": {
+    "filename": "SHQ_V2_HEZHONG_MULTI_MASTER_2X.png",
+    "resolution_wh": [
+      2752,
+      1536
+    ],
+    "scale_k": 2,
+    "sha256": "633414d4cd42c16b8ce77047b959ac6aad60d2db97cdda897aeb5a096879b9e5",
+    "ncc_vs_source_structure": 0.970524,
+    "elev_remap": false,
+    "feather_enabled": false
+  },
+  "hierarchy_counts": {
+    "l1_mecha_units": 4,
+    "l2_structural_parts": 20,
+    "l3_core_subparts": 8,
+    "total_verified_nodes": 32
+  },
+  "gates_summary": {
+    "L1_golden_replay_E36": true,
+    "E25_E78_bad_group_plate_blocked": true,
+    "E78_l1_mecha_units_mutex_pass": true,
+    "E78_all_l2_parts_mutex_pass": true,
+    "E40_all_32_nodes_full_boundary_pass": true,
+    "E77_all_32_nodes_binary_alpha_xor_zero": true,
+    "E68_all_32_nodes_dual_4corner_bit_exact": true
+  },
+  "units": [
+    {
+      "unit_id": "U0_COMMAND_WHITE",
+      "box_xywh_in_world": [
+        36,
+        118,
+        318,
+        606
+      ],
+      "corners_4_rel_in_world": [
+        [
+          0.02616279069767442,
+          0.15364583333333334
+        ],
+        [
+          0.25726744186046513,
+          0.15364583333333334
+        ],
+        [
+          0.25726744186046513,
+          0.9427083333333334
+        ],
+        [
+          0.02616279069767442,
+          0.9427083333333334
+        ]
+      ],
+      "base_detail_gain_ratio": 1.7905,
+      "e40_boundary_pass": true,
+      "binary_alpha_xor_zero": true,
+      "dual_4corner_return_audit": {
+        "part_id": "U0_COMMAND_WHITE",
+        "parent_frame": "WORLD_SCENE",
+        "child_frame": "MECHA.U0",
+        "scale_k": 2,
+        "target_xywh": [
+          72,
+          236,
+          636,
+          1212
+        ],
+        "corners_4_rel": [
+          [
+            0.02616279069767442,
+            0.15364583333333334
+          ],
+          [
+            0.25726744186046513,
+            0.15364583333333334
+          ],
+          [
+            0.25726744186046513,
+            0.9427083333333334
+          ],
+          [
+            0.02616279069767442,
+            0.9427083333333334
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "l2_parts_mutex_pass": true,
+      "l2_parts": [
+        {
+          "part_id": "U0_COMMAND_WHITE.P0_HEAD_SENSOR",
+          "box_xywh_in_mecha": [
+            76,
+            6,
+            165,
+            137
+          ],
+          "detail_gain_ratio": 1.6786,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U0.HEAD",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 224.0,
+            "ty": 248.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": [
+            {
+              "subpart_id": "U0_COMMAND_WHITE.P0_HEAD_SENSOR.L3_CORE",
+              "detail_gain_ratio": 1.6451,
+              "e40_pass": true,
+              "binary_alpha_xor_zero": true,
+              "core_bit_exact": 1.0,
+              "composed_world_transform": {
+                "parent_frame": "WORLD_SCENE",
+                "child_frame": "MECHA.U0.HEAD.L3_CORE",
+                "scale": 2.0,
+                "rotation_deg": 0.0,
+                "tx": 284.0,
+                "ty": 298.0,
+                "transform_class": "ROOT",
+                "gate_passed": true
+              }
+            }
+          ]
+        },
+        {
+          "part_id": "U0_COMMAND_WHITE.P1_TORSO_REACTOR",
+          "box_xywh_in_mecha": [
+            76,
+            145,
+            165,
+            179
+          ],
+          "detail_gain_ratio": 1.8261,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U0.TORSO",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 224.0,
+            "ty": 526.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": [
+            {
+              "subpart_id": "U0_COMMAND_WHITE.P1_TORSO_REACTOR.L3_CORE",
+              "detail_gain_ratio": 1.8081,
+              "e40_pass": true,
+              "binary_alpha_xor_zero": true,
+              "core_bit_exact": 1.0,
+              "composed_world_transform": {
+                "parent_frame": "WORLD_SCENE",
+                "child_frame": "MECHA.U0.TORSO.L3_CORE",
+                "scale": 2.0,
+                "rotation_deg": 0.0,
+                "tx": 284.0,
+                "ty": 590.0,
+                "transform_class": "ROOT",
+                "gate_passed": true
+              }
+            }
+          ]
+        },
+        {
+          "part_id": "U0_COMMAND_WHITE.P2_ARM_Weapon_L",
+          "box_xywh_in_mecha": [
+            6,
+            6,
+            68,
+            318
+          ],
+          "detail_gain_ratio": 1.9379,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U0.ARM_L",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 84.0,
+            "ty": 248.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        },
+        {
+          "part_id": "U0_COMMAND_WHITE.P3_ARM_Weapon_R",
+          "box_xywh_in_mecha": [
+            243,
+            6,
+            69,
+            318
+          ],
+          "detail_gain_ratio": 1.7959,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U0.ARM_R",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 558.0,
+            "ty": 248.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        },
+        {
+          "part_id": "U0_COMMAND_WHITE.P4_LEGS_CHASSIS",
+          "box_xywh_in_mecha": [
+            6,
+            326,
+            306,
+            274
+          ],
+          "detail_gain_ratio": 1.989,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U0.LEGS",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 84.0,
+            "ty": 888.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        }
+      ]
+    },
+    {
+      "unit_id": "U1_CRIMSON_BLADE",
+      "box_xywh_in_world": [
+        358,
+        112,
+        348,
+        618
+      ],
+      "corners_4_rel_in_world": [
+        [
+          0.2601744186046512,
+          0.14583333333333334
+        ],
+        [
+          0.5130813953488372,
+          0.14583333333333334
+        ],
+        [
+          0.5130813953488372,
+          0.9505208333333334
+        ],
+        [
+          0.2601744186046512,
+          0.9505208333333334
+        ]
+      ],
+      "base_detail_gain_ratio": 1.8927,
+      "e40_boundary_pass": true,
+      "binary_alpha_xor_zero": true,
+      "dual_4corner_return_audit": {
+        "part_id": "U1_CRIMSON_BLADE",
+        "parent_frame": "WORLD_SCENE",
+        "child_frame": "MECHA.U1",
+        "scale_k": 2,
+        "target_xywh": [
+          716,
+          224,
+          696,
+          1236
+        ],
+        "corners_4_rel": [
+          [
+            0.2601744186046512,
+            0.14583333333333334
+          ],
+          [
+            0.5130813953488372,
+            0.14583333333333334
+          ],
+          [
+            0.5130813953488372,
+            0.9505208333333334
+          ],
+          [
+            0.2601744186046512,
+            0.9505208333333334
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "l2_parts_mutex_pass": true,
+      "l2_parts": [
+        {
+          "part_id": "U1_CRIMSON_BLADE.P0_HEAD_SENSOR",
+          "box_xywh_in_mecha": [
+            83,
+            6,
+            180,
+            140
+          ],
+          "detail_gain_ratio": 1.8707,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U1.HEAD",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 882.0,
+            "ty": 236.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": [
+            {
+              "subpart_id": "U1_CRIMSON_BLADE.P0_HEAD_SENSOR.L3_CORE",
+              "detail_gain_ratio": 1.8511,
+              "e40_pass": true,
+              "binary_alpha_xor_zero": true,
+              "core_bit_exact": 1.0,
+              "composed_world_transform": {
+                "parent_frame": "WORLD_SCENE",
+                "child_frame": "MECHA.U1.HEAD.L3_CORE",
+                "scale": 2.0,
+                "rotation_deg": 0.0,
+                "tx": 946.0,
+                "ty": 286.0,
+                "transform_class": "ROOT",
+                "gate_passed": true
+              }
+            }
+          ]
+        },
+        {
+          "part_id": "U1_CRIMSON_BLADE.P1_TORSO_REACTOR",
+          "box_xywh_in_mecha": [
+            83,
+            148,
+            180,
+            183
+          ],
+          "detail_gain_ratio": 1.8155,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U1.TORSO",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 882.0,
+            "ty": 520.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": [
+            {
+              "subpart_id": "U1_CRIMSON_BLADE.P1_TORSO_REACTOR.L3_CORE",
+              "detail_gain_ratio": 1.8209,
+              "e40_pass": true,
+              "binary_alpha_xor_zero": true,
+              "core_bit_exact": 1.0,
+              "composed_world_transform": {
+                "parent_frame": "WORLD_SCENE",
+                "child_frame": "MECHA.U1.TORSO.L3_CORE",
+                "scale": 2.0,
+                "rotation_deg": 0.0,
+                "tx": 946.0,
+                "ty": 586.0,
+                "transform_class": "ROOT",
+                "gate_passed": true
+              }
+            }
+          ]
+        },
+        {
+          "part_id": "U1_CRIMSON_BLADE.P2_ARM_Weapon_L",
+          "box_xywh_in_mecha": [
+            6,
+            6,
+            75,
+            325
+          ],
+          "detail_gain_ratio": 1.9715,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U1.ARM_L",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 728.0,
+            "ty": 236.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        },
+        {
+          "part_id": "U1_CRIMSON_BLADE.P3_ARM_Weapon_R",
+          "box_xywh_in_mecha": [
+            265,
+            6,
+            77,
+            325
+          ],
+          "detail_gain_ratio": 1.9356,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U1.ARM_R",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 1246.0,
+            "ty": 236.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        },
+        {
+          "part_id": "U1_CRIMSON_BLADE.P4_LEGS_CHASSIS",
+          "box_xywh_in_mecha": [
+            6,
+            333,
+            336,
+            279
+          ],
+          "detail_gain_ratio": 2.0397,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U1.LEGS",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 728.0,
+            "ty": 890.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        }
+      ]
+    },
+    {
+      "unit_id": "U2_ARTILLERY_GREEN",
+      "box_xywh_in_world": [
+        710,
+        40,
+        340,
+        690
+      ],
+      "corners_4_rel_in_world": [
+        [
+          0.5159883720930233,
+          0.052083333333333336
+        ],
+        [
+          0.7630813953488372,
+          0.052083333333333336
+        ],
+        [
+          0.7630813953488372,
+          0.9505208333333334
+        ],
+        [
+          0.5159883720930233,
+          0.9505208333333334
+        ]
+      ],
+      "base_detail_gain_ratio": 1.8626,
+      "e40_boundary_pass": true,
+      "binary_alpha_xor_zero": true,
+      "dual_4corner_return_audit": {
+        "part_id": "U2_ARTILLERY_GREEN",
+        "parent_frame": "WORLD_SCENE",
+        "child_frame": "MECHA.U2",
+        "scale_k": 2,
+        "target_xywh": [
+          1420,
+          80,
+          680,
+          1380
+        ],
+        "corners_4_rel": [
+          [
+            0.5159883720930233,
+            0.052083333333333336
+          ],
+          [
+            0.7630813953488372,
+            0.052083333333333336
+          ],
+          [
+            0.7630813953488372,
+            0.9505208333333334
+          ],
+          [
+            0.5159883720930233,
+            0.9505208333333334
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "l2_parts_mutex_pass": true,
+      "l2_parts": [
+        {
+          "part_id": "U2_ARTILLERY_GREEN.P0_HEAD_SENSOR",
+          "box_xywh_in_mecha": [
+            81,
+            6,
+            176,
+            157
+          ],
+          "detail_gain_ratio": 1.8207,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U2.HEAD",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 1582.0,
+            "ty": 92.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": [
+            {
+              "subpart_id": "U2_ARTILLERY_GREEN.P0_HEAD_SENSOR.L3_CORE",
+              "detail_gain_ratio": 2.029,
+              "e40_pass": true,
+              "binary_alpha_xor_zero": true,
+              "core_bit_exact": 1.0,
+              "composed_world_transform": {
+                "parent_frame": "WORLD_SCENE",
+                "child_frame": "MECHA.U2.HEAD.L3_CORE",
+                "scale": 2.0,
+                "rotation_deg": 0.0,
+                "tx": 1646.0,
+                "ty": 148.0,
+                "transform_class": "ROOT",
+                "gate_passed": true
+              }
+            }
+          ]
+        },
+        {
+          "part_id": "U2_ARTILLERY_GREEN.P1_TORSO_REACTOR",
+          "box_xywh_in_mecha": [
+            81,
+            165,
+            176,
+            205
+          ],
+          "detail_gain_ratio": 1.8637,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U2.TORSO",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 1582.0,
+            "ty": 410.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": [
+            {
+              "subpart_id": "U2_ARTILLERY_GREEN.P1_TORSO_REACTOR.L3_CORE",
+              "detail_gain_ratio": 1.9245,
+              "e40_pass": true,
+              "binary_alpha_xor_zero": true,
+              "core_bit_exact": 1.0,
+              "composed_world_transform": {
+                "parent_frame": "WORLD_SCENE",
+                "child_frame": "MECHA.U2.TORSO.L3_CORE",
+                "scale": 2.0,
+                "rotation_deg": 0.0,
+                "tx": 1646.0,
+                "ty": 484.0,
+                "transform_class": "ROOT",
+                "gate_passed": true
+              }
+            }
+          ]
+        },
+        {
+          "part_id": "U2_ARTILLERY_GREEN.P2_ARM_Weapon_L",
+          "box_xywh_in_mecha": [
+            6,
+            6,
+            73,
+            364
+          ],
+          "detail_gain_ratio": 1.9274,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U2.ARM_L",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 1432.0,
+            "ty": 92.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        },
+        {
+          "part_id": "U2_ARTILLERY_GREEN.P3_ARM_Weapon_R",
+          "box_xywh_in_mecha": [
+            259,
+            6,
+            75,
+            364
+          ],
+          "detail_gain_ratio": 1.8893,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U2.ARM_R",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 1938.0,
+            "ty": 92.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        },
+        {
+          "part_id": "U2_ARTILLERY_GREEN.P4_LEGS_CHASSIS",
+          "box_xywh_in_mecha": [
+            6,
+            372,
+            328,
+            312
+          ],
+          "detail_gain_ratio": 1.9836,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U2.LEGS",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 1432.0,
+            "ty": 824.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        }
+      ]
+    },
+    {
+      "unit_id": "U3_STEALTH_VIOLET",
+      "box_xywh_in_world": [
+        1054,
+        132,
+        314,
+        598
+      ],
+      "corners_4_rel_in_world": [
+        [
+          0.7659883720930233,
+          0.171875
+        ],
+        [
+          0.9941860465116279,
+          0.171875
+        ],
+        [
+          0.9941860465116279,
+          0.9505208333333334
+        ],
+        [
+          0.7659883720930233,
+          0.9505208333333334
+        ]
+      ],
+      "base_detail_gain_ratio": 1.9567,
+      "e40_boundary_pass": true,
+      "binary_alpha_xor_zero": true,
+      "dual_4corner_return_audit": {
+        "part_id": "U3_STEALTH_VIOLET",
+        "parent_frame": "WORLD_SCENE",
+        "child_frame": "MECHA.U3",
+        "scale_k": 2,
+        "target_xywh": [
+          2108,
+          264,
+          628,
+          1196
+        ],
+        "corners_4_rel": [
+          [
+            0.7659883720930233,
+            0.171875
+          ],
+          [
+            0.9941860465116279,
+            0.171875
+          ],
+          [
+            0.9941860465116279,
+            0.9505208333333334
+          ],
+          [
+            0.7659883720930233,
+            0.9505208333333334
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "l2_parts_mutex_pass": true,
+      "l2_parts": [
+        {
+          "part_id": "U3_STEALTH_VIOLET.P0_HEAD_SENSOR",
+          "box_xywh_in_mecha": [
+            75,
+            6,
+            163,
+            135
+          ],
+          "detail_gain_ratio": 1.9655,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U3.HEAD",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 2258.0,
+            "ty": 276.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": [
+            {
+              "subpart_id": "U3_STEALTH_VIOLET.P0_HEAD_SENSOR.L3_CORE",
+              "detail_gain_ratio": 1.9725,
+              "e40_pass": true,
+              "binary_alpha_xor_zero": true,
+              "core_bit_exact": 1.0,
+              "composed_world_transform": {
+                "parent_frame": "WORLD_SCENE",
+                "child_frame": "MECHA.U3.HEAD.L3_CORE",
+                "scale": 2.0,
+                "rotation_deg": 0.0,
+                "tx": 2316.0,
+                "ty": 324.0,
+                "transform_class": "ROOT",
+                "gate_passed": true
+              }
+            }
+          ]
+        },
+        {
+          "part_id": "U3_STEALTH_VIOLET.P1_TORSO_REACTOR",
+          "box_xywh_in_mecha": [
+            75,
+            143,
+            163,
+            177
+          ],
+          "detail_gain_ratio": 1.8378,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U3.TORSO",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 2258.0,
+            "ty": 550.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": [
+            {
+              "subpart_id": "U3_STEALTH_VIOLET.P1_TORSO_REACTOR.L3_CORE",
+              "detail_gain_ratio": 1.886,
+              "e40_pass": true,
+              "binary_alpha_xor_zero": true,
+              "core_bit_exact": 1.0,
+              "composed_world_transform": {
+                "parent_frame": "WORLD_SCENE",
+                "child_frame": "MECHA.U3.TORSO.L3_CORE",
+                "scale": 2.0,
+                "rotation_deg": 0.0,
+                "tx": 2316.0,
+                "ty": 614.0,
+                "transform_class": "ROOT",
+                "gate_passed": true
+              }
+            }
+          ]
+        },
+        {
+          "part_id": "U3_STEALTH_VIOLET.P2_ARM_Weapon_L",
+          "box_xywh_in_mecha": [
+            6,
+            6,
+            67,
+            314
+          ],
+          "detail_gain_ratio": 1.9029,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U3.ARM_L",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 2120.0,
+            "ty": 276.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        },
+        {
+          "part_id": "U3_STEALTH_VIOLET.P3_ARM_Weapon_R",
+          "box_xywh_in_mecha": [
+            240,
+            6,
+            68,
+            314
+          ],
+          "detail_gain_ratio": 2.0273,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U3.ARM_R",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 2588.0,
+            "ty": 276.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        },
+        {
+          "part_id": "U3_STEALTH_VIOLET.P4_LEGS_CHASSIS",
+          "box_xywh_in_mecha": [
+            6,
+            322,
+            302,
+            270
+          ],
+          "detail_gain_ratio": 2.0925,
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "composed_world_transform": {
+            "parent_frame": "WORLD_SCENE",
+            "child_frame": "MECHA.U3.LEGS",
+            "scale": 2.0,
+            "rotation_deg": 0.0,
+            "tx": 2120.0,
+            "ty": 908.0,
+            "transform_class": "ROOT",
+            "gate_passed": true
+          },
+          "l3_subparts": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,549 @@
+{
+  "schema": "SHQ_ALL24_TRUE_AI_GENERATIVE_UPSCALE_AND_S7_RETURN_REPORT",
+  "version": "10.0.0",
+  "method_id": "ALL24_TRUE_AI_GEN_MULTIBAND_RETURN",
+  "synthetic_cosine_weave_used": false,
+  "true_ai_diffusion_donors_used": {
+    "full_scene_8k": {
+      "filename": "watermarked_img_1170464247286558273.jpg",
+      "sha256": "2328275f10ab9d94a4f434bc0e5483b03fe146f2501c6f933c560354ba6a2ad9",
+      "shape_hwc": [
+        768,
+        1376,
+        3
+      ]
+    },
+    "pilot_head_portrait_8k": {
+      "filename": "watermarked_img_3526183393322072827.jpg",
+      "sha256": "5cbc85b0d00b32da9772ce075ccfe46ac74581b8d9986d64fbde4d60534c751c",
+      "shape_hwc": [
+        1200,
+        896,
+        3
+      ]
+    },
+    "pilot_bodysuit_8k": {
+      "filename": "watermarked_img_3091548433323444127.jpg",
+      "sha256": "2a008a4cbe76bfa7ab500eae47efdc5d654e34168872bfe655bb73d189a58d47",
+      "shape_hwc": [
+        1200,
+        896,
+        3
+      ]
+    },
+    "white_mecha_8k": {
+      "filename": "watermarked_img_6262079040622231198.jpg",
+      "sha256": "01b01c2cc91f48926360f9e55f53206905eb4a42c1d66e25fb6707f11acf887a",
+      "shape_hwc": [
+        1200,
+        896,
+        3
+      ]
+    },
+    "artillery_mecha_8k": {
+      "filename": "watermarked_img_3522986443307266800.jpg",
+      "sha256": "3c53eaaee95c11b35a289665df25324808842d00ae4a696112f6a434074ff004",
+      "shape_hwc": [
+        1200,
+        896,
+        3
+      ]
+    }
+  },
+  "s4_skill_router_identity_lock_applied": {
+    "part_id": "GM_01_HEAD_AND_COLLAR",
+    "initial_bodysuit_pass_identity_drift": "present (watermarked_img_3091548433323444127.jpg had Western braided hair)",
+    "routed_skill": "PATH1E_IDENTITY_ECC_LOCK",
+    "identity_locked_portrait_donor": "watermarked_img_3526183393322072827.jpg (East Asian 3/4 portrait with gold-trimmed collar)"
+  },
+  "global_s7_independent_audit": {
+    "status": "PASS",
+    "accept_full_hd": true,
+    "alpha_equal_to_source": true,
+    "alpha_xor_pixels": 0,
+    "soft_alpha_pixels": 0,
+    "max_outside_hole_rgb_diff": 0,
+    "inside_hole_detail_gain_ratio": 1.3369,
+    "phase_shift_px": 0.0079,
+    "frozen_src_sha256": "7ddf8d1ab04b6545586bf6440e20e522bc6661a94aaa0fff77bf7e439a6b2b3d",
+    "final_output_sha256": "e1d519ebd9b2e908df1f9bea6da2b817203649730e0366c04e10e9625f909e81"
+  },
+  "strict_diag_summary": {
+    "strict_mode": true,
+    "total_checks": 25,
+    "counts": {
+      "PASS": 25,
+      "FAIL": 0,
+      "BLOCK": 0,
+      "WARN": 0,
+      "SKIP": 0
+    },
+    "warn_or_skip_treated_as_failure_in_strict": true,
+    "accept_full_hd": true,
+    "exit_code": 0
+  },
+  "output_artifacts": {
+    "all24_true_ai_gen_board_png": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_ALL24_TRUE_AI_GEN_24PARTS_ATLAS_AND_RETURN_BOARD.png",
+    "all24_true_ai_gen_4x_master_png": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_ALL24_TRUE_AI_GEN_4X_MASTER_5504x3072.png",
+    "all24_true_ai_gen_72parts_zip": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_ALL24_TRUE_AI_GEN_72PARTS_RGBA_PACK.zip",
+    "all24_true_ai_gen_s7_report_json": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_ALL24_TRUE_AI_GEN_S7_AUDIT_REPORT.json"
+  },
+  "per_part_24_s7_receipts": [
+    {
+      "part_id": "GM_08_GOLDMESH_LEGS_TROUSERS",
+      "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "ai_donor_source_id": "watermarked_img_3091548433323444127.jpg[235:665,795:1195]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 409728,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.4751,
+        "phase_shift_px": 0.0109,
+        "frozen_src_sha256": "6c29c3a1a2077d8275eb4c3ead6c786da3fba8c2798483ce23e6167a020cdce3",
+        "final_output_sha256": "db03505ffbbc479d914737862dfc3198f0a5f682452dad804737cf22cbdbf275"
+      }
+    },
+    {
+      "part_id": "WM_08_LEFT_LEG_THRUSTER_BOOT",
+      "subject_id": "U0_WEATHERED_WHITE_MECHA",
+      "ai_donor_source_id": "watermarked_img_6262079040622231198.jpg[515:760,515:1175]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 556592,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3867,
+        "phase_shift_px": 0.0149,
+        "frozen_src_sha256": "06f5749518899f7409d414f0110e20e11f16d5652b047530fd38e9837ef42b4f",
+        "final_output_sha256": "552b38ea31d76c732c91bb6445afd47e57e42f49d0f41ccc04b93cc8e93914a1"
+      }
+    },
+    {
+      "part_id": "AM_08_TWIN_TRACKED_LEGS",
+      "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "ai_donor_source_id": "watermarked_img_3522986443307266800.jpg[90:815,600:1170]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 1164704,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.4325,
+        "phase_shift_px": 0.0068,
+        "frozen_src_sha256": "02f35b4871ef5645bdb958a04182dcefc19f679f8e982adda1853f8869d99289",
+        "final_output_sha256": "7fd752b75267af2f17f44a1f03d617654ce047bee7a4a0e51505d0b89820776e"
+      }
+    },
+    {
+      "part_id": "GM_03_GOLDMESH_CORSET_WAIST",
+      "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "ai_donor_source_id": "watermarked_img_3091548433323444127.jpg[305:590,545:755]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 129696,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.4761,
+        "phase_shift_px": 0.0194,
+        "frozen_src_sha256": "79d1533c5b549217a84d20fc554f9e567ca8af429af88a798fe849c709e214dd",
+        "final_output_sha256": "8bc78ef9b3a1c88f37747811e1a63632e2042f81b0e530b7ce2bdb9a06676b75"
+      }
+    },
+    {
+      "part_id": "WM_07_RIGHT_LEG_THRUSTER_BOOT",
+      "subject_id": "U0_WEATHERED_WHITE_MECHA",
+      "ai_donor_source_id": "watermarked_img_6262079040622231198.jpg[135:440,530:1165]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 701744,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3728,
+        "phase_shift_px": 0.0151,
+        "frozen_src_sha256": "8392820fdb458cfa9b7874aaf6d4521186b431f6dd19388acb9a0785e30e900e",
+        "final_output_sha256": "f7140b0e8cbdfdf190675f983834e2c2be1917b2a2174fad887aef7dde6598bf"
+      }
+    },
+    {
+      "part_id": "AM_07_PELVIS_ARMOR_BLOCK",
+      "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "ai_donor_source_id": "watermarked_img_3522986443307266800.jpg[345:565,595:785]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 228448,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.478,
+        "phase_shift_px": 0.0333,
+        "frozen_src_sha256": "fcefc2ccd5502a77c2c9d8a4717f161ceeb88835aa00d255d19d5aec772b2f57",
+        "final_output_sha256": "cf02f178ee499c3760aaa5a046a66da4bef414d7e21b93a0b29211f1b095a591"
+      }
+    },
+    {
+      "part_id": "GM_02_GOLDMESH_CHEST_ARMOR",
+      "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "ai_donor_source_id": "watermarked_img_3091548433323444127.jpg[250:645,290:560]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 263744,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.5179,
+        "phase_shift_px": 0.0105,
+        "frozen_src_sha256": "123baad6784f69817fc96939afd5436ba51e9178738f0f9dd7e94b620b07fae5",
+        "final_output_sha256": "f6e02d98c03b9f086dedb62b312a442c0e9fea3a5aa21e14b4e4d358a22bfdef"
+      }
+    },
+    {
+      "part_id": "WM_06_PELVIS_GYRO_BLOCK",
+      "subject_id": "U0_WEATHERED_WHITE_MECHA",
+      "ai_donor_source_id": "watermarked_img_6262079040622231198.jpg[345:560,490:715]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 152976,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3892,
+        "phase_shift_px": 0.0076,
+        "frozen_src_sha256": "298bd473fde88e9319a8fea18dd6d05cc03ede11661dcd75d8e4d0d4d53a13f0",
+        "final_output_sha256": "942cb2ef51f18bacfb5de6352bd5b9b8a834a1310d8c52bb1f961226f7917765"
+      }
+    },
+    {
+      "part_id": "AM_02_SHOULDER_MISSILE_PODS",
+      "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "ai_donor_source_id": "watermarked_img_3522986443307266800.jpg[180:860,145:305]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 181696,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3572,
+        "phase_shift_px": 0.0099,
+        "frozen_src_sha256": "a21f4142c693dd4e466b86d3f8c6e0d107076059a3ef90d7ed74e64cdec7a42c",
+        "final_output_sha256": "3f021fe7f4643259a1d539a2a990075b8f8360a8d48e85e24168d3f2ea158163"
+      }
+    },
+    {
+      "part_id": "GM_04_RIGHT_GOLDMESH_ARM",
+      "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "ai_donor_source_id": "watermarked_img_3091548433323444127.jpg[160:315,310:810]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 148832,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.4093,
+        "phase_shift_px": 0.0128,
+        "frozen_src_sha256": "71001c16bff797ad3d4df162836559aaa64c84352382f6941c058b70c433b5ab",
+        "final_output_sha256": "a32c0c3e1745d65837f9c4ef4e12a2fad4b82aa7bdb16807998ef290428e3f3e"
+      }
+    },
+    {
+      "part_id": "WM_02_SHOULDER_SENSOR_PODS",
+      "subject_id": "U0_WEATHERED_WHITE_MECHA",
+      "ai_donor_source_id": "watermarked_img_6262079040622231198.jpg[215:755,25:185]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 180368,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3555,
+        "phase_shift_px": 0.0106,
+        "frozen_src_sha256": "20f34672948b4ad7c68b72929dcc2c0037bd97e7a246fbfbe3daf6f24cb5c11e",
+        "final_output_sha256": "3b44b05183eedbd95673751f0e6fa2255e589d063971397c0fa93e323abb7fd6"
+      }
+    },
+    {
+      "part_id": "AM_04_REACTIVE_CHEST_AND_PODS",
+      "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "ai_donor_source_id": "watermarked_img_3522986443307266800.jpg[250:690,290:600]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 637264,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3692,
+        "phase_shift_px": 0.0186,
+        "frozen_src_sha256": "204a5a11cb59ac9afff77c80a1ce60fb040ff95bd04f50809c1ad93c879cc6fa",
+        "final_output_sha256": "2c82885ec4ee7c8def979ff63ebd50a07e0ce09e58fd0188a620444e91648e6d"
+      }
+    },
+    {
+      "part_id": "GM_05_LEFT_GOLDMESH_ARM",
+      "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "ai_donor_source_id": "watermarked_img_3091548433323444127.jpg[580:745,310:810]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 127568,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.429,
+        "phase_shift_px": 0.0101,
+        "frozen_src_sha256": "7665ebe8ee93a397296e073ec802b8b49b8be3bcedd19c149ca0f85d18f01df7",
+        "final_output_sha256": "cfe181ecda1e4323433d4a7dbadd405bf1f42c19f64039afc5ec870378458338"
+      }
+    },
+    {
+      "part_id": "WM_03_WEATHERED_CHEST_HYDRAULICS",
+      "subject_id": "U0_WEATHERED_WHITE_MECHA",
+      "ai_donor_source_id": "watermarked_img_6262079040622231198.jpg[270:645,160:495]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 788784,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3229,
+        "phase_shift_px": 0.019,
+        "frozen_src_sha256": "8cebfb53652f7cb84de1e035ccb116f9a9332ee8b0a61778641d8b1e4e6d4738",
+        "final_output_sha256": "939d7cf128fbdc461f7c4f940482c79fbccf6ef4b9f03824e21d6c5eb34b554c"
+      }
+    },
+    {
+      "part_id": "AM_05_RIGHT_ARM_SHIELDED",
+      "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "ai_donor_source_id": "watermarked_img_3522986443307266800.jpg[55:280,295:810]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 267648,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.5044,
+        "phase_shift_px": 0.0145,
+        "frozen_src_sha256": "091f933f9329d5d2b40e0069781d96f259d94c5ff557cb15ba9023aa1ab7d909",
+        "final_output_sha256": "f9f2fcc6334c2807d342d4cca392902a74cfd0460268bbfebc3d33f87064fe16"
+      }
+    },
+    {
+      "part_id": "GM_06_TACTICAL_BELT_RIG",
+      "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "ai_donor_source_id": "watermarked_img_3091548433323444127.jpg[255:655,700:835]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 165952,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.4151,
+        "phase_shift_px": 0.0245,
+        "frozen_src_sha256": "93d556b881b4945ca454128c82a4bc2743d5008f8c03fc6e58f9952a81a6c578",
+        "final_output_sha256": "b94a75c712dd2ed3fda2f4d36ffa8fcbdbe9a45bdcad0cfeb886947cdb2c9856"
+      }
+    },
+    {
+      "part_id": "WM_05_LEFT_ARM_MANIPULATOR",
+      "subject_id": "U0_WEATHERED_WHITE_MECHA",
+      "ai_donor_source_id": "watermarked_img_6262079040622231198.jpg[605:835,150:795]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 493360,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.33,
+        "phase_shift_px": 0.0088,
+        "frozen_src_sha256": "c9bb6ef91666908db8097963821ca16c7957b23b1d46f1aa6b81a6decb0e16f7",
+        "final_output_sha256": "8a01d8045c2d17678cd840e19e46d9fabf4e58cff24291db7dd4d2cac4e04933"
+      }
+    },
+    {
+      "part_id": "AM_06_LEFT_ARM_SHIELDED",
+      "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "ai_donor_source_id": "watermarked_img_3522986443307266800.jpg[665:880,275:815]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 516672,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.392,
+        "phase_shift_px": 0.0079,
+        "frozen_src_sha256": "f1873d04f3157b366601c8e0d5dc78901f860e20ccfa1ef35fcec1ec9270e168",
+        "final_output_sha256": "d03b92413ba50bf139d0b2804e49976a687e453a90244c9d0f10d1a9ba676332"
+      }
+    },
+    {
+      "part_id": "GM_07_TACTICAL_GLOVES_PAIR",
+      "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "ai_donor_source_id": "watermarked_img_3091548433323444127.jpg[145:760,800:1045]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 137104,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.4386,
+        "phase_shift_px": 0.0198,
+        "frozen_src_sha256": "05e8574a25a0d73f1ad553e68bb36a3ae9f797875ecb1ed2e052c7880d59a152",
+        "final_output_sha256": "e622f2ce5b7d6b3418509e849ffac812fbdd65f7d35d88fe2ecd28da80db53a9"
+      }
+    },
+    {
+      "part_id": "WM_04_RIGHT_ARM_MANIPULATOR",
+      "subject_id": "U0_WEATHERED_WHITE_MECHA",
+      "ai_donor_source_id": "watermarked_img_6262079040622231198.jpg[70:310,195:795]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 533776,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3454,
+        "phase_shift_px": 0.0109,
+        "frozen_src_sha256": "f0089299c8ef15959268dc4a99b64af217450ba5d716b0bc8da1e0bec1117249",
+        "final_output_sha256": "46994aa0d7caa619c2e7aeca359f723e00335c9c70a63fb41047fb1b5a8579ab"
+      }
+    },
+    {
+      "part_id": "AM_01_TWIN_HOWITZER_CANNONS",
+      "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "ai_donor_source_id": "watermarked_img_3522986443307266800.jpg[25:760,15:275]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 220336,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3416,
+        "phase_shift_px": 0.0172,
+        "frozen_src_sha256": "7ae06021637c86cb33f6a505aaabed1ba5239ad75107007fb835df9f0f5bc344",
+        "final_output_sha256": "8bc33d8cebf14dcc9ae56df1b41f2a0a80249c024820851bb36f4f0b65d014be"
+      }
+    },
+    {
+      "part_id": "GM_01_HEAD_AND_COLLAR",
+      "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+      "ai_donor_source_id": "watermarked_img_3526183393322072827.jpg[120:800,30:1060]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 201488,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.2652,
+        "phase_shift_px": 0.0144,
+        "frozen_src_sha256": "afcc018bdba02168cb0ce02307bf26ed294e0b60012458edd9bef3a8fba4176a",
+        "final_output_sha256": "3be607f0458f64c5e879538e8577d9e92bc408d1ed285994cebfebad9f249030"
+      }
+    },
+    {
+      "part_id": "WM_01_OPTICAL_SENSOR_HEAD",
+      "subject_id": "U0_WEATHERED_WHITE_MECHA",
+      "ai_donor_source_id": "watermarked_img_6262079040622231198.jpg[360:535,65:205]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 126912,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.4006,
+        "phase_shift_px": 0.0121,
+        "frozen_src_sha256": "c258d72dd0b972a7d1707ba54a35b8d5414fdba241d287d804ec6b3cdae4ad2d",
+        "final_output_sha256": "da02c2f4bd0fe3336636e0f1e787f2d841b23cd11a604c592bcca98ec0bd84dd"
+      }
+    },
+    {
+      "part_id": "AM_03_ARMORED_VISOR_HEAD",
+      "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+      "ai_donor_source_id": "watermarked_img_3522986443307266800.jpg[370:585,205:340]",
+      "synthetic_cosine_weave_used": false,
+      "true_ai_diffusion_pixels_transferred": 113584,
+      "s7_part_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "alpha_equal_to_source": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3713,
+        "phase_shift_px": 0.025,
+        "frozen_src_sha256": "a0a93575a6cbee86af61fe182ea120f2d62a72348cff5528fc76f0ddd0238c1b",
+        "final_output_sha256": "2b0064db714d3078335a922f6fbab476f4d5001f13d8e1cd7c76eb8e21aa12c3"
+      }
+    }
+  ]
+}
