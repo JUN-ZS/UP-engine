@@ -24,7 +24,7 @@ assets/s4_self_part_hr_b0_geometry_locked_1200x896.jpg
 assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg
 ```
 
-Do **not** rename `B0_UPPER` to `B0_GL` or `B2_FULL` to `B2_GL`. They are not equivalent source images. Do not generate placeholder files, resize another plate, or edit the runner to silently fall back. Until the exact two images are committed and their SHA-256 values added to the manifest, the attached ZIP must remain `BLOCK` and must not replace the Hub baseline.
+Do **not** rename `B0_UPPER` to `B0_GL` or `B2_FULL` to `B2_GL`. They are not equivalent source images. Do not generate placeholder files, resize another plate, or edit the runner to silently fall back. Even after both image paths exist, preflight will still `BLOCK` unless `assets/geometry_locked_hr_manifest.json` records the exact SHA-256 and `[1200, 896]` dimensions for each file. Until the exact two images and valid manifest are committed, the attached ZIP must remain `BLOCK` and must not replace the Hub baseline.
 
 ## 1. Clone the Hub branch
 
@@ -73,7 +73,25 @@ To inspect a separately extracted candidate ZIP without changing the Hub baselin
 python preflight_check.py --root /absolute/path/to/IGE_SHQ_GitHub_Verifiable_Package_v1.0
 ```
 
-If the runner references `B0_GL` / `B2_GL`, preflight automatically requires the two extra geometry-locked files. Missing files or a hash mismatch return `BLOCK` and exit code `2`.
+If the runner references `B0_GL` / `B2_GL`, preflight automatically requires both extra geometry-locked files **and** `assets/geometry_locked_hr_manifest.json`. The manifest schema must be `ige-geometry-locked-hr-assets/1.0`, with each full relative asset path mapped to its SHA-256 and `dimensions_wh: [1200, 896]`. Preflight reads the actual image dimensions and hashes; missing files, missing manifest, invalid dimensions or hash mismatch return `BLOCK` and exit code `2`.
+
+Manifest shape (the two SHA values must come from the actual committed image bytes; never invent them):
+
+```json
+{
+  "schema": "ige-geometry-locked-hr-assets/1.0",
+  "assets": {
+    "assets/s4_self_part_hr_b0_geometry_locked_1200x896.jpg": {
+      "sha256": "<actual SHA-256>",
+      "dimensions_wh": [1200, 896]
+    },
+    "assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg": {
+      "sha256": "<actual SHA-256>",
+      "dimensions_wh": [1200, 896]
+    }
+  }
+}
+```
 
 ## 4. Validate the Method Registry
 
