@@ -1,0 +1,172 @@
+{
+  "schema_version": "ige-global-audit/0.2",
+  "status": "BLOCKED_PENDING_GEOMETRY_AND_CONSENSUS",
+  "canvas_wh": [
+    5376,
+    3024
+  ],
+  "source_candidate_exact_match_outside_coverage": true,
+  "outside_coverage_changed_pixels": 0,
+  "preserve_reject_changed_pixels": 0,
+  "geometry_status": "assistant_provisional",
+  "source_alignment_status": "pending_operator_registration_to_siax_output",
+  "geometry_observations": {
+    "silhouette_iou": {
+      "provided": false,
+      "valid_numeric": false,
+      "value": null,
+      "threshold": 0.85
+    },
+    "bbox_iou": {
+      "provided": false,
+      "valid_numeric": false,
+      "value": null,
+      "threshold": 0.9
+    },
+    "landmark_max_px": {
+      "provided": false,
+      "valid_numeric": false,
+      "value": null,
+      "threshold": 12.0
+    },
+    "operator_confirmed": {
+      "provided": false,
+      "value": false
+    }
+  },
+  "geometry_observations_pass": false,
+  "operator_confirmation_pass": false,
+  "geometry_acceptance_pass": false,
+  "overlap_consensus_pass": false,
+  "acceptance_pass": false,
+  "conditioning_groups_compatible_with_single_batch": true,
+  "reconcile": {
+    "status": "RECONCILED_WITH_ABSTENTION",
+    "canvas_wh": [
+      5376,
+      3024
+    ],
+    "tile_count": 2,
+    "covered_pixels": 2097152,
+    "uncovered_pixels": 14159872,
+    "overlap_pixels": 294912,
+    "overlap_agreement_pixels": 172052,
+    "overlap_conflict_pixels": 122860,
+    "overlap_conflict_fraction": 0.4165988498263889,
+    "overlap_mean_spread": 0.06460154056549072,
+    "overlap_p95_spread": 0.21045750379562378,
+    "overlap_mean_threshold": 0.05,
+    "overlap_p95_threshold": 0.2,
+    "maximum_overlap_conflict_fraction": 0.05,
+    "subset_overlap_diagnostics": [
+      {
+        "tile_id": "tile_0000",
+        "tile_index": 0,
+        "position_xyxy": [
+          1656,
+          960,
+          2824,
+          1984
+        ],
+        "overlap_pixels": 294912,
+        "overlap_conflict_pixels": 122860,
+        "overlap_conflict_fraction": 0.4165988498263889,
+        "overlap_conflict_fraction_limit": 0.05,
+        "overlap_pass": false,
+        "failure_reasons": [
+          "tile_overlap_conflict_fraction_above_configured_limit"
+        ]
+      },
+      {
+        "tile_id": "tile_0001",
+        "tile_index": 1,
+        "position_xyxy": [
+          2536,
+          960,
+          3704,
+          1984
+        ],
+        "overlap_pixels": 294912,
+        "overlap_conflict_pixels": 122860,
+        "overlap_conflict_fraction": 0.4165988498263889,
+        "overlap_conflict_fraction_limit": 0.05,
+        "overlap_pass": false,
+        "failure_reasons": [
+          "tile_overlap_conflict_fraction_above_configured_limit"
+        ]
+      }
+    ],
+    "failed_subsets": [
+      {
+        "tile_id": "tile_0000",
+        "tile_index": 0,
+        "reasons": [
+          "tile_overlap_conflict_fraction_above_configured_limit"
+        ],
+        "overlap_conflict_fraction": 0.4165988498263889
+      },
+      {
+        "tile_id": "tile_0001",
+        "tile_index": 1,
+        "reasons": [
+          "tile_overlap_conflict_fraction_above_configured_limit"
+        ],
+        "overlap_conflict_fraction": 0.4165988498263889
+      }
+    ],
+    "fallback_to_source_on_conflict": true,
+    "blocked_action_pixels_restored": 0,
+    "outside_tile_coverage_changed_pixels": 0,
+    "notes": [
+      "Overlap pixels are written only when all overlapping tile candidates agree within threshold.",
+      "Conflicting overlap pixels revert to the source, not a feather blend.",
+      "This is a consistency gate, not a semantic/identity detector."
+    ],
+    "overlap_p95_threshold_pass": false,
+    "overlap_conflict_fraction_pass": false,
+    "overlap_consensus_pass": false
+  },
+  "violations": [],
+  "warnings": [
+    "geometry_observations_missing",
+    "operator_geometry_confirmation_missing",
+    "geometry_contract_not_operator_confirmed",
+    "geometry_coordinates_not_registered_to_current_siax_output",
+    "overlap_conflict_fraction_above_configured_limit",
+    "one_or_more_tile_subsets_failed_overlap_consensus",
+    "overlap_p95_spread_above_configured_limit"
+  ],
+  "failed_subsets": [
+    {
+      "tile_id": "tile_0000",
+      "tile_index": 0,
+      "reasons": [
+        "tile_overlap_conflict_fraction_above_configured_limit"
+      ],
+      "overlap_conflict_fraction": 0.4165988498263889
+    },
+    {
+      "tile_id": "tile_0001",
+      "tile_index": 1,
+      "reasons": [
+        "tile_overlap_conflict_fraction_above_configured_limit"
+      ],
+      "overlap_conflict_fraction": 0.4165988498263889
+    }
+  ],
+  "explicit_non_claims": [
+    "No identity detector was run.",
+    "RGB similarity is not proof of semantic identity.",
+    "The tile gate does not hard-constrain the diffusion sampler."
+  ],
+  "logic_gate": {
+    "blocked_source_pixels_restored": 0,
+    "tile_action_pixels": {
+      "PRESERVE": 0,
+      "REFINE": 2392064,
+      "GENERATE": 0,
+      "REJECT": 0
+    },
+    "geometry_enforced_by_pixel_gate": false
+  }
+}

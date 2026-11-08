@@ -1,0 +1,532 @@
+{
+  "schema": "ige-handoff-text-manifest/1.0",
+  "root": "docs/handoff",
+  "file_count": 105,
+  "files": [
+    {
+      "path": "docs/handoff/COMFY_SIAX_RETURN_PACK_README.md",
+      "bytes": 6335,
+      "sha256": "22b02857ec0a0e8931c44c95469ea3a595735df487df9849e7e9a25f3679b1e3"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/BINARY_ASSETS_SHA_ONLY.json",
+      "bytes": 2624,
+      "sha256": "db0d45e55f41e4514b8818eed82fe45defbb52faa42c6c4404a7e5b4e3e5ea83"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/README.md",
+      "bytes": 6335,
+      "sha256": "22b02857ec0a0e8931c44c95469ea3a595735df487df9849e7e9a25f3679b1e3"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/__init__.py",
+      "bytes": 286,
+      "sha256": "6e1d12bb17d77d5ccda08465329d6c305a26d171edffb39ff426240161215dfb"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/config/global_logic_policy.json",
+      "bytes": 2645,
+      "sha256": "4f1f89be30e567d2b0cecb8453b557758b15c3c6c1582754a8e53468006b8521"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/config/object_geometry.provisional.json",
+      "bytes": 5735,
+      "sha256": "a672ac0c6ca400594f4f62498a170209a172e8f84a5fd10e724c1b25e9e625cb"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/__init__.py",
+      "bytes": 84,
+      "sha256": "ae9be7548f8c8d47b3bc0e0baae1fa4534bbf4acd93aed44cc97a8e078facd03"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/__main__.py",
+      "bytes": 29,
+      "sha256": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/audit.py",
+      "bytes": 6567,
+      "sha256": "f05ad98d50360a3b907405161074708189bee7c36db7b169f13f5ddd0667e1cc"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/cli.py",
+      "bytes": 3554,
+      "sha256": "82086dee7033469736f6b94dae46dd5131e97b722068b39421028a3b1e81ff81"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/coordinator.py",
+      "bytes": 1643,
+      "sha256": "c0f93762cffea5d81da7793bfbed7bfbf962351bf1589bf744b12c9fd6f32425"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/core.py",
+      "bytes": 18727,
+      "sha256": "a5932ccfa26a6170a8174e356170a5bc772d6f18aa37772c71e4f1a62a759f52"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/io.py",
+      "bytes": 4302,
+      "sha256": "3c7002933d5a8c8fef0e10237b0465816d6413a08eed827f58ca4d2da5488b4e"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/masks.py",
+      "bytes": 6481,
+      "sha256": "a1012f6765c98862b2bf15c6a56d9b6e86a9dfebaea23e34dbf62726ec2388b2"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/prompting.py",
+      "bytes": 4165,
+      "sha256": "ebd389f423fc02ff2845f4b4aa8fc78e73026299b8795c5d2a23609e8fbc965c"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/reconcile.py",
+      "bytes": 9036,
+      "sha256": "eccb4e19ade09578bde4c6cd983deb635a068291952ee74ec79e112d2ccc2db5"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/ttp.py",
+      "bytes": 1439,
+      "sha256": "cba6e945ff46fa5d1d8e7744761003c25a3a3478a7243a0f27624a931eb4109f"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/nodes.py",
+      "bytes": 10560,
+      "sha256": "72b913d3927fb2b76bb021d5c3223d6a1800d3a1fb249a1a6737716b00d2b9cc"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/MANIFEST.sha256",
+      "bytes": 6056,
+      "sha256": "f3432aba647f56efe65db7c650c15fac87084ad868ae58e5e6d574d37bed2030"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/README.md",
+      "bytes": 11166,
+      "sha256": "4ed446ab0a6edf599ac92bdbc7b79774659a37d7d1304056d732d1fafec686e1"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/STATUS_REPORT.md",
+      "bytes": 4492,
+      "sha256": "53a7096dec9c1fc22af313fd3e75770a0a8e2bea6e9c5d28456135092e0bc183"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/WORKFLOW_VALIDATION.json",
+      "bytes": 2306,
+      "sha256": "f2c559639394a1e0ab8009ca24c8a42084418e5187b1935a1d65e5c33ac0db1a"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/config/global_logic_policy.json",
+      "bytes": 2645,
+      "sha256": "4f1f89be30e567d2b0cecb8453b557758b15c3c6c1582754a8e53468006b8521"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/config/object_geometry.provisional.json",
+      "bytes": 5735,
+      "sha256": "a672ac0c6ca400594f4f62498a170209a172e8f84a5fd10e724c1b25e9e625cb"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/__init__.py",
+      "bytes": 286,
+      "sha256": "6e1d12bb17d77d5ccda08465329d6c305a26d171edffb39ff426240161215dfb"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/config/global_logic_policy.json",
+      "bytes": 2645,
+      "sha256": "4f1f89be30e567d2b0cecb8453b557758b15c3c6c1582754a8e53468006b8521"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/config/object_geometry.provisional.json",
+      "bytes": 5735,
+      "sha256": "a672ac0c6ca400594f4f62498a170209a172e8f84a5fd10e724c1b25e9e625cb"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/__init__.py",
+      "bytes": 84,
+      "sha256": "ae9be7548f8c8d47b3bc0e0baae1fa4534bbf4acd93aed44cc97a8e078facd03"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/__main__.py",
+      "bytes": 29,
+      "sha256": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/audit.py",
+      "bytes": 6567,
+      "sha256": "f05ad98d50360a3b907405161074708189bee7c36db7b169f13f5ddd0667e1cc"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/cli.py",
+      "bytes": 3554,
+      "sha256": "82086dee7033469736f6b94dae46dd5131e97b722068b39421028a3b1e81ff81"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/coordinator.py",
+      "bytes": 1643,
+      "sha256": "c0f93762cffea5d81da7793bfbed7bfbf962351bf1589bf744b12c9fd6f32425"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/core.py",
+      "bytes": 18727,
+      "sha256": "a5932ccfa26a6170a8174e356170a5bc772d6f18aa37772c71e4f1a62a759f52"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/io.py",
+      "bytes": 4302,
+      "sha256": "3c7002933d5a8c8fef0e10237b0465816d6413a08eed827f58ca4d2da5488b4e"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/masks.py",
+      "bytes": 6481,
+      "sha256": "a1012f6765c98862b2bf15c6a56d9b6e86a9dfebaea23e34dbf62726ec2388b2"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/prompting.py",
+      "bytes": 4165,
+      "sha256": "ebd389f423fc02ff2845f4b4aa8fc78e73026299b8795c5d2a23609e8fbc965c"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/reconcile.py",
+      "bytes": 9036,
+      "sha256": "eccb4e19ade09578bde4c6cd983deb635a068291952ee74ec79e112d2ccc2db5"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/ttp.py",
+      "bytes": 1439,
+      "sha256": "cba6e945ff46fa5d1d8e7744761003c25a3a3478a7243a0f27624a931eb4109f"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/custom_nodes/ComfyUI_IGE_GlobalLogicCoordinator/nodes.py",
+      "bytes": 10560,
+      "sha256": "72b913d3927fb2b76bb021d5c3223d6a1800d3a1fb249a1a6737716b00d2b9cc"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/docs/CONCEPT_ARCHITECTURE.md",
+      "bytes": 5589,
+      "sha256": "39b56e8d8cb207172a81c88594bf3f3a7c3fe602ae808420ff85bfbf6cdf6250"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/docs/WORKFLOW_INTEGRATION.md",
+      "bytes": 5803,
+      "sha256": "223c649a604b342d7a3035d932c81a67f4bc54de1f0c2b5143b4819b4081a444"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/examples/cloud_ui_job_c88c70e5_positions_fixture.json",
+      "bytes": 378,
+      "sha256": "c9e08d2fd087e25515f002f97b006bb2fed9670f8114e077356c20b3f29e1b70"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/examples/replay_c88c70e5/audit_report.json",
+      "bytes": 5026,
+      "sha256": "17e4a6b54ba8d974a18f2fc12fa9bc622cd52b4c57a3ba8642e3e3fc1850ec27"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/examples/replay_c88c70e5/compiled_contract.json",
+      "bytes": 4872,
+      "sha256": "36b7f4475b29442cf0175e3ce69d8c7cd053670644100428e8496c50016e3111"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/examples/replay_c88c70e5/iteration_state.json",
+      "bytes": 1406,
+      "sha256": "fa499d4fec5c035bd6d826654aa13beffac84337888c5a653422862d1987b609"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/examples/replay_c88c70e5/reconcile_report.json",
+      "bytes": 2429,
+      "sha256": "47aad185ba3e934c84108afb73039b5bb3f1ad4cf8d0ef8b00161754d2ff9e47"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/examples/replay_c88c70e5/replay_context.json",
+      "bytes": 910,
+      "sha256": "bce5e7a4a6dd9c21ecdd9cde619bd9f130828cedf748dffaaa46e94cf6d26652"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/__init__.py",
+      "bytes": 84,
+      "sha256": "ae9be7548f8c8d47b3bc0e0baae1fa4534bbf4acd93aed44cc97a8e078facd03"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/__main__.py",
+      "bytes": 29,
+      "sha256": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/audit.py",
+      "bytes": 6567,
+      "sha256": "f05ad98d50360a3b907405161074708189bee7c36db7b169f13f5ddd0667e1cc"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/cli.py",
+      "bytes": 3554,
+      "sha256": "82086dee7033469736f6b94dae46dd5131e97b722068b39421028a3b1e81ff81"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/coordinator.py",
+      "bytes": 1643,
+      "sha256": "c0f93762cffea5d81da7793bfbed7bfbf962351bf1589bf744b12c9fd6f32425"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/core.py",
+      "bytes": 18727,
+      "sha256": "a5932ccfa26a6170a8174e356170a5bc772d6f18aa37772c71e4f1a62a759f52"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/io.py",
+      "bytes": 4302,
+      "sha256": "3c7002933d5a8c8fef0e10237b0465816d6413a08eed827f58ca4d2da5488b4e"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/masks.py",
+      "bytes": 6481,
+      "sha256": "a1012f6765c98862b2bf15c6a56d9b6e86a9dfebaea23e34dbf62726ec2388b2"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/prompting.py",
+      "bytes": 4165,
+      "sha256": "ebd389f423fc02ff2845f4b4aa8fc78e73026299b8795c5d2a23609e8fbc965c"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/reconcile.py",
+      "bytes": 9036,
+      "sha256": "eccb4e19ade09578bde4c6cd983deb635a068291952ee74ec79e112d2ccc2db5"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/ige_logic/ttp.py",
+      "bytes": 1439,
+      "sha256": "cba6e945ff46fa5d1d8e7744761003c25a3a3478a7243a0f27624a931eb4109f"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/requirements.txt",
+      "bytes": 111,
+      "sha256": "ecc41ddfad83661cb48a37e23f22c70053ca6dce88630075f93bdb5d4056e7fc"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/object_geometry.provisional.json",
+      "bytes": 5735,
+      "sha256": "a672ac0c6ca400594f4f62498a170209a172e8f84a5fd10e724c1b25e9e625cb"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/original_siax_with_ige_logic_coordinator_v0.2.json",
+      "bytes": 80065,
+      "sha256": "620382165b5eff47b2cf5382af04df08b5d44ef6624117e0aa83acfed66ddc87"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/original_siax_workflow.json",
+      "bytes": 57658,
+      "sha256": "0f0f877d5f3cf3a8aaca879086ecf22fa8359d2c96ad66fab5118e2873259f5a"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/original_workflow_node_map.json",
+      "bytes": 11723,
+      "sha256": "2c677c8fc06cb9679976612374f0c0d25f730beb627148eae00320433a4e332b"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/plan.json",
+      "bytes": 23436,
+      "sha256": "423dc79d3667de3f48400f4c7c9a5026c0ec6899fd09b94fef1b92fffd4ddbfa"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/tile_left.task.json",
+      "bytes": 8177,
+      "sha256": "59f2d0a5c3abe6de8b5769227da1ac9a2c06ffe81b91dd2670d002ccbe726125"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/tile_right.task.json",
+      "bytes": 8224,
+      "sha256": "dfbbd949dc5fe30a44f143e7904a1d35c4fcb9208ff035128cfa590fa99e464b"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/workflow_integration_spec.json",
+      "bytes": 5966,
+      "sha256": "ec8f38bb5dba8cc0ae49b815cd821b1de89d47f78ae288ffda5a232ef3c73e13"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/source_reference/workflow_validation.json",
+      "bytes": 2306,
+      "sha256": "f2c559639394a1e0ab8009ca24c8a42084418e5187b1935a1d65e5c33ac0db1a"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/tests/test_core.py",
+      "bytes": 9485,
+      "sha256": "1a1673aa9f259a3919e2078be566dc5a749cbe455ac9510401449f9d7e583460"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/tests/test_masks.py",
+      "bytes": 2740,
+      "sha256": "7d721fa73e2a8c23d355c0d8917d7feac6a1716df36d5bef0eb90bdeecd27bd0"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/tests/test_nodes.py",
+      "bytes": 2638,
+      "sha256": "693317cb9c90e9e8fb32de30c8f1454bc279d2059dd6be39853a45548176c87c"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/tests/test_workflow_graph.py",
+      "bytes": 3306,
+      "sha256": "112632b7b2fb8a2b4b4ecc144860e3d1cc4b525fc6b6fe68e36485b563781b89"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_Global_Logic_Coordinator_v0.2/tools/build_patched_workflow.py",
+      "bytes": 11454,
+      "sha256": "034003b947a7cd376191d68ac55dc4d3b81d25989b4d1845bd0091fd82ed3b00"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/ACCEPTANCE_MATRIX.md",
+      "bytes": 3745,
+      "sha256": "20b65974ff584b74ee3c02bf674495e7821c898f8b82dd3c429850b6ee9f0f6b"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/ADOPTION_NOTE_zh.md",
+      "bytes": 3017,
+      "sha256": "cce28f9bac3eadc5734c003ff15474520cda468d0dd44b632787e9652252601d"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/ARCHITECTURE_DECISION.md",
+      "bytes": 12185,
+      "sha256": "4a06eddab4a581b2480960eb2e191117fb01738a1be560ed7e8cf8a4a33a87e6"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/COMFYUI_NODE_MAPPING.md",
+      "bytes": 4955,
+      "sha256": "184aa410288771069813bc966890402fef89aaf8bc742293a79d2a79ac9b6f1b"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/README.md",
+      "bytes": 2167,
+      "sha256": "33761d5e730235eebffa4b745cf3220edad5dc93b6e058985fc9b32fe089d42f"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/contracts/IGE_S0_S7_METHOD_REGISTRY_V0.1.json",
+      "bytes": 10401,
+      "sha256": "00012ffdd6c0692ff9a39b117bc1d79f909386a973e2c33672649a8b07138c2e"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/src/ige/__init__.py",
+      "bytes": 700,
+      "sha256": "55583d9396d9b907146b2abfc73c7068490f87ee7820b9a14362f5986c383901"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/src/ige/method_registry.py",
+      "bytes": 14676,
+      "sha256": "7dab773a045813c2c17cbbc208bcbb6b03055f56748dfc0c80de13e37ac0240c"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/IGE_S0_S7_MethodRegistry_v0.1/tests/test_method_registry.py",
+      "bytes": 5794,
+      "sha256": "af6ca45a077dd221a68b009262dc3e9b3b5ddd05448d7a81d0c1f0027e618512"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ige_workflow_v03/README_zh-TW.md",
+      "bytes": 5274,
+      "sha256": "02ad2c5a92bdff66ae7d809e5955a6e8105a73de5c97f8dc5c6650b858acaa04"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ige_workflow_v03/SHA256SUMS.txt",
+      "bytes": 98,
+      "sha256": "4102f73f4304189e9d80bcdc223f08f455ebdf80f903e73bd797cc60b39348b1"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/packages/ige_workflow_v03/apply_ige_workflow_v03_patch.py",
+      "bytes": 18973,
+      "sha256": "8b20e19ab2e1d2165db4ca33163c53de655a12404507a412507182daf88976c2"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/ASSET_SHA256SUMS.txt",
+      "bytes": 2737,
+      "sha256": "1055b4956e41955926969d8d2baca540776095606434577371e265a44ff32c96"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/ASSET_SHA256_MANIFEST.json",
+      "bytes": 4927,
+      "sha256": "cdb06bf2fba114f385295e2fa59cb4156b975eefe2ca4dabaeaf38a947977b26"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/CLOUD_ASSET_MAPPING_V0.5.md",
+      "bytes": 3291,
+      "sha256": "1ab0da84aaf3d29de0bae2cf4dfbf2c15cfca0fea1a33fbf38ff0d4010082f69"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/Geometry_Locked_Two_Tile_Flux_Refinement_CLOUD_v0.5.json",
+      "bytes": 38317,
+      "sha256": "283d6d9a5bb68a031f1d243110b6c35ba5e6375aa50c301b4fcac081592308ab"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/PC_BOT_START_HERE.txt",
+      "bytes": 1504,
+      "sha256": "59e9a1e7b84920dfb18cbfde3b5f7d4a0d7bb08136c7f9a4bbde04976e262e6a"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/PREFLIGHT_RUNTIME_LOADIMAGE_FIX_V0.5.md",
+      "bytes": 2209,
+      "sha256": "81d8bb7084b1bcd559a0426426673467cad3fdbe9586836b2dccb29a4956bfcd"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/README_COMFYUI.md",
+      "bytes": 3448,
+      "sha256": "eaeaed51af6d4ce300c0d35989267072fae6dd01a632c1301ff9ffae2ef1b604"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/V05_EXECUTION_SUMMARY.json",
+      "bytes": 7969,
+      "sha256": "7349d70cb55e3ed223c6c31ad61ab1ad035001c4dcbe2aa2e275be4fce282c75"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/backend_model_inventory_partial.jsonl",
+      "bytes": 1805,
+      "sha256": "56b816360cc26cfed261315f6108258681ed2aec075dd5227b79e44ecb83c7f9"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/cloud_workflow_validation.json",
+      "bytes": 1372,
+      "sha256": "e4679b0badfede25af96d88cc284cb7a7681daf2a9a5888a06f99347ab29bc91"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/model_inventory_capture_receipt.json",
+      "bytes": 3455,
+      "sha256": "142ec1c35107d75eee3e5183c3fd7f4460569c219881b28f83f37d99d8c4d202"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/object_geometry.provisional.json",
+      "bytes": 5735,
+      "sha256": "a672ac0c6ca400594f4f62498a170209a172e8f84a5fd10e724c1b25e9e625cb"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/original_siax_with_ige_logic_coordinator_v0.2_dev_fp8_baseline.json",
+      "bytes": 80197,
+      "sha256": "16222cbc8305037d846bab913b6cac075ff850207f16767519d3043f341409cc"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/original_siax_with_ige_logic_coordinator_v0.2_dev_fp8_local.json",
+      "bytes": 84238,
+      "sha256": "9d8c09d2238c9fe235b762393f96808499f1c91e54676afd65b4163ac5b05e9e"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/tile_left.task.json",
+      "bytes": 8177,
+      "sha256": "59f2d0a5c3abe6de8b5769227da1ac9a2c06ffe81b91dd2670d002ccbe726125"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/tile_right.task.json",
+      "bytes": 8224,
+      "sha256": "dfbbd949dc5fe30a44f143e7904a1d35c4fcb9208ff035128cfa590fa99e464b"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/workflow_cloud_api_prompt_v0.5.json",
+      "bytes": 8002,
+      "sha256": "8f252ae6b56d6d58decaaf5cea7dff789bc7158d2f491e1ebb10a1855d8f7fbf"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/workflow_ige_v03_dev_fp8.json",
+      "bytes": 100609,
+      "sha256": "fc6d7e1a9145139cb5bf998e71df7ffe1bd25b14e42a2da558ce6cfa6a9d48c0"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/workflow_ige_v03_dev_fp8_local.json",
+      "bytes": 105655,
+      "sha256": "1ea8c7ecafbb2f0f321a6ae7b265ddcec8d8e9a9cf66c4613223494a3b898ec4"
+    },
+    {
+      "path": "docs/handoff/comfy-siax-return/pc_高清探/workflow_ige_v03_from_v02.json",
+      "bytes": 100494,
+      "sha256": "20fbbdbd8cdffb4846e7db881a003bfc17f0a5f5fef0ed64059c62b64829ca7f"
+    }
+  ]
+}

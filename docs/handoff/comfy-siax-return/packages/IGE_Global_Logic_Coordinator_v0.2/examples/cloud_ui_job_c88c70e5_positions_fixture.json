@@ -1,0 +1,29 @@
+{
+  "positions": [
+    [
+      1656,
+      960,
+      2824,
+      1984
+    ],
+    [
+      2536,
+      960,
+      3704,
+      1984
+    ]
+  ],
+  "original_size": [
+    5376,
+    3024
+  ],
+  "grid_size": [
+    2,
+    1
+  ],
+  "tile_hw": [
+    1024,
+    1168
+  ],
+  "fixture_note": "This is the prior two-tile ROI test plan, not the original full-frame SIAX TTP runtime metadata."
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "ige-handoff-binary-manifest/1.0",
+  "note": "Large PNGs/JPGs are NOT committed. Verify against PC paths or recompute SHA before use.",
+  "captured_at_asia_hong_kong": "2026-11-09T06:15:00+08:00",
+  "pc_root": "C:\\Users\\user\\Desktop\\高清探\\",
+  "assets": [
+    {
+      "filename": "city_scene_16mp_lanczos.png",
+      "pc_path": "C:\\Users\\user\\Desktop\\高清探\\city_scene_16mp_lanczos.png",
+      "also_at": "C:\\Users\\user\\Documents\\ComfyUI\\input\\city_scene_16mp_lanczos.png",
+      "width": 5376,
+      "height": 3024,
+      "bytes": 19083835,
+      "sha256": "f75d9d2fa9bfe952a7cd67024e629bf1a641a462c21a84e6a59c110bad8943f8",
+      "role": "geometry_canonical_canvas_for_object_geometry.provisional.json"
+    },
+    {
+      "filename": "source_original.jpg",
+      "pc_path": "C:\\Users\\user\\Desktop\\高清探\\source_original.jpg",
+      "width": 1792,
+      "height": 1008,
+      "bytes": 1036042,
+      "sha256": "090810a4f1c89b9f74af0e46582923bb7a71d892f7c1c6bf0e525eb2d8e84138",
+      "role": "geometry_upscale_provenance_input (matches object_geometry input_sha256; geometry names it grok-836d4cba-....jpg)"
+    },
+    {
+      "filename": "tile_left.png",
+      "pc_path": "C:\\Users\\user\\Desktop\\高清探\\tile_left.png",
+      "width": 1168,
+      "height": 1024,
+      "bytes": 1768301,
+      "sha256": "4abdca7c4bacc76f85349431ab6d4f4322f0662989562e6ef41d6909ffbd2b3a",
+      "role": "two_tile_cloud_left"
+    },
+    {
+      "filename": "tile_right.png",
+      "pc_path": "C:\\Users\\user\\Desktop\\高清探\\tile_right.png",
+      "width": 1168,
+      "height": 1024,
+      "bytes": 1764329,
+      "sha256": "387fd116215423b385c2055f331618dc4f80cc7ed6bad79ee291040952151b11",
+      "role": "two_tile_cloud_right"
+    },
+    {
+      "filename": "roi_annotation_preview.jpg",
+      "pc_path": "C:\\Users\\user\\Desktop\\高清探\\roi_annotation_preview.jpg",
+      "width": 1792,
+      "height": 1008,
+      "bytes": 951265,
+      "sha256": "9903463041465aa7d915ea648e5aff7e41f90ec51bf5e58b7cec2cf663a4c004",
+      "role": "annotation_preview_not_runtime_canvas"
+    },
+    {
+      "filename": "ComfyUI_00001_.png",
+      "pc_path": "C:\\Users\\user\\Documents\\ComfyUI\\output\\ComfyUI_00001_.png",
+      "width": 3862,
+      "height": 2172,
+      "bytes": 17430053,
+      "sha256": "104b898bb6d711bb404a65746e538a32e6c9de5701e3f269c5553948680d110b",
+      "role": "LIVE_MISMATCH_CANDIDATE — IMAGE size that hit IGE_GlobalLogicCompiler (3862x2172) vs geometry 5376x3024; ratio ~1.392 vs Lanczos 3x provenance. Do NOT treat as canonical geometry canvas."
+    }
+  ]
+}

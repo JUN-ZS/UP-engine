@@ -1,0 +1,3 @@
+numpy>=1.24
+Pillow>=10.0
+# torch is supplied by ComfyUI and is needed only by the ComfyUI custom-node adapter.

@@ -1,0 +1,155 @@
+{
+  "contract": {
+    "schema_version": "ige-global-logic-contract/0.1",
+    "canvas": {
+      "width": 5376,
+      "height": 3024,
+      "coordinate_frame": "global_full_frame_px"
+    },
+    "source_sha256": "f75d9d2fa9bfe952a7cd67024e629bf1a641a462c21a84e6a59c110bad8943f8",
+    "geometry_status": "assistant_provisional",
+    "geometry_object_id": "central_woman_on_skybridge",
+    "geometry_tolerances": {
+      "bbox_iou_min": 0.9,
+      "silhouette_iou_min": 0.85,
+      "landmark_max_px": 12.0,
+      "overlap_silhouette_iou_min": 0.85,
+      "overlap_landmark_max_px": 8.0
+    },
+    "geometry_reference": {
+      "bbox_xyxy": [
+        2629.7143,
+        1181.5714,
+        2726.5714,
+        1517.1429
+      ],
+      "landmarks": {
+        "head_top": [
+          2672.5714,
+          1181.5714
+        ],
+        "head_center": [
+          2676.4286,
+          1206.4286
+        ],
+        "shoulder_center": [
+          2677.2857,
+          1251.4286
+        ],
+        "waist_center": [
+          2676.4286,
+          1330.7143
+        ],
+        "hip_center": [
+          2678.5714,
+          1382.1429
+        ],
+        "left_foot_contact": [
+          2655.0,
+          1510.7143
+        ],
+        "right_foot_contact": [
+          2711.5714,
+          1510.2857
+        ]
+      }
+    },
+    "geometry_operator_confirmation": "pending",
+    "source_alignment_status": "pending_operator_registration_to_siax_output",
+    "policy_id": "siax-global-logic-default-v01",
+    "policy_revision": 1,
+    "default_action": "REFINE",
+    "global_conditioning_prompt": "Refine the existing SIAX-upscaled full image as one globally coherent scene. Improve selected local detail only; do not reinterpret tile crops as independent pictures. Every tile is only a spatial subset of the same full-frame image. Preserve the shared scene layout, object identity, scale, pose, and spatial relationships across tile boundaries. Follow the inherited global logic and geometry constraints. Do not invent new semantic objects unless an explicitly operator-confirmed GENERATE region allows it. Do not reinterpret crop edges as scene boundaries. Treat overlap as shared context for reconciliation, not as permission to create duplicate content. Global object constraint for central_woman_on_skybridge: preserve silhouette; preserve landmark positions; do not change pose; do not duplicate the object. The supplied geometry is provisional guidance, not an operator-approved hard lock; do not claim geometry acceptance from this prompt.",
+    "applied_rules": [
+      {
+        "id": "central-human-geometry",
+        "parent_rule_id": null,
+        "action": "REFINE",
+        "pixels": 21275,
+        "operator_confirmed": false,
+        "constraints": {
+          "preserve_silhouette": true,
+          "preserve_landmarks": true,
+          "no_pose_change": true,
+          "no_duplication": true,
+          "allow_new_semantics": false,
+          "allow_geometry_change": false
+        }
+      }
+    ],
+    "rules_digest": "247a25127dd03b4af983749f01019d9d5dcba6c662b54de611907cfb7255d6f8",
+    "state": {
+      "iteration": 0,
+      "state_id": null,
+      "parent_state_id": null,
+      "parent_contract_id": null,
+      "previous_status": null,
+      "operator_approval_recorded": false,
+      "promotion_allowed": false
+    },
+    "constraints": {
+      "allow_new_semantics_default": false,
+      "allow_geometry_change_default": false,
+      "unrecognized_action_fails_closed": true,
+      "unknown_region_action": "default_policy_only; no GENERATE without explicit confirmed polygon",
+      "provisional_geometry_is_not_operator_lock": true
+    },
+    "action_counts": {
+      "PRESERVE": 0,
+      "REFINE": 16257024,
+      "GENERATE": 0,
+      "REJECT": 0
+    },
+    "geometry_guard_pixels": 21275,
+    "reconciliation": {
+      "overlap_mean_abs_difference_threshold": 0.05,
+      "overlap_p95_abs_difference_threshold": 0.2,
+      "on_overlap_conflict": "fallback_to_source",
+      "on_missing_tile": "fallback_to_source",
+      "core_ownership": "nearest_tile_center",
+      "allow_unconfirmed_geometry_acceptance": false,
+      "maximum_overlap_conflict_fraction": 0.05
+    },
+    "acceptance": {
+      "status": "BLOCKED_PENDING_OBSERVATIONS",
+      "requires_operator_geometry_confirmation": true,
+      "requires_source_coordinate_registration": true,
+      "requires_geometry_observations": true
+    },
+    "contract_id": "d4bd5e79e6d5e147"
+  },
+  "positions": [
+    [
+      1656,
+      960,
+      2824,
+      1984
+    ],
+    [
+      2536,
+      960,
+      3704,
+      1984
+    ]
+  ],
+  "original_size": [
+    5376,
+    3024
+  ],
+  "grid_size": [
+    2,
+    1
+  ],
+  "tile_hw": [
+    1024,
+    1168
+  ],
+  "tile_count": 2,
+  "geometry_guard_pixels": 21275,
+  "action_counts": {
+    "PRESERVE": 0,
+    "REFINE": 16257024,
+    "GENERATE": 0,
+    "REJECT": 0
+  }
+}

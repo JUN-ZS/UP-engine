@@ -1,0 +1,41 @@
+{
+  "schema_version": "ige-iteration-state/0.1",
+  "state_id": "22aec9c2eeaa3855",
+  "parent_contract_id": "d4bd5e79e6d5e147",
+  "parent_state_id": null,
+  "iteration": 1,
+  "status": "REVIEW_REQUIRED",
+  "failed_subsets": [
+    {
+      "tile_id": "tile_0000",
+      "tile_index": 0,
+      "reasons": [
+        "tile_overlap_conflict_fraction_above_configured_limit"
+      ],
+      "overlap_conflict_fraction": 0.4165988498263889
+    },
+    {
+      "tile_id": "tile_0001",
+      "tile_index": 1,
+      "reasons": [
+        "tile_overlap_conflict_fraction_above_configured_limit"
+      ],
+      "overlap_conflict_fraction": 0.4165988498263889
+    }
+  ],
+  "warnings": [
+    "geometry_observations_missing",
+    "operator_geometry_confirmation_missing",
+    "geometry_contract_not_operator_confirmed",
+    "geometry_coordinates_not_registered_to_current_siax_output",
+    "overlap_conflict_fraction_above_configured_limit",
+    "one_or_more_tile_subsets_failed_overlap_consensus",
+    "overlap_p95_spread_above_configured_limit"
+  ],
+  "operator_feedback": {},
+  "proposed_changes": [],
+  "operator_approved": false,
+  "automatic_policy_changes": false,
+  "geometry_promotion": false,
+  "note": "Feedback is recorded as a proposal only. Recompile may inherit this state for lineage, but it never applies policy/geometry changes; operator approval and an explicit new policy/geometry artifact are required."
+}
