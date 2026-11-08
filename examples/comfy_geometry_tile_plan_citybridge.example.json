@@ -1,0 +1,9 @@
+{
+  "schema": "ige-comfy-tile-plan/0.1",
+  "coordinate_frame": "citybridge_4x_canvas_px_v1",
+  "coverage_target": {"kind": "rect_union", "rects": [[1656, 960, 3704, 1984]]},
+  "tiles": [
+    {"tile_id": "tile_left", "input_node_id": "233", "read_bounds": [1656, 960, 2824, 1984], "core_bounds": [1656, 960, 2680, 1984], "halo_bounds": [2680, 960, 2824, 1984]},
+    {"tile_id": "tile_right", "input_node_id": "5000", "read_bounds": [2536, 960, 3704, 1984], "core_bounds": [2680, 960, 3704, 1984], "halo_bounds": [2536, 960, 2680, 1984]}
+  ]
+}

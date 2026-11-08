@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ige-comfy-geometry-locked-run/0.1",
+  "title": "SHQ geometry-locked Comfy diagnostic run manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "run_id", "workflow", "source", "geometry_contract", "canvas", "masks", "tile_plan", "tile_plan_sha256", "output_dir", "diagnostic_only"],
+  "properties": {
+    "schema": {"const": "ige-comfy-geometry-locked-run/0.1"},
+    "run_id": {"type": "string", "minLength": 1},
+    "workflow": {"$ref": "#/$defs/file"},
+    "source": {"$ref": "#/$defs/file"},
+    "geometry_contract": {"$ref": "#/$defs/file"},
+    "canvas": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256", "width", "height", "coordinate_frame"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "coordinate_frame": {"type": "string", "minLength": 1}
+      }
+    },
+    "masks": {
+      "type": "object", "additionalProperties": false,
+      "required": ["approved", "protected"],
+      "properties": {"approved": {"$ref": "#/$defs/file"}, "protected": {"$ref": "#/$defs/file"}}
+    },
+    "tile_plan": {
+      "type": "object", "required": ["schema", "coordinate_frame", "coverage_target", "tiles"],
+      "properties": {
+        "schema": {"const": "ige-comfy-tile-plan/0.1"},
+        "coordinate_frame": {"type": "string", "minLength": 1},
+        "coverage_target": {"type": "object", "required": ["kind", "rects"], "properties": {"kind": {"const": "rect_union"}, "rects": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/bounds"}}}},
+        "tiles": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["tile_id", "input_node_id", "read_bounds", "core_bounds", "input"], "properties": {"tile_id": {"type": "string", "minLength": 1}, "input_node_id": {"type": "string", "minLength": 1}, "read_bounds": {"$ref": "#/$defs/bounds"}, "core_bounds": {"$ref": "#/$defs/bounds"}, "halo_bounds": {"$ref": "#/$defs/bounds"}, "input": {"$ref": "#/$defs/file"}}}}
+      }
+    },
+    "tile_plan_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "output_dir": {"type": "string", "minLength": 1},
+    "permission_template_path": {"type": "string"},
+    "diagnostic_only": {"const": true},
+    "execution_allowed": {"const": false},
+    "candidate_accepted": {"const": false},
+    "non_claims": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "file": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"}}},
+    "bounds": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "integer"}, "description": "Half-open global canvas rectangle [x0,y0,x1,y1)."}
+  }
+}
