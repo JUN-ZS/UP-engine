@@ -5,7 +5,7 @@
 **Latest source:** [`sources/gemini-share-XMyk6HVn2J9S/`](./sources/gemini-share-XMyk6HVn2J9S/)（**20 turns**；+1 vs nutr：戰場自身部件追溯／生除扣洞反 + 方法一對一追溯）  
 **Prior sources:** [`nutrRjsw676R`](./sources/gemini-share-nutrRjsw676R/)（19）、[`hC9HlUpskKK9`](./sources/gemini-share-hC9HlUpskKK9/)（17）、[`47yxULPlPy0W`](./sources/gemini-share-47yxULPlPy0W/)（15）  
 **Verifiable package:** [`../research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) — **research-only** 五層可重現包（優先用呢個驗）  
-**Other-AI runbook:** [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) — clone、preflight、逐步 RUN L0→L4、S7、回報格式及 BLOCK 規則
+**Other-AI runbook:** [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) — clone、preflight、逐步 RUN L0→L4、S7、回報格式及 BLOCK 規則  
 **Fossils:** [`../research/shq_v9/`](../research/shq_v9/) — 早期單檔化石 ×10；**唔係** production runtime
 
 ---
@@ -221,7 +221,9 @@ Registry 缺失或 schema 失敗 → Router **RuntimeError**（唔准 silent fal
 
 ## 8. 快速自檢（開工前 30 秒）
 
-- [ ] 已讀 INDEX → PROGRAM_GUIDANCE → 最新 share（XMyk）→ **可驗證包** `run_all_verifications.py --strict` → fossils  
+- [ ] 已讀 INDEX → PROGRAM_GUIDANCE → AI_USAGE_GUIDE → OTHER_AI_RUNBOOK  
+- [ ] 已執行 `preflight_check.py` → Registry → package tests → `run_all_verifications.py --strict`  
+- [ ] 已核對最新 share（XMyk）及 fossils，並理解套件不會自行呼叫 live Siax／Comfy／Flux backend  
 - [ ] 清楚五參數分離（含 `delivery_transform`）  
 - [ ] empty-BG 係原生編輯；四態生除扣洞齊  
 - [ ] 計劃咗真 backend；**無** Lanczos 捷徑  
