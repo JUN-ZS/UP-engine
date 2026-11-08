@@ -21,7 +21,7 @@ python3 run_all_verifications.py --strict
 
 **Layer map (quick):** L0=S0 four-way anti-hole → L1=S1/S2 18-part + geometry lock → L2=S3 permission + registry → L3=Skills A/B/C dense reg + \(L+M+H\) → L4=Skill D Rule 01380 return + S7 disk reverse QA.
 
-**External candidate ZIP audit (2026-11-08):** attached SHA-256 `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`. Registry validation passes (22 methods) and package Registry tests pass (4/4), but its runner references two files absent from that ZIP: `assets/s4_self_part_hr_b0_geometry_locked_1200x896.jpg` and `assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg`. Its `--strict` run therefore fails at L3. Do not substitute `B0_UPPER` / `B2_FULL`, do not silently resize, and do not promote this ZIP over the Hub baseline until the exact files and hashes are committed.
+**External candidate ZIP audit (2026-11-08):** attached SHA-256 `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`. Registry validation passes (22 methods) and package Registry tests pass (4/4), but its runner references two files absent from that ZIP: `assets/s4_self_part_hr_b0_geometry_locked_1200x896.jpg` and `assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg`. Its `--strict` run therefore fails at L3. Do not substitute `B0_UPPER` / `B2_FULL`, do not silently resize, and do not promote this ZIP over the Hub baseline until the exact files and `assets/geometry_locked_hr_manifest.json` with real SHA-256 / 1200×896 evidence are committed.
 
 **External AI instructions:** [`docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](../../docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md). Preflight script: [`preflight_check.py`](./preflight_check.py). Pinned dependencies: [`requirements.txt`](./requirements.txt).
 
