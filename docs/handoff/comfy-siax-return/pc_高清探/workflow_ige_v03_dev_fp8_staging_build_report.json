@@ -1,0 +1,36 @@
+{
+  "schema_version": "ige-siax-staging-build-report/0.1",
+  "stage1": {
+    "node_count": 6,
+    "link_count": 5,
+    "contains_sampler": false,
+    "contains_flux_unet_loader": false,
+    "retained_node_ids": [
+      34,
+      128,
+      133,
+      134,
+      233,
+      244
+    ]
+  },
+  "stage2": {
+    "node_count": 59,
+    "link_count": 92,
+    "canvas_node_type": "LoadImage",
+    "sampler_count": 2,
+    "removed_siax_preprocess_node_ids": [
+      133,
+      134,
+      233,
+      244
+    ],
+    "removed_unordered_terminal_purge_node_id": 262,
+    "memory_barrier_node_ids": [
+      344,
+      345
+    ],
+    "release_models_before_vae_decode": true,
+    "execution_allowed": false
+  }
+}
