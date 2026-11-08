@@ -1,0 +1,13 @@
+PC BOT START HERE — COMFY CLOUD v0.5
+
+1) Extract this ZIP to a normal writable folder.
+2) Read `PC_BOT_TASK.txt`, `README_COMFYUI.md`, `CLOUD_ASSET_MAPPING_V0.5.md`, and `PREFLIGHT_RUNTIME_LOADIMAGE_FIX_V0.5.md`.
+3) Confirm the existing secret `COMFY_API_KEY` is available to the PC BOT / secure PowerShell prompt. Never paste it into chat or a plain-text file.
+4) Run the no-credit, read-only preflight:
+   powershell -ExecutionPolicy Bypass -File .\RUN_COMFY_CLOUD.ps1 -PreflightOnly
+5) Expected preflight result when Cloud auth, nodes and four preinstalled model assets are present: `CLOUD_PREFLIGHT_PASS_NOT_QUEUED`. It does not upload tiles or submit a workflow.
+6) Important v0.5 fix: the pre-upload Cloud `LoadImage.image` dropdown is not expected to contain `tile_left.png` / `tile_right.png`. Only the two exact runtime-bound slots (233.image and 5000.image) defer filename enumeration. The fields must exist; local Tile files must pass SHA/dimension checks; every other dropdown remains strict.
+7) Only after preflight passes, run:
+   powershell -ExecutionPolicy Bypass -File .\RUN_COMFY_CLOUD.ps1
+8) Execute uploads only the two Tile PNGs to `/api/upload/image` as `type=input`, binds the returned Cloud filenames, and then submits `/api/prompt`. No model weights are uploaded.
+9) Keep the run folder and distinguish API acceptance from completed GPU output and geometry acceptance. Original model parity is not claimed: this is the stock Flux1 Dev baseline, not CC_V1 + three custom LoRAs.

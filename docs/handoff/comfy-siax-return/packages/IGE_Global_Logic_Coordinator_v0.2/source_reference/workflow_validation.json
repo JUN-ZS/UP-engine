@@ -1,0 +1,78 @@
+{
+  "status": "STRUCTURAL_VALIDATION_PASS_RUNTIME_NOT_EXECUTED",
+  "schema_version": "ige-workflow-validation/0.2",
+  "source_workflow": "original_siax_workflow.json",
+  "patched_workflow": "original_siax_with_ige_logic_coordinator_v0.2.json",
+  "original_graph": {
+    "node_count": 29,
+    "link_count": 39
+  },
+  "patched_graph": {
+    "node_count": 45,
+    "link_count": 75
+  },
+  "baseline_A_unmodified": true,
+  "baseline_A_path": "42 -> 73 -> 72 -> 67 -> 96 -> 237 -> 127 -> 128",
+  "candidate_B_nodes": [
+    300,
+    301,
+    308,
+    309,
+    310,
+    311,
+    312,
+    313,
+    314,
+    315,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307
+  ],
+  "custom_node_classes": [
+    "IGE_GlobalLogicCompiler",
+    "IGE_TTPSubsetProjector",
+    "IGE_TileNoiseMask",
+    "IGE_LogicMapPreview",
+    "IGE_ApplyLogicGate",
+    "IGE_GlobalReconciler",
+    "IGE_GlobalAcceptanceAudit",
+    "IGE_IterationFeedback"
+  ],
+  "checks": {
+    "all_links_resolve": true,
+    "original_siax_ttp_nodes_retained": [
+      134,
+      34,
+      111,
+      36,
+      127
+    ],
+    "actual_ttp_metadata_drives_subset_projection": true,
+    "latent_noise_mask_precedes_candidate_B_sampler": true,
+    "candidate_B_separate_from_A": true,
+    "per_tile_overlap_failure_attribution": true,
+    "default_generate_and_unbounded_generate_rejected": true
+  },
+  "unit_tests": {
+    "passed": 21,
+    "failed": 0
+  },
+  "runtime": {
+    "comfyui_ui_execution": "NOT_RUN",
+    "siaux_inference": "NOT_RUN",
+    "flux_inference": "NOT_RUN",
+    "gpu": "NOT_RUN",
+    "cloud_job": "NOT_RUN",
+    "credits_used": false
+  },
+  "known_blockers": [
+    "Object geometry remains assistant_provisional and source-coordinate registration to the actual SIAX output is pending.",
+    "Current policy defaults the full canvas to REFINE; the geometry guard is inactive until both geometry and source alignment are operator-confirmed.",
+    "Candidate B uses one global conditioning for its latent batch; local prompt groups are reported but not separately routed to independent sampler executions.",
+    "The latent noise mask is a soft denoising constraint, not a hard geometry or identity lock.",
+    "Metamorphic grid test proves coordinator projection invariance only, not diffusion-output invariance when tile boundaries move."
+  ]
+}

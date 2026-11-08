@@ -1,0 +1,172 @@
+{
+  "package": "PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5",
+  "unpack_path": "/workspace/comfy-cloud-run-all-v05",
+  "package_root": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5",
+  "sha256_manifest": "30/30 PASS (ASSET_SHA256SUMS.txt)",
+  "model_weights_in_zip": false,
+  "builtin_tests": {
+    "cloud_workflow_validate.py": "PASS",
+    "test_bundle.py": "PASS",
+    "self_test_pipeline.py": "PASS",
+    "fake_comfy_cloud_api_test.py": "PASS"
+  },
+  "live_preflight": {
+    "run_id": "20261106T141253Z_0524c8e6",
+    "run_folder": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141253Z_0524c8e6",
+    "status_marker": "CLOUD_PREFLIGHT_PASS_NOT_QUEUED",
+    "preflight_report_status": "PASS",
+    "images_uploaded": 0,
+    "prompts_submitted": 0,
+    "runtime_bound_deferred": [
+      {
+        "node_id": "233",
+        "class_type": "LoadImage",
+        "field": "image"
+      },
+      {
+        "node_id": "5000",
+        "class_type": "LoadImage",
+        "field": "image"
+      }
+    ],
+    "model_files_present": true,
+    "required_model_files": {
+      "diffusion_models": [
+        "flux1-dev.safetensors"
+      ],
+      "text_encoders": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors"
+      ],
+      "vae": [
+        "ae.safetensors"
+      ],
+      "loras": []
+    },
+    "node_classes_present": true,
+    "api_authentication": {
+      "status": "PASS",
+      "endpoint": "/api/prompt",
+      "response_type": "dict"
+    }
+  },
+  "live_execute": {
+    "run_id": "20261106T141330Z_4b363f6c",
+    "run_folder": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141330Z_4b363f6c",
+    "preflight_inside_execute": "PASS",
+    "tile_uploads": "SUCCESS (2 images uploaded; Cloud-issued filenames bound)",
+    "workflow_submission": "FAILED HTTP 403 FREE_TIER_NOT_ALLOWED",
+    "error": "API key authentication is not available for free tier accounts",
+    "error_type": "FREE_TIER_NOT_ALLOWED",
+    "job_id": null,
+    "gpu_inference": "NOT_RUN",
+    "outputs": null,
+    "geometry_audit": "NOT_RUN",
+    "manifest_keys": [
+      "bundle_verification",
+      "error",
+      "preflight",
+      "provider",
+      "run_id",
+      "started_at_utc",
+      "status"
+    ],
+    "log_tail": [
+      "2026-11-06 22:13:30,903 INFO Run ID: 20261106T141330Z_4b363f6c",
+      "2026-11-06 22:13:30,903 INFO Provider: Comfy Cloud API",
+      "2026-11-06 22:13:30,903 INFO Mode: EXECUTE",
+      "2026-11-06 22:13:30,930 INFO Bundle SHA/dimension/geometry verification: PASS",
+      "2026-11-06 22:13:58,282 INFO Comfy Cloud API key, node schema, model catalog, and runtime image-source preflight: PASS",
+      "2026-11-06 22:13:59,104 INFO Uploaded runtime image input tile_left: local_sha256=4abdca7c4bacc76f85349431ab6d4f4322f0662989562e6ef41d6909ffbd2b3a cloud_filename=2a11317f238de607c84010822bff346b54c147f68fb387cf92e340ce49d6ccbc.png type=input",
+      "2026-11-06 22:13:59,868 INFO Uploaded runtime image input tile_right: local_sha256=387fd116215423b385c2055f331618dc4f80cc7ed6bad79ee291040952151b11 cloud_filename=268898f05096ec7af87803ded3b4fdd174a327a1d6581cc9f88f998ee1d7bef6.png type=input",
+      "2026-11-06 22:13:59,868 INFO Both runtime image inputs uploaded; Cloud-issued filenames are ready to bind",
+      "2026-11-06 22:14:00,227 ERROR Cloud run stopped: Comfy Cloud rejected workflow submission: HTTP 403: {\"error\":{\"message\":\"API key authentication is not available for free tier accounts\",\"type\":\"FREE_TIER_NOT_ALLOWED\"}}",
+      "Traceback (most recent call last):",
+      "  File \"/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/pcbot_runner.py\", line 988, in main",
+      "    raise RuntimeError(f\"Comfy Cloud rejected workflow submission: {safe_error_text(response)}\")",
+      "RuntimeError: Comfy Cloud rejected workflow submission: HTTP 403: {\"error\":{\"message\":\"API key authentication is not available for free tier accounts\",\"type\":\"FREE_TIER_NOT_ALLOWED\"}}"
+    ],
+    "runtime_bound_inputs_after_preflight_stage": [
+      {
+        "upload_id": "tile_left",
+        "node_id": "233",
+        "field": "image",
+        "local_file": "tile_left.png",
+        "cloud_filename": "NOT_YET_UPLOADED; BOUND_FROM_UPLOAD_RESPONSE_DURING_EXECUTE",
+        "dimensions": [
+          1168,
+          1024
+        ]
+      },
+      {
+        "upload_id": "tile_right",
+        "node_id": "5000",
+        "field": "image",
+        "local_file": "tile_right.png",
+        "cloud_filename": "NOT_YET_UPLOADED; BOUND_FROM_UPLOAD_RESPONSE_DURING_EXECUTE",
+        "dimensions": [
+          1168,
+          1024
+        ]
+      }
+    ],
+    "manifest_status": "FAILED_CLOSED",
+    "manifest_error": "RuntimeError: Comfy Cloud rejected workflow submission: HTTP 403: {\"error\":{\"message\":\"API key authentication is not available for free tier accounts\",\"type\":\"FREE_TIER_NOT_ALLOWED\"}}\n",
+    "bound_inputs": [
+      {
+        "upload_id": "tile_left",
+        "node_id": "233",
+        "class_type": "LoadImage",
+        "field": "image",
+        "local_file": "tile_left.png",
+        "local_sha256": "4abdca7c4bacc76f85349431ab6d4f4322f0662989562e6ef41d6909ffbd2b3a",
+        "dimensions": [
+          1168,
+          1024
+        ],
+        "format": "PNG",
+        "upload_type": "input",
+        "cloud_filename": "NOT_YET_UPLOADED; BOUND_FROM_UPLOAD_RESPONSE_DURING_EXECUTE"
+      },
+      {
+        "upload_id": "tile_right",
+        "node_id": "5000",
+        "class_type": "LoadImage",
+        "field": "image",
+        "local_file": "tile_right.png",
+        "local_sha256": "387fd116215423b385c2055f331618dc4f80cc7ed6bad79ee291040952151b11",
+        "dimensions": [
+          1168,
+          1024
+        ],
+        "format": "PNG",
+        "upload_type": "input",
+        "cloud_filename": "NOT_YET_UPLOADED; BOUND_FROM_UPLOAD_RESPONSE_DURING_EXECUTE"
+      }
+    ],
+    "uploaded_cloud_filenames": {
+      "tile_left": "2a11317f238de607c84010822bff346b54c147f68fb387cf92e340ce49d6ccbc.png",
+      "tile_right": "268898f05096ec7af87803ded3b4fdd174a327a1d6581cc9f88f998ee1d7bef6.png"
+    },
+    "submitted_prompt_path": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141330Z_4b363f6c/submitted_cloud_api_prompt.json"
+  },
+  "profile": "Flux1 Dev baseline (v0.5) — NOT CC_V1+LoRA parity",
+  "immutable_params": {
+    "seed": 909424749197426,
+    "steps": 47,
+    "denoise": 0.33,
+    "guidance": 6.2,
+    "sampler": "dpm_adaptive",
+    "scheduler": "normal"
+  },
+  "blocker": "Comfy Cloud free-tier account cannot submit workflows via API key (HTTP 403 FREE_TIER_NOT_ALLOWED). Preflight + image upload succeeded; prompt queue blocked. Need paid/API-entitled plan on the same account, or a key from an entitled account.",
+  "paths": {
+    "preflight_report": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141253Z_0524c8e6/cloud_preflight_report.json",
+    "preflight_log": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141253Z_0524c8e6/pcbot_cloud_run.log",
+    "preflight_manifest": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141253Z_0524c8e6/run_manifest.json",
+    "execute_log": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141330Z_4b363f6c/pcbot_cloud_run.log",
+    "execute_manifest": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141330Z_4b363f6c/run_manifest.json",
+    "execute_preflight_report": "/workspace/comfy-cloud-run-all-v05/PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5/runs/20261106T141330Z_4b363f6c/cloud_preflight_report.json",
+    "test_logs": "/workspace/comfy-cloud-run-all-v05/test-logs/"
+  }
+}

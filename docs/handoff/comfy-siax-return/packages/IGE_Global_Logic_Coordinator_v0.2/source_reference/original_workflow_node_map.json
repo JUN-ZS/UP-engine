@@ -1,0 +1,469 @@
+{
+  "source_workflow": "source_reference/original_siax_workflow.json",
+  "nodes": {
+    "source_full_image": {
+      "id": 34,
+      "type": "ImageScaleToTotalPixels",
+      "output": "IMAGE",
+      "meaning": "16MP full-frame image after Siax 4x model upscale and Lanczos pixel-count normalization"
+    },
+    "tile_size_planner": {
+      "id": 111,
+      "type": "TTP_Tile_image_size",
+      "widgets_values": [
+        2,
+        3,
+        0.05
+      ],
+      "meaning": "tile width/height calculator using 2 horizontal divisions, 3 vertical divisions, overlap_rate 0.05"
+    },
+    "tile_batch": {
+      "id": 36,
+      "type": "TTP_Image_Tile_Batch",
+      "outputs": [
+        "IMAGES",
+        "POSITIONS",
+        "ORIGINAL_SIZE",
+        "GRID_SIZE"
+      ],
+      "meaning": "creates ordered tile batch plus global position tuples and canvas/grid metadata"
+    },
+    "batch_to_list": {
+      "id": 163,
+      "type": "easy imageBatchToImageList"
+    },
+    "vae_encode": {
+      "id": 129,
+      "type": "VAEEncode"
+    },
+    "shared_sampler": {
+      "id": 67,
+      "type": "SamplerCustomAdvanced",
+      "meaning": "one sampler node receives the latent batch and shared global conditioning"
+    },
+    "vae_decode": {
+      "id": 96,
+      "type": "VAEDecodeTiled"
+    },
+    "list_to_batch": {
+      "id": 237,
+      "type": "ImageListToImageBatch"
+    },
+    "legacy_reassembly": {
+      "id": 127,
+      "type": "TTP_Image_Assy",
+      "inputs": [
+        "tiles",
+        "positions",
+        "original_size",
+        "grid_size",
+        "padding"
+      ],
+      "meaning": "baseline assembly path; retain as A/B comparator, not assumed to enforce semantic consistency"
+    },
+    "save": {
+      "id": 128,
+      "type": "SaveImage"
+    }
+  },
+  "confirmed_dataflow": [
+    {
+      "link_id": 87,
+      "from_node": 70,
+      "from_type": "RandomNoise",
+      "from_output": "NOISE",
+      "to_node": 67,
+      "to_type": "SamplerCustomAdvanced",
+      "to_input": "noise",
+      "data_type": "NOISE"
+    },
+    {
+      "link_id": 89,
+      "from_node": 68,
+      "from_type": "KSamplerSelect",
+      "from_output": "SAMPLER",
+      "to_node": 67,
+      "to_type": "SamplerCustomAdvanced",
+      "to_input": "sampler",
+      "data_type": "SAMPLER"
+    },
+    {
+      "link_id": 90,
+      "from_node": 69,
+      "from_type": "BasicScheduler",
+      "from_output": "SIGMAS",
+      "to_node": 67,
+      "to_type": "SamplerCustomAdvanced",
+      "to_input": "sigmas",
+      "data_type": "SIGMAS"
+    },
+    {
+      "link_id": 94,
+      "from_node": 72,
+      "from_type": "BasicGuider",
+      "from_output": "GUIDER",
+      "to_node": 67,
+      "to_type": "SamplerCustomAdvanced",
+      "to_input": "guider",
+      "data_type": "GUIDER"
+    },
+    {
+      "link_id": 160,
+      "from_node": 67,
+      "from_type": "SamplerCustomAdvanced",
+      "from_output": "output",
+      "to_node": 96,
+      "to_type": "VAEDecodeTiled",
+      "to_input": "samples",
+      "data_type": "LATENT"
+    },
+    {
+      "link_id": 161,
+      "from_node": 31,
+      "from_type": "VAELoader",
+      "from_output": "VAE",
+      "to_node": 96,
+      "to_type": "VAEDecodeTiled",
+      "to_input": "vae",
+      "data_type": "VAE"
+    },
+    {
+      "link_id": 181,
+      "from_node": 111,
+      "from_type": "TTP_Tile_image_size",
+      "from_output": "tile_width",
+      "to_node": 36,
+      "to_type": "TTP_Image_Tile_Batch",
+      "to_input": "tile_width",
+      "data_type": "INT"
+    },
+    {
+      "link_id": 182,
+      "from_node": 111,
+      "from_type": "TTP_Tile_image_size",
+      "from_output": "tile_height",
+      "to_node": 36,
+      "to_type": "TTP_Image_Tile_Batch",
+      "to_input": "tile_height",
+      "data_type": "INT"
+    },
+    {
+      "link_id": 191,
+      "from_node": 116,
+      "from_type": "Reroute",
+      "from_output": "",
+      "to_node": 111,
+      "to_type": "TTP_Tile_image_size",
+      "to_input": "image",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 192,
+      "from_node": 116,
+      "from_type": "Reroute",
+      "from_output": "",
+      "to_node": 36,
+      "to_type": "TTP_Image_Tile_Batch",
+      "to_input": "image",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 218,
+      "from_node": 36,
+      "from_type": "TTP_Image_Tile_Batch",
+      "from_output": "POSITIONS",
+      "to_node": 127,
+      "to_type": "TTP_Image_Assy",
+      "to_input": "positions",
+      "data_type": "LIST"
+    },
+    {
+      "link_id": 219,
+      "from_node": 36,
+      "from_type": "TTP_Image_Tile_Batch",
+      "from_output": "ORIGINAL_SIZE",
+      "to_node": 127,
+      "to_type": "TTP_Image_Assy",
+      "to_input": "original_size",
+      "data_type": "TUPLE"
+    },
+    {
+      "link_id": 220,
+      "from_node": 36,
+      "from_type": "TTP_Image_Tile_Batch",
+      "from_output": "GRID_SIZE",
+      "to_node": 127,
+      "to_type": "TTP_Image_Assy",
+      "to_input": "grid_size",
+      "data_type": "TUPLE"
+    },
+    {
+      "link_id": 222,
+      "from_node": 127,
+      "from_type": "TTP_Image_Assy",
+      "from_output": "RECONSTRUCTED_IMAGE",
+      "to_node": 128,
+      "to_type": "SaveImage",
+      "to_input": "images",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 224,
+      "from_node": 31,
+      "from_type": "VAELoader",
+      "from_output": "VAE",
+      "to_node": 129,
+      "to_type": "VAEEncode",
+      "to_input": "vae",
+      "data_type": "VAE"
+    },
+    {
+      "link_id": 234,
+      "from_node": 34,
+      "from_type": "ImageScaleToTotalPixels",
+      "from_output": "IMAGE",
+      "to_node": 116,
+      "to_type": "Reroute",
+      "to_input": "",
+      "data_type": "*"
+    },
+    {
+      "link_id": 237,
+      "from_node": 133,
+      "from_type": "UpscaleModelLoader",
+      "from_output": "UPSCALE_MODEL",
+      "to_node": 134,
+      "to_type": "ImageUpscaleWithModel",
+      "to_input": "upscale_model",
+      "data_type": "UPSCALE_MODEL"
+    },
+    {
+      "link_id": 239,
+      "from_node": 134,
+      "from_type": "ImageUpscaleWithModel",
+      "from_output": "IMAGE",
+      "to_node": 34,
+      "to_type": "ImageScaleToTotalPixels",
+      "to_input": "image",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 275,
+      "from_node": 77,
+      "from_type": "UNETLoader",
+      "from_output": "MODEL",
+      "to_node": 162,
+      "to_type": "LoraLoader",
+      "to_input": "model",
+      "data_type": "MODEL"
+    },
+    {
+      "link_id": 285,
+      "from_node": 36,
+      "from_type": "TTP_Image_Tile_Batch",
+      "from_output": "IMAGES",
+      "to_node": 163,
+      "to_type": "easy imageBatchToImageList",
+      "to_input": "image",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 302,
+      "from_node": 73,
+      "from_type": "FluxGuidance",
+      "from_output": "CONDITIONING",
+      "to_node": 72,
+      "to_type": "BasicGuider",
+      "to_input": "conditioning",
+      "data_type": "CONDITIONING"
+    },
+    {
+      "link_id": 307,
+      "from_node": 163,
+      "from_type": "easy imageBatchToImageList",
+      "from_output": "IMAGE",
+      "to_node": 129,
+      "to_type": "VAEEncode",
+      "to_input": "pixels",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 308,
+      "from_node": 42,
+      "from_type": "CLIPTextEncode",
+      "from_output": "CONDITIONING",
+      "to_node": 73,
+      "to_type": "FluxGuidance",
+      "to_input": "conditioning",
+      "data_type": "CONDITIONING"
+    },
+    {
+      "link_id": 316,
+      "from_node": 129,
+      "from_type": "VAEEncode",
+      "from_output": "LATENT",
+      "to_node": 67,
+      "to_type": "SamplerCustomAdvanced",
+      "to_input": "latent_image",
+      "data_type": "LATENT"
+    },
+    {
+      "link_id": 424,
+      "from_node": 96,
+      "from_type": "VAEDecodeTiled",
+      "from_output": "IMAGE",
+      "to_node": 237,
+      "to_type": "ImageListToImageBatch",
+      "to_input": "images",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 425,
+      "from_node": 237,
+      "from_type": "ImageListToImageBatch",
+      "from_output": "IMAGE",
+      "to_node": 127,
+      "to_type": "TTP_Image_Assy",
+      "to_input": "tiles",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 429,
+      "from_node": 233,
+      "from_type": "LoadImage",
+      "from_output": "IMAGE",
+      "to_node": 244,
+      "to_type": "ImageResizeKJ",
+      "to_input": "image",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 430,
+      "from_node": 244,
+      "from_type": "ImageResizeKJ",
+      "from_output": "IMAGE",
+      "to_node": 134,
+      "to_type": "ImageUpscaleWithModel",
+      "to_input": "image",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 431,
+      "from_node": 233,
+      "from_type": "LoadImage",
+      "from_output": "IMAGE",
+      "to_node": 245,
+      "to_type": "Image Comparer (rgthree)",
+      "to_input": "image_a",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 432,
+      "from_node": 127,
+      "from_type": "TTP_Image_Assy",
+      "from_output": "RECONSTRUCTED_IMAGE",
+      "to_node": 245,
+      "to_type": "Image Comparer (rgthree)",
+      "to_input": "image_b",
+      "data_type": "IMAGE"
+    },
+    {
+      "link_id": 444,
+      "from_node": 255,
+      "from_type": "Lora Loader Stack (rgthree)",
+      "from_output": "MODEL",
+      "to_node": 254,
+      "to_type": "Lora Loader Stack (rgthree)",
+      "to_input": "model",
+      "data_type": "MODEL"
+    },
+    {
+      "link_id": 445,
+      "from_node": 255,
+      "from_type": "Lora Loader Stack (rgthree)",
+      "from_output": "CLIP",
+      "to_node": 254,
+      "to_type": "Lora Loader Stack (rgthree)",
+      "to_input": "clip",
+      "data_type": "CLIP"
+    },
+    {
+      "link_id": 446,
+      "from_node": 162,
+      "from_type": "LoraLoader",
+      "from_output": "CLIP",
+      "to_node": 255,
+      "to_type": "Lora Loader Stack (rgthree)",
+      "to_input": "clip",
+      "data_type": "CLIP"
+    },
+    {
+      "link_id": 447,
+      "from_node": 162,
+      "from_type": "LoraLoader",
+      "from_output": "MODEL",
+      "to_node": 255,
+      "to_type": "Lora Loader Stack (rgthree)",
+      "to_input": "model",
+      "data_type": "MODEL"
+    },
+    {
+      "link_id": 452,
+      "from_node": 254,
+      "from_type": "Lora Loader Stack (rgthree)",
+      "from_output": "CLIP",
+      "to_node": 42,
+      "to_type": "CLIPTextEncode",
+      "to_input": "clip",
+      "data_type": "CLIP"
+    },
+    {
+      "link_id": 453,
+      "from_node": 254,
+      "from_type": "Lora Loader Stack (rgthree)",
+      "from_output": "MODEL",
+      "to_node": 72,
+      "to_type": "BasicGuider",
+      "to_input": "model",
+      "data_type": "MODEL"
+    },
+    {
+      "link_id": 465,
+      "from_node": 67,
+      "from_type": "SamplerCustomAdvanced",
+      "from_output": "output",
+      "to_node": 262,
+      "to_type": "LayerUtility: PurgeVRAM",
+      "to_input": "anything",
+      "data_type": "*"
+    },
+    {
+      "link_id": 468,
+      "from_node": 77,
+      "from_type": "UNETLoader",
+      "from_output": "MODEL",
+      "to_node": 69,
+      "to_type": "BasicScheduler",
+      "to_input": "model",
+      "data_type": "MODEL"
+    },
+    {
+      "link_id": 470,
+      "from_node": 78,
+      "from_type": "DualCLIPLoader",
+      "from_output": "CLIP",
+      "to_node": 162,
+      "to_type": "LoraLoader",
+      "to_input": "clip",
+      "data_type": "CLIP"
+    }
+  ],
+  "integration_intent": {
+    "global_contract_insert_after_node": 34,
+    "project_rules_from_global_to_tile_batch_after_node": 36,
+    "apply_logic_gate_after_node": 237,
+    "new_global_reconciler_replaces_final_assembly_for_candidate_B": 127,
+    "keep_original_TTP_Image_Assy_as_baseline_A_B_comparator": true,
+    "do_not_remove_Siax_upscale_or_TTP_batch": true
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "package": "PC_BOT_GEOMETRY_LOCKED_TILE_RUN_ALL_CLOUD_v0.5",
+  "file_count": 30,
+  "hash_algorithm": "sha256",
+  "files": [
+    {
+      "path": "CLOUD_ASSET_MAPPING_V0.5.md",
+      "bytes": 3291,
+      "sha256": "1ab0da84aaf3d29de0bae2cf4dfbf2c15cfca0fea1a33fbf38ff0d4010082f69"
+    },
+    {
+      "path": "Geometry_Locked_Two_Tile_Flux_Refinement_CLOUD_v0.5.json",
+      "bytes": 38317,
+      "sha256": "283d6d9a5bb68a031f1d243110b6c35ba5e6375aa50c301b4fcac081592308ab"
+    },
+    {
+      "path": "PC_BOT_CLOUD_PREFLIGHT_FIX_REPORT_V0.5.json",
+      "bytes": 1400,
+      "sha256": "07f683d8980b3500c2e4641916ee7ec0dc3a2f9ff650fa85c6a68d692ef99d79"
+    },
+    {
+      "path": "PC_BOT_RUN_ALL.md",
+      "bytes": 4775,
+      "sha256": "dff23e06879edf02f87cefd4ffed662538e7362f116a5c9b3a45d576acff9ad9"
+    },
+    {
+      "path": "PC_BOT_START_HERE.txt",
+      "bytes": 1504,
+      "sha256": "59e9a1e7b84920dfb18cbfde3b5f7d4a0d7bb08136c7f9a4bbde04976e262e6a"
+    },
+    {
+      "path": "PC_BOT_TASK.txt",
+      "bytes": 5844,
+      "sha256": "9f3d9dc0c1eaac057e0d7b23af90f5fc10f1ec87bdef608d7bc8825643aa1178"
+    },
+    {
+      "path": "PREFLIGHT_RUNTIME_LOADIMAGE_FIX_V0.5.md",
+      "bytes": 2209,
+      "sha256": "81d8bb7084b1bcd559a0426426673467cad3fdbe9586836b2dccb29a4956bfcd"
+    },
+    {
+      "path": "README_COMFYUI.md",
+      "bytes": 3448,
+      "sha256": "eaeaed51af6d4ce300c0d35989267072fae6dd01a632c1301ff9ffae2ef1b604"
+    },
+    {
+      "path": "RUN_COMFY_CLOUD.ps1",
+      "bytes": 1536,
+      "sha256": "92c22c72cb97fc77907be58ab308f9cccf88cc12ee987f36a6067733083272ae"
+    },
+    {
+      "path": "START_PC_BOT_RUN_ALL.bat",
+      "bytes": 2174,
+      "sha256": "3c06209ce5ee850ceafd0572aab2b0b4225a2bcf638a7b1d8cde7038a7841d82"
+    },
+    {
+      "path": "UP_ENGINE_IMPLEMENTATION_REFERENCE.md",
+      "bytes": 853,
+      "sha256": "bc1ebd07743a40fa45bed8d2d82a02c3d2f443c637b9f9609328162635575f87"
+    },
+    {
+      "path": "city_scene_16mp_lanczos.png",
+      "bytes": 19083835,
+      "sha256": "f75d9d2fa9bfe952a7cd67024e629bf1a641a462c21a84e6a59c110bad8943f8"
+    },
+    {
+      "path": "cloud_workflow_validate.py",
+      "bytes": 6486,
+      "sha256": "0b7c99acae7c44c026761155e1cbb6a8820d88ec5b044fc91db741115aa78fb8"
+    },
+    {
+      "path": "cloud_workflow_validation.json",
+      "bytes": 1372,
+      "sha256": "e4679b0badfede25af96d88cc284cb7a7681daf2a9a5888a06f99347ab29bc91"
+    },
+    {
+      "path": "fake_comfy_cloud_api_test.py",
+      "bytes": 12533,
+      "sha256": "8878c62eeb81c96f20a162404dda02192f145b4522a5d95634b3b1e9e49839e2"
+    },
+    {
+      "path": "geometry_audit_stitch.py",
+      "bytes": 13543,
+      "sha256": "edb2fa11fa6f9a4d5fdf95ed4be7be97e143b26ec5bf521b34f87e4025aabe9d"
+    },
+    {
+      "path": "object_geometry.provisional.json",
+      "bytes": 5735,
+      "sha256": "a672ac0c6ca400594f4f62498a170209a172e8f84a5fd10e724c1b25e9e625cb"
+    },
+    {
+      "path": "pc_bot_config.json",
+      "bytes": 4909,
+      "sha256": "72fb8896a64989d53d0bce5f02d585e2d90340f0f35c493168d49dfa6f8d5610"
+    },
+    {
+      "path": "pcbot_runner.py",
+      "bytes": 51180,
+      "sha256": "6fae1156a696cc3126e8120e5d59a9935f87b9b3783f8c4088c2f89c683cd328"
+    },
+    {
+      "path": "plan.json",
+      "bytes": 23436,
+      "sha256": "423dc79d3667de3f48400f4c7c9a5026c0ec6899fd09b94fef1b92fffd4ddbfa"
+    },
+    {
+      "path": "requirements-pcbot.txt",
+      "bytes": 40,
+      "sha256": "940cfdeecae14df511b157f277ae8affae3c1e050b16bab5091e15d812e365e6"
+    },
+    {
+      "path": "roi_annotation_preview.jpg",
+      "bytes": 951265,
+      "sha256": "9903463041465aa7d915ea648e5aff7e41f90ec51bf5e58b7cec2cf663a4c004"
+    },
+    {
+      "path": "self_test_pipeline.py",
+      "bytes": 2756,
+      "sha256": "46aa135732acde832ab1d8e52423798a737ecf0e62b21cdc0f76f9f346eee72f"
+    },
+    {
+      "path": "source_original.jpg",
+      "bytes": 1036042,
+      "sha256": "090810a4f1c89b9f74af0e46582923bb7a71d892f7c1c6bf0e525eb2d8e84138"
+    },
+    {
+      "path": "test_bundle.py",
+      "bytes": 5098,
+      "sha256": "a74bd8b2ff386dae8789d837623ae6627818fcd8d2b3887513f1a70c273e2b59"
+    },
+    {
+      "path": "tile_left.png",
+      "bytes": 1768301,
+      "sha256": "4abdca7c4bacc76f85349431ab6d4f4322f0662989562e6ef41d6909ffbd2b3a"
+    },
+    {
+      "path": "tile_left.task.json",
+      "bytes": 8177,
+      "sha256": "59f2d0a5c3abe6de8b5769227da1ac9a2c06ffe81b91dd2670d002ccbe726125"
+    },
+    {
+      "path": "tile_right.png",
+      "bytes": 1764329,
+      "sha256": "387fd116215423b385c2055f331618dc4f80cc7ed6bad79ee291040952151b11"
+    },
+    {
+      "path": "tile_right.task.json",
+      "bytes": 8224,
+      "sha256": "dfbbd949dc5fe30a44f143e7904a1d35c4fcb9208ff035128cfa590fa99e464b"
+    },
+    {
+      "path": "workflow_cloud_api_prompt_v0.5.json",
+      "bytes": 8002,
+      "sha256": "8f252ae6b56d6d58decaaf5cea7dff789bc7158d2f491e1ebb10a1855d8f7fbf"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "ige-global-logic-policy/0.1",
+  "policy_id": "siax-global-logic-default-v01",
+  "revision": 1,
+  "default_action": "REFINE",
+  "default_constraints": {
+    "allow_new_semantics": false,
+    "allow_geometry_change": false,
+    "allow_object_duplication": false,
+    "allow_pose_change": false
+  },
+  "actions": {
+    "PRESERVE": "Keep original source pixels. No generated change may be written.",
+    "REFINE": "Permit local detail refinement but retain inherited geometry and semantics constraints.",
+    "GENERATE": "Permit new content only inside an explicit, operator-confirmed region.",
+    "REJECT": "Reject candidate content in this region and fall back to source pixels."
+  },
+  "rules": [
+    {
+      "id": "central-human-geometry",
+      "scope": "object",
+      "object_id": "central_woman_on_skybridge",
+      "action": "REFINE",
+      "priority": 100,
+      "constraints": {
+        "preserve_silhouette": true,
+        "preserve_landmarks": true,
+        "no_pose_change": true,
+        "no_duplication": true,
+        "allow_new_semantics": false,
+        "allow_geometry_change": false
+      },
+      "geometry_status_required_for_acceptance": "operator_confirmed",
+      "note": "The supplied object geometry is assistant_provisional. It is a constraint reference, not an operator-approved hard lock.",
+      "instruction": "For the central standing human figure, improve only permitted surface detail while preserving its global silhouette, pose, body proportions, limb placement, and landmark positions. Do not duplicate or reinterpret the figure.",
+      "instruction_scope": "global"
+    }
+  ],
+  "operator_regions": [],
+  "hierarchy": {
+    "child_may_tighten_parent": true,
+    "child_may_weaken_parent": false,
+    "conflict_resolution": "most_restrictive_action_wins",
+    "fail_closed_on_unknown_action": true
+  },
+  "reconciliation": {
+    "overlap_mean_abs_difference_threshold": 0.05,
+    "overlap_p95_abs_difference_threshold": 0.2,
+    "on_overlap_conflict": "fallback_to_source",
+    "on_missing_tile": "fallback_to_source",
+    "core_ownership": "nearest_tile_center",
+    "allow_unconfirmed_geometry_acceptance": false,
+    "maximum_overlap_conflict_fraction": 0.05
+  },
+  "iteration": {
+    "max_automatic_rule_changes": 0,
+    "automatic_policy_promotion": false,
+    "record_failed_subsets_for_review": true
+  },
+  "source_alignment_status": "pending_operator_registration_to_siax_output",
+  "global_instruction": "Refine the existing SIAX-upscaled full image as one globally coherent scene. Improve selected local detail only; do not reinterpret tile crops as independent pictures."
+}

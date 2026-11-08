@@ -1,0 +1,49 @@
+{
+  "status": "PASS_STATIC_STRUCTURE_ONLY",
+  "provider": "comfy_cloud",
+  "model_profile": "CLOUD_PREINSTALLED_FLUX1_DEV_BASELINE",
+  "model_mapping": {
+    "base_model": "flux1-dev.safetensors",
+    "original_CC_V1": "not used; intentional different baseline",
+    "vae": "ae.safetensors (Cloud standard Ae; original local label ae.sft)",
+    "text_encoders": [
+      "t5xxl_fp16.safetensors",
+      "clip_l.safetensors"
+    ],
+    "active_custom_loras": "none"
+  },
+  "ui_nodes": 22,
+  "ui_links": 29,
+  "api_nodes": 22,
+  "api_classes": [
+    "BasicGuider",
+    "BasicScheduler",
+    "CLIPTextEncode",
+    "DualCLIPLoader",
+    "FluxGuidance",
+    "KSamplerSelect",
+    "LoadImage",
+    "RandomNoise",
+    "SamplerCustomAdvanced",
+    "SaveImage",
+    "UNETLoader",
+    "VAEDecodeTiled",
+    "VAEEncode",
+    "VAELoader"
+  ],
+  "custom_node_classes": [],
+  "active_lora_count": 0,
+  "parameters": {
+    "seed": 909424749197426,
+    "steps": 47,
+    "denoise": 0.33000000000000007,
+    "sampler": "dpm_adaptive",
+    "scheduler": "normal",
+    "flux_guidance": 6.2
+  },
+  "model_parity": "NOT_EQUIVALENT_TO_ORIGINAL_CC_V1_PLUS_3_LORAS",
+  "errors": [],
+  "gpu_inference": "NOT_RUN",
+  "cloud_model_inventory": "requires live authenticated PC preflight",
+  "runtime_image_inputs": "local SHA/dimensions preflight; cloud filename bound only after execute-stage upload"
+}

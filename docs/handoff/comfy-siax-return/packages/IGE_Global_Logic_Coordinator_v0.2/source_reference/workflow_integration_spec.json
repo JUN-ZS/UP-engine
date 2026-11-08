@@ -1,0 +1,343 @@
+{
+  "schema_version": "ige-comfyui-workflow-integration/0.2",
+  "source_workflow": "original_siax_workflow.json",
+  "patched_workflow": "original_siax_with_ige_logic_coordinator_v0.2.json",
+  "architecture": "Keep the original SIAX/TTP path as A. Candidate B duplicates the sampler/decode/batch path and adds global prompt + tile noise masks + post-decode pixel gate + global overlap consensus.",
+  "baseline_A": {
+    "path": "original node 42 blank prompt -> 73 FluxGuidance -> 72 BasicGuider -> 67 SamplerCustomAdvanced -> 96 VAEDecodeTiled -> 237 ImageListToImageBatch -> 127 TTP_Image_Assy -> 128 SaveImage",
+    "modified": false
+  },
+  "candidate_B": {
+    "path": "global contract -> TTP subset projection -> tile noise mask -> SetLatentNoiseMask -> duplicated sampler/decode/batch -> logic gate -> global consensus -> audit",
+    "nodes": {
+      "compiler": 300,
+      "projector": 301,
+      "noise_mask": 308,
+      "set_latent_noise_mask": 309,
+      "sampler": 310,
+      "decoder": 311,
+      "batch": 312,
+      "clip_text": 313,
+      "flux_guidance": 314,
+      "basic_guider": 315,
+      "pixel_gate": 302,
+      "reconciler": 303,
+      "audit": 304,
+      "iteration_feedback": 305,
+      "logic_preview": 306,
+      "save_candidate": 307
+    },
+    "shared_original_inputs": [
+      "model/LoRA stack node 254",
+      "noise node 70",
+      "sampler node 68",
+      "sigma schedule node 69",
+      "VAE loader node 31"
+    ],
+    "global_prompt": "Injected only into B conditioning; A retains original blank prompt.",
+    "noise_mask": "Per-tile MASK batch is built from parent action map. PRESERVE/REJECT=0; REFINE/GENERATE configurable; geometry guard attenuation is disabled until geometry and source coordinates are operator-confirmed.",
+    "pixel_gate": "After decode, restores exact source pixels for PRESERVE/REJECT zones.",
+    "overlap": "Writes overlap only when candidate tiles agree; disagreement abstains to original source pixels."
+  },
+  "runtime_truth": {
+    "tile_positions_source": "Actual runtime POSITIONS/ORIGINAL_SIZE/GRID_SIZE emitted by original TTP_Image_Tile_Batch node 36.",
+    "offline_helper": "ige_logic.ttp is only an offline fixture builder; never substitute it for node 36 runtime metadata in production.",
+    "conditioning": "The B sampler still has one shared global conditioning. Per-tile local prompts are grouped for compatibility reporting; a separate group execution adapter is still required if groups differ.",
+    "geometry": "Noise attenuation is a soft denoising constraint, not proof of silhouette/identity preservation. Geometry acceptance still requires registered coordinates, operator confirmation and observations."
+  },
+  "added_links": [
+    [
+      471,
+      34,
+      0,
+      300,
+      0,
+      "IMAGE"
+    ],
+    [
+      472,
+      300,
+      0,
+      301,
+      0,
+      "IGE_CONTRACT"
+    ],
+    [
+      473,
+      36,
+      0,
+      301,
+      1,
+      "IMAGE"
+    ],
+    [
+      474,
+      36,
+      1,
+      301,
+      2,
+      "LIST"
+    ],
+    [
+      475,
+      36,
+      2,
+      301,
+      3,
+      "TUPLE"
+    ],
+    [
+      476,
+      36,
+      3,
+      301,
+      4,
+      "TUPLE"
+    ],
+    [
+      477,
+      301,
+      0,
+      308,
+      0,
+      "IGE_SUBSETS"
+    ],
+    [
+      478,
+      129,
+      0,
+      308,
+      1,
+      "LATENT"
+    ],
+    [
+      479,
+      308,
+      0,
+      309,
+      1,
+      "MASK"
+    ],
+    [
+      480,
+      129,
+      0,
+      309,
+      0,
+      "LATENT"
+    ],
+    [
+      481,
+      309,
+      0,
+      310,
+      4,
+      "LATENT"
+    ],
+    [
+      482,
+      254,
+      1,
+      313,
+      0,
+      "CLIP"
+    ],
+    [
+      483,
+      300,
+      4,
+      313,
+      1,
+      "STRING"
+    ],
+    [
+      484,
+      313,
+      0,
+      314,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      485,
+      314,
+      0,
+      315,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      486,
+      254,
+      0,
+      315,
+      0,
+      "MODEL"
+    ],
+    [
+      487,
+      70,
+      0,
+      310,
+      0,
+      "NOISE"
+    ],
+    [
+      488,
+      315,
+      0,
+      310,
+      1,
+      "GUIDER"
+    ],
+    [
+      489,
+      68,
+      0,
+      310,
+      2,
+      "SAMPLER"
+    ],
+    [
+      490,
+      69,
+      0,
+      310,
+      3,
+      "SIGMAS"
+    ],
+    [
+      491,
+      310,
+      0,
+      311,
+      0,
+      "LATENT"
+    ],
+    [
+      492,
+      31,
+      0,
+      311,
+      1,
+      "VAE"
+    ],
+    [
+      493,
+      311,
+      0,
+      312,
+      0,
+      "IMAGE"
+    ],
+    [
+      494,
+      36,
+      0,
+      302,
+      0,
+      "IMAGE"
+    ],
+    [
+      495,
+      312,
+      0,
+      302,
+      1,
+      "IMAGE"
+    ],
+    [
+      496,
+      301,
+      0,
+      302,
+      2,
+      "IGE_SUBSETS"
+    ],
+    [
+      497,
+      34,
+      0,
+      303,
+      0,
+      "IMAGE"
+    ],
+    [
+      498,
+      302,
+      0,
+      303,
+      1,
+      "IMAGE"
+    ],
+    [
+      499,
+      301,
+      0,
+      303,
+      2,
+      "IGE_SUBSETS"
+    ],
+    [
+      500,
+      34,
+      0,
+      304,
+      0,
+      "IMAGE"
+    ],
+    [
+      501,
+      303,
+      0,
+      304,
+      1,
+      "IMAGE"
+    ],
+    [
+      502,
+      303,
+      1,
+      304,
+      2,
+      "IGE_SUBSETS"
+    ],
+    [
+      503,
+      300,
+      0,
+      305,
+      0,
+      "IGE_CONTRACT"
+    ],
+    [
+      504,
+      304,
+      0,
+      305,
+      1,
+      "STRING"
+    ],
+    [
+      505,
+      300,
+      0,
+      306,
+      0,
+      "IGE_CONTRACT"
+    ],
+    [
+      506,
+      303,
+      0,
+      307,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "known_blockers": [
+    "Geometry remains assistant_provisional; source-coordinate registration to actual SIAX output is pending.",
+    "The geometry guard is deliberately inactive in the noise mask until the above registration and operator confirmation are complete.",
+    "No real ComfyUI UI execution, SIAX inference, GPU run or Cloud job was performed in this environment."
+  ]
+}

@@ -1,0 +1,1757 @@
+{
+  "id": "9f61fbf7-2c6f-4a7f-a70a-9e0a2d710001",
+  "revision": 1,
+  "last_node_id": 5007,
+  "last_link_id": 1014,
+  "nodes": [
+    {
+      "id": 31,
+      "type": "VAELoader",
+      "pos": [
+        -850,
+        850
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "vae_name",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
+          "links": [
+            22,
+            23,
+            28,
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "ae.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "ae.safetensors"
+      },
+      "title": "Cloud preinstalled Ae VAE"
+    },
+    {
+      "id": 70,
+      "type": "RandomNoise",
+      "pos": [
+        1900,
+        1880
+      ],
+      "size": [
+        310.7922058105469,
+        90.74833679199219
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "noise_seed",
+          "name": "noise_seed",
+          "type": "INT",
+          "widget": {
+            "name": "noise_seed"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "NOISE",
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            12,
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        909424749197426,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "noise_seed": 909424749197426,
+        "control_after_generate": "fixed"
+      },
+      "title": "Shared fixed noise seed"
+    },
+    {
+      "id": 72,
+      "type": "BasicGuider",
+      "pos": [
+        1900,
+        1000
+      ],
+      "size": [
+        311.2446594238281,
+        46
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 1011
+        },
+        {
+          "label": "conditioning",
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "label": "GUIDER",
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "slot_index": 0,
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "title": "Shared Guider"
+    },
+    {
+      "id": 67,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        300,
+        -100
+      ],
+      "size": [
+        323.118896484375,
+        209.93569946289062
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "noise",
+          "name": "noise",
+          "type": "NOISE",
+          "link": 12
+        },
+        {
+          "label": "guider",
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 13
+        },
+        {
+          "label": "sampler",
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 14
+        },
+        {
+          "label": "sigmas",
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 15
+        },
+        {
+          "label": "latent_image",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            26
+          ]
+        },
+        {
+          "label": "denoised_output",
+          "name": "denoised_output",
+          "type": "LATENT",
+          "slot_index": 1,
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "title": "LEFT — Flux Sampler"
+    },
+    {
+      "id": 96,
+      "type": "VAEDecodeTiled",
+      "pos": [
+        900,
+        -100
+      ],
+      "size": [
+        309.4901123046875,
+        150
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "samples",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 26
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 28
+        },
+        {
+          "label": "tile_size",
+          "name": "tile_size",
+          "type": "INT",
+          "widget": {
+            "name": "tile_size"
+          },
+          "link": null
+        },
+        {
+          "label": "overlap",
+          "name": "overlap",
+          "type": "INT",
+          "widget": {
+            "name": "overlap"
+          },
+          "link": null
+        },
+        {
+          "label": "temporal_size",
+          "name": "temporal_size",
+          "type": "INT",
+          "widget": {
+            "name": "temporal_size"
+          },
+          "link": null
+        },
+        {
+          "label": "temporal_overlap",
+          "name": "temporal_overlap",
+          "type": "INT",
+          "widget": {
+            "name": "temporal_overlap"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecodeTiled",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        1024,
+        64,
+        64,
+        8
+      ],
+      "widgets_values_named": {
+        "tile_size": 1024,
+        "overlap": 64,
+        "temporal_size": 64,
+        "temporal_overlap": 8
+      },
+      "title": "LEFT — VAE Decode"
+    },
+    {
+      "id": 129,
+      "type": "VAEEncode",
+      "pos": [
+        -350,
+        -100
+      ],
+      "size": [
+        154.8260040283203,
+        46
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "pixels",
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 20
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "label": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "title": "LEFT — VAE Encode"
+    },
+    {
+      "id": 128,
+      "type": "SaveImage",
+      "pos": [
+        1450,
+        -100
+      ],
+      "size": [
+        933.8792724609375,
+        641.3317260742188
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 30
+        },
+        {
+          "label": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "image_urls",
+          "name": "image_urls",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "geometry_locked_city/tile_left_refined"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "geometry_locked_city/tile_left_refined"
+      },
+      "title": "OUTPUT A — tile_left_refined"
+    },
+    {
+      "id": 68,
+      "type": "KSamplerSelect",
+      "pos": [
+        1900,
+        1620
+      ],
+      "size": [
+        313.3482971191406,
+        74.59920501708984
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "sampler_name",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "SAMPLER",
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            14,
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "dpm_adaptive"
+      ],
+      "widgets_values_named": {
+        "sampler_name": "dpm_adaptive"
+      },
+      "title": "Shared Sampler"
+    },
+    {
+      "id": 77,
+      "type": "UNETLoader",
+      "pos": [
+        -850,
+        1150
+      ],
+      "size": [
+        404.7267150878906,
+        108.53325653076172
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "unet_name",
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        },
+        {
+          "label": "weight_dtype",
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "weight_dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            11,
+            1011,
+            1013
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "flux1-dev.safetensors",
+        "fp8_e4m3fn_fast"
+      ],
+      "widgets_values_named": {
+        "unet_name": "flux1-dev.safetensors",
+        "weight_dtype": "fp8_e4m3fn_fast"
+      },
+      "title": "Cloud preinstalled Flux1 Dev UNet"
+    },
+    {
+      "id": 78,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -850,
+        1450
+      ],
+      "size": [
+        396.47479248046875,
+        130
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "clip_name1",
+          "name": "clip_name1",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name1"
+          },
+          "link": null
+        },
+        {
+          "label": "clip_name2",
+          "name": "clip_name2",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name2"
+          },
+          "link": null
+        },
+        {
+          "label": "type",
+          "name": "type",
+          "type": "COMBO",
+          "widget": {
+            "name": "type"
+          },
+          "link": null
+        },
+        {
+          "label": "device",
+          "name": "device",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
+          "links": [
+            1012,
+            1014
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name1": "t5xxl_fp16.safetensors",
+        "clip_name2": "clip_l.safetensors",
+        "type": "flux",
+        "device": "default"
+      },
+      "title": "Shared Dual CLIP"
+    },
+    {
+      "id": 69,
+      "type": "BasicScheduler",
+      "pos": [
+        1900,
+        1320
+      ],
+      "size": [
+        414.9441833496094,
+        404.50115966796875
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 11
+        },
+        {
+          "label": "scheduler",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "label": "steps",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "label": "denoise",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "SIGMAS",
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            15,
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "normal",
+        47,
+        0.33000000000000007
+      ],
+      "widgets_values_named": {
+        "scheduler": "normal",
+        "steps": 47,
+        "denoise": 0.33000000000000007
+      },
+      "title": "Shared Scheduler"
+    },
+    {
+      "id": 73,
+      "type": "FluxGuidance",
+      "pos": [
+        1550,
+        1000
+      ],
+      "size": [
+        307.38922119140625,
+        77.7908935546875
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "conditioning",
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "label": "guidance",
+          "name": "guidance",
+          "type": "FLOAT",
+          "widget": {
+            "name": "guidance"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        6.2
+      ],
+      "widgets_values_named": {
+        "guidance": 6.2
+      },
+      "title": "Shared Flux Guidance"
+    },
+    {
+      "id": 42,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1200,
+        1000
+      ],
+      "size": [
+        604.5852661132812,
+        653.0470581054688
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1012
+        },
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "Faithful high-resolution img2img refinement of this exact source crop. Preserve the original camera viewpoint, perspective, composition, architecture, skybridge, rails, signage, lighting and color relationships. Refine plausible fine material texture, edge clarity and surface detail only. Do not add, remove, duplicate, move, resize, rotate, reshape or reinterpret visible objects.\nTILE: tile_left; tile-local image dimensions 1168x1024 pixels. GLOBAL TILE ORIGIN: [1656, 960]. TARGET OBJECT: central_woman_on_skybridge. OBJECT TILE-LOCAL BBOX XYXY: [973.7, 221.6, 1070.6, 557.1]. TILE-LOCAL LANDMARKS (pixel coordinates): {\"head_top\": [1016.6, 221.6], \"head_center\": [1020.4, 246.4], \"shoulder_center\": [1021.3, 291.4], \"waist_center\": [1020.4, 370.7], \"hip_center\": [1022.6, 422.1], \"left_foot_contact\": [999.0, 550.7], \"right_foot_contact\": [1055.6, 550.3]}. SIMPLIFIED TILE-LOCAL SILHOUETTE ANCHORS: [[1016.6, 221.6], [1030.7, 270.4], [1061.6, 336.4], [1056.4, 394.7], [1051.7, 533.6], [1030.7, 538.7], [1007.6, 471.0], [983.6, 556.7], [987.9, 416.1], [977.6, 344.6], [999.9, 277.3], [1008.4, 227.1]]. These coordinates are soft text-conditioning hints only, not hard constraints. The supplied image pixels remain the visual source of truth; never hallucinate missing limbs or duplicate the person."
+      ],
+      "widgets_values_named": {
+        "text": "Faithful high-resolution image-to-image refinement of the exact supplied source crop. Preserve the original camera viewpoint, perspective, composition, object positions, silhouettes, shapes, proportions, pose, architecture, bridge rails, signage, lighting and color relationships. Refine only plausible fine material texture, edge clarity, small structural detail and realistic surface definition consistent with the source. Keep every visible object in its original location and scale. Do not add, remove, duplicate, move, resize, rotate, reshape or reinterpret visible objects."
+      },
+      "title": "LEFT — tile-specific geometry prompt"
+    },
+    {
+      "id": 233,
+      "type": "LoadImage",
+      "pos": [
+        -900,
+        -100
+      ],
+      "size": [
+        550.2362060546875,
+        657.0697021484375
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "image",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "label": "upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            20
+          ]
+        },
+        {
+          "label": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "tile_left.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "tile_left.png",
+        "upload": "image"
+      },
+      "title": "INPUT A — tile_left.png"
+    },
+    {
+      "id": 5000,
+      "type": "LoadImage",
+      "pos": [
+        -900,
+        520
+      ],
+      "size": [
+        550.2362060546875,
+        657.0697021484375
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "image",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "label": "upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            21
+          ]
+        },
+        {
+          "label": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "tile_right.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "tile_right.png",
+        "upload": "image"
+      },
+      "title": "INPUT B — tile_right.png"
+    },
+    {
+      "id": 5001,
+      "type": "VAEEncode",
+      "pos": [
+        -350,
+        520
+      ],
+      "size": [
+        154.8260040283203,
+        46
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "pixels",
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 21
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "label": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "title": "RIGHT — VAE Encode"
+    },
+    {
+      "id": 5002,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        300,
+        520
+      ],
+      "size": [
+        323.118896484375,
+        209.93569946289062
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "noise",
+          "name": "noise",
+          "type": "NOISE",
+          "link": 16
+        },
+        {
+          "label": "guider",
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 17
+        },
+        {
+          "label": "sampler",
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 18
+        },
+        {
+          "label": "sigmas",
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 19
+        },
+        {
+          "label": "latent_image",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            27
+          ]
+        },
+        {
+          "label": "denoised_output",
+          "name": "denoised_output",
+          "type": "LATENT",
+          "slot_index": 1,
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "title": "RIGHT — Flux Sampler"
+    },
+    {
+      "id": 5003,
+      "type": "VAEDecodeTiled",
+      "pos": [
+        900,
+        520
+      ],
+      "size": [
+        309.4901123046875,
+        150
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "samples",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 27
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 29
+        },
+        {
+          "label": "tile_size",
+          "name": "tile_size",
+          "type": "INT",
+          "widget": {
+            "name": "tile_size"
+          },
+          "link": null
+        },
+        {
+          "label": "overlap",
+          "name": "overlap",
+          "type": "INT",
+          "widget": {
+            "name": "overlap"
+          },
+          "link": null
+        },
+        {
+          "label": "temporal_size",
+          "name": "temporal_size",
+          "type": "INT",
+          "widget": {
+            "name": "temporal_size"
+          },
+          "link": null
+        },
+        {
+          "label": "temporal_overlap",
+          "name": "temporal_overlap",
+          "type": "INT",
+          "widget": {
+            "name": "temporal_overlap"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            31
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecodeTiled",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        1024,
+        64,
+        64,
+        8
+      ],
+      "widgets_values_named": {
+        "tile_size": 1024,
+        "overlap": 64,
+        "temporal_size": 64,
+        "temporal_overlap": 8
+      },
+      "title": "RIGHT — VAE Decode"
+    },
+    {
+      "id": 5004,
+      "type": "SaveImage",
+      "pos": [
+        1450,
+        520
+      ],
+      "size": [
+        933.8792724609375,
+        641.3317260742188
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 31
+        },
+        {
+          "label": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "image_urls",
+          "name": "image_urls",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "geometry_locked_city/tile_right_refined"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "geometry_locked_city/tile_right_refined"
+      },
+      "title": "OUTPUT B — tile_right_refined"
+    },
+    {
+      "id": 5005,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2450,
+        850
+      ],
+      "size": [
+        604.5852661132812,
+        653.0470581054688
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1014
+        },
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            33
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        "Faithful high-resolution img2img refinement of this exact source crop. Preserve the original camera viewpoint, perspective, composition, architecture, skybridge, rails, signage, lighting and color relationships. Refine plausible fine material texture, edge clarity and surface detail only. Do not add, remove, duplicate, move, resize, rotate, reshape or reinterpret visible objects.\nTILE: tile_right; tile-local image dimensions 1168x1024 pixels. GLOBAL TILE ORIGIN: [2536, 960]. TARGET OBJECT: central_woman_on_skybridge. OBJECT TILE-LOCAL BBOX XYXY: [93.7, 221.6, 190.6, 557.1]. TILE-LOCAL LANDMARKS (pixel coordinates): {\"head_top\": [136.6, 221.6], \"head_center\": [140.4, 246.4], \"shoulder_center\": [141.3, 291.4], \"waist_center\": [140.4, 370.7], \"hip_center\": [142.6, 422.1], \"left_foot_contact\": [119.0, 550.7], \"right_foot_contact\": [175.6, 550.3]}. SIMPLIFIED TILE-LOCAL SILHOUETTE ANCHORS: [[136.6, 221.6], [150.7, 270.4], [181.6, 336.4], [176.4, 394.7], [171.7, 533.6], [150.7, 538.7], [127.6, 471.0], [103.6, 556.7], [107.9, 416.1], [97.6, 344.6], [119.9, 277.3], [128.4, 227.1]]. These coordinates are soft text-conditioning hints only, not hard constraints. The supplied image pixels remain the visual source of truth; never hallucinate missing limbs or duplicate the person."
+      ],
+      "widgets_values_named": {
+        "text": "Faithful high-resolution image-to-image refinement of the exact supplied source crop. Preserve the original camera viewpoint, perspective, composition, object positions, silhouettes, shapes, proportions, pose, architecture, bridge rails, signage, lighting and color relationships. Refine only plausible fine material texture, edge clarity, small structural detail and realistic surface definition consistent with the source. Keep every visible object in its original location and scale. Do not add, remove, duplicate, move, resize, rotate, reshape or reinterpret visible objects."
+      },
+      "title": "RIGHT — tile-specific geometry prompt"
+    },
+    {
+      "id": 5006,
+      "type": "FluxGuidance",
+      "pos": [
+        2700,
+        850
+      ],
+      "size": [
+        307.38922119140625,
+        77.7908935546875
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "conditioning",
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 33
+        },
+        {
+          "label": "guidance",
+          "name": "guidance",
+          "type": "FLOAT",
+          "widget": {
+            "name": "guidance"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            35
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "widgets_values": [
+        6.2
+      ],
+      "widgets_values_named": {
+        "guidance": 6.2
+      },
+      "title": "RIGHT — Flux Guidance"
+    },
+    {
+      "id": 5007,
+      "type": "BasicGuider",
+      "pos": [
+        2940,
+        850
+      ],
+      "size": [
+        311.2446594238281,
+        46
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 1013
+        },
+        {
+          "label": "conditioning",
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 35
+        }
+      ],
+      "outputs": [
+        {
+          "label": "GUIDER",
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "slot_index": 0,
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider",
+        "widget_ue_connectable": {},
+        "ttNbgOverride": {
+          "bgcolor": "#335",
+          "groupcolor": "#88A",
+          "color": "#223"
+        }
+      },
+      "title": "RIGHT — Basic Guider"
+    }
+  ],
+  "links": [
+    [
+      8,
+      42,
+      0,
+      73,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      73,
+      0,
+      72,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      11,
+      77,
+      0,
+      69,
+      0,
+      "MODEL"
+    ],
+    [
+      12,
+      70,
+      0,
+      67,
+      0,
+      "NOISE"
+    ],
+    [
+      13,
+      72,
+      0,
+      67,
+      1,
+      "GUIDER"
+    ],
+    [
+      14,
+      68,
+      0,
+      67,
+      2,
+      "SAMPLER"
+    ],
+    [
+      15,
+      69,
+      0,
+      67,
+      3,
+      "SIGMAS"
+    ],
+    [
+      16,
+      70,
+      0,
+      5002,
+      0,
+      "NOISE"
+    ],
+    [
+      17,
+      5007,
+      0,
+      5002,
+      1,
+      "GUIDER"
+    ],
+    [
+      18,
+      68,
+      0,
+      5002,
+      2,
+      "SAMPLER"
+    ],
+    [
+      19,
+      69,
+      0,
+      5002,
+      3,
+      "SIGMAS"
+    ],
+    [
+      20,
+      233,
+      0,
+      129,
+      0,
+      "IMAGE"
+    ],
+    [
+      21,
+      5000,
+      0,
+      5001,
+      0,
+      "IMAGE"
+    ],
+    [
+      22,
+      31,
+      0,
+      129,
+      1,
+      "VAE"
+    ],
+    [
+      23,
+      31,
+      0,
+      5001,
+      1,
+      "VAE"
+    ],
+    [
+      24,
+      129,
+      0,
+      67,
+      4,
+      "LATENT"
+    ],
+    [
+      25,
+      5001,
+      0,
+      5002,
+      4,
+      "LATENT"
+    ],
+    [
+      26,
+      67,
+      0,
+      96,
+      0,
+      "LATENT"
+    ],
+    [
+      27,
+      5002,
+      0,
+      5003,
+      0,
+      "LATENT"
+    ],
+    [
+      28,
+      31,
+      0,
+      96,
+      1,
+      "VAE"
+    ],
+    [
+      29,
+      31,
+      0,
+      5003,
+      1,
+      "VAE"
+    ],
+    [
+      30,
+      96,
+      0,
+      128,
+      0,
+      "IMAGE"
+    ],
+    [
+      31,
+      5003,
+      0,
+      5004,
+      0,
+      "IMAGE"
+    ],
+    [
+      33,
+      5005,
+      0,
+      5006,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      35,
+      5006,
+      0,
+      5007,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      1011,
+      77,
+      0,
+      72,
+      0,
+      "MODEL"
+    ],
+    [
+      1012,
+      78,
+      0,
+      42,
+      0,
+      "CLIP"
+    ],
+    [
+      1013,
+      77,
+      0,
+      5007,
+      0,
+      "MODEL"
+    ],
+    [
+      1014,
+      78,
+      0,
+      5005,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "LEFT TILE — fixed-seed Flux refinement",
+      "bounding": [
+        -990,
+        -180,
+        2580,
+        580
+      ],
+      "color": "#2f6f91",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "RIGHT TILE — same fixed-seed Flux refinement",
+      "bounding": [
+        -990,
+        440,
+        2580,
+        620
+      ],
+      "color": "#2f6f91",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "SHARED MODEL / CONDITIONING / SEED",
+      "bounding": [
+        -930,
+        820,
+        2950,
+        1240
+      ],
+      "color": "#594b7a",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.58.5",
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ],
+    "workflow_name": "Geometry-Locked Two-Tile Flux Refinement — Comfy Cloud v0.5",
+    "workflow_notes": "Cloud-preinstalled Flux1 Dev zero-model-import baseline. Original CC_V1 and three active custom LoRAs are not reproduced; standard Ae VAE is selected under Cloud filename ae.safetensors. Geometry prompts are soft hints only.",
+    "ds": {
+      "scale": 0.43,
+      "offset": [
+        100,
+        60
+      ]
+    },
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "geometry_locked_execution": {
+      "right_conditioning": "Independent CLIP conditioning. PC BOT fills bbox and landmark hints from tile_right.task.json.",
+      "left_conditioning": "PC BOT fills bbox and landmark hints from tile_left.task.json.",
+      "shared_model": "Cloud preinstalled flux1-dev.safetensors (not weight-equivalent to original CC_V1.safetensors).",
+      "shared_vae": "Cloud standard Ae VAE ae.safetensors (original UI filename ae.sft mapped to canonical Cloud asset).",
+      "active_custom_loras": "none in zero-import baseline; original active Kodak/female-face/wow_details trio is intentionally omitted.",
+      "limitations": "Text conditioning is a soft hint, not a hard geometric constraint."
+    },
+    "workflow_version": "geometry-locked-cloud-v0.5"
+  },
+  "version": 0.4
+}

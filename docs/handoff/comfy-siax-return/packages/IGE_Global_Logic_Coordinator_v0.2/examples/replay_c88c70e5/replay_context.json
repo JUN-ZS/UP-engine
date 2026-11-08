@@ -1,0 +1,17 @@
+{
+  "job_id": "c88c70e5",
+  "source_canvas_wh": [5376, 3024],
+  "tile_count": 2,
+  "tile_dimensions_wh": [1168, 1024],
+  "positions_fixture": "../cloud_ui_job_c88c70e5_positions_fixture.json",
+  "fixture_scope": "Prior two-tile ROI test plan; not the original full-frame SIAX TTP 2x3 runtime metadata.",
+  "replay_type": "offline_python_reconciliation_only",
+  "gpu_inference": "NOT_RUN",
+  "comfyui_ui_execution": "NOT_RUN",
+  "cloud_api_submission": "NOT_RUN",
+  "credits_used": false,
+  "geometry_status": "assistant_provisional",
+  "source_coordinate_registration": "pending_operator_confirmation",
+  "acceptance": "BLOCKED_PENDING_GEOMETRY_AND_CONSENSUS",
+  "interpretation": "The coordinator replay exercises global-coordinate tile projection, pixel gating, overlap consensus, source fallback, audit and iteration feedback. It does not test whether diffusion output is invariant to tile grid changes."
+}
