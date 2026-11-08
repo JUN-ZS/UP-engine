@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "registry_id": "IGE_S0_S7_METHOD_REGISTRY",
+  "registry_version": "1.0.0-github-layered-package",
+  "method_count": 22,
+  "errors": [],
+  "production_wired_in_local_router": true,
+  "upstream_github_src_ige_merged": false
+}

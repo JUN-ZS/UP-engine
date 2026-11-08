@@ -1,0 +1,35 @@
+{
+  "schema": "grok-ige-shq-readonly-audit/1.0",
+  "started_utc": "2026-11-08T03:48:06.307986+00:00",
+  "source_package": "/workspace/GROK_IGE_SHQ_RUNNABLE_v1.0/source/IGE_SHQ_GitHub_Verifiable_Package_v1.0",
+  "scope": "read-only asset and registry checks; no method/recipe image-write execution",
+  "steps": [
+    {
+      "label": "preflight",
+      "argv": [
+        "/usr/bin/python3",
+        "preflight_check.py"
+      ],
+      "started_utc": "2026-11-08T03:48:06.308027+00:00",
+      "ended_utc": "2026-11-08T03:48:06.344930+00:00",
+      "exit_code": 1,
+      "status": "FAIL_COMMAND_EXIT_NONZERO",
+      "stdout_file": "outputs/grok_runs/20261108T034806Z_preflight.stdout.txt",
+      "stderr_file": "outputs/grok_runs/20261108T034806Z_preflight.stderr.txt",
+      "stdout_tail": "",
+      "stderr_tail": "Traceback (most recent call last):\n  File \"/workspace/GROK_IGE_SHQ_RUNNABLE_v1.0/source/IGE_SHQ_GitHub_Verifiable_Package_v1.0/preflight_check.py\", line 29, in <module>\n    import cv2\nModuleNotFoundError: No module named 'cv2'\n"
+    }
+  ],
+  "status": "FAIL_CLOSED",
+  "execution_gate": {
+    "status": "BLOCKED",
+    "blockers": [
+      "S3 permission is hard-coded to human_verified=True in methods/common_runtime.py",
+      "No visible signed human-approval artifact verifier is wired into the shared runtime",
+      "Existing master/report artifact path may be reused as a cache pair without content-addressed source validation"
+    ],
+    "method_execution_allowed_by_launcher": false,
+    "note": "A launcher-side flag cannot substitute for signed human review. Repair the S3 gate in source before enabling write methods."
+  },
+  "finished_utc": "2026-11-08T03:48:06.346086+00:00"
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "grok-ige-shq-task-manifest/1.0",
+  "project": "IGE-SHQ Modular Methods Toolkit v2.0",
+  "bundle_root": "GROK_IGE_SHQ_RUNNABLE_v1.0",
+  "source_package": "source/IGE_SHQ_GitHub_Verifiable_Package_v1.0",
+  "target_master": {
+    "file": "outputs/SHQ_BATTLEFIELD_SELF_PARTS_4X_MASTER_5504x3072.png",
+    "dimensions_wh": [5504, 3072],
+    "scale": "4x",
+    "not_claimed_as": "8K"
+  },
+  "platform_roles": {
+    "grok_chat": "orchestrator, code review, report synthesis, prompt routing",
+    "grok_canvas": "project specification, task board, code/document editing; not assumed to be a Python runtime",
+    "grok_imagine": "generate/edit auxiliary image donors only; not a Python runtime or geometry authority",
+    "grok_bot": "cloud terminal/filesystem runtime for real Python execution when available",
+    "xai_code_execution": "API-integrated Python execution option when explicitly enabled; not assumed to exist in every chat UI"
+  },
+  "method_groups": [
+    {"category": "cat01_s0_anti_hole_and_base", "methods": ["M01", "M02"]},
+    {"category": "cat02_s1_s2_part_read_and_5d_lock", "methods": ["M03", "M04", "M05", "M06", "M07"]},
+    {"category": "cat03_s3_s4_permission_and_routing", "methods": ["M08", "M09", "M10"]},
+    {"category": "cat04_s4_s5_true_hd_upgrade_engines", "methods": ["M11", "M12", "M13", "M14", "M15", "M16", "M17", "M18", "M19", "M20"]},
+    {"category": "cat05_s6_s7_geometry_locked_return_and_audit", "methods": ["M21", "M22"]}
+  ],
+  "recipes": {
+    "R01": {"chain": ["M01", "M04", "M05", "M11", "M12", "M13", "M22"], "status": "BLOCKED_PENDING_SOURCE_GATE_FIX"},
+    "R02": {"chain": ["M01", "M04", "M05", "M08", "M11", "M12", "M13", "M21", "M22"], "status": "BLOCKED_PENDING_SIGNED_PER_PART_APPROVAL"},
+    "R03": {"chain": ["M11", "M12", "M13", "M14", "M15", "M22"], "status": "BLOCKED_PENDING_SOURCE_GATE_FIX"}
+  },
+  "safe_commands": [
+    "python grok_shq_runner.py --doctor",
+    "python grok_shq_runner.py --preflight",
+    "python grok_shq_runner.py --registry",
+    "python grok_shq_runner.py --audit",
+    "python grok_shq_runner.py --catalog",
+    "python grok_shq_runner.py --info M12",
+    "python grok_shq_runner.py --verify-master"
+  ],
+  "blocked_commands_until_patch": [
+    "python grok_shq_runner.py --run M01",
+    "python grok_shq_runner.py --run M08",
+    "python grok_shq_runner.py --recipe R01",
+    "python grok_shq_runner.py --recipe R02",
+    "python grok_shq_runner.py --recipe R03"
+  ],
+  "status_vocabulary": [
+    "PASS_COMMAND_EXIT_0",
+    "PASS_PREFLIGHT",
+    "PASS_REGISTRY",
+    "PASS_CONTRACT_ONLY",
+    "PASS_SYNTHETIC",
+    "PASS_SHARED_PIPELINE",
+    "PASS_INDEPENDENT",
+    "BLOCKED",
+    "FAIL"
+  ],
+  "gates": [
+    "signed per-part human approval artifact",
+    "content-addressed source/model/parameter/output cache",
+    "assertion-derived method receipts",
+    "typed recipe artifact DAG",
+    "independent holdout acceptance",
+    "honest backend/model execution receipts"
+  ],
+  "imagine_donor_policy": {
+    "destination": "assets/imagine_donors/",
+    "canonical_assets_may_be_overwritten": false,
+    "geometry_authority": false,
+    "currently_wired_into_m12_m13": false,
+    "required_evidence": ["prompt", "generation_date_utc", "file_sha256", "dimensions", "part_label"]
+  }
+}

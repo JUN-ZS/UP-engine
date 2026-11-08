@@ -7,6 +7,7 @@
 **AI agent usage guide:** [`docs/SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md)  
 **Verifiable reference package:** [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) (v1.1 Complete13Assets; 5-layer L0→L4; research-only)  
 **Modular toolkit:** [`research/ige_shq_modular_methods_toolkit_v2.0/`](../research/ige_shq_modular_methods_toolkit_v2.0/) (M01–M22 + R01–R03; research-only)  
+**Grok runnable ops pack:** [`research/grok_ige_shq_runnable_v1.0/`](../research/grok_ige_shq_runnable_v1.0/) (Grok × Imagine × Canvas ops layer; research-only; write gate BLOCKED)  
 **Research fossils:** [`research/shq_v9/`](../research/shq_v9/) (10 scripts; earlier single-file experiments)  
 **Status:** implementer contract / design lock. Not a runtime merge.
 
@@ -272,6 +273,7 @@ When implementing, cite this doc’s stage ids (`S0`–`S6`) and forbidden list 
 - [x] Latest source pack `XMyk6HVn2J9S` (20 turns) + prior packs retained  
 - [x] `research/ige_shq_github_verifiable_package_v1.0` five-layer package v1.1 Complete13Assets (research-only)
 - [x] `research/ige_shq_modular_methods_toolkit_v2.0` M01–M22 + R01–R03 (research-only)  
+- [x] `research/grok_ige_shq_runnable_v1.0` Grok × Imagine × Canvas ops pack (research-only; write BLOCKED)  
 - [x] `research/shq_v9` fossils ×10 + README (not production-wired)  
 - [ ] Runtime wiring into `src/ige` — **out of scope**  
 - [ ] Real Siax backend proof in CI — **belongs to runner PRs**
@@ -329,4 +331,12 @@ Point implementers at these **research-only** trees (not `src/ige` production wi
    - CLI: `--list` / `--list-parts` / `--info` / `--run Mxx --part Pyy` / `--category cat0N` / `--recipe R0N`.
    - See package `SHQ_MODULAR_METHODS_GUIDE.md` and hub `HUB_NOTES.md`.
 
-Hub notes: [`ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md`](../research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md), [`ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md`](../research/ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md). AI checklist: [`SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md) §9–§10.
+
+3. **`research/grok_ige_shq_runnable_v1.0/`** — Grok × Imagine × Canvas **ops layer** over the modular / verifiable stack.
+   - Entry: `README_GROK_START_HERE.md`; launcher: `grok_shq_runner.py`.
+   - First-round (safe): `--doctor` → `--audit` → `--catalog` → `--info M12` (Hub: all exit 0; preflight 13/13; registry 22 PASS).
+   - Write paths (`--run` / recipes) intentionally **BLOCKED** until S3 human-verified evidence, content-addressed cache SHA, and non-literal method receipts are repaired (`common_runtime.py`).
+   - Role split: Grok orchestrates; Imagine supplies donors; Canvas holds the board; Bot/Python executes. Imagine/Canvas do **not** run M01–M22.
+   - ZIP SHA-256: `310c15d986885bbaa8e33c2ab37516367391cc4156e22a23a4ca859083912a11` (committed sibling zip; `.venv/` not in tree).
+
+Hub notes: [`ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md`](../research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md), [`ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md`](../research/ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md), [`grok_ige_shq_runnable_v1.0/HUB_NOTES.md`](../research/grok_ige_shq_runnable_v1.0/HUB_NOTES.md). AI checklist: [`SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md) §9–§11.

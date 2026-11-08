@@ -8,6 +8,7 @@
 **Other-AI runbook:** [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) — clone、preflight、逐步 RUN L0→L4、S7、回報格式及 BLOCK 規則  
 **Verifiable package content:** **v1.1 Complete13Assets**（13 張母本含 `B0_GL`／`B2_GL` + `asset_manifest.json`）  
 **Modular toolkit:** [`../research/ige_shq_modular_methods_toolkit_v2.0/`](../research/ige_shq_modular_methods_toolkit_v2.0/) — M01–M22 + R01–R03 + `invoke_method.py`（research-only）  
+**Grok runnable ops pack:** [`../research/grok_ige_shq_runnable_v1.0/`](../research/grok_ige_shq_runnable_v1.0/) — Grok × Imagine × Canvas 操作層 + `grok_shq_runner.py`（research-only；寫入閘門暫 BLOCK）  
 **Fossils:** [`../research/shq_v9/`](../research/shq_v9/) — 早期單檔化石 ×10；**唔係** production runtime
 
 ---
@@ -329,3 +330,29 @@ python3 try_all_methods_one_by_one.py --part P08
 - Fail-Closed：單方法 FAIL／BLOCK → 停機回報。  
 - 嚴禁用 `B0_UPPER` 冒充 `B0_GL`、用 `B2_FULL` 冒充 `B2_GL`。  
 - 離線契約模式（Siax／Flux）唔好宣稱為即時 GPU 擴散推理。
+
+---
+
+## 11. Grok × Imagine × Canvas runnable ops pack v1.0
+
+**路徑：** [`research/grok_ige_shq_runnable_v1.0/`](../research/grok_ige_shq_runnable_v1.0/)  
+**狀態：** research-only；**未**接 `src/ige`。喺 Modular Toolkit / 五層包之上加 Grok 操作層（提示詞、Canvas 板、Imagine donor 流程、安全啟動器）。`source/` 內原始程式**未改**。
+
+### 11.1 起步（Grok Start Here）
+
+先讀 [`README_GROK_START_HERE.md`](../research/grok_ige_shq_runnable_v1.0/README_GROK_START_HERE.md)，再按角色分工：Grok AI 總控、Imagine 產 donor、Canvas 記狀態、Grok Bot／Python 真正執行。
+
+```bash
+cd research/grok_ige_shq_runnable_v1.0
+# recreate .venv if needed — see HUB_NOTES.md
+python grok_shq_runner.py --doctor
+python grok_shq_runner.py --audit
+python grok_shq_runner.py --catalog
+python grok_shq_runner.py --info M12
+```
+
+Hub 首輪：`--doctor`/`--audit`/`--catalog`/`--info M12` 均 exit 0；preflight 13/13 PASS；registry 22 PASS。詳見 [`HUB_NOTES.md`](../research/grok_ige_shq_runnable_v1.0/HUB_NOTES.md)。
+
+### 11.2 寫入方法暫 BLOCK（直至 S3 修復）
+
+`grok_shq_runner.py` **刻意**阻擋 `--run` / recipe 寫圖路徑。根因（`methods/common_runtime.py`）：硬編碼 `human_verified=True`、快取未做來源 content-addressed SHA、method receipt 固定寫 `PASS`。未修好前唔好越過閘門覆蓋主圖；唔好把 BLOCK 解讀成「22 方法已失敗」。
