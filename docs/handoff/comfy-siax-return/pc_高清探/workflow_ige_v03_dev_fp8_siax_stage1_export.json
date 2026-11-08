@@ -912,7 +912,7 @@
       "contains_flux_unet_loader": false,
       "contains_flux_text_encoder": false,
       "execution_allowed": false,
-      "note": "Siax-only stage. Inspect the saved image actual dimensions and SHA before Stage 2."
+      "note": "Siax-only stage. Inspect the saved image's actual dimensions and SHA before Stage 2."
     }
   },
   "version": 0.4
