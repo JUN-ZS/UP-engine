@@ -5,7 +5,7 @@ from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-MODULE = ROOT / "packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/execution_gate.py"
+MODULE = ROOT / "docs/handoff/comfy-siax-return/packages/ComfyUI_IGE_GlobalLogicCoordinator/ige_logic/execution_gate.py"
 SPEC = importlib.util.spec_from_file_location("comfy_execution_gate_under_test", MODULE)
 GATE = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader
