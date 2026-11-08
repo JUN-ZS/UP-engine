@@ -28,7 +28,7 @@ python -m unittest discover -s tests -v
 python run_all_verifications.py --strict
 ```
 
-任何 Preflight／Registry／測試失敗，立即 BLOCK；不得用舊 report 當新執行證據。Runbook §0 已記錄目前 Hub baseline 同另行附上的缺件 candidate ZIP 並非同一個 artifact。
+任何 Preflight／Registry／測試失敗，立即 BLOCK；不得用舊 report 當新執行證據。Runbook §0 已記錄目前 Hub baseline 同另行附上的缺件 candidate ZIP 並非同一個 artifact；candidate 若使用 B0_GL/B2_GL，亦必須有 `assets/geometry_locked_hr_manifest.json` 驗證兩張圖的 SHA-256 與 1200×896 尺寸。
 
 ## 3. 一鍵重現與驗證指令（供 GitHub 與外部 AI 驗收）
 
