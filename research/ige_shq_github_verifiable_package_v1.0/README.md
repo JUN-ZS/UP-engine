@@ -30,21 +30,17 @@ python run_all_verifications.py --strict
 
 任何 Preflight／Registry／測試失敗，立即 BLOCK；不得用舊 report 當新執行證據。Runbook §0 已記錄目前 Hub baseline 同另行附上的缺件 candidate ZIP 並非同一個 artifact；candidate 若使用 B0_GL/B2_GL，亦必須有 `assets/geometry_locked_hr_manifest.json` 驗證兩張圖的 SHA-256 與 1200×896 尺寸。
 
-## 3. 一鍵重現與驗證指令（供 GitHub 與外部 AI 驗收）
-
-解壓縮本套件後，在套件根目錄直接執行：
+## 3. 可複製的完整執行命令
 
 ```bash
-# 1. 驗證 Method Registry Schema (ige-method-registry/0.1)
-python3 registry/validate_registry.py registry/method_registry.json
-
-# 2. 執行完整 L0 -> L4 五層聯動升清、合成 5504x3072 母本、12 項單元測試與 S7 磁碟重讀反扣驗收
-python3 run_all_verifications.py --strict
-
-# 3. 單獨執行 Registry 單元測試
-python3 -m unittest discover -s tests -v
+python -m pip install -r requirements.txt
+python preflight_check.py
+python registry/validate_registry.py registry/method_registry.json
+python -m unittest discover -s tests -v
+python run_all_verifications.py --strict
 ```
 
+如需逐步說明、Windows PowerShell 指令、S0–S7 驗收內容及回報 JSON，請以 [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](../../docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) 為準。
 
 ## Execution capability boundary
 
