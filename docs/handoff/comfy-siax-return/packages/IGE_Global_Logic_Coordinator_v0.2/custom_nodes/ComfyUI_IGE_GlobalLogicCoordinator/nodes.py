@@ -14,6 +14,7 @@ from ige_logic.reconcile import apply_logic_gate, reconcile_tiles
 from ige_logic.audit import audit_candidate
 from ige_logic.coordinator import summarize_subset_compatibility
 from ige_logic.masks import build_tile_noise_masks
+from ige_logic.execution_gate import validate_execution_authorization
 
 
 def _resolve_path(value: str) -> Path:
@@ -230,6 +231,33 @@ class IGE_IterationFeedback:
         return (_json_text(state),)
 
 
+
+class IGE_ExecutionAuthorizationGate:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {
+            "global_contract": ("IGE_CONTRACT",),
+            "latent": ("LATENT",),
+            "authorization_json": ("STRING", {"default": "{}", "multiline": True}),
+            "branch_id": ("STRING", {"default": "sampler"}),
+        }}
+
+    RETURN_TYPES = ("LATENT", "STRING")
+    RETURN_NAMES = ("AUTHORIZED_LATENT", "EXECUTION_GATE_REPORT_JSON")
+    FUNCTION = "gate"
+    CATEGORY = "IGE/Global Logic"
+
+    def gate(self, global_contract, latent, authorization_json="{}", branch_id="sampler"):
+        if not isinstance(latent, dict) or "samples" not in latent:
+            raise TypeError("latent must be a ComfyUI LATENT dictionary with samples")
+        if not isinstance(latent["samples"], torch.Tensor):
+            raise TypeError("latent.samples must be a torch.Tensor")
+        report = validate_execution_authorization(global_contract, authorization_json, branch_id)
+        report["latent_shape"] = [int(x) for x in latent["samples"].shape]
+        report["latent_batch"] = int(latent["samples"].shape[0])
+        return (latent, _json_text(report))
+
+
 NODE_CLASS_MAPPINGS={
     "IGE_GlobalLogicCompiler": IGE_GlobalLogicCompiler,
     "IGE_TTPSubsetProjector": IGE_TTPSubsetProjector,
@@ -239,6 +267,7 @@ NODE_CLASS_MAPPINGS={
     "IGE_GlobalReconciler": IGE_GlobalReconciler,
     "IGE_GlobalAcceptanceAudit": IGE_GlobalAcceptanceAudit,
     "IGE_IterationFeedback": IGE_IterationFeedback,
+    "IGE_ExecutionAuthorizationGate": IGE_ExecutionAuthorizationGate,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS={
@@ -250,4 +279,5 @@ NODE_DISPLAY_NAME_MAPPINGS={
     "IGE_GlobalReconciler":"IGE · Global Consensus Reconciler",
     "IGE_GlobalAcceptanceAudit":"IGE · Global Acceptance Audit",
     "IGE_IterationFeedback":"IGE · Iteration Feedback Compiler",
+    "IGE_ExecutionAuthorizationGate":"IGE · Fail-Closed Execution Authorization Gate",
 }
