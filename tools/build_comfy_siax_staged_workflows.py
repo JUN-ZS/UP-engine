@@ -10,6 +10,7 @@ from typing import Any
 SOURCE_NODE_ID = 34
 SOURCE_SAVE_NODE_ID = 128
 REMOVE_FOR_STAGE2 = {233, 244, 133, 134}
+REMOVE_UNORDERED_PURGE_NODE_ID = 262
 
 
 def _nodes(workflow: dict[str, Any]) -> dict[int, dict[str, Any]]:
@@ -96,6 +97,7 @@ def build_staged_workflows(workflow: dict[str, Any]) -> tuple[dict[str, Any], di
         300: "IGE_GlobalLogicCompiler",
         36: "TTP_Image_Tile_Batch",
         262: "LayerUtility: PurgeVRAM",
+        262: "LayerUtility: PurgeVRAM",
     }.items():
         if node_id not in node_map or node_map[node_id].get("type") != expected_type:
             raise ValueError(f"Expected Node {node_id} type {expected_type}")
@@ -156,13 +158,107 @@ def build_staged_workflows(workflow: dict[str, Any]) -> tuple[dict[str, Any], di
     stage2["nodes"] = [
         loader if int(node["id"]) == SOURCE_NODE_ID else copy.deepcopy(node)
         for node in stage2["nodes"]
-        if int(node["id"]) not in REMOVE_FOR_STAGE2
+        if int(node["id"]) not in (REMOVE_FOR_STAGE2 | {REMOVE_UNORDERED_PURGE_NODE_ID})
     ]
     stage2["links"] = [
         copy.deepcopy(link) for link in stage2["links"]
-        if int(link[1]) not in REMOVE_FOR_STAGE2
-        and int(link[3]) not in REMOVE_FOR_STAGE2
+        if int(link[1]) not in (REMOVE_FOR_STAGE2 | {REMOVE_UNORDERED_PURGE_NODE_ID})
+        and int(link[3]) not in (REMOVE_FOR_STAGE2 | {REMOVE_UNORDERED_PURGE_NODE_ID})
     ]
+
+    # Replace the unsequenced terminal PurgeVRAM output with explicit post-sampler
+    # model-release barriers. Keep each latent alive and pass it to its own VAE decode.
+    stage2_node_map = _nodes(stage2)
+    stage2_link_map = _links(stage2)
+    barrier_specs = [
+        (67, 96, 160, 344, "baseline_A"),
+        (310, 311, 491, 345, "candidate_B"),
+    ]
+    next_link_id = max(int(stage2.get("last_link_id", 0)), max(stage2_link_map, default=0)) + 1
+    next_order = max((int(n.get("order", 0)) for n in stage2["nodes"]), default=0) + 1
+    barrier_ids = []
+
+    for sampler_id, decoder_id, latent_link_id, barrier_id, branch_id in barrier_specs:
+        sampler = stage2_node_map.get(sampler_id)
+        decoder = stage2_node_map.get(decoder_id)
+        old_link = stage2_link_map.get(latent_link_id)
+        if not sampler or sampler.get("type") != "SamplerCustomAdvanced":
+            raise ValueError(f"Missing sampler node {sampler_id}")
+        if not decoder or decoder.get("type") != "VAEDecodeTiled":
+            raise ValueError(f"Missing tiled VAE decoder node {decoder_id}")
+        if old_link is None or int(old_link[1]) != sampler_id or int(old_link[3]) != decoder_id:
+            raise ValueError(
+                f"Expected sampler {sampler_id} to feed decoder {decoder_id} through link {latent_link_id}"
+            )
+        decoder_slots = [
+            index for index, slot in enumerate(decoder.get("inputs", []))
+            if slot.get("name") == "samples"
+        ]
+        if len(decoder_slots) != 1:
+            raise ValueError(f"Decoder {decoder_id} must have exactly one samples input")
+        decoder_slot = decoder_slots[0]
+        if decoder["inputs"][decoder_slot].get("link") != latent_link_id:
+            raise ValueError(f"Decoder {decoder_id} samples input is not linked by {latent_link_id}")
+
+        new_link_id = next_link_id
+        next_link_id += 1
+        old_link[3] = barrier_id
+        old_link[4] = 0
+        old_link[5] = "LATENT"
+        decoder["inputs"][decoder_slot]["link"] = new_link_id
+
+        sampler_pos = sampler.get("pos", [0, 0])
+        if isinstance(sampler_pos, dict):
+            sx = float(sampler_pos.get("0", 0))
+            sy = float(sampler_pos.get("1", 0))
+        else:
+            sx = float(sampler_pos[0])
+            sy = float(sampler_pos[1])
+
+        barrier = {
+            "id": barrier_id,
+            "type": "IGE_LatentMemoryBarrier",
+            "pos": [sx + 410.0, sy + 30.0],
+            "size": [330.0, 150.0],
+            "flags": {},
+            "order": next_order,
+            "mode": 0,
+            "inputs": [
+                {"name": "latent", "type": "LATENT", "link": latent_link_id},
+                {"name": "release_models", "type": "BOOLEAN", "widget": {"name": "release_models"}, "link": None},
+                {"name": "clear_cuda_cache", "type": "BOOLEAN", "widget": {"name": "clear_cuda_cache"}, "link": None},
+                {"name": "synchronize", "type": "BOOLEAN", "widget": {"name": "synchronize"}, "link": None},
+            ],
+            "outputs": [
+                {"name": "LATENT", "type": "LATENT", "links": [new_link_id], "slot_index": 0},
+                {"name": "MEMORY_REPORT_JSON", "type": "STRING", "links": [], "slot_index": 1},
+            ],
+            "properties": {"Node name for S&R": "IGE_LatentMemoryBarrier"},
+            "widgets_values": [True, True, True],
+            "widgets_values_named": {
+                "release_models": True,
+                "clear_cuda_cache": True,
+                "synchronize": True,
+            },
+            "title": f"IGE · Memory Release Barrier · {branch_id}",
+        }
+        stage2["nodes"].append(barrier)
+        new_link = [new_link_id, barrier_id, 0, decoder_id, decoder_slot, "LATENT"]
+        stage2["links"].append(new_link)
+        stage2_node_map[barrier_id] = barrier
+        stage2_link_map[new_link_id] = new_link
+        barrier_ids.append(barrier_id)
+        next_order += 1
+
+    # Pruning Node 262 also prunes its outgoing link from Node 67.
+    valid_link_ids = set(_links(stage2))
+    for node in stage2["nodes"]:
+        for output in node.get("outputs", []):
+            if output.get("links") is not None:
+                output["links"] = [link_id for link_id in output["links"] if int(link_id) in valid_link_ids]
+
+    stage2["last_node_id"] = max(int(stage2.get("last_node_id", 0)), max(_nodes(stage2), default=0))
+    stage2["last_link_id"] = max(int(stage2.get("last_link_id", 0)), max(_links(stage2), default=0))
     stage2["extra"] = copy.deepcopy(stage2.get("extra") or {})
     stage2["extra"]["ige_siax_staging"] = {
         "schema_version": "ige-siax-staging/0.1",
@@ -174,6 +270,9 @@ def build_staged_workflows(workflow: dict[str, Any]) -> tuple[dict[str, Any], di
             int(n["id"]) for n in stage2["nodes"] if n.get("type") == "SamplerCustomAdvanced"
         ],
         "requires_external_cpu_geometry_preflight": True,
+        "memory_barrier_node_ids": barrier_ids,
+        "removed_unordered_terminal_purge_node_id": REMOVE_UNORDERED_PURGE_NODE_ID,
+        "release_models_before_vae_decode": True,
         "execution_allowed": False,
         "note": "Do not queue until the exact Stage 1 output has passed CPU geometry preflight and human registration review.",
     }
@@ -194,6 +293,9 @@ def build_staged_workflows(workflow: dict[str, Any]) -> tuple[dict[str, Any], di
             "canvas_node_type": _nodes(stage2)[SOURCE_NODE_ID]["type"],
             "sampler_count": len([n for n in stage2["nodes"] if n.get("type") == "SamplerCustomAdvanced"]),
             "removed_siax_preprocess_node_ids": sorted(REMOVE_FOR_STAGE2),
+            "removed_unordered_terminal_purge_node_id": REMOVE_UNORDERED_PURGE_NODE_ID,
+            "memory_barrier_node_ids": barrier_ids,
+            "release_models_before_vae_decode": True,
             "execution_allowed": False,
         },
     }
