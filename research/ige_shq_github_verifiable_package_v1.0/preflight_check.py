@@ -70,10 +70,7 @@ def inspect(root: Path) -> dict[str, Any]:
     candidate_extra_required = False
     if runner.is_file():
         source = runner.read_text(encoding="utf-8", errors="replace")
-        candidate_extra_required = bool(
-            re.search(r'["\\']B0_GL["\\']', source)
-            and re.search(r'["\\']B2_GL["\\']', source)
-        )
+        candidate_extra_required = "B0_GL" in source and "B2_GL" in source
 
     candidate_results: dict[str, str] = {}
     if candidate_extra_required:
