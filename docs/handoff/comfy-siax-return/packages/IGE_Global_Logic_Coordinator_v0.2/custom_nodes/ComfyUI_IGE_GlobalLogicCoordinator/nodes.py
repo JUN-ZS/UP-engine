@@ -80,6 +80,135 @@ class IGE_GlobalLogicCompiler:
         return (bundle,compiled["action_map"],compiled["geometry_guard"],_json_text(compiled["contract"]),compiled["contract"]["global_conditioning_prompt"])
 
 
+class IGE_GlobalPreflightGate:
+    """Fail-closed barrier between the full-frame geometry contract and all tile work."""
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {
+            "source_image": ("IMAGE",),
+            "global_contract": ("IGE_CONTRACT",),
+            "execution_allowed": ("BOOLEAN", {"default": False})
+        }}
+
+    RETURN_TYPES=("IMAGE","STRING")
+    RETURN_NAMES=("PREFLIGHTED_IMAGE","PREFLIGHT_REPORT_JSON")
+    FUNCTION="gate"
+    CATEGORY="IGE/Global Logic"
+
+    def gate(self, source_image, global_contract, execution_allowed=False):
+        if not isinstance(source_image, torch.Tensor):
+            raise TypeError(f"Expected ComfyUI IMAGE torch.Tensor, got {type(source_image).__name__}")
+        if not isinstance(global_contract, dict) or not isinstance(global_contract.get("contract"), dict):
+            raise TypeError("global_contract must be the complete IGE_GlobalLogicCompiler bundle")
+
+        src = source_image.detach().float().cpu().numpy()
+        if src.ndim != 4 or src.shape[0] != 1:
+            raise RuntimeError(f"IGE_PREFLIGHT_BLOCKED: global image must be batch size 1, got {tuple(src.shape)}")
+
+        height, width = int(src.shape[1]), int(src.shape[2])
+        observed_shape = [height, width]
+        observed_sha = hashlib.sha256(
+            np.round(np.clip(src[0], 0, 1) * 255).astype(np.uint8).tobytes()
+        ).hexdigest()
+        bundle_shape = [int(x) for x in global_contract.get("source_shape", [])]
+        contract = global_contract["contract"]
+        canvas = contract.get("canvas", {})
+        checks = {
+            "compiler_source_shape_matches": bundle_shape == observed_shape,
+            "contract_canvas_matches": (
+                int(canvas.get("height", -1)) == height and int(canvas.get("width", -1)) == width
+            ),
+            "compiler_source_hash_matches": observed_sha == global_contract.get("source_hash"),
+            "contract_source_hash_matches": observed_sha == contract.get("source_sha256"),
+            "geometry_operator_confirmed": contract.get("geometry_status") == "operator_confirmed",
+            "geometry_confirmation_recorded": contract.get("geometry_operator_confirmation") == "operator_confirmed",
+            "source_coordinate_registration_confirmed": contract.get("source_alignment_status") == "operator_confirmed",
+            "explicit_execution_authorization": execution_allowed is True
+        }
+        report = {
+            "schema_version": "ige-global-preflight-report/0.1",
+            "status": "PASS" if all(checks.values()) else "BLOCK",
+            "source_canvas_wh": [width, height],
+            "source_sha256": observed_sha,
+            "contract_id": contract.get("contract_id"),
+            "checks": checks,
+            "failed_checks": [name for name, passed in checks.items() if not passed],
+            "note": "This node is a dependency barrier. It returns the exact source tensor unchanged; it does not resize, warp, or alter geometry."
+        }
+        if report["status"] != "PASS":
+            raise RuntimeError("IGE_PREFLIGHT_BLOCKED: " + _json_text(report))
+        return (source_image, _json_text(report))
+
+
+class IGE_TileBatchBudgetGuard:
+    """Conservative resource gate; legacy multi-tile batches fail closed on 8GB-class GPUs."""
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {
+            "tile_images": ("IMAGE",),
+            "max_tiles_per_batch": ("INT", {"default": 1, "min": 1, "max": 64, "step": 1}),
+            "min_free_vram_mb": ("INT", {"default": 2048, "min": 512, "max": 16384, "step": 256}),
+            "min_free_ram_mb": ("INT", {"default": 4096, "min": 512, "max": 131072, "step": 256})
+        }}
+
+    RETURN_TYPES=("IMAGE","STRING")
+    RETURN_NAMES=("BUDGET_APPROVED_TILES","RESOURCE_BUDGET_REPORT_JSON")
+    FUNCTION="guard"
+    CATEGORY="IGE/Global Logic"
+
+    def guard(self, tile_images, max_tiles_per_batch=1, min_free_vram_mb=2048, min_free_ram_mb=4096):
+        if not isinstance(tile_images, torch.Tensor) or tile_images.ndim != 4:
+            raise TypeError("tile_images must be a ComfyUI IMAGE batch with shape [N,H,W,C]")
+        batch_count, tile_height, tile_width, channels = map(int, tile_images.shape)
+        free_vram = 0
+        total_vram = 0
+        cuda_available = bool(torch.cuda.is_available())
+        if cuda_available:
+            try:
+                free_vram, total_vram = torch.cuda.mem_get_info()
+            except Exception:
+                cuda_available = False
+        try:
+            import psutil
+            available_ram = int(psutil.virtual_memory().available)
+        except Exception:
+            available_ram = 0
+
+        tensor_bytes = int(tile_images.numel() * tile_images.element_size())
+        checks = {
+            "tile_batch_within_limit": batch_count <= int(max_tiles_per_batch),
+            "cuda_available": cuda_available,
+            "free_vram_reserve_met": free_vram >= int(min_free_vram_mb) * 1024 * 1024,
+            "free_ram_reserve_met": available_ram >= int(min_free_ram_mb) * 1024 * 1024
+        }
+        report = {
+            "schema_version": "ige-resource-budget-report/0.1",
+            "status": "PASS" if all(checks.values()) else "BLOCK",
+            "device": torch.cuda.get_device_name(torch.cuda.current_device()) if cuda_available else "CUDA_UNAVAILABLE",
+            "cuda_total_mb": round(total_vram / 1024 / 1024, 1),
+            "cuda_free_mb": round(free_vram / 1024 / 1024, 1),
+            "system_ram_available_mb": round(available_ram / 1024 / 1024, 1),
+            "tile_batch": {
+                "count": batch_count,
+                "tile_width": tile_width,
+                "tile_height": tile_height,
+                "channels": channels,
+                "tensor_bytes": tensor_bytes
+            },
+            "limits": {
+                "max_tiles_per_batch": int(max_tiles_per_batch),
+                "min_free_vram_mb": int(min_free_vram_mb),
+                "min_free_ram_mb": int(min_free_ram_mb)
+            },
+            "checks": checks,
+            "failed_checks": [name for name, passed in checks.items() if not passed],
+            "oom_claim": "This is a conservative admission gate, not proof that a later model's peak allocation cannot OOM. A measured model/tile profile and sequential tile runner are still required."
+        }
+        if report["status"] != "PASS":
+            raise RuntimeError("IGE_RESOURCE_BUDGET_BLOCKED: " + _json_text(report))
+        return (tile_images, _json_text(report))
+
+
 class IGE_TTPSubsetProjector:
     @classmethod
     def INPUT_TYPES(cls):
@@ -232,6 +361,8 @@ class IGE_IterationFeedback:
 
 NODE_CLASS_MAPPINGS={
     "IGE_GlobalLogicCompiler": IGE_GlobalLogicCompiler,
+    "IGE_GlobalPreflightGate": IGE_GlobalPreflightGate,
+    "IGE_TileBatchBudgetGuard": IGE_TileBatchBudgetGuard,
     "IGE_TTPSubsetProjector": IGE_TTPSubsetProjector,
     "IGE_TileNoiseMask": IGE_TileNoiseMask,
     "IGE_LogicMapPreview": IGE_LogicMapPreview,
@@ -243,6 +374,8 @@ NODE_CLASS_MAPPINGS={
 
 NODE_DISPLAY_NAME_MAPPINGS={
     "IGE_GlobalLogicCompiler":"IGE · Global Logic Compiler",
+    "IGE_GlobalPreflightGate":"IGE · Global Preflight Gate",
+    "IGE_TileBatchBudgetGuard":"IGE · Tile Batch Budget Gate",
     "IGE_TTPSubsetProjector":"IGE · TTP Global-to-Subset Projector",
     "IGE_TileNoiseMask":"IGE · Tile Latent Noise Mask",
     "IGE_LogicMapPreview":"IGE · Logic Map Preview",
