@@ -1,0 +1,93 @@
+[
+  {
+    "file": "IGE_SHQ_FourPlane_ArtifactDAG_v3.0.zip",
+    "bytes": 53046179,
+    "sha256": "053da70ffb008b233e243c29af7461f65e0caf9d9044f9b54fc473f6b4a2620f",
+    "sha1": "ed0f8827f818194aad1ce3eb0e0b7639012ae97a",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "IGE_SHQ_GitHub_Verifiable_Package_v1.0.zip",
+    "bytes": 13347257,
+    "sha256": "5ef8601d818c4ffb05b1fb25182cee600668be71ccd021d5d5065f4c84f4ba1c",
+    "sha1": "5b5192a3e94d0414d508fd3398b2c4d822bfa8af",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "IGE_SHQ_GitHub_Verifiable_Package_v1.0_0b5cdffd.zip",
+    "bytes": 13360286,
+    "sha256": "05a436b34391cfafd71502f5c0fe1abb204d53de1861006fd62d64c76a3a2cf4",
+    "sha1": "0b5cdffd521ae6a237b3b472084b319eacf95634",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "IGE_SHQ_GitHub_Verifiable_Package_v1.0_739db4e3.zip",
+    "bytes": 21457595,
+    "sha256": "85a7fcb81ced3a9e2cc48afe7afa20c3e1d0e782b76707b91b5321f48bf18df9",
+    "sha1": "739db4e3b3475a6a033f57df6b36cc9e3815105d",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "IGE_SHQ_Modular_Methods_Toolkit_v2.0.zip",
+    "bytes": 48169770,
+    "sha256": "244553242084f521fac2bb3b4091c341b2de3a3be5f1a94154ee5cb472965079",
+    "sha1": "f03c3570a0ff88ff0b79217b6dda490bae71dca0",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "SHQ_ALL24_TRUE_AI_GEN_72PARTS_RGBA_PACK.zip",
+    "bytes": 19672798,
+    "sha256": "092f7c4f94ca8e39c82f23dd7e1b7479a7321a84306a60a4574d86b69770d55c",
+    "sha1": "52d352952c4a6b48a3667986e262b04ef708f10d",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "SHQ_V3_2_EXTREME_4X_RGBA_LAYER_PACK.zip",
+    "bytes": 59340251,
+    "sha256": "fabb0de00700f27bf5d90fc5762ccc2d7e5f6641a5111d7bc05907d7db4988d9",
+    "sha1": "987ca3952ab62af8064e93270f28066d0bf54959",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "SHQ_V4_WHOLE_PARTS_CLOSED_EDGE_RGBA_PACK.zip",
+    "bytes": 11607025,
+    "sha256": "d6d53a489e8d4e10e8bb17f132ed7287a74f530009c88c4dfdd43cc0fc2a05b2",
+    "sha1": "da69792e2be19994fda094a0b11178ddedc6dadc",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK.zip",
+    "bytes": 3126025,
+    "sha256": "11e3fe685b881bc4451d7cb6b5d06df69b4d6756e2c2a1121d5e828d07acb3b7",
+    "sha1": "7978e4ad4b79028a54b376dc0519ae307308f6e9",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_074c2e68.zip",
+    "bytes": 3085981,
+    "sha256": "41bc721e890bc6983a0a995da458a768a245866a57074241f1a4bc86ccfaaf52",
+    "sha1": "074c2e68686b4b85611177bc5065689ffffb1196",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_40fa1866.zip",
+    "bytes": 3280821,
+    "sha256": "1792f9bbfe56fcf2f0d5f76e3f9a0f88b7fb7f950ba4c1f4a946228010ccd2ba",
+    "sha1": "40fa186670effdbc287ff5bfabb9dfeab8351c11",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_85eb8b15.zip",
+    "bytes": 2858196,
+    "sha256": "306483add6dd8ca5cfef626c88a9d10a2a9a15fdf8c2797b2d4ffc6b3a7baa51",
+    "sha1": "85eb8b1581266888d81c392e391dd974264fff4a",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_e938d91b.zip",
+    "bytes": 3364408,
+    "sha256": "677cda91fe367674e12ae97171e86e9ff04f30db33a452a878f7b402431c21e8",
+    "sha1": "e938d91ba2d748ab88b821bcea7a7d3c1d0b1fc6",
+    "location": "artifacts_large (Desktop pack only; Hub stores SHA only)"
+  }
+]

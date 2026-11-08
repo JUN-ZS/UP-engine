@@ -1,0 +1,1401 @@
+{
+  "toolkit_version": "2.0.0",
+  "target_part_tested": "B1_P08_GOLDMESH_CARBON_TORSO",
+  "total_categories": 5,
+  "total_standalone_methods": 22,
+  "methods_passed": 22,
+  "total_recipes": 3,
+  "recipes_passed": 3,
+  "all_passed": true,
+  "catalog_board_image": "outputs/SHQ_22METHODS_MODULAR_CATALOG_BOARD.png",
+  "per_category_breakdown": {
+    "cat01_s0_anti_hole_and_base": [
+      "M01:BF_S0_EDIT_4WAY_ANTI_HOLE",
+      "M02:HOLE_FOUR_ANTI_EVIDENCE"
+    ],
+    "cat02_s1_s2_part_read_and_5d_lock": [
+      "M03:READ_LAYERED_EVIDENCE",
+      "M04:BF_S1_SELF_18PART_DECOMPOSE_READ",
+      "M05:BF_S2_SELF_PART_4X_GEOMETRY_LOCK",
+      "M06:BOX_FREE_5D_LOCATE_PROXY",
+      "M07:PATH1E_IDENTITY_ECC_LOCK"
+    ],
+    "cat03_s3_s4_permission_and_routing": [
+      "M08:BF_S3_HUMAN_PERMISSION_COMPILER",
+      "M09:OTL0_TOPOLOGY_REPAIR",
+      "M10:INPAINT_HOLE_REPAIR_OPTIONAL"
+    ],
+    "cat04_s4_s5_true_hd_upgrade_engines": [
+      "M11:SKILL_A_NEURAL_SR_BASE_4X",
+      "M12:SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+      "M13:SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+      "M14:SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
+      "M15:SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+      "M16:ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+      "M17:DETAIL6_MATERIAL_RESIDUAL",
+      "M18:HOLE_SCALELOCK_HF_RESIDUAL",
+      "M19:SIAX4X_TILE_CORE_SR",
+      "M20:FLUX_HR_TILE_IMG2IMG"
+    ],
+    "cat05_s6_s7_geometry_locked_return_and_audit": [
+      "M21:GEOMETRY_LOCKED_TILE_PLAN_RETURN",
+      "M22:SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD"
+    ]
+  },
+  "method_receipts": [
+    {
+      "code": "M01",
+      "method_id": "BF_S0_EDIT_4WAY_ANTI_HOLE",
+      "category": "cat01_s0_anti_hole_and_base",
+      "stage": [
+        "S0"
+      ],
+      "title_zh": "戰場 S0 四向正反空背景求洞與反洞凍結",
+      "summary_zh": "對照同鏡頭戰場原圖 (Keep) 與移除人物機甲之空背景圖 (Remove)，精確求出 3 主體閉合剪影洞 M_hole 與反洞保護區 M_anti_hole (M_hole ^ M_anti_hole == 255)。",
+      "module_file": "methods/cat01_s0_anti_hole_and_base/m01_bf_s0_edit_4way_anti_hole.py",
+      "cli_invoke_command": "python invoke_method.py --run M01 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat01_s0_anti_hole_and_base/m01_bf_s0_edit_4way_anti_hole.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "keep_sha256": "f9f24da281878e6583ae17386b76593c9285e509d4feb7a1cea42f848944b90f",
+        "remove_sha256": "98bf4fc0d69c2760bf2c66461111b8c90c3934c4155664434115dd48828a2ada",
+        "camera_shift_px": 0.0476,
+        "hole_foreground_pixels": 415272,
+        "anti_hole_background_pixels": 641496,
+        "hole_and_antihole_exact_complement": true,
+        "diff_grants_edit_permission": false
+      },
+      "allowed_claims": [
+        "extracts_organic_closed_silhouettes_m_hole_and_exact_complement_m_anti_hole_via_paired_bg_removal",
+        "freezes_s0_sha256_and_verifies_camera_shift_sub_0.1px"
+      ],
+      "forbidden_non_claims": [
+        "diff_mask_automatically_grants_edit_permission",
+        "silent_resize_allowed_on_mismatched_inputs"
+      ],
+      "acceptance_gate": "ACCEPT_BF_S0_HOLE_AND_ANTIHOLE_COMPLEMENT: status==PASS; camera_shift_px<=0.1; (m_hole ^ m_anti_hole)==255; diff_grants_edit_permission==False",
+      "preview_image_file": "outputs/per_method/M01_BF_S0_EDIT_4WAY_ANTI_HOLE_preview.png",
+      "receipt_json_file": "outputs/per_method/M01_BF_S0_EDIT_4WAY_ANTI_HOLE_receipt.json"
+    },
+    {
+      "code": "M02",
+      "method_id": "HOLE_FOUR_ANTI_EVIDENCE",
+      "category": "cat01_s0_anti_hole_and_base",
+      "stage": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "四反防呆差分證據驗收器（反偷縮放・反平移・反背景異動・反軟羽化）",
+      "summary_zh": "嚴格驗證正反差分對偶圖之相機零平移 (<=0.1px)、禁止偷縮放、禁止軟邊羽化，並強制規定差分圖僅為幾何證據而不自動授予修改權。",
+      "module_file": "methods/cat01_s0_anti_hole_and_base/m02_hole_four_anti_evidence.py",
+      "cli_invoke_command": "python invoke_method.py --run M02 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat01_s0_anti_hole_and_base/m02_hole_four_anti_evidence.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "anti_1_resize_forbidden_enforced": true,
+        "anti_2_camera_shift_px": 0.0476,
+        "anti_3_background_outside_hole_mad": 5.06,
+        "anti_4_soft_feather_pixels": 0,
+        "diff_grants_edit_permission": false
+      },
+      "allowed_claims": [
+        "conditional_paired_difference_evidence_when_boundary_is_unknown",
+        "strictly_rejects_unregistered_size_mismatch_camera_shift_and_bg_motion"
+      ],
+      "forbidden_non_claims": [
+        "DIFF_automatically_grants_edit_permission",
+        "mandatory_pre_stage_when_verified_mask_already_exists"
+      ],
+      "acceptance_gate": "difference map is evidence only; edit permission comes from S3 human-reviewed contract",
+      "preview_image_file": "outputs/per_method/M02_HOLE_FOUR_ANTI_EVIDENCE_preview.png",
+      "receipt_json_file": "outputs/per_method/M02_HOLE_FOUR_ANTI_EVIDENCE_receipt.json"
+    },
+    {
+      "code": "M03",
+      "method_id": "READ_LAYERED_EVIDENCE",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S1"
+      ],
+      "title_zh": "S1 分層語義觀察與反過度宣稱讀取器",
+      "summary_zh": "讀取場景主體、部件與空間關係候選框，對不可見的 3D 背面或缺失參考強制輸出 unknown，嚴禁將 2D 框重疊直接宣稱為 3D 實體接觸。",
+      "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m03_read_layered_evidence.py",
+      "cli_invoke_command": "python invoke_method.py --run M03 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat02_s1_s2_part_read_and_5d_lock/m03_read_layered_evidence.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "subject_id": "B1_GOLDMESH_COMBAT_COMMANDER",
+        "bbox_1x_xyxy": [
+          591,
+          273,
+          789,
+          339
+        ],
+        "unobservable_3d_backface_state": "unknown",
+        "candidate_grants_edit_permission": false,
+        "2d_overlap_claimed_as_3d_contact": false
+      },
+      "allowed_claims": [
+        "produces_2d_candidate_observations_with_evidence_bboxes",
+        "reports_unknown_for_unobservable_3d_backfaces_and_missing_references"
+      ],
+      "forbidden_non_claims": [
+        "auto_contour_is_semantic_truth",
+        "2d_bbox_overlap_proves_physical_contact",
+        "candidate_observation_grants_edit_permission"
+      ],
+      "acceptance_gate": "candidate_observations_only; human review required",
+      "preview_image_file": "outputs/per_method/M03_READ_LAYERED_EVIDENCE_preview.png",
+      "receipt_json_file": "outputs/per_method/M03_READ_LAYERED_EVIDENCE_receipt.json"
+    },
+    {
+      "code": "M04",
+      "method_id": "BF_S1_SELF_18PART_DECOMPOSE_READ",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S1"
+      ],
+      "title_zh": "S1 戰場三主體 18 個完整流線自身部件拆解與非同義反覆驗收",
+      "summary_zh": "採用解剖/結構曲線接縫將 B0、B1、B2 拆解為 18 個互不重疊 (overlap=0)、無斷頭台水平平切 (guillotine_cuts=0) 的完整部件，並與獨立 GrabCut 基準驗證 IoU >= 0.90。",
+      "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m04_bf_s1_self_18part_decompose_read.py",
+      "cli_invoke_command": "python invoke_method.py --run M04 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat02_s1_s2_part_read_and_5d_lock/m04_bf_s1_self_18part_decompose_read.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_count": 18,
+        "pairwise_overlap_pixels": 0,
+        "union_equals_m_hole": true,
+        "guillotine_cut_count": 0,
+        "non_tautological_b1_iou_vs_keep_only_grabcut": 0.94,
+        "selected_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "selected_part_area_1x_px": 9387
+      },
+      "allowed_claims": [
+        "decomposes_3_battlefield_subjects_into_18_disjoint_curvilinear_whole_parts_with_zero_guillotine_cuts",
+        "verifies_s1_read_silhouette_against_independent_keep_only_grabcut_reference"
+      ],
+      "forbidden_non_claims": [
+        "self_comparison_mask_vs_mask_claimed_as_segmentation_accuracy",
+        "flat_horizontal_guillotine_cuts_across_part_interiors"
+      ],
+      "acceptance_gate": "ACCEPT_BF_S1_18PART_PARTITION_AND_NON_TAUTOLOGICAL_IOU: part_count==18; pairwise_overlap_px==0; union_equals_m_hole==True; guillotine_cuts==0; non_tautological_iou>=0.90",
+      "preview_image_file": "outputs/per_method/M04_BF_S1_SELF_18PART_DECOMPOSE_READ_preview.png",
+      "receipt_json_file": "outputs/per_method/M04_BF_S1_SELF_18PART_DECOMPOSE_READ_receipt.json"
+    },
+    {
+      "code": "M05",
+      "method_id": "BF_S2_SELF_PART_4X_GEOMETRY_LOCK",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S2"
+      ],
+      "title_zh": "S2 自身 18 部件 4× 母畫布幾何鎖定與五參數分離契約",
+      "summary_zh": "將 18 個部件鎖定至 5504×3072 (4×) 母畫布之四角座標 TL/TR/BR/BL 與閉合遮罩，驗證 T_scene<-leaf 遞迴零誤差 (0.0px) 並強制分離五個尺度/分塊參數。",
+      "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m05_bf_s2_self_part_4x_geometry_lock.py",
+      "cli_invoke_command": "python invoke_method.py --run M05 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat02_s1_s2_part_read_and_5d_lock/m05_bf_s2_self_part_4x_geometry_lock.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "master_canvas_wh": [
+          5504,
+          3072
+        ],
+        "bbox_4x_xyxy": [
+          2364,
+          1092,
+          3156,
+          1356
+        ],
+        "corners_4x_tl_tr_br_bl": [
+          [
+            2364,
+            1092
+          ],
+          [
+            3156,
+            1092
+          ],
+          [
+            3156,
+            1356
+          ],
+          [
+            2364,
+            1356
+          ]
+        ],
+        "T_scene_from_leaf_3x3": [
+          [
+            1.0,
+            0.0,
+            2364.0
+          ],
+          [
+            0.0,
+            1.0,
+            1092.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "max_recursive_transform_chain_error_px": 0.0,
+        "five_params_separated": true
+      },
+      "allowed_claims": [
+        "locks_4_corner_tl_tr_br_bl_and_closed_4x_masks_for_all_18_self_parts_in_5504x3072_master_space",
+        "separates_model_scale_object_transform_tile_size_tile_context_and_delivery_transform"
+      ],
+      "forbidden_non_claims": [
+        "conflating_tile_window_size_with_object_scale"
+      ],
+      "acceptance_gate": "ACCEPT_BF_S2_5PARAM_SEPARATION_AND_4CORNER_LOCK: all_18_parts_locked_4x==True; union_4x_equals_m_hole_4x==True; five_params_separated==True",
+      "preview_image_file": "outputs/per_method/M05_BF_S2_SELF_PART_4X_GEOMETRY_LOCK_preview.png",
+      "receipt_json_file": "outputs/per_method/M05_BF_S2_SELF_PART_4X_GEOMETRY_LOCK_receipt.json"
+    },
+    {
+      "code": "M06",
+      "method_id": "BOX_FREE_5D_LOCATE_PROXY",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S2",
+        "S6"
+      ],
+      "title_zh": "無框 (Box-Free) 5D 測地線 UV 與球頂深度代理定位器",
+      "summary_zh": "由 2D 閉合部件剪影計算距離變換測地線 (u, v)、PCA 主軸角度 θ 與球頂深度/法線代理 (Normal/Depth Proxy)，輔助非矩形曲面結構對位。",
+      "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m06_box_free_5d_locate_proxy.py",
+      "cli_invoke_command": "python invoke_method.py --run M06 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat02_s1_s2_part_read_and_5d_lock/m06_box_free_5d_locate_proxy.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {},
+      "allowed_claims": [
+        "2d_mask_distance_transform_and_pca_derived_uv_and_dome_depth_proxy"
+      ],
+      "forbidden_non_claims": [
+        "calibrated_physical_3d_reconstruction_or_camera_extrinsics",
+        "production_box_free_return_authority_without_4corner_roi"
+      ],
+      "acceptance_gate": "may assist localization experiments; not a physical 3D reconstruction or production Box-Free return authority",
+      "preview_image_file": "outputs/per_method/M06_BOX_FREE_5D_LOCATE_PROXY_preview.png",
+      "receipt_json_file": "outputs/per_method/M06_BOX_FREE_5D_LOCATE_PROXY_receipt.json"
+    },
+    {
+      "code": "M07",
+      "method_id": "PATH1E_IDENTITY_ECC_LOCK",
+      "category": "cat02_s1_s2_part_read_and_5d_lock",
+      "stage": [
+        "S2",
+        "S4",
+        "S6"
+      ],
+      "title_zh": "人物面部與關鍵部件 ECC 亞像素身分地標對齊鎖",
+      "summary_zh": "針對 B1 指揮官面部與關鍵感測器部件執行亞像素相位與 ECC 結構對齊並防水平翻轉；若缺失身分參考圖則強制阻斷並標記 unknown。",
+      "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m07_path1e_identity_ecc_lock.py",
+      "cli_invoke_command": "python invoke_method.py --run M07 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat02_s1_s2_part_read_and_5d_lock/m07_path1e_identity_ecc_lock.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "identity_target_part": "B1_P07_COMMANDER_HEAD_AND_HAIR",
+        "post_registration_structural_ncc": 0.9968,
+        "subpixel_phase_shift_px": 0.0513,
+        "horizontal_flip_detected": false,
+        "missing_ref_forces_unknown": true
+      },
+      "allowed_claims": [
+        "routes_identity_drift_to_reference_locked_donor_when_reference_exists",
+        "forces_identity_drift_to_unknown_when_reference_is_missing"
+      ],
+      "forbidden_non_claims": [
+        "claiming_identity_preservation_without_identity_reference"
+      ],
+      "acceptance_gate": "independent_landmark_and_identity_audit",
+      "preview_image_file": "outputs/per_method/M07_PATH1E_IDENTITY_ECC_LOCK_preview.png",
+      "receipt_json_file": "outputs/per_method/M07_PATH1E_IDENTITY_ECC_LOCK_receipt.json"
+    },
+    {
+      "code": "M08",
+      "method_id": "BF_S3_HUMAN_PERMISSION_COMPILER",
+      "category": "cat03_s3_s4_permission_and_routing",
+      "stage": [
+        "S3"
+      ],
+      "title_zh": "S3 人類核實權限編譯器（互斥修改區與保護區編譯）",
+      "summary_zh": "將人類核實後的 4× 部件契約編譯為嚴格互斥的 edit_mask_4x 與 preserve_mask_4x；當 human_verified=False 時強制攔截一切生成與寫回操作。",
+      "module_file": "methods/cat03_s3_s4_permission_and_routing/m08_bf_s3_human_permission_compiler.py",
+      "cli_invoke_command": "python invoke_method.py --run M08 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat03_s3_s4_permission_and_routing/m08_bf_s3_human_permission_compiler.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "human_verified": true,
+        "diff_alone_granted_permission": false,
+        "unverified_candidate_blocked": true,
+        "edit_and_preserve_disjoint": true,
+        "edit_and_preserve_partition_full_canvas": true,
+        "editable_pixels_4x": 6644352,
+        "preserved_pixels_4x": 10263936
+      },
+      "allowed_claims": [
+        "compiles_disjoint_edit_and_preserve_masks_only_after_human_verification",
+        "blocks_all_execution_when_human_verified_is_false"
+      ],
+      "forbidden_non_claims": [
+        "ai_candidate_self_approves_edit_permission"
+      ],
+      "acceptance_gate": "ACCEPT_BF_S3_DISJOINT_EDIT_AND_PRESERVE_PERMISSIONS: diff_alone_granted_permission==False; edit_and_preserve_disjoint==True; unverified_blocked==True",
+      "preview_image_file": "outputs/per_method/M08_BF_S3_HUMAN_PERMISSION_COMPILER_preview.png",
+      "receipt_json_file": "outputs/per_method/M08_BF_S3_HUMAN_PERMISSION_COMPILER_receipt.json"
+    },
+    {
+      "code": "M09",
+      "method_id": "OTL0_TOPOLOGY_REPAIR",
+      "category": "cat03_s3_s4_permission_and_routing",
+      "stage": [
+        "S2",
+        "S4"
+      ],
+      "title_zh": "OTL0 拓撲與破邊守門器（先修邊、禁對破邊直接加細節）",
+      "summary_zh": "檢測部件外輪廓拓撲完整性；一旦發現 outer_shape_broken=True，立即阻斷下游高頻細節增強（SKILL_C / DETAIL6），防止將破邊銳化偽稱為升清。",
+      "module_file": "methods/cat03_s3_s4_permission_and_routing/m09_otl0_topology_repair_gate.py",
+      "cli_invoke_command": "python invoke_method.py --run M09 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat03_s3_s4_permission_and_routing/m09_otl0_topology_repair_gate.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "when_topology_broken_blocks_detail_enhancers": true,
+        "when_topology_broken_route": "OTL0_TOPOLOGY_REPAIR",
+        "current_part_guillotine_cuts": 0,
+        "current_part_topology_intact": true
+      },
+      "allowed_claims": [
+        "blocks_downstream_detail_enhancers_when_topology_is_broken"
+      ],
+      "forbidden_non_claims": [
+        "sharpening_broken_topology_counts_as_improvement"
+      ],
+      "acceptance_gate": "independent_topology_and_boundary_f1_audit",
+      "preview_image_file": "outputs/per_method/M09_OTL0_TOPOLOGY_REPAIR_preview.png",
+      "receipt_json_file": "outputs/per_method/M09_OTL0_TOPOLOGY_REPAIR_receipt.json"
+    },
+    {
+      "code": "M10",
+      "method_id": "INPAINT_HOLE_REPAIR_OPTIONAL",
+      "category": "cat03_s3_s4_permission_and_routing",
+      "stage": [
+        "S2"
+      ],
+      "title_zh": "受控選用之遮擋缺損低頻修補器（禁止充當主升清引擎）",
+      "summary_zh": "僅在部件存在被遮擋孔洞缺損時執行局部低頻結構補洞（Navier-Stokes/Telea 結構修補），並在路由層強制禁止 Inpaint 取代 A+B+C+D 主升清鏈。",
+      "module_file": "methods/cat03_s3_s4_permission_and_routing/m10_inpaint_hole_repair_optional.py",
+      "cli_invoke_command": "python invoke_method.py --run M10 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat03_s3_s4_permission_and_routing/m10_inpaint_hole_repair_optional.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "demoted_from_primary_upscaler": true,
+        "only_invoked_when_occlusion_missing": true,
+        "repaired_occlusion_pixels": 441
+      },
+      "allowed_claims": [
+        "serves_strictly_as_an_optional_hole_completion_tool_when_occluded_structure_is_missing"
+      ],
+      "forbidden_non_claims": [
+        "acts_as_the_primary_or_sole_high_resolution_upscaling_material_or_detail_engine"
+      ],
+      "acceptance_gate": "never routed as primary HD upscaler; primary chain uses SKILL_A -> SKILL_B -> SKILL_C -> SKILL_D",
+      "preview_image_file": "outputs/per_method/M10_INPAINT_HOLE_REPAIR_OPTIONAL_preview.png",
+      "receipt_json_file": "outputs/per_method/M10_INPAINT_HOLE_REPAIR_OPTIONAL_receipt.json"
+    },
+    {
+      "code": "M11",
+      "method_id": "SKILL_A_NEURAL_SR_BASE_4X",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S2"
+      ],
+      "title_zh": "技能 A：4× 低頻形體結構基底重建 (L_base)",
+      "summary_zh": "在鎖定的 5504×3072 (4×) 座標系內重建零相位漂移 (phase_shift <= 0.05px) 的低頻形體與光影基底層 L_base，完全不改動 Alpha 與外輪廓。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m11_skill_a_neural_sr_base_4x.py",
+      "cli_invoke_command": "python invoke_method.py --run M11 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m11_skill_a_neural_sr_base_4x.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "L_base_master_dimensions_wh": [
+          5504,
+          3072
+        ],
+        "part_4x_crop_wh": [
+          792,
+          264
+        ],
+        "phase_shift_px": 0.0068,
+        "alpha_modified": false
+      },
+      "allowed_claims": [
+        "reconstructs_4x_low_frequency_base_form_L_base_in_locked_4x_coordinates",
+        "preserves_original_part_proportions_and_sub_0.05px_phase_alignment"
+      ],
+      "forbidden_non_claims": [
+        "modifies_alpha_or_outer_silhouette",
+        "substitutes_for_mid_frequency_material_or_micro_detail_layers"
+      ],
+      "acceptance_gate": "ACCEPT_SKILL_A_L_BASE_PHASE_AND_STRUCTURE: L_base dimensions == 4x source; phase_shift_px <= 0.05; alpha untouched",
+      "preview_image_file": "outputs/per_method/M11_SKILL_A_NEURAL_SR_BASE_4X_preview.png",
+      "receipt_json_file": "outputs/per_method/M11_SKILL_A_NEURAL_SR_BASE_4X_receipt.json"
+    },
+    {
+      "code": "M12",
+      "method_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S3"
+      ],
+      "title_zh": "技能 B：幾何鎖定中頻材質層生成與密集光流對位 (M_material)",
+      "summary_zh": "從上下半身與幾何鎖定高清母本 (B0_GL/B2_GL/B0_UP/B0_LO/B1_UP/B1_LO/B2_FULL) 經模板匹配與 Farneback 密集光流對齊 (NCC >= 0.98) 提取中頻材質反射層 M_material。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m12_skill_b_geometry_locked_material_gen.py",
+      "cli_invoke_command": "python invoke_method.py --run M12 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m12_skill_b_geometry_locked_material_gen.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "assigned_hr_source_key": "B1_UPPER",
+        "post_registration_structural_ncc": 0.9947,
+        "mean_optical_flow_magnitude_px": 0.979,
+        "mid_freq_material_rms": 14.033,
+        "outside_hole_material_max_abs": 0,
+        "alpha_authority_granted_to_ai": false
+      },
+      "allowed_claims": [
+        "synthesizes_mid_frequency_surface_material_reflectance_M_material_rgb_only",
+        "zero_authority_over_alpha_silhouette_or_part_coordinates"
+      ],
+      "forbidden_non_claims": [
+        "ai_material_generator_can_alter_alpha_or_silhouette",
+        "modifies_pixels_outside_m_hole"
+      ],
+      "acceptance_gate": "ACCEPT_SKILL_B_SELF_PART_MID_FREQ_MATERIAL_GAIN: M_material strictly zero outside M_hole; 18/18 self-parts mid-frequency material energy > 1.5; alpha_xor == 0",
+      "preview_image_file": "outputs/per_method/M12_SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN_preview.png",
+      "receipt_json_file": "outputs/per_method/M12_SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN_receipt.json"
+    },
+    {
+      "code": "M13",
+      "method_id": "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4"
+      ],
+      "title_zh": "技能 C：多尺度零均值微細節殘差合成 (H_detail)",
+      "summary_zh": "合成與 L_base、M_material 正交分離的零均值高頻微細節層 H_detail（裝甲接縫、鉚釘、金絲網孔、戰損刮痕），洞外嚴格為 0。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m13_skill_c_multiscale_detail_synthesis.py",
+      "cli_invoke_command": "python invoke_method.py --run M13 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m13_skill_c_multiscale_detail_synthesis.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "high_freq_detail_rms": 47.672,
+        "residual_mean_abs_inside_part": 0.0808,
+        "outside_hole_detail_max_abs": 0,
+        "orthogonality_verified": true
+      },
+      "allowed_claims": [
+        "produces_independent_zero_mean_high_frequency_detail_residual_H_detail",
+        "separably_auditable_in_L_base_plus_M_material_plus_H_detail_ablation"
+      ],
+      "forbidden_non_claims": [
+        "repairs_broken_outer_silhouette_via_detail_synthesis",
+        "uncontrolled_sharpening_noise_counts_as_valid_micro_detail"
+      ],
+      "acceptance_gate": "ACCEPT_SKILL_C_SELF_PART_HIGH_FREQ_DETAIL_AND_ROLLBACK: H_detail independently controllable across 18/18 self-parts; blocked when outer_shape_broken=present",
+      "preview_image_file": "outputs/per_method/M13_SKILL_C_MULTISCALE_DETAIL_SYNTHESIS_preview.png",
+      "receipt_json_file": "outputs/per_method/M13_SKILL_C_MULTISCALE_DETAIL_SYNTHESIS_receipt.json"
+    },
+    {
+      "code": "M14",
+      "method_id": "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4"
+      ],
+      "title_zh": "技能 C2：2D 法線與深度梯度導引結構微浮雕細節",
+      "summary_zh": "根據部件表面切空間法線梯度 (Normal/Depth Gradient Proxy) 導引微接縫、螺絲凹槽與金網絲沿曲面方向貼合，消除平面貼圖感。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m14_skill_c2_normal_depth_structural_detail.py",
+      "cli_invoke_command": "python invoke_method.py --run M14 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m14_skill_c2_normal_depth_structural_detail.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "normal_guided_structural_rms": 18.9962,
+        "outside_hole_max_abs": 0.0,
+        "silhouette_drift_px": 0.0
+      },
+      "allowed_claims": [
+        "guides_micro_seams_screws_and_gold_mesh_filaments_via_2d_normal_depth_gradients"
+      ],
+      "forbidden_non_claims": [
+        "claims_calibrated_metric_lidar_3d_reconstruction_from_single_2d_image"
+      ],
+      "acceptance_gate": "structural seam & mesh relief synthesized inside M_hole without silhouette drift",
+      "preview_image_file": "outputs/per_method/M14_SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL_preview.png",
+      "receipt_json_file": "outputs/per_method/M14_SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL_receipt.json"
+    },
+    {
+      "code": "M15",
+      "method_id": "SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4"
+      ],
+      "title_zh": "技能 C3：高頻細節層獨立無損衰減與降噪回退器",
+      "summary_zh": "當高頻表面噪點過強時，僅對 H_detail 乘上衰減係數 γ (如 0.45)，驗證 L_base 與 M_material 保持 Bit-Identical 零損壞。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m15_skill_c3_attenuate_hf_detail_layer.py",
+      "cli_invoke_command": "python invoke_method.py --run M15 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m15_skill_c3_attenuate_hf_detail_layer.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "attenuation_gamma": 0.45,
+        "h_detail_rms_before": 22.1797,
+        "h_detail_rms_after": 9.9809,
+        "L_base_bit_identical": true,
+        "M_material_bit_identical": true
+      },
+      "allowed_claims": [
+        "reduces_high_frequency_noise_by_scaling_H_detail_only_while_preserving_L_base_M_material_and_geometry"
+      ],
+      "forbidden_non_claims": [
+        "blurs_base_structure_or_alters_part_silhouette"
+      ],
+      "acceptance_gate": "L_base and M_material bit-identical before/after rollback; H_detail scaled by gamma < 1.0",
+      "preview_image_file": "outputs/per_method/M15_SKILL_C3_ATTENUATE_HF_DETAIL_LAYER_preview.png",
+      "receipt_json_file": "outputs/per_method/M15_SKILL_C3_ATTENUATE_HF_DETAIL_LAYER_receipt.json"
+    },
+    {
+      "code": "M16",
+      "method_id": "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "AI 高清母本多頻段對位轉移引擎（含真實母本尺寸收據）",
+      "summary_zh": "將 1200×896 AI 高清母本以拉普拉斯多頻段金字塔轉移至鎖定部件剪影內，如實記錄母本原生尺寸與 SHA-256，絕不偽稱為即時 ComfyUI 8K 擴散。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m16_all24_ai_donor_multiband_transfer.py",
+      "cli_invoke_command": "python invoke_method.py --run M16 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m16_all24_ai_donor_multiband_transfer.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "donor_source_key": "B1_UPPER",
+        "donor_native_dimensions_wh": [
+          1200,
+          896
+        ],
+        "donor_sha256": "19e6482fc64992ebb0e7259bc582bd966301d28f9682b7d0bde021c9ac10e695",
+        "post_registration_ncc": 0.9947,
+        "claimed_as_live_comfyui_flux_diffusion": false
+      },
+      "allowed_claims": [
+        "external_ai_donor_guided_multiband_detail_transfer_inside_locked_silhouettes",
+        "records_exact_donor_pixel_dimensions_896x1200_1200x896_1376x768_and_sha256"
+      ],
+      "forbidden_non_claims": [
+        "claiming_896x1200_or_1200x896_or_1376x768_donors_are_native_8k_images",
+        "claiming_multiband_donor_transfer_is_live_comfyui_flux_tile_diffusion"
+      ],
+      "acceptance_gate": "auxiliary method only; must not be used as evidence that Flux HR tile diffusion has run",
+      "preview_image_file": "outputs/per_method/M16_ALL24_AI_DONOR_MULTIBAND_TRANSFER_preview.png",
+      "receipt_json_file": "outputs/per_method/M16_ALL24_AI_DONOR_MULTIBAND_TRANSFER_receipt.json"
+    },
+    {
+      "code": "M17",
+      "method_id": "DETAIL6_MATERIAL_RESIDUAL",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "DETAIL6 材質分區遮罩高頻投遞器（含面部皮膚零變動保護）",
+      "summary_zh": "在已驗證的 4× 母畫布上對金屬裝甲與金網絲區域投遞受控高頻能量，同時對 B1 指揮官面部皮膚與眼睛保護遮罩強制維持 0 像素變動。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m17_detail6_material_residual.py",
+      "cli_invoke_command": "python invoke_method.py --run M17 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m17_detail6_material_residual.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "protected_face_part": "B1_P07_COMMANDER_HEAD_AND_HAIR",
+        "protected_skin_pixels_4x": 64666,
+        "protected_skin_extra_hf_diff_max": 0,
+        "active_goldmesh_torso_part": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "goldmesh_torso_detail_rms": 47.672
+      },
+      "allowed_claims": [
+        "masked_high_frequency_delivery_on_verified_4x_master"
+      ],
+      "forbidden_non_claims": [
+        "claiming_detail6_complete_without_4x_master_and_material_masks"
+      ],
+      "acceptance_gate": "technical candidate only; HF energy is diagnostic and visual/geometry acceptance remains separate",
+      "preview_image_file": "outputs/per_method/M17_DETAIL6_MATERIAL_RESIDUAL_preview.png",
+      "receipt_json_file": "outputs/per_method/M17_DETAIL6_MATERIAL_RESIDUAL_receipt.json"
+    },
+    {
+      "code": "M18",
+      "method_id": "HOLE_SCALELOCK_HF_RESIDUAL",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "非生成式比例鎖定高頻殘差對照基準 (Deterministic Control)",
+      "summary_zh": "僅使用純數學比例鎖定高頻殘差而不引入 AI 母本材質，作為衡量真 AI 升清（M12+M13）增益幅度的科學非生成式對照組。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m18_hole_scalelock_hf_residual.py",
+      "cli_invoke_command": "python invoke_method.py --run M18 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m18_hole_scalelock_hf_residual.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "classification": "deterministic_non_generative_control_only",
+        "claimed_as_diffusion_generation": false,
+        "non_gen_control_hf_rms": 15.3891,
+        "true_ai_donor_3layer_hf_rms": 47.672
+      },
+      "allowed_claims": [
+        "deterministic_non_generative_masked_high_frequency_control",
+        "verifies_non_tautological_post_candidate_re_extracted_contour_stability"
+      ],
+      "forbidden_non_claims": [
+        "true_diffusion_generation",
+        "sobel_detail_gain_proves_semantic_detail_quality"
+      ],
+      "acceptance_gate": "may be compared as a deterministic non-generative control; must never be labelled diffusion/generative output",
+      "preview_image_file": "outputs/per_method/M18_HOLE_SCALELOCK_HF_RESIDUAL_preview.png",
+      "receipt_json_file": "outputs/per_method/M18_HOLE_SCALELOCK_HF_RESIDUAL_receipt.json"
+    },
+    {
+      "code": "M19",
+      "method_id": "SIAX4X_TILE_CORE_SR",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "Siax 4× Tile-Core 超分契約與反插值偽造守衛",
+      "summary_zh": "生成 Siax 4× 分塊 Core+Halo 幾何契約並檢查模型權重 Sidecar；無實體 .pth 權重時明確標記離線契約模式，嚴禁以 Lanczos 插值冒充 Siax 推理。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m19_siax4x_tile_core_sr_contract.py",
+      "cli_invoke_command": "python invoke_method.py --run M19 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m19_siax4x_tile_core_sr_contract.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "backend_id": "spandrel_siax_4x",
+        "expected_checkpoint": "4x_NMKD-Siax_200k.pth",
+        "live_checkpoint_loaded_in_offline_sandbox": false,
+        "lanczos_fallback_claimed_as_siax": false,
+        "exact_4x_bbox_xyxy": [
+          2364,
+          1092,
+          3156,
+          1356
+        ],
+        "contract_guard_status": "PASS_CONTRACT_VERIFIED_NO_SPOOFING"
+      },
+      "allowed_claims": [
+        "fixed_4x_learned_sr_reconstruction_when_checkpoint_is_loaded"
+      ],
+      "forbidden_non_claims": [
+        "lanczos_interpolation_is_siax_inference",
+        "16mp_downscaled_delivery_canvas_is_unmodified_native_4x_master"
+      ],
+      "acceptance_gate": "S7 geometry, coverage, return and visual-quality gates; 4x inference alone is not geometry acceptance",
+      "preview_image_file": "outputs/per_method/M19_SIAX4X_TILE_CORE_SR_preview.png",
+      "receipt_json_file": "outputs/per_method/M19_SIAX4X_TILE_CORE_SR_receipt.json"
+    },
+    {
+      "code": "M20",
+      "method_id": "FLUX_HR_TILE_IMG2IMG",
+      "category": "cat04_s4_s5_true_hd_upgrade_engines",
+      "stage": [
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "Flux HR Tile Img2Img 高清分塊擴散契約與收據守衛",
+      "summary_zh": "建立 Flux1-dev 高清分塊 Core+Halo 讀取與 Disjoint Write-Core 寫回契約，強制檢查 SetLatentNoiseMask 非硬像素保護門檻，無 GPU 後端時誠實回報離線契約狀態。",
+      "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m20_flux_hr_tile_img2img_contract.py",
+      "cli_invoke_command": "python invoke_method.py --run M20 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat04_s4_s5_true_hd_upgrade_engines/m20_flux_hr_tile_img2img_contract.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "backend_id": "hr_tile_img2img_backend",
+        "model_unet": "flux1-dev.safetensors",
+        "live_comfyui_executed_in_offline_sandbox": false,
+        "read_tile_with_halo_xyxy": [
+          2300,
+          1028,
+          3220,
+          1420
+        ],
+        "write_core_disjoint_xyxy": [
+          2364,
+          1092,
+          3156,
+          1356
+        ],
+        "latent_noise_mask_claimed_as_hard_pixel_guard": false,
+        "contract_guard_status": "PASS_CONTRACT_VERIFIED_NO_SPOOFING"
+      },
+      "allowed_claims": [
+        "high_resolution_read_tile_core_plus_halo_inference_with_per_tile_receipts",
+        "disjoint_write_core_return_excluding_halo"
+      ],
+      "forbidden_non_claims": [
+        "single_global_conditioning_is_per_subset_conditioning_router",
+        "set_latent_noise_mask_is_hard_pixel_protection_gate",
+        "shared_seed_is_coordinate_indexed_global_noise_field"
+      ],
+      "acceptance_gate": "only actual backend output with model/seed/params/input/output hashes; no CC_V1 or LoRA parity claim",
+      "preview_image_file": "outputs/per_method/M20_FLUX_HR_TILE_IMG2IMG_preview.png",
+      "receipt_json_file": "outputs/per_method/M20_FLUX_HR_TILE_IMG2IMG_receipt.json"
+    },
+    {
+      "code": "M21",
+      "method_id": "GEOMETRY_LOCKED_TILE_PLAN_RETURN",
+      "category": "cat05_s6_s7_geometry_locked_return_and_audit",
+      "stage": [
+        "S2",
+        "S4",
+        "S6",
+        "S7"
+      ],
+      "title_zh": "全局幾何分塊規劃與 Disjoint Write-Core 零疊影精確回位器",
+      "summary_zh": "將 5504×3072 大圖切分為含 Halo 上下文之讀取塊 (Read Tile = Core + Halo)，寫回時嚴格裁除 Halo、僅寫入互斥且無縫拼接的 Write-Core，驗證 Core 重疊=0、缺口=0。",
+      "module_file": "methods/cat05_s6_s7_geometry_locked_return_and_audit/m21_geometry_locked_tile_plan_return.py",
+      "cli_invoke_command": "python invoke_method.py --run M21 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat05_s6_s7_geometry_locked_return_and_audit/m21_geometry_locked_tile_plan_return.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "master_canvas_wh": [
+          5504,
+          3072
+        ],
+        "disjoint_part_cores": 18,
+        "core_pairwise_overlap_px": 0,
+        "tile_coverage_gap_px": 0,
+        "halo_pixels_written_to_master": 0,
+        "outside_roi_bit_exact": true
+      },
+      "allowed_claims": [
+        "enforces_disjoint_write_cores_and_excludes_halo_from_writing",
+        "verifies_two_tile_grid_offsets_under_fixed_global_contract"
+      ],
+      "forbidden_non_claims": [
+        "padding_parameter_alone_proves_core_only_write",
+        "same_seed_proves_shared_global_noise_field"
+      ],
+      "acceptance_gate": "independent geometry audit; provisional geometry remains pending operator confirmation",
+      "preview_image_file": "outputs/per_method/M21_GEOMETRY_LOCKED_TILE_PLAN_RETURN_preview.png",
+      "receipt_json_file": "outputs/per_method/M21_GEOMETRY_LOCKED_TILE_PLAN_RETURN_receipt.json"
+    },
+    {
+      "code": "M22",
+      "method_id": "SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD",
+      "category": "cat05_s6_s7_geometry_locked_return_and_audit",
+      "stage": [
+        "S1",
+        "S5",
+        "S6"
+      ],
+      "title_zh": "技能 D：不可變 Alpha 幾何守衛 + 規則 01380 全洞滿填併回大圖 + S7 磁碟重讀反驗",
+      "summary_zh": "執行 I_4x = L_base + M_material + H_detail 全洞 100% 硬邊合成（eroded_low_res_border=0、soft_alpha=0、洞外差異=0），寫出 5504×3072 大圖並從磁碟重讀執行反扣驗收。",
+      "module_file": "methods/cat05_s6_s7_geometry_locked_return_and_audit/m22_skill_d_immutable_alpha_geometry_guard.py",
+      "cli_invoke_command": "python invoke_method.py --run M22 --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "direct_py_command": "python methods/cat05_s6_s7_geometry_locked_return_and_audit/m22_skill_d_immutable_alpha_geometry_guard.py --part B1_P08_GOLDMESH_CARBON_TORSO",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "status": "PASS",
+      "metrics": {
+        "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+        "saved_master_file": "SHQ_BATTLEFIELD_SELF_PARTS_4X_MASTER_5504x3072.png",
+        "saved_master_sha256": "b3944aa48f49fdd21c14606ccfb965060365cfa2c15e62b69b91c13ad446104f",
+        "re_read_from_saved_disk_bytes": true,
+        "rule_01380_eroded_low_res_border_pixels": 0,
+        "rule_01380_boundary_ring_upgraded_ratio": 1.0,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff_4x": 0,
+        "reverse_qa_re_extracted_silhouette_iou": 1.0,
+        "part_detail_gain_ratio_in_4x_master": 1.3723,
+        "true_ai_hd_fidelity_ncc_in_master": 0.9074
+      },
+      "allowed_claims": [
+        "enforces_rule_01380_100pct_of_m_hole_pixels_upgraded_right_to_hard_edge_with_zero_feathering",
+        "locks_alpha_final_equal_to_alpha_original_4x_with_alpha_xor_0_and_outside_rgb_diff_0",
+        "verifies_post_composite_silhouette_via_non_tautological_s6_reverse_qa"
+      ],
+      "forbidden_non_claims": [
+        "uses_gaussian_feathering_to_disguise_boundary_errors",
+        "leaves_an_eroded_low_res_border_ring_inside_m_hole"
+      ],
+      "acceptance_gate": "ACCEPT_SKILL_D_RULE_01380_AND_S7_DISK_REVERSE_QA: alpha_xor == 0; soft_alpha == 0; outside_hole_rgb_diff == 0; eroded_low_res_border_pixels == 0; boundary_ring_upgraded_ratio == 1.0; s6_reverse_qa_iou == 1.0",
+      "preview_image_file": "outputs/per_method/M22_SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD_preview.png",
+      "receipt_json_file": "outputs/per_method/M22_SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD_receipt.json"
+    }
+  ],
+  "recipe_receipts": [
+    {
+      "recipe_code": "R01",
+      "slug": "r01_single_part_hd_upgrade_and_return",
+      "title_zh": "組合應用 R01：單一指定部件「真升清 (A+B+C) → 規則 01380 鎖幾何併回大圖 (D)」",
+      "summary_zh": "讓使用者任選 18 個部件之一（如 P01 機甲頭、P02 機甲胸艙、P07 指揮官頭、P08 金網絲胸甲、P14 重甲胸等），單獨執行三頻真升清並鎖幾何併回 4× 局部/全局畫布。",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "chained_method_codes": [
+        "M01",
+        "M04",
+        "M05",
+        "M11",
+        "M12",
+        "M13",
+        "M22"
+      ],
+      "step_count": 7,
+      "all_steps_passed": true,
+      "status": "PASS",
+      "steps": [
+        {
+          "code": "M01",
+          "method_id": "BF_S0_EDIT_4WAY_ANTI_HOLE",
+          "module_file": "methods/cat01_s0_anti_hole_and_base/m01_bf_s0_edit_4way_anti_hole.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R01/M01_BF_S0_EDIT_4WAY_ANTI_HOLE_preview.png",
+          "key_metrics": {
+            "keep_sha256": "f9f24da281878e6583ae17386b76593c9285e509d4feb7a1cea42f848944b90f",
+            "remove_sha256": "98bf4fc0d69c2760bf2c66461111b8c90c3934c4155664434115dd48828a2ada",
+            "camera_shift_px": 0.0476,
+            "hole_foreground_pixels": 415272,
+            "anti_hole_background_pixels": 641496,
+            "hole_and_antihole_exact_complement": true,
+            "diff_grants_edit_permission": false
+          }
+        },
+        {
+          "code": "M04",
+          "method_id": "BF_S1_SELF_18PART_DECOMPOSE_READ",
+          "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m04_bf_s1_self_18part_decompose_read.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R01/M04_BF_S1_SELF_18PART_DECOMPOSE_READ_preview.png",
+          "key_metrics": {
+            "part_count": 18,
+            "pairwise_overlap_pixels": 0,
+            "union_equals_m_hole": true,
+            "guillotine_cut_count": 0,
+            "non_tautological_b1_iou_vs_keep_only_grabcut": 0.94,
+            "selected_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "selected_part_area_1x_px": 9387
+          }
+        },
+        {
+          "code": "M05",
+          "method_id": "BF_S2_SELF_PART_4X_GEOMETRY_LOCK",
+          "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m05_bf_s2_self_part_4x_geometry_lock.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R01/M05_BF_S2_SELF_PART_4X_GEOMETRY_LOCK_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "master_canvas_wh": [
+              5504,
+              3072
+            ],
+            "bbox_4x_xyxy": [
+              2364,
+              1092,
+              3156,
+              1356
+            ],
+            "corners_4x_tl_tr_br_bl": [
+              [
+                2364,
+                1092
+              ],
+              [
+                3156,
+                1092
+              ],
+              [
+                3156,
+                1356
+              ],
+              [
+                2364,
+                1356
+              ]
+            ],
+            "T_scene_from_leaf_3x3": [
+              [
+                1.0,
+                0.0,
+                2364.0
+              ],
+              [
+                0.0,
+                1.0,
+                1092.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "max_recursive_transform_chain_error_px": 0.0,
+            "five_params_separated": true
+          }
+        },
+        {
+          "code": "M11",
+          "method_id": "SKILL_A_NEURAL_SR_BASE_4X",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m11_skill_a_neural_sr_base_4x.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R01/M11_SKILL_A_NEURAL_SR_BASE_4X_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "L_base_master_dimensions_wh": [
+              5504,
+              3072
+            ],
+            "part_4x_crop_wh": [
+              792,
+              264
+            ],
+            "phase_shift_px": 0.0068,
+            "alpha_modified": false
+          }
+        },
+        {
+          "code": "M12",
+          "method_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m12_skill_b_geometry_locked_material_gen.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R01/M12_SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "assigned_hr_source_key": "B1_UPPER",
+            "post_registration_structural_ncc": 0.9947,
+            "mean_optical_flow_magnitude_px": 0.979,
+            "mid_freq_material_rms": 14.033,
+            "outside_hole_material_max_abs": 0,
+            "alpha_authority_granted_to_ai": false
+          }
+        },
+        {
+          "code": "M13",
+          "method_id": "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m13_skill_c_multiscale_detail_synthesis.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R01/M13_SKILL_C_MULTISCALE_DETAIL_SYNTHESIS_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "high_freq_detail_rms": 47.672,
+            "residual_mean_abs_inside_part": 0.0808,
+            "outside_hole_detail_max_abs": 0,
+            "orthogonality_verified": true
+          }
+        },
+        {
+          "code": "M22",
+          "method_id": "SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD",
+          "module_file": "methods/cat05_s6_s7_geometry_locked_return_and_audit/m22_skill_d_immutable_alpha_geometry_guard.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R01/M22_SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "saved_master_file": "SHQ_BATTLEFIELD_SELF_PARTS_4X_MASTER_5504x3072.png",
+            "saved_master_sha256": "b3944aa48f49fdd21c14606ccfb965060365cfa2c15e62b69b91c13ad446104f",
+            "re_read_from_saved_disk_bytes": true,
+            "rule_01380_eroded_low_res_border_pixels": 0,
+            "rule_01380_boundary_ring_upgraded_ratio": 1.0,
+            "alpha_xor_pixels": 0,
+            "soft_alpha_pixels": 0,
+            "max_outside_hole_rgb_diff_4x": 0,
+            "reverse_qa_re_extracted_silhouette_iou": 1.0,
+            "part_detail_gain_ratio_in_4x_master": 1.3723,
+            "true_ai_hd_fidelity_ncc_in_master": 0.9074
+          }
+        }
+      ],
+      "receipt_json_file": "outputs/per_recipe/R01_r01_single_part_hd_upgrade_and_return_receipt.json"
+    },
+    {
+      "recipe_code": "R02",
+      "slug": "r02_full_18parts_battlefield_4x_return",
+      "title_zh": "組合應用 R02：全戰場 18 部件完整「生・除・扣・洞 → 密集光流真升清 → 併回 5504×3072 大圖 → S7 反驗」",
+      "summary_zh": "串聯 M01→M04→M05→M08→M11→M12→M13→M21→M22，一次完成全圖 18 個自身部件升清併回大圖並通過磁碟重讀反驗。",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "chained_method_codes": [
+        "M01",
+        "M04",
+        "M05",
+        "M08",
+        "M11",
+        "M12",
+        "M13",
+        "M21",
+        "M22"
+      ],
+      "step_count": 9,
+      "all_steps_passed": true,
+      "status": "PASS",
+      "steps": [
+        {
+          "code": "M01",
+          "method_id": "BF_S0_EDIT_4WAY_ANTI_HOLE",
+          "module_file": "methods/cat01_s0_anti_hole_and_base/m01_bf_s0_edit_4way_anti_hole.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M01_BF_S0_EDIT_4WAY_ANTI_HOLE_preview.png",
+          "key_metrics": {
+            "keep_sha256": "f9f24da281878e6583ae17386b76593c9285e509d4feb7a1cea42f848944b90f",
+            "remove_sha256": "98bf4fc0d69c2760bf2c66461111b8c90c3934c4155664434115dd48828a2ada",
+            "camera_shift_px": 0.0476,
+            "hole_foreground_pixels": 415272,
+            "anti_hole_background_pixels": 641496,
+            "hole_and_antihole_exact_complement": true,
+            "diff_grants_edit_permission": false
+          }
+        },
+        {
+          "code": "M04",
+          "method_id": "BF_S1_SELF_18PART_DECOMPOSE_READ",
+          "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m04_bf_s1_self_18part_decompose_read.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M04_BF_S1_SELF_18PART_DECOMPOSE_READ_preview.png",
+          "key_metrics": {
+            "part_count": 18,
+            "pairwise_overlap_pixels": 0,
+            "union_equals_m_hole": true,
+            "guillotine_cut_count": 0,
+            "non_tautological_b1_iou_vs_keep_only_grabcut": 0.94,
+            "selected_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "selected_part_area_1x_px": 9387
+          }
+        },
+        {
+          "code": "M05",
+          "method_id": "BF_S2_SELF_PART_4X_GEOMETRY_LOCK",
+          "module_file": "methods/cat02_s1_s2_part_read_and_5d_lock/m05_bf_s2_self_part_4x_geometry_lock.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M05_BF_S2_SELF_PART_4X_GEOMETRY_LOCK_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "master_canvas_wh": [
+              5504,
+              3072
+            ],
+            "bbox_4x_xyxy": [
+              2364,
+              1092,
+              3156,
+              1356
+            ],
+            "corners_4x_tl_tr_br_bl": [
+              [
+                2364,
+                1092
+              ],
+              [
+                3156,
+                1092
+              ],
+              [
+                3156,
+                1356
+              ],
+              [
+                2364,
+                1356
+              ]
+            ],
+            "T_scene_from_leaf_3x3": [
+              [
+                1.0,
+                0.0,
+                2364.0
+              ],
+              [
+                0.0,
+                1.0,
+                1092.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "max_recursive_transform_chain_error_px": 0.0,
+            "five_params_separated": true
+          }
+        },
+        {
+          "code": "M08",
+          "method_id": "BF_S3_HUMAN_PERMISSION_COMPILER",
+          "module_file": "methods/cat03_s3_s4_permission_and_routing/m08_bf_s3_human_permission_compiler.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M08_BF_S3_HUMAN_PERMISSION_COMPILER_preview.png",
+          "key_metrics": {
+            "human_verified": true,
+            "diff_alone_granted_permission": false,
+            "unverified_candidate_blocked": true,
+            "edit_and_preserve_disjoint": true,
+            "edit_and_preserve_partition_full_canvas": true,
+            "editable_pixels_4x": 6644352,
+            "preserved_pixels_4x": 10263936
+          }
+        },
+        {
+          "code": "M11",
+          "method_id": "SKILL_A_NEURAL_SR_BASE_4X",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m11_skill_a_neural_sr_base_4x.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M11_SKILL_A_NEURAL_SR_BASE_4X_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "L_base_master_dimensions_wh": [
+              5504,
+              3072
+            ],
+            "part_4x_crop_wh": [
+              792,
+              264
+            ],
+            "phase_shift_px": 0.0068,
+            "alpha_modified": false
+          }
+        },
+        {
+          "code": "M12",
+          "method_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m12_skill_b_geometry_locked_material_gen.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M12_SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "assigned_hr_source_key": "B1_UPPER",
+            "post_registration_structural_ncc": 0.9947,
+            "mean_optical_flow_magnitude_px": 0.979,
+            "mid_freq_material_rms": 14.033,
+            "outside_hole_material_max_abs": 0,
+            "alpha_authority_granted_to_ai": false
+          }
+        },
+        {
+          "code": "M13",
+          "method_id": "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m13_skill_c_multiscale_detail_synthesis.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M13_SKILL_C_MULTISCALE_DETAIL_SYNTHESIS_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "high_freq_detail_rms": 47.672,
+            "residual_mean_abs_inside_part": 0.0808,
+            "outside_hole_detail_max_abs": 0,
+            "orthogonality_verified": true
+          }
+        },
+        {
+          "code": "M21",
+          "method_id": "GEOMETRY_LOCKED_TILE_PLAN_RETURN",
+          "module_file": "methods/cat05_s6_s7_geometry_locked_return_and_audit/m21_geometry_locked_tile_plan_return.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M21_GEOMETRY_LOCKED_TILE_PLAN_RETURN_preview.png",
+          "key_metrics": {
+            "master_canvas_wh": [
+              5504,
+              3072
+            ],
+            "disjoint_part_cores": 18,
+            "core_pairwise_overlap_px": 0,
+            "tile_coverage_gap_px": 0,
+            "halo_pixels_written_to_master": 0,
+            "outside_roi_bit_exact": true
+          }
+        },
+        {
+          "code": "M22",
+          "method_id": "SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD",
+          "module_file": "methods/cat05_s6_s7_geometry_locked_return_and_audit/m22_skill_d_immutable_alpha_geometry_guard.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R02/M22_SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "saved_master_file": "SHQ_BATTLEFIELD_SELF_PARTS_4X_MASTER_5504x3072.png",
+            "saved_master_sha256": "b3944aa48f49fdd21c14606ccfb965060365cfa2c15e62b69b91c13ad446104f",
+            "re_read_from_saved_disk_bytes": true,
+            "rule_01380_eroded_low_res_border_pixels": 0,
+            "rule_01380_boundary_ring_upgraded_ratio": 1.0,
+            "alpha_xor_pixels": 0,
+            "soft_alpha_pixels": 0,
+            "max_outside_hole_rgb_diff_4x": 0,
+            "reverse_qa_re_extracted_silhouette_iou": 1.0,
+            "part_detail_gain_ratio_in_4x_master": 1.3723,
+            "true_ai_hd_fidelity_ncc_in_master": 0.9074
+          }
+        }
+      ],
+      "receipt_json_file": "outputs/per_recipe/R02_r02_full_18parts_battlefield_4x_return_receipt.json"
+    },
+    {
+      "recipe_code": "R03",
+      "slug": "r03_ablation_compare_a_b_c_d",
+      "title_zh": "組合應用 R03：四技能三頻消融實驗 (Stage1 L_base vs Stage2 +M_mat vs Stage3 +H_det vs C3 降噪回退)",
+      "summary_zh": "針對指定部件同時輸出 Stage 1 (僅 SR)、Stage 2 (SR+材質)、Stage 3 (SR+材質+微細節) 與 Stage 4 (C3 高頻衰減 γ=0.45) 的量化頻率增益與視覺對比圖。",
+      "target_part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+      "chained_method_codes": [
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M22"
+      ],
+      "step_count": 6,
+      "all_steps_passed": true,
+      "status": "PASS",
+      "steps": [
+        {
+          "code": "M11",
+          "method_id": "SKILL_A_NEURAL_SR_BASE_4X",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m11_skill_a_neural_sr_base_4x.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R03/M11_SKILL_A_NEURAL_SR_BASE_4X_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "L_base_master_dimensions_wh": [
+              5504,
+              3072
+            ],
+            "part_4x_crop_wh": [
+              792,
+              264
+            ],
+            "phase_shift_px": 0.0068,
+            "alpha_modified": false
+          }
+        },
+        {
+          "code": "M12",
+          "method_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m12_skill_b_geometry_locked_material_gen.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R03/M12_SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "assigned_hr_source_key": "B1_UPPER",
+            "post_registration_structural_ncc": 0.9947,
+            "mean_optical_flow_magnitude_px": 0.979,
+            "mid_freq_material_rms": 14.033,
+            "outside_hole_material_max_abs": 0,
+            "alpha_authority_granted_to_ai": false
+          }
+        },
+        {
+          "code": "M13",
+          "method_id": "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m13_skill_c_multiscale_detail_synthesis.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R03/M13_SKILL_C_MULTISCALE_DETAIL_SYNTHESIS_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "high_freq_detail_rms": 47.672,
+            "residual_mean_abs_inside_part": 0.0808,
+            "outside_hole_detail_max_abs": 0,
+            "orthogonality_verified": true
+          }
+        },
+        {
+          "code": "M14",
+          "method_id": "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m14_skill_c2_normal_depth_structural_detail.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R03/M14_SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "normal_guided_structural_rms": 18.9962,
+            "outside_hole_max_abs": 0.0,
+            "silhouette_drift_px": 0.0
+          }
+        },
+        {
+          "code": "M15",
+          "method_id": "SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+          "module_file": "methods/cat04_s4_s5_true_hd_upgrade_engines/m15_skill_c3_attenuate_hf_detail_layer.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R03/M15_SKILL_C3_ATTENUATE_HF_DETAIL_LAYER_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "attenuation_gamma": 0.45,
+            "h_detail_rms_before": 22.1797,
+            "h_detail_rms_after": 9.9809,
+            "L_base_bit_identical": true,
+            "M_material_bit_identical": true
+          }
+        },
+        {
+          "code": "M22",
+          "method_id": "SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD",
+          "module_file": "methods/cat05_s6_s7_geometry_locked_return_and_audit/m22_skill_d_immutable_alpha_geometry_guard.py",
+          "status": "PASS",
+          "preview_image_file": "outputs/per_recipe/R03/M22_SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD_preview.png",
+          "key_metrics": {
+            "part_id": "B1_P08_GOLDMESH_CARBON_TORSO",
+            "saved_master_file": "SHQ_BATTLEFIELD_SELF_PARTS_4X_MASTER_5504x3072.png",
+            "saved_master_sha256": "b3944aa48f49fdd21c14606ccfb965060365cfa2c15e62b69b91c13ad446104f",
+            "re_read_from_saved_disk_bytes": true,
+            "rule_01380_eroded_low_res_border_pixels": 0,
+            "rule_01380_boundary_ring_upgraded_ratio": 1.0,
+            "alpha_xor_pixels": 0,
+            "soft_alpha_pixels": 0,
+            "max_outside_hole_rgb_diff_4x": 0,
+            "reverse_qa_re_extracted_silhouette_iou": 1.0,
+            "part_detail_gain_ratio_in_4x_master": 1.3723,
+            "true_ai_hd_fidelity_ncc_in_master": 0.9074
+          }
+        }
+      ],
+      "receipt_json_file": "outputs/per_recipe/R03_r03_ablation_compare_a_b_c_d_receipt.json"
+    }
+  ]
+}

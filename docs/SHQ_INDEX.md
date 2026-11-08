@@ -9,8 +9,9 @@
 | [SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md) | Actionable pipeline stages, gates, forbidden practices, module map |
 | [SHQ_AI_USAGE_GUIDE.md](./SHQ_AI_USAGE_GUIDE.md) | **給 AI agent 嘅理解規約**：讀序、硬閘、S0–S7、Registry、宣稱邊界 |
 | [SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) | **其他 AI 直接照做嘅操作手冊**：Clone、依賴、Preflight、Registry、測試、L0→L4 Strict RUN、S7 與回報 JSON |
-| [sources/gemini-share-XMyk6HVn2J9S/](./sources/gemini-share-XMyk6HVn2J9S/) | **最新** Gemini 源（20 turns；+1 vs nutr：戰場自身部件追溯／生除扣洞反）；raw/payload 只留 SHA |
-| [sources/gemini-share-nutrRjsw676R/](./sources/gemini-share-nutrRjsw676R/) | 上一包（19 turns；PR #12／宣稱再測 + 三技能／頻率層）— 保留作 provenance |
+| [sources/gemini-share-uXr7snnWQVOR/](./sources/gemini-share-uXr7snnWQVOR/) | **最新** Gemini 源（26 turns；+6 vs XMyk：可驗證包 v1.0→v1.1 Complete13Assets、`preflight`／B0_GL‧B2_GL、Modular M01–M22、Grok runnable、Four-Plane Artifact DAG／獨立 PASS vs 聯動 FAIL）；raw/payload 只留 SHA；大 zip 只留 SHA |
+| [sources/gemini-share-XMyk6HVn2J9S/](./sources/gemini-share-XMyk6HVn2J9S/) | 上一包（20 turns；戰場自身部件追溯／生除扣洞反）— 保留作 provenance |
+| [sources/gemini-share-nutrRjsw676R/](./sources/gemini-share-nutrRjsw676R/) | 更早包（19 turns；PR #12／宣稱再測 + 三技能／頻率層）— 保留作 provenance |
 | [sources/gemini-share-hC9HlUpskKK9/](./sources/gemini-share-hC9HlUpskKK9/) | 更早包（17 turns；Method Registry + 真生成 8K）— 保留作 provenance |
 | [sources/gemini-share-47yxULPlPy0W/](./sources/gemini-share-47yxULPlPy0W/) | 更早包（15 turns）— 保留作 provenance |
 | [../research/ige_shq_github_verifiable_package_v1.0/](../research/ige_shq_github_verifiable_package_v1.0/) | **Current verifiable reference package (v1.1 Complete13Assets)** — 5-layer L0→L4 + registry + tests + **13** assets incl. `B0_GL`/`B2_GL` + `preflight_check.py`（research-only; Fail-Closed: `preflight` → `validate_registry` → unittest → `run_all_verifications.py --strict`） |

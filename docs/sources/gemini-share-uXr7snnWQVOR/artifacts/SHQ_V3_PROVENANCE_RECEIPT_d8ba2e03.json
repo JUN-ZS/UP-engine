@@ -1,0 +1,5753 @@
+{
+  "schema": "SHQ_V9_0_TRUE_GEMINI_EMPTY_BG_CLIPPING_MASK_REVERSE_AND_5D_MANIFOLD_RECEIPT",
+  "version": "9.0.0",
+  "true_gemini_empty_background_source": {
+    "filename": "Gemini_Generated_Image_n6rz1kn6rz1kn6rz.jpeg",
+    "sha256": "f439707fcd86ee29b47daa866e121e07b797b9fd04052462c574526fbd32827f",
+    "resolution_wh": [
+      2752,
+      1536
+    ],
+    "gemini_edit_prompt": "把人和機甲人移除,只剩背景",
+    "clutter_cancellation_stats": {
+      "bg_alignment_dx_px": 0.0698,
+      "bg_alignment_dy_px": 0.071,
+      "ceiling_beam_above_pilot_head_energy": 13.25,
+      "orange_machine_behind_pilot_left_arm_energy": 8.03,
+      "yellow_safety_railing_left_of_u0_energy": 8.23,
+      "hangar_floor_between_u1_and_u2_energy": 9.42,
+      "u1_pilot_head_and_face_energy": 105.75,
+      "u1_pilot_chest_and_waist_energy": 80.37,
+      "u0_white_mecha_chest_energy": 83.37,
+      "u2_artillery_mecha_chest_energy": 111.32
+    }
+  },
+  "script_sha256": {
+    "shq_object_extractor_py": "2e73c84f524af5eecd3186a6c87044e256c1b603917ce5e34b1e518d852a12e4",
+    "shq_recursive_layer_return_py": "02216110d37481dc135426cc37b914eccfb760965fc754739a456bbacc74ab7a",
+    "shq_v2_self_consistent_engine_py": "42f82be6d54ef556cb342db50df7adf48206872f9e42511fd98b917fd005dfd4"
+  },
+  "v9_summary_metrics": {
+    "synthetic_inpainting_used": false,
+    "true_gemini_empty_bg_used": true,
+    "bounding_box_used_for_5d_localization": false,
+    "guillotine_grid_cut_banned_E_SHQ_91": true,
+    "all_24_layers_closed_binary_silhouette_0_255": true,
+    "total_regenerated_rgba_pngs": 72,
+    "soft_alpha_pixels_total": 0,
+    "elev_remap": false,
+    "mean_multi_facet_relief_gain": 1.4623,
+    "total_gold_mesh_3d_pixels_4x": 142834,
+    "phase_shift_px": 0.0675,
+    "global_ncc": 0.9983
+  },
+  "output_artifacts": {
+    "true_gemini_empty_hangar_bg_png": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_V8_INPLACE_EMPTY_HANGAR_BACKGROUND.png",
+    "v6_3d_teaching_dna_and_return_board_png": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_V6_3D_TEACHING_DNA_AND_RETURN_BOARD.png",
+    "v6_3d_layers_normal_and_depth_atlas_png": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_V6_3D_LAYERS_NORMAL_AND_DEPTH_ATLAS.png",
+    "v6_3d_intelligent_master_4x_png": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_V6_3D_INTELLIGENT_MASTER_4X_5504x3072.png",
+    "v5_exploded_anatomy_and_locate_sheet_png": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_V5_GOLDMESH_PILOT_AND_MECHA_EXPLODED_SHEET.png",
+    "v5_complete_board_png": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_V5_GOLDMESH_AND_MECHA_COMPLETE_BOARD.png",
+    "v5_72parts_rgba_zip": "/working_dir/c_9cf0c56aa8603457/artifacts/file_generation/ttl=63d/output/SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK.zip"
+  },
+  "v4_reference_suite_summary": {
+    "guillotine_grid_cut_banned_E_SHQ_91": true,
+    "all_parts_closed_binary_silhouette_0_255": true,
+    "soft_alpha_pixels_total": 0,
+    "elev_remap": false,
+    "bw_subject_return_phase_shift_px": 0.002,
+    "bw_subject_return_ncc": 0.99785,
+    "mecha_sheet_return_phase_shift_px": 0.4998,
+    "mecha_sheet_return_ncc": 0.99922
+  },
+  "three_d_and_five_d_layer_receipts": [
+    {
+      "three_d_layer_contract": {
+        "part_id": "GM_08_GOLDMESH_LEGS_TROUSERS",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "teaching_3d_source_id": "watermarked_img_217049927352389546.jpg",
+        "z_depth_layer_index": 1,
+        "locate_4corners_xyxy": [
+          568,
+          574,
+          743,
+          768
+        ],
+        "dna_inertia_coherence": 0.5715,
+        "mean_3d_normal_xyz": [
+          -0.0001,
+          -0.0184,
+          0.9405
+        ],
+        "multi_facet_relief_gain": 1.6123,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "231edb7f53a97b62c171039d2289c528a5836686aa28666f64e21c75c2733d60",
+        "layer_3d_rgb_sha256": "90cb6cc978ae9ceae38bfee22e72adfc36e716c25de02c705983d35fccce68e8"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "GM_08_GOLDMESH_LEGS_TROUSERS",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "centroid_xy": [
+          659.04,
+          674.32
+        ],
+        "principal_axis_angle_deg": 97.75,
+        "super_roi_8x_wh": [
+          1400,
+          1552
+        ],
+        "z_buffer_priority": 1,
+        "mean_3d_normal_xyz": [
+          -0.0001,
+          -0.0184,
+          0.9405
+        ],
+        "dna_coherence": 0.5715,
+        "relief_gain_8x": 1.5657,
+        "mean_reverse_clipping_energy": 119.96,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "231edb7f53a97b62c171039d2289c528a5836686aa28666f64e21c75c2733d60",
+        "super_roi_8x_rgb_sha256": "5b20a953f4e722b247f627122d2076b7709fd20afd5100f8118e255a6367d19c"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "GM_08A_RIGHT_GOLDMESH_THIGH",
+          "parent_part_id": "GM_08_GOLDMESH_LEGS_TROUSERS",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              87,
+              0
+            ],
+            [
+              87,
+              194
+            ],
+            [
+              0,
+              194
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.49714285714285716,
+              0.0
+            ],
+            [
+              0.49714285714285716,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 11187,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "GM_08B_LEFT_GOLDMESH_THIGH",
+          "parent_part_id": "GM_08_GOLDMESH_LEGS_TROUSERS",
+          "locate_4corners_px": [
+            [
+              87,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              175,
+              194
+            ],
+            [
+              87,
+              194
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.49714285714285716,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.49714285714285716,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 14421,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "GM_08_GOLDMESH_LEGS_TROUSERS",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          2272,
+          2296,
+          2972,
+          3072
+        ],
+        "corners_4_rel": [
+          [
+            0.4127906976744186,
+            0.7473958333333334
+          ],
+          [
+            0.5399709302325582,
+            0.7473958333333334
+          ],
+          [
+            0.5399709302325582,
+            1.0
+          ],
+          [
+            0.4127906976744186,
+            1.0
+          ]
+        ],
+        "closed_edge_pixels_pasted": 409728,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "GM_08_GOLDMESH_LEGS_TROUSERS",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          2272,
+          2296,
+          2972,
+          3072
+        ],
+        "corners_4_rel": [
+          [
+            0.4127906976744186,
+            0.7473958333333334
+          ],
+          [
+            0.5399709302325582,
+            0.7473958333333334
+          ],
+          [
+            0.5399709302325582,
+            1.0
+          ],
+          [
+            0.4127906976744186,
+            1.0
+          ]
+        ],
+        "closed_edge_pixels_pasted": 409728,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "GM_08_GOLDMESH_LEGS_TROUSERS",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          2272,
+          2296,
+          2972,
+          3072
+        ],
+        "corners_4_rel": [
+          [
+            0.4127906976744186,
+            0.7473958333333334
+          ],
+          [
+            0.5399709302325582,
+            0.7473958333333334
+          ],
+          [
+            0.5399709302325582,
+            1.0
+          ],
+          [
+            0.4127906976744186,
+            1.0
+          ]
+        ],
+        "closed_edge_pixels_pasted": 409728,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "WM_08_LEFT_LEG_THRUSTER_BOOT",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 1,
+        "locate_4corners_xyxy": [
+          340,
+          346,
+          497,
+          716
+        ],
+        "dna_inertia_coherence": 0.6426,
+        "mean_3d_normal_xyz": [
+          -0.0124,
+          0.0057,
+          0.8968
+        ],
+        "multi_facet_relief_gain": 1.4027,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "e555468aad3f8bdf3fe9f853c7cde1aadded1febf701ca989680fc181d63cbcc",
+        "layer_3d_rgb_sha256": "6081a753345ebd3d469ae0934249a643fde604e512fe2292d291b40b2956006f"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "WM_08_LEFT_LEG_THRUSTER_BOOT",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "centroid_xy": [
+          420.63,
+          532.11
+        ],
+        "principal_axis_angle_deg": 89.57,
+        "super_roi_8x_wh": [
+          1256,
+          2960
+        ],
+        "z_buffer_priority": 1,
+        "mean_3d_normal_xyz": [
+          -0.0124,
+          0.0057,
+          0.8968
+        ],
+        "dna_coherence": 0.6426,
+        "relief_gain_8x": 1.5764,
+        "mean_reverse_clipping_energy": 91.33,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "e555468aad3f8bdf3fe9f853c7cde1aadded1febf701ca989680fc181d63cbcc",
+        "super_roi_8x_rgb_sha256": "be9143b3113ceb1ed464e693f8fc5910326f94b09c0f41c8ea6cd8b8683a93c3"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "WM_08A_LEFT_THIGH_AND_KNEE",
+          "parent_part_id": "WM_08_LEFT_LEG_THRUSTER_BOOT",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              157,
+              199
+            ],
+            [
+              0,
+              199
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.5378378378378378
+            ],
+            [
+              0.0,
+              0.5378378378378378
+            ]
+          ],
+          "active_closed_edge_pixels": 18720,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "WM_08B_LEFT_SHIN_AND_BOOT",
+          "parent_part_id": "WM_08_LEFT_LEG_THRUSTER_BOOT",
+          "locate_4corners_px": [
+            [
+              0,
+              185
+            ],
+            [
+              157,
+              185
+            ],
+            [
+              157,
+              370
+            ],
+            [
+              0,
+              370
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.5
+            ],
+            [
+              1.0,
+              0.5
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 17084,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "WM_08_LEFT_LEG_THRUSTER_BOOT",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          1360,
+          1384,
+          1988,
+          2864
+        ],
+        "corners_4_rel": [
+          [
+            0.24709302325581395,
+            0.4505208333333333
+          ],
+          [
+            0.36119186046511625,
+            0.4505208333333333
+          ],
+          [
+            0.36119186046511625,
+            0.9322916666666666
+          ],
+          [
+            0.24709302325581395,
+            0.9322916666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 556592,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "WM_08_LEFT_LEG_THRUSTER_BOOT",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          1360,
+          1384,
+          1988,
+          2864
+        ],
+        "corners_4_rel": [
+          [
+            0.24709302325581395,
+            0.4505208333333333
+          ],
+          [
+            0.36119186046511625,
+            0.4505208333333333
+          ],
+          [
+            0.36119186046511625,
+            0.9322916666666666
+          ],
+          [
+            0.24709302325581395,
+            0.9322916666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 556592,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "WM_08_LEFT_LEG_THRUSTER_BOOT",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          1360,
+          1384,
+          1988,
+          2864
+        ],
+        "corners_4_rel": [
+          [
+            0.24709302325581395,
+            0.4505208333333333
+          ],
+          [
+            0.36119186046511625,
+            0.4505208333333333
+          ],
+          [
+            0.36119186046511625,
+            0.9322916666666666
+          ],
+          [
+            0.24709302325581395,
+            0.9322916666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 556592,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "AM_08_TWIN_TRACKED_LEGS",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 1,
+        "locate_4corners_xyxy": [
+          892,
+          334,
+          1290,
+          714
+        ],
+        "dna_inertia_coherence": 0.6682,
+        "mean_3d_normal_xyz": [
+          -0.01,
+          -0.001,
+          0.9292
+        ],
+        "multi_facet_relief_gain": 1.2297,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "6f61e23bc0091938508ca88f75024d25f412216365da942dc5316138a39fb27a",
+        "layer_3d_rgb_sha256": "abceee43f415f3294a64d752da34fcc2bb7cbb23bcc64c88b478cb32a0829dcb"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "AM_08_TWIN_TRACKED_LEGS",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "centroid_xy": [
+          1095.01,
+          522.27
+        ],
+        "principal_axis_angle_deg": -176.02,
+        "super_roi_8x_wh": [
+          3184,
+          3040
+        ],
+        "z_buffer_priority": 1,
+        "mean_3d_normal_xyz": [
+          -0.01,
+          -0.001,
+          0.9292
+        ],
+        "dna_coherence": 0.6682,
+        "relief_gain_8x": 1.5802,
+        "mean_reverse_clipping_energy": 98.65,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "6f61e23bc0091938508ca88f75024d25f412216365da942dc5316138a39fb27a",
+        "super_roi_8x_rgb_sha256": "97fb32e3344aa3f7356b01d328322c091c2ad817ed2e5bd8ab9a0b4237e694f3"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "AM_08A_RIGHT_ARMORED_LEG_TREAD",
+          "parent_part_id": "AM_08_TWIN_TRACKED_LEGS",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              191,
+              380
+            ],
+            [
+              0,
+              380
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.4798994974874372,
+              0.0
+            ],
+            [
+              0.4798994974874372,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 37616,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "AM_08B_LEFT_ARMORED_LEG_TREAD",
+          "parent_part_id": "AM_08_TWIN_TRACKED_LEGS",
+          "locate_4corners_px": [
+            [
+              199,
+              0
+            ],
+            [
+              398,
+              0
+            ],
+            [
+              398,
+              380
+            ],
+            [
+              199,
+              380
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.5,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.5,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 35178,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "AM_08_TWIN_TRACKED_LEGS",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          3568,
+          1336,
+          5160,
+          2856
+        ],
+        "corners_4_rel": [
+          [
+            0.6482558139534884,
+            0.4348958333333333
+          ],
+          [
+            0.9375,
+            0.4348958333333333
+          ],
+          [
+            0.9375,
+            0.9296875
+          ],
+          [
+            0.6482558139534884,
+            0.9296875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 1164704,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "AM_08_TWIN_TRACKED_LEGS",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          3568,
+          1336,
+          5160,
+          2856
+        ],
+        "corners_4_rel": [
+          [
+            0.6482558139534884,
+            0.4348958333333333
+          ],
+          [
+            0.9375,
+            0.4348958333333333
+          ],
+          [
+            0.9375,
+            0.9296875
+          ],
+          [
+            0.6482558139534884,
+            0.9296875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 1164704,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "AM_08_TWIN_TRACKED_LEGS",
+        "z_order": 1,
+        "target_4corners_scaled_xyxy": [
+          3568,
+          1336,
+          5160,
+          2856
+        ],
+        "corners_4_rel": [
+          [
+            0.6482558139534884,
+            0.4348958333333333
+          ],
+          [
+            0.9375,
+            0.4348958333333333
+          ],
+          [
+            0.9375,
+            0.9296875
+          ],
+          [
+            0.6482558139534884,
+            0.9296875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 1164704,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "GM_03_GOLDMESH_CORSET_WAIST",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "teaching_3d_source_id": "watermarked_img_217049927352389546.jpg",
+        "z_depth_layer_index": 2,
+        "locate_4corners_xyxy": [
+          588,
+          446,
+          706,
+          534
+        ],
+        "dna_inertia_coherence": 0.5639,
+        "mean_3d_normal_xyz": [
+          -0.0026,
+          -0.0025,
+          0.9123
+        ],
+        "multi_facet_relief_gain": 1.5751,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "33063f6a28418a41379f2f8a3b8040e94d9aa0e1bcd89b6209a2ce9ef37393a9",
+        "layer_3d_rgb_sha256": "15406720bdf4156302df4d8b0391070222d5086dc6628deaa1cc5c622ce5589e"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "GM_03_GOLDMESH_CORSET_WAIST",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "centroid_xy": [
+          647.19,
+          489.63
+        ],
+        "principal_axis_angle_deg": -174.6,
+        "super_roi_8x_wh": [
+          944,
+          704
+        ],
+        "z_buffer_priority": 2,
+        "mean_3d_normal_xyz": [
+          -0.0026,
+          -0.0025,
+          0.9123
+        ],
+        "dna_coherence": 0.5639,
+        "relief_gain_8x": 1.5646,
+        "mean_reverse_clipping_energy": 97.2,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "33063f6a28418a41379f2f8a3b8040e94d9aa0e1bcd89b6209a2ce9ef37393a9",
+        "super_roi_8x_rgb_sha256": "b93757506ce1cd9a0a749fff6ed9c18fe9a4c929dd0a4645b0778a35ae4268d4"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "GM_03A_RIBBED_ABDOMINAL_CORE",
+          "parent_part_id": "GM_03_GOLDMESH_CORSET_WAIST",
+          "locate_4corners_px": [
+            [
+              23,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              94,
+              88
+            ],
+            [
+              23,
+              88
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.19491525423728814,
+              0.0
+            ],
+            [
+              0.7966101694915254,
+              0.0
+            ],
+            [
+              0.7966101694915254,
+              1.0
+            ],
+            [
+              0.19491525423728814,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 5680,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "GM_03B_GOLDMESH_WAIST_WEAVE",
+          "parent_part_id": "GM_03_GOLDMESH_CORSET_WAIST",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              118,
+              88
+            ],
+            [
+              0,
+              88
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 8106,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "GM_03_GOLDMESH_CORSET_WAIST",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          2352,
+          1784,
+          2824,
+          2136
+        ],
+        "corners_4_rel": [
+          [
+            0.4273255813953488,
+            0.5807291666666666
+          ],
+          [
+            0.5130813953488372,
+            0.5807291666666666
+          ],
+          [
+            0.5130813953488372,
+            0.6953125
+          ],
+          [
+            0.4273255813953488,
+            0.6953125
+          ]
+        ],
+        "closed_edge_pixels_pasted": 129696,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "GM_03_GOLDMESH_CORSET_WAIST",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          2352,
+          1784,
+          2824,
+          2136
+        ],
+        "corners_4_rel": [
+          [
+            0.4273255813953488,
+            0.5807291666666666
+          ],
+          [
+            0.5130813953488372,
+            0.5807291666666666
+          ],
+          [
+            0.5130813953488372,
+            0.6953125
+          ],
+          [
+            0.4273255813953488,
+            0.6953125
+          ]
+        ],
+        "closed_edge_pixels_pasted": 129696,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "GM_03_GOLDMESH_CORSET_WAIST",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          2352,
+          1784,
+          2824,
+          2136
+        ],
+        "corners_4_rel": [
+          [
+            0.4273255813953488,
+            0.5807291666666666
+          ],
+          [
+            0.5130813953488372,
+            0.5807291666666666
+          ],
+          [
+            0.5130813953488372,
+            0.6953125
+          ],
+          [
+            0.4273255813953488,
+            0.6953125
+          ]
+        ],
+        "closed_edge_pixels_pasted": 129696,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "WM_07_RIGHT_LEG_THRUSTER_BOOT",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 2,
+        "locate_4corners_xyxy": [
+          98,
+          315,
+          279,
+          749
+        ],
+        "dna_inertia_coherence": 0.6374,
+        "mean_3d_normal_xyz": [
+          -0.0079,
+          -0.0016,
+          0.8886
+        ],
+        "multi_facet_relief_gain": 1.3423,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "2bfa66c3555e00625a0eb24ce2138317d2a7c565b866272ac6cfe69bd9e51334",
+        "layer_3d_rgb_sha256": "c48bdb14aef5429ece3fdf79a4fcf9fa7659a5a628867ce9388b171fb20d54af"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "WM_07_RIGHT_LEG_THRUSTER_BOOT",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "centroid_xy": [
+          197.74,
+          532.8
+        ],
+        "principal_axis_angle_deg": 97.93,
+        "super_roi_8x_wh": [
+          1448,
+          3472
+        ],
+        "z_buffer_priority": 2,
+        "mean_3d_normal_xyz": [
+          -0.0079,
+          -0.0016,
+          0.8886
+        ],
+        "dna_coherence": 0.6374,
+        "relief_gain_8x": 1.5756,
+        "mean_reverse_clipping_energy": 76.4,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "2bfa66c3555e00625a0eb24ce2138317d2a7c565b866272ac6cfe69bd9e51334",
+        "super_roi_8x_rgb_sha256": "3d3818221642c7d52b920746763d19a65a4a9051a1ca62bb5c7abbacdfe6fade"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "WM_07A_RIGHT_THIGH_AND_KNEE",
+          "parent_part_id": "WM_07_RIGHT_LEG_THRUSTER_BOOT",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              181,
+              225
+            ],
+            [
+              0,
+              225
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.5184331797235023
+            ],
+            [
+              0.0,
+              0.5184331797235023
+            ]
+          ],
+          "active_closed_edge_pixels": 23473,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "WM_07B_RIGHT_VENTED_SHIN_BOOT",
+          "parent_part_id": "WM_07_RIGHT_LEG_THRUSTER_BOOT",
+          "locate_4corners_px": [
+            [
+              0,
+              208
+            ],
+            [
+              181,
+              208
+            ],
+            [
+              181,
+              434
+            ],
+            [
+              0,
+              434
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.4792626728110599
+            ],
+            [
+              1.0,
+              0.4792626728110599
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 21998,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "WM_07_RIGHT_LEG_THRUSTER_BOOT",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          392,
+          1260,
+          1116,
+          2996
+        ],
+        "corners_4_rel": [
+          [
+            0.07122093023255814,
+            0.41015625
+          ],
+          [
+            0.20276162790697674,
+            0.41015625
+          ],
+          [
+            0.20276162790697674,
+            0.9752604166666666
+          ],
+          [
+            0.07122093023255814,
+            0.9752604166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 701744,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "WM_07_RIGHT_LEG_THRUSTER_BOOT",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          392,
+          1260,
+          1116,
+          2996
+        ],
+        "corners_4_rel": [
+          [
+            0.07122093023255814,
+            0.41015625
+          ],
+          [
+            0.20276162790697674,
+            0.41015625
+          ],
+          [
+            0.20276162790697674,
+            0.9752604166666666
+          ],
+          [
+            0.07122093023255814,
+            0.9752604166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 701744,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "WM_07_RIGHT_LEG_THRUSTER_BOOT",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          392,
+          1260,
+          1116,
+          2996
+        ],
+        "corners_4_rel": [
+          [
+            0.07122093023255814,
+            0.41015625
+          ],
+          [
+            0.20276162790697674,
+            0.41015625
+          ],
+          [
+            0.20276162790697674,
+            0.9752604166666666
+          ],
+          [
+            0.07122093023255814,
+            0.9752604166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 701744,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "AM_07_PELVIS_ARMOR_BLOCK",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 2,
+        "locate_4corners_xyxy": [
+          1008,
+          336,
+          1173,
+          443
+        ],
+        "dna_inertia_coherence": 0.6616,
+        "mean_3d_normal_xyz": [
+          -0.0082,
+          -0.0057,
+          0.9246
+        ],
+        "multi_facet_relief_gain": 1.6865,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "8a15c68730b5a12c110f59d86284938aa325c4d559d3d7f806668759f7e5e4f3",
+        "layer_3d_rgb_sha256": "5fa13b2d3f3bf32aece2aaf07e72638b3cdab48511af4e57f210830aee535f06"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "AM_07_PELVIS_ARMOR_BLOCK",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "centroid_xy": [
+          1089.88,
+          387.79
+        ],
+        "principal_axis_angle_deg": 179.7,
+        "super_roi_8x_wh": [
+          1320,
+          856
+        ],
+        "z_buffer_priority": 2,
+        "mean_3d_normal_xyz": [
+          -0.0082,
+          -0.0057,
+          0.9246
+        ],
+        "dna_coherence": 0.6616,
+        "relief_gain_8x": 1.5792,
+        "mean_reverse_clipping_energy": 113.78,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "8a15c68730b5a12c110f59d86284938aa325c4d559d3d7f806668759f7e5e4f3",
+        "super_roi_8x_rgb_sha256": "fbcecf79f30c46a0b464ea279daff7a503bb30ac20bb10158daaaac9418b9763"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "AM_07A_BOLTED_WAIST_RING",
+          "parent_part_id": "AM_07_PELVIS_ARMOR_BLOCK",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              165,
+              55
+            ],
+            [
+              0,
+              55
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.514018691588785
+            ],
+            [
+              0.0,
+              0.514018691588785
+            ]
+          ],
+          "active_closed_edge_pixels": 7614,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "AM_07B_LOWER_CROTCH_SKIRT",
+          "parent_part_id": "AM_07_PELVIS_ARMOR_BLOCK",
+          "locate_4corners_px": [
+            [
+              0,
+              51
+            ],
+            [
+              165,
+              51
+            ],
+            [
+              165,
+              107
+            ],
+            [
+              0,
+              107
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.4766355140186916
+            ],
+            [
+              1.0,
+              0.4766355140186916
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 7260,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "AM_07_PELVIS_ARMOR_BLOCK",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          4032,
+          1344,
+          4692,
+          1772
+        ],
+        "corners_4_rel": [
+          [
+            0.7325581395348837,
+            0.4375
+          ],
+          [
+            0.8524709302325582,
+            0.4375
+          ],
+          [
+            0.8524709302325582,
+            0.5768229166666666
+          ],
+          [
+            0.7325581395348837,
+            0.5768229166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 228448,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "AM_07_PELVIS_ARMOR_BLOCK",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          4032,
+          1344,
+          4692,
+          1772
+        ],
+        "corners_4_rel": [
+          [
+            0.7325581395348837,
+            0.4375
+          ],
+          [
+            0.8524709302325582,
+            0.4375
+          ],
+          [
+            0.8524709302325582,
+            0.5768229166666666
+          ],
+          [
+            0.7325581395348837,
+            0.5768229166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 228448,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "AM_07_PELVIS_ARMOR_BLOCK",
+        "z_order": 2,
+        "target_4corners_scaled_xyxy": [
+          4032,
+          1344,
+          4692,
+          1772
+        ],
+        "corners_4_rel": [
+          [
+            0.7325581395348837,
+            0.4375
+          ],
+          [
+            0.8524709302325582,
+            0.4375
+          ],
+          [
+            0.8524709302325582,
+            0.5768229166666666
+          ],
+          [
+            0.7325581395348837,
+            0.5768229166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 228448,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "GM_02_GOLDMESH_CHEST_ARMOR",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "teaching_3d_source_id": "watermarked_img_217049927352389546.jpg",
+        "z_depth_layer_index": 3,
+        "locate_4corners_xyxy": [
+          578,
+          318,
+          711,
+          460
+        ],
+        "dna_inertia_coherence": 0.5706,
+        "mean_3d_normal_xyz": [
+          -0.0047,
+          0.0024,
+          0.9197
+        ],
+        "multi_facet_relief_gain": 1.4685,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "a7860f08d49a9fb0f2c93fad03c287e9af5122c9cca3563bc03b6262bab575c5",
+        "layer_3d_rgb_sha256": "4fddf5019a0d2392c79226b3a6f2b0c2680c591ae94bda01dc15d10e31d0bd80"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "GM_02_GOLDMESH_CHEST_ARMOR",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "centroid_xy": [
+          643.7,
+          388.36
+        ],
+        "principal_axis_angle_deg": 93.53,
+        "super_roi_8x_wh": [
+          1064,
+          1136
+        ],
+        "z_buffer_priority": 3,
+        "mean_3d_normal_xyz": [
+          -0.0047,
+          0.0024,
+          0.9197
+        ],
+        "dna_coherence": 0.5706,
+        "relief_gain_8x": 1.5656,
+        "mean_reverse_clipping_energy": 68.41,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "a7860f08d49a9fb0f2c93fad03c287e9af5122c9cca3563bc03b6262bab575c5",
+        "super_roi_8x_rgb_sha256": "b933eff3283ce56f4b2da888252caf0a6143b2a21d7b15226b05297f877b82f2"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "GM_02A_GOLDMESH_SHOULDER_YOKE",
+          "parent_part_id": "GM_02_GOLDMESH_CHEST_ARMOR",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              133,
+              65
+            ],
+            [
+              0,
+              65
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.45774647887323944
+            ],
+            [
+              0.0,
+              0.45774647887323944
+            ]
+          ],
+          "active_closed_edge_pixels": 7553,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "GM_02B_MOLDED_LEATHER_BUST",
+          "parent_part_id": "GM_02_GOLDMESH_CHEST_ARMOR",
+          "locate_4corners_px": [
+            [
+              10,
+              56
+            ],
+            [
+              122,
+              56
+            ],
+            [
+              122,
+              142
+            ],
+            [
+              10,
+              142
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.07518796992481203,
+              0.39436619718309857
+            ],
+            [
+              0.9172932330827067,
+              0.39436619718309857
+            ],
+            [
+              0.9172932330827067,
+              1.0
+            ],
+            [
+              0.07518796992481203,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 9184,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "GM_02_GOLDMESH_CHEST_ARMOR",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          2312,
+          1272,
+          2844,
+          1840
+        ],
+        "corners_4_rel": [
+          [
+            0.42005813953488375,
+            0.4140625
+          ],
+          [
+            0.5167151162790697,
+            0.4140625
+          ],
+          [
+            0.5167151162790697,
+            0.5989583333333334
+          ],
+          [
+            0.42005813953488375,
+            0.5989583333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 263744,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "GM_02_GOLDMESH_CHEST_ARMOR",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          2312,
+          1272,
+          2844,
+          1840
+        ],
+        "corners_4_rel": [
+          [
+            0.42005813953488375,
+            0.4140625
+          ],
+          [
+            0.5167151162790697,
+            0.4140625
+          ],
+          [
+            0.5167151162790697,
+            0.5989583333333334
+          ],
+          [
+            0.42005813953488375,
+            0.5989583333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 263744,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "GM_02_GOLDMESH_CHEST_ARMOR",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          2312,
+          1272,
+          2844,
+          1840
+        ],
+        "corners_4_rel": [
+          [
+            0.42005813953488375,
+            0.4140625
+          ],
+          [
+            0.5167151162790697,
+            0.4140625
+          ],
+          [
+            0.5167151162790697,
+            0.5989583333333334
+          ],
+          [
+            0.42005813953488375,
+            0.5989583333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 263744,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "WM_06_PELVIS_GYRO_BLOCK",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 3,
+        "locate_4corners_xyxy": [
+          254,
+          334,
+          393,
+          432
+        ],
+        "dna_inertia_coherence": 0.629,
+        "mean_3d_normal_xyz": [
+          0.0032,
+          0.0119,
+          0.8708
+        ],
+        "multi_facet_relief_gain": 1.6641,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "438811809adf2ec8e6a6d15d13069af6fe198aaf9712d1f3d2f172babe02c2f8",
+        "layer_3d_rgb_sha256": "1a27ec84b02df4dded79460e9d506f6d43bf20843828233c6a99cba33af3ccbe"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "WM_06_PELVIS_GYRO_BLOCK",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "centroid_xy": [
+          323.04,
+          376.68
+        ],
+        "principal_axis_angle_deg": 179.52,
+        "super_roi_8x_wh": [
+          1112,
+          784
+        ],
+        "z_buffer_priority": 3,
+        "mean_3d_normal_xyz": [
+          0.0032,
+          0.0119,
+          0.8708
+        ],
+        "dna_coherence": 0.629,
+        "relief_gain_8x": 1.5743,
+        "mean_reverse_clipping_energy": 105.58,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "438811809adf2ec8e6a6d15d13069af6fe198aaf9712d1f3d2f172babe02c2f8",
+        "super_roi_8x_rgb_sha256": "fa540d6303de96a428ce39f8bfa5f99cac2f7e6b20e8f51e6345aeb5edc6b06d"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "WM_06A_UPPER_WAIST_HYDRAULICS",
+          "parent_part_id": "WM_06_PELVIS_GYRO_BLOCK",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              139,
+              50
+            ],
+            [
+              0,
+              50
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.5102040816326531
+            ],
+            [
+              0.0,
+              0.5102040816326531
+            ]
+          ],
+          "active_closed_edge_pixels": 5624,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "WM_06B_LOWER_PELVIS_GUARD",
+          "parent_part_id": "WM_06_PELVIS_GYRO_BLOCK",
+          "locate_4corners_px": [
+            [
+              0,
+              47
+            ],
+            [
+              139,
+              47
+            ],
+            [
+              139,
+              98
+            ],
+            [
+              0,
+              98
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.47959183673469385
+            ],
+            [
+              1.0,
+              0.47959183673469385
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 4322,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "WM_06_PELVIS_GYRO_BLOCK",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          1016,
+          1336,
+          1572,
+          1728
+        ],
+        "corners_4_rel": [
+          [
+            0.18459302325581395,
+            0.4348958333333333
+          ],
+          [
+            0.2856104651162791,
+            0.4348958333333333
+          ],
+          [
+            0.2856104651162791,
+            0.5625
+          ],
+          [
+            0.18459302325581395,
+            0.5625
+          ]
+        ],
+        "closed_edge_pixels_pasted": 152976,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "WM_06_PELVIS_GYRO_BLOCK",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          1016,
+          1336,
+          1572,
+          1728
+        ],
+        "corners_4_rel": [
+          [
+            0.18459302325581395,
+            0.4348958333333333
+          ],
+          [
+            0.2856104651162791,
+            0.4348958333333333
+          ],
+          [
+            0.2856104651162791,
+            0.5625
+          ],
+          [
+            0.18459302325581395,
+            0.5625
+          ]
+        ],
+        "closed_edge_pixels_pasted": 152976,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "WM_06_PELVIS_GYRO_BLOCK",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          1016,
+          1336,
+          1572,
+          1728
+        ],
+        "corners_4_rel": [
+          [
+            0.18459302325581395,
+            0.4348958333333333
+          ],
+          [
+            0.2856104651162791,
+            0.4348958333333333
+          ],
+          [
+            0.2856104651162791,
+            0.5625
+          ],
+          [
+            0.18459302325581395,
+            0.5625
+          ]
+        ],
+        "closed_edge_pixels_pasted": 152976,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "AM_02_SHOULDER_MISSILE_PODS",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 3,
+        "locate_4corners_xyxy": [
+          976,
+          56,
+          1322,
+          167
+        ],
+        "dna_inertia_coherence": 0.6471,
+        "mean_3d_normal_xyz": [
+          -0.0191,
+          0.0023,
+          0.8811
+        ],
+        "multi_facet_relief_gain": 1.2838,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "2dd49b3370cd6ad8128a28b4c9a07ca70d75351f2decb8d2cd98c5426e2b6de5",
+        "layer_3d_rgb_sha256": "ed655f6a18b4a9a954759033cfb8a464276fe68a9d21b36752f1bdf402187b17"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "AM_02_SHOULDER_MISSILE_PODS",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "centroid_xy": [
+          1162.09,
+          115.14
+        ],
+        "principal_axis_angle_deg": 174.62,
+        "super_roi_8x_wh": [
+          2768,
+          888
+        ],
+        "z_buffer_priority": 3,
+        "mean_3d_normal_xyz": [
+          -0.0191,
+          0.0023,
+          0.8811
+        ],
+        "dna_coherence": 0.6471,
+        "relief_gain_8x": 1.5771,
+        "mean_reverse_clipping_energy": 81.19,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "2dd49b3370cd6ad8128a28b4c9a07ca70d75351f2decb8d2cd98c5426e2b6de5",
+        "super_roi_8x_rgb_sha256": "c39eee05f79766834ef71b68583aa197d29a46b443b67e01f39ba794393ad7a4"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "AM_02A_RIGHT_6CELL_MISSILE_POD",
+          "parent_part_id": "AM_02_SHOULDER_MISSILE_PODS",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              155,
+              111
+            ],
+            [
+              0,
+              111
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.4479768786127168,
+              0.0
+            ],
+            [
+              0.4479768786127168,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 4927,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "AM_02B_LEFT_6CELL_MISSILE_POD",
+          "parent_part_id": "AM_02_SHOULDER_MISSILE_PODS",
+          "locate_4corners_px": [
+            [
+              190,
+              0
+            ],
+            [
+              346,
+              0
+            ],
+            [
+              346,
+              111
+            ],
+            [
+              190,
+              111
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.5491329479768786,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.5491329479768786,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 6429,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "AM_02_SHOULDER_MISSILE_PODS",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          3904,
+          224,
+          5288,
+          668
+        ],
+        "corners_4_rel": [
+          [
+            0.7093023255813954,
+            0.07291666666666667
+          ],
+          [
+            0.9607558139534884,
+            0.07291666666666667
+          ],
+          [
+            0.9607558139534884,
+            0.21744791666666666
+          ],
+          [
+            0.7093023255813954,
+            0.21744791666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 181696,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "AM_02_SHOULDER_MISSILE_PODS",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          3904,
+          224,
+          5288,
+          668
+        ],
+        "corners_4_rel": [
+          [
+            0.7093023255813954,
+            0.07291666666666667
+          ],
+          [
+            0.9607558139534884,
+            0.07291666666666667
+          ],
+          [
+            0.9607558139534884,
+            0.21744791666666666
+          ],
+          [
+            0.7093023255813954,
+            0.21744791666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 181696,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "AM_02_SHOULDER_MISSILE_PODS",
+        "z_order": 3,
+        "target_4corners_scaled_xyxy": [
+          3904,
+          224,
+          5288,
+          668
+        ],
+        "corners_4_rel": [
+          [
+            0.7093023255813954,
+            0.07291666666666667
+          ],
+          [
+            0.9607558139534884,
+            0.07291666666666667
+          ],
+          [
+            0.9607558139534884,
+            0.21744791666666666
+          ],
+          [
+            0.7093023255813954,
+            0.21744791666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 181696,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "GM_04_RIGHT_GOLDMESH_ARM",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "teaching_3d_source_id": "watermarked_img_217049927352389546.jpg",
+        "z_depth_layer_index": 4,
+        "locate_4corners_xyxy": [
+          539,
+          326,
+          590,
+          586
+        ],
+        "dna_inertia_coherence": 0.5747,
+        "mean_3d_normal_xyz": [
+          -0.014,
+          -0.0026,
+          0.8783
+        ],
+        "multi_facet_relief_gain": 1.3538,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "2d980c97ac400cbefa39523492bf261c0ea17b9351ebe8a5fc59e5c707d185eb",
+        "layer_3d_rgb_sha256": "958e08d338181b63e2e0d943fbe9879a5ecc5741b226a56c667ba8f5f413990a"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "GM_04_RIGHT_GOLDMESH_ARM",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "centroid_xy": [
+          566.0,
+          464.44
+        ],
+        "principal_axis_angle_deg": 91.32,
+        "super_roi_8x_wh": [
+          408,
+          2080
+        ],
+        "z_buffer_priority": 4,
+        "mean_3d_normal_xyz": [
+          -0.014,
+          -0.0026,
+          0.8783
+        ],
+        "dna_coherence": 0.5747,
+        "relief_gain_8x": 1.5662,
+        "mean_reverse_clipping_energy": 89.44,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "2d980c97ac400cbefa39523492bf261c0ea17b9351ebe8a5fc59e5c707d185eb",
+        "super_roi_8x_rgb_sha256": "148e7565bf84786c4740de7dc1ebf895386e733519923933be4532acdec4ee22"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "GM_04A_RIGHT_DELTOID_MESH",
+          "parent_part_id": "GM_04_RIGHT_GOLDMESH_ARM",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              51,
+              135
+            ],
+            [
+              0,
+              135
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.5192307692307693
+            ],
+            [
+              0.0,
+              0.5192307692307693
+            ]
+          ],
+          "active_closed_edge_pixels": 4367,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "GM_04B_RIGHT_FOREARM_MESH",
+          "parent_part_id": "GM_04_RIGHT_GOLDMESH_ARM",
+          "locate_4corners_px": [
+            [
+              0,
+              124
+            ],
+            [
+              51,
+              124
+            ],
+            [
+              51,
+              260
+            ],
+            [
+              0,
+              260
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.47692307692307695
+            ],
+            [
+              1.0,
+              0.47692307692307695
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 5408,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "GM_04_RIGHT_GOLDMESH_ARM",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          2156,
+          1304,
+          2360,
+          2344
+        ],
+        "corners_4_rel": [
+          [
+            0.39171511627906974,
+            0.4244791666666667
+          ],
+          [
+            0.42877906976744184,
+            0.4244791666666667
+          ],
+          [
+            0.42877906976744184,
+            0.7630208333333334
+          ],
+          [
+            0.39171511627906974,
+            0.7630208333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 148832,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "GM_04_RIGHT_GOLDMESH_ARM",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          2156,
+          1304,
+          2360,
+          2344
+        ],
+        "corners_4_rel": [
+          [
+            0.39171511627906974,
+            0.4244791666666667
+          ],
+          [
+            0.42877906976744184,
+            0.4244791666666667
+          ],
+          [
+            0.42877906976744184,
+            0.7630208333333334
+          ],
+          [
+            0.39171511627906974,
+            0.7630208333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 148832,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "GM_04_RIGHT_GOLDMESH_ARM",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          2156,
+          1304,
+          2360,
+          2344
+        ],
+        "corners_4_rel": [
+          [
+            0.39171511627906974,
+            0.4244791666666667
+          ],
+          [
+            0.42877906976744184,
+            0.4244791666666667
+          ],
+          [
+            0.42877906976744184,
+            0.7630208333333334
+          ],
+          [
+            0.39171511627906974,
+            0.7630208333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 148832,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "WM_02_SHOULDER_SENSOR_PODS",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 4,
+        "locate_4corners_xyxy": [
+          166,
+          22,
+          439,
+          140
+        ],
+        "dna_inertia_coherence": 0.6696,
+        "mean_3d_normal_xyz": [
+          -0.0001,
+          0.0049,
+          0.8041
+        ],
+        "multi_facet_relief_gain": 1.2742,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "f54c65a61d287833f3cbc6c22875444677b2ca0816873b61153f02f881b88bf6",
+        "layer_3d_rgb_sha256": "3ccfaae7bbf61b5ca3609d10a83599018e70f3763ee06277bae983da0161530d"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "WM_02_SHOULDER_SENSOR_PODS",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "centroid_xy": [
+          275.23,
+          79.55
+        ],
+        "principal_axis_angle_deg": -173.81,
+        "super_roi_8x_wh": [
+          2184,
+          944
+        ],
+        "z_buffer_priority": 4,
+        "mean_3d_normal_xyz": [
+          -0.0001,
+          0.0049,
+          0.8041
+        ],
+        "dna_coherence": 0.6696,
+        "relief_gain_8x": 1.5804,
+        "mean_reverse_clipping_energy": 142.58,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "f54c65a61d287833f3cbc6c22875444677b2ca0816873b61153f02f881b88bf6",
+        "super_roi_8x_rgb_sha256": "6fa2187052a442a82b54545f4fb21a4ad27b5c913436ef2392d7bd47e125bb1c"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "WM_02A_RIGHT_FLOODLIGHT_POD",
+          "parent_part_id": "WM_02_SHOULDER_SENSOR_PODS",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              131,
+              0
+            ],
+            [
+              131,
+              118
+            ],
+            [
+              0,
+              118
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.47985347985347987,
+              0.0
+            ],
+            [
+              0.47985347985347987,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 7975,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "WM_02B_LEFT_FLOODLIGHT_POD",
+          "parent_part_id": "WM_02_SHOULDER_SENSOR_PODS",
+          "locate_4corners_px": [
+            [
+              141,
+              0
+            ],
+            [
+              273,
+              0
+            ],
+            [
+              273,
+              118
+            ],
+            [
+              141,
+              118
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.5164835164835165,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.5164835164835165,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 3298,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "WM_02_SHOULDER_SENSOR_PODS",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          664,
+          88,
+          1756,
+          560
+        ],
+        "corners_4_rel": [
+          [
+            0.12063953488372094,
+            0.028645833333333332
+          ],
+          [
+            0.3190406976744186,
+            0.028645833333333332
+          ],
+          [
+            0.3190406976744186,
+            0.18229166666666666
+          ],
+          [
+            0.12063953488372094,
+            0.18229166666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 180368,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "WM_02_SHOULDER_SENSOR_PODS",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          664,
+          88,
+          1756,
+          560
+        ],
+        "corners_4_rel": [
+          [
+            0.12063953488372094,
+            0.028645833333333332
+          ],
+          [
+            0.3190406976744186,
+            0.028645833333333332
+          ],
+          [
+            0.3190406976744186,
+            0.18229166666666666
+          ],
+          [
+            0.12063953488372094,
+            0.18229166666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 180368,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "WM_02_SHOULDER_SENSOR_PODS",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          664,
+          88,
+          1756,
+          560
+        ],
+        "corners_4_rel": [
+          [
+            0.12063953488372094,
+            0.028645833333333332
+          ],
+          [
+            0.3190406976744186,
+            0.028645833333333332
+          ],
+          [
+            0.3190406976744186,
+            0.18229166666666666
+          ],
+          [
+            0.12063953488372094,
+            0.18229166666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 180368,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "AM_04_REACTIVE_CHEST_AND_PODS",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 4,
+        "locate_4corners_xyxy": [
+          965,
+          171,
+          1217,
+          350
+        ],
+        "dna_inertia_coherence": 0.6708,
+        "mean_3d_normal_xyz": [
+          -0.001,
+          0.0026,
+          0.9257
+        ],
+        "multi_facet_relief_gain": 1.3868,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "4626fb61a6d79bcad104e278a68c745ffc1c8e35e3291faa490b7b8eb427cc03",
+        "layer_3d_rgb_sha256": "a65a6984a3a92cc147716db20e46acc97d8c0049a5f9f140bad9922757957219"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "AM_04_REACTIVE_CHEST_AND_PODS",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "centroid_xy": [
+          1091.38,
+          259.21
+        ],
+        "principal_axis_angle_deg": 179.51,
+        "super_roi_8x_wh": [
+          2016,
+          1432
+        ],
+        "z_buffer_priority": 4,
+        "mean_3d_normal_xyz": [
+          -0.001,
+          0.0026,
+          0.9257
+        ],
+        "dna_coherence": 0.6708,
+        "relief_gain_8x": 1.5806,
+        "mean_reverse_clipping_energy": 117.68,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "4626fb61a6d79bcad104e278a68c745ffc1c8e35e3291faa490b7b8eb427cc03",
+        "super_roi_8x_rgb_sha256": "e74a535a3c5475d3681bdd72c688718e29b0025ac859b525b1922c1a874babd1"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "AM_04A_CENTRAL_BOLTED_CHEST",
+          "parent_part_id": "AM_04_REACTIVE_CHEST_AND_PODS",
+          "locate_4corners_px": [
+            [
+              50,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              201,
+              179
+            ],
+            [
+              50,
+              179
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.1984126984126984,
+              0.0
+            ],
+            [
+              0.7976190476190477,
+              0.0
+            ],
+            [
+              0.7976190476190477,
+              1.0
+            ],
+            [
+              0.1984126984126984,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 25579,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "AM_04B_TWIN_CHEST_MISSILE_BAYS",
+          "parent_part_id": "AM_04_REACTIVE_CHEST_AND_PODS",
+          "locate_4corners_px": [
+            [
+              0,
+              44
+            ],
+            [
+              252,
+              44
+            ],
+            [
+              252,
+              152
+            ],
+            [
+              0,
+              152
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.24581005586592178
+            ],
+            [
+              1.0,
+              0.24581005586592178
+            ],
+            [
+              1.0,
+              0.8491620111731844
+            ],
+            [
+              0.0,
+              0.8491620111731844
+            ]
+          ],
+          "active_closed_edge_pixels": 25748,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "AM_04_REACTIVE_CHEST_AND_PODS",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          3860,
+          684,
+          4868,
+          1400
+        ],
+        "corners_4_rel": [
+          [
+            0.7013081395348837,
+            0.22265625
+          ],
+          [
+            0.8844476744186046,
+            0.22265625
+          ],
+          [
+            0.8844476744186046,
+            0.4557291666666667
+          ],
+          [
+            0.7013081395348837,
+            0.4557291666666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 637264,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "AM_04_REACTIVE_CHEST_AND_PODS",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          3860,
+          684,
+          4868,
+          1400
+        ],
+        "corners_4_rel": [
+          [
+            0.7013081395348837,
+            0.22265625
+          ],
+          [
+            0.8844476744186046,
+            0.22265625
+          ],
+          [
+            0.8844476744186046,
+            0.4557291666666667
+          ],
+          [
+            0.7013081395348837,
+            0.4557291666666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 637264,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "AM_04_REACTIVE_CHEST_AND_PODS",
+        "z_order": 4,
+        "target_4corners_scaled_xyxy": [
+          3860,
+          684,
+          4868,
+          1400
+        ],
+        "corners_4_rel": [
+          [
+            0.7013081395348837,
+            0.22265625
+          ],
+          [
+            0.8844476744186046,
+            0.22265625
+          ],
+          [
+            0.8844476744186046,
+            0.4557291666666667
+          ],
+          [
+            0.7013081395348837,
+            0.4557291666666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 637264,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "GM_05_LEFT_GOLDMESH_ARM",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "teaching_3d_source_id": "watermarked_img_217049927352389546.jpg",
+        "z_depth_layer_index": 5,
+        "locate_4corners_xyxy": [
+          694,
+          330,
+          771,
+          576
+        ],
+        "dna_inertia_coherence": 0.6173,
+        "mean_3d_normal_xyz": [
+          -0.0085,
+          0.0069,
+          0.8562
+        ],
+        "multi_facet_relief_gain": 1.4203,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "3478076195a93af1eda6f6fe005bbe4d8d5db35f1739cd136377dc73060edbbc",
+        "layer_3d_rgb_sha256": "2ae135b6e8558ea0181d5b3ccc5c7ff1bc000634f0e5d87c8d33aa17e9ab7740"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "GM_05_LEFT_GOLDMESH_ARM",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "centroid_xy": [
+          724.27,
+          466.19
+        ],
+        "principal_axis_angle_deg": 81.8,
+        "super_roi_8x_wh": [
+          616,
+          1968
+        ],
+        "z_buffer_priority": 5,
+        "mean_3d_normal_xyz": [
+          -0.0085,
+          0.0069,
+          0.8562
+        ],
+        "dna_coherence": 0.6173,
+        "relief_gain_8x": 1.5726,
+        "mean_reverse_clipping_energy": 74.79,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "3478076195a93af1eda6f6fe005bbe4d8d5db35f1739cd136377dc73060edbbc",
+        "super_roi_8x_rgb_sha256": "50bc1c14c14c70a7480922e08daa7c22f868fb0f3d617ba594987c9cc7e3e7e1"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "GM_05A_LEFT_DELTOID_MESH",
+          "parent_part_id": "GM_05_LEFT_GOLDMESH_ARM",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              77,
+              0
+            ],
+            [
+              77,
+              127
+            ],
+            [
+              0,
+              127
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.516260162601626
+            ],
+            [
+              0.0,
+              0.516260162601626
+            ]
+          ],
+          "active_closed_edge_pixels": 3573,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "GM_05B_LEFT_FOREARM_MESH",
+          "parent_part_id": "GM_05_LEFT_GOLDMESH_ARM",
+          "locate_4corners_px": [
+            [
+              0,
+              118
+            ],
+            [
+              77,
+              118
+            ],
+            [
+              77,
+              246
+            ],
+            [
+              0,
+              246
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.4796747967479675
+            ],
+            [
+              1.0,
+              0.4796747967479675
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 4638,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "GM_05_LEFT_GOLDMESH_ARM",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          2776,
+          1320,
+          3084,
+          2304
+        ],
+        "corners_4_rel": [
+          [
+            0.5043604651162791,
+            0.4296875
+          ],
+          [
+            0.5603197674418605,
+            0.4296875
+          ],
+          [
+            0.5603197674418605,
+            0.75
+          ],
+          [
+            0.5043604651162791,
+            0.75
+          ]
+        ],
+        "closed_edge_pixels_pasted": 127568,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "GM_05_LEFT_GOLDMESH_ARM",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          2776,
+          1320,
+          3084,
+          2304
+        ],
+        "corners_4_rel": [
+          [
+            0.5043604651162791,
+            0.4296875
+          ],
+          [
+            0.5603197674418605,
+            0.4296875
+          ],
+          [
+            0.5603197674418605,
+            0.75
+          ],
+          [
+            0.5043604651162791,
+            0.75
+          ]
+        ],
+        "closed_edge_pixels_pasted": 127568,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "GM_05_LEFT_GOLDMESH_ARM",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          2776,
+          1320,
+          3084,
+          2304
+        ],
+        "corners_4_rel": [
+          [
+            0.5043604651162791,
+            0.4296875
+          ],
+          [
+            0.5603197674418605,
+            0.4296875
+          ],
+          [
+            0.5603197674418605,
+            0.75
+          ],
+          [
+            0.5043604651162791,
+            0.75
+          ]
+        ],
+        "closed_edge_pixels_pasted": 127568,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "WM_03_WEATHERED_CHEST_HYDRAULICS",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 5,
+        "locate_4corners_xyxy": [
+          188,
+          92,
+          433,
+          353
+        ],
+        "dna_inertia_coherence": 0.6661,
+        "mean_3d_normal_xyz": [
+          -0.009,
+          0.0004,
+          0.8838
+        ],
+        "multi_facet_relief_gain": 1.3334,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "421b8d7d3ebe4a004539ede060efb4dd9d02dc774a570a5c38db3162aeb4ea75",
+        "layer_3d_rgb_sha256": "278201f4dbacf1bcdc1080c9fcd6bfaa56db9555d5dc45188aa06cfdee2d6011"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "WM_03_WEATHERED_CHEST_HYDRAULICS",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "centroid_xy": [
+          310.41,
+          216.81
+        ],
+        "principal_axis_angle_deg": 68.21,
+        "super_roi_8x_wh": [
+          1960,
+          2088
+        ],
+        "z_buffer_priority": 5,
+        "mean_3d_normal_xyz": [
+          -0.009,
+          0.0004,
+          0.8838
+        ],
+        "dna_coherence": 0.6661,
+        "relief_gain_8x": 1.5799,
+        "mean_reverse_clipping_energy": 96.39,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "421b8d7d3ebe4a004539ede060efb4dd9d02dc774a570a5c38db3162aeb4ea75",
+        "super_roi_8x_rgb_sha256": "aff0bf6208a60abe76e541cc1999780d1c2b366e0f9c69719e5b7cd0ef6f5d92"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "WM_03A_WEATHERED_CHEST_ARMOR",
+          "parent_part_id": "WM_03_WEATHERED_CHEST_HYDRAULICS",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              245,
+              161
+            ],
+            [
+              0,
+              161
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.6168582375478927
+            ],
+            [
+              0.0,
+              0.6168582375478927
+            ]
+          ],
+          "active_closed_edge_pixels": 33564,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "WM_03B_COPPER_HYDRAULIC_PIPES",
+          "parent_part_id": "WM_03_WEATHERED_CHEST_HYDRAULICS",
+          "locate_4corners_px": [
+            [
+              19,
+              135
+            ],
+            [
+              225,
+              135
+            ],
+            [
+              225,
+              261
+            ],
+            [
+              19,
+              261
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.07755102040816327,
+              0.5172413793103449
+            ],
+            [
+              0.9183673469387755,
+              0.5172413793103449
+            ],
+            [
+              0.9183673469387755,
+              1.0
+            ],
+            [
+              0.07755102040816327,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 21035,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "WM_03_WEATHERED_CHEST_HYDRAULICS",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          752,
+          368,
+          1732,
+          1412
+        ],
+        "corners_4_rel": [
+          [
+            0.13662790697674418,
+            0.11979166666666667
+          ],
+          [
+            0.31468023255813954,
+            0.11979166666666667
+          ],
+          [
+            0.31468023255813954,
+            0.4596354166666667
+          ],
+          [
+            0.13662790697674418,
+            0.4596354166666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 788784,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "WM_03_WEATHERED_CHEST_HYDRAULICS",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          752,
+          368,
+          1732,
+          1412
+        ],
+        "corners_4_rel": [
+          [
+            0.13662790697674418,
+            0.11979166666666667
+          ],
+          [
+            0.31468023255813954,
+            0.11979166666666667
+          ],
+          [
+            0.31468023255813954,
+            0.4596354166666667
+          ],
+          [
+            0.13662790697674418,
+            0.4596354166666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 788784,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "WM_03_WEATHERED_CHEST_HYDRAULICS",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          752,
+          368,
+          1732,
+          1412
+        ],
+        "corners_4_rel": [
+          [
+            0.13662790697674418,
+            0.11979166666666667
+          ],
+          [
+            0.31468023255813954,
+            0.11979166666666667
+          ],
+          [
+            0.31468023255813954,
+            0.4596354166666667
+          ],
+          [
+            0.13662790697674418,
+            0.4596354166666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 788784,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "AM_05_RIGHT_ARM_SHIELDED",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 5,
+        "locate_4corners_xyxy": [
+          878,
+          171,
+          973,
+          474
+        ],
+        "dna_inertia_coherence": 0.6499,
+        "mean_3d_normal_xyz": [
+          0.009,
+          0.0012,
+          0.9314
+        ],
+        "multi_facet_relief_gain": 1.5342,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "ade4fa803883cd2741422f041197402af374d2339639bac4413769d3666141b6",
+        "layer_3d_rgb_sha256": "06cc7afd94c15febe6aa425364b6833103b8e95576b255e37750eb5b12087dcc"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "AM_05_RIGHT_ARM_SHIELDED",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "centroid_xy": [
+          928.76,
+          314.79
+        ],
+        "principal_axis_angle_deg": 95.48,
+        "super_roi_8x_wh": [
+          760,
+          2424
+        ],
+        "z_buffer_priority": 5,
+        "mean_3d_normal_xyz": [
+          0.009,
+          0.0012,
+          0.9314
+        ],
+        "dna_coherence": 0.6499,
+        "relief_gain_8x": 1.5775,
+        "mean_reverse_clipping_energy": 122.16,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "ade4fa803883cd2741422f041197402af374d2339639bac4413769d3666141b6",
+        "super_roi_8x_rgb_sha256": "dcf82f18e5076fd9842fd7574f7628e421452053e2c9a04ae204d8dfc8135187"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "AM_05A_RIGHT_SHOULDER_SHIELD",
+          "parent_part_id": "AM_05_RIGHT_ARM_SHIELDED",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              95,
+              151
+            ],
+            [
+              0,
+              151
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.49834983498349833
+            ],
+            [
+              0.0,
+              0.49834983498349833
+            ]
+          ],
+          "active_closed_edge_pixels": 8515,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "AM_05B_RIGHT_FOREARM_FIST",
+          "parent_part_id": "AM_05_RIGHT_ARM_SHIELDED",
+          "locate_4corners_px": [
+            [
+              0,
+              139
+            ],
+            [
+              95,
+              139
+            ],
+            [
+              95,
+              303
+            ],
+            [
+              0,
+              303
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.45874587458745875
+            ],
+            [
+              1.0,
+              0.45874587458745875
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 8787,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "AM_05_RIGHT_ARM_SHIELDED",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          3512,
+          684,
+          3892,
+          1896
+        ],
+        "corners_4_rel": [
+          [
+            0.6380813953488372,
+            0.22265625
+          ],
+          [
+            0.7071220930232558,
+            0.22265625
+          ],
+          [
+            0.7071220930232558,
+            0.6171875
+          ],
+          [
+            0.6380813953488372,
+            0.6171875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 267648,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "AM_05_RIGHT_ARM_SHIELDED",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          3512,
+          684,
+          3892,
+          1896
+        ],
+        "corners_4_rel": [
+          [
+            0.6380813953488372,
+            0.22265625
+          ],
+          [
+            0.7071220930232558,
+            0.22265625
+          ],
+          [
+            0.7071220930232558,
+            0.6171875
+          ],
+          [
+            0.6380813953488372,
+            0.6171875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 267648,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "AM_05_RIGHT_ARM_SHIELDED",
+        "z_order": 5,
+        "target_4corners_scaled_xyxy": [
+          3512,
+          684,
+          3892,
+          1896
+        ],
+        "corners_4_rel": [
+          [
+            0.6380813953488372,
+            0.22265625
+          ],
+          [
+            0.7071220930232558,
+            0.22265625
+          ],
+          [
+            0.7071220930232558,
+            0.6171875
+          ],
+          [
+            0.6380813953488372,
+            0.6171875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 267648,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "GM_06_TACTICAL_BELT_RIG",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "teaching_3d_source_id": "watermarked_img_217049927352389546.jpg",
+        "z_depth_layer_index": 6,
+        "locate_4corners_xyxy": [
+          568,
+          508,
+          739,
+          586
+        ],
+        "dna_inertia_coherence": 0.5708,
+        "mean_3d_normal_xyz": [
+          0.0062,
+          0.0013,
+          0.9047
+        ],
+        "multi_facet_relief_gain": 1.4419,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "b4542f00b5474e4f616b0d58d888bf343767793b2bf045640a9d5073acb712d5",
+        "layer_3d_rgb_sha256": "c05a0766ff51da792c41ca3ec974899de3250c89b263898c9466d3c58f13153d"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "GM_06_TACTICAL_BELT_RIG",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "centroid_xy": [
+          645.85,
+          547.71
+        ],
+        "principal_axis_angle_deg": -176.51,
+        "super_roi_8x_wh": [
+          1368,
+          624
+        ],
+        "z_buffer_priority": 6,
+        "mean_3d_normal_xyz": [
+          0.0062,
+          0.0013,
+          0.9047
+        ],
+        "dna_coherence": 0.5708,
+        "relief_gain_8x": 1.5656,
+        "mean_reverse_clipping_energy": 117.52,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "b4542f00b5474e4f616b0d58d888bf343767793b2bf045640a9d5073acb712d5",
+        "super_roi_8x_rgb_sha256": "a30d292426380be464444ceeb5b82a69be4fd2688ea8b3c0de037986efad0861"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "GM_06A_RIGHT_UTILITY_POUCH",
+          "parent_part_id": "GM_06_TACTICAL_BELT_RIG",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              82,
+              0
+            ],
+            [
+              82,
+              78
+            ],
+            [
+              0,
+              78
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.47953216374269003,
+              0.0
+            ],
+            [
+              0.47953216374269003,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 5460,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "GM_06B_BUCKLE_AND_LEFT_POUCH",
+          "parent_part_id": "GM_06_TACTICAL_BELT_RIG",
+          "locate_4corners_px": [
+            [
+              76,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              171,
+              78
+            ],
+            [
+              76,
+              78
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.4444444444444444,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.4444444444444444,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 5332,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "GM_06_TACTICAL_BELT_RIG",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          2272,
+          2032,
+          2956,
+          2344
+        ],
+        "corners_4_rel": [
+          [
+            0.4127906976744186,
+            0.6614583333333334
+          ],
+          [
+            0.5370639534883721,
+            0.6614583333333334
+          ],
+          [
+            0.5370639534883721,
+            0.7630208333333334
+          ],
+          [
+            0.4127906976744186,
+            0.7630208333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 165952,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "GM_06_TACTICAL_BELT_RIG",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          2272,
+          2032,
+          2956,
+          2344
+        ],
+        "corners_4_rel": [
+          [
+            0.4127906976744186,
+            0.6614583333333334
+          ],
+          [
+            0.5370639534883721,
+            0.6614583333333334
+          ],
+          [
+            0.5370639534883721,
+            0.7630208333333334
+          ],
+          [
+            0.4127906976744186,
+            0.7630208333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 165952,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "GM_06_TACTICAL_BELT_RIG",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          2272,
+          2032,
+          2956,
+          2344
+        ],
+        "corners_4_rel": [
+          [
+            0.4127906976744186,
+            0.6614583333333334
+          ],
+          [
+            0.5370639534883721,
+            0.6614583333333334
+          ],
+          [
+            0.5370639534883721,
+            0.7630208333333334
+          ],
+          [
+            0.4127906976744186,
+            0.7630208333333334
+          ]
+        ],
+        "closed_edge_pixels_pasted": 165952,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "WM_05_LEFT_ARM_MANIPULATOR",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 6,
+        "locate_4corners_xyxy": [
+          414,
+          126,
+          547,
+          527
+        ],
+        "dna_inertia_coherence": 0.6851,
+        "mean_3d_normal_xyz": [
+          -0.0045,
+          0.005,
+          0.8576
+        ],
+        "multi_facet_relief_gain": 1.3498,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "45c17008828ad7bbb42af94ed6308f0cb44087475df87f58a6e7381837a0798e",
+        "layer_3d_rgb_sha256": "9f7e3b6308b1116c1322e2a8c5843b4bc9b304a14267fb4e76ea0724c3a432b9"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "WM_05_LEFT_ARM_MANIPULATOR",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "centroid_xy": [
+          472.42,
+          318.84
+        ],
+        "principal_axis_angle_deg": 87.09,
+        "super_roi_8x_wh": [
+          1064,
+          3208
+        ],
+        "z_buffer_priority": 6,
+        "mean_3d_normal_xyz": [
+          -0.0045,
+          0.005,
+          0.8576
+        ],
+        "dna_coherence": 0.6851,
+        "relief_gain_8x": 1.5828,
+        "mean_reverse_clipping_energy": 94.47,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "45c17008828ad7bbb42af94ed6308f0cb44087475df87f58a6e7381837a0798e",
+        "super_roi_8x_rgb_sha256": "52e91bd516e349a63a4d3490fec76c32f9da20713523e4e2ba3cf8f8d9ad9e91"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "WM_05A_LEFT_PAULDRON_ELBOW",
+          "parent_part_id": "WM_05_LEFT_ARM_MANIPULATOR",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              133,
+              220
+            ],
+            [
+              0,
+              220
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.5486284289276808
+            ],
+            [
+              0.0,
+              0.5486284289276808
+            ]
+          ],
+          "active_closed_edge_pixels": 17159,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "WM_05B_LEFT_FOREARM_CLAW",
+          "parent_part_id": "WM_05_LEFT_ARM_MANIPULATOR",
+          "locate_4corners_px": [
+            [
+              0,
+              200
+            ],
+            [
+              133,
+              200
+            ],
+            [
+              133,
+              401
+            ],
+            [
+              0,
+              401
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.49875311720698257
+            ],
+            [
+              1.0,
+              0.49875311720698257
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 15461,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "WM_05_LEFT_ARM_MANIPULATOR",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          1656,
+          504,
+          2188,
+          2108
+        ],
+        "corners_4_rel": [
+          [
+            0.3008720930232558,
+            0.1640625
+          ],
+          [
+            0.39752906976744184,
+            0.1640625
+          ],
+          [
+            0.39752906976744184,
+            0.6861979166666666
+          ],
+          [
+            0.3008720930232558,
+            0.6861979166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 493360,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "WM_05_LEFT_ARM_MANIPULATOR",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          1656,
+          504,
+          2188,
+          2108
+        ],
+        "corners_4_rel": [
+          [
+            0.3008720930232558,
+            0.1640625
+          ],
+          [
+            0.39752906976744184,
+            0.1640625
+          ],
+          [
+            0.39752906976744184,
+            0.6861979166666666
+          ],
+          [
+            0.3008720930232558,
+            0.6861979166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 493360,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "WM_05_LEFT_ARM_MANIPULATOR",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          1656,
+          504,
+          2188,
+          2108
+        ],
+        "corners_4_rel": [
+          [
+            0.3008720930232558,
+            0.1640625
+          ],
+          [
+            0.39752906976744184,
+            0.1640625
+          ],
+          [
+            0.39752906976744184,
+            0.6861979166666666
+          ],
+          [
+            0.3008720930232558,
+            0.6861979166666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 493360,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "AM_06_LEFT_ARM_SHIELDED",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 6,
+        "locate_4corners_xyxy": [
+          1204,
+          141,
+          1358,
+          476
+        ],
+        "dna_inertia_coherence": 0.6844,
+        "mean_3d_normal_xyz": [
+          -0.0208,
+          0.0045,
+          0.8975
+        ],
+        "multi_facet_relief_gain": 1.3162,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "1a2fd3ceda08b7e97a218d3b2c9964115904ae81ff2071853c94fc9a3422e2a3",
+        "layer_3d_rgb_sha256": "53fe4d5226f06b047888fa98ba8390479c9174930c55a57eba10479b9d27c18c"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "AM_06_LEFT_ARM_SHIELDED",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "centroid_xy": [
+          1283.29,
+          286.14
+        ],
+        "principal_axis_angle_deg": 80.83,
+        "super_roi_8x_wh": [
+          1232,
+          2680
+        ],
+        "z_buffer_priority": 6,
+        "mean_3d_normal_xyz": [
+          -0.0208,
+          0.0045,
+          0.8975
+        ],
+        "dna_coherence": 0.6844,
+        "relief_gain_8x": 1.5827,
+        "mean_reverse_clipping_energy": 114.07,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "1a2fd3ceda08b7e97a218d3b2c9964115904ae81ff2071853c94fc9a3422e2a3",
+        "super_roi_8x_rgb_sha256": "3872c2ac041b701e4fe4d5e3a71cecfab349ca87308e5edad788ff984c1f943a"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "AM_06A_LEFT_REACTIVE_SHIELD",
+          "parent_part_id": "AM_06_LEFT_ARM_SHIELDED",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              154,
+              167
+            ],
+            [
+              0,
+              167
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.49850746268656715
+            ],
+            [
+              0.0,
+              0.49850746268656715
+            ]
+          ],
+          "active_closed_edge_pixels": 19509,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "AM_06B_LEFT_FOREARM_FIST",
+          "parent_part_id": "AM_06_LEFT_ARM_SHIELDED",
+          "locate_4corners_px": [
+            [
+              0,
+              154
+            ],
+            [
+              154,
+              154
+            ],
+            [
+              154,
+              335
+            ],
+            [
+              0,
+              335
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.4597014925373134
+            ],
+            [
+              1.0,
+              0.4597014925373134
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 14025,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "AM_06_LEFT_ARM_SHIELDED",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          4816,
+          564,
+          5432,
+          1904
+        ],
+        "corners_4_rel": [
+          [
+            0.875,
+            0.18359375
+          ],
+          [
+            0.9869186046511628,
+            0.18359375
+          ],
+          [
+            0.9869186046511628,
+            0.6197916666666666
+          ],
+          [
+            0.875,
+            0.6197916666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 516672,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "AM_06_LEFT_ARM_SHIELDED",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          4816,
+          564,
+          5432,
+          1904
+        ],
+        "corners_4_rel": [
+          [
+            0.875,
+            0.18359375
+          ],
+          [
+            0.9869186046511628,
+            0.18359375
+          ],
+          [
+            0.9869186046511628,
+            0.6197916666666666
+          ],
+          [
+            0.875,
+            0.6197916666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 516672,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "AM_06_LEFT_ARM_SHIELDED",
+        "z_order": 6,
+        "target_4corners_scaled_xyxy": [
+          4816,
+          564,
+          5432,
+          1904
+        ],
+        "corners_4_rel": [
+          [
+            0.875,
+            0.18359375
+          ],
+          [
+            0.9869186046511628,
+            0.18359375
+          ],
+          [
+            0.9869186046511628,
+            0.6197916666666666
+          ],
+          [
+            0.875,
+            0.6197916666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 516672,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "GM_07_TACTICAL_GLOVES_PAIR",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "teaching_3d_source_id": "watermarked_img_217049927352389546.jpg",
+        "z_depth_layer_index": 7,
+        "locate_4corners_xyxy": [
+          546,
+          564,
+          774,
+          686
+        ],
+        "dna_inertia_coherence": 0.6629,
+        "mean_3d_normal_xyz": [
+          0.0004,
+          0.0046,
+          0.8853
+        ],
+        "multi_facet_relief_gain": 1.4916,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "8fb3cb8ad8e7877f00ae4e4cbce0a3e6892196a1163f6cb40e5c658fb69d9bab",
+        "layer_3d_rgb_sha256": "47890f32516737a0869f46c77dd5c47c282dfe10912d0aeff57fab1e72b3f3ae"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "GM_07_TACTICAL_GLOVES_PAIR",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "centroid_xy": [
+          654.02,
+          622.62
+        ],
+        "principal_axis_angle_deg": 175.03,
+        "super_roi_8x_wh": [
+          1824,
+          976
+        ],
+        "z_buffer_priority": 7,
+        "mean_3d_normal_xyz": [
+          0.0004,
+          0.0046,
+          0.8853
+        ],
+        "dna_coherence": 0.6629,
+        "relief_gain_8x": 1.5794,
+        "mean_reverse_clipping_energy": 100.0,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "8fb3cb8ad8e7877f00ae4e4cbce0a3e6892196a1163f6cb40e5c658fb69d9bab",
+        "super_roi_8x_rgb_sha256": "98d8febc720e0ceff014b9c1c78eec4bb21afc7d2d9f9dec4f9ec446ae799987"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "GM_07A_RIGHT_LEATHER_GLOVE",
+          "parent_part_id": "GM_07_TACTICAL_GLOVES_PAIR",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              102,
+              122
+            ],
+            [
+              0,
+              122
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.4473684210526316,
+              0.0
+            ],
+            [
+              0.4473684210526316,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 4606,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "GM_07B_LEFT_LEATHER_GLOVE",
+          "parent_part_id": "GM_07_TACTICAL_GLOVES_PAIR",
+          "locate_4corners_px": [
+            [
+              125,
+              0
+            ],
+            [
+              228,
+              0
+            ],
+            [
+              228,
+              122
+            ],
+            [
+              125,
+              122
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.5482456140350878,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.5482456140350878,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 3963,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "GM_07_TACTICAL_GLOVES_PAIR",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          2184,
+          2256,
+          3096,
+          2744
+        ],
+        "corners_4_rel": [
+          [
+            0.39680232558139533,
+            0.734375
+          ],
+          [
+            0.5625,
+            0.734375
+          ],
+          [
+            0.5625,
+            0.8932291666666666
+          ],
+          [
+            0.39680232558139533,
+            0.8932291666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 137104,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "GM_07_TACTICAL_GLOVES_PAIR",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          2184,
+          2256,
+          3096,
+          2744
+        ],
+        "corners_4_rel": [
+          [
+            0.39680232558139533,
+            0.734375
+          ],
+          [
+            0.5625,
+            0.734375
+          ],
+          [
+            0.5625,
+            0.8932291666666666
+          ],
+          [
+            0.39680232558139533,
+            0.8932291666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 137104,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "GM_07_TACTICAL_GLOVES_PAIR",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          2184,
+          2256,
+          3096,
+          2744
+        ],
+        "corners_4_rel": [
+          [
+            0.39680232558139533,
+            0.734375
+          ],
+          [
+            0.5625,
+            0.734375
+          ],
+          [
+            0.5625,
+            0.8932291666666666
+          ],
+          [
+            0.39680232558139533,
+            0.8932291666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 137104,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "WM_04_RIGHT_ARM_MANIPULATOR",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 7,
+        "locate_4corners_xyxy": [
+          39,
+          74,
+          201,
+          504
+        ],
+        "dna_inertia_coherence": 0.6493,
+        "mean_3d_normal_xyz": [
+          -0.0078,
+          0.0044,
+          0.8587
+        ],
+        "multi_facet_relief_gain": 1.2617,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "ebd4473958f4200712cff36613ce11b2cf278dc396d8378f9c4c6845c6e15c10",
+        "layer_3d_rgb_sha256": "16f97efa2d98e76d3d234e10270ce29309209a99a1b01ce574cec226dcb257ad"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "WM_04_RIGHT_ARM_MANIPULATOR",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "centroid_xy": [
+          121.48,
+          265.92
+        ],
+        "principal_axis_angle_deg": 100.7,
+        "super_roi_8x_wh": [
+          1296,
+          3440
+        ],
+        "z_buffer_priority": 7,
+        "mean_3d_normal_xyz": [
+          -0.0078,
+          0.0044,
+          0.8587
+        ],
+        "dna_coherence": 0.6493,
+        "relief_gain_8x": 1.5774,
+        "mean_reverse_clipping_energy": 77.1,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "ebd4473958f4200712cff36613ce11b2cf278dc396d8378f9c4c6845c6e15c10",
+        "super_roi_8x_rgb_sha256": "126579e621c768355453d704a9baab92a67b8e02b9c0b351759bcf2c249a3ab6"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "WM_04A_RIGHT_HEAVY_PAULDRON",
+          "parent_part_id": "WM_04_RIGHT_ARM_MANIPULATOR",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              162,
+              0
+            ],
+            [
+              162,
+              223
+            ],
+            [
+              0,
+              223
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.5186046511627908
+            ],
+            [
+              0.0,
+              0.5186046511627908
+            ]
+          ],
+          "active_closed_edge_pixels": 19595,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "WM_04B_RIGHT_FOREARM_HAND",
+          "parent_part_id": "WM_04_RIGHT_ARM_MANIPULATOR",
+          "locate_4corners_px": [
+            [
+              0,
+              206
+            ],
+            [
+              162,
+              206
+            ],
+            [
+              162,
+              430
+            ],
+            [
+              0,
+              430
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.4790697674418605
+            ],
+            [
+              1.0,
+              0.4790697674418605
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 15402,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "WM_04_RIGHT_ARM_MANIPULATOR",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          156,
+          296,
+          804,
+          2016
+        ],
+        "corners_4_rel": [
+          [
+            0.028343023255813952,
+            0.09635416666666667
+          ],
+          [
+            0.14607558139534885,
+            0.09635416666666667
+          ],
+          [
+            0.14607558139534885,
+            0.65625
+          ],
+          [
+            0.028343023255813952,
+            0.65625
+          ]
+        ],
+        "closed_edge_pixels_pasted": 533776,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "WM_04_RIGHT_ARM_MANIPULATOR",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          156,
+          296,
+          804,
+          2016
+        ],
+        "corners_4_rel": [
+          [
+            0.028343023255813952,
+            0.09635416666666667
+          ],
+          [
+            0.14607558139534885,
+            0.09635416666666667
+          ],
+          [
+            0.14607558139534885,
+            0.65625
+          ],
+          [
+            0.028343023255813952,
+            0.65625
+          ]
+        ],
+        "closed_edge_pixels_pasted": 533776,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "WM_04_RIGHT_ARM_MANIPULATOR",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          156,
+          296,
+          804,
+          2016
+        ],
+        "corners_4_rel": [
+          [
+            0.028343023255813952,
+            0.09635416666666667
+          ],
+          [
+            0.14607558139534885,
+            0.09635416666666667
+          ],
+          [
+            0.14607558139534885,
+            0.65625
+          ],
+          [
+            0.028343023255813952,
+            0.65625
+          ]
+        ],
+        "closed_edge_pixels_pasted": 533776,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "AM_01_TWIN_HOWITZER_CANNONS",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 7,
+        "locate_4corners_xyxy": [
+          816,
+          14,
+          1227,
+          177
+        ],
+        "dna_inertia_coherence": 0.726,
+        "mean_3d_normal_xyz": [
+          -0.0374,
+          0.0514,
+          0.8756
+        ],
+        "multi_facet_relief_gain": 1.2283,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "5adfdb0ac769bde61866149320c76a96cd6599a1a7027eb23ff737b5ad8d4f86",
+        "layer_3d_rgb_sha256": "59427f3b57092944475f45c785b15abe004bcf03a53f88c6cdefd2f00f4eb056"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "AM_01_TWIN_HOWITZER_CANNONS",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "centroid_xy": [
+          1055.78,
+          105.44
+        ],
+        "principal_axis_angle_deg": -174.84,
+        "super_roi_8x_wh": [
+          3288,
+          1304
+        ],
+        "z_buffer_priority": 7,
+        "mean_3d_normal_xyz": [
+          -0.0374,
+          0.0514,
+          0.8756
+        ],
+        "dna_coherence": 0.726,
+        "relief_gain_8x": 1.5889,
+        "mean_reverse_clipping_energy": 73.99,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "5adfdb0ac769bde61866149320c76a96cd6599a1a7027eb23ff737b5ad8d4f86",
+        "super_roi_8x_rgb_sha256": "191a5f51479093975d22e522c283171a773eabf6dc06ad9d7ff2584a336ef40a"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "AM_01A_RIGHT_HOWITZER_BARREL",
+          "parent_part_id": "AM_01_TWIN_HOWITZER_CANNONS",
+          "locate_4corners_px": [
+            [
+              0,
+              24
+            ],
+            [
+              226,
+              24
+            ],
+            [
+              226,
+              163
+            ],
+            [
+              0,
+              163
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.147239263803681
+            ],
+            [
+              0.5498783454987834,
+              0.147239263803681
+            ],
+            [
+              0.5498783454987834,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 5507,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "AM_01B_LEFT_HOWITZER_BARREL",
+          "parent_part_id": "AM_01_TWIN_HOWITZER_CANNONS",
+          "locate_4corners_px": [
+            [
+              197,
+              0
+            ],
+            [
+              411,
+              0
+            ],
+            [
+              411,
+              146
+            ],
+            [
+              197,
+              146
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.4793187347931874,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.8957055214723927
+            ],
+            [
+              0.4793187347931874,
+              0.8957055214723927
+            ]
+          ],
+          "active_closed_edge_pixels": 7665,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "AM_01_TWIN_HOWITZER_CANNONS",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          3264,
+          56,
+          4908,
+          708
+        ],
+        "corners_4_rel": [
+          [
+            0.5930232558139535,
+            0.018229166666666668
+          ],
+          [
+            0.8917151162790697,
+            0.018229166666666668
+          ],
+          [
+            0.8917151162790697,
+            0.23046875
+          ],
+          [
+            0.5930232558139535,
+            0.23046875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 220336,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "AM_01_TWIN_HOWITZER_CANNONS",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          3264,
+          56,
+          4908,
+          708
+        ],
+        "corners_4_rel": [
+          [
+            0.5930232558139535,
+            0.018229166666666668
+          ],
+          [
+            0.8917151162790697,
+            0.018229166666666668
+          ],
+          [
+            0.8917151162790697,
+            0.23046875
+          ],
+          [
+            0.5930232558139535,
+            0.23046875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 220336,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "AM_01_TWIN_HOWITZER_CANNONS",
+        "z_order": 7,
+        "target_4corners_scaled_xyxy": [
+          3264,
+          56,
+          4908,
+          708
+        ],
+        "corners_4_rel": [
+          [
+            0.5930232558139535,
+            0.018229166666666668
+          ],
+          [
+            0.8917151162790697,
+            0.018229166666666668
+          ],
+          [
+            0.8917151162790697,
+            0.23046875
+          ],
+          [
+            0.5930232558139535,
+            0.23046875
+          ]
+        ],
+        "closed_edge_pixels_pasted": 220336,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "GM_01_HEAD_AND_COLLAR",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "teaching_3d_source_id": "watermarked_img_217049927352389546.jpg",
+        "z_depth_layer_index": 8,
+        "locate_4corners_xyxy": [
+          596,
+          176,
+          713,
+          332
+        ],
+        "dna_inertia_coherence": 0.6269,
+        "mean_3d_normal_xyz": [
+          -0.0197,
+          0.0015,
+          0.9131
+        ],
+        "multi_facet_relief_gain": 2.3909,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "35fd308c4cd567f3bc2ef7693f77304c9cf7164dfff8fa171fd6cb030c680de7",
+        "layer_3d_rgb_sha256": "390f02a068fe526aecefb15aa5180d7b3ea9e4a1c7d6b9715567c16a7fd1e0f7"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "GM_01_HEAD_AND_COLLAR",
+        "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+        "centroid_xy": [
+          652.64,
+          254.01
+        ],
+        "principal_axis_angle_deg": 99.29,
+        "super_roi_8x_wh": [
+          936,
+          1248
+        ],
+        "z_buffer_priority": 8,
+        "mean_3d_normal_xyz": [
+          -0.0197,
+          0.0015,
+          0.9131
+        ],
+        "dna_coherence": 0.6269,
+        "relief_gain_8x": 1.574,
+        "mean_reverse_clipping_energy": 107.77,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "35fd308c4cd567f3bc2ef7693f77304c9cf7164dfff8fa171fd6cb030c680de7",
+        "super_roi_8x_rgb_sha256": "336e699029deacd4542b167dc709f1c2774c5c1a0b836b4726f657d3036e72c5"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "GM_01A_HAIR_CROWN_SILHOUETTE",
+          "parent_part_id": "GM_01_HEAD_AND_COLLAR",
+          "locate_4corners_px": [
+            [
+              0,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              117,
+              70
+            ],
+            [
+              0,
+              70
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.44871794871794873
+            ],
+            [
+              0.0,
+              0.44871794871794873
+            ]
+          ],
+          "active_closed_edge_pixels": 5692,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "GM_01B_FACE_EYES_AND_GOLD_COLLAR",
+          "parent_part_id": "GM_01_HEAD_AND_COLLAR",
+          "locate_4corners_px": [
+            [
+              11,
+              31
+            ],
+            [
+              112,
+              31
+            ],
+            [
+              112,
+              156
+            ],
+            [
+              11,
+              156
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.09401709401709402,
+              0.1987179487179487
+            ],
+            [
+              0.9572649572649573,
+              0.1987179487179487
+            ],
+            [
+              0.9572649572649573,
+              1.0
+            ],
+            [
+              0.09401709401709402,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 10585,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "GM_01_HEAD_AND_COLLAR",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          2384,
+          704,
+          2852,
+          1328
+        ],
+        "corners_4_rel": [
+          [
+            0.4331395348837209,
+            0.22916666666666666
+          ],
+          [
+            0.5181686046511628,
+            0.22916666666666666
+          ],
+          [
+            0.5181686046511628,
+            0.4322916666666667
+          ],
+          [
+            0.4331395348837209,
+            0.4322916666666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 201488,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "GM_01_HEAD_AND_COLLAR",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          2384,
+          704,
+          2852,
+          1328
+        ],
+        "corners_4_rel": [
+          [
+            0.4331395348837209,
+            0.22916666666666666
+          ],
+          [
+            0.5181686046511628,
+            0.22916666666666666
+          ],
+          [
+            0.5181686046511628,
+            0.4322916666666667
+          ],
+          [
+            0.4331395348837209,
+            0.4322916666666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 201488,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "GM_01_HEAD_AND_COLLAR",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          2384,
+          704,
+          2852,
+          1328
+        ],
+        "corners_4_rel": [
+          [
+            0.4331395348837209,
+            0.22916666666666666
+          ],
+          [
+            0.5181686046511628,
+            0.22916666666666666
+          ],
+          [
+            0.5181686046511628,
+            0.4322916666666667
+          ],
+          [
+            0.4331395348837209,
+            0.4322916666666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 201488,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "WM_01_OPTICAL_SENSOR_HEAD",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 8,
+        "locate_4corners_xyxy": [
+          294,
+          74,
+          401,
+          170
+        ],
+        "dna_inertia_coherence": 0.6212,
+        "mean_3d_normal_xyz": [
+          -0.006,
+          -0.0003,
+          0.8476
+        ],
+        "multi_facet_relief_gain": 1.4656,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "899bba48fc0625929a1b3afc11fe3277170e8fbfd28d5bab7168aeb4fa6717a5",
+        "layer_3d_rgb_sha256": "b2c7bbabc3f5065292b1fd5d14cd9448e99d5089c23b6d611a49183c3bed090a"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "WM_01_OPTICAL_SENSOR_HEAD",
+        "subject_id": "U0_WEATHERED_WHITE_MECHA",
+        "centroid_xy": [
+          346.35,
+          121.13
+        ],
+        "principal_axis_angle_deg": -159.07,
+        "super_roi_8x_wh": [
+          856,
+          768
+        ],
+        "z_buffer_priority": 8,
+        "mean_3d_normal_xyz": [
+          -0.006,
+          -0.0003,
+          0.8476
+        ],
+        "dna_coherence": 0.6212,
+        "relief_gain_8x": 1.5732,
+        "mean_reverse_clipping_energy": 195.6,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "899bba48fc0625929a1b3afc11fe3277170e8fbfd28d5bab7168aeb4fa6717a5",
+        "super_roi_8x_rgb_sha256": "1b7165aa855e5942ef28fdf2d09d46301745cded1bfb0cee29bf7f2a3424a901"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "WM_01A_QUAD_GREEN_OPTICAL_LENSES",
+          "parent_part_id": "WM_01_OPTICAL_SENSOR_HEAD",
+          "locate_4corners_px": [
+            [
+              16,
+              14
+            ],
+            [
+              90,
+              14
+            ],
+            [
+              90,
+              72
+            ],
+            [
+              16,
+              72
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.14953271028037382,
+              0.14583333333333334
+            ],
+            [
+              0.8411214953271028,
+              0.14583333333333334
+            ],
+            [
+              0.8411214953271028,
+              0.75
+            ],
+            [
+              0.14953271028037382,
+              0.75
+            ]
+          ],
+          "active_closed_edge_pixels": 4292,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "WM_01B_TURRET_COLLAR_HOUSING",
+          "parent_part_id": "WM_01_OPTICAL_SENSOR_HEAD",
+          "locate_4corners_px": [
+            [
+              0,
+              52
+            ],
+            [
+              107,
+              52
+            ],
+            [
+              107,
+              96
+            ],
+            [
+              0,
+              96
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.5416666666666666
+            ],
+            [
+              1.0,
+              0.5416666666666666
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 3505,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "WM_01_OPTICAL_SENSOR_HEAD",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          1176,
+          296,
+          1604,
+          680
+        ],
+        "corners_4_rel": [
+          [
+            0.2136627906976744,
+            0.09635416666666667
+          ],
+          [
+            0.2914244186046512,
+            0.09635416666666667
+          ],
+          [
+            0.2914244186046512,
+            0.22135416666666666
+          ],
+          [
+            0.2136627906976744,
+            0.22135416666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 126912,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "WM_01_OPTICAL_SENSOR_HEAD",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          1176,
+          296,
+          1604,
+          680
+        ],
+        "corners_4_rel": [
+          [
+            0.2136627906976744,
+            0.09635416666666667
+          ],
+          [
+            0.2914244186046512,
+            0.09635416666666667
+          ],
+          [
+            0.2914244186046512,
+            0.22135416666666666
+          ],
+          [
+            0.2136627906976744,
+            0.22135416666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 126912,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "WM_01_OPTICAL_SENSOR_HEAD",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          1176,
+          296,
+          1604,
+          680
+        ],
+        "corners_4_rel": [
+          [
+            0.2136627906976744,
+            0.09635416666666667
+          ],
+          [
+            0.2914244186046512,
+            0.09635416666666667
+          ],
+          [
+            0.2914244186046512,
+            0.22135416666666666
+          ],
+          [
+            0.2136627906976744,
+            0.22135416666666666
+          ]
+        ],
+        "closed_edge_pixels_pasted": 126912,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    },
+    {
+      "three_d_layer_contract": {
+        "part_id": "AM_03_ARMORED_VISOR_HEAD",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "teaching_3d_source_id": "watermarked_img_12753495973710355774.jpg",
+        "z_depth_layer_index": 8,
+        "locate_4corners_xyxy": [
+          1021,
+          128,
+          1140,
+          203
+        ],
+        "dna_inertia_coherence": 0.669,
+        "mean_3d_normal_xyz": [
+          0.0015,
+          0.004,
+          0.8772
+        ],
+        "multi_facet_relief_gain": 1.5812,
+        "soft_alpha_pixels": 0,
+        "elev_remap": false,
+        "closed_edge_mask_sha256": "0dcebcbcd90ea2a468ed618df77d3d16bb02d66fc4a6bc4be6a0c923b5e1049d",
+        "layer_3d_rgb_sha256": "3e015f0a8f14e34f937aeb82202f19b58f85a4c972baad441e1fcd35702b513b"
+      },
+      "five_d_manifold_contract": {
+        "part_id": "AM_03_ARMORED_VISOR_HEAD",
+        "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+        "centroid_xy": [
+          1078.97,
+          165.57
+        ],
+        "principal_axis_angle_deg": -178.79,
+        "super_roi_8x_wh": [
+          952,
+          600
+        ],
+        "z_buffer_priority": 8,
+        "mean_3d_normal_xyz": [
+          0.0015,
+          0.004,
+          0.8772
+        ],
+        "dna_coherence": 0.669,
+        "relief_gain_8x": 1.5803,
+        "mean_reverse_clipping_energy": 194.52,
+        "bounding_box_used_for_localization": false,
+        "reverse_clipping_mask_sha256": "0dcebcbcd90ea2a468ed618df77d3d16bb02d66fc4a6bc4be6a0c923b5e1049d",
+        "super_roi_8x_rgb_sha256": "a9ed9e335d86127ee10aefec6e532b3526cd081b2766a662eb1765a0ade85f0a"
+      },
+      "l3_to_l2_subcomponent_hops": [
+        {
+          "subcomponent_id": "AM_03A_SLIT_VISOR_TURRET",
+          "parent_part_id": "AM_03_ARMORED_VISOR_HEAD",
+          "locate_4corners_px": [
+            [
+              11,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              107,
+              51
+            ],
+            [
+              11,
+              51
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.09243697478991597,
+              0.0
+            ],
+            [
+              0.8991596638655462,
+              0.0
+            ],
+            [
+              0.8991596638655462,
+              0.68
+            ],
+            [
+              0.09243697478991597,
+              0.68
+            ]
+          ],
+          "active_closed_edge_pixels": 4510,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        },
+        {
+          "subcomponent_id": "AM_03B_ARMORED_NECK_COLLAR",
+          "parent_part_id": "AM_03_ARMORED_VISOR_HEAD",
+          "locate_4corners_px": [
+            [
+              0,
+              41
+            ],
+            [
+              119,
+              41
+            ],
+            [
+              119,
+              75
+            ],
+            [
+              0,
+              75
+            ]
+          ],
+          "locate_4corners_rel": [
+            [
+              0.0,
+              0.5466666666666666
+            ],
+            [
+              1.0,
+              0.5466666666666666
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "active_closed_edge_pixels": 3266,
+          "bit_exact_to_whole_part": true,
+          "elev_remap": false
+        }
+      ],
+      "l2_to_studio_3d_layer_splice_hop": {
+        "part_id": "AM_03_ARMORED_VISOR_HEAD",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          4084,
+          512,
+          4560,
+          812
+        ],
+        "corners_4_rel": [
+          [
+            0.7420058139534884,
+            0.16666666666666666
+          ],
+          [
+            0.8284883720930233,
+            0.16666666666666666
+          ],
+          [
+            0.8284883720930233,
+            0.2643229166666667
+          ],
+          [
+            0.7420058139534884,
+            0.2643229166666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 113584,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_gemini_empty_bg_splice_hop": {
+        "part_id": "AM_03_ARMORED_VISOR_HEAD",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          4084,
+          512,
+          4560,
+          812
+        ],
+        "corners_4_rel": [
+          [
+            0.7420058139534884,
+            0.16666666666666666
+          ],
+          [
+            0.8284883720930233,
+            0.16666666666666666
+          ],
+          [
+            0.8284883720930233,
+            0.2643229166666667
+          ],
+          [
+            0.7420058139534884,
+            0.2643229166666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 113584,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      },
+      "l2_to_master_4x_3d_return_hop": {
+        "part_id": "AM_03_ARMORED_VISOR_HEAD",
+        "z_order": 8,
+        "target_4corners_scaled_xyxy": [
+          4084,
+          512,
+          4560,
+          812
+        ],
+        "corners_4_rel": [
+          [
+            0.7420058139534884,
+            0.16666666666666666
+          ],
+          [
+            0.8284883720930233,
+            0.16666666666666666
+          ],
+          [
+            0.8284883720930233,
+            0.2643229166666667
+          ],
+          [
+            0.7420058139534884,
+            0.2643229166666667
+          ]
+        ],
+        "closed_edge_pixels_pasted": 113584,
+        "soft_alpha_pixels": 0,
+        "core_write_integrity": true,
+        "outside_closed_edge_untouched": true,
+        "elev_remap": false
+      }
+    }
+  ]
+}

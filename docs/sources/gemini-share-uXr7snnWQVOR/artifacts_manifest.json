@@ -1,0 +1,593 @@
+[
+  {
+    "file": "shq_v2_self_consistent_engine.py",
+    "turn": 14,
+    "sha1": "d48547d47c90d289fcd8863fff4f5a10c920412d",
+    "bytes": 51312,
+    "versions": 9,
+    "title": "Shq V2 Self Consistent Engine"
+  },
+  {
+    "file": "shq_object_extractor.py",
+    "turn": 14,
+    "sha1": "fdc342b5e7434fe2197308b363f6f6422180087f",
+    "bytes": 71681,
+    "versions": 9,
+    "title": "Shq Object Extractor"
+  },
+  {
+    "file": "shq_recursive_layer_return.py",
+    "turn": 14,
+    "sha1": "da12b50986dd9a1ea06b50997f91055b82bd9468",
+    "bytes": 21477,
+    "versions": 5,
+    "title": "Shq Recursive Layer Return"
+  },
+  {
+    "file": "shq_edit_hole_four_anti_debug.py",
+    "turn": 18,
+    "sha1": "067513a4efc396c53e4f08ea004083b798c94825",
+    "bytes": 29747,
+    "versions": 1,
+    "title": "Shq Edit Hole Four Anti Debug"
+  },
+  {
+    "file": "shq_read_and_skill_router.py",
+    "turn": 18,
+    "sha1": "cf86c50b0d5b53d6d04ba8224ea7a6d56e5253f8",
+    "bytes": 29733,
+    "versions": 1,
+    "title": "Shq Read And Skill Router"
+  },
+  {
+    "file": "shq_5group_test_and_holdout_suite.py",
+    "turn": 17,
+    "sha1": "4da1e2c6c75b8eee5665d9e7b8b02f5d6e77da80",
+    "bytes": 48170,
+    "versions": 1,
+    "title": "Shq 5group Test And Holdout Suite"
+  },
+  {
+    "file": "shq_all24_true_generative_upscale_return.py",
+    "turn": 16,
+    "sha1": "f8946928029dc642ca274e773560c24f52d1df2c",
+    "bytes": 35423,
+    "versions": 1,
+    "title": "Shq All24 True Generative Upscale Return"
+  },
+  {
+    "file": "validate_registry.py",
+    "turn": 17,
+    "sha1": "a5c5066961355187da0d463d8f825d039a475f7e",
+    "bytes": 4257,
+    "versions": 1,
+    "title": "Validate Registry"
+  },
+  {
+    "file": "shq_4skill_frequency_layer_engine.py",
+    "turn": 18,
+    "sha1": "682a71c08c7a7168f8178e6bcfb8b68515dfea0f",
+    "bytes": 45283,
+    "versions": 1,
+    "title": "Shq 4skill Frequency Layer Engine"
+  },
+  {
+    "file": "shq_battlefield_self_part_traceability_engine.py",
+    "turn": 19,
+    "sha1": "22e108a7cfc069956c9da41ec28329939687c788",
+    "bytes": 74260,
+    "versions": 1,
+    "title": "Shq Battlefield Self Part Traceability Engine"
+  },
+  {
+    "file": "run_all_verifications.py",
+    "turn": 20,
+    "sha1": "50ccb9725f526045c7ced5c015cdec714151f9c5",
+    "bytes": 29785,
+    "versions": 1,
+    "title": "Run All Verifications"
+  },
+  {
+    "file": "l3_s4_self_part_dense_registration_and_3freq_engine.py",
+    "turn": 20,
+    "sha1": "525ef833755ff6bb3e2b27a8687f2fd41d1c2f22",
+    "bytes": 15207,
+    "versions": 1,
+    "title": "L3 S4 Self Part Dense Registration And 3freq Engine"
+  },
+  {
+    "file": "preflight_check.py",
+    "turn": 23,
+    "sha1": "6f14f7daae464995fed5a2807269a7e68e643991",
+    "bytes": 6050,
+    "versions": 1,
+    "title": "Preflight Check"
+  },
+  {
+    "file": "invoke_method.py",
+    "turn": 24,
+    "sha1": "c2b9f2b09ff2b67a0774cabd5bd5624ac3df0edc",
+    "bytes": 8373,
+    "versions": 1,
+    "title": "Invoke Method"
+  },
+  {
+    "file": "four_plane_artifact_dag_engine.py",
+    "turn": 25,
+    "sha1": "2c0ab62cd655ee25ed399c10bc6c94993c970abe",
+    "bytes": 75070,
+    "versions": 1,
+    "title": "Four Plane Artifact Dag Engine"
+  },
+  {
+    "file": "SHQ_V2_MECHA_ACCEPTANCE_REPORT.json",
+    "turn": null,
+    "sha1": "6d5bf5916744cbd04f77d6ed4a30aa62a536aaef",
+    "bytes": 27675,
+    "versions": 1,
+    "title": "SHQ_V2_MECHA_ACCEPTANCE_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V2_HEZHONG_MULTI_REPORT.json",
+    "turn": null,
+    "sha1": "262398510491892d0088198e5e5e48d5250a6f76",
+    "bytes": 25574,
+    "versions": 1,
+    "title": "SHQ_V2_HEZHONG_MULTI_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V2_HEZHONG_MULTI_REPORT_d1248d94.json",
+    "turn": null,
+    "sha1": "d1248d94ada23f8c29dd18d34abe824cdf8c420e",
+    "bytes": 25574,
+    "versions": 1,
+    "title": "SHQ_V2_HEZHONG_MULTI_REPORT_d1248d94.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V2_HEZHONG_MULTI_REPORT_6590aaa3.json",
+    "turn": null,
+    "sha1": "6590aaa371b58a6223e41ebcb6a75bbe363d15ce",
+    "bytes": 25574,
+    "versions": 1,
+    "title": "SHQ_V2_HEZHONG_MULTI_REPORT_6590aaa3.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V2_HEZHONG_4X_L4_REPORT.json",
+    "turn": null,
+    "sha1": "4cfcafa6f373213f5bcba01af97bbba6a83bdf04",
+    "bytes": 42418,
+    "versions": 1,
+    "title": "SHQ_V2_HEZHONG_4X_L4_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V2_HEZHONG_4X_L4_REPORT_04d58031.json",
+    "turn": null,
+    "sha1": "04d58031b07e63f0ba9282615fc8ec5b57abecea",
+    "bytes": 42418,
+    "versions": 1,
+    "title": "SHQ_V2_HEZHONG_4X_L4_REPORT_04d58031.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V2_PHOTOREAL_GOLDMESH_NOGHOST_REPORT.json",
+    "turn": null,
+    "sha1": "dd833815899f6b8f11737e690dcf57ad317e9407",
+    "bytes": 10896,
+    "versions": 1,
+    "title": "SHQ_V2_PHOTOREAL_GOLDMESH_NOGHOST_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V3_TILE_PLANNER_MANIFEST.json",
+    "turn": null,
+    "sha1": "d8be323cf49962c4d4dad09fe17638c8128168e2",
+    "bytes": 15725,
+    "versions": 1,
+    "title": "SHQ_V3_TILE_PLANNER_MANIFEST.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT.json",
+    "turn": null,
+    "sha1": "e93a833a56412ef715f5d2bbb99b563bdde95465",
+    "bytes": 8499,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_78b031c3.json",
+    "turn": null,
+    "sha1": "78b031c39bbd8b0198d6104b26e5d3618c4a1252",
+    "bytes": 117594,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_78b031c3.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_beb70547.json",
+    "turn": null,
+    "sha1": "beb70547d2d89e40b604f8a1e4cbc9db9b125375",
+    "bytes": 159205,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_beb70547.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V3_2_EXTREME_4X_RGBA_LAYER_PACK.zip",
+    "turn": null,
+    "sha1": "987ca3952ab62af8064e93270f28066d0bf54959",
+    "bytes": 59340251,
+    "versions": 1,
+    "title": "SHQ_V3_2_EXTREME_4X_RGBA_LAYER_PACK.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "fabb0de00700f27bf5d90fc5762ccc2d7e5f6641a5111d7bc05907d7db4988d9",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_24c42c63.json",
+    "turn": null,
+    "sha1": "24c42c63491a00605437012101c1520a1f2d827f",
+    "bytes": 61370,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_24c42c63.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V4_WHOLE_PARTS_CLOSED_EDGE_RGBA_PACK.zip",
+    "turn": null,
+    "sha1": "da69792e2be19994fda094a0b11178ddedc6dadc",
+    "bytes": 11607025,
+    "versions": 1,
+    "title": "SHQ_V4_WHOLE_PARTS_CLOSED_EDGE_RGBA_PACK.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "d6d53a489e8d4e10e8bb17f132ed7287a74f530009c88c4dfdd43cc0fc2a05b2",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK.zip",
+    "turn": null,
+    "sha1": "7978e4ad4b79028a54b376dc0519ae307308f6e9",
+    "bytes": 3126025,
+    "versions": 1,
+    "title": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "11e3fe685b881bc4451d7cb6b5d06df69b4d6756e2c2a1121d5e828d07acb3b7",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_70a77984.json",
+    "turn": null,
+    "sha1": "70a779847825878f65946a4a5fd396b07fced2a2",
+    "bytes": 135885,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_70a77984.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_074c2e68.zip",
+    "turn": null,
+    "sha1": "074c2e68686b4b85611177bc5065689ffffb1196",
+    "bytes": 3085981,
+    "versions": 1,
+    "title": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_074c2e68.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "41bc721e890bc6983a0a995da458a768a245866a57074241f1a4bc86ccfaaf52",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_f5a771ea.json",
+    "turn": null,
+    "sha1": "f5a771eac200629b96ece0afae93875fe9e6df53",
+    "bytes": 104551,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_f5a771ea.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_e938d91b.zip",
+    "turn": null,
+    "sha1": "e938d91ba2d748ab88b821bcea7a7d3c1d0b1fc6",
+    "bytes": 3364408,
+    "versions": 1,
+    "title": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_e938d91b.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "677cda91fe367674e12ae97171e86e9ff04f30db33a452a878f7b402431c21e8",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_eb63ec1c.json",
+    "turn": null,
+    "sha1": "eb63ec1c0ba9439bdcb4ed8e2971adbd8c405086",
+    "bytes": 104733,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_eb63ec1c.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_40fa1866.zip",
+    "turn": null,
+    "sha1": "40fa186670effdbc287ff5bfabb9dfeab8351c11",
+    "bytes": 3280821,
+    "versions": 1,
+    "title": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_40fa1866.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "1792f9bbfe56fcf2f0d5f76e3f9a0f88b7fb7f950ba4c1f4a946228010ccd2ba",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_c1e78308.json",
+    "turn": null,
+    "sha1": "c1e7830884bc1f920454f434743ec749c872530c",
+    "bytes": 104661,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_c1e78308.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_842844e5.json",
+    "turn": null,
+    "sha1": "842844e5dc35b0396973a8d9093aaf0f6b5fa767",
+    "bytes": 122039,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_842844e5.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_85eb8b15.zip",
+    "turn": null,
+    "sha1": "85eb8b1581266888d81c392e391dd974264fff4a",
+    "bytes": 2858196,
+    "versions": 1,
+    "title": "SHQ_V5_GOLDMESH_AND_MECHA_72PARTS_RGBA_PACK_85eb8b15.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "306483add6dd8ca5cfef626c88a9d10a2a9a15fdf8c2797b2d4ffc6b3a7baa51",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_V3_PROVENANCE_RECEIPT_d8ba2e03.json",
+    "turn": null,
+    "sha1": "d8ba2e03687d2b2b593e70066879b11f0e4383ed",
+    "bytes": 145243,
+    "versions": 1,
+    "title": "SHQ_V3_PROVENANCE_RECEIPT_d8ba2e03.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_METHOD_REGISTRY_V1.json",
+    "turn": null,
+    "sha1": "9f28edb76ac491c7085f56eb01a8ad4f2018253e",
+    "bytes": 12788,
+    "versions": 1,
+    "title": "SHQ_METHOD_REGISTRY_V1.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_METHOD_TRACEABILITY_AND_HOLDOUT_REPORT.json",
+    "turn": null,
+    "sha1": "1d636f0d98a689e50b53ee29d8445603cb02b56f",
+    "bytes": 7307,
+    "versions": 1,
+    "title": "SHQ_METHOD_TRACEABILITY_AND_HOLDOUT_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_ALL24_TRUE_AI_GEN_72PARTS_RGBA_PACK.zip",
+    "turn": null,
+    "sha1": "52d352952c4a6b48a3667986e262b04ef708f10d",
+    "bytes": 19672798,
+    "versions": 1,
+    "title": "SHQ_ALL24_TRUE_AI_GEN_72PARTS_RGBA_PACK.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "092f7c4f94ca8e39c82f23dd7e1b7479a7321a84306a60a4574d86b69770d55c",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_ALL24_TRUE_AI_GEN_S7_AUDIT_REPORT.json",
+    "turn": null,
+    "sha1": "29ca16f23a37c76d4bb16038aaa391bffad1843a",
+    "bytes": 22628,
+    "versions": 1,
+    "title": "SHQ_ALL24_TRUE_AI_GEN_S7_AUDIT_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_PR12_CLAIMS_AND_NONCLAIMS_AUDIT_REPORT.json",
+    "turn": null,
+    "sha1": "3d1aa34cea35f511907d3ac3851a170d90e62646",
+    "bytes": 16369,
+    "versions": 1,
+    "title": "SHQ_PR12_CLAIMS_AND_NONCLAIMS_AUDIT_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "method_registry.json",
+    "turn": null,
+    "sha1": "8ddcff97e9ff2ad8fd9d0edfd5a09c2ca6a91453",
+    "bytes": 16451,
+    "versions": 1,
+    "title": "method_registry.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_4SKILL_FREQUENCY_LAYER_AUDIT_REPORT.json",
+    "turn": null,
+    "sha1": "b209845e9d28f7abea481fa9172c773f9fb6fa57",
+    "bytes": 14771,
+    "versions": 1,
+    "title": "SHQ_4SKILL_FREQUENCY_LAYER_AUDIT_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "method_registry_33c61ba3.json",
+    "turn": null,
+    "sha1": "33c61ba3294fba52cc2fd8b25d4c2ef606188a97",
+    "bytes": 29162,
+    "versions": 1,
+    "title": "method_registry_33c61ba3.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_BATTLEFIELD_METHOD_TRACEABILITY_REPORT.json",
+    "turn": null,
+    "sha1": "a7287d34d87ded80ad9dfed097f565a3355a39b2",
+    "bytes": 35997,
+    "versions": 1,
+    "title": "SHQ_BATTLEFIELD_METHOD_TRACEABILITY_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "method_registry_8264e1e2.json",
+    "turn": null,
+    "sha1": "8264e1e2bec3563af97b8fe420f4336cfa28ac8b",
+    "bytes": 34962,
+    "versions": 1,
+    "title": "method_registry_8264e1e2.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_BATTLEFIELD_METHOD_TRACEABILITY_REPORT_a25f49fa.json",
+    "turn": null,
+    "sha1": "a25f49faa9d9be957d777cdf68063a20b4b446b4",
+    "bytes": 36236,
+    "versions": 1,
+    "title": "SHQ_BATTLEFIELD_METHOD_TRACEABILITY_REPORT_a25f49fa.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "method_registry_684e7d55.json",
+    "turn": null,
+    "sha1": "684e7d55dc8b7fe64646429606e9202bfde0c4e1",
+    "bytes": 35273,
+    "versions": 1,
+    "title": "method_registry_684e7d55.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "IGE_SHQ_GitHub_Verifiable_Package_v1.0.zip",
+    "turn": null,
+    "sha1": "5b5192a3e94d0414d508fd3398b2c4d822bfa8af",
+    "bytes": 13347257,
+    "versions": 1,
+    "title": "IGE_SHQ_GitHub_Verifiable_Package_v1.0.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "5ef8601d818c4ffb05b1fb25182cee600668be71ccd021d5d5065f4c84f4ba1c",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_GITHUB_LAYERED_TRACEABILITY_REPORT.json",
+    "turn": null,
+    "sha1": "66ea2af43246ce925f437890442df0413bced25c",
+    "bytes": 30203,
+    "versions": 1,
+    "title": "SHQ_GITHUB_LAYERED_TRACEABILITY_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_GITHUB_LAYERED_TRACEABILITY_REPORT_637a203d.json",
+    "turn": null,
+    "sha1": "637a203d5e9f1e124de1516ebe0d87d611b4de37",
+    "bytes": 29449,
+    "versions": 1,
+    "title": "SHQ_GITHUB_LAYERED_TRACEABILITY_REPORT_637a203d.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "IGE_SHQ_GitHub_Verifiable_Package_v1.0_0b5cdffd.zip",
+    "turn": null,
+    "sha1": "0b5cdffd521ae6a237b3b472084b319eacf95634",
+    "bytes": 13360286,
+    "versions": 1,
+    "title": "IGE_SHQ_GitHub_Verifiable_Package_v1.0_0b5cdffd.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "05a436b34391cfafd71502f5c0fe1abb204d53de1861006fd62d64c76a3a2cf4",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "asset_manifest.json",
+    "turn": null,
+    "sha1": "ad16ef8c90c3017ecf568b08a0b67194600fda38",
+    "bytes": 5627,
+    "versions": 1,
+    "title": "asset_manifest.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "SHQ_GITHUB_LAYERED_TRACEABILITY_REPORT_660334be.json",
+    "turn": null,
+    "sha1": "660334be788a95da76bf587cbe71ffdafe7b763a",
+    "bytes": 32075,
+    "versions": 1,
+    "title": "SHQ_GITHUB_LAYERED_TRACEABILITY_REPORT_660334be.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "IGE_SHQ_GitHub_Verifiable_Package_v1.0_739db4e3.zip",
+    "turn": null,
+    "sha1": "739db4e3b3475a6a033f57df6b36cc9e3815105d",
+    "bytes": 21457595,
+    "versions": 1,
+    "title": "IGE_SHQ_GitHub_Verifiable_Package_v1.0_739db4e3.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "85a7fcb81ced3a9e2cc48afe7afa20c3e1d0e782b76707b91b5321f48bf18df9",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "MODULAR_22METHODS_ONE_BY_ONE_REPORT.json",
+    "turn": null,
+    "sha1": "ae83872c65bf5d6dc1eff0d76a34445ccc732948",
+    "bytes": 65029,
+    "versions": 1,
+    "title": "MODULAR_22METHODS_ONE_BY_ONE_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "IGE_SHQ_Modular_Methods_Toolkit_v2.0.zip",
+    "turn": null,
+    "sha1": "f03c3570a0ff88ff0b79217b6dda490bae71dca0",
+    "bytes": 48169770,
+    "versions": 1,
+    "title": "IGE_SHQ_Modular_Methods_Toolkit_v2.0.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "244553242084f521fac2bb3b4091c341b2de3a3be5f1a94154ee5cb472965079",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  },
+  {
+    "file": "SHQ_V3_TRUTHFULNESS_AND_8_EXPERIMENTS_REPORT.json",
+    "turn": null,
+    "sha1": "35076a3c53a6d3395ff45d87c0018714ca3294f7",
+    "bytes": 9288,
+    "versions": 1,
+    "title": "SHQ_V3_TRUTHFULNESS_AND_8_EXPERIMENTS_REPORT.json",
+    "source": "contribution_download"
+  },
+  {
+    "file": "IGE_SHQ_FourPlane_ArtifactDAG_v3.0.zip",
+    "turn": null,
+    "sha1": "ed0f8827f818194aad1ce3eb0e0b7639012ae97a",
+    "bytes": 53046179,
+    "versions": 1,
+    "title": "IGE_SHQ_FourPlane_ArtifactDAG_v3.0.zip",
+    "source": "contribution_download",
+    "hub": "sha_only",
+    "sha256": "053da70ffb008b233e243c29af7461f65e0caf9d9044f9b54fc473f6b4a2620f",
+    "note": "Large binary omitted from Hub; full file in Desktop zip artifacts_large/"
+  }
+]

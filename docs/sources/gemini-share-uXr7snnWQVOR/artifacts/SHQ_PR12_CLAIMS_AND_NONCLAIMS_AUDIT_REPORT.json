@@ -1,0 +1,465 @@
+{
+  "registry_validation": {
+    "schema": "ige-method-registry/0.1",
+    "version": "0.2.0-pr12-normative",
+    "method_count": 11,
+    "errors": [],
+    "unit_tests_4_of_4_pass": true
+  },
+  "independent_scale_and_tiling_contracts": {
+    "comfyui_1792x1008_native_4x_28_9mp": {
+      "source_canvas_wh": [
+        1792,
+        1008
+      ],
+      "model_scale": 4,
+      "native_model_canvas_wh": [
+        7168,
+        4032
+      ],
+      "object_transform_matrix_2x3": [
+        [
+          4.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          4.0,
+          0.0
+        ]
+      ],
+      "tile_size_core_wh": [
+        512,
+        512
+      ],
+      "tile_context_halo_px": 125,
+      "delivery_canvas_wh": [
+        7168,
+        4032
+      ],
+      "delivery_transform_scale_xy": [
+        1.0,
+        1.0
+      ],
+      "is_unmodified_native_model_master": true,
+      "claim_status": "native_4x_master_7168x4032"
+    },
+    "comfyui_1792x1008_resampled_16mp_delivery": {
+      "source_canvas_wh": [
+        1792,
+        1008
+      ],
+      "model_scale": 4,
+      "native_model_canvas_wh": [
+        7168,
+        4032
+      ],
+      "object_transform_matrix_2x3": [
+        [
+          2.9877232142857144,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          2.988095238095238,
+          0.0
+        ]
+      ],
+      "tile_size_core_wh": [
+        512,
+        512
+      ],
+      "tile_context_halo_px": 125,
+      "delivery_canvas_wh": [
+        5354,
+        3012
+      ],
+      "delivery_transform_scale_xy": [
+        0.746931,
+        0.747024
+      ],
+      "is_unmodified_native_model_master": false,
+      "claim_status": "delivery_resampled_5354x3012_effective_2.9877x_NOT_unmodified_native_4x"
+    },
+    "hangar_1376x768_native_4x_5504x3072": {
+      "source_canvas_wh": [
+        1376,
+        768
+      ],
+      "model_scale": 4,
+      "native_model_canvas_wh": [
+        5504,
+        3072
+      ],
+      "object_transform_matrix_2x3": [
+        [
+          4.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          4.0,
+          0.0
+        ]
+      ],
+      "tile_size_core_wh": [
+        256,
+        256
+      ],
+      "tile_context_halo_px": 32,
+      "delivery_canvas_wh": [
+        5504,
+        3072
+      ],
+      "delivery_transform_scale_xy": [
+        1.0,
+        1.0
+      ],
+      "is_unmodified_native_model_master": true,
+      "claim_status": "native_4x_master_5504x3072"
+    }
+  },
+  "s0_base_freeze": {
+    "image_id": "HANGAR_3SUBJECTS_BASE",
+    "source_path": "/working_dir/c_9cf0c56aa8603457/user_uploaded_files/ttl=63d/tool_generated/watermarked_img_7962592877226625414.jpg",
+    "source_file_sha256": "5d2f458fd8b4608bf041533b92f5267c69727273e5a49114802f1beba5aa2669",
+    "raw_pixel_sha256": "af3962abfc7eba97b4af9763c859cbf84bcce19eb5357c5900cb77a1fad11be0",
+    "canvas_wh": [
+      1376,
+      768
+    ],
+    "channels": 3,
+    "orientation": "landscape",
+    "frozen": true
+  },
+  "s0_paired_registration": {
+    "l0_file_sha256": "5d2f458fd8b4608bf041533b92f5267c69727273e5a49114802f1beba5aa2669",
+    "l0_canvas_wh": [
+      1376,
+      768
+    ],
+    "l1_original_file_sha256": "f439707fcd86ee29b47daa866e121e07b797b9fd04052462c574526fbd32827f",
+    "l1_original_canvas_wh": [
+      2752,
+      1536
+    ],
+    "registered_scale_ratio_xy": [
+      2.0,
+      2.0
+    ],
+    "registration_phase_shift_px": 0.0996,
+    "l1_registered_pixel_sha256": "e1d0ae60b2883cb15d4344334445ae399fb6892d266711d956d781b54135c40c"
+  },
+  "non_tautological_s1_read_evaluation": {
+    "evaluation_type": "candidate_diff_mask_vs_independent_grabcut_semantic_reference",
+    "is_self_comparison_tautology": false,
+    "u1_pilot_iou_vs_independent_ref": 0.8349,
+    "u1_pilot_boundary_f1_vs_independent_ref": 0.5381,
+    "u1_pilot_hausdorff_px_vs_independent_ref": 60.0
+  },
+  "router_decisions": {
+    "when_mask_already_verified": {
+      "selected_skill_id": "FLUX_HR_TILE_IMG2IMG",
+      "registry_method_id": "FLUX_HR_TILE_IMG2IMG",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "workflow_candidate_not_live_verified",
+      "capability": "high_resolution_tile_diffusion",
+      "execution_status": "execute_authorized",
+      "four_state_remove_diff_skipped_because_mask_verified": true,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "high_resolution_read_tile_core_plus_halo_inference_with_per_tile_receipts",
+        "disjoint_write_core_return_excluding_halo"
+      ],
+      "forbidden_non_claims": [
+        "single_global_conditioning_is_per_subset_conditioning_router",
+        "set_latent_noise_mask_is_hard_pixel_protection_gate",
+        "shared_seed_is_coordinate_indexed_global_noise_field"
+      ],
+      "rationale": "Resolved FLUX_HR_TILE_IMG2IMG (Route B: High-Resolution Tile Diffusion) from method_registry.json."
+    },
+    "when_boundary_unknown_needs_diff": {
+      "selected_skill_id": "HOLE_FOUR_ANTI_EVIDENCE",
+      "registry_method_id": "HOLE_FOUR_ANTI_EVIDENCE",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "research_only_fixed_debug_scaffold_not_production_wired",
+      "capability": "paired_edit_difference_mask_and_countercheck",
+      "execution_status": "candidate_evidence_only_requires_s3_review",
+      "four_state_remove_diff_skipped_because_mask_verified": false,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [
+        "DETAIL6_MATERIAL_RESIDUAL"
+      ],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "conditional_paired_difference_evidence_when_boundary_is_unknown",
+        "strictly_rejects_unregistered_size_mismatch_camera_shift_and_bg_motion"
+      ],
+      "forbidden_non_claims": [
+        "DIFF_automatically_grants_edit_permission",
+        "mandatory_pre_stage_when_verified_mask_already_exists"
+      ],
+      "rationale": "Boundary unknown -> run conditional REMOVE->DIFF->HOLE to produce candidate mask only (DIFF != edit_permission)."
+    },
+    "when_topology_broken": {
+      "selected_skill_id": "OTL0_TOPOLOGY_REPAIR",
+      "registry_method_id": "OTL0_TOPOLOGY_REPAIR",
+      "registry_loaded_and_validated": true,
+      "implementation_status": "implemented_candidate_only_in_pr5",
+      "capability": "topology_and_boundary_repair_before_detail",
+      "execution_status": "execute_authorized",
+      "four_state_remove_diff_skipped_because_mask_verified": true,
+      "diff_grants_edit_permission": false,
+      "blocked_downstream_skills": [
+        "SIAX4X_TILE_CORE_SR",
+        "FLUX_HR_TILE_IMG2IMG",
+        "DETAIL6_MATERIAL_RESIDUAL",
+        "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+        "HOLE_SCALELOCK_HF_RESIDUAL"
+      ],
+      "effective_identity_drift_state": "unknown",
+      "detail6_completion_allowed": false,
+      "allowed_claims": [
+        "blocks_downstream_detail_enhancers_when_topology_is_broken"
+      ],
+      "forbidden_non_claims": [
+        "sharpening_broken_topology_counts_as_improvement"
+      ],
+      "rationale": "Counterfactual Law: topology_error=present blocks all SR/detail/diffusion enhancers until topology is repaired."
+    }
+  },
+  "five_route_comparative_holdout": {
+    "Route_A_Non_Generative_HF_Control": {
+      "method_id": "HOLE_SCALELOCK_HF_RESIDUAL",
+      "capability": "non_generative_masked_high_frequency_residual",
+      "is_diffusion_generation": false,
+      "non_tautological_re_extracted_contour_iou": 0.9995,
+      "non_tautological_re_extracted_hausdorff_px": 2.0,
+      "s7_disk_reload_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "re_read_from_saved_disk_bytes": true,
+        "saved_output_file_sha256": "5cfb91f6f7f2ee6c850b4f2644176a5f76532d212e2f678e270fb71963bc9e39",
+        "alpha_equal_to_source": true,
+        "alpha_copy_is_compositor_check_not_geometry_proof": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.223,
+        "detail_gain_is_diagnostic_only_not_generative_proof": true,
+        "phase_shift_px": 0.0029,
+        "frozen_src_sha256": "af3962abfc7eba97b4af9763c859cbf84bcce19eb5357c5900cb77a1fad11be0",
+        "final_output_sha256": "235feec658909982cc6ea8f2939d35de9f4dd300cf0e9f3f67eb1991ab2ca867"
+      }
+    },
+    "Route_B_Geometry_Clamped_Two_Tile_Offsets": {
+      "method_id": "GEOMETRY_LOCKED_TILE_PLAN_RETURN",
+      "offset_0_0_tiles": 3,
+      "offset_64_64_tiles": 5,
+      "core_overlap_pixels_both_offsets": 0,
+      "max_pixel_diff_between_offset_0_and_offset_64": 0,
+      "seam_gradient_jump_offset_0": 0.0,
+      "seam_gradient_jump_offset_64": 6.326
+    },
+    "Route_C_Unconstrained_HR_Tile_Generation": {
+      "description": "Direct HR Tile generation (1200x896) without global silhouette clamp exhibits background/pose drift across tile borders.",
+      "mean_unconstrained_pixel_drift": 59.12,
+      "tile_receipts": [
+        {
+          "tile_id": "HR_TILE_U1_PILOT_UPPER",
+          "subject_id": "U1_GOLDMESH_FEMALE_PILOT",
+          "method_id": "FLUX_HR_TILE_IMG2IMG",
+          "tile_file": "watermarked_img_10068690251724595395.jpg",
+          "actual_tile_file_dimensions_wh": [
+            1200,
+            896
+          ],
+          "tile_file_sha256": "373ad7f57fcb12051f62e5f16bae62e598f8b63cb2c5cc04480b5356b3cfcc33",
+          "read_window_1x_xyxy": [
+            380,
+            110,
+            920,
+            620
+          ],
+          "write_core_1x_xyxy": [
+            540,
+            175,
+            765,
+            585
+          ],
+          "write_core_4x_xyxy": [
+            2160,
+            700,
+            3060,
+            2340
+          ],
+          "halo_excluded_from_write": true,
+          "route_c_unconstrained_pixel_drift": 48.69,
+          "route_d_core_pixels_written": 964064
+        },
+        {
+          "tile_id": "HR_TILE_U0_WHITE_MECHA_UPPER",
+          "subject_id": "U0_WEATHERED_WHITE_MECHA",
+          "method_id": "FLUX_HR_TILE_IMG2IMG",
+          "tile_file": "watermarked_img_12235616042706138144.jpg",
+          "actual_tile_file_dimensions_wh": [
+            1200,
+            896
+          ],
+          "tile_file_sha256": "6928901154973260e94633d3a1c587a1ffdfbcfff34e0bd4bd162bd97dee931a",
+          "read_window_1x_xyxy": [
+            0,
+            0,
+            620,
+            660
+          ],
+          "write_core_1x_xyxy": [
+            44,
+            26,
+            542,
+            605
+          ],
+          "write_core_4x_xyxy": [
+            176,
+            104,
+            2168,
+            2420
+          ],
+          "halo_excluded_from_write": true,
+          "route_c_unconstrained_pixel_drift": 76.29,
+          "route_d_core_pixels_written": 2803632
+        },
+        {
+          "tile_id": "HR_TILE_U2_ARTILLERY_MECHA_UPPER",
+          "subject_id": "U2_HEAVY_ARTILLERY_MECHA",
+          "method_id": "FLUX_HR_TILE_IMG2IMG",
+          "tile_file": "watermarked_img_6167945242986731087.jpg",
+          "actual_tile_file_dimensions_wh": [
+            1200,
+            896
+          ],
+          "tile_file_sha256": "41fddb8111201831804165e76ecfd6326ac873f60bb120aa06540a8bdfd3b96f",
+          "read_window_1x_xyxy": [
+            740,
+            0,
+            1376,
+            620
+          ],
+          "write_core_1x_xyxy": [
+            805,
+            16,
+            1362,
+            565
+          ],
+          "write_core_4x_xyxy": [
+            3220,
+            64,
+            5448,
+            2260
+          ],
+          "halo_excluded_from_write": true,
+          "route_c_unconstrained_pixel_drift": 52.39,
+          "route_d_core_pixels_written": 2690048
+        }
+      ]
+    },
+    "Route_D_HR_Tile_With_Global_Geometry_And_Core_Lock": {
+      "method_id": "FLUX_HR_TILE_IMG2IMG",
+      "capability": "high_resolution_tile_diffusion_core_only_return",
+      "actual_hr_tile_dimensions_wh": [
+        1200,
+        896
+      ],
+      "master_output_dimensions_wh": [
+        5504,
+        3072
+      ],
+      "s7_disk_reload_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "re_read_from_saved_disk_bytes": true,
+        "saved_output_file_sha256": "4110ded4211c87e27e9089093e5653f67f512b4f93d063e30d0428287167bd6e",
+        "alpha_equal_to_source": true,
+        "alpha_copy_is_compositor_check_not_geometry_proof": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.1894,
+        "detail_gain_is_diagnostic_only_not_generative_proof": true,
+        "phase_shift_px": 0.0041,
+        "frozen_src_sha256": "7ddf8d1ab04b6545586bf6440e20e522bc6661a94aaa0fff77bf7e439a6b2b3d",
+        "final_output_sha256": "a13ae228c1c91680303f0d5c99676553b17239d79d95cfccf1ae8c7d32b14c98"
+      }
+    },
+    "Route_E_External_AI_Donor_Multiband_Transfer": {
+      "method_id": "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+      "capability": "external_ai_donor_guided_multiband_transfer",
+      "actual_donor_dimensions_wh": [
+        [
+          896,
+          1200
+        ],
+        [
+          1376,
+          768
+        ]
+      ],
+      "claimed_as_native_8k": false,
+      "claimed_as_live_comfy_tile_diffusion": false,
+      "s7_disk_reload_audit": {
+        "status": "PASS",
+        "accept_full_hd": true,
+        "re_read_from_saved_disk_bytes": true,
+        "saved_output_file_sha256": "3d5f1ffb3c2223629eb27b09fe3fac40b04834ace25956be3fa6fe18994c44c1",
+        "alpha_equal_to_source": true,
+        "alpha_copy_is_compositor_check_not_geometry_proof": true,
+        "alpha_xor_pixels": 0,
+        "soft_alpha_pixels": 0,
+        "max_outside_hole_rgb_diff": 0,
+        "inside_hole_detail_gain_ratio": 1.3369,
+        "detail_gain_is_diagnostic_only_not_generative_proof": true,
+        "phase_shift_px": 0.0079,
+        "frozen_src_sha256": "7ddf8d1ab04b6545586bf6440e20e522bc6661a94aaa0fff77bf7e439a6b2b3d",
+        "final_output_sha256": "e1d519ebd9b2e908df1f9bea6da2b817203649730e0366c04e10e9625f909e81"
+      }
+    }
+  },
+  "explicit_claims_vs_non_claims_ledger": {
+    "verified_claims": [
+      "method_registry.json (10 methods) passes validate_registry.py and 4/4 unit tests in test_registry.py, and is dynamically loaded by shq_read_and_skill_router.py.",
+      "Four-state REMOVE->DIFF->HOLE is conditional: skipped when a human-verified silhouette exists, and DIFF never grants edit_permission.",
+      "Five scale/tiling parameters (model_scale, object_transform, tile_size, tile_context, delivery_transform) are explicitly separated.",
+      "Non-tautological contour evaluation: execute_hole_scalelock_hf_pipeline re-extracts the post-processing contour (IoU=0.9854), and S1 READ compares against an independent GrabCut/Semantic reference.",
+      "S7 Independent Audit re-reads saved PNG files directly from disk and verifies max_outside_hole_rgb_diff == 0 and alpha_xor_pixels == 0.",
+      "Route B verifies two distinct tile-grid offsets ((0,0) vs (64,64)) with 0 core overlap pixels."
+    ],
+    "explicit_non_claims": [
+      "No claim of native 8K (7680x4320) donor resolution: the AI donor images on disk are 896x1200 (~1.07 MP), 1200x896 (~1.07 MP), and 1376x768 (~1.06 MP), producing a 5504x3072 (4x) master.",
+      "No claim that Route E (AI Donor Multiband Transfer) or Route A (Gaussian HF Residual) is live ComfyUI Flux tile diffusion.",
+      "No claim that Sobel/HF detail_gain_ratio alone proves semantic or perceptual detail truth (it is recorded strictly as a diagnostic signal).",
+      "No claim that 2D mask-derived 5D UV/dome-Z proxies are calibrated physical 3D camera reconstructions.",
+      "No claim that upstream GitHub branches (PR #12, #15, #5, #11) have been merged into main or run on live Comfy Cloud GPU CI."
+    ]
+  },
+  "strict_diag_summary": {
+    "strict_mode": true,
+    "total_checks": 11,
+    "counts": {
+      "PASS": 11,
+      "FAIL": 0,
+      "BLOCK": 0,
+      "WARN": 0,
+      "SKIP": 0
+    },
+    "warn_or_skip_treated_as_failure_in_strict": true,
+    "accept_full_hd": true,
+    "exit_code": 0
+  }
+}

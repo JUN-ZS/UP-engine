@@ -2,8 +2,8 @@
 
 **Audience:** 任何要跟進／實作／驗收「物件導向幾何約束升頻」嘅 AI agent  
 **Normative contract:** [`SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md)  
-**Latest source:** [`sources/gemini-share-XMyk6HVn2J9S/`](./sources/gemini-share-XMyk6HVn2J9S/)（**20 turns**；+1 vs nutr：戰場自身部件追溯／生除扣洞反 + 方法一對一追溯）  
-**Prior sources:** [`nutrRjsw676R`](./sources/gemini-share-nutrRjsw676R/)（19）、[`hC9HlUpskKK9`](./sources/gemini-share-hC9HlUpskKK9/)（17）、[`47yxULPlPy0W`](./sources/gemini-share-47yxULPlPy0W/)（15）  
+**Latest source:** [`sources/gemini-share-uXr7snnWQVOR/`](./sources/gemini-share-uXr7snnWQVOR/)（**26 turns**；+6 vs XMyk：v1.1 Complete13Assets／`preflight`／B0_GL‧B2_GL、Modular M01–M22、Grok runnable、Four-Plane DAG、獨立 PASS vs 聯動 FAIL）  
+**Prior sources:** [`XMyk6HVn2J9S`](./sources/gemini-share-XMyk6HVn2J9S/)（20）、[`nutrRjsw676R`](./sources/gemini-share-nutrRjsw676R/)（19）、[`hC9HlUpskKK9`](./sources/gemini-share-hC9HlUpskKK9/)（17）、[`47yxULPlPy0W`](./sources/gemini-share-47yxULPlPy0W/)（15）  
 **Verifiable package:** [`../research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) — **research-only** 五層可重現包（優先用呢個驗）  
 **Other-AI runbook:** [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md) — clone、preflight、逐步 RUN L0→L4、S7、回報格式及 BLOCK 規則  
 **Verifiable package content:** **v1.1 Complete13Assets**（13 張母本含 `B0_GL`／`B2_GL` + `asset_manifest.json`）  
@@ -13,7 +13,19 @@
 
 ---
 
-## 0. 對上一包（nutr）新增咗咩
+## 0. 對上一包（XMyk／nutr）新增咗咩
+
+### 0.1 uXr7（26 turns）相對 XMyk（20 turns）
+
+| 項 | 內容 |
+|----|------|
+| Turn 20 | GitHub 可驗證包 `IGE_SHQ_GitHub_Verifiable_Package_v1.0`（五層 L0→L4 聯動） |
+| Turn 23 | 缺件根因（FUSE rglob 漏 `B0_GL`／`B2_GL`）→ **v1.1 Complete13Assets** + `preflight_check.py`（Anti-Spoof SHA） |
+| Turn 24 | **Modular Methods Toolkit v2.0**：`M01`–`M22` + `R01`–`R03` + `invoke_method.py` |
+| Turn 25 | 真實性審核：`[(生,除,扣,洞)×(反)]`；**獨立方法 PASS、聯動 FAIL** 根因；Four-Plane Artifact DAG；對齊 Grok runnable 閘門 |
+| 新化石（本包 artifacts） | `run_all_verifications.py`、`preflight_check.py`、`invoke_method.py`、`four_plane_artifact_dag_engine.py`、`l3_s4_…3freq_engine.py` 等 |
+
+### 0.2 XMyk 相對 nutr（仍須保留）
 
 | 項 | 內容 |
 |----|------|
@@ -23,7 +35,7 @@
 | 追溯硬規 | 每階段必須 **同一 `method_id` → 同一 `entrypoint` → 同一 `test_id` → 同一 `acceptance_gate_id`**（一對一；唔可以「方法表有、程式另一套」） |
 | 宣稱 | 可宣稱「大圖由**自身**高清部件升級組成回去」——前提係上述追溯 + S7 磁碟反扣全 PASS；否則屬越權宣稱 |
 
-nutr 已有、本包延續（務必保留）：**嚴格宣稱邊界**、**Anti-Tautology**、**五參數分離（含 `delivery_transform`）**、**Rule 01380**、**三頻率層 \(L+M+H\)**、**四技能 A/B/C/D（INPAINT 降級）**。
+nutr／XMyk 已有、本包延續（務必保留）：**嚴格宣稱邊界**、**Anti-Tautology**、**五參數分離（含 `delivery_transform`）**、**Rule 01380**、**三頻率層 \(L+M+H\)**、**四技能 A/B/C/D（INPAINT 降級）**、**Fail-Closed preflight**、**S3 人工核實不得硬編碼**。
 
 ---
 
@@ -35,7 +47,7 @@ nutr 已有、本包延續（務必保留）：**嚴格宣稱邊界**、**Anti-T
 2. **[`SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](./SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md)** — 權威階段契約、硬閘及禁令  
 3. **本檔** — AI 閱讀、證據、候選、權限、技能路由及宣稱邊界  
 4. **[`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](./SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md)** — 外部 AI 必須照做：Clone → Environment → Preflight → Registry → Unit Tests → L0–L4 Strict RUN → Fresh S7 Evidence  
-5. **最新 Gemini 源** — `sources/gemini-share-XMyk6HVn2J9S/EXTRACT.md` → `Gemini-完整對話.md`（20 turns；戰場自身部件、一對一追溯）  
+5. **最新 Gemini 源** — `sources/gemini-share-uXr7snnWQVOR/EXTRACT.md` → `Gemini-完整對話.md`（26 turns；v1.1／Modular／Grok／Four-Plane；獨立 PASS vs 聯動 FAIL）  
 6. **可驗證套件** — `research/ige_shq_github_verifiable_package_v1.0/`：先讀 `README.md`／`HUB_NOTES.md`／Registry，再讀 L0–L4 實作；`research/shq_v9/` 只作歷史化石，不可直接當 production runtime
 
 讀文件係理解契約；執行結果必須由當前 clone 的新輸出、SHA、測試及 strict exit code 證明。
@@ -227,7 +239,7 @@ Registry 缺失或 schema 失敗 → Router **RuntimeError**（唔准 silent fal
 - [ ] 已讀 INDEX → PROGRAM_GUIDANCE → AI_USAGE_GUIDE → OTHER_AI_RUNBOOK  
 - [ ] 已執行 `preflight_check.py` → Registry → package tests → `run_all_verifications.py --strict`（v1.1：13/13 含 B0_GL／B2_GL）
 - [ ] （可選）Modular toolkit：`python3 invoke_method.py --list` / `--run M12 --part P08`  
-- [ ] 已核對最新 share（XMyk）及 fossils，並理解套件不會自行呼叫 live Siax／Comfy／Flux backend  
+- [ ] 已核對最新 share（uXr7）及 fossils，並理解套件不會自行呼叫 live Siax／Comfy／Flux backend  
 - [ ] 清楚五參數分離（含 `delivery_transform`）  
 - [ ] empty-BG 係原生編輯；四態生除扣洞齊  
 - [ ] 計劃咗真 backend；**無** Lanczos 捷徑  

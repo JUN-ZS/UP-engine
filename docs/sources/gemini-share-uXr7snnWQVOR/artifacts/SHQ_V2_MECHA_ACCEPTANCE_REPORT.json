@@ -1,0 +1,1180 @@
+{
+  "schema_version": "SHQ_V2.0_ACCEPTANCE_REPORT",
+  "status": "SHQ_V2_MULTILAYER_HARDLOCK_RETURN_OK",
+  "source_image": {
+    "filename": "watermarked_img_15549997136084541784.jpg",
+    "resolution_wh": [
+      896,
+      1200
+    ],
+    "sha256": "1dfa428d3c0ba80aa03b78988d477fe3c91d8a9293ab8925fc66d29c93316cbe"
+  },
+  "output_virtual_master": {
+    "filename": "SHQ_V2_MECHA_RETURN_MASTER_2X.png",
+    "resolution_wh": [
+      1792,
+      2400
+    ],
+    "scale_k": 2,
+    "sha256": "756f178b3fb987b4eb6d4ec0ed23d73c6cda34848dc0efa7c19b474e5dc476ff",
+    "ncc_vs_source_structure": 0.992058,
+    "elev_remap": false,
+    "feather_enabled": false
+  },
+  "gates_summary": {
+    "L1_golden_replay_E36": true,
+    "L2_01333_overlap_bug_blocked_E78": true,
+    "L2_canonical_l1_mutex_pass_E78": true,
+    "L2_canonical_l2_mutex_pass_E78": true,
+    "L3_all_parts_e40_full_boundary_pass": true,
+    "L4_all_parts_binary_alpha_xor_zero_E77": true,
+    "L5_all_parts_dual_4corner_bit_exact_E68": true
+  },
+  "diagnostic_01333_overlap_blocked": {
+    "gate": "E-SHQ-78_MUTUAL_EXCLUSION",
+    "passed": false,
+    "max_iou_allowed": 0.05,
+    "max_containment_allowed": 0.1,
+    "pair_count": 3,
+    "violations": [
+      {
+        "part_a": "HEAD_BAD",
+        "part_b": "WEAPON_BAD",
+        "iou": 0.045344129554655874,
+        "a_in_b": 1.0,
+        "b_in_a": 0.045344129554655874
+      },
+      {
+        "part_a": "TORSO_BAD",
+        "part_b": "WEAPON_BAD",
+        "iou": 0.15870445344129555,
+        "a_in_b": 1.0,
+        "b_in_a": 0.15870445344129555
+      }
+    ]
+  },
+  "l1_parts_audit": [
+    {
+      "part_id": "L1_WEAPON_R",
+      "box_xywh_in_mecha": [
+        104,
+        68,
+        138,
+        1076
+      ],
+      "corners_4_rel_in_mecha": [
+        [
+          0.11607142857142858,
+          0.056666666666666664
+        ],
+        [
+          0.2700892857142857,
+          0.056666666666666664
+        ],
+        [
+          0.2700892857142857,
+          0.9533333333333334
+        ],
+        [
+          0.11607142857142858,
+          0.9533333333333334
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 6,
+        "min_margin_observed": 6,
+        "margins_px": {
+          "left": 12,
+          "top": 18,
+          "right": 6,
+          "bottom": 6
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 232658,
+        "candidate_xor_drift_detected": 27204,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.7925,
+      "dual_4corner_return_audit": {
+        "part_id": "L1_WEAPON_R",
+        "parent_frame": "WORLD.MECHA",
+        "child_frame": "MECHA.WEAPON_R",
+        "scale_k": 2,
+        "target_xywh": [
+          208,
+          136,
+          276,
+          2152
+        ],
+        "corners_4_rel": [
+          [
+            0.11607142857142858,
+            0.056666666666666664
+          ],
+          [
+            0.2700892857142857,
+            0.056666666666666664
+          ],
+          [
+            0.2700892857142857,
+            0.9533333333333334
+          ],
+          [
+            0.11607142857142858,
+            0.9533333333333334
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "MECHA.WEAPON_R",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 208.0,
+        "ty": 136.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "part_id": "L1_ARM_R",
+      "box_xywh_in_mecha": [
+        244,
+        140,
+        118,
+        490
+      ],
+      "corners_4_rel_in_mecha": [
+        [
+          0.27232142857142855,
+          0.11666666666666667
+        ],
+        [
+          0.40401785714285715,
+          0.11666666666666667
+        ],
+        [
+          0.40401785714285715,
+          0.525
+        ],
+        [
+          0.27232142857142855,
+          0.525
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 6,
+        "min_margin_observed": 6,
+        "margins_px": {
+          "left": 6,
+          "top": 40,
+          "right": 6,
+          "bottom": 6
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 104278,
+        "candidate_xor_drift_detected": 7975,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.7374,
+      "dual_4corner_return_audit": {
+        "part_id": "L1_ARM_R",
+        "parent_frame": "WORLD.MECHA",
+        "child_frame": "MECHA.ARM_R",
+        "scale_k": 2,
+        "target_xywh": [
+          488,
+          280,
+          236,
+          980
+        ],
+        "corners_4_rel": [
+          [
+            0.27232142857142855,
+            0.11666666666666667
+          ],
+          [
+            0.40401785714285715,
+            0.11666666666666667
+          ],
+          [
+            0.40401785714285715,
+            0.525
+          ],
+          [
+            0.27232142857142855,
+            0.525
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "MECHA.ARM_R",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 488.0,
+        "ty": 280.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "part_id": "L1_HEAD",
+      "box_xywh_in_mecha": [
+        364,
+        82,
+        192,
+        148
+      ],
+      "corners_4_rel_in_mecha": [
+        [
+          0.40625,
+          0.06833333333333333
+        ],
+        [
+          0.6205357142857143,
+          0.06833333333333333
+        ],
+        [
+          0.6205357142857143,
+          0.19166666666666668
+        ],
+        [
+          0.40625,
+          0.19166666666666668
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 6,
+        "min_margin_observed": 6,
+        "margins_px": {
+          "left": 6,
+          "top": 37,
+          "right": 6,
+          "bottom": 6
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 40001,
+        "candidate_xor_drift_detected": 3685,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.6873,
+      "dual_4corner_return_audit": {
+        "part_id": "L1_HEAD",
+        "parent_frame": "WORLD.MECHA",
+        "child_frame": "MECHA.HEAD",
+        "scale_k": 2,
+        "target_xywh": [
+          728,
+          164,
+          384,
+          296
+        ],
+        "corners_4_rel": [
+          [
+            0.40625,
+            0.06833333333333333
+          ],
+          [
+            0.6205357142857143,
+            0.06833333333333333
+          ],
+          [
+            0.6205357142857143,
+            0.19166666666666668
+          ],
+          [
+            0.40625,
+            0.19166666666666668
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "MECHA.HEAD",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 728.0,
+        "ty": 164.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "part_id": "L1_TORSO",
+      "box_xywh_in_mecha": [
+        364,
+        232,
+        192,
+        256
+      ],
+      "corners_4_rel_in_mecha": [
+        [
+          0.40625,
+          0.19333333333333333
+        ],
+        [
+          0.6205357142857143,
+          0.19333333333333333
+        ],
+        [
+          0.6205357142857143,
+          0.4066666666666667
+        ],
+        [
+          0.40625,
+          0.4066666666666667
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 6,
+        "min_margin_observed": 6,
+        "margins_px": {
+          "left": 6,
+          "top": 6,
+          "right": 6,
+          "bottom": 6
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 80843,
+        "candidate_xor_drift_detected": 7899,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.7017,
+      "dual_4corner_return_audit": {
+        "part_id": "L1_TORSO",
+        "parent_frame": "WORLD.MECHA",
+        "child_frame": "MECHA.TORSO",
+        "scale_k": 2,
+        "target_xywh": [
+          728,
+          464,
+          384,
+          512
+        ],
+        "corners_4_rel": [
+          [
+            0.40625,
+            0.19333333333333333
+          ],
+          [
+            0.6205357142857143,
+            0.19333333333333333
+          ],
+          [
+            0.6205357142857143,
+            0.4066666666666667
+          ],
+          [
+            0.40625,
+            0.4066666666666667
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "MECHA.TORSO",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 728.0,
+        "ty": 464.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "part_id": "L1_WAIST",
+      "box_xywh_in_mecha": [
+        364,
+        490,
+        192,
+        188
+      ],
+      "corners_4_rel_in_mecha": [
+        [
+          0.40625,
+          0.4083333333333333
+        ],
+        [
+          0.6205357142857143,
+          0.4083333333333333
+        ],
+        [
+          0.6205357142857143,
+          0.565
+        ],
+        [
+          0.40625,
+          0.565
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 6,
+        "min_margin_observed": 6,
+        "margins_px": {
+          "left": 6,
+          "top": 6,
+          "right": 6,
+          "bottom": 6
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 70444,
+        "candidate_xor_drift_detected": 4605,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.7183,
+      "dual_4corner_return_audit": {
+        "part_id": "L1_WAIST",
+        "parent_frame": "WORLD.MECHA",
+        "child_frame": "MECHA.WAIST",
+        "scale_k": 2,
+        "target_xywh": [
+          728,
+          980,
+          384,
+          376
+        ],
+        "corners_4_rel": [
+          [
+            0.40625,
+            0.4083333333333333
+          ],
+          [
+            0.6205357142857143,
+            0.4083333333333333
+          ],
+          [
+            0.6205357142857143,
+            0.565
+          ],
+          [
+            0.40625,
+            0.565
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "MECHA.WAIST",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 728.0,
+        "ty": 980.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "part_id": "L1_ARM_L",
+      "box_xywh_in_mecha": [
+        558,
+        140,
+        228,
+        490
+      ],
+      "corners_4_rel_in_mecha": [
+        [
+          0.6227678571428571,
+          0.11666666666666667
+        ],
+        [
+          0.8772321428571429,
+          0.11666666666666667
+        ],
+        [
+          0.8772321428571429,
+          0.525
+        ],
+        [
+          0.6227678571428571,
+          0.525
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 6,
+        "min_margin_observed": 6,
+        "margins_px": {
+          "left": 6,
+          "top": 37,
+          "right": 18,
+          "bottom": 6
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 160651,
+        "candidate_xor_drift_detected": 13379,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.6987,
+      "dual_4corner_return_audit": {
+        "part_id": "L1_ARM_L",
+        "parent_frame": "WORLD.MECHA",
+        "child_frame": "MECHA.ARM_L",
+        "scale_k": 2,
+        "target_xywh": [
+          1116,
+          280,
+          456,
+          980
+        ],
+        "corners_4_rel": [
+          [
+            0.6227678571428571,
+            0.11666666666666667
+          ],
+          [
+            0.8772321428571429,
+            0.11666666666666667
+          ],
+          [
+            0.8772321428571429,
+            0.525
+          ],
+          [
+            0.6227678571428571,
+            0.525
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "MECHA.ARM_L",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 1116.0,
+        "ty": 280.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "part_id": "L1_LEG_R",
+      "box_xywh_in_mecha": [
+        244,
+        680,
+        214,
+        492
+      ],
+      "corners_4_rel_in_mecha": [
+        [
+          0.27232142857142855,
+          0.5666666666666667
+        ],
+        [
+          0.5111607142857143,
+          0.5666666666666667
+        ],
+        [
+          0.5111607142857143,
+          0.9766666666666667
+        ],
+        [
+          0.27232142857142855,
+          0.9766666666666667
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 6,
+        "min_margin_observed": 6,
+        "margins_px": {
+          "left": 6,
+          "top": 6,
+          "right": 6,
+          "bottom": 16
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 141728,
+        "candidate_xor_drift_detected": 12113,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.8501,
+      "dual_4corner_return_audit": {
+        "part_id": "L1_LEG_R",
+        "parent_frame": "WORLD.MECHA",
+        "child_frame": "MECHA.LEG_R",
+        "scale_k": 2,
+        "target_xywh": [
+          488,
+          1360,
+          428,
+          984
+        ],
+        "corners_4_rel": [
+          [
+            0.27232142857142855,
+            0.5666666666666667
+          ],
+          [
+            0.5111607142857143,
+            0.5666666666666667
+          ],
+          [
+            0.5111607142857143,
+            0.9766666666666667
+          ],
+          [
+            0.27232142857142855,
+            0.9766666666666667
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "MECHA.LEG_R",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 488.0,
+        "ty": 1360.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "part_id": "L1_LEG_L",
+      "box_xywh_in_mecha": [
+        460,
+        680,
+        296,
+        492
+      ],
+      "corners_4_rel_in_mecha": [
+        [
+          0.5133928571428571,
+          0.5666666666666667
+        ],
+        [
+          0.84375,
+          0.5666666666666667
+        ],
+        [
+          0.84375,
+          0.9766666666666667
+        ],
+        [
+          0.5133928571428571,
+          0.9766666666666667
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 6,
+        "min_margin_observed": 6,
+        "margins_px": {
+          "left": 6,
+          "top": 6,
+          "right": 19,
+          "bottom": 34
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 132368,
+        "candidate_xor_drift_detected": 10816,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.859,
+      "dual_4corner_return_audit": {
+        "part_id": "L1_LEG_L",
+        "parent_frame": "WORLD.MECHA",
+        "child_frame": "MECHA.LEG_L",
+        "scale_k": 2,
+        "target_xywh": [
+          920,
+          1360,
+          592,
+          984
+        ],
+        "corners_4_rel": [
+          [
+            0.5133928571428571,
+            0.5666666666666667
+          ],
+          [
+            0.84375,
+            0.5666666666666667
+          ],
+          [
+            0.84375,
+            0.9766666666666667
+          ],
+          [
+            0.5133928571428571,
+            0.9766666666666667
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "MECHA.LEG_L",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 920.0,
+        "ty": 1360.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    }
+  ],
+  "l2_subparts_audit": [
+    {
+      "subpart_id": "L2_HEAD_CREST_VISOR",
+      "parent_part_id": "L1_HEAD",
+      "box_xywh_in_parent": [
+        16,
+        10,
+        160,
+        68
+      ],
+      "corners_4_rel_in_parent": [
+        [
+          0.08333333333333333,
+          0.06756756756756757
+        ],
+        [
+          0.9166666666666666,
+          0.06756756756756757
+        ],
+        [
+          0.9166666666666666,
+          0.527027027027027
+        ],
+        [
+          0.08333333333333333,
+          0.527027027027027
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 4,
+        "min_margin_observed": 4,
+        "margins_px": {
+          "left": 27,
+          "top": 27,
+          "right": 31,
+          "bottom": 4
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 0,
+        "candidate_xor_drift_detected": 0,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.7084,
+      "dual_4corner_return_audit": {
+        "part_id": "L2_HEAD_CREST_VISOR",
+        "parent_frame": "MECHA.HEAD",
+        "child_frame": "HEAD.CREST_VISOR",
+        "scale_k": 2,
+        "target_xywh": [
+          32,
+          20,
+          320,
+          136
+        ],
+        "corners_4_rel": [
+          [
+            0.08333333333333333,
+            0.06756756756756757
+          ],
+          [
+            0.9166666666666666,
+            0.06756756756756757
+          ],
+          [
+            0.9166666666666666,
+            0.527027027027027
+          ],
+          [
+            0.08333333333333333,
+            0.527027027027027
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "HEAD.CREST_VISOR",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 760.0,
+        "ty": 184.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "subpart_id": "L2_HEAD_FACE_GUARD",
+      "parent_part_id": "L1_HEAD",
+      "box_xywh_in_parent": [
+        16,
+        80,
+        160,
+        58
+      ],
+      "corners_4_rel_in_parent": [
+        [
+          0.08333333333333333,
+          0.5405405405405406
+        ],
+        [
+          0.9166666666666666,
+          0.5405405405405406
+        ],
+        [
+          0.9166666666666666,
+          0.9324324324324325
+        ],
+        [
+          0.08333333333333333,
+          0.9324324324324325
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 4,
+        "min_margin_observed": 4,
+        "margins_px": {
+          "left": 4,
+          "top": 4,
+          "right": 4,
+          "bottom": 4
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 0,
+        "candidate_xor_drift_detected": 0,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.6729,
+      "dual_4corner_return_audit": {
+        "part_id": "L2_HEAD_FACE_GUARD",
+        "parent_frame": "MECHA.HEAD",
+        "child_frame": "HEAD.FACE_GUARD",
+        "scale_k": 2,
+        "target_xywh": [
+          32,
+          160,
+          320,
+          116
+        ],
+        "corners_4_rel": [
+          [
+            0.08333333333333333,
+            0.5405405405405406
+          ],
+          [
+            0.9166666666666666,
+            0.5405405405405406
+          ],
+          [
+            0.9166666666666666,
+            0.9324324324324325
+          ],
+          [
+            0.08333333333333333,
+            0.9324324324324325
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "HEAD.FACE_GUARD",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 760.0,
+        "ty": 324.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "subpart_id": "L2_TORSO_CHEST_PLATE",
+      "parent_part_id": "L1_TORSO",
+      "box_xywh_in_parent": [
+        12,
+        10,
+        168,
+        134
+      ],
+      "corners_4_rel_in_parent": [
+        [
+          0.0625,
+          0.0390625
+        ],
+        [
+          0.9375,
+          0.0390625
+        ],
+        [
+          0.9375,
+          0.5625
+        ],
+        [
+          0.0625,
+          0.5625
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 4,
+        "min_margin_observed": 4,
+        "margins_px": {
+          "left": 4,
+          "top": 4,
+          "right": 4,
+          "bottom": 4
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 0,
+        "candidate_xor_drift_detected": 0,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.8175,
+      "dual_4corner_return_audit": {
+        "part_id": "L2_TORSO_CHEST_PLATE",
+        "parent_frame": "MECHA.TORSO",
+        "child_frame": "TORSO.CHEST_PLATE",
+        "scale_k": 2,
+        "target_xywh": [
+          24,
+          20,
+          336,
+          268
+        ],
+        "corners_4_rel": [
+          [
+            0.0625,
+            0.0390625
+          ],
+          [
+            0.9375,
+            0.0390625
+          ],
+          [
+            0.9375,
+            0.5625
+          ],
+          [
+            0.0625,
+            0.5625
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "TORSO.CHEST_PLATE",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 752.0,
+        "ty": 484.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    },
+    {
+      "subpart_id": "L2_TORSO_COCKPIT_ABS",
+      "parent_part_id": "L1_TORSO",
+      "box_xywh_in_parent": [
+        12,
+        146,
+        168,
+        100
+      ],
+      "corners_4_rel_in_parent": [
+        [
+          0.0625,
+          0.5703125
+        ],
+        [
+          0.9375,
+          0.5703125
+        ],
+        [
+          0.9375,
+          0.9609375
+        ],
+        [
+          0.0625,
+          0.9609375
+        ]
+      ],
+      "e40_boundary_audit": {
+        "gate": "E-SHQ-40_FULL_BOUNDARY",
+        "passed": true,
+        "min_margin_required": 4,
+        "min_margin_observed": 4,
+        "margins_px": {
+          "left": 4,
+          "top": 4,
+          "right": 4,
+          "bottom": 4
+        }
+      },
+      "hard_binary_alpha_audit": {
+        "gate": "E-SHQ-77_HARD_BINARY_ALPHA_LOCK",
+        "passed": true,
+        "candidate_soft_pixels_detected": 0,
+        "candidate_xor_drift_detected": 0,
+        "final_soft_alpha_pixels": 0,
+        "final_alpha_xor_pixels": 0,
+        "feather_enabled": false,
+        "elev_remap": false
+      },
+      "detail_gain_ratio": 1.6647,
+      "dual_4corner_return_audit": {
+        "part_id": "L2_TORSO_COCKPIT_ABS",
+        "parent_frame": "MECHA.TORSO",
+        "child_frame": "TORSO.COCKPIT_ABS",
+        "scale_k": 2,
+        "target_xywh": [
+          24,
+          292,
+          336,
+          200
+        ],
+        "corners_4_rel": [
+          [
+            0.0625,
+            0.5703125
+          ],
+          [
+            0.9375,
+            0.5703125
+          ],
+          [
+            0.9375,
+            0.9609375
+          ],
+          [
+            0.0625,
+            0.9609375
+          ]
+        ],
+        "core_bit_exact": 1.0,
+        "background_untouched": true,
+        "elev_remap": false
+      },
+      "composed_world_transform": {
+        "parent_frame": "WORLD",
+        "child_frame": "TORSO.COCKPIT_ABS",
+        "scale": 2.0,
+        "rotation_deg": 0.0,
+        "tx": 752.0,
+        "ty": 756.0,
+        "transform_class": "ROOT",
+        "gate_passed": true
+      }
+    }
+  ]
+}

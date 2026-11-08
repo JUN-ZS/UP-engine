@@ -1,0 +1,1297 @@
+{
+  "schema_version": "SHQ_V2.0_5LAYER_4X_L4_GENERATIVE_HD_REPORT",
+  "status": "HEZHONG_4X_5504x3072_72NODES_L4_HARDLOCK_OK",
+  "scale_k": 4,
+  "source_scene_wh": [
+    1376,
+    768
+  ],
+  "virtual_master_4x_wh": [
+    5504,
+    3072
+  ],
+  "virtual_master_4x_file": "SHQ_V2_HEZHONG_4X_MASTER_5504x3072.png",
+  "closeup_board_file": "SHQ_V2_4X_L4_PARTS_CLOSEUP_BOARD.png",
+  "hierarchy_node_counts": {
+    "L1_units": 4,
+    "L2_parts": 20,
+    "L3_subassemblies": 16,
+    "L4_micro_components": 32,
+    "total_verified_nodes": 72
+  },
+  "gates_summary": {
+    "L1_golden_replay_E36": true,
+    "E78_all_levels_mutually_exclusive_iou_zero": true,
+    "E40_all_72_nodes_full_boundary_pass": true,
+    "E77_all_72_nodes_binary_alpha_xor_zero": true,
+    "E68_all_72_nodes_dual_4corner_bit_exact_return": true,
+    "elev_remap": false,
+    "feather_enabled": false
+  },
+  "units_4x_audit": [
+    {
+      "unit_id": "U0_COMMAND_WHITE",
+      "1x_box_xywh": [
+        36,
+        118,
+        318,
+        606
+      ],
+      "4x_target_xywh": [
+        144,
+        472,
+        1272,
+        2424
+      ],
+      "generative_hd_detail_gain_vs_lanczos4x": 4.0708,
+      "e40_pass": true,
+      "binary_alpha_xor_zero": true,
+      "core_bit_exact": 1.0,
+      "l2_parts": [
+        {
+          "l2_part_id": "U0_COMMAND_WHITE.L2_HEAD_UNIT",
+          "4x_pixel_size_wh": [
+            660,
+            548
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U0_COMMAND_WHITE.L2_HEAD_UNIT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U0_COMMAND_WHITE.L4_OPTICAL_HEAD_VISOR",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    153,
+                    61
+                  ],
+                  "4x_pixel_size_wh": [
+                    612,
+                    244
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U0.L2_HEAD.L3_ASM.L4_OPTICAL_HEAD_VISOR",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 472.0,
+                    "ty": 520.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U0_COMMAND_WHITE.L4_TWIN_ANTENNA_ARRAY",
+                  "box_xywh_in_l3": [
+                    2,
+                    65,
+                    153,
+                    62
+                  ],
+                  "4x_pixel_size_wh": [
+                    612,
+                    248
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U0.L2_HEAD.L3_ASM.L4_TWIN_ANTENNA_ARRAY",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 472.0,
+                    "ty": 772.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U0_COMMAND_WHITE.L2_TORSO_UNIT",
+          "4x_pixel_size_wh": [
+            660,
+            716
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U0_COMMAND_WHITE.L2_TORSO_UNIT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U0_COMMAND_WHITE.L4_COBALT_CHEST_VENTS",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    153,
+                    82
+                  ],
+                  "4x_pixel_size_wh": [
+                    612,
+                    328
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U0.L2_TORSO.L3_ASM.L4_COBALT_CHEST_VENTS",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 472.0,
+                    "ty": 1076.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U0_COMMAND_WHITE.L4_CORE_REACTOR_HATCH",
+                  "box_xywh_in_l3": [
+                    2,
+                    86,
+                    153,
+                    83
+                  ],
+                  "4x_pixel_size_wh": [
+                    612,
+                    332
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U0.L2_TORSO.L3_ASM.L4_CORE_REACTOR_HATCH",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 472.0,
+                    "ty": 1412.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U0_COMMAND_WHITE.L2_LEFT_MOUNT",
+          "4x_pixel_size_wh": [
+            272,
+            1272
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U0_COMMAND_WHITE.L2_LEFT_MOUNT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U0_COMMAND_WHITE.L4_LEFT_RADAR_POD_LENS",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    56,
+                    152
+                  ],
+                  "4x_pixel_size_wh": [
+                    224,
+                    608
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U0.L2_ARM_L.L3_ASM.L4_LEFT_RADAR_POD_LENS",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 192.0,
+                    "ty": 520.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U0_COMMAND_WHITE.L4_LEFT_ELBOW_ACTUATOR",
+                  "box_xywh_in_l3": [
+                    2,
+                    156,
+                    56,
+                    152
+                  ],
+                  "4x_pixel_size_wh": [
+                    224,
+                    608
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U0.L2_ARM_L.L3_ASM.L4_LEFT_ELBOW_ACTUATOR",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 192.0,
+                    "ty": 1136.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U0_COMMAND_WHITE.L2_RIGHT_MOUNT",
+          "4x_pixel_size_wh": [
+            276,
+            1272
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U0_COMMAND_WHITE.L2_RIGHT_MOUNT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U0_COMMAND_WHITE.L4_RIGHT_RADAR_POD_LENS",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    57,
+                    152
+                  ],
+                  "4x_pixel_size_wh": [
+                    228,
+                    608
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U0.L2_ARM_R.L3_ASM.L4_RIGHT_RADAR_POD_LENS",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 1140.0,
+                    "ty": 520.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U0_COMMAND_WHITE.L4_RIGHT_ELBOW_ACTUATOR",
+                  "box_xywh_in_l3": [
+                    2,
+                    156,
+                    57,
+                    152
+                  ],
+                  "4x_pixel_size_wh": [
+                    228,
+                    608
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U0.L2_ARM_R.L3_ASM.L4_RIGHT_ELBOW_ACTUATOR",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 1140.0,
+                    "ty": 1136.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U0_COMMAND_WHITE.L2_LEGS_CHASSIS",
+          "4x_pixel_size_wh": [
+            1224,
+            1096
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": []
+        }
+      ]
+    },
+    {
+      "unit_id": "U1_CRIMSON_BLADE",
+      "1x_box_xywh": [
+        358,
+        112,
+        348,
+        618
+      ],
+      "4x_target_xywh": [
+        1432,
+        448,
+        1392,
+        2472
+      ],
+      "generative_hd_detail_gain_vs_lanczos4x": 4.6572,
+      "e40_pass": true,
+      "binary_alpha_xor_zero": true,
+      "core_bit_exact": 1.0,
+      "l2_parts": [
+        {
+          "l2_part_id": "U1_CRIMSON_BLADE.L2_HEAD_UNIT",
+          "4x_pixel_size_wh": [
+            720,
+            560
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U1_CRIMSON_BLADE.L2_HEAD_UNIT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U1_CRIMSON_BLADE.L4_SLIT_COMBAT_VISOR",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    168,
+                    63
+                  ],
+                  "4x_pixel_size_wh": [
+                    672,
+                    252
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U1.L2_HEAD.L3_ASM.L4_SLIT_COMBAT_VISOR",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 1788.0,
+                    "ty": 496.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U1_CRIMSON_BLADE.L4_CREST_SENSOR_HORN",
+                  "box_xywh_in_l3": [
+                    2,
+                    67,
+                    168,
+                    63
+                  ],
+                  "4x_pixel_size_wh": [
+                    672,
+                    252
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U1.L2_HEAD.L3_ASM.L4_CREST_SENSOR_HORN",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 1788.0,
+                    "ty": 756.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U1_CRIMSON_BLADE.L2_TORSO_UNIT",
+          "4x_pixel_size_wh": [
+            720,
+            732
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U1_CRIMSON_BLADE.L2_TORSO_UNIT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U1_CRIMSON_BLADE.L4_ANGULAR_CHEST_ARMOR",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    168,
+                    84
+                  ],
+                  "4x_pixel_size_wh": [
+                    672,
+                    336
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U1.L2_TORSO.L3_ASM.L4_ANGULAR_CHEST_ARMOR",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 1788.0,
+                    "ty": 1064.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U1_CRIMSON_BLADE.L4_WAIST_HYDRAULIC_PISTON",
+                  "box_xywh_in_l3": [
+                    2,
+                    88,
+                    168,
+                    85
+                  ],
+                  "4x_pixel_size_wh": [
+                    672,
+                    340
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U1.L2_TORSO.L3_ASM.L4_WAIST_HYDRAULIC_PISTON",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 1788.0,
+                    "ty": 1408.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U1_CRIMSON_BLADE.L2_LEFT_MOUNT",
+          "4x_pixel_size_wh": [
+            300,
+            1300
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U1_CRIMSON_BLADE.L2_LEFT_MOUNT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U1_CRIMSON_BLADE.L4_LEFT_PLASMA_BLADE_EDGE",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    63,
+                    155
+                  ],
+                  "4x_pixel_size_wh": [
+                    252,
+                    620
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U1.L2_ARM_L.L3_ASM.L4_LEFT_PLASMA_BLADE_EDGE",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 1480.0,
+                    "ty": 496.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U1_CRIMSON_BLADE.L4_LEFT_SHOULDER_THRUSTER",
+                  "box_xywh_in_l3": [
+                    2,
+                    159,
+                    63,
+                    156
+                  ],
+                  "4x_pixel_size_wh": [
+                    252,
+                    624
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U1.L2_ARM_L.L3_ASM.L4_LEFT_SHOULDER_THRUSTER",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 1480.0,
+                    "ty": 1124.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U1_CRIMSON_BLADE.L2_RIGHT_MOUNT",
+          "4x_pixel_size_wh": [
+            308,
+            1300
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U1_CRIMSON_BLADE.L2_RIGHT_MOUNT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U1_CRIMSON_BLADE.L4_RIGHT_PLASMA_BLADE_EDGE",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    65,
+                    155
+                  ],
+                  "4x_pixel_size_wh": [
+                    260,
+                    620
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U1.L2_ARM_R.L3_ASM.L4_RIGHT_PLASMA_BLADE_EDGE",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 2516.0,
+                    "ty": 496.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U1_CRIMSON_BLADE.L4_RIGHT_SHOULDER_THRUSTER",
+                  "box_xywh_in_l3": [
+                    2,
+                    159,
+                    65,
+                    156
+                  ],
+                  "4x_pixel_size_wh": [
+                    260,
+                    624
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U1.L2_ARM_R.L3_ASM.L4_RIGHT_SHOULDER_THRUSTER",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 2516.0,
+                    "ty": 1124.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U1_CRIMSON_BLADE.L2_LEGS_CHASSIS",
+          "4x_pixel_size_wh": [
+            1344,
+            1116
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": []
+        }
+      ]
+    },
+    {
+      "unit_id": "U2_ARTILLERY_GREEN",
+      "1x_box_xywh": [
+        710,
+        40,
+        340,
+        690
+      ],
+      "4x_target_xywh": [
+        2840,
+        160,
+        1360,
+        2760
+      ],
+      "generative_hd_detail_gain_vs_lanczos4x": 4.6313,
+      "e40_pass": true,
+      "binary_alpha_xor_zero": true,
+      "core_bit_exact": 1.0,
+      "l2_parts": [
+        {
+          "l2_part_id": "U2_ARTILLERY_GREEN.L2_HEAD_UNIT",
+          "4x_pixel_size_wh": [
+            704,
+            628
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U2_ARTILLERY_GREEN.L2_HEAD_UNIT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U2_ARTILLERY_GREEN.L4_ARMORED_GUNNER_VISOR",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    164,
+                    71
+                  ],
+                  "4x_pixel_size_wh": [
+                    656,
+                    284
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U2.L2_HEAD.L3_ASM.L4_ARMORED_GUNNER_VISOR",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 3188.0,
+                    "ty": 208.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U2_ARTILLERY_GREEN.L4_COMMS_MAST_MOUNT",
+                  "box_xywh_in_l3": [
+                    2,
+                    75,
+                    164,
+                    72
+                  ],
+                  "4x_pixel_size_wh": [
+                    656,
+                    288
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U2.L2_HEAD.L3_ASM.L4_COMMS_MAST_MOUNT",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 3188.0,
+                    "ty": 500.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U2_ARTILLERY_GREEN.L2_TORSO_UNIT",
+          "4x_pixel_size_wh": [
+            704,
+            820
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U2_ARTILLERY_GREEN.L2_TORSO_UNIT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U2_ARTILLERY_GREEN.L4_CHEST_MISSILE_WARHEADS_L",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    164,
+                    95
+                  ],
+                  "4x_pixel_size_wh": [
+                    656,
+                    380
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U2.L2_TORSO.L3_ASM.L4_CHEST_MISSILE_WARHEADS_L",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 3188.0,
+                    "ty": 844.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U2_ARTILLERY_GREEN.L4_CHEST_MISSILE_WARHEADS_R",
+                  "box_xywh_in_l3": [
+                    2,
+                    99,
+                    164,
+                    96
+                  ],
+                  "4x_pixel_size_wh": [
+                    656,
+                    384
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U2.L2_TORSO.L3_ASM.L4_CHEST_MISSILE_WARHEADS_R",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 3188.0,
+                    "ty": 1232.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U2_ARTILLERY_GREEN.L2_LEFT_MOUNT",
+          "4x_pixel_size_wh": [
+            292,
+            1456
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U2_ARTILLERY_GREEN.L2_LEFT_MOUNT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U2_ARTILLERY_GREEN.L4_LEFT_CANNON_BARREL",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    61,
+                    175
+                  ],
+                  "4x_pixel_size_wh": [
+                    244,
+                    700
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U2.L2_ARM_L.L3_ASM.L4_LEFT_CANNON_BARREL",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 2888.0,
+                    "ty": 208.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U2_ARTILLERY_GREEN.L4_ROCKET_LAUNCHER_POD",
+                  "box_xywh_in_l3": [
+                    2,
+                    179,
+                    61,
+                    175
+                  ],
+                  "4x_pixel_size_wh": [
+                    244,
+                    700
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U2.L2_ARM_L.L3_ASM.L4_ROCKET_LAUNCHER_POD",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 2888.0,
+                    "ty": 916.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U2_ARTILLERY_GREEN.L2_RIGHT_MOUNT",
+          "4x_pixel_size_wh": [
+            300,
+            1456
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U2_ARTILLERY_GREEN.L2_RIGHT_MOUNT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U2_ARTILLERY_GREEN.L4_RIGHT_CANNON_BARREL",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    63,
+                    175
+                  ],
+                  "4x_pixel_size_wh": [
+                    252,
+                    700
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U2.L2_ARM_R.L3_ASM.L4_RIGHT_CANNON_BARREL",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 3900.0,
+                    "ty": 208.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U2_ARTILLERY_GREEN.L4_HEAVY_AUTOCANNON_BREECH",
+                  "box_xywh_in_l3": [
+                    2,
+                    179,
+                    63,
+                    175
+                  ],
+                  "4x_pixel_size_wh": [
+                    252,
+                    700
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U2.L2_ARM_R.L3_ASM.L4_HEAVY_AUTOCANNON_BREECH",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 3900.0,
+                    "ty": 916.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U2_ARTILLERY_GREEN.L2_LEGS_CHASSIS",
+          "4x_pixel_size_wh": [
+            1312,
+            1248
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": []
+        }
+      ]
+    },
+    {
+      "unit_id": "U3_STEALTH_VIOLET",
+      "1x_box_xywh": [
+        1054,
+        132,
+        314,
+        598
+      ],
+      "4x_target_xywh": [
+        4216,
+        528,
+        1256,
+        2392
+      ],
+      "generative_hd_detail_gain_vs_lanczos4x": 4.8717,
+      "e40_pass": true,
+      "binary_alpha_xor_zero": true,
+      "core_bit_exact": 1.0,
+      "l2_parts": [
+        {
+          "l2_part_id": "U3_STEALTH_VIOLET.L2_HEAD_UNIT",
+          "4x_pixel_size_wh": [
+            652,
+            540
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U3_STEALTH_VIOLET.L2_HEAD_UNIT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U3_STEALTH_VIOLET.L4_VIOLET_SNIPER_OPTICS",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    151,
+                    60
+                  ],
+                  "4x_pixel_size_wh": [
+                    604,
+                    240
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U3.L2_HEAD.L3_ASM.L4_VIOLET_SNIPER_OPTICS",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 4540.0,
+                    "ty": 576.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U3_STEALTH_VIOLET.L4_BLADE_ANTENNA_FIN",
+                  "box_xywh_in_l3": [
+                    2,
+                    64,
+                    151,
+                    61
+                  ],
+                  "4x_pixel_size_wh": [
+                    604,
+                    244
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U3.L2_HEAD.L3_ASM.L4_BLADE_ANTENNA_FIN",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 4540.0,
+                    "ty": 824.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U3_STEALTH_VIOLET.L2_TORSO_UNIT",
+          "4x_pixel_size_wh": [
+            652,
+            708
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U3_STEALTH_VIOLET.L2_TORSO_UNIT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U3_STEALTH_VIOLET.L4_STEALTH_CHEST_FACET",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    151,
+                    81
+                  ],
+                  "4x_pixel_size_wh": [
+                    604,
+                    324
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U3.L2_TORSO.L3_ASM.L4_STEALTH_CHEST_FACET",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 4540.0,
+                    "ty": 1124.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U3_STEALTH_VIOLET.L4_REACTOR_COOLING_SLIT",
+                  "box_xywh_in_l3": [
+                    2,
+                    85,
+                    151,
+                    82
+                  ],
+                  "4x_pixel_size_wh": [
+                    604,
+                    328
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U3.L2_TORSO.L3_ASM.L4_REACTOR_COOLING_SLIT",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 4540.0,
+                    "ty": 1456.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U3_STEALTH_VIOLET.L2_LEFT_MOUNT",
+          "4x_pixel_size_wh": [
+            268,
+            1256
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U3_STEALTH_VIOLET.L2_LEFT_MOUNT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U3_STEALTH_VIOLET.L4_SHOULDER_TARGETING_POD",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    55,
+                    150
+                  ],
+                  "4x_pixel_size_wh": [
+                    220,
+                    600
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U3.L2_ARM_L.L3_ASM.L4_SHOULDER_TARGETING_POD",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 4264.0,
+                    "ty": 576.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U3_STEALTH_VIOLET.L4_RAILGUN_OPTICAL_SCOPE",
+                  "box_xywh_in_l3": [
+                    2,
+                    154,
+                    55,
+                    150
+                  ],
+                  "4x_pixel_size_wh": [
+                    220,
+                    600
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U3.L2_ARM_L.L3_ASM.L4_RAILGUN_OPTICAL_SCOPE",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 4264.0,
+                    "ty": 1184.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U3_STEALTH_VIOLET.L2_RIGHT_MOUNT",
+          "4x_pixel_size_wh": [
+            272,
+            1256
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": [
+            {
+              "l3_assembly_id": "U3_STEALTH_VIOLET.L2_RIGHT_MOUNT.L3_ASSEMBLY",
+              "l4_mutex_pass": true,
+              "core_bit_exact": 1.0,
+              "l4_micro_components": [
+                {
+                  "l4_component_id": "U3_STEALTH_VIOLET.L4_RAILGUN_COPPER_COILS",
+                  "box_xywh_in_l3": [
+                    2,
+                    2,
+                    56,
+                    150
+                  ],
+                  "4x_pixel_size_wh": [
+                    224,
+                    600
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U3.L2_ARM_R.L3_ASM.L4_RAILGUN_COPPER_COILS",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 5200.0,
+                    "ty": 576.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                },
+                {
+                  "l4_component_id": "U3_STEALTH_VIOLET.L4_LEFT_FOREARM_STABILIZER",
+                  "box_xywh_in_l3": [
+                    2,
+                    154,
+                    56,
+                    150
+                  ],
+                  "4x_pixel_size_wh": [
+                    224,
+                    600
+                  ],
+                  "e40_pass": true,
+                  "binary_alpha_xor_zero": true,
+                  "core_bit_exact": 1.0,
+                  "composed_world_transform": {
+                    "parent_frame": "WORLD_SCENE",
+                    "child_frame": "MECHA.U3.L2_ARM_R.L3_ASM.L4_LEFT_FOREARM_STABILIZER",
+                    "scale": 4.0,
+                    "rotation_deg": 0.0,
+                    "tx": 5200.0,
+                    "ty": 1184.0,
+                    "transform_class": "ROOT",
+                    "gate_passed": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l2_part_id": "U3_STEALTH_VIOLET.L2_LEGS_CHASSIS",
+          "4x_pixel_size_wh": [
+            1208,
+            1080
+          ],
+          "e40_pass": true,
+          "binary_alpha_xor_zero": true,
+          "core_bit_exact": 1.0,
+          "l3_assemblies": []
+        }
+      ]
+    }
+  ]
+}

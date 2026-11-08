@@ -1,9 +1,9 @@
 # SHQ Object Geometry Lock — Program Guidance v0.1
 
-**Latest source conversation:** Gemini share `XMyk6HVn2J9S` → `381865631306` (**20 turns**)  
-**Prior packs (kept):** `nutrRjsw676R` → `f5fb21d16408` (19); `hC9HlUpskKK9` → `49fb97a58dbe` (17); `47yxULPlPy0W` → `970343afbbef` (15)  
+**Latest source conversation:** Gemini share `uXr7snnWQVOR` → `2b13c3741433` (**26 turns**)  
+**Prior packs (kept):** `XMyk6HVn2J9S` → `381865631306` (20); `nutrRjsw676R` → `f5fb21d16408` (19); `hC9HlUpskKK9` → `49fb97a58dbe` (17); `47yxULPlPy0W` → `970343afbbef` (15)  
 **Title:** 物件導向幾何約束升頻架構  
-**Transcript (latest):** [`docs/sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md`](./sources/gemini-share-XMyk6HVn2J9S/Gemini-完整對話.md)  
+**Transcript (latest):** [`docs/sources/gemini-share-uXr7snnWQVOR/Gemini-完整對話.md`](./sources/gemini-share-uXr7snnWQVOR/Gemini-完整對話.md)  
 **AI agent usage guide:** [`docs/SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md)  
 **Verifiable reference package:** [`research/ige_shq_github_verifiable_package_v1.0/`](../research/ige_shq_github_verifiable_package_v1.0/) (v1.1 Complete13Assets; 5-layer L0→L4; research-only)  
 **Modular toolkit:** [`research/ige_shq_modular_methods_toolkit_v2.0/`](../research/ige_shq_modular_methods_toolkit_v2.0/) (M01–M22 + R01–R03; research-only)  
@@ -11,7 +11,7 @@
 **Research fossils:** [`research/shq_v9/`](../research/shq_v9/) (10 scripts; earlier single-file experiments)  
 **Status:** implementer contract / design lock. Not a runtime merge.
 
-**v0.1 refresh note:** packs through XMyk add (1) **Method Registry** + Skill Router / holdout, (2) **true generative 8K** donors, (3) **strict claim boundary** + anti-tautology + `delivery_transform`, (4) **Rule 01380** + four-skill frequency layers \(L+M+H\), (5) **battlefield self-part** chain 生/除/扣/洞/反 with **1:1 method→program→test→accept** traceability. Stage naming emphasizes **S7 independent ACCEPT**; this doc’s S0–S6 map still applies — cover freeze→read→lock→route→infer→return→independent accept.
+**v0.1 refresh note:** packs through **uXr7** add (1) **Method Registry** + Skill Router / holdout, (2) **true generative 8K** donors, (3) **strict claim boundary** + anti-tautology + `delivery_transform`, (4) **Rule 01380** + four-skill frequency layers \(L+M+H\), (5) **battlefield self-part** chain 生/除/扣/洞/反 with **1:1 method→program→test→accept** traceability, (6) **GitHub verifiable package** L0→L4 + **preflight Anti-Spoof** (`B0_GL`/`B2_GL`), (7) **Modular M01–M22 / R01–R03**, (8) **Grok×Imagine×Canvas** ops layer with write gate, (9) **Four-Plane Artifact DAG** + diagnosis that **per-method PASS ≠ linked-pipeline PASS**. Stage naming emphasizes **S7 independent ACCEPT**; this doc’s S0–S6 map still applies — cover freeze→read→lock→route→infer→return→independent accept.
 
 ---
 
@@ -270,7 +270,7 @@ When implementing, cite this doc’s stage ids (`S0`–`S6`) and forbidden list 
 - [x] Guidance stages + gates written  
 - [x] Forbidden practices explicit  
 - [x] AI usage guide (`SHQ_AI_USAGE_GUIDE.md`)  
-- [x] Latest source pack `XMyk6HVn2J9S` (20 turns) + prior packs retained  
+- [x] Latest source pack `uXr7snnWQVOR` (26 turns) + prior packs retained  
 - [x] `research/ige_shq_github_verifiable_package_v1.0` five-layer package v1.1 Complete13Assets (research-only)
 - [x] `research/ige_shq_modular_methods_toolkit_v2.0` M01–M22 + R01–R03 (research-only)  
 - [x] `research/grok_ige_shq_runnable_v1.0` Grok × Imagine × Canvas ops pack (research-only; write BLOCKED)  
@@ -340,3 +340,14 @@ Point implementers at these **research-only** trees (not `src/ige` production wi
    - ZIP SHA-256: `310c15d986885bbaa8e33c2ab37516367391cc4156e22a23a4ca859083912a11` (committed sibling zip; `.venv/` not in tree).
 
 Hub notes: [`ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md`](../research/ige_shq_github_verifiable_package_v1.0/HUB_NOTES.md), [`ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md`](../research/ige_shq_modular_methods_toolkit_v2.0/HUB_NOTES.md), [`grok_ige_shq_runnable_v1.0/HUB_NOTES.md`](../research/grok_ige_shq_runnable_v1.0/HUB_NOTES.md). AI checklist: [`SHQ_AI_USAGE_GUIDE.md`](./SHQ_AI_USAGE_GUIDE.md) §9–§11.
+
+
+### 10.7 uXr7 pack citations (honest scope)
+
+Source: [`docs/sources/gemini-share-uXr7snnWQVOR/`](./sources/gemini-share-uXr7snnWQVOR/) (26 turns; model 4 Argon).
+
+- **Fail-Closed preflight** for 13 assets + Geometry-Locked donor anti-spoof (`B0_GL` ̸≡ `B0_UPPER`, `B2_GL` ̸≡ `B2_FULL` by SHA-256).
+- **Modular methods** `M01`–`M22` / recipes `R01`–`R03` are callable one-by-one; linked recipes must still pass S3 human-verify + S7 disk re-read — independent method PASS does **not** imply composite PASS.
+- **Grok runnable ops pack** coordinates Chat/Imagine/Canvas; Python runtime alone owns reproducible geometry/pixel gates. Write path remains BLOCKED while `human_verified=True` is hard-coded.
+- **Four-Plane Artifact DAG** (turn 25 fossil `four_plane_artifact_dag_engine.py`) is an audit/orchestration sketch in the share artifacts; Hub runtime remains the research packages under `research/`, not a `src/ige` merge.
+
