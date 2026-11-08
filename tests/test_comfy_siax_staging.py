@@ -47,5 +47,40 @@ class ComfySiaxStagingTests(unittest.TestCase):
         self.assertEqual(json.dumps(self.original, sort_keys=True), before)
 
 
+    def test_committed_dev_workflow_artifacts_are_reproducible(self):
+        stage1, stage2, report = build_staged_workflows(self.original)
+        pack = ROOT / "docs/handoff/comfy-siax-return/pc_高清探"
+        self.assertEqual(
+            stage1,
+            json.loads((pack / "workflow_ige_v03_dev_fp8_siax_stage1_export.json").read_text(encoding="utf-8")),
+        )
+        self.assertEqual(
+            stage2,
+            json.loads((pack / "workflow_ige_v03_dev_fp8_ige_stage2_gated_candidate.json").read_text(encoding="utf-8")),
+        )
+        self.assertEqual(
+            report,
+            json.loads((pack / "workflow_ige_v03_dev_fp8_staging_build_report.json").read_text(encoding="utf-8")),
+        )
+
+    def test_committed_local_workflow_artifacts_are_reproducible(self):
+        local_path = ROOT / "docs/handoff/comfy-siax-return/pc_高清探/workflow_ige_v03_dev_fp8_local_gated_candidate.json"
+        local_original = json.loads(local_path.read_text(encoding="utf-8"))
+        stage1, stage2, report = build_staged_workflows(local_original)
+        pack = ROOT / "docs/handoff/comfy-siax-return/pc_高清探"
+        self.assertEqual(
+            stage1,
+            json.loads((pack / "workflow_ige_v03_dev_fp8_local_siax_stage1_export.json").read_text(encoding="utf-8")),
+        )
+        self.assertEqual(
+            stage2,
+            json.loads((pack / "workflow_ige_v03_dev_fp8_local_ige_stage2_gated_candidate.json").read_text(encoding="utf-8")),
+        )
+        self.assertEqual(
+            report,
+            json.loads((pack / "workflow_ige_v03_dev_fp8_local_staging_build_report.json").read_text(encoding="utf-8")),
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
