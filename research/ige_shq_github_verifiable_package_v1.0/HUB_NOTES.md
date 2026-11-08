@@ -2,7 +2,7 @@
 
 **Status:** research-only reference implementation. **Not** wired into `src/ige` production.
 
-**Provenance:** Gemini share [`XMyk6HVn2J9S`](../../docs/sources/gemini-share-XMyk6HVn2J9S/) (battlefield self-part / dense registration / five-layer package turn; continues nutr + hC9 packs). User-attached zip SHA-256: `5ef8601d818c4ffb05b1fb25182cee600668be71ccd021d5d5065f4c84f4ba1c`.
+**Provenance:** Gemini share [`XMyk6HVn2J9S`](../../docs/sources/gemini-share-XMyk6HVn2J9S/) (battlefield self-part / dense registration / five-layer package turn; continues nutr + hC9 packs). The Hub-stored ZIP has its own historical SHA-256: `5ef8601d818c4ffb05b1fb25182cee600668be71ccd021d5d5065f4c84f4ba1c`. It is **not** byte-identical to the separately attached candidate ZIP audited below.
 
 **What this is:** portable five-layer Python package (`src/ige_shq/l0`→`l4`) + relative-path assets + Method Registry + unit tests + one-command runner. External AI/engineer can unzip (or clone this tree) and run:
 
@@ -11,7 +11,7 @@ python3 registry/validate_registry.py registry/method_registry.json
 python3 run_all_verifications.py --strict
 ```
 
-**Hub verification (this PR):** with `opencv-python-headless` + `numpy` + `Pillow` in a venv: registry PASS (22 methods); **12/12** unittest OK; **8/8** stage gates PASS; `exit_code = 0`. Regenerated `outputs/SHQ_BATTLEFIELD_SELF_PARTS_4X_MASTER_5504x3072.png` kept as run evidence.
+**Stored Hub report:** records registry PASS (22 methods), **12/12** runner unit tests, **8/8** strict stage gates and `exit_code = 0`. Treat this as historical evidence; every external AI must run a fresh `preflight_check.py` and `run_all_verifications.py --strict` and hash the newly generated outputs.
 
 **Three DEBUG root causes fixed in this package (vs earlier single-script fossils):**
 
@@ -20,5 +20,9 @@ python3 run_all_verifications.py --strict
 3. Hardcoded absolute `/working_dir/...` paths → five relative-path modules + portable runner.
 
 **Layer map (quick):** L0=S0 four-way anti-hole → L1=S1/S2 18-part + geometry lock → L2=S3 permission + registry → L3=Skills A/B/C dense reg + \(L+M+H\) → L4=Skill D Rule 01380 return + S7 disk reverse QA.
+
+**External candidate ZIP audit (2026-11-08):** attached SHA-256 `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`. Registry validation passes (22 methods) and package Registry tests pass (4/4), but its runner references two files absent from that ZIP: `assets/s4_self_part_hr_b0_geometry_locked_1200x896.jpg` and `assets/s4_self_part_hr_b2_geometry_locked_1200x896.jpg`. Its `--strict` run therefore fails at L3. Do not substitute `B0_UPPER` / `B2_FULL`, do not silently resize, and do not promote this ZIP over the Hub baseline until the exact files and hashes are committed.
+
+**External AI instructions:** [`docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](../../docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md). Preflight script: [`preflight_check.py`](./preflight_check.py). Pinned dependencies: [`requirements.txt`](./requirements.txt).
 
 See also: [`docs/SHQ_AI_USAGE_GUIDE.md`](../../docs/SHQ_AI_USAGE_GUIDE.md) §9; [`docs/SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md`](../../docs/SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md) §10.6; package [`README.md`](./README.md).
