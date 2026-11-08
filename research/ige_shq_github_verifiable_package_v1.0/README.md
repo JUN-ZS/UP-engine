@@ -16,7 +16,21 @@
    - **Layer 3 (`src/ige_shq/l3_s4_self_part_dense_registration_and_3freq_engine.py`)**：執行 `Skill A` ($L_{\text{base}}$)、`Skill B` ($M_{\text{material}}$)、`Skill C` ($H_{\text{detail}}$) 逐部件光流對齊與三頻率層分解。
    - **Layer 4 (`src/ige_shq/l4_s5_s6_s7_rule01380_return_and_reverse_qa.py`)**：執行 `Skill D` + `Rule 01380`（洞內硬邊 `100.0%` 升清，`eroded_low_res_border_pixels = 0`、`feather_px = 0`）、18 部件遞迴回位至 `5504×3072` 母本，並從磁碟重讀 PNG 執行純唯讀 `S7 Reverse QA` 反扣驗收（`IoU = 1.0000`）。
 
-## 2. 一鍵重現與驗證指令（供 GitHub 與外部 AI 驗收）
+## 2. 外部 AI 逐步執行入口
+
+先看 [`SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md`](../../docs/SHQ_OTHER_AI_STEP_BY_STEP_RUNBOOK.md)。Clone PR #12 branch 後，喺本套件根目錄依序執行：
+
+```bash
+python -m pip install -r requirements.txt
+python preflight_check.py
+python registry/validate_registry.py registry/method_registry.json
+python -m unittest discover -s tests -v
+python run_all_verifications.py --strict
+```
+
+任何 Preflight／Registry／測試失敗，立即 BLOCK；不得用舊 report 當新執行證據。Runbook §0 已記錄目前 Hub baseline 同另行附上的缺件 candidate ZIP 並非同一個 artifact。
+
+## 3. 一鍵重現與驗證指令（供 GitHub 與外部 AI 驗收）
 
 解壓縮本套件後，在套件根目錄直接執行：
 
@@ -30,3 +44,8 @@ python3 run_all_verifications.py --strict
 # 3. 單獨執行 Registry 單元測試
 python3 -m unittest discover -s tests -v
 ```
+
+
+## Execution capability boundary
+
+本套件驗證已提供 HR self-part donors 的配準、L/M/H 頻率轉移、幾何回位和 S7 reverse QA。Runner 本身不會呼叫 Siax/NCNN、ComfyUI/Flux 或 Imagine live backend；需要以獨立 backend adapter receipt 證明實際生成時，唔可以用本套件的 PASS 代替。
