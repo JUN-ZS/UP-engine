@@ -15,7 +15,7 @@ There are two different artifacts that have both been called `IGE_SHQ_GitHub_Ver
 | Artifact | What it contains | Current status |
 |---|---|---|
 | **Hub expanded baseline**: `research/ige_shq_github_verifiable_package_v1.0/` | Five HR self-part plates (`B0_UPPER`, `B0_LOWER`, `B1_UPPER`, `B1_LOWER`, `B2_FULL`), 10 hashed image assets, Registry, L0–L4 modules, tests, runner and stored reports | The Hub's stored traceability report records 12 unit tests and 8/8 strict checks PASS. Re-run it locally; the stored report is historical evidence, not a substitute for a fresh run. |
-| **Newly attached ZIP inspected 2026-11-08** | Same 10 baseline assets, but its updated runner also references `B0_GL` and `B2_GL` whole-body geometry-locked HR images | **BLOCKED**: these two files are absent from the ZIP. Registry validation and its 4 package tests pass, but `run_all_verifications.py --strict` fails in Layer 3 when `cv2.imread` returns `None`. ZIP SHA-256: `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`. |
+| **Newly attached ZIP inspected 2026-11-08** | Same 10 baseline assets, but its updated runner also references `B0_GL` and `B2_GL` whole-body geometry-locked HR images | **BLOCKED**: all 10 baseline asset hashes match, but the archive lacks the new Hub `preflight_check.py` / `requirements.txt`, both `B0_GL` / `B2_GL` images, and `assets/geometry_locked_hr_manifest.json`. Registry validation and its 4 package tests pass; the full strict runner fails in L3 when `cv2.imread` returns `None`. ZIP SHA-256: `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`. |
 
 The two missing files are:
 
@@ -217,6 +217,7 @@ Use `NOT_RUN` when the full pipeline was not executed. Never turn a historical r
 Observed in this session against the newly attached ZIP:
 
 - ZIP SHA-256: `6f13bd5c45f99db1541f236991dbd9e07d7bb637f9d02138563f85ff7f63b2e8`.
+- Preflight executed from the Hub script (`preflight_check.py`, Git blob SHA `0c898447ef1d744ac8ac72f00e840e939b7b1d3b`): `BLOCK`, exit code `2`. All 10 known baseline asset hashes are `PASS`; the archive is missing `preflight_check.py`, `requirements.txt`, both `B0_GL` / `B2_GL` images, and `assets/geometry_locked_hr_manifest.json`.
 - Registry validator: `PASS`, 22 methods, zero schema errors.
 - Package Registry tests: `4/4 PASS`.
 - Full strict runner: `FAIL` in Layer 3 because `B0_GL` and `B2_GL` are referenced but absent; `cv2.imread` returns `None`, followed by a `NoneType` subscript error.
