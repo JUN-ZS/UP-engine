@@ -1,0 +1,17 @@
+{
+  "schema": "ige-comfy-geometry-human-permission/0.1",
+  "decision": "PENDING_REVIEW",
+  "reviewer_ref": "",
+  "reviewed_at": "",
+  "review_scope": "diagnostic_candidate_only",
+  "reviewed_artifacts": ["source", "canvas", "geometry_contract", "approved_mask", "protected_mask", "tile_plan", "workflow"],
+  "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "canvas_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "coordinate_frame": "REPLACED_BY_PREPARE_COMMAND",
+  "approved_mask_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "protected_mask_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "tile_plan_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "workflow_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "geometry_contract_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "note": "Example only. Run prepare to obtain real SHA values, then replace with a reviewed attestation. This is not a cryptographic identity signature."
+}

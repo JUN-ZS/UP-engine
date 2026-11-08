@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ige-comfy-geometry-human-permission/0.1",
+  "title": "Human S3 permission attestation for diagnostic Comfy candidate generation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "decision", "reviewer_ref", "reviewed_at", "review_scope", "reviewed_artifacts", "source_sha256", "geometry_contract_sha256", "canvas_sha256", "coordinate_frame", "approved_mask_sha256", "protected_mask_sha256", "tile_plan_sha256", "workflow_sha256"],
+  "properties": {
+    "schema": {"const": "ige-comfy-geometry-human-permission/0.1"},
+    "decision": {"enum": ["PENDING_REVIEW", "APPROVED", "REJECTED"]},
+    "reviewer_ref": {"type": "string", "description": "Operator reference entered after manual review; this does not cryptographically authenticate the reviewer."},
+    "reviewed_at": {"type": "string", "description": "Blank while PENDING_REVIEW; ISO-8601 timestamp with timezone is required for APPROVED."},
+    "review_scope": {"const": "diagnostic_candidate_only"},
+    "reviewed_artifacts": {"type": "array", "uniqueItems": true, "items": {"enum": ["source", "canvas", "approved_mask", "protected_mask", "tile_plan", "workflow", "geometry_contract"]}, "description": "All seven must be included before APPROVED."},
+    "source_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "canvas_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "coordinate_frame": {"type": "string", "minLength": 1},
+    "approved_mask_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "protected_mask_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "tile_plan_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "workflow_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "geometry_contract_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "note": {"type": "string"}
+  },
+  "$comment": "The permission record is a human attestation bound to frozen artifacts. Reviewer identity is not cryptographically verified; it never promotes execution_allowed or candidate_accepted.",
+  "allOf": [{"if": {"properties": {"decision": {"const": "APPROVED"}}, "required": ["decision"]}, "then": {"properties": {"reviewer_ref": {"type": "string", "minLength": 1}, "reviewed_at": {"type": "string", "format": "date-time", "minLength": 10}, "reviewed_artifacts": {"type": "array", "minItems": 7, "uniqueItems": true}}}}]
+}

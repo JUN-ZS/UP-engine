@@ -1,0 +1,11 @@
+{
+  "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "canvas_path": "C:/project/baseline_4x.png",
+  "canvas_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "coordinate_frame": "citybridge_4x_canvas_px_v1",
+  "geometry_human_verified": true,
+  "object_transform": {"description": "Replace with reviewed S2 object transform", "transform_id": "REPLACE_WITH_REAL_S2_TRANSFORM"},
+  "model_scale": 4.0,
+  "tile_size": 512,
+  "tile_context": 64
+}
