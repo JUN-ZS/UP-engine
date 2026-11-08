@@ -502,9 +502,10 @@ def _preflight_context(context: Mapping[str, Any], client: ComfyCloudClient) -> 
         route = by_id[tile_id]
         origin = route.get("origin_xy")
         read = tile["read_bounds"]
-        if origin != [read[0], read[1]]:
+        expected_origin = [read[0], read[1]]
+        if origin != expected_origin:
             raise GeometryLockedRuntimeError(
-                f"workflow tile {tile_id} global origin {origin} != read_bounds origin {[read[0], read[1]}"
+                f"workflow tile {tile_id} global origin {origin} != read_bounds origin {expected_origin}"
             )
         if route.get("input_node_id") != tile["input_node_id"]:
             raise GeometryLockedRuntimeError(f"workflow tile {tile_id} input node is not bound to the planned LoadImage")
