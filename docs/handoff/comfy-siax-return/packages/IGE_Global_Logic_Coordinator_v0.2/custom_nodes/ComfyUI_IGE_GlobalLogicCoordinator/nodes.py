@@ -258,6 +258,94 @@ class IGE_ExecutionAuthorizationGate:
         return (latent, _json_text(report))
 
 
+
+class IGE_LatentMemoryBarrier:
+    """Release model weights between a completed sampler and downstream VAE decode."""
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {
+            "latent": ("LATENT",),
+            "release_models": ("BOOLEAN", {"default": True}),
+            "clear_cuda_cache": ("BOOLEAN", {"default": True}),
+            "synchronize": ("BOOLEAN", {"default": True}),
+        }}
+
+    RETURN_TYPES = ("LATENT", "STRING")
+    RETURN_NAMES = ("LATENT", "MEMORY_RELEASE_REPORT_JSON")
+    FUNCTION = "release"
+    CATEGORY = "IGE/Global Logic"
+
+    def release(self, latent, release_models=True, clear_cuda_cache=True, synchronize=True):
+        import gc
+        if not isinstance(latent, dict) or "samples" not in latent:
+            raise TypeError("latent must be a ComfyUI LATENT dictionary with samples")
+        samples = latent["samples"]
+        if not isinstance(samples, torch.Tensor):
+            raise TypeError("latent.samples must be a torch.Tensor")
+
+        def snapshot():
+            result = {
+                "cuda_available": bool(torch.cuda.is_available()),
+                "vram_free_mb": None,
+                "vram_total_mb": None,
+                "allocated_mb": None,
+                "reserved_mb": None,
+            }
+            if result["cuda_available"]:
+                try:
+                    free_bytes, total_bytes = torch.cuda.mem_get_info()
+                    result["vram_free_mb"] = int(free_bytes // (1024 * 1024))
+                    result["vram_total_mb"] = int(total_bytes // (1024 * 1024))
+                    result["allocated_mb"] = int(torch.cuda.memory_allocated() // (1024 * 1024))
+                    result["reserved_mb"] = int(torch.cuda.memory_reserved() // (1024 * 1024))
+                except Exception as exc:
+                    result["snapshot_error"] = f"{type(exc).__name__}: {exc}"
+            return result
+
+        before = snapshot()
+        if synchronize and torch.cuda.is_available():
+            torch.cuda.synchronize()
+
+        gc.collect()
+        unload_report = "not_requested"
+        if release_models:
+            try:
+                import comfy.model_management as model_management
+                model_management.unload_all_models()
+                model_management.soft_empty_cache()
+                unload_report = "unload_all_models_and_soft_empty_cache_called"
+            except Exception as exc:
+                raise RuntimeError(
+                    f"IGE Latent Memory Barrier could not unload ComfyUI models: {type(exc).__name__}: {exc}"
+                ) from exc
+
+        if clear_cuda_cache and torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            torch.cuda.ipc_collect()
+        gc.collect()
+        after = snapshot()
+
+        report = {
+            "schema_version": "ige-latent-memory-release/0.1",
+            "status": "RELEASE_REQUESTED",
+            "release_models": bool(release_models),
+            "clear_cuda_cache": bool(clear_cuda_cache),
+            "synchronize": bool(synchronize),
+            "model_unload_action": unload_report,
+            "latent_shape": [int(x) for x in samples.shape],
+            "memory_before": before,
+            "memory_after": after,
+            "non_claims": [
+                "The latent tensor is deliberately retained and passed through unchanged.",
+                "Emptying the CUDA cache does not free live tensors or ComfyUI cached outputs.",
+                "Downstream VAE decode may reload the VAE model.",
+                "This barrier does not prevent OOM inside the preceding sampler and is not a guarantee of OOM-free execution.",
+            ],
+        }
+        return (latent, _json_text(report))
+
+
 NODE_CLASS_MAPPINGS={
     "IGE_GlobalLogicCompiler": IGE_GlobalLogicCompiler,
     "IGE_TTPSubsetProjector": IGE_TTPSubsetProjector,
@@ -268,6 +356,7 @@ NODE_CLASS_MAPPINGS={
     "IGE_GlobalAcceptanceAudit": IGE_GlobalAcceptanceAudit,
     "IGE_IterationFeedback": IGE_IterationFeedback,
     "IGE_ExecutionAuthorizationGate": IGE_ExecutionAuthorizationGate,
+    "IGE_LatentMemoryBarrier": IGE_LatentMemoryBarrier,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS={
@@ -280,4 +369,5 @@ NODE_DISPLAY_NAME_MAPPINGS={
     "IGE_GlobalAcceptanceAudit":"IGE · Global Acceptance Audit",
     "IGE_IterationFeedback":"IGE · Iteration Feedback Compiler",
     "IGE_ExecutionAuthorizationGate":"IGE · Fail-Closed Execution Authorization Gate",
+    "IGE_LatentMemoryBarrier":"IGE · Latent Model-Release Barrier",
 }

@@ -38,7 +38,20 @@ class ComfySiaxStagingTests(unittest.TestCase):
         self.assertIn(36, nodes)
         self.assertIn(342, nodes)
         self.assertIn(343, nodes)
+        self.assertNotIn(262, nodes)
+        self.assertEqual(nodes[344]["type"], "IGE_LatentMemoryBarrier")
+        self.assertEqual(nodes[345]["type"], "IGE_LatentMemoryBarrier")
+        links = {int(link[0]): link for link in stage2["links"]}
+        for sampler_id, barrier_id, decoder_id in ((67, 344, 96), (310, 345, 311)):
+            sampler = nodes[sampler_id]
+            latent_link_id = sampler["outputs"][0]["links"][0]
+            self.assertEqual(int(links[int(latent_link_id)][3]), barrier_id)
+            barrier_output_link = nodes[barrier_id]["outputs"][0]["links"][0]
+            self.assertEqual(int(links[int(barrier_output_link)][3]), decoder_id)
+            self.assertEqual(nodes[barrier_id]["widgets_values"], [True, True, True])
         self.assertEqual(report["stage2"]["sampler_count"], 2)
+        self.assertEqual(report["stage2"]["memory_barrier_node_ids"], [344, 345])
+        self.assertEqual(report["stage2"]["removed_unordered_terminal_purge_node_id"], 262)
         self.assertFalse(report["stage2"]["execution_allowed"])
 
     def test_build_does_not_mutate_source_workflow(self):

@@ -68,6 +68,11 @@ class ComfySiaxGeometryPreflightTests(unittest.TestCase):
         self.assertFalse(report["execution_allowed"])
         self.assertFalse(report["queue_submission"])
         self.assertEqual(len(report["samplers"]), 2)
+        self.assertEqual(
+            [row["memory_barrier_node_id"] for row in report["samplers"]],
+            [344, 345],
+        )
+        self.assertTrue(all(row["release_models_before_vae_decode"] for row in report["samplers"]))
 
     def test_dimension_mismatch_blocks_before_compile_contract(self):
         with tempfile.TemporaryDirectory() as tmp:

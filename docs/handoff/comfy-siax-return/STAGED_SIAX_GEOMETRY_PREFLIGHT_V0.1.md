@@ -35,7 +35,7 @@ This is the only stage intended to run before geometry review. It uses the exist
 
 ## Stage 2 — IGE / TTP / Flux candidate
 
-Stage 2 removes the original pre-SIAX nodes 233, 244, 133 and 134, and reuses Node 34 as a LoadImage. All downstream links from Node 34 are preserved, including the compiler source and the TTP source path. Both sampler latent inputs remain behind their fail-closed authorization gates.
+Stage 2 removes the original pre-SIAX nodes 233, 244, 133 and 134, removes the unsequenced terminal LayerUtility PurgeVRAM Node 262, and reuses Node 34 as a LoadImage. All downstream links from Node 34 are preserved, including the compiler source and the TTP source path. Both sampler latent inputs remain behind their fail-closed authorization gates. It inserts IGE_LatentMemoryBarrier Node 344 between Baseline A sampler 67 and VAE Decode 96, and Node 345 between Candidate B sampler 310 and VAE Decode 311. Each barrier requests Comfy model unload, CUDA cache release and synchronization, while passing the latent unchanged.
 
 1. Open the Stage 2 workflow.
 2. In Node 34, select the exact Stage 1 PNG copied into ComfyUI/input.
@@ -80,6 +80,7 @@ If the Stage 1 output remains 3862×2172, preflight returns BLOCKED_CANVAS_DIMEN
 - No weakening of compile_contract.
 - No automatic setting of execution_allowed=true.
 - A passing dimension check is not geometry acceptance.
+- The memory-release barrier retains the latent and cannot free ComfyUI cached outputs; it does not prevent OOM inside the preceding sampler and may cause VAE weights to reload for decode.
 - A static JSON check is not a live ComfyUI node-import or GPU run.
 - The current stage split does not prove cross-tile semantic continuity.
 - Stage 1 SIAX execution and Stage 2 Flux execution are separate user-controlled ComfyUI runs; no GPU job was run while preparing this PR.

@@ -58,6 +58,18 @@ Therefore, the existence of a configured 2×3 TTP grid does not by itself prove 
 
 This remains a static inference until the installed Easy-Use version and runtime latent batch shape are captured on the operator PC. It is not a live proof that exactly one tile is resident at every stage, nor does it account for ComfyUI's intermediate-output cache.
 
+## Stage 2 model-release barriers
+
+The original v03 graph contains LayerUtility PurgeVRAM Node 262 as a terminal output connected to the Baseline A sampler branch. It is not a dataflow dependency between both samplers and their VAE decoders, and the archived node inventory does not identify the installed LayerStyle package version.
+
+The new Stage 2 candidate removes Node 262 and inserts explicit IGE_LatentMemoryBarrier nodes:
+- Node 344: Baseline A sampler 67 → barrier 344 → VAEDecodeTiled 96.
+- Node 345: Candidate B sampler 310 → barrier 345 → VAEDecodeTiled 311.
+
+Each barrier synchronizes CUDA, calls Comfy model unload/soft cache release, performs CUDA cache cleanup, records free/allocated/reserved VRAM before/after, and passes the latent through unchanged. The resource and geometry preflights verify these graph connections and that release flags remain enabled.
+
+This reduces model-weight overlap between Flux sampling and VAE decoding, but it is not a complete OOM guarantee: the latent remains live, ComfyUI may retain cached outputs, the VAE may reload for decode, and an OOM can still occur inside the preceding sampler. Actual 8GB runtime peaks must be measured locally.
+
 ## Remaining OOM work
 
 The archived list path is a better starting point than a simultaneous six-tile latent batch, but OOM protection is not yet complete:

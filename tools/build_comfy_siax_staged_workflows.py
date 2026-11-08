@@ -95,6 +95,7 @@ def build_staged_workflows(workflow: dict[str, Any]) -> tuple[dict[str, Any], di
         134: "ImageUpscaleWithModel",
         300: "IGE_GlobalLogicCompiler",
         36: "TTP_Image_Tile_Batch",
+        262: "LayerUtility: PurgeVRAM",
     }.items():
         if node_id not in node_map or node_map[node_id].get("type") != expected_type:
             raise ValueError(f"Expected Node {node_id} type {expected_type}")

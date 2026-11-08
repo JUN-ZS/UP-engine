@@ -46,6 +46,18 @@ def _input_source(node: dict[str, Any], input_name: str, links: dict[int, list[A
     return int(link[1]) if link else None
 
 
+def _output_targets(node: dict[str, Any], output_name: str, links: dict[int, list[Any]]) -> list[int]:
+    slots = [slot for slot in node.get("outputs", []) if slot.get("name") == output_name]
+    if len(slots) != 1:
+        return []
+    targets = []
+    for link_id in slots[0].get("links") or []:
+        link = links.get(int(link_id))
+        if link:
+            targets.append(int(link[3]))
+    return targets
+
+
 def _tile_grid_report(ttp: dict[str, Any], links: dict[int, list[Any]], nodes: dict[int, dict[str, Any]]) -> dict[str, Any]:
     grid_node_ids = set()
     for input_slot in ttp.get("inputs", []):
@@ -126,6 +138,17 @@ def _inspect_sampler_path(
     tile_count = max(configured_counts) if configured_counts else None
     split_before_vae = bool(vae_paths) and all(path["split_before_vae"] for path in vae_paths)
 
+    barrier_targets = _output_targets(sampler, "output", links)
+    barriers = [nodes[node_id] for node_id in barrier_targets if node_id in nodes and nodes[node_id].get("type") == "IGE_LatentMemoryBarrier"]
+    barrier = barriers[0] if len(barriers) == 1 else None
+    barrier_values = (barrier or {}).get("widgets_values") or []
+    barrier_release_enabled = barrier_values[:3] == [True, True, True]
+    barrier_decoder_targets = _output_targets(barrier, "LATENT", links) if barrier else []
+    decoder_targets = [
+        node_id for node_id in barrier_decoder_targets
+        if node_id in nodes and nodes[node_id].get("type") == "VAEDecodeTiled"
+    ]
+
     return {
         "sampler_id": sampler_id,
         "sampler_title": sampler.get("title"),
@@ -146,6 +169,10 @@ def _inspect_sampler_path(
             if tile_count and tile_count > 1 and split_before_vae
             else "not_established"
         ),
+        "memory_barrier_present": barrier is not None,
+        "memory_barrier_node_id": int(barrier["id"]) if barrier else None,
+        "memory_barrier_releases_models_and_cache": bool(barrier and barrier_release_enabled),
+        "vae_decode_node_ids": decoder_targets,
     }
 
 
@@ -254,6 +281,12 @@ def evaluate_preflight(
         reasons.append("SAMPLER_PATH_NOT_GEOMETRY_GATED")
     if any(item.get("static_batch_warning") for item in graph_report.get("samplers", [])):
         reasons.append("TTP_BATCH_NOT_SPLIT_BEFORE_VAE")
+    if any(not item.get("memory_barrier_present") for item in graph_report.get("samplers", [])):
+        reasons.append("SAMPLER_MEMORY_BARRIER_MISSING")
+    if any(not item.get("memory_barrier_releases_models_and_cache") for item in graph_report.get("samplers", [])):
+        reasons.append("MEMORY_BARRIER_RELEASE_POLICY_DISABLED")
+    if any(len(item.get("vae_decode_node_ids", [])) != 1 for item in graph_report.get("samplers", [])):
+        reasons.append("MEMORY_BARRIER_NOT_CONNECTED_TO_SINGLE_VAE_DECODE")
     if graph_report.get("max_sampler_batch_policy") != int(max_sampler_batch):
         reasons.append("GRAPH_BATCH_POLICY_MISMATCH")
 

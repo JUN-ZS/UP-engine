@@ -45,7 +45,7 @@ def sample_workflow(gated=True, split_before_vae=True):
         nodes.append({
             "id": 6, "type": "SamplerCustomAdvanced",
             "inputs": [{"name": "latent_image", "type": "LATENT", "link": 6}],
-            "outputs": [],
+            "outputs": [{"name": "output", "type": "LATENT", "links": [7]}],
         })
         links.extend([
             [5, 4, 0, 5, 0, "LATENT"],
@@ -55,10 +55,26 @@ def sample_workflow(gated=True, split_before_vae=True):
         nodes.append({
             "id": 6, "type": "SamplerCustomAdvanced",
             "inputs": [{"name": "latent_image", "type": "LATENT", "link": 5}],
-            "outputs": [],
+            "outputs": [{"name": "output", "type": "LATENT", "links": [7]}],
         })
         links.append([5, 4, 0, 6, 0, "LATENT"])
 
+    nodes.extend([
+        {"id": 7, "type": "IGE_LatentMemoryBarrier", "widgets_values": [True, True, True],
+         "inputs": [
+             {"name": "latent", "type": "LATENT", "link": 7},
+             {"name": "release_models", "type": "BOOLEAN", "link": None},
+             {"name": "clear_cuda_cache", "type": "BOOLEAN", "link": None},
+             {"name": "synchronize", "type": "BOOLEAN", "link": None}],
+         "outputs": [{"name": "LATENT", "type": "LATENT", "links": [8]}]},
+        {"id": 8, "type": "VAEDecodeTiled", "inputs": [
+            {"name": "samples", "type": "LATENT", "link": 8}],
+         "outputs": []},
+    ])
+    links.extend([
+        [7, 6, 0, 7, 0, "LATENT"],
+        [8, 7, 0, 8, 0, "LATENT"],
+    ])
     return {"nodes": nodes, "links": links}
 
 
@@ -72,6 +88,10 @@ class ComfyResourcePreflightTests(unittest.TestCase):
         self.assertEqual(sampler["list_splitter_node_ids"], [3])
         self.assertEqual(sampler["execution_semantics_evidence"], "candidate_sequential_map")
         self.assertFalse(sampler["static_batch_warning"])
+        self.assertTrue(sampler["memory_barrier_present"])
+        self.assertTrue(sampler["memory_barrier_releases_models_and_cache"])
+        self.assertEqual(sampler["memory_barrier_node_id"], 7)
+        self.assertEqual(sampler["vae_decode_node_ids"], [8])
 
     def test_blocks_multi_tile_path_without_pre_vae_list_split(self):
         graph = analyze_workflow(sample_workflow(gated=True, split_before_vae=False))
@@ -100,6 +120,22 @@ class ComfyResourcePreflightTests(unittest.TestCase):
         self.assertIn("FREE_RAM_BELOW_RESERVE", result["reasons"])
         self.assertIn("EXECUTION_NOT_AUTHORIZED", result["reasons"])
         self.assertIn("OPERATOR_NOT_AUTHORIZED", result["reasons"])
+
+    def test_blocks_missing_memory_release_barrier(self):
+        workflow = sample_workflow(gated=True, split_before_vae=True)
+        workflow["nodes"] = [node for node in workflow["nodes"] if node["id"] != 7]
+        workflow["links"] = [link for link in workflow["links"] if link[1] != 7 and link[3] != 7]
+        sampler = next(node for node in workflow["nodes"] if node["id"] == 6)
+        sampler["outputs"][0]["links"] = []
+        graph = analyze_workflow(workflow)
+        result = evaluate_preflight(
+            graph,
+            {"cuda_available": True, "vram_free_mb": 7000, "ram_available_mb": 24000},
+            execution_allowed=True,
+            operator_authorized=True,
+        )
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertIn("SAMPLER_MEMORY_BARRIER_MISSING", result["reasons"])
 
 
 if __name__ == "__main__":

@@ -15,16 +15,22 @@
     ]
   },
   "stage2": {
-    "node_count": 58,
-    "link_count": 91,
+    "node_count": 59,
+    "link_count": 92,
     "canvas_node_type": "LoadImage",
     "sampler_count": 2,
     "removed_siax_preprocess_node_ids": [
-      233,
-      244,
       133,
-      134
+      134,
+      233,
+      244
     ],
+    "removed_unordered_terminal_purge_node_id": 262,
+    "memory_barrier_node_ids": [
+      344,
+      345
+    ],
+    "release_models_before_vae_decode": true,
     "execution_allowed": false
   }
 }

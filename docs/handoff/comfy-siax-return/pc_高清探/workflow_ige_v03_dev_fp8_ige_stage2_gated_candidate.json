@@ -1,8 +1,8 @@
 {
   "id": "fa680c56-e891-4a22-9450-cdb9f8e22b0e",
   "revision": 0,
-  "last_node_id": 343,
-  "last_link_id": 532,
+  "last_node_id": 345,
+  "last_link_id": 534,
   "nodes": [
     {
       "id": 111,
@@ -648,7 +648,7 @@
           "label": "samples",
           "name": "samples",
           "type": "LATENT",
-          "link": 160
+          "link": 533
         },
         {
           "label": "vae",
@@ -830,8 +830,7 @@
           "type": "LATENT",
           "slot_index": 0,
           "links": [
-            160,
-            465
+            160
           ]
         },
         {
@@ -851,61 +850,6 @@
           "color": "#223"
         }
       }
-    },
-    {
-      "id": 262,
-      "type": "LayerUtility: PurgeVRAM",
-      "pos": [
-        -2682.051025390625,
-        2286.314453125
-      ],
-      "size": [
-        315,
-        82
-      ],
-      "flags": {},
-      "order": 24,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "anything",
-          "name": "anything",
-          "type": "*",
-          "link": 465
-        },
-        {
-          "label": "purge_cache",
-          "name": "purge_cache",
-          "type": "BOOLEAN",
-          "widget": {
-            "name": "purge_cache"
-          },
-          "link": null
-        },
-        {
-          "label": "purge_models",
-          "name": "purge_models",
-          "type": "BOOLEAN",
-          "widget": {
-            "name": "purge_models"
-          },
-          "link": null
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "LayerUtility: PurgeVRAM",
-        "widget_ue_connectable": {}
-      },
-      "widgets_values": [
-        true,
-        true
-      ],
-      "widgets_values_named": {
-        "purge_cache": true,
-        "purge_models": true
-      },
-      "color": "rgba(38, 73, 116, 0.7)"
     },
     {
       "id": 254,
@@ -2220,7 +2164,7 @@
           "label": "samples",
           "name": "samples",
           "type": "LATENT",
-          "link": 491
+          "link": 534
         },
         {
           "label": "vae",
@@ -3746,6 +3690,158 @@
         "candidate_B"
       ],
       "title": "IGE · Execution Gate · candidate_B"
+    },
+    {
+      "id": 344,
+      "type": "IGE_LatentMemoryBarrier",
+      "pos": [
+        -2307.21923828125,
+        1991
+      ],
+      "size": [
+        330,
+        150
+      ],
+      "flags": {},
+      "order": 83,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 160
+        },
+        {
+          "name": "release_models",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "release_models"
+          },
+          "link": null
+        },
+        {
+          "name": "clear_cuda_cache",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "clear_cuda_cache"
+          },
+          "link": null
+        },
+        {
+          "name": "synchronize",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "synchronize"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            533
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MEMORY_REPORT_JSON",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IGE_LatentMemoryBarrier"
+      },
+      "widgets_values": [
+        true,
+        true,
+        true
+      ],
+      "widgets_values_named": {
+        "release_models": true,
+        "clear_cuda_cache": true,
+        "synchronize": true
+      },
+      "title": "IGE · Memory Release Barrier · baseline_A"
+    },
+    {
+      "id": 345,
+      "type": "IGE_LatentMemoryBarrier",
+      "pos": [
+        -390,
+        1480
+      ],
+      "size": [
+        330,
+        150
+      ],
+      "flags": {},
+      "order": 84,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 491
+        },
+        {
+          "name": "release_models",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "release_models"
+          },
+          "link": null
+        },
+        {
+          "name": "clear_cuda_cache",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "clear_cuda_cache"
+          },
+          "link": null
+        },
+        {
+          "name": "synchronize",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "synchronize"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            534
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MEMORY_REPORT_JSON",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IGE_LatentMemoryBarrier"
+      },
+      "widgets_values": [
+        true,
+        true,
+        true
+      ],
+      "widgets_values_named": {
+        "release_models": true,
+        "clear_cuda_cache": true,
+        "synchronize": true
+      },
+      "title": "IGE · Memory Release Barrier · candidate_B"
     }
   ],
   "links": [
@@ -3785,7 +3881,7 @@
       160,
       67,
       0,
-      96,
+      344,
       0,
       "LATENT"
     ],
@@ -3966,14 +4062,6 @@
       "MODEL"
     ],
     [
-      465,
-      67,
-      0,
-      262,
-      0,
-      "*"
-    ],
-    [
       468,
       77,
       0,
@@ -4145,7 +4233,7 @@
       491,
       310,
       0,
-      311,
+      345,
       0,
       "LATENT"
     ],
@@ -4475,6 +4563,22 @@
       0,
       310,
       4,
+      "LATENT"
+    ],
+    [
+      533,
+      344,
+      0,
+      96,
+      0,
+      "LATENT"
+    ],
+    [
+      534,
+      345,
+      0,
+      311,
+      0,
       "LATENT"
     ]
   ],
@@ -4898,8 +5002,14 @@
         310
       ],
       "requires_external_cpu_geometry_preflight": true,
+      "memory_barrier_node_ids": [
+        344,
+        345
+      ],
+      "removed_unordered_terminal_purge_node_id": 262,
+      "release_models_before_vae_decode": true,
       "execution_allowed": false,
-      "note": "Do not queue until the exact Stage 1 output passes CPU geometry preflight and human registration review."
+      "note": "Do not queue until the exact Stage 1 output has passed CPU geometry preflight and human registration review."
     }
   },
   "version": 0.4

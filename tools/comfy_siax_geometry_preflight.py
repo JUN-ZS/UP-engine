@@ -34,6 +34,19 @@ def _source_node(node: dict[str, Any], input_name: str, links: dict[int, list[An
     return int(link[1]) if link else None
 
 
+def _output_targets(node: dict[str, Any], output_name: str, links: dict[int, list[Any]]) -> list[int]:
+    slots = [slot for slot in node.get("outputs", []) if slot.get("name") == output_name]
+    if len(slots) != 1:
+        raise ValueError(f"Node {node.get('id')} must have exactly one output named {output_name}")
+    targets = []
+    for link_id in slots[0].get("links") or []:
+        link = links.get(int(link_id))
+        if link is None:
+            raise ValueError(f"Node {node.get('id')} output references missing link {link_id}")
+        targets.append(int(link[3]))
+    return targets
+
+
 def _ancestors(start_id: int, nodes: dict[int, dict[str, Any]], links: dict[int, list[Any]]) -> set[int]:
     seen: set[int] = set()
     todo = [int(start_id)]
@@ -117,11 +130,29 @@ def inspect_stage2_preflight(
         authorization_default = widget_values[0] if widget_values else None
         if authorization_default != "{}":
             raise ValueError(f"Sampler {sampler_id} authorization default must remain empty BLOCK")
+
+        barrier_targets = _output_targets(sampler, "output", links)
+        barriers = [nodes[node_id] for node_id in barrier_targets if node_id in nodes and nodes[node_id].get("type") == "IGE_LatentMemoryBarrier"]
+        if len(barriers) != 1:
+            raise ValueError(f"Sampler {sampler_id} must feed exactly one IGE_LatentMemoryBarrier")
+        barrier = barriers[0]
+        if _source_node(barrier, "latent", links) != sampler_id:
+            raise ValueError(f"Memory barrier {barrier['id']} is not bound to sampler {sampler_id}")
+        barrier_values = barrier.get("widgets_values") or []
+        if barrier_values[:3] != [True, True, True]:
+            raise ValueError(f"Memory barrier {barrier['id']} must release models, clear CUDA cache and synchronize")
+        barrier_decoder_targets = _output_targets(barrier, "LATENT", links)
+        decoders = [nodes[node_id] for node_id in barrier_decoder_targets if node_id in nodes and nodes[node_id].get("type") == "VAEDecodeTiled"]
+        if len(decoders) != 1:
+            raise ValueError(f"Memory barrier {barrier['id']} must feed exactly one VAEDecodeTiled")
         sampler_reports.append({
             "sampler_node_id": sampler_id,
             "gate_node_id": int(gate["id"]),
             "branch_id": widget_values[1] if len(widget_values) > 1 else None,
             "authorization_default": authorization_default,
+            "memory_barrier_node_id": int(barrier["id"]),
+            "vae_decode_node_id": int(decoders[0]["id"]),
+            "release_models_before_vae_decode": True,
             "status": "BLOCKED_PENDING_EXPLICIT_AUTHORIZATION",
         })
 
