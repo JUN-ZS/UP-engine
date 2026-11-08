@@ -1,4 +1,4 @@
-# ComfyUI Siax-return: execution gate and resource preflight v0.1
+# ComfyUI Siax-return: execution gate and resource preflight v0.2
 
 This is a repair layer on the archived Siax + IGE workflow, not a replacement workflow.
 
@@ -7,6 +7,7 @@ This is a repair layer on the archived Siax + IGE workflow, not a replacement wo
 - Added IGE_ExecutionAuthorizationGate to both archived copies of ComfyUI_IGE_GlobalLogicCoordinator.
 - Added a workflow patcher that inserts this gate in front of every SamplerCustomAdvanced.latent_image input. Baseline A and Candidate B are both gated.
 - Added a read-only resource preflight helper for graph inspection and current free VRAM/RAM probes.
+- The preflight distinguishes a real unsplit multi-image path from the archived v03 path that splits the TTP batch to a list before VAEEncode.
 - Added CPU-only tests. No ComfyUI UI, Siax model, Flux sampler, GPU inference or Cloud job was run.
 
 ## Execution authorization
@@ -41,11 +42,33 @@ python tools/comfy_resource_preflight.py --workflow "docs/handoff/comfy-siax-ret
 
 The tool does not queue a prompt. It checks that every sampler's latent input is directly gated, measures currently free CUDA VRAM when PyTorch/CUDA is available, and probes available system RAM. The 2048 MB VRAM and 8192 MB RAM values are configurable admission reserves, not measured peak-memory predictions or a guarantee against OOM.
 
-## Known unresolved OOM architecture
+## Batch/list semantics in the archived v03 graph
 
-The archived v03 graph routes the TTP 2×3 tile batch through batch-to-list conversion and then a VAE encode whose latent batch is passed to the sampler. The graph therefore does not prove one-tile-at-a-time sampler execution. The preflight infers six tiles from the TTP_Tile_image_size node configuration and blocks this multi-tile sampler batch under the default max batch of one.
+The archived v03 workflow contains:
 
-Sequential per-tile inference, output ledger/resume, and safe OOM retry are not implemented by this patch. They require a separate orchestrator that consumes the actual runtime TTP POSITIONS, ORIGINAL_SIZE, and GRID_SIZE, submits one tile at a time, verifies each output SHA/dimensions, and only then reassembles using the existing geometry/core/halo contract. Automatically reducing tile dimensions without rebuilding the plan is forbidden.
+TTP_Image_Tile_Batch (Node 36) → easy imageBatchToImageList (Node 163) → VAEEncode (Node 129) → SamplerCustomAdvanced (Node 67 / Node 310)
+
+The upstream Easy-Use implementation declares OUTPUT_IS_LIST = (True,) and returns one image slice per list item:
+https://github.com/yolain/ComfyUI-Easy-Use/blob/main/py/nodes/image.py
+
+ComfyUI's list scheduler maps downstream node calls across list items in a loop:
+https://github.com/Comfy-Org/ComfyUI/blob/master/execution.py
+
+Therefore, the existence of a configured 2×3 TTP grid does not by itself prove that six tiles occupy the sampler simultaneously. The v0.2 preflight now recognizes the list-split-before-VAE path as a static sequential-map candidate. It only blocks a multi-tile path when no recognized splitter is upstream of the VAEEncode input.
+
+This remains a static inference until the installed Easy-Use version and runtime latent batch shape are captured on the operator PC. It is not a live proof that exactly one tile is resident at every stage, nor does it account for ComfyUI's intermediate-output cache.
+
+## Remaining OOM work
+
+The archived list path is a better starting point than a simultaneous six-tile latent batch, but OOM protection is not yet complete:
+
+- No runtime peak VRAM/RAM telemetry is attached to each tile.
+- No verified model unload/retention policy is applied between tile items.
+- No durable per-tile output ledger or resume after a mid-list failure is implemented.
+- No OOM retry that recomputes the full TTP plan and core/halo bounds is implemented.
+- The VAE decode nodes are tiled, but the installed runtime parameters and actual peak memory still require capture.
+
+Do not silently reduce tile size, crop or output resolution after an OOM. Any retry must regenerate the tile plan, revalidate geometry/coverage/core/halo, preserve the original source and completed outputs, and produce a new plan hash. A separate per-tile Comfy API orchestrator remains a possible architecture if the existing list scheduler cannot provide reliable output checkpoints.
 
 ## Evidence boundary
 
