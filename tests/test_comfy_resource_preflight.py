@@ -13,7 +13,7 @@ def sample_workflow(gated=True, split_before_vae=True):
         {"id": 2, "type": "TTP_Image_Tile_Batch", "inputs": [
             {"name": "tile_width", "type": "INT", "link": 1},
             {"name": "tile_height", "type": "INT", "link": 2}], "outputs": [
-            {"name": "IMAGES", "type": "IMAGE", "links": [3 if split_before_vae else 4]}]},
+            {"name": "IMAGES", "type": "IMAGE", "links": [3]}]},
         {"id": 4, "type": "VAEEncode", "inputs": [
             {"name": "pixels", "type": "IMAGE", "link": 4 if split_before_vae else 3}], "outputs": [
             {"name": "LATENT", "type": "LATENT", "links": [5 if gated else 6]}]},
