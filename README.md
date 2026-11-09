@@ -13,3 +13,9 @@ SHQ / SIAX / Comfy geometry-locked image pipeline experiments.
 See `docs/shq/README_01471_E7_LINEAGE.md`.
 
 > main is intentionally thin; feature branches hold domain drafts. PR → main when frozen.
+
+## 01473 Audit Force
+
+- `docs/shq/SHQ_STEAL_DRIFT_AUDIT_FORCE.md`
+- `research/audit_force/shq_audit_force.py`
+- `run-gold` auto-stamps `audit_force` / `steal_flags` / `E_codes` (01472 harness)
