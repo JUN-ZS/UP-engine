@@ -1,0 +1,27 @@
+{
+  "POSTER_OBSIDIAN_ORBIT_GEO_T_H2": {
+    "asset_id": "c2dc7af4-01e3-4b60-9d28-d18e81e24d79",
+    "file_sha256": "ba92a8fd817e0f8fc29e0ede1ed74c43aa64b8caa11b215ed17d08bb127ea299",
+    "role": "完成海報金錨 · THE BOUNDARY WALKER · GEO_T_H2 · OBSIDIAN_ORBIT",
+    "ncc_to_BW_SRC": 0.99
+  },
+  "BW_PARTMAP_00_SRC": {
+    "path": "SETS/PROJ_BOUNDARY_WALKER_PARTMAP/SHQ_RUN_BW1/.../00_SRC.jpg",
+    "role": "PARTMAP 金 SRC（同視覺 · ncc0.99）"
+  },
+  "STANDARD_FACE_a8b": {
+    "asset_id": "a8b78fe5-2654-4f6f-84e3-c1dfbee61004",
+    "file_sha256": "f612ec7e07d95f256d3bd352f73f98ca913074c87556aed58cfc3223a059ee81",
+    "FACE_L": "FACE-f612ec7e07d9",
+    "role": "全專輯唯一標準面 · 身份源"
+  },
+  "FULLFRAME_LOCK_samples": {
+    "2ce5fabe": "2ce5fabe-8de3-42a2-bab9-727d63c834c8",
+    "SET_Q_v2": "f1d38afd-17cb-476e-b354-6d77e153d6ca",
+    "role": "§0.13 全幅鎖臉 OK 樣板"
+  },
+  "PATH1E_plate_ECC_sample": {
+    "L": "L-fc0a2fa7b8a9",
+    "role": "plate→ECC PATH1E_OK 樣板"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "assets": {
+    "A_FULL_L0": {
+      "asset_id": "cb078e94-bd90-476f-91f2-dd24fae0d20b",
+      "file_sha256": "76cb29ec1ae7bc44f0b6722b48d960527c5d21679b1d293db88fb08e28f16097",
+      "bytes": 448798,
+      "wh": [
+        1376,
+        768
+      ]
+    },
+    "B_S2_GENERIC": {
+      "asset_id": "aa27e8ab-33f8-41fb-924a-4bb41349f52f",
+      "file_sha256": "af63b45246efafd7484618e66f5fbae074e8825be9bd167d162e96ab9a894afc",
+      "bytes": 451928,
+      "wh": [
+        1376,
+        768
+      ]
+    },
+    "C_PART_SEG": {
+      "asset_id": "38d22646-9937-425d-9639-7ab93499153b",
+      "file_sha256": "d7dd0041f3e07014af9ca24716805c602210fbfb4ea1086448cc6acdf30f7c05",
+      "bytes": 379557,
+      "wh": [
+        1376,
+        768
+      ]
+    },
+    "D_INSTANCE": {
+      "asset_id": "03a6d6ac-0aa2-4152-98cc-ea122897fa1b",
+      "file_sha256": "7379ad0eaf31942ad351ff3d7e3844acad4cd8b1ceb01a41d6bf2fee3aee0586",
+      "bytes": 379844,
+      "wh": [
+        1376,
+        768
+      ]
+    },
+    "E_EMPTY": {
+      "asset_id": "42918f69-2337-4d68-88a2-5c205e3a0100",
+      "file_sha256": "57979756ad925e26dfbe0b3647aa84bbf05b205585081035faea79aa5223d5d4",
+      "bytes": 579320,
+      "wh": [
+        1792,
+        1008
+      ]
+    },
+    "F_RETURN": {
+      "asset_id": "892fac6d-b2f5-4b93-8cc4-2d240a3ae0db",
+      "file_sha256": "34fe08d55cad77923845bb7e8c6fc85ff1dee5366675b333cdd5bab13397e4d9",
+      "bytes": 660558,
+      "wh": [
+        1792,
+        1008
+      ]
+    },
+    "G_TANK_PEEP": {
+      "asset_id": "e7da1388-9181-4603-8738-e814b8ffc055",
+      "file_sha256": "0a3741d281dab5bc550a3a62efaae4e22a0bd08089f0f3d54033504412f66486",
+      "bytes": 604124,
+      "wh": [
+        1584,
+        1248
+      ]
+    }
+  },
+  "skill_set": {
+    "primary_family": "SHQ L1_GENERIC_3SUBJ + S2_GENERIC_RELATIVE",
+    "write_ids": [
+      "01407",
+      "01408"
+    ],
+    "method_ids": [
+      "L1_GENERIC_3SUBJ_RELATIVE_V0",
+      "S2_GENERIC_RELATIVE_HIERARCHY_V0"
+    ],
+    "docs": [
+      "docs_SHQ_L1_GENERIC_3SUBJ.md",
+      "docs_SHQ_S2_GENERIC_RELATIVE.md"
+    ],
+    "projects": [
+      "PROJ_SHQ_L1_GENERIC_3SUBJ_01407",
+      "PROJ_SHQ_S2_GENERIC_01408"
+    ],
+    "scene": "3 subjects: white mecha + heroine + red tank · rain mud battlefield 1376x768",
+    "pipeline_map": {
+      "A_FULL_L0": "L0 SRC full scene",
+      "B_S2_GENERIC": "S2_GENERIC PASS chain=0.0 · bbox + joint tree board",
+      "C_PART_SEG": "L1 18-part relative color partmap",
+      "D_INSTANCE": "L0/L1 3-subject instance solids (mecha/woman/tank)",
+      "E_EMPTY": "EMPTY freeframe field (subjects removed)",
+      "F_RETURN": "higher-res multi-return / delivery frame",
+      "G_TANK_PEEP": "subject/part peep elev HD (tank barrel) for local SR return"
+    },
+    "parent_stack": [
+      "SHQ hierarchical hezhong",
+      "MULTI_RETURN",
+      "Object Geometry Lock",
+      "part_layer"
+    ],
+    "NOT": [
+      "HUAN_YA_REN",
+      "XIN_HUA_NV face-only",
+      "JI_ZHA_HUI mecha-only PARTMAP (related hierarchy but this is 3-subj generic)"
+    ],
+    "ACCEPT_FULL_HD": false,
+    "status": "EVOLUTION DRAFT"
+  }
+}

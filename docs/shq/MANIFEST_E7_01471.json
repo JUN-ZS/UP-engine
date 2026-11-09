@@ -1,0 +1,740 @@
+{
+  "write_id": "01471",
+  "formal": "SHQ_TECHNIQUE_LINEAGE_E7_DIALOGUE_CONSTITUTION_V1",
+  "zh": "E7 完整對話與憲技整理（換涯人→機炸回→新畫女→回車大炮→四態/外力→WLF V2.1）",
+  "parent_lineage": "01388",
+  "range_writes": "01438–01470",
+  "asof": "2026-11-09T15:26:51.916032+00:00",
+  "n": 28,
+  "entries": [
+    {
+      "idx": 0,
+      "epoch": "E7_HUAN",
+      "phase": "LOCK",
+      "id": "00_HYR_BOARD5",
+      "caption": "換涯人五步板 SRC→PEEP→HD→EMPTY→LOCK",
+      "question": "Q: 崖台換人是否可鎖成金錨？",
+      "src": "/workspace/artifacts/imagine_images/9043229b-0bc6-41e2-87b5-3b40f09c9f2b.png",
+      "asset": "9043229b",
+      "thumb": "thumbs/00_E7_HUAN_LOCK_00_HYR_BOARD5.jpg",
+      "thumb_size": [
+        240,
+        85
+      ],
+      "thumb_bytes": 7030,
+      "file_sha256_prefix": "8c78559172096c29",
+      "exists": true
+    },
+    {
+      "idx": 1,
+      "epoch": "E7_HUAN",
+      "phase": "LOCK",
+      "id": "01_HYR_FINAL",
+      "caption": "換涯人 FINAL sole lock",
+      "question": "Q: outside=0 是否=視覺成功？",
+      "src": "/workspace/artifacts/imagine_images/5a1246fb-6cf3-485c-aa3d-401134662c6c.png",
+      "asset": "5a1246fb",
+      "thumb": "thumbs/01_E7_HUAN_LOCK_01_HYR_FINAL.jpg",
+      "thumb_size": [
+        135,
+        240
+      ],
+      "thumb_bytes": 9416,
+      "file_sha256_prefix": "0dacbcf3184febdd",
+      "exists": true
+    },
+    {
+      "idx": 2,
+      "epoch": "E7_HUAN",
+      "phase": "LOCK",
+      "id": "02_HYR_CLEAN",
+      "caption": "換涯人 FINAL clean",
+      "question": "Q: sole annotate 可否脫離像素？",
+      "src": "/workspace/artifacts/imagine_images/a715a7ee-80c3-4c57-8fe1-b1541a44fd3d.png",
+      "asset": "a715a7ee",
+      "thumb": "thumbs/02_E7_HUAN_LOCK_02_HYR_CLEAN.jpg",
+      "thumb_size": [
+        135,
+        240
+      ],
+      "thumb_bytes": 9398,
+      "file_sha256_prefix": "6143f115901adabf",
+      "exists": true
+    },
+    {
+      "idx": 3,
+      "epoch": "E7_HUAN",
+      "phase": "ORIGIN",
+      "id": "03_HYR_SRC",
+      "caption": "換涯人 SRC full mid",
+      "question": "Q: 頭必須在？洞不吃岩？",
+      "src": "/workspace/artifacts/imagine_images/cf9d9dfa-34c3-43a0-9520-4225516516ec.jpg",
+      "asset": "cf9d9dfa",
+      "thumb": "thumbs/03_E7_HUAN_ORIGIN_03_HYR_SRC.jpg",
+      "thumb_size": [
+        135,
+        240
+      ],
+      "thumb_bytes": 9146,
+      "file_sha256_prefix": "8122e3b7b923bcb8",
+      "exists": true
+    },
+    {
+      "idx": 4,
+      "epoch": "E7_HUAN",
+      "phase": "EXPLORE",
+      "id": "04_HYR_HD_CUT",
+      "caption": "HD elev cutout peep",
+      "question": "Q: elev 是否 freeframe？",
+      "src": "/workspace/artifacts/imagine_images/87479fb3-6c6f-4959-b6a4-0bac15399759.png",
+      "asset": "87479fb3",
+      "thumb": "thumbs/04_E7_HUAN_EXPLORE_04_HYR_HD_CUT.jpg",
+      "thumb_size": [
+        160,
+        240
+      ],
+      "thumb_bytes": 11532,
+      "file_sha256_prefix": "4b20a913d1367a1d",
+      "exists": true
+    },
+    {
+      "idx": 5,
+      "epoch": "E7_HUAN",
+      "phase": "EXPLORE",
+      "id": "05_HYR_TRIPTYCH",
+      "caption": "IC 三聯 原光/BEFORE/AFTER",
+      "question": "Q: IC 光影是後綴還是主鏈？",
+      "src": "/workspace/artifacts/imagine_images/4f5d40ce-5b91-4877-8ff7-288f6338519d.png",
+      "asset": "4f5d40ce",
+      "thumb": "thumbs/05_E7_HUAN_EXPLORE_05_HYR_TRIPTYCH.jpg",
+      "thumb_size": [
+        239,
+        142
+      ],
+      "thumb_bytes": 10425,
+      "file_sha256_prefix": "269faad5271a0c06",
+      "exists": true
+    },
+    {
+      "idx": 6,
+      "epoch": "E7_JIZHA",
+      "phase": "ORIGIN",
+      "id": "06_JZH_SRC_YARD",
+      "caption": "機炸回 scrapyard SRC",
+      "question": "Q: 爆炸是教學還是 freeframe？",
+      "src": "/workspace/artifacts/imagine_images/b32bd2ef-fda9-45b2-9841-db2ad5f4d7ed.jpg",
+      "asset": "b32bd2ef",
+      "thumb": "thumbs/06_E7_JIZHA_ORIGIN_06_JZH_SRC_YARD.jpg",
+      "thumb_size": [
+        135,
+        240
+      ],
+      "thumb_bytes": 11412,
+      "file_sha256_prefix": "372cf58e38e517c8",
+      "exists": true
+    },
+    {
+      "idx": 7,
+      "epoch": "E7_JIZHA",
+      "phase": "EXPLORE",
+      "id": "07_JZH_EXPLODE",
+      "caption": "8 parts EXPLODE 教學",
+      "question": "Q: 框=圖邊？elev_remap=false？",
+      "src": "/workspace/artifacts/imagine_images/af20a0cb-1ed3-4fbb-97b0-df554cc508a3.jpg",
+      "asset": "af20a0cb",
+      "thumb": "thumbs/07_E7_JIZHA_EXPLORE_07_JZH_EXPLODE.jpg",
+      "thumb_size": [
+        135,
+        240
+      ],
+      "thumb_bytes": 7950,
+      "file_sha256_prefix": "b95ce4814f44791a",
+      "exists": true
+    },
+    {
+      "idx": 8,
+      "epoch": "E7_JIZHA",
+      "phase": "LOCK",
+      "id": "08_JZH_MATLOCK",
+      "caption": "MAT 8parts→4corner hardpaste",
+      "question": "Q: α XOR 必須 0？",
+      "src": "/workspace/artifacts/imagine_images/a2289860-4ee6-4b1f-836b-2694f70610af.jpg",
+      "asset": "a2289860",
+      "thumb": "thumbs/08_E7_JIZHA_LOCK_08_JZH_MATLOCK.jpg",
+      "thumb_size": [
+        240,
+        89
+      ],
+      "thumb_bytes": 7964,
+      "file_sha256_prefix": "0310558be7f331bc",
+      "exists": true
+    },
+    {
+      "idx": 9,
+      "epoch": "E7_JIZHA",
+      "phase": "LOCK",
+      "id": "09_JZH_GUIDED",
+      "caption": "guided FULL_MAT / 對位 / structure fix",
+      "question": "Q: 機炸回 ≠ 換涯人？",
+      "src": "/workspace/artifacts/imagine_images/4daf0007-3f51-4a62-9da5-b4f7359ea39c.jpg",
+      "asset": "4daf0007",
+      "thumb": "thumbs/09_E7_JIZHA_LOCK_09_JZH_GUIDED.jpg",
+      "thumb_size": [
+        240,
+        150
+      ],
+      "thumb_bytes": 12963,
+      "file_sha256_prefix": "5697047aae86bab2",
+      "exists": true
+    },
+    {
+      "idx": 10,
+      "epoch": "E7_XHN",
+      "phase": "ORIGIN",
+      "id": "10_XHN_A8B",
+      "caption": "標準面 a8b 身份錨",
+      "question": "Q: 裸 a8b 直 ECC 合法？",
+      "src": "/workspace/artifacts/imagine_images/a8b78fe5-2654-4f6f-84e3-c1dfbee61004.jpg",
+      "asset": "a8b78fe5",
+      "thumb": "thumbs/10_E7_XHN_ORIGIN_10_XHN_A8B.jpg",
+      "thumb_size": [
+        240,
+        228
+      ],
+      "thumb_bytes": 12411,
+      "file_sha256_prefix": "f612ec7e07d95f25",
+      "exists": true
+    },
+    {
+      "idx": 11,
+      "epoch": "E7_HCD",
+      "phase": "ORIGIN",
+      "id": "11_HCD_L0",
+      "caption": "回車大炮 L0 三主體",
+      "question": "Q: 18 相對件 + S2 樹？",
+      "src": "/workspace/artifacts/imagine_images/cb078e94-bd90-476f-91f2-dd24fae0d20b.jpg",
+      "asset": "cb078e94",
+      "thumb": "thumbs/11_E7_HCD_ORIGIN_11_HCD_L0.jpg",
+      "thumb_size": [
+        240,
+        133
+      ],
+      "thumb_bytes": 8559,
+      "file_sha256_prefix": "76cb29ec1ae7bc44",
+      "exists": true
+    },
+    {
+      "idx": 12,
+      "epoch": "E7_HCD",
+      "phase": "EXPLORE",
+      "id": "12_HCD_S2",
+      "caption": "S2 GENERIC chain=0 PASS 板",
+      "question": "Q: 三主體 ≠ 單機 PARTMAP？",
+      "src": "/workspace/artifacts/imagine_images/aa27e8ab-33f8-41fb-924a-4bb41349f52f.jpg",
+      "asset": "aa27e8ab",
+      "thumb": "thumbs/12_E7_HCD_EXPLORE_12_HCD_S2.jpg",
+      "thumb_size": [
+        240,
+        133
+      ],
+      "thumb_bytes": 9440,
+      "file_sha256_prefix": "af63b45246efafd7",
+      "exists": true
+    },
+    {
+      "idx": 13,
+      "epoch": "E7_HCD",
+      "phase": "EXPLORE",
+      "id": "13_HCD_PART",
+      "caption": "L1 18-part relative partmap",
+      "question": "Q: 禁色帶亂件？",
+      "src": "/workspace/artifacts/imagine_images/38d22646-9937-425d-9639-7ab93499153b.jpg",
+      "asset": "38d22646",
+      "thumb": "thumbs/13_E7_HCD_EXPLORE_13_HCD_PART.jpg",
+      "thumb_size": [
+        240,
+        133
+      ],
+      "thumb_bytes": 8148,
+      "file_sha256_prefix": "d7dd0041f3e07014",
+      "exists": true
+    },
+    {
+      "idx": 14,
+      "epoch": "E7_HCD",
+      "phase": "LOCK",
+      "id": "14_HCD_RETURN",
+      "caption": "MULTI_RETURN 交付框",
+      "question": "Q: peep=件級 elev？",
+      "src": "/workspace/artifacts/imagine_images/892fac6d-b2f5-4b93-8cc4-2d240a3ae0db.jpg",
+      "asset": "892fac6d",
+      "thumb": "thumbs/14_E7_HCD_LOCK_14_HCD_RETURN.jpg",
+      "thumb_size": [
+        240,
+        135
+      ],
+      "thumb_bytes": 8680,
+      "file_sha256_prefix": "34fe08d55cad7792",
+      "exists": true
+    },
+    {
+      "idx": 15,
+      "epoch": "E7_HCD",
+      "phase": "EXPLORE",
+      "id": "15_HCD_TANK",
+      "caption": "坦克 peep elev HD",
+      "question": "Q: D2 無 peep SOLO 禁 SUCCESS？",
+      "src": "/workspace/artifacts/imagine_images/e7da1388-9181-4603-8738-e814b8ffc055.jpg",
+      "asset": "e7da1388",
+      "thumb": "thumbs/15_E7_HCD_EXPLORE_15_HCD_TANK.jpg",
+      "thumb_size": [
+        240,
+        189
+      ],
+      "thumb_bytes": 9433,
+      "file_sha256_prefix": "0a3741d281dab5bc",
+      "exists": true
+    },
+    {
+      "idx": 16,
+      "epoch": "E7_XNV2",
+      "phase": "LOCK",
+      "id": "16_XNV2_L0",
+      "caption": "新女畫 V2 L0 驗證",
+      "question": "Q: PATH1E plate 只在洞內生？",
+      "src": "/workspace/artifacts/imagine_images/adc54e71-253c-4f81-b612-3ee22046f751.jpg",
+      "asset": "adc54e71",
+      "thumb": "thumbs/16_E7_XNV2_LOCK_16_XNV2_L0.jpg",
+      "thumb_size": [
+        240,
+        160
+      ],
+      "thumb_bytes": 10146,
+      "file_sha256_prefix": "87f2c74756ab01e1",
+      "exists": true
+    },
+    {
+      "idx": 17,
+      "epoch": "E7_XNV2",
+      "phase": "EXPLORE",
+      "id": "17_XNV2_CHU",
+      "caption": "除背 chu_bei",
+      "question": "Q: CLIP 從除背來？禁自 peep？",
+      "src": "/workspace/artifacts/imagine_images/e612344e-d360-4be6-be6e-26b37e9fd963.jpg",
+      "asset": "e612344e",
+      "thumb": "thumbs/17_E7_XNV2_EXPLORE_17_XNV2_CHU.jpg",
+      "thumb_size": [
+        240,
+        160
+      ],
+      "thumb_bytes": 4588,
+      "file_sha256_prefix": "b1e24ffb6f07292a",
+      "exists": true
+    },
+    {
+      "idx": 18,
+      "epoch": "E7_XNV2",
+      "phase": "EXPLORE",
+      "id": "18_XNV2_CLIP",
+      "asset": "b976c10b",
+      "caption": "CLIP vis 真洞座",
+      "question": "Q: 無洞回=錯位教材？",
+      "path_hint": null,
+      "thumb": null,
+      "exists": false
+    },
+    {
+      "idx": 19,
+      "epoch": "E7_XNV2",
+      "phase": "LOCK",
+      "id": "19_XNV2_R",
+      "caption": "V2 RETURN",
+      "question": "Q: V1 stick 保留、返還改臉默認 V2？",
+      "src": "/workspace/artifacts/imagine_images/84b99e84-bf79-4578-a16e-a41dff032ec0.jpg",
+      "asset": "84b99e84",
+      "thumb": "thumbs/19_E7_XNV2_LOCK_19_XNV2_R.jpg",
+      "thumb_size": [
+        240,
+        160
+      ],
+      "thumb_bytes": 10362,
+      "file_sha256_prefix": "83cc0f50d070dcc5",
+      "exists": true
+    },
+    {
+      "idx": 20,
+      "epoch": "E7_XNV2",
+      "phase": "ASK",
+      "id": "20_XNV2_STORY",
+      "asset": "51496473",
+      "caption": "V2 story 板",
+      "question": "Q: (N)(X) 層層反？",
+      "path_hint": null,
+      "thumb": null,
+      "exists": false
+    },
+    {
+      "idx": 21,
+      "epoch": "E7_WLF21",
+      "phase": "LOCK",
+      "id": "21_WLF21_STORY",
+      "caption": "外力反 V2.1 ACCEPT story",
+      "question": "Q: 任意物件 TunePack 可換？",
+      "src": "/workspace/artifacts/SETS/PROJ_SHQ_WLF_V21_ACCEPT_01470/boards/STORY_V21_ACCEPT.jpg",
+      "asset": null,
+      "thumb": "thumbs/21_E7_WLF21_LOCK_21_WLF21_STORY.jpg",
+      "thumb_size": [
+        240,
+        160
+      ],
+      "thumb_bytes": 11113,
+      "file_sha256_prefix": "9936627116c53785",
+      "exists": true
+    },
+    {
+      "idx": 22,
+      "epoch": "E7_WLF21",
+      "phase": "LOCK",
+      "id": "22_WLF21_COMPARE",
+      "caption": "V2.1 COMPARE board",
+      "question": "Q: 獨立 PASS ≠ 可組合？",
+      "src": "/workspace/artifacts/SETS/PROJ_SHQ_WLF_V21_ACCEPT_01470/boards/COMPARE.jpg",
+      "asset": null,
+      "thumb": "thumbs/22_E7_WLF21_LOCK_22_WLF21_COMPARE.jpg",
+      "thumb_size": [
+        240,
+        39
+      ],
+      "thumb_bytes": 3352,
+      "file_sha256_prefix": "67130f0ece60acd7",
+      "exists": true
+    },
+    {
+      "idx": 23,
+      "epoch": "E7_WLF21",
+      "phase": "EXPLORE",
+      "id": "23_WLF21_SRC",
+      "caption": "V2.1 L0 SRC dual mecha",
+      "question": "Q: part_role any object？",
+      "src": "/workspace/artifacts/SETS/PROJ_SHQ_WLF_V21_ACCEPT_01470/L00/S0_SRC/L0.jpg",
+      "asset": null,
+      "thumb": "thumbs/23_E7_WLF21_EXPLORE_23_WLF21_SRC.jpg",
+      "thumb_size": [
+        240,
+        160
+      ],
+      "thumb_bytes": 12671,
+      "file_sha256_prefix": "85cc2b04ce78daf7",
+      "exists": true
+    },
+    {
+      "idx": 24,
+      "epoch": "E7_WLF21",
+      "phase": "EXPLORE",
+      "id": "24_WLF21_CLIP",
+      "caption": "CLIP from 除背 only",
+      "question": "Q: CLIP_from_chu_bei 必須 true？",
+      "src": "/workspace/artifacts/SETS/PROJ_SHQ_WLF_V21_ACCEPT_01470/L00/S3_CLIP/CLIP_vis.jpg",
+      "asset": null,
+      "thumb": "thumbs/24_E7_WLF21_EXPLORE_24_WLF21_CLIP.jpg",
+      "thumb_size": [
+        240,
+        160
+      ],
+      "thumb_bytes": 10266,
+      "file_sha256_prefix": "cb0d487004d8da2d",
+      "exists": true
+    },
+    {
+      "idx": 25,
+      "epoch": "E7_WLF21",
+      "phase": "EXPLORE",
+      "id": "25_WLF21_HOLE",
+      "caption": "TRUE_HOLE checker",
+      "question": "Q: true_hole=除後像素不在？",
+      "src": "/workspace/artifacts/SETS/PROJ_SHQ_WLF_V21_ACCEPT_01470/L00/S2_TRUE_HOLE/TRUE_HOLE_checker.jpg",
+      "asset": null,
+      "thumb": "thumbs/25_E7_WLF21_EXPLORE_25_WLF21_HOLE.jpg",
+      "thumb_size": [
+        240,
+        160
+      ],
+      "thumb_bytes": 12832,
+      "file_sha256_prefix": "92fb155de99dff83",
+      "exists": true
+    },
+    {
+      "idx": 26,
+      "epoch": "E7_WLF21",
+      "phase": "LOCK",
+      "id": "26_WLF21_RETURN",
+      "caption": "V2.1 RETURN hardpaste",
+      "question": "Q: elev_remap=false · outside_max=0？",
+      "src": "/workspace/artifacts/SETS/PROJ_SHQ_WLF_V21_ACCEPT_01470/L00/S7_RETURN/RETURN.jpg",
+      "asset": null,
+      "thumb": "thumbs/26_E7_WLF21_LOCK_26_WLF21_RETURN.jpg",
+      "thumb_size": [
+        240,
+        160
+      ],
+      "thumb_bytes": 12610,
+      "file_sha256_prefix": "13386ccf700ccac9",
+      "exists": true
+    },
+    {
+      "idx": 27,
+      "epoch": "E7_WLF21",
+      "phase": "FIX",
+      "id": "27_WLF21_ANTI",
+      "caption": "ANTI 回 L0×RETURN",
+      "question": "Q: 反板省略=E-FA-06？",
+      "src": "/workspace/artifacts/SETS/PROJ_SHQ_WLF_V21_ACCEPT_01470/L00/S8_ANTI/ANTI_回_L0_RETURN.jpg",
+      "asset": null,
+      "thumb": "thumbs/27_E7_WLF21_FIX_27_WLF21_ANTI.jpg",
+      "thumb_size": [
+        240,
+        80
+      ],
+      "thumb_bytes": 6375,
+      "file_sha256_prefix": "9be2d3f7da9d3d0b",
+      "exists": true
+    }
+  ],
+  "sha_table": {
+    "HYR_SHA_board5": {
+      "file_sha256": "8c78559172096c2926bd1c03340b9c5af4c15b8f9997ebd3e2a8449d7b1ea7a0",
+      "pixel_sha256": "bb11411fd4f2dc2b374aceeb29d76763e0b353b3862af532342c2c33a34b83b1",
+      "shape": [
+        356,
+        1000,
+        3
+      ],
+      "bytes_orig": 752062,
+      "thumb": "sha_thumbs/HYR_SHA_board5.jpg",
+      "thumb_bytes": 5220,
+      "thumb_size": [
+        200,
+        71
+      ],
+      "src_name": "9043229b-0bc6-41e2-87b5-3b40f09c9f2b.png"
+    },
+    "HYR_SHA_final_sole": {
+      "file_sha256": "0dacbcf3184febdd7cbf9a9f4ecfdbd449f44417c5882fffbb823bac692e3ccd",
+      "pixel_sha256": "42f1e719a88910e00891113c2681b4494abd79fcdec06365763b0b54df0fca2b",
+      "shape": [
+        1400,
+        790,
+        3
+      ],
+      "bytes_orig": 1912080,
+      "thumb": "sha_thumbs/HYR_SHA_final_sole.jpg",
+      "thumb_bytes": 6672,
+      "thumb_size": [
+        112,
+        200
+      ],
+      "src_name": "5a1246fb-6cf3-485c-aa3d-401134662c6c.png"
+    },
+    "HYR_SHA_final_clean": {
+      "file_sha256": "6143f115901adabf451743352a56ded72c32c3c98e58945b84af996713af591d",
+      "pixel_sha256": "54c3e754a8090065dad2814257037c16c6ca4bdb555a4f4e218b4bbf1b978117",
+      "shape": [
+        1400,
+        790,
+        3
+      ],
+      "bytes_orig": 1911536,
+      "thumb": "sha_thumbs/HYR_SHA_final_clean.jpg",
+      "thumb_bytes": 6676,
+      "thumb_size": [
+        112,
+        200
+      ],
+      "src_name": "a715a7ee-80c3-4c57-8fe1-b1541a44fd3d.png"
+    },
+    "HYR_SHA_src": {
+      "file_sha256": "8122e3b7b923bcb884c2b4471552c17a06cdab3b28e459c30119bd25294903d6",
+      "pixel_sha256": "206d4309471523a24969af6cb7a92cbd2f6769ea6237b7463a406e18ae4db621",
+      "shape": [
+        1792,
+        1008,
+        3
+      ],
+      "bytes_orig": 730227,
+      "thumb": "sha_thumbs/HYR_SHA_src.jpg",
+      "thumb_bytes": 6508,
+      "thumb_size": [
+        112,
+        200
+      ],
+      "src_name": "cf9d9dfa-34c3-43a0-9520-4225516516ec.jpg"
+    },
+    "HYR_SHA_hd_cut": {
+      "file_sha256": "4b20a913d1367a1d77862f3179171a3f0f95de84bff75b1acc4c6bd9db12bbb3",
+      "pixel_sha256": "6da659b820f7fbebb1f9479ed9647d70b45472ab4e1b38514267ac9444a140a0",
+      "shape": [
+        1587,
+        1062,
+        3
+      ],
+      "bytes_orig": 2869296,
+      "thumb": "sha_thumbs/HYR_SHA_hd_cut.jpg",
+      "thumb_bytes": 8544,
+      "thumb_size": [
+        133,
+        200
+      ],
+      "src_name": "87479fb3-6c6f-4959-b6a4-0bac15399759.png"
+    },
+    "HYR_SHA_hd_white": {
+      "file_sha256": "2dd06fa0c1ea29f9cd47d189120697c0c4c570b012366f054b40aab7c7e608bb",
+      "pixel_sha256": "44d43a3186cd00674fd4c5a171c68c349fbceea2d2f8cbad77a373b1c69507c9",
+      "shape": [
+        1728,
+        1152,
+        3
+      ],
+      "bytes_orig": 618514,
+      "thumb": "sha_thumbs/HYR_SHA_hd_white.jpg",
+      "thumb_bytes": 6328,
+      "thumb_size": [
+        133,
+        200
+      ],
+      "src_name": "688849c1-a8f3-4da8-a0a9-6a4a23176339.jpg"
+    },
+    "HYR_SHA_triptych": {
+      "file_sha256": "269faad5271a0c0687c153205a79311efbb188190d972fafeb922fe978913d50",
+      "pixel_sha256": "6e8e7665527e70e6a73ec78892f2929cd4e64880b5cdcb78c441f6ab095fec9a",
+      "shape": [
+        700,
+        1179,
+        3
+      ],
+      "bytes_orig": 1622499,
+      "thumb": "sha_thumbs/HYR_SHA_triptych.jpg",
+      "thumb_bytes": 7680,
+      "thumb_size": [
+        200,
+        118
+      ],
+      "src_name": "4f5d40ce-5b91-4877-8ff7-288f6338519d.png"
+    },
+    "JZH_SHA_src": {
+      "file_sha256": "372cf58e38e517c8f56532f2ab9892a55f35c0bc85c49ac81d9ccd99e640b927",
+      "pixel_sha256": "0899c4940fe16570ab6f77c66c486c7aa4a2ae409177da2af5a20c990707894b",
+      "shape": [
+        1792,
+        1008,
+        3
+      ],
+      "bytes_orig": 847824,
+      "thumb": "sha_thumbs/JZH_SHA_src.jpg",
+      "thumb_bytes": 8035,
+      "thumb_size": [
+        112,
+        200
+      ],
+      "src_name": "b32bd2ef-fda9-45b2-9841-db2ad5f4d7ed.jpg"
+    },
+    "JZH_SHA_explode": {
+      "file_sha256": "b95ce4814f44791a4c47f59da7ba01f54149012ce26a2c3e33842a8b3958b4c3",
+      "pixel_sha256": "685557d0dabe66367f269b55bf2b40347013aa8c6d79002bf99a8f9b220d17a8",
+      "shape": [
+        1792,
+        1008,
+        3
+      ],
+      "bytes_orig": 461799,
+      "thumb": "sha_thumbs/JZH_SHA_explode.jpg",
+      "thumb_bytes": 5952,
+      "thumb_size": [
+        112,
+        200
+      ],
+      "src_name": "af20a0cb-1ed3-4fbb-97b0-df554cc508a3.jpg"
+    },
+    "JZH_SHA_matlock": {
+      "file_sha256": "0310558be7f331bc8fff9d0160ffdf37fc62d639ef5ce8724e9d8d9e9c01a295",
+      "pixel_sha256": "ac5528a213112bd19b4514b42b36ba76733b9e317e700f97ac534ee014e49fe4",
+      "shape": [
+        528,
+        1414,
+        3
+      ],
+      "bytes_orig": 237851,
+      "thumb": "sha_thumbs/JZH_SHA_matlock.jpg",
+      "thumb_bytes": 6028,
+      "thumb_size": [
+        200,
+        74
+      ],
+      "src_name": "a2289860-4ee6-4b1f-836b-2694f70610af.jpg"
+    },
+    "HCD_SHA_L0": {
+      "file_sha256": "76cb29ec1ae7bc44f0b6722b48d960527c5d21679b1d293db88fb08e28f16097",
+      "pixel_sha256": "cd3dad5958e32d94e9601329064be465bf2303d09f420b4e89fe615bdc7f58ce",
+      "shape": [
+        768,
+        1376,
+        3
+      ],
+      "bytes_orig": 448798,
+      "thumb": "sha_thumbs/HCD_SHA_L0.jpg",
+      "thumb_bytes": 6092,
+      "thumb_size": [
+        200,
+        111
+      ],
+      "src_name": "cb078e94-bd90-476f-91f2-dd24fae0d20b.jpg"
+    },
+    "HCD_SHA_S2": {
+      "file_sha256": "af63b45246efafd7484618e66f5fbae074e8825be9bd167d162e96ab9a894afc",
+      "pixel_sha256": "b927cc26661950a28c42dcf655bba694c8140886138126a60cb641b54156c9dc",
+      "shape": [
+        768,
+        1376,
+        3
+      ],
+      "bytes_orig": 451928,
+      "thumb": "sha_thumbs/HCD_SHA_S2.jpg",
+      "thumb_bytes": 6700,
+      "thumb_size": [
+        200,
+        111
+      ],
+      "src_name": "aa27e8ab-33f8-41fb-924a-4bb41349f52f.jpg"
+    },
+    "HCD_SHA_return": {
+      "file_sha256": "34fe08d55cad77923845bb7e8c6fc85ff1dee5366675b333cdd5bab13397e4d9",
+      "pixel_sha256": "850fa2e7f53d57e7841494352b16fec3b8bee1d089936cf01d39208b7cad985f",
+      "shape": [
+        1008,
+        1792,
+        3
+      ],
+      "bytes_orig": 660558,
+      "thumb": "sha_thumbs/HCD_SHA_return.jpg",
+      "thumb_bytes": 6181,
+      "thumb_size": [
+        200,
+        112
+      ],
+      "src_name": "892fac6d-b2f5-4b93-8cc4-2d240a3ae0db.jpg"
+    }
+  },
+  "sha_policy": {
+    "write_id": "01471",
+    "rule": "SHA 圖改用縮圖",
+    "max_thumb_side": 240,
+    "forbid_full_contact_on_hub": true,
+    "old_full_contact_bytes": 576244,
+    "new_sha_contact_bytes": 85916,
+    "note": "Hub evidence only ships sha_thumbs/* + 01_SHA_THUMBS_CONTACT.jpg; full-res stays in local project artifacts"
+  },
+  "ACCEPT_FULL_HD": false,
+  "missing_thumbs": [
+    "18_XNV2_CLIP",
+    "20_XNV2_STORY"
+  ]
+}

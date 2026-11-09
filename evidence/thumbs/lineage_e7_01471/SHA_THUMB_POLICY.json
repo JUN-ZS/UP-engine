@@ -1,0 +1,9 @@
+{
+  "write_id": "01471",
+  "rule": "SHA 圖改用縮圖",
+  "max_thumb_side": 240,
+  "forbid_full_contact_on_hub": true,
+  "old_full_contact_bytes": 576244,
+  "new_sha_contact_bytes": 85916,
+  "note": "Hub evidence only ships sha_thumbs/* + 01_SHA_THUMBS_CONTACT.jpg; full-res stays in local project artifacts"
+}

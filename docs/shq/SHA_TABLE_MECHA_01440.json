@@ -1,0 +1,68 @@
+{
+  "SRC_full_yard": {
+    "asset_id": "b32bd2ef-fda9-45b2-9841-db2ad5f4d7ed",
+    "file_sha256": "372cf58e38e517c8f56532f2ab9892a55f35c0bc85c49ac81d9ccd99e640b927",
+    "pixel_sha256": "84c5aa57e30abb911ce51815e88b2d739785915f37b7d8c3845b037cd3a3aef0",
+    "shape": [
+      1792,
+      1008,
+      3
+    ],
+    "bytes": 847824
+  },
+  "EXPLODE_8parts_A": {
+    "asset_id": "af20a0cb-1ed3-4fbb-97b0-df554cc508a3",
+    "file_sha256": "b95ce4814f44791a4c47f59da7ba01f54149012ce26a2c3e33842a8b3958b4c3",
+    "pixel_sha256": "a846aa25d6d1c0761550373060371c8db6eae947263b10e6619b463a6520aab0",
+    "shape": [
+      1792,
+      1008,
+      3
+    ],
+    "bytes": 461799
+  },
+  "TRIPTYCH_guided_4_5_6": {
+    "asset_id": "4daf0007-3f51-4a62-9da5-b4f7359ea39c",
+    "file_sha256": "5697047aae86bab27202b27379f990bdaa4cdbce8783b5ccc35383b72f96d18a",
+    "pixel_sha256": "888438fac7fb4cffbca0cff8d18784253c31528435c8291a0ba1969471ce18fd",
+    "shape": [
+      528,
+      843,
+      3
+    ],
+    "bytes": 242713
+  },
+  "BOARD_MAT_structure_4corner": {
+    "asset_id": "a2289860-4ee6-4b1f-836b-2694f70610af",
+    "file_sha256": "0310558be7f331bc8fff9d0160ffdf37fc62d639ef5ce8724e9d8d9e9c01a295",
+    "pixel_sha256": "5a3c97189b399ff399fb7bb024bd1664f5c9b34e497c233d6cf6136e30b55042",
+    "shape": [
+      528,
+      1414,
+      3
+    ],
+    "bytes": 237851
+  },
+  "SRC_with_hole_peep": {
+    "asset_id": "166e7923-e561-496a-af12-68156f48d3db",
+    "file_sha256": "ac7631cab56f7f32ef39e651f54c97c43373c4976407c4dfcc71ffeec5aae63d",
+    "pixel_sha256": "1f072a9ced422e11312d5c25d2e90d9d2fcb34721d199f99c9542580c05c7ec0",
+    "shape": [
+      1792,
+      1008,
+      3
+    ],
+    "bytes": 794202
+  },
+  "EXPLODE_8parts_B": {
+    "asset_id": "359af77f-ffe6-4cd9-9f8a-d28cb100d9e0",
+    "file_sha256": "f88bcdc04516909c8a5533da117a7e341a5f814f75ddfe78e07eedea63d910c2",
+    "pixel_sha256": "a846aa25d6d1c0761550373060371c8db6eae947263b10e6619b463a6520aab0",
+    "shape": [
+      1792,
+      1008,
+      3
+    ],
+    "bytes": 461800
+  }
+}

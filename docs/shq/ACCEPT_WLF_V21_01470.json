@@ -1,0 +1,33 @@
+{
+  "write_id": "01470",
+  "project": "PROJ_SHQ_WLF_V21_ACCEPT_01470",
+  "formal": "WAI_LI_FAN_V2_1_ANYOBJ_TUNE_V1",
+  "STICK": "STICK_WAI_LI_FAN_V2",
+  "tune_pack": "mecha_dual_part",
+  "source_gold_assets": "01468 dual mecha 外力GROK chain",
+  "status": "PASS",
+  "claim": "C2_WLF_V21_L0",
+  "gates": {
+    "Imagine_除件": true,
+    "Imagine_除背_CLIP": true,
+    "Imagine_生": true,
+    "MARK_frozen": true,
+    "true_hole": true,
+    "elev_remap_false": true,
+    "outside_0": true,
+    "no_self_peep_as_CLIP": true,
+    "tune_pack": true,
+    "any_object": true
+  },
+  "kou_frac": 0.01591284481095679,
+  "CLIP_from_chu_bei": true,
+  "outside_max": 0,
+  "imagine": {
+    "除件": "0af57ff3-45a8-4249-beab-d90de18a2ec7",
+    "除背": "710144a4-95eb-46b3-a9f2-63cd6e3681f5",
+    "生": "1c7d1841-4e46-44bd-a130-ee73f54dede2"
+  },
+  "ACCEPT_FULL_HD": false,
+  "verdict": "C2_PASS · real dual-mecha · V2.1 structure OK · not production FULL_HD",
+  "asof": "2026-11-09T06:21:30.091964+00:00"
+}

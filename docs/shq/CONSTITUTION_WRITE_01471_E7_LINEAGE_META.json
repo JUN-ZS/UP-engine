@@ -1,0 +1,11 @@
+{
+  "write_id": "01471",
+  "formal": "SHQ_TECHNIQUE_LINEAGE_E7_DIALOGUE_CONSTITUTION_V1",
+  "project": "PROJ_SHQ_TECHNIQUE_LINEAGE_E7_01471",
+  "action": "organize full dialogue + constitution techniques; SHA images as thumbs; PUSH Hub",
+  "hub_repo": "JUN-ZS/UP-engine",
+  "hub_branch": "feat/shq-technique-lineage-e7-01471",
+  "sha_policy": "thumbnails only on Hub",
+  "ACCEPT_FULL_HD": false,
+  "status": "PUSH"
+}

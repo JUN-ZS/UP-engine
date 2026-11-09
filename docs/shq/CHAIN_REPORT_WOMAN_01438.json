@@ -1,0 +1,44 @@
+{
+  "formal": "WOMAN_CLIFF_SUCCESS_SHA_TRACE_01438",
+  "claim": "User-provided 7 assets form one real SHQ success lineage: SRC→PEEP→HD_ELEV→EMPTY→LOCK_PASTE (+ IC light + sole lock)",
+  "file_sha256": {
+    "triptych_IC": "269faad5271a0c0687c153205a79311efbb188190d972fafeb922fe978913d50",
+    "src_full": "8122e3b7b923bcb884c2b4471552c17a06cdab3b28e459c30119bd25294903d6",
+    "after_sole": "0dacbcf3184febdd7cbf9a9f4ecfdbd449f44417c5882fffbb823bac692e3ccd",
+    "after_clean": "6143f115901adabf451743352a56ded72c32c3c98e58945b84af996713af591d",
+    "hd_elev_cut": "4b20a913d1367a1d77862f3179171a3f0f95de84bff75b1acc4c6bd9db12bbb3",
+    "hd_white": "2dd06fa0c1ea29f9cd47d189120697c0c4c570b012366f054b40aab7c7e608bb",
+    "board_5step": "8c78559172096c2926bd1c03340b9c5af4c15b8f9997ebd3e2a8449d7b1ea7a0"
+  },
+  "pixel_sha256": {
+    "triptych_IC": "7a778cd2af3635d913d3fe82f5218db1311ec0bbe18d0cfb1d12bee0af945942",
+    "src_full": "66c652f4d8789ff145ede93469441f5289a195c46b379621eb5536cf94bc27f0",
+    "after_sole": "ce4a8b7d64cf2f7ea68a66aa9ef3b2b37c7cd168ad0ffc03d489005ba4e0b06b",
+    "after_clean": "34de6686892e89301dbb8f89839e0d5f3a0b25a6d2c1801b81d548522bd2838c",
+    "hd_elev_cut": "08caf9e374c3383d4cd618c281591d850ffc7aa1e54b05c4589a5d44c9f0ddc5",
+    "hd_white": "ab9e3ecc70adea374c092a6b27d2dbd0d1da6fc3a5317f367158dc9dde7f3da2",
+    "board_5step": "6cb96a5e0ed275fff2f9cbbb329126ff20a76c2e09cc7806148232dc8f6d1b5c"
+  },
+  "pipeline_5step": [
+    "1_SRC",
+    "2_PEEP",
+    "3_HD_ELEV",
+    "4_EMPTY",
+    "5_LOCK_PASTE"
+  ],
+  "ic_triptych": [
+    "REF_原光",
+    "BEFORE_SHQ",
+    "AFTER_IC光影"
+  ],
+  "note": "01436A headless was a later wrong elev re-run; these SHAs are the original success artifacts",
+  "ncc": {
+    "LOCK_vs_after_clean": 0.7618718382694489,
+    "LOCK_vs_after_sole": 0.7617778301352103,
+    "BEFORE_vs_src_full": 0.7824854031433933,
+    "AFTER_vs_after_clean": 0.8106237170150399,
+    "hd_white_vs_hd_elev_cut": 0.49255853864338633,
+    "sole_vs_clean": 0.9994126623046601,
+    "sole_maxdiff": 201
+  }
+}

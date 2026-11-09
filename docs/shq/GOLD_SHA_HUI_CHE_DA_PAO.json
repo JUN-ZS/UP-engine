@@ -1,0 +1,39 @@
+{
+  "A_FULL_L0": {
+    "asset_id": "cb078e94-bd90-476f-91f2-dd24fae0d20b",
+    "file_sha256": "76cb29ec1ae7bc44f0b6722b48d960527c5d21679b1d293db88fb08e28f16097",
+    "role": "L0 全景 · 白機甲｜女主｜紅坦克 雨戰場 1376×768"
+  },
+  "B_S2_GENERIC": {
+    "asset_id": "aa27e8ab-33f8-41fb-924a-4bb41349f52f",
+    "file_sha256": "af63b45246efafd7484618e66f5fbae074e8825be9bd167d162e96ab9a894afc",
+    "role": "S2_GENERIC PASS chain=0.0 · bbox+關節樹",
+    "ncc_to_S2_TREE_BOARD": 1.0
+  },
+  "C_L1_PARTMAP": {
+    "asset_id": "38d22646-9937-425d-9639-7ab93499153b",
+    "file_sha256": "d7dd0041f3e07014af9ca24716805c602210fbfb4ea1086448cc6acdf30f7c05",
+    "role": "L1 18 件相對分件彩圖",
+    "ncc_to_L1_PARTMAP": 1.0
+  },
+  "D_INSTANCE": {
+    "asset_id": "03a6d6ac-0aa2-4152-98cc-ea122897fa1b",
+    "file_sha256": "7379ad0eaf31942ad351ff3d7e3844acad4cd8b1ceb01a41d6bf2fee3aee0586",
+    "role": "3 CC 實心 · 黃機甲／綠人／藍坦克"
+  },
+  "E_EMPTY": {
+    "asset_id": "42918f69-2337-4d68-88a2-5c205e3a0100",
+    "file_sha256": "57979756ad925e26dfbe0b3647aa84bbf05b205585081035faea79aa5223d5d4",
+    "role": "EMPTY 空場"
+  },
+  "F_RETURN": {
+    "asset_id": "892fac6d-b2f5-4b93-8cc4-2d240a3ae0db",
+    "file_sha256": "34fe08d55cad77923845bb7e8c6fc85ff1dee5366675b333cdd5bab13397e4d9",
+    "role": "回位全景交付"
+  },
+  "G_TANK_PEEP": {
+    "asset_id": "e7da1388-9181-4603-8738-e814b8ffc055",
+    "file_sha256": "0a3741d281dab5bc550a3a62efaae4e22a0bd08089f0f3d54033504412f66486",
+    "role": "紅坦克炮管 peep elev HD · 件級回位 donor 象徵"
+  }
+}

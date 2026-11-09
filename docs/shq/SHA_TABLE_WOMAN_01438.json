@@ -1,0 +1,79 @@
+{
+  "triptych_IC": {
+    "file_sha256": "269faad5271a0c0687c153205a79311efbb188190d972fafeb922fe978913d50",
+    "pixel_sha256": "7a778cd2af3635d913d3fe82f5218db1311ec0bbe18d0cfb1d12bee0af945942",
+    "shape": [
+      700,
+      1179,
+      3
+    ],
+    "bytes": 1622499,
+    "path": "/workspace/artifacts/imagine_images/4f5d40ce-5b91-4877-8ff7-288f6338519d.png"
+  },
+  "src_full": {
+    "file_sha256": "8122e3b7b923bcb884c2b4471552c17a06cdab3b28e459c30119bd25294903d6",
+    "pixel_sha256": "66c652f4d8789ff145ede93469441f5289a195c46b379621eb5536cf94bc27f0",
+    "shape": [
+      1792,
+      1008,
+      3
+    ],
+    "bytes": 730227,
+    "path": "/workspace/artifacts/imagine_images/cf9d9dfa-34c3-43a0-9520-4225516516ec.jpg"
+  },
+  "after_sole": {
+    "file_sha256": "0dacbcf3184febdd7cbf9a9f4ecfdbd449f44417c5882fffbb823bac692e3ccd",
+    "pixel_sha256": "ce4a8b7d64cf2f7ea68a66aa9ef3b2b37c7cd168ad0ffc03d489005ba4e0b06b",
+    "shape": [
+      1400,
+      790,
+      3
+    ],
+    "bytes": 1912080,
+    "path": "/workspace/artifacts/imagine_images/5a1246fb-6cf3-485c-aa3d-401134662c6c.png"
+  },
+  "after_clean": {
+    "file_sha256": "6143f115901adabf451743352a56ded72c32c3c98e58945b84af996713af591d",
+    "pixel_sha256": "34de6686892e89301dbb8f89839e0d5f3a0b25a6d2c1801b81d548522bd2838c",
+    "shape": [
+      1400,
+      790,
+      3
+    ],
+    "bytes": 1911536,
+    "path": "/workspace/artifacts/imagine_images/a715a7ee-80c3-4c57-8fe1-b1541a44fd3d.png"
+  },
+  "hd_elev_cut": {
+    "file_sha256": "4b20a913d1367a1d77862f3179171a3f0f95de84bff75b1acc4c6bd9db12bbb3",
+    "pixel_sha256": "08caf9e374c3383d4cd618c281591d850ffc7aa1e54b05c4589a5d44c9f0ddc5",
+    "shape": [
+      1587,
+      1062,
+      3
+    ],
+    "bytes": 2869296,
+    "path": "/workspace/artifacts/imagine_images/87479fb3-6c6f-4959-b6a4-0bac15399759.png"
+  },
+  "hd_white": {
+    "file_sha256": "2dd06fa0c1ea29f9cd47d189120697c0c4c570b012366f054b40aab7c7e608bb",
+    "pixel_sha256": "ab9e3ecc70adea374c092a6b27d2dbd0d1da6fc3a5317f367158dc9dde7f3da2",
+    "shape": [
+      1728,
+      1152,
+      3
+    ],
+    "bytes": 618514,
+    "path": "/workspace/artifacts/imagine_images/688849c1-a8f3-4da8-a0a9-6a4a23176339.jpg"
+  },
+  "board_5step": {
+    "file_sha256": "8c78559172096c2926bd1c03340b9c5af4c15b8f9997ebd3e2a8449d7b1ea7a0",
+    "pixel_sha256": "6cb96a5e0ed275fff2f9cbbb329126ff20a76c2e09cc7806148232dc8f6d1b5c",
+    "shape": [
+      356,
+      1000,
+      3
+    ],
+    "bytes": 752062,
+    "path": "/workspace/artifacts/imagine_images/9043229b-0bc6-41e2-87b5-3b40f09c9f2b.png"
+  }
+}
