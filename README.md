@@ -13,3 +13,9 @@ SHQ / SIAX / Comfy geometry-locked image pipeline experiments.
 See `docs/shq/README_01471_E7_LINEAGE.md`.
 
 > main is intentionally thin; feature branches hold domain drafts. PR → main when frozen.
+
+## 01472
+
+- KILL 01433 ranking: `docs/shq/SHQ_KILL_01433_RANKING.md`
+- Harness ABC: `docs/shq/SHQ_METHOD_HARNESS_ABC_01472.md`
+- PY: `research/harness_abc/shq_method_harness_abc.py`

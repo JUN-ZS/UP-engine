@@ -1,0 +1,12 @@
+{
+  "write_id": "01472",
+  "formal": "SHQ_KILL01433_HARNESS_ABC_V1",
+  "project": "PROJ_SHQ_KILL01433_HARNESS_ABC_01472",
+  "action": "KILL 01433 ranking + A/B/C harness py + stick flow refs",
+  "selftest": "PASS",
+  "A_pass_per_scene": 14,
+  "B": "PASS_B mutex+order",
+  "C": "3-scene matrix",
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-10T00:20:00+08:00"
+}

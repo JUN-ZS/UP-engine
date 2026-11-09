@@ -1,0 +1,24 @@
+STICK_HUAN_YA_REN  換涯人  write=01439
+  pipe: SRC → PEEP → HD_ELEV → EMPTY → LOCK_PASTE → IC? → SOLE?
+  gates: elev_remap=false, outside_vs_frozen_hole=0, head_in
+STICK_JI_ZHA_HUI  機炸回  write=01441
+  pipe: SRC → PARTMAP_TEACH → EXPLODE → TUIDI_4CORNER → MAT_STRUCTURE_LOCK → HARDPASTE_MATLOCK → GUIDED_FULL_MAT
+  gates: mutex parts, structure_hole_fix
+STICK_XIN_HUA_NV  新畫女  write=01443
+  pipe: a8b → ST1_IP → ST2_FACELOCK → PATH1E_PLATE → ECC → ET_GEO
+  gates: plate only inside hole
+STICK_HUI_CHE_DA_PAO  回車大炮  write=01445
+  pipe: L1_3SUBJ_18PART → S2_HIERARCHY_T → EMPTY → MULTI_RETURN
+  gates: no color-band scramble, no SUCCESS without peep SOLO
+STICK_FOUR_ANTI_ARCH  四態反  write=01448
+  pipe: GEN → REMOVE → HOLE → DIFF → ANTI_each
+  gates: independent PASS ≠ combinable
+STICK_WAI_LI_GROK  外力GROK  write=01466
+  pipe: Imagine_REMOVE_part → Imagine_REMOVE_bg → Imagine_GEN_in_hole
+  gates: no self-peep
+STICK_XIN_NV_V2  新女畫V2  write=01464
+  pipe: a8b → WLF3_hole_seat → Nx_layer_anti
+  gates: no-hole-return = textbook fail
+STICK_WAI_LI_FAN_V2  外力反 V2.1  write=01469-01470
+  pipe: chu_bei→CLIP → chu_part→HOLE+MARK → GEN_in_hole → hardpaste → ANTI_board → TunePack
+  gates: CLIP_from_chu_bei, outside_max=0, any_object TunePack
