@@ -1,0 +1,137 @@
+{
+  "pack_id": "pc-run-evidence-20261109",
+  "timezone": "Asia/Hong_Kong",
+  "captured_at_local": "2026-11-09 morning (approx 08:12–08:45 HKT)",
+  "workflow": "workflow_ige_v03_dev_fp8_local_preflight_canvas_align.json",
+  "workflow_note": "A/B dual parallel path (Baseline A + Candidate B); one Queue yields two primary results",
+  "device": "NVIDIA GeForce RTX 3070 Ti 8192 MB",
+  "comfyui_version": "0.44.0",
+  "claim_boundaries": {
+    "flux_maturity": "workflow_candidate",
+    "flux_promoted": false,
+    "budget_guard_max_tiles_per_batch": 1,
+    "sequential_tile_runner": "pending",
+    "merge_main": false,
+    "cloud_gpu": false
+  },
+  "pixel_identity_notes": [
+    "operator_attached_A.png pixels == disk B_TTP_GatedTiles_00001_.png (mean_abs_diff=0) but PNG SHA/size differ → re-encode/UI export",
+    "operator_attached_B.png pixels == ComfyUI_00002_.png (mean_abs_diff=0) but PNG SHA/size differ → re-encode/UI export",
+    "operator_attached_B.png vs disk GlobalLogic_Candidate_B_00001_.png: mean_abs_diff≈1 (near-identical, not byte-identical pixels)"
+  ],
+  "operator_confirmed_primary_outputs": [
+    {
+      "filename": "operator_attached_A.png",
+      "sha256": "cfc057d21f8657bf555206dac1bdb933059f7dc5510bd73b0146dfcbd8c2f6a1",
+      "bytes": 25176815,
+      "width": 5376,
+      "height": 3024,
+      "role": "operator_attached_primary",
+      "label": "A_or_B_TTP_visual",
+      "pair_side": "A_visual",
+      "release_asset": "operator_attached_A.png",
+      "chat_attachment_sha256": "cfc057d21f8657bf555206dac1bdb933059f7dc5510bd73b0146dfcbd8c2f6a1"
+    },
+    {
+      "filename": "operator_attached_B.png",
+      "sha256": "874f6839967a00a79ae59040780d33b2e8a628ba9b4c1ed09e80b29a6ecc6f35",
+      "bytes": 25035073,
+      "width": 5376,
+      "height": 3024,
+      "role": "operator_attached_primary",
+      "label": "A_or_B_Candidate_visual",
+      "pair_side": "B_visual",
+      "release_asset": "operator_attached_B.png",
+      "chat_attachment_sha256": "874f6839967a00a79ae59040780d33b2e8a628ba9b4c1ed09e80b29a6ecc6f35"
+    }
+  ],
+  "disk_ige_outputs": [
+    {
+      "filename": "B_TTP_GatedTiles_00001_.png",
+      "sha256": "f4afbb9d960cda86813920ee4a8275a9740e41a08db3eb6a4ee04681a7546208",
+      "bytes": 20080980,
+      "width": 5376,
+      "height": 3024,
+      "role": "disk_ige",
+      "pc_path": "C:\\\\Users\\\\user\\\\Documents\\\\ComfyUI\\\\output\\\\IGE\\\\B_TTP_GatedTiles_00001_.png",
+      "release_asset": "disk_ige_B_TTP_GatedTiles_00001_.png"
+    },
+    {
+      "filename": "GlobalLogic_Candidate_B_00001_.png",
+      "sha256": "190b1130181964f708cd4c2afa219fb824b100f061a7eb08b8dc70465a2ee850",
+      "bytes": 20077010,
+      "width": 5376,
+      "height": 3024,
+      "role": "disk_ige",
+      "pc_path": "C:\\\\Users\\\\user\\\\Documents\\\\ComfyUI\\\\output\\\\IGE\\\\GlobalLogic_Candidate_B_00001_.png",
+      "release_asset": "disk_ige_GlobalLogic_Candidate_B_00001_.png"
+    },
+    {
+      "filename": "GlobalLogicMap_00004_.png",
+      "sha256": "2c66208af39d65fdb45f0e8a3e3f9eb95300efda3f00cfd6f4d37fe55a9d1687",
+      "bytes": 131935,
+      "width": 5376,
+      "height": 3024,
+      "role": "disk_ige_map",
+      "pc_path": "C:\\\\Users\\\\user\\\\Documents\\\\ComfyUI\\\\output\\\\IGE\\\\GlobalLogicMap_00004_.png",
+      "release_asset": "disk_ige_GlobalLogicMap_00004_.png"
+    }
+  ],
+  "other_disk_outputs": [
+    {
+      "filename": "ComfyUI_00002_.png",
+      "sha256": "e743d92352493edbf621dfb985ace652d5a9d0c698fe14de079e1fe111398baa",
+      "bytes": 19980385,
+      "width": 5376,
+      "height": 3024,
+      "role": "disk_output_root",
+      "pc_path": "C:\\\\Users\\\\user\\\\Documents\\\\ComfyUI\\\\output\\\\ComfyUI_00002_.png",
+      "note": "pixel-identical to operator_attached_B"
+    },
+    {
+      "filename": "ige_preflight_pass_00001_.png",
+      "sha256": "b93622e0f0e94181b39dd0196c197f1611e55d156303065f4b10cf65924e2ab5",
+      "bytes": 19920855,
+      "width": 5376,
+      "height": 3024,
+      "role": "preflight_pass_image",
+      "pc_path": "C:\\\\Users\\\\user\\\\Documents\\\\ComfyUI\\\\output\\\\ige_preflight_pass_00001_.png"
+    }
+  ],
+  "previews_1280_jpeg": [
+    {
+      "filename": "ComfyUI_00002_preview_1280.jpg",
+      "sha256": "7bc9403d28cc9add3ba8d22eda298f42308e8276eb26ba75823fbe57900b5333",
+      "bytes": 258570,
+      "width": 1280,
+      "height": 720,
+      "role": "preview_1280_jpeg"
+    },
+    {
+      "filename": "ige_preflight_pass_preview_1280.jpg",
+      "sha256": "641279b3e88e0520bb56e78699759f4e14917bb75d43dff274b202cc5dc25e0d",
+      "bytes": 310744,
+      "width": 1280,
+      "height": 720,
+      "role": "preview_1280_jpeg"
+    },
+    {
+      "filename": "operator_A_preview_1280.jpg",
+      "sha256": "43d247b4a63d5c208afb942e694e38c9f4ce91392d7562868496da504a3a9e61",
+      "bytes": 262742,
+      "width": 1280,
+      "height": 720,
+      "role": "preview_1280_jpeg"
+    },
+    {
+      "filename": "operator_B_preview_1280.jpg",
+      "sha256": "7bc9403d28cc9add3ba8d22eda298f42308e8276eb26ba75823fbe57900b5333",
+      "bytes": 258570,
+      "width": 1280,
+      "height": 720,
+      "role": "preview_1280_jpeg"
+    }
+  ],
+  "release_tag": "pc-run-evidence-20261109",
+  "release_zip": "pc-run-evidence-20261109-binaries.zip"
+}

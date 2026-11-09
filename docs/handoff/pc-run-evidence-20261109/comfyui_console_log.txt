@@ -1,0 +1,106 @@
+# ComfyUI Console Evidence — PC Run 2026-11-09 (Asia/Hong_Kong)
+# Source: operator paste + condensed boot log. Not a full raw console capture.
+# Machine: DESKTOP-GNMQ0PF · RTX 3070 Ti 8GB · ComfyUI 0.44.0 · Python 3.12.9 · pytorch 2.10.0+cu130
+# Workflow loaded (operator): workflow_ige_v03_dev_fp8_local_preflight_canvas_align.json
+# Dual path: Baseline A + Candidate B (one Queue → two primary outputs)
+
+================================================================================
+BOOT / ENVIRONMENT (condensed)
+================================================================================
+[INFO] Checkpoint files will always be loaded safely.
+[INFO] Total VRAM 8192 MB, total RAM 32506 MB
+[INFO] pytorch version: 2.10.0+cu130
+[INFO] Set vram state to: NORMAL_VRAM
+[INFO] Device: cuda:0 NVIDIA GeForce RTX 3070 Ti : cudaMallocAsync
+[INFO] Using async weight offloading with 2 streams
+[INFO] Enabled pinned memory 13002.0
+[INFO] working around nvidia conv3d memory bug.
+[INFO] Using pytorch attention
+[INFO] aimdo: ... comfy-aimdo inited for GPU: NVIDIA GeForce RTX 3070 Ti (VRAM: 8191 MB)
+[INFO] DynamicVRAM support detected and enabled
+[INFO] Python version: 3.12.9 (main, Feb 12 2025, 14:52:31) [MSC v.1942 64 bit (AMD64)]
+[INFO] ComfyUI version: 0.44.0
+[INFO] comfy-aimdo version: 0.6.0
+[INFO] comfy-kitchen version: 0.2.41
+[INFO] comfyui-frontend-package version: 1.58.5
+[INFO] [Prompt Server] web root: ...\comfyui_frontend_package\static
+[INFO] [START] ComfyUI-Manager
+[INFO] ### Loading: ComfyUI-Impact-Pack (V8.30)
+[ERROR] [Impact Pack] Failed to read impact-pack.ini — using hardcoded defaults
+[ERROR] No module named 'ultralytics'
+[WARNING] Cannot import ComfyUI-Impact-Subpack: No module named 'ultralytics'
+[WARNING] KJNodes: PatchTritonVAE unavailable (no triton)
+[INFO] Import times: IGE_GlobalLogicCoordinator 0.0s; Impact-Subpack IMPORT FAILED
+[INFO] Starting server http://127.0.0.1:8000
+
+================================================================================
+RUN SEQUENCE (operator-confirmed narrative + key log lines)
+================================================================================
+
+--- (1) ContractError — geometry vs source canvas mismatch ---
+ContractError / geometry gate:
+  Geometry canvas (5376, 3024) != source canvas (5461, 3072)
+  (Earlier history also saw 5376×3024 vs 3862×2172; this session logged 5461×3072.)
+
+--- (2) IGE_PREFLIGHT_BLOCKED ---
+IGE_GlobalPreflightGate BLOCK:
+  contract_id=e36a5df632afd1da
+  geometry_operator_confirmed=false
+  confirmation_recorded=false
+  source_coordinate_registration_confirmed=false
+  explicit_execution_authorization=false
+  (Later queue: authorization true, but geometry three still false until operator confirmed.)
+
+--- (3) Unsupported iteration state schema ---
+Log reported unsupported iteration state schema (tile/runner state not yet sequential-ready).
+
+--- (4) Preflight PASS (after operator confirm) ---
+Two short prompts executed OK (~1.73s / ~1.33s) — Preflight path PASS after operator geometry/auth confirm.
+Evidence image on disk: output/ige_preflight_pass_00001_.png (5376×3024).
+
+--- (5)(6) IGE_RESOURCE_BUDGET_BLOCKED — BudgetGuard max_tiles=1 ---
+IGE_TileBatchBudgetGuard BLOCK (repeated):
+  tile_batch.count=6  vs  max_tiles_per_batch=1
+  tile shape ~2752×1040 (legacy TTP multi-tile batch)
+  VRAM free ~7069 MB; RAM available ~8757–8902 MB
+  NOTE: VRAM/RAM thresholds themselves were OK; admission blocked on tile COUNT.
+  Sequential tile runner still PENDING — guard is intentional fail-closed, not a completed executor.
+
+--- (7)(8) Flux path interrupted / cancelled ---
+Flux/VAE path started then cancelled (short runs ~46s / ~102s).
+Later: Cancelling running prompt b880e7a2-5f51-4338-8c6c-736ce6f46d70
+  2%|▏ | 1/47 [04:21<3:20:06, 261.01s/it, Model Initialization complete!]
+  2%|▏ | 1/47 [05:06<3:54:47, 306.26s/it, Model Initialization complete!]
+[INFO] Processing interrupted
+[INFO] Prompt executed in 441.72 seconds
+
+Model load notes from this session:
+[INFO] model weight dtype torch.float8_e4m3fn, manual cast: torch.bfloat16
+[INFO] model_type FLUX
+[INFO] Model storage policy: fast_disk=True paths=[...\flux1-dev.safetensors]
+[INFO] CLIP paths: t5xxl_fp16.safetensors, clip_l.safetensors
+[WARNING] clip missing: ['text_projection.weight']
+[INFO] Model Flux prepared for dynamic VRAM loading. 11350MB Staged.
+[INFO] Model FluxClipModel_ prepared for dynamic VRAM loading. 9318MB Staged.
+[INFO] Model AutoencodingEngine prepared for dynamic VRAM loading. 159MB Staged.
+
+--- (9) FINAL SUCCESS — single-tile / canvas_align path ---
+[INFO] got prompt
+100%|██████████| 8/8 [18:08<00:00, 136.09s/it]   # Flux pass 1 (8 steps)
+[INFO] Requested to load AutoencodingEngine / FluxClipModel_ / Flux (dynamic VRAM)
+100%|██████████| 8/8 [21:43<00:00, 162.97s/it]   # Flux pass 2 (8 steps) — A/B dual path
+[INFO] Model storage policy: fast_disk=True paths=[...\upscale_models\4x_NMKD-Siax_200k.pth]
+[INFO] Requested to load RRDBNet
+[INFO] Prompt executed in 00:39:35
+
+[INFO] Seeder scan output: created=0 skipped=11 (assets already present)
+Asset scan root: C:\Users\user\Documents\ComfyUI\output
+
+================================================================================
+CLAIM BOUNDARIES (do NOT over-read this log)
+================================================================================
+- Flux remains workflow_candidate / NOT promoted.
+- BudgetGuard still max_tiles_per_batch=1; sequential runner still pending.
+- This proves: gates BLOCKED then (after operator confirm + single-tile path) a dual A/B Flux×8 + Siax run completed in ~39m35s on 8GB.
+- Does NOT prove: production authorization, multi-tile sequential OOM-safety, geometry-lock acceptance for merge to main, or Cloud GPU.
+- Operator-confirmed chat attachments are PRIMARY visual outputs; disk IGE PNG SHAs differ (re-encode) — see OUTPUT_MANIFEST.json.
