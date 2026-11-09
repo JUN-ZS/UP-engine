@@ -1,0 +1,59 @@
+{
+  "selftest": "PASS",
+  "write_id": "01473",
+  "cases": [
+    {
+      "name": "clean_proxy",
+      "ok": true,
+      "status": "PASS_AUDIT",
+      "E": []
+    },
+    {
+      "name": "proxy_as_true",
+      "ok": true,
+      "status": "FAIL_STEAL",
+      "E": [
+        "E-DRIFT-02",
+        "E-STEAL-02"
+      ]
+    },
+    {
+      "name": "01433_kill",
+      "ok": true,
+      "status": "FAIL_STEAL",
+      "E": [
+        "E-AUDIT-00",
+        "E-AUDIT-01",
+        "E-DRIFT-04",
+        "E-STEAL-04"
+      ]
+    },
+    {
+      "name": "no_af_c5",
+      "ok": true,
+      "status": "FAIL_STEAL",
+      "E": [
+        "E-AUDIT-00",
+        "E-AUDIT-01",
+        "E-DRIFT-04",
+        "E-STEAL-01"
+      ]
+    },
+    {
+      "name": "claim_over_af",
+      "ok": true,
+      "status": "WARN_DRIFT",
+      "E": [
+        "E-AUDIT-01",
+        "E-DRIFT-04"
+      ]
+    },
+    {
+      "name": "xnv2_summary",
+      "ok": true,
+      "status": "PASS_AUDIT",
+      "E": []
+    }
+  ],
+  "ACCEPT_FULL_HD": false
+}

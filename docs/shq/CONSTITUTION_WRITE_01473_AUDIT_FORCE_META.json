@@ -1,0 +1,10 @@
+{
+  "write_id": "01473",
+  "formal": "SHQ_STEAL_DRIFT_AUDIT_FORCE_V1",
+  "zh": "偷步·跑偏·出錯審查力",
+  "project": "PROJ_SHQ_AUDIT_FORCE_01473",
+  "py": "shq_audit_force.py",
+  "selftest": "PASS",
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-10T01:05:00+08:00"
+}

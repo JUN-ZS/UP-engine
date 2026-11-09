@@ -1,0 +1,21 @@
+{
+  "formal": "SHQ_STEAL_DRIFT_AUDIT_FORCE_V1",
+  "write_id": "01473",
+  "defs": {
+    "steal": "skip required step yet PASS",
+    "drift": "declared≠observed",
+    "AF": "detect+encode+block claim"
+  },
+  "AF": {
+    "AF0": "none",
+    "AF1": "numbers only",
+    "AF2": "steps+frozen hole+honest empty",
+    "AF3": "+imagine assets",
+    "AF4": "+gold CI"
+  },
+  "gate": {
+    "STEAL": "C0",
+    "DRIFT": "≤C1",
+    "C5": "AF4"
+  }
+}

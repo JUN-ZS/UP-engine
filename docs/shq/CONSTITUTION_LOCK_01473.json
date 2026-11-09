@@ -1,0 +1,24 @@
+{
+  "write_id": "01473",
+  "formal": "SHQ_STEAL_DRIFT_AUDIT_FORCE_V1",
+  "zh": "偷步·跑偏·出錯審查力",
+  "STICK": "STICK_AUDIT_FORCE",
+  "defines": ["STEAL_STEP", "DRIFT", "AUDIT_FORCE AF0-AF4"],
+  "new_E_codes": [
+    "E-STEAL-01", "E-STEAL-02", "E-STEAL-03", "E-STEAL-04",
+    "E-DRIFT-01", "E-DRIFT-02", "E-DRIFT-03", "E-DRIFT-04", "E-DRIFT-05", "E-DRIFT-06",
+    "E-AUDIT-00", "E-AUDIT-01", "E-AUDIT-02", "E-AUDIT-03", "E-AUDIT-04"
+  ],
+  "report_required_fields": [
+    "audit_force", "steal_flags", "drift_flags", "E_codes",
+    "empty_mode", "claim_level", "outside_basis"
+  ],
+  "claim_gate": {
+    "C2": "AF2",
+    "C3": "AF3",
+    "C5": "AF4"
+  },
+  "parent_writes": ["01389", "01448", "01466", "01469", "01472"],
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-10T01:00:00+08:00"
+}

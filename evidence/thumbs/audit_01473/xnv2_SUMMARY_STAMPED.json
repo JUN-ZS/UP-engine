@@ -1,0 +1,58 @@
+{
+  "preset": "xnv2",
+  "stick": "STICK_XIN_NV_V2",
+  "STICK": "STICK_XIN_NV_V2",
+  "write_id_harness": "01472",
+  "empty_mode": "true_diff_chu_tou",
+  "empty_note": "chu_tou (外力除头) + light inpaint residual; better than pure Telea-from-KEEP",
+  "outside_basis": "frozen_M_hole",
+  "n_peeps": 2,
+  "A_n_pass": 14,
+  "A_n_fail_ban": 4,
+  "A_n_fail_outside": 0,
+  "B_status": "PASS_B",
+  "B_mutex": true,
+  "B_order": true,
+  "claim_level": "C2",
+  "audit_force": "AF2",
+  "required_steps": [
+    "ingest_gold",
+    "freeze_hole",
+    "mutex_peeps",
+    "run_A",
+    "run_B"
+  ],
+  "executed_steps": [
+    "ingest_gold",
+    "freeze_hole",
+    "mutex_peeps",
+    "run_A",
+    "run_B"
+  ],
+  "status": "PASS_B",
+  "ACCEPT_FULL_HD": false,
+  "out": "SETS/PROJ_SHQ_KILL01433_HARNESS_ABC_01472/runs/gold_ingest_stamped/xnv2",
+  "audit_stamp": {
+    "write_id": "01473",
+    "formal": "SHQ_STEAL_DRIFT_AUDIT_FORCE_V1",
+    "source": "SETS/PROJ_SHQ_KILL01433_HARNESS_ABC_01472/runs/gold_ingest_stamped/xnv2/SUMMARY.json",
+    "status": "PASS_AUDIT",
+    "audit_force_declared": "AF2",
+    "audit_force_effective": "AF2",
+    "claim_declared": "C2",
+    "claim_allowed": "C2",
+    "steal_flags": [],
+    "drift_flags": [],
+    "E_codes": [],
+    "notes": [
+      "true-ish empty_mode=true_diff_chu_tou"
+    ],
+    "ACCEPT_FULL_HD": false,
+    "rule": "STEAL→C0 ban SUCCESS; DRIFT→≤C1; AF gates claim"
+  },
+  "steal_flags": [],
+  "drift_flags": [],
+  "E_codes": [],
+  "audit_force_effective": "AF2",
+  "audit_status": "PASS_AUDIT"
+}
