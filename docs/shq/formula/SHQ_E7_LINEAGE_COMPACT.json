@@ -1,0 +1,266 @@
+{
+  "formal": "SHQ_TECHNIQUE_LINEAGE_E7_DIALOGUE_CONSTITUTION_V1",
+  "epochs": [
+    "E7_HUAN",
+    "E7_JIZHA",
+    "E7_XHN",
+    "E7_HCD",
+    "E7_XNV2",
+    "E7_WLF21"
+  ],
+  "sticks": [
+    "STICK_HUAN_YA_REN",
+    "STICK_JI_ZHA_HUI",
+    "STICK_XIN_HUA_NV",
+    "STICK_HUI_CHE_DA_PAO",
+    "STICK_FOUR_ANTI_ARCH",
+    "STICK_WAI_LI_FAN",
+    "STICK_WAI_LI_FAN_V2",
+    "STICK_WAI_LI_FAN_V3",
+    "STICK_XIN_HUA_NV_V2_WLF3_NX",
+    "STICK_XIN_NV_V2",
+    "STICK_WAI_LI_GROK"
+  ],
+  "core_formulas": {
+    "huan_ya_ren": "SRC→PEEP→HD_ELEV→EMPTY→LOCK_PASTE(+IC+sole)",
+    "ji_zha_hui": "SRC→PARTMAP→EXPLODE→TUIDI4→MAT structure-lock→4corner hardpaste→guided FULL_MAT",
+    "xin_hua_nv": "a8b→ST1 IP→ST2 facelock→PATH1E plate→ECC→ET/GEO",
+    "hui_che_da_pao": "L1_3SUBJ 18parts + S2 hierarchy T + EMPTY×MULTI_RETURN",
+    "four_anti": "[(生,除,洞,扣)×(反)] + State Bus invariants",
+    "wai_li_fan_v21": "外力GROK除背→CLIP · 除件→洞/MARK · 生洞內 · TunePack any object · elev_remap=false"
+  },
+  "invariants": [
+    "CLIP from 除背 only (no self-peep)",
+    "true_hole = pixels gone after 外力除",
+    "elev_remap=false",
+    "outside_max=0 for hardpaste gate (not visual success alone)",
+    "independent PASS ≠ combinable without State Bus",
+    "ACCEPT_FULL_HD=false unless C5 gold+CI"
+  ],
+  "entries": [
+    {
+      "idx": 0,
+      "epoch": "E7_HUAN",
+      "phase": "LOCK",
+      "id": "00_HYR_BOARD5",
+      "question": "Q: 崖台換人是否可鎖成金錨？",
+      "thumb": "thumbs/00_E7_HUAN_LOCK_00_HYR_BOARD5.jpg"
+    },
+    {
+      "idx": 1,
+      "epoch": "E7_HUAN",
+      "phase": "LOCK",
+      "id": "01_HYR_FINAL",
+      "question": "Q: outside=0 是否=視覺成功？",
+      "thumb": "thumbs/01_E7_HUAN_LOCK_01_HYR_FINAL.jpg"
+    },
+    {
+      "idx": 2,
+      "epoch": "E7_HUAN",
+      "phase": "LOCK",
+      "id": "02_HYR_CLEAN",
+      "question": "Q: sole annotate 可否脫離像素？",
+      "thumb": "thumbs/02_E7_HUAN_LOCK_02_HYR_CLEAN.jpg"
+    },
+    {
+      "idx": 3,
+      "epoch": "E7_HUAN",
+      "phase": "ORIGIN",
+      "id": "03_HYR_SRC",
+      "question": "Q: 頭必須在？洞不吃岩？",
+      "thumb": "thumbs/03_E7_HUAN_ORIGIN_03_HYR_SRC.jpg"
+    },
+    {
+      "idx": 4,
+      "epoch": "E7_HUAN",
+      "phase": "EXPLORE",
+      "id": "04_HYR_HD_CUT",
+      "question": "Q: elev 是否 freeframe？",
+      "thumb": "thumbs/04_E7_HUAN_EXPLORE_04_HYR_HD_CUT.jpg"
+    },
+    {
+      "idx": 5,
+      "epoch": "E7_HUAN",
+      "phase": "EXPLORE",
+      "id": "05_HYR_TRIPTYCH",
+      "question": "Q: IC 光影是後綴還是主鏈？",
+      "thumb": "thumbs/05_E7_HUAN_EXPLORE_05_HYR_TRIPTYCH.jpg"
+    },
+    {
+      "idx": 6,
+      "epoch": "E7_JIZHA",
+      "phase": "ORIGIN",
+      "id": "06_JZH_SRC_YARD",
+      "question": "Q: 爆炸是教學還是 freeframe？",
+      "thumb": "thumbs/06_E7_JIZHA_ORIGIN_06_JZH_SRC_YARD.jpg"
+    },
+    {
+      "idx": 7,
+      "epoch": "E7_JIZHA",
+      "phase": "EXPLORE",
+      "id": "07_JZH_EXPLODE",
+      "question": "Q: 框=圖邊？elev_remap=false？",
+      "thumb": "thumbs/07_E7_JIZHA_EXPLORE_07_JZH_EXPLODE.jpg"
+    },
+    {
+      "idx": 8,
+      "epoch": "E7_JIZHA",
+      "phase": "LOCK",
+      "id": "08_JZH_MATLOCK",
+      "question": "Q: α XOR 必須 0？",
+      "thumb": "thumbs/08_E7_JIZHA_LOCK_08_JZH_MATLOCK.jpg"
+    },
+    {
+      "idx": 9,
+      "epoch": "E7_JIZHA",
+      "phase": "LOCK",
+      "id": "09_JZH_GUIDED",
+      "question": "Q: 機炸回 ≠ 換涯人？",
+      "thumb": "thumbs/09_E7_JIZHA_LOCK_09_JZH_GUIDED.jpg"
+    },
+    {
+      "idx": 10,
+      "epoch": "E7_XHN",
+      "phase": "ORIGIN",
+      "id": "10_XHN_A8B",
+      "question": "Q: 裸 a8b 直 ECC 合法？",
+      "thumb": "thumbs/10_E7_XHN_ORIGIN_10_XHN_A8B.jpg"
+    },
+    {
+      "idx": 11,
+      "epoch": "E7_HCD",
+      "phase": "ORIGIN",
+      "id": "11_HCD_L0",
+      "question": "Q: 18 相對件 + S2 樹？",
+      "thumb": "thumbs/11_E7_HCD_ORIGIN_11_HCD_L0.jpg"
+    },
+    {
+      "idx": 12,
+      "epoch": "E7_HCD",
+      "phase": "EXPLORE",
+      "id": "12_HCD_S2",
+      "question": "Q: 三主體 ≠ 單機 PARTMAP？",
+      "thumb": "thumbs/12_E7_HCD_EXPLORE_12_HCD_S2.jpg"
+    },
+    {
+      "idx": 13,
+      "epoch": "E7_HCD",
+      "phase": "EXPLORE",
+      "id": "13_HCD_PART",
+      "question": "Q: 禁色帶亂件？",
+      "thumb": "thumbs/13_E7_HCD_EXPLORE_13_HCD_PART.jpg"
+    },
+    {
+      "idx": 14,
+      "epoch": "E7_HCD",
+      "phase": "LOCK",
+      "id": "14_HCD_RETURN",
+      "question": "Q: peep=件級 elev？",
+      "thumb": "thumbs/14_E7_HCD_LOCK_14_HCD_RETURN.jpg"
+    },
+    {
+      "idx": 15,
+      "epoch": "E7_HCD",
+      "phase": "EXPLORE",
+      "id": "15_HCD_TANK",
+      "question": "Q: D2 無 peep SOLO 禁 SUCCESS？",
+      "thumb": "thumbs/15_E7_HCD_EXPLORE_15_HCD_TANK.jpg"
+    },
+    {
+      "idx": 16,
+      "epoch": "E7_XNV2",
+      "phase": "LOCK",
+      "id": "16_XNV2_L0",
+      "question": "Q: PATH1E plate 只在洞內生？",
+      "thumb": "thumbs/16_E7_XNV2_LOCK_16_XNV2_L0.jpg"
+    },
+    {
+      "idx": 17,
+      "epoch": "E7_XNV2",
+      "phase": "EXPLORE",
+      "id": "17_XNV2_CHU",
+      "question": "Q: CLIP 從除背來？禁自 peep？",
+      "thumb": "thumbs/17_E7_XNV2_EXPLORE_17_XNV2_CHU.jpg"
+    },
+    {
+      "idx": 18,
+      "epoch": "E7_XNV2",
+      "phase": "EXPLORE",
+      "id": "18_XNV2_CLIP",
+      "question": "Q: 無洞回=錯位教材？",
+      "thumb": null
+    },
+    {
+      "idx": 19,
+      "epoch": "E7_XNV2",
+      "phase": "LOCK",
+      "id": "19_XNV2_R",
+      "question": "Q: V1 stick 保留、返還改臉默認 V2？",
+      "thumb": "thumbs/19_E7_XNV2_LOCK_19_XNV2_R.jpg"
+    },
+    {
+      "idx": 20,
+      "epoch": "E7_XNV2",
+      "phase": "ASK",
+      "id": "20_XNV2_STORY",
+      "question": "Q: (N)(X) 層層反？",
+      "thumb": null
+    },
+    {
+      "idx": 21,
+      "epoch": "E7_WLF21",
+      "phase": "LOCK",
+      "id": "21_WLF21_STORY",
+      "question": "Q: 任意物件 TunePack 可換？",
+      "thumb": "thumbs/21_E7_WLF21_LOCK_21_WLF21_STORY.jpg"
+    },
+    {
+      "idx": 22,
+      "epoch": "E7_WLF21",
+      "phase": "LOCK",
+      "id": "22_WLF21_COMPARE",
+      "question": "Q: 獨立 PASS ≠ 可組合？",
+      "thumb": "thumbs/22_E7_WLF21_LOCK_22_WLF21_COMPARE.jpg"
+    },
+    {
+      "idx": 23,
+      "epoch": "E7_WLF21",
+      "phase": "EXPLORE",
+      "id": "23_WLF21_SRC",
+      "question": "Q: part_role any object？",
+      "thumb": "thumbs/23_E7_WLF21_EXPLORE_23_WLF21_SRC.jpg"
+    },
+    {
+      "idx": 24,
+      "epoch": "E7_WLF21",
+      "phase": "EXPLORE",
+      "id": "24_WLF21_CLIP",
+      "question": "Q: CLIP_from_chu_bei 必須 true？",
+      "thumb": "thumbs/24_E7_WLF21_EXPLORE_24_WLF21_CLIP.jpg"
+    },
+    {
+      "idx": 25,
+      "epoch": "E7_WLF21",
+      "phase": "EXPLORE",
+      "id": "25_WLF21_HOLE",
+      "question": "Q: true_hole=除後像素不在？",
+      "thumb": "thumbs/25_E7_WLF21_EXPLORE_25_WLF21_HOLE.jpg"
+    },
+    {
+      "idx": 26,
+      "epoch": "E7_WLF21",
+      "phase": "LOCK",
+      "id": "26_WLF21_RETURN",
+      "question": "Q: elev_remap=false · outside_max=0？",
+      "thumb": "thumbs/26_E7_WLF21_LOCK_26_WLF21_RETURN.jpg"
+    },
+    {
+      "idx": 27,
+      "epoch": "E7_WLF21",
+      "phase": "FIX",
+      "id": "27_WLF21_ANTI",
+      "question": "Q: 反板省略=E-FA-06？",
+      "thumb": "thumbs/27_E7_WLF21_FIX_27_WLF21_ANTI.jpg"
+    }
+  ]
+}

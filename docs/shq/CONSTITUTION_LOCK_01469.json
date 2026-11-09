@@ -1,0 +1,19 @@
+{
+  "write_id": "01469",
+  "formal": "WAI_LI_FAN_V2_ANY_OBJECT_TUNE_V1",
+  "zh": "外力反 V2.1 任意物件可微調",
+  "STICK": "STICK_WAI_LI_FAN_V2",
+  "binds": [
+    "STICK_WAI_LI_GROK",
+    "STICK_FOUR_ANTI_ARCH"
+  ],
+  "key_fixes": [
+    "CLIP from 除背 only",
+    "part_id any object",
+    "TunePack theta externalized",
+    "no self-peep",
+    "compose requires state bus invariants"
+  ],
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-09T06:17:44.567861+00:00"
+}

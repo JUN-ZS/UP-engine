@@ -1,0 +1,15 @@
+{
+  "formal": "SHQ_XIN_NV_V2_WLF3_TRUE_FOUR_ANTI",
+  "zh": "新女畫V2",
+  "write_id": "01464",
+  "docs": [
+    "SHQ_XIN_NV_V2.md",
+    "SHQ_XIN_NV_V2_CALL.md"
+  ],
+  "inherits": [
+    "STICK_XIN_HUA_NV",
+    "STICK_WAI_LI_FAN_V3",
+    "TRUE_FOUR_ANTI_CLIP"
+  ],
+  "a8b": "a8b78fe5-2654-4f6f-84e3-c1dfbee61004"
+}

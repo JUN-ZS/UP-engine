@@ -1,0 +1,37 @@
+{
+  "board_5step": {
+    "asset_id": "9043229b-0bc6-41e2-87b5-3b40f09c9f2b",
+    "file_sha256": "8c78559172096c2926bd1c03340b9c5af4c15b8f9997ebd3e2a8449d7b1ea7a0",
+    "role": "5step SRC→PEEP→HD_ELEV→EMPTY→LOCK_PASTE"
+  },
+  "triptych_IC": {
+    "asset_id": "4f5d40ce-5b91-4877-8ff7-288f6338519d",
+    "file_sha256": "269faad5271a0c0687c153205a79311efbb188190d972fafeb922fe978913d50",
+    "role": "REF原光 | BEFORE SHQ | AFTER IC光影"
+  },
+  "src_full": {
+    "asset_id": "cf9d9dfa-34c3-43a0-9520-4225516516ec",
+    "file_sha256": "8122e3b7b923bcb884c2b4471552c17a06cdab3b28e459c30119bd25294903d6",
+    "role": "full SRC / mid silver state"
+  },
+  "final_sole": {
+    "asset_id": "5a1246fb-6cf3-485c-aa3d-401134662c6c",
+    "file_sha256": "0dacbcf3184febdd7cbf9a9f4ecfdbd449f44417c5882fffbb823bac692e3ccd",
+    "role": "LOCK_PASTE FINAL + sole lock annotate"
+  },
+  "final_clean": {
+    "asset_id": "a715a7ee-80c3-4c57-8fe1-b1541a44fd3d",
+    "file_sha256": "6143f115901adabf451743352a56ded72c32c3c98e58945b84af996713af591d",
+    "role": "LOCK_PASTE FINAL clean"
+  },
+  "hd_elev_white": {
+    "asset_id": "688849c1-a8f3-4da8-a0a9-6a4a23176339",
+    "file_sha256": "2dd06fa0c1ea29f9cd47d189120697c0c4c570b012366f054b40aab7c7e608bb",
+    "role": "HD ELEV peep white bg"
+  },
+  "hd_elev_cut": {
+    "asset_id": "87479fb3-6c6f-4959-b6a4-0bac15399759",
+    "file_sha256": "4b20a913d1367a1d77862f3179171a3f0f95de84bff75b1acc4c6bd9db12bbb3",
+    "role": "HD ELEV cutout"
+  }
+}

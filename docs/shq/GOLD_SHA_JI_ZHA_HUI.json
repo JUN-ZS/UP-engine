@@ -1,0 +1,29 @@
+{
+  "SRC_full_yard": {
+    "asset_id": "b32bd2ef-fda9-45b2-9841-db2ad5f4d7ed",
+    "file_sha256": "372cf58e38e517c8f56532f2ab9892a55f35c0bc85c49ac81d9ccd99e640b927",
+    "role": "① SRC 全機 scrapyard"
+  },
+  "EXPLODE_8parts": {
+    "asset_id": "af20a0cb-1ed3-4fbb-97b0-df554cc508a3",
+    "file_sha256": "b95ce4814f44791a4c47f59da7ba01f54149012ce26a2c3e33842a8b3958b4c3",
+    "role": "② 爆炸教學 8 件",
+    "twin_asset_id": "359af77f-ffe6-4cd9-9f8a-d28cb100d9e0",
+    "twin_file_sha256": "f88bcdc04516909c8a5533da117a7e341a5f814f75ddfe78e07eedea63d910c2"
+  },
+  "BOARD_1_2_3": {
+    "asset_id": "a2289860-4ee6-4b1f-836b-2694f70610af",
+    "file_sha256": "0310558be7f331bc8fff9d0160ffdf37fc62d639ef5ce8724e9d8d9e9c01a295",
+    "role": "1 MAT structure-lock 8parts · 2 EXPLODE densify · 3 4corner hardpaste MATLOCK"
+  },
+  "TRIPTYCH_4_5_6": {
+    "asset_id": "4daf0007-3f51-4a62-9da5-b4f7359ea39c",
+    "file_sha256": "5697047aae86bab27202b27379f990bdaa4cdbce8783b5ccc35383b72f96d18a",
+    "role": "4 guided pose×FULL_MAT · 5 guided align MATLOCK · 6 structure fix hole"
+  },
+  "SRC_structure_hole": {
+    "asset_id": "166e7923-e561-496a-af12-68156f48d3db",
+    "file_sha256": "ac7631cab56f7f32ef39e651f54c97c43373c4976407c4dfcc71ffeec5aae63d",
+    "role": "structure fix hole 中間態（腰洞 peep）"
+  }
+}
