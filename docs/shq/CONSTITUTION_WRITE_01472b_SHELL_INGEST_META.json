@@ -1,0 +1,32 @@
+{
+  "write_id": "01472b",
+  "parent": "01472",
+  "action": "① PROJ shells 01464/01466 + ② ingest-gold",
+  "shells": [
+    "PROJ_SHQ_XIN_NV_V2_01464",
+    "PROJ_SHQ_WAI_LI_GROK_01466"
+  ],
+  "presets": [
+    "hyr",
+    "jzh",
+    "xnv2"
+  ],
+  "gold_resolved": true,
+  "run_gold": {
+    "hyr": {
+      "A_pass": 14,
+      "B": "PASS_B"
+    },
+    "jzh": {
+      "A_pass": 14,
+      "B": "PASS_B"
+    },
+    "xnv2": {
+      "A_pass": 14,
+      "B": "PASS_B",
+      "empty_mode": "true_diff_chu_tou"
+    }
+  },
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-10T00:45:00+08:00"
+}

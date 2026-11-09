@@ -1078,6 +1078,299 @@ def cmd_run_C(args: argparse.Namespace) -> int:
     return 0
 
 
+
+
+# ---------------------------------------------------------------------------
+# 8. Gold ingest (01439 換涯人 / 01441 機炸回 / 01464 新女畫V2)
+# ---------------------------------------------------------------------------
+
+IMAGINE_DIR = Path("/workspace/artifacts/imagine_images")
+SETS_DIR = Path("/workspace/artifacts/SETS")
+
+GOLD_PRESETS: Dict[str, Dict[str, Any]] = {
+    "hyr": {
+        "zh": "換涯人",
+        "write": "01439",
+        "stick": "STICK_HUAN_YA_REN",
+        "proj": "PROJ_SHQ_HUAN_YA_REN_01439",
+        "keep_key": "src_full",
+        "elev_key": "hd_elev_cut",
+        "final_key": "final_clean",
+        "empty_mode": "proxy_grabcut_telea",  # no true EMPTY asset in gold set
+        "parts": "person_3band",
+    },
+    "jzh": {
+        "zh": "機炸回",
+        "write": "01441",
+        "stick": "STICK_JI_ZHA_HUI",
+        "proj": "PROJ_SHQ_JI_ZHA_HUI_01441",
+        "keep_key": "SRC_full_yard",
+        "elev_key": None,
+        "final_key": "BOARD_1_2_3",
+        "empty_mode": "proxy_grabcut_telea",
+        "parts": "person_3band",
+    },
+    "xnv2": {
+        "zh": "新女畫V2",
+        "write": "01464",
+        "stick": "STICK_XIN_NV_V2",
+        "proj": "PROJ_SHQ_XIN_NV_V2_01464",
+        "keep_file": "L0.jpg",
+        "empty_file": "chu_tou.jpg",  # 外力除头 → hole via kou
+        "elev_file": "plate.jpg",
+        "empty_mode": "true_diff_chu_tou",  # Imagine 外力 · better than Telea
+        "parts": "head_focus",
+    },
+}
+
+
+def _resolve_resolved_dir(proj: str) -> Path:
+    return SETS_DIR / proj / "gold" / "resolved"
+
+
+def _load_any(folder: Path, stem: str) -> Optional[np.ndarray]:
+    for ext in (".png", ".jpg", ".jpeg", ".webp"):
+        p = folder / f"{stem}{ext}"
+        if p.exists():
+            return load_img(p)
+    return None
+
+
+def estimate_hole_grabcut(keep: np.ndarray) -> np.ndarray:
+    """Proxy hole when true EMPTY missing. Not true REMOVE proof."""
+    H, W = keep.shape[:2]
+    mask = np.zeros((H, W), np.uint8)
+    # center rect prior
+    x0, y0 = int(W * 0.25), int(H * 0.08)
+    x1, y1 = int(W * 0.75), int(H * 0.98)
+    rect = (x0, y0, max(1, x1 - x0), max(1, y1 - y0))
+    bgd = np.zeros((1, 65), np.float64)
+    fgd = np.zeros((1, 65), np.float64)
+    try:
+        cv2.grabCut(keep, mask, rect, bgd, fgd, 3, cv2.GC_INIT_WITH_RECT)
+        hole = np.where((mask == cv2.GC_FGD) | (mask == cv2.GC_PR_FGD), 255, 0).astype(np.uint8)
+    except Exception:
+        hole = np.zeros((H, W), np.uint8)
+        cv2.rectangle(hole, (x0, y0), (x1, y1), 255, -1)
+    # keep largest CC
+    n, lab, st, _ = cv2.connectedComponentsWithStats(hole, 8)
+    if n > 1:
+        i = 1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA]))
+        hole = np.where(lab == i, 255, 0).astype(np.uint8)
+    hole = cv2.morphologyEx(hole, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8), 2)
+    return hole
+
+
+def hole_from_kou(keep: np.ndarray, removed: np.ndarray, thr: int = 22) -> np.ndarray:
+    """Support(|keep-removed|) → hole. Prefer when true 外力 edit exists."""
+    if keep.shape != removed.shape:
+        removed = cv2.resize(removed, (keep.shape[1], keep.shape[0]), interpolation=cv2.INTER_LINEAR)
+    d = np.abs(keep.astype(np.int16) - removed.astype(np.int16)).max(axis=2)
+    hole = (d >= thr).astype(np.uint8) * 255
+    hole = cv2.morphologyEx(hole, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8), 2)
+    n, lab, st, _ = cv2.connectedComponentsWithStats(hole, 8)
+    if n > 1:
+        # keep up to 2 largest (head + debris) but prefer largest
+        areas = st[1:, cv2.CC_STAT_AREA]
+        i = 1 + int(np.argmax(areas))
+        hole = np.where(lab == i, 255, 0).astype(np.uint8)
+    return hole
+
+
+def empty_from_hole(keep: np.ndarray, hole: np.ndarray) -> np.ndarray:
+    return cv2.inpaint(keep, hole, 5, cv2.INPAINT_TELEA)
+
+
+def peeps_from_hole(
+    keep: np.ndarray,
+    hole: np.ndarray,
+    elev_img: Optional[np.ndarray],
+    mode: str,
+) -> List[Peep]:
+    H, W = keep.shape[:2]
+    ys, xs = np.where(hole > 0)
+    if len(xs) < 8:
+        raise RuntimeError("hole too small for peeps")
+    y0, y1 = int(ys.min()), int(ys.max()) + 1
+    x0, x1 = int(xs.min()), int(xs.max()) + 1
+    bh = max(1, y1 - y0)
+
+    if mode == "head_focus":
+        bands = [("head", 0.0, 0.45), ("torso", 0.35, 1.0)]
+    else:
+        bands = [("head", 0.0, 0.33), ("torso", 0.33, 0.66), ("leg", 0.66, 1.0)]
+
+    # build band masks then mutex top-wins
+    raw = {}
+    for role, a, b in bands:
+        m = np.zeros((H, W), np.uint8)
+        ya, yb = y0 + int(bh * a), y0 + int(bh * b)
+        band = np.zeros_like(hole)
+        band[ya:yb, :] = 255
+        m = cv2.bitwise_and(hole, band)
+        raw[role] = m
+    order = [r for r, _, _ in bands]
+    claimed = np.zeros((H, W), np.uint8)
+    peeps: List[Peep] = []
+    for role in order:
+        m = raw[role].copy()
+        m[claimed > 0] = 0
+        if m.sum() < 32:
+            continue
+        claimed = np.maximum(claimed, m)
+        ys2, xs2 = np.where(m > 0)
+        yy0, yy1 = int(ys2.min()), int(ys2.max()) + 1
+        xx0, xx1 = int(xs2.min()), int(xs2.max()) + 1
+        peep = keep[yy0:yy1, xx0:xx1].copy()
+        if elev_img is not None:
+            e = elev_img
+            if e.shape[:2] != keep.shape[:2]:
+                e = cv2.resize(e, (W, H), interpolation=cv2.INTER_LINEAR)
+            elev = e[yy0:yy1, xx0:xx1].copy()
+        else:
+            elev = cv2.detailEnhance(peep, sigma_s=8, sigma_r=0.15)
+        peeps.append(
+            Peep(
+                peep_id=f"S0_{role}",
+                part_role=role,
+                subject_id="S0",
+                mask=m,
+                peep_rgb=peep,
+                elev_rgb=elev,
+                bbox=(xx0, yy0, xx1, yy1),
+            )
+        )
+    return peeps
+
+
+def ingest_gold_preset(preset: str, scene_id: Optional[str] = None) -> SceneBundle:
+    if preset not in GOLD_PRESETS:
+        raise KeyError(f"unknown gold preset {preset}; have {list(GOLD_PRESETS)}")
+    cfg = GOLD_PRESETS[preset]
+    resolved = _resolve_resolved_dir(cfg["proj"])
+    if not resolved.exists():
+        raise FileNotFoundError(f"missing resolved gold: {resolved}")
+
+    meta_extra: Dict[str, Any] = {
+        "gold_preset": preset,
+        "write": cfg["write"],
+        "empty_mode": cfg["empty_mode"],
+        "proj": cfg["proj"],
+        "ACCEPT_FULL_HD": False,
+        "note": "ingest for harness A/B; proxy empty ≠ true REMOVE proof unless true_diff_*",
+    }
+
+    if preset == "xnv2":
+        keep = _load_any(resolved, "L0")
+        removed = _load_any(resolved, "chu_tou")
+        elev = _load_any(resolved, "plate")
+        if keep is None or removed is None:
+            raise FileNotFoundError("xnv2 needs L0 + chu_tou in gold/resolved")
+        # match size
+        if removed.shape[:2] != keep.shape[:2]:
+            removed = cv2.resize(removed, (keep.shape[1], keep.shape[0]), interpolation=cv2.INTER_LINEAR)
+        hole = hole_from_kou(keep, removed, thr=18)
+        # EMPTY: prefer chu_tou as base (head removed) then clear residual hole with light inpaint
+        empty = removed.copy()
+        residual = hole
+        empty = cv2.inpaint(empty, residual, 3, cv2.INPAINT_TELEA)
+        # but permission hole stays kou of L0 vs chu_tou
+        peeps = peeps_from_hole(keep, hole, elev, cfg["parts"])
+        meta_extra["empty_note"] = "chu_tou (外力除头) + light inpaint residual; better than pure Telea-from-KEEP"
+    else:
+        keep = _load_any(resolved, cfg["keep_key"])
+        if keep is None:
+            raise FileNotFoundError(f"keep {cfg['keep_key']} missing in {resolved}")
+        elev = _load_any(resolved, cfg["elev_key"]) if cfg.get("elev_key") else None
+        hole = estimate_hole_grabcut(keep)
+        empty = empty_from_hole(keep, hole)
+        peeps = peeps_from_hole(keep, hole, elev, cfg["parts"])
+        meta_extra["empty_note"] = "PROXY Telea from GrabCut hole — not true same-camera REMOVE"
+
+    sid = scene_id or f"GOLD_{preset}_{cfg['write']}"
+    sb = SceneBundle(
+        scene_id=sid,
+        stick_hint=cfg["stick"],
+        keep=keep,
+        empty=empty,
+        hole=hole,
+        peeps=peeps,
+        meta=meta_extra,
+    )
+    sb.assert_invariants()
+    return sb
+
+
+def cmd_list_gold(_: argparse.Namespace) -> int:
+    for k, v in GOLD_PRESETS.items():
+        resolved = _resolve_resolved_dir(v["proj"])
+        n = len(list(resolved.glob("*"))) if resolved.exists() else 0
+        print(f"{k:8s} {v['zh']:8s} write={v['write']} stick={v['stick']} resolved_files={n} empty_mode={v['empty_mode']}")
+    return 0
+
+
+def cmd_ingest_gold(args: argparse.Namespace) -> int:
+    sb = ingest_gold_preset(args.preset, args.scene_id)
+    out = Path(args.out)
+    sb.save(out)
+    # also dump quick contact
+    board = ensure_dir(out / "board")
+    save_img(board / "KEEP.png", sb.keep)
+    save_img(board / "EMPTY.png", sb.empty)
+    save_img(board / "HOLE.png", sb.hole)
+    # side-by-side thumb
+    def th(im, w=320):
+        h = int(im.shape[0] * w / im.shape[1])
+        return cv2.resize(im, (w, h))
+    k, e = th(sb.keep), th(sb.empty)
+    ho = th(cv2.cvtColor(sb.hole, cv2.COLOR_GRAY2BGR) if sb.hole.ndim == 2 else sb.hole)
+    # match heights
+    H = min(k.shape[0], e.shape[0], ho.shape[0])
+    strip = np.hstack([k[:H], e[:H], ho[:H]])
+    save_img(board / "KEEP_EMPTY_HOLE_STRIP.jpg", strip)
+    info = {
+        "ok": True,
+        "preset": args.preset,
+        "scene": str(out),
+        "stick": sb.stick_hint,
+        "n_peeps": len(sb.peeps),
+        "empty_mode": sb.meta.get("empty_mode"),
+        "empty_note": sb.meta.get("empty_note"),
+        "hole_frac": round(float((sb.hole > 0).mean()), 5),
+        "ACCEPT_FULL_HD": False,
+    }
+    print(json.dumps(info, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_run_gold(args: argparse.Namespace) -> int:
+    """ingest + A + B in one shot."""
+    out = Path(args.out)
+    ensure_dir(out)
+    sb = ingest_gold_preset(args.preset, args.scene_id)
+    scene_dir = ensure_dir(out / "scene")
+    sb.save(scene_dir)
+    rep_a = run_layer_A(sb, ensure_dir(out / "A"), base_mode=args.base)
+    rep_b = run_layer_B(sb, ensure_dir(out / "B"))
+    summary = {
+        "preset": args.preset,
+        "stick": sb.stick_hint,
+        "empty_mode": sb.meta.get("empty_mode"),
+        "n_peeps": len(sb.peeps),
+        "A_n_pass": rep_a["n_pass"],
+        "A_n_fail_ban": rep_a["n_fail_ban"],
+        "A_n_fail_outside": rep_a["n_fail_outside"],
+        "B_status": rep_b["status"],
+        "B_mutex": rep_b["mutex_ok"],
+        "B_order": rep_b["order_independent"],
+        "ACCEPT_FULL_HD": False,
+        "out": str(out),
+    }
+    (out / "SUMMARY.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     ap = argparse.ArgumentParser(description=f"SHQ Harness ABC {WRITE_ID}")
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -1104,6 +1397,23 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("--scene", required=True)
     p.add_argument("--out", required=True)
     p.set_defaults(func=cmd_run_B)
+
+    
+    sp.add_parser("list-gold", help="list gold ingest presets").set_defaults(func=cmd_list_gold)
+
+    p = sp.add_parser("ingest-gold", help="build SceneBundle from gold resolved assets")
+    p.add_argument("--preset", required=True, choices=list(GOLD_PRESETS.keys()) if False else ["hyr", "jzh", "xnv2"])
+    p.add_argument("--out", required=True)
+    p.add_argument("--scene-id", default=None)
+    p.set_defaults(func=cmd_ingest_gold)
+
+    p = sp.add_parser("run-gold", help="ingest-gold + run A + run B")
+    p.add_argument("--preset", required=True, choices=["hyr", "jzh", "xnv2"])
+    p.add_argument("--out", required=True)
+    p.add_argument("--scene-id", default=None)
+    p.add_argument("--base", default="empty", choices=["empty", "keep"])
+    p.set_defaults(func=cmd_run_gold)
+
 
     p = sp.add_parser("run-C")
     p.add_argument("--scenes", required=True, help="comma-separated scene dirs")

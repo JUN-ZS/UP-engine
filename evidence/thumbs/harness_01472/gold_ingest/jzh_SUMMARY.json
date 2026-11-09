@@ -1,0 +1,14 @@
+{
+  "preset": "jzh",
+  "stick": "STICK_JI_ZHA_HUI",
+  "empty_mode": "proxy_grabcut_telea",
+  "n_peeps": 3,
+  "A_n_pass": 14,
+  "A_n_fail_ban": 4,
+  "A_n_fail_outside": 0,
+  "B_status": "PASS_B",
+  "B_mutex": true,
+  "B_order": true,
+  "ACCEPT_FULL_HD": false,
+  "out": "SETS/PROJ_SHQ_KILL01433_HARNESS_ABC_01472/runs/gold_ingest/jzh"
+}

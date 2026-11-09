@@ -1,0 +1,17 @@
+{
+  "formal": "WAI_LI_GROK_IMAGINE_EDIT_V1",
+  "zh": "外力GROK",
+  "write_id": "01466",
+  "docs": [
+    "SHQ_WAI_LI_GROK.md",
+    "SHQ_WAI_LI_GROK_CALL.md",
+    "docs/GROK_IMAGINE_FUNCTION_CODES.md §22"
+  ],
+  "means": "Grok Imagine external EDIT only for 除/生/除背",
+  "tools": [
+    "imagine_image_to_image",
+    "imagine_reference_to_image",
+    "imagine_extract_subject",
+    "imagine_region_edit"
+  ]
+}
