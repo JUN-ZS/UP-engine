@@ -1,0 +1,87 @@
+{
+  "write_id": "01397",
+  "formal": "SHQ_4SKILL_CLAIM_DIGEST",
+  "asof": "2026-11-07T22:12:48.769869+00:00",
+  "claim_level": "C0_DOCTRINE_LOCKED",
+  "ACCEPT_FULL_HD": false,
+  "doctrine_paths": {
+    "md": "/root/.grok/server-skills/shengqing-huiwei/SHQ_4SKILL_CLAIM_DOCTRINE.md",
+    "json": "/root/.grok/server-skills/shengqing-huiwei/SHQ_4SKILL_CLAIM_DOCTRINE.json",
+    "levels": "/root/.grok/server-skills/shengqing-huiwei/SHQ_CLAIM_LEVELS.json"
+  },
+  "router_demo": [
+    {
+      "case": "pixels_low",
+      "selected_skill_id": "SKILL_A_NEURAL_SR_BASE_4X",
+      "registry_method_id": "SKILL_A_NEURAL_SR_BASE_4X",
+      "execution_status": "execute_authorized",
+      "diff_grants_edit_permission": false,
+      "allowed_claims": [
+        "path_a_when_adapter"
+      ],
+      "forbidden_non_claims": [
+        "lanczos_as_gen"
+      ],
+      "claim_level_max_without_S7": "C2_candidate",
+      "ACCEPT_FULL_HD": false
+    },
+    {
+      "case": "material_low",
+      "selected_skill_id": "DETAIL6_MATERIAL_RESIDUAL",
+      "registry_method_id": "DETAIL6_MATERIAL_RESIDUAL",
+      "execution_status": "execute_authorized",
+      "diff_grants_edit_permission": false,
+      "allowed_claims": [
+        "detail6_control"
+      ],
+      "forbidden_non_claims": [
+        "true_gen"
+      ],
+      "claim_level_max_without_S7": "C2_candidate",
+      "ACCEPT_FULL_HD": false
+    },
+    {
+      "case": "shape_wrong",
+      "selected_skill_id": "CANDIDATE_PLAN_ONLY",
+      "registry_method_id": null,
+      "execution_status": "review_required",
+      "diff_grants_edit_permission": false,
+      "allowed_claims": [
+        "enforces_fail_closed_s3_and_s4_preconditions"
+      ],
+      "forbidden_non_claims": [
+        "ai_self_authorizes_edit_permission"
+      ],
+      "claim_level_max_without_S7": "C0/C1",
+      "ACCEPT_FULL_HD": false
+    },
+    {
+      "case": "hf_noise",
+      "selected_skill_id": "SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+      "registry_method_id": "SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+      "execution_status": "execute_authorized",
+      "diff_grants_edit_permission": false,
+      "allowed_claims": [
+        "noise_attenuate"
+      ],
+      "forbidden_non_claims": [
+        "generative_detail"
+      ],
+      "claim_level_max_without_S7": "C2_candidate",
+      "ACCEPT_FULL_HD": false
+    }
+  ],
+  "forbidden": [
+    "INPAINT 同時負責 A+B+C+D",
+    "feather / soft-alpha 冒充邊界正確",
+    "Lanczos+unsharp 冒充 gen-level / Skill A",
+    "無 backend adapter log 宣稱 gen-level detail",
+    "DIFF mask 自動授予 edit_permission",
+    "coverage 高但 peep 幾乎全圖 → outside_diff 假 PASS",
+    "用 A 方案腳位結果簽 B 方案 ACCEPT（cross-model acceptance）",
+    "把 delivery 下採樣圖宣稱未修改原生 4×",
+    "外形錯仍跑 DETAIL 補救",
+    "邊界低清保護區（違反 01380）"
+  ],
+  "summary": "Digested A/B/C/D + claim ladder into skill constitution; INPAINT demoted; D invariant; ACCEPT only at C5."
+}

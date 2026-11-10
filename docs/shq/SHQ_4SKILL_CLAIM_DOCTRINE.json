@@ -1,0 +1,206 @@
+{
+  "write_id": "01397",
+  "formal": "SHQ_4SKILL_CLAIM_DOCTRINE_V1",
+  "asof": "2026-11-07T22:12:48.769869+00:00",
+  "source": [
+    "user message 四技能+獨立邊界保護",
+    "PR#12 docs/SHQ_AI_USAGE_GUIDE.md §4.3 §5",
+    "PR#12 SHQ_OBJECT_GEOMETRY_LOCK_PROGRAM_GUIDANCE.md",
+    "Rule 01380 (hole interior full elev; freeze geometry not resolution)"
+  ],
+  "axiom": {
+    "hole_role": "洞只界定「哪裡可以改」，不規定「用甚麼方法生成高清」",
+    "inpaint_demotion": "INPAINT 降為可選洞位修復；不得同時扮演 A/B/C/D",
+    "rule_01380": "凍結邊界幾何，不是邊界附近解析度；禁止 feather 冒充邊界正確",
+    "frequency_split": "RGB_final = L_base + M_material + H_detail; alpha_final = alpha_original_4x"
+  },
+  "skills": {
+    "A": {
+      "id": "SKILL_A_NEURAL_SR_BASE_4X",
+      "name": "Neural Super-Resolution",
+      "zh": "神經超分重建",
+      "owns": [
+        "pixel resolution uplift",
+        "low-frequency form preserve"
+      ],
+      "forbids": [
+        "new contour",
+        "alpha rewrite",
+        "pose rewrite",
+        "lanczos_as_generative"
+      ],
+      "backends": [
+        "SIAX4X_TILE_CORE_SR",
+        "other_learned_SR"
+      ],
+      "outputs": [
+        "L_base"
+      ],
+      "claim_when": "adapter log + size contract + L layer isolatable",
+      "non_claim": "material richness, micro-detail authorship, full ACCEPT"
+    },
+    "B": {
+      "id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+      "name": "Geometry-Locked Material Generation",
+      "zh": "幾何鎖定材質生成",
+      "owns": [
+        "metal/coat/wear RGB texture inside frozen alpha"
+      ],
+      "forbids": [
+        "alpha",
+        "silhouette",
+        "position",
+        "scale",
+        "freeframe whole object"
+      ],
+      "backends": [
+        "Imagine material RGB",
+        "GEOMETRY_LOCKED_MATERIAL_FILL"
+      ],
+      "outputs": [
+        "M_material"
+      ],
+      "claim_when": "alpha_xor=0 + material RGB only + geometry SHA match",
+      "non_claim": "shape invention, native generative geometry"
+    },
+    "C": {
+      "id": "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+      "name": "Multi-Scale Detail Synthesis",
+      "zh": "多尺度微細節生成",
+      "owns": [
+        "seams/screws/mesh/scratches residual or detail layer"
+      ],
+      "forbids": [
+        "redraw whole part",
+        "geometry fix",
+        "topology repair"
+      ],
+      "backends": [
+        "DETAIL6_MATERIAL_RESIDUAL",
+        "wavelet_laplacian_detail",
+        "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL"
+      ],
+      "outputs": [
+        "H_detail"
+      ],
+      "claim_when": "H layer isolatable + can ablate without moving geometry",
+      "non_claim": "shape correction, identity fix"
+    },
+    "D": {
+      "id": "SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD",
+      "name": "Immutable Geometry / Alpha Guard",
+      "zh": "不可變幾何／Alpha 保護",
+      "owns": [
+        "M_hole freeze",
+        "corners_4",
+        "outside bit-exact",
+        "alpha_xor=0"
+      ],
+      "forbids": [
+        "being skipped",
+        "soft alpha hide",
+        "feather as proof"
+      ],
+      "backends": [
+        "hardpaste peep-alpha",
+        "S7 outside_max_absdiff=0"
+      ],
+      "outputs": [
+        "alpha_final = alpha_original_4x"
+      ],
+      "claim_when": "D gates PASS independently of A/B/C quality",
+      "non_claim": "content quality (A/B/C)",
+      "invariant": true,
+      "applies_to": [
+        "A",
+        "B",
+        "C",
+        "INPAINT_OPTIONAL"
+      ]
+    },
+    "INPAINT_OPTIONAL": {
+      "id": "INPAINT_HOLE_REPAIR_OPTIONAL",
+      "name": "Optional hole repair",
+      "zh": "可選洞位修復（非主升清）",
+      "owns": [
+        "missing occlusion fill only"
+      ],
+      "forbids": [
+        "being the sole HD content path",
+        "posing as SR/Material/Detail"
+      ],
+      "claim_when": "explicit optional repair receipt",
+      "non_claim": "main elev chain, gen-level detail"
+    }
+  },
+  "pipeline_S": {
+    "S0": "EDIT 四向 生/除/扣/洞 → M_hole + SHA freeze",
+    "S1": "Geometry Lock → fixed 4× coords; alpha/contour/pose/joints locked",
+    "S2": "Skill A Neural SR → L_base",
+    "S3": "Skill B Material Gen → M_material (RGB only)",
+    "S4": "Skill C Detail Synthesis → H_detail",
+    "S5": "Skill D composite: alpha hard-limit; only hole RGB updated",
+    "S6": "Reverse QA / fail-closed rollback to failing layer",
+    "S7": "Independent ACCEPT (disk re-read); only then claim escalation"
+  },
+  "state_router": [
+    {
+      "state": "shape_clear_pixels_low",
+      "prefer": [
+        "A",
+        "B"
+      ],
+      "block": []
+    },
+    {
+      "state": "material_blurry_texture_lacking",
+      "prefer": [
+        "B",
+        "C"
+      ],
+      "block": []
+    },
+    {
+      "state": "mesh_cracks_seams_missing",
+      "prefer": [
+        "C2_STRUCTURAL",
+        "C"
+      ],
+      "block": []
+    },
+    {
+      "state": "outer_shape_wrong",
+      "prefer": [
+        "OTL0_EDIT_FOUR_ANTI"
+      ],
+      "block": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "state": "hf_noise_excessive",
+      "prefer": [
+        "C3_ATTENUATE"
+      ],
+      "block": [
+        "geometry_change"
+      ]
+    }
+  ],
+  "frequency_equation": "RGB_final = L_base + M_material + H_detail ; alpha_final = alpha_original_4x",
+  "ablation_required_for_claim": [
+    "L_only",
+    "L+M",
+    "L+M+H"
+  ],
+  "what_may_change": {
+    "alpha_outer": false,
+    "pose_scale": false,
+    "outside_pixels": false,
+    "inside_lowfreq_form": "structure_constrained",
+    "inside_material_rgb": true,
+    "inside_hf_detail": true
+  }
+}

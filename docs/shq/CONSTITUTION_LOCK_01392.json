@@ -1,0 +1,14 @@
+{
+  "write_id": "01392",
+  "formal": "SHQ_AGENT_DRIVER_V0_1",
+  "registry_schema": "ige-method-registry/0.1",
+  "n_methods": 21,
+  "files": [
+    "method_registry.json",
+    "validate_registry.py",
+    "shq_agent_driver.py",
+    "SHQ_AGENT_DRIVER_GUIDE.md"
+  ],
+  "ACCEPT_FULL_HD": false,
+  "wired_to_src_ige": false
+}

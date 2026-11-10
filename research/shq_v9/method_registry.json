@@ -1,0 +1,841 @@
+{
+  "registry_schema": "ige-method-registry/0.1",
+  "registry_id": "SHQ_METHOD_REGISTRY_V1",
+  "registry_version": "0.1.0-01392+claim-01397",
+  "policy": "fail_closed",
+  "edit_permission_default": false,
+  "write_id": "01392",
+  "asof": "2026-11-07T20:53:16.352021+00:00",
+  "source": "PR12 contract + skill callables + agent driver",
+  "paths": {
+    "PATH_A": "SIAX4X_TILE_CORE_SR / SKILL_A_NEURAL_SR_BASE_4X",
+    "PATH_B": "FLUX_HR_TILE_IMG2IMG",
+    "PATH_C": "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+    "GUARD": "SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD (invariant on A/B/C)"
+  },
+  "methods": [
+    {
+      "method_id": "S0_BASE_FREEZE",
+      "version": "0.1.0",
+      "stage": [
+        "S0"
+      ],
+      "capability": "freeze_src_sha",
+      "implementation_status": "partial_non_generative_in_pr5",
+      "entrypoint": "shq_agent_driver:s0_freeze",
+      "preconditions": [
+        "src_path_exists"
+      ],
+      "inputs": [
+        "src"
+      ],
+      "outputs": [
+        "sha256",
+        "size"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-24",
+        "E-39"
+      ],
+      "test_ids": [
+        "T_SHA_REREAD"
+      ],
+      "acceptance": "reread SHA must match frozen bytes",
+      "allowed_claims": [
+        "s0_freeze_receipt"
+      ],
+      "forbidden_non_claims": [
+        "accept_full_hd",
+        "generative_upscale"
+      ]
+    },
+    {
+      "method_id": "S1_OBJECT_READ_DIFF_CANDIDATE",
+      "version": "0.1.0",
+      "stage": [
+        "S1"
+      ],
+      "capability": "candidate_mask_from_empty_diff",
+      "implementation_status": "research_only_non_generative",
+      "entrypoint": "shq_agent_driver:s1_diff_read",
+      "preconditions": [
+        "s0_done",
+        "empty_same_size"
+      ],
+      "inputs": [
+        "src",
+        "empty"
+      ],
+      "outputs": [
+        "masks",
+        "heat"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-08"
+      ],
+      "test_ids": [
+        "T_DIFF_CANDIDATE"
+      ],
+      "acceptance": "masks are candidates only; edit_permission remains false",
+      "allowed_claims": [
+        "diff_candidate_mask"
+      ],
+      "forbidden_non_claims": [
+        "human_verified_identity",
+        "edit_permission"
+      ]
+    },
+    {
+      "method_id": "S2_GEOMETRY_LOCK_PEEP",
+      "version": "0.1.0",
+      "stage": [
+        "S2"
+      ],
+      "capability": "corners4_peep_alpha",
+      "implementation_status": "partial_non_generative_in_pr5",
+      "entrypoint": "shq_agent_driver:s2_geometry_lock",
+      "preconditions": [
+        "s1_candidates"
+      ],
+      "inputs": [
+        "masks"
+      ],
+      "outputs": [
+        "peep",
+        "corners_4",
+        "geo_rgba"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-66",
+        "E-67"
+      ],
+      "test_ids": [
+        "T_CORNERS4"
+      ],
+      "acceptance": "elev_remap must stay false; corners frozen",
+      "allowed_claims": [
+        "geometry_lock_partial"
+      ],
+      "forbidden_non_claims": [
+        "5d_calibrated_3d"
+      ]
+    },
+    {
+      "method_id": "HOLE_FOUR_ANTI_EVIDENCE",
+      "version": "0.1.0",
+      "stage": [
+        "S1",
+        "S4"
+      ],
+      "capability": "four_state_anti_diff_evidence",
+      "implementation_status": "research_only_fixed_debug_scaffold_not_production_wired",
+      "entrypoint": "shq_edit_hole_four_anti_debug:anti_diff",
+      "preconditions": [
+        "paired_keep_remove"
+      ],
+      "inputs": [
+        "keep",
+        "remove"
+      ],
+      "outputs": [
+        "M_hole",
+        "heat"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-100",
+        "E-107"
+      ],
+      "test_ids": [
+        "T_ANTI_DIFF"
+      ],
+      "acceptance": "DIFF≠permission; silhouette not bbox",
+      "allowed_claims": [
+        "four_anti_evidence"
+      ],
+      "forbidden_non_claims": [
+        "production_permission",
+        "freeframe_donor"
+      ]
+    },
+    {
+      "method_id": "HOLE_SCALELOCK_HF_RESIDUAL",
+      "version": "0.1.0",
+      "stage": [
+        "S5",
+        "S6"
+      ],
+      "capability": "scale_lock_hf_in_peep",
+      "implementation_status": "research_only_non_generative",
+      "entrypoint": "shq_edit_hole_four_anti_debug:scale_lock_map",
+      "preconditions": [
+        "peep_locked",
+        "alpha"
+      ],
+      "inputs": [
+        "peep",
+        "densify",
+        "alpha"
+      ],
+      "outputs": [
+        "elev_rgb"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-105",
+        "E-106"
+      ],
+      "test_ids": [
+        "T_SIZE_GROW",
+        "T_HARDPASTE"
+      ],
+      "acceptance": "peep owns scale; densify mapped; outside hole max_diff=0",
+      "allowed_claims": [
+        "hf_scalelock_control"
+      ],
+      "forbidden_non_claims": [
+        "true_diffusion",
+        "8k_master"
+      ]
+    },
+    {
+      "method_id": "SKILL_D_IMMUTABLE_ALPHA_GEOMETRY_GUARD",
+      "version": "0.1.0",
+      "stage": [
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "alpha_xor0_hardpaste",
+      "implementation_status": "partial_non_generative_in_pr5",
+      "entrypoint": "shq_agent_driver:skill_d_guard",
+      "preconditions": [
+        "locked_alpha"
+      ],
+      "inputs": [
+        "src",
+        "hd",
+        "m_hole"
+      ],
+      "outputs": [
+        "return",
+        "leak"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-63",
+        "E-64"
+      ],
+      "test_ids": [
+        "T_ALPHA_XOR",
+        "T_OUTSIDE_DIFF0"
+      ],
+      "acceptance": "alpha xor=0; outside bit-exact; elev_remap=false",
+      "allowed_claims": [
+        "geometry_guard"
+      ],
+      "forbidden_non_claims": [
+        "soft_alpha_fix",
+        "halo_double_write"
+      ],
+      "claim_block": {
+        "skill_family": "D",
+        "frequency_layer": "alpha_guard",
+        "allowed_claims": [
+          "alpha_xor_0",
+          "outside_bitexact",
+          "elev_remap_false"
+        ],
+        "forbidden_non_claims": [
+          "content_quality_from_D_alone"
+        ],
+        "requires_skill_d": true,
+        "invariant": true
+      },
+      "claim_doctrine_write_id": "01397"
+    },
+    {
+      "method_id": "SKILL_A_NEURAL_SR_BASE_4X",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "neural_sr_siax4x",
+      "implementation_status": "workflow_candidate_not_live_verified",
+      "entrypoint": "shq_agent_driver:path_a_siax_stub",
+      "preconditions": [
+        "geometry_locked",
+        "backend_siax_available"
+      ],
+      "inputs": [
+        "tile_core"
+      ],
+      "outputs": [
+        "tile_hr",
+        "backend_log"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-04"
+      ],
+      "test_ids": [
+        "T_SIAX_ADAPTER"
+      ],
+      "acceptance": "requires real Siax/NCNN adapter log",
+      "allowed_claims": [
+        "path_a_when_adapter"
+      ],
+      "forbidden_non_claims": [
+        "lanczos_as_gen"
+      ],
+      "claim_block": {
+        "skill_family": "A",
+        "frequency_layer": "L_base",
+        "allowed_claims": [
+          "neural_sr_L_base_with_adapter",
+          "resolution_uplift_under_D"
+        ],
+        "forbidden_non_claims": [
+          "lanczos_as_gen",
+          "material_authorship",
+          "ACCEPT_FULL_HD_alone"
+        ],
+        "requires_skill_d": true
+      },
+      "claim_doctrine_write_id": "01397"
+    },
+    {
+      "method_id": "SKILL_B_GEOMETRY_LOCKED_MATERIAL_GEN",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "geometry_locked_material",
+      "implementation_status": "implemented_optional_runtime_in_pr5_inference_not_run_by_pr_ci",
+      "entrypoint": "shq_material_fill:material_fill_or_scalelock",
+      "preconditions": [
+        "geo_rgba",
+        "ai_rgb"
+      ],
+      "inputs": [
+        "geo_rgba",
+        "ai_rgb"
+      ],
+      "outputs": [
+        "filled_rgba",
+        "xor0"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-02"
+      ],
+      "test_ids": [
+        "T_MATFILL_XOR0"
+      ],
+      "acceptance": "AI RGB only inside frozen alpha",
+      "allowed_claims": [
+        "material_fill_diag"
+      ],
+      "forbidden_non_claims": [
+        "size_from_ai",
+        "contour_from_ai"
+      ],
+      "claim_block": {
+        "skill_family": "B",
+        "frequency_layer": "M_material",
+        "allowed_claims": [
+          "material_rgb_under_frozen_alpha",
+          "alpha_xor_0"
+        ],
+        "forbidden_non_claims": [
+          "alpha_or_silhouette_from_AI",
+          "freeframe_geometry"
+        ],
+        "requires_skill_d": true
+      },
+      "claim_doctrine_write_id": "01397"
+    },
+    {
+      "method_id": "SKILL_C_MULTISCALE_DETAIL_SYNTHESIS",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "multiscale_detail",
+      "implementation_status": "research_only_fixed_debug_scaffold_not_production_wired",
+      "entrypoint": "shq_agent_driver:skill_c_detail_stub",
+      "preconditions": [
+        "material_layer"
+      ],
+      "inputs": [
+        "rgb"
+      ],
+      "outputs": [
+        "detail_layer"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-06"
+      ],
+      "test_ids": [
+        "T_DETAIL_NOT_SOBEL_ONLY"
+      ],
+      "acceptance": "forbid sobel-gain-only pass",
+      "allowed_claims": [
+        "detail_research"
+      ],
+      "forbidden_non_claims": [
+        "detail_gain_as_quality"
+      ],
+      "claim_block": {
+        "skill_family": "C",
+        "frequency_layer": "H_detail",
+        "allowed_claims": [
+          "detail_residual_layer",
+          "ablation_H_independent"
+        ],
+        "forbidden_non_claims": [
+          "topology_repair_via_detail",
+          "whole_part_redraw"
+        ],
+        "requires_skill_d": true
+      },
+      "claim_doctrine_write_id": "01397"
+    },
+    {
+      "method_id": "SKILL_C2_NORMAL_DEPTH_STRUCTURAL_DETAIL",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "structural_seams",
+      "implementation_status": "research_only_fixed_debug_scaffold_not_production_wired",
+      "entrypoint": "shq_agent_driver:skill_c2_stub",
+      "preconditions": [
+        "seams_missing"
+      ],
+      "inputs": [
+        "rgb",
+        "mask"
+      ],
+      "outputs": [
+        "struct_layer"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-06"
+      ],
+      "test_ids": [
+        "T_STRUCT"
+      ],
+      "acceptance": "research only",
+      "allowed_claims": [
+        "struct_diag"
+      ],
+      "forbidden_non_claims": [
+        "calibrated_depth"
+      ]
+    },
+    {
+      "method_id": "SKILL_C3_ATTENUATE_HF_DETAIL_LAYER",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "attenuate_noise",
+      "implementation_status": "research_only_non_generative",
+      "entrypoint": "shq_agent_driver:skill_c3_attenuate",
+      "preconditions": [
+        "surface_noise_excessive"
+      ],
+      "inputs": [
+        "rgb"
+      ],
+      "outputs": [
+        "rgb_smooth"
+      ],
+      "edit_permission": false,
+      "failure_codes": [],
+      "test_ids": [
+        "T_ATTENUATE"
+      ],
+      "acceptance": "non-generative smooth",
+      "allowed_claims": [
+        "noise_attenuate"
+      ],
+      "forbidden_non_claims": [
+        "generative_detail"
+      ]
+    },
+    {
+      "method_id": "OTL0_TOPOLOGY_REPAIR",
+      "version": "0.1.0",
+      "stage": [
+        "S1",
+        "S4"
+      ],
+      "capability": "topology_repair",
+      "implementation_status": "research_only_fixed_debug_scaffold_not_production_wired",
+      "entrypoint": "shq_agent_driver:otl0_block_detail",
+      "preconditions": [
+        "topology_error"
+      ],
+      "inputs": [
+        "state"
+      ],
+      "outputs": [
+        "blocked_methods"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-91"
+      ],
+      "test_ids": [
+        "T_TOPOLOGY_BLOCK"
+      ],
+      "acceptance": "blocks DETAIL/SIAX/FLUX until fixed",
+      "allowed_claims": [
+        "topology_block"
+      ],
+      "forbidden_non_claims": [
+        "detail_while_broken"
+      ]
+    },
+    {
+      "method_id": "PATH1E_IDENTITY_ECC_LOCK",
+      "version": "0.1.0",
+      "stage": [
+        "S3",
+        "S4"
+      ],
+      "capability": "identity_lock",
+      "implementation_status": "research_only_fixed_debug_scaffold_not_production_wired",
+      "entrypoint": "shq_agent_driver:identity_block",
+      "preconditions": [
+        "identity_drift"
+      ],
+      "inputs": [
+        "state"
+      ],
+      "outputs": [
+        "blocked"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-08"
+      ],
+      "test_ids": [
+        "T_IDENTITY"
+      ],
+      "acceptance": "unknown identity => block detail identity claims",
+      "allowed_claims": [
+        "identity_gate"
+      ],
+      "forbidden_non_claims": [
+        "identity_verified_without_ref"
+      ]
+    },
+    {
+      "method_id": "INPAINT_HOLE_REPAIR_OPTIONAL",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "optional_hole_inpaint",
+      "implementation_status": "research_only_fixed_debug_scaffold_not_production_wired",
+      "entrypoint": "shq_agent_driver:inpaint_optional_stub",
+      "preconditions": [
+        "missing_occlusion"
+      ],
+      "inputs": [
+        "hole"
+      ],
+      "outputs": [
+        "filled"
+      ],
+      "edit_permission": false,
+      "failure_codes": [],
+      "test_ids": [
+        "T_INPAINT_OPT"
+      ],
+      "acceptance": "optional only",
+      "allowed_claims": [
+        "optional_inpaint"
+      ],
+      "forbidden_non_claims": [
+        "required_for_accept"
+      ],
+      "claim_block": {
+        "skill_family": "INPAINT_OPTIONAL",
+        "frequency_layer": "optional_repair",
+        "allowed_claims": [
+          "optional_occlusion_fill"
+        ],
+        "forbidden_non_claims": [
+          "main_elev_chain",
+          "playing_A_B_C_D"
+        ],
+        "requires_skill_d": true
+      },
+      "claim_doctrine_write_id": "01397"
+    },
+    {
+      "method_id": "SIAX4X_TILE_CORE_SR",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "siax_tile_core",
+      "implementation_status": "workflow_candidate_not_live_verified",
+      "entrypoint": "shq_agent_driver:path_a_siax_stub",
+      "preconditions": [
+        "backend_siax"
+      ],
+      "inputs": [
+        "tile"
+      ],
+      "outputs": [
+        "hr",
+        "log"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-04"
+      ],
+      "test_ids": [
+        "T_SIAX"
+      ],
+      "acceptance": "real adapter required",
+      "allowed_claims": [
+        "path_a"
+      ],
+      "forbidden_non_claims": [
+        "lanczos_residual_as_siax"
+      ]
+    },
+    {
+      "method_id": "FLUX_HR_TILE_IMG2IMG",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "flux_hr_tile",
+      "implementation_status": "workflow_candidate_not_live_verified",
+      "entrypoint": "shq_agent_driver:path_b_flux_stub",
+      "preconditions": [
+        "backend_flux",
+        "geometry_locked"
+      ],
+      "inputs": [
+        "tile",
+        "mask"
+      ],
+      "outputs": [
+        "gen",
+        "log"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-02",
+        "E-CLAIM-05"
+      ],
+      "test_ids": [
+        "T_FLUX"
+      ],
+      "acceptance": "destination tile diffusion only with adapter",
+      "allowed_claims": [
+        "path_b_when_adapter"
+      ],
+      "forbidden_non_claims": [
+        "donor_as_flux"
+      ]
+    },
+    {
+      "method_id": "ALL24_AI_DONOR_MULTIBAND_TRANSFER",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "donor_multiband",
+      "implementation_status": "research_only_external_donor_transfer_not_destination_tile_diffusion",
+      "entrypoint": "shq_agent_driver:path_c_donor",
+      "preconditions": [
+        "external_donor"
+      ],
+      "inputs": [
+        "donor",
+        "mask"
+      ],
+      "outputs": [
+        "xfer"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-05"
+      ],
+      "test_ids": [
+        "T_DONOR"
+      ],
+      "acceptance": "Route C only; not 8K tile gen",
+      "allowed_claims": [
+        "path_c_donor"
+      ],
+      "forbidden_non_claims": [
+        "8k_native_diffusion"
+      ]
+    },
+    {
+      "method_id": "DETAIL6_MATERIAL_RESIDUAL",
+      "version": "0.1.0",
+      "stage": [
+        "S5"
+      ],
+      "capability": "detail6_residual",
+      "implementation_status": "research_only_non_generative",
+      "entrypoint": "shq_agent_driver:detail6_stub",
+      "preconditions": [
+        "master_4x",
+        "material_mask"
+      ],
+      "inputs": [
+        "rgb"
+      ],
+      "outputs": [
+        "residual"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-06"
+      ],
+      "test_ids": [
+        "T_DETAIL6"
+      ],
+      "acceptance": "non-generative residual control",
+      "allowed_claims": [
+        "detail6_control"
+      ],
+      "forbidden_non_claims": [
+        "true_gen"
+      ]
+    },
+    {
+      "method_id": "GEOMETRY_LOCKED_TILE_PLAN_RETURN",
+      "version": "0.1.0",
+      "stage": [
+        "S4",
+        "S6"
+      ],
+      "capability": "tile_core_halo_plan",
+      "implementation_status": "implemented_experimental_in_pr11_not_live_comfy_verified",
+      "entrypoint": "shq_agent_driver:tile_plan_return",
+      "preconditions": [
+        "geometry_locked"
+      ],
+      "inputs": [
+        "hr_masks"
+      ],
+      "outputs": [
+        "tiles"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-63"
+      ],
+      "test_ids": [
+        "T_CORE_ONLY"
+      ],
+      "acceptance": "halo never double-write",
+      "allowed_claims": [
+        "tile_plan"
+      ],
+      "forbidden_non_claims": [
+        "halo_as_core"
+      ]
+    },
+    {
+      "method_id": "S7_INDEPENDENT_ACCEPT",
+      "version": "0.1.0",
+      "stage": [
+        "S7"
+      ],
+      "capability": "independent_s7_audit",
+      "implementation_status": "partial_non_generative_in_pr5",
+      "entrypoint": "shq_agent_driver:s7_accept",
+      "preconditions": [
+        "return_written"
+      ],
+      "inputs": [
+        "master",
+        "contracts"
+      ],
+      "outputs": [
+        "S7_AUDIT"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-01",
+        "E-38"
+      ],
+      "test_ids": [
+        "T_S7_REREAD"
+      ],
+      "acceptance": "fail-closed; claim_level required; empty {} FAIL",
+      "allowed_claims": [
+        "s7_diag_chain"
+      ],
+      "forbidden_non_claims": [
+        "accept_full_hd_without_c5"
+      ]
+    },
+    {
+      "method_id": "AGENT_DRIVER_FULL_CHAIN",
+      "version": "0.1.0",
+      "stage": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "capability": "orchestrate_s0_s7",
+      "implementation_status": "partial_non_generative_in_pr5",
+      "entrypoint": "shq_agent_driver:run_full",
+      "preconditions": [
+        "src"
+      ],
+      "inputs": [
+        "manifest"
+      ],
+      "outputs": [
+        "receipts",
+        "report"
+      ],
+      "edit_permission": false,
+      "failure_codes": [
+        "E-CLAIM-07"
+      ],
+      "test_ids": [
+        "T_DRIVER_SELFTEST"
+      ],
+      "acceptance": "driver resolves registry entrypoints; fails closed on missing callable",
+      "allowed_claims": [
+        "driver_diag"
+      ],
+      "forbidden_non_claims": [
+        "production_autonomy_complete"
+      ]
+    }
+  ],
+  "wired_to_src_ige": false,
+  "ACCEPT_FULL_HD": false,
+  "claim_doctrine": "SHQ_4SKILL_CLAIM_DOCTRINE.md",
+  "claim_levels": "SHQ_CLAIM_LEVELS.json",
+  "inpaint_role": "OPTIONAL_ONLY_NOT_MAIN_CHAIN",
+  "skill_d_invariant": true
+}
