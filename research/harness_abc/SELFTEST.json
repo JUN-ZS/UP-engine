@@ -1,0 +1,62 @@
+{
+  "selftest": "PASS",
+  "write_id": "01472",
+  "formal": "SHQ_KILL01433_HARNESS_ABC_V1",
+  "ACCEPT_FULL_HD": false,
+  "results": {
+    "S_cliff": {
+      "preset": "synth_cliff",
+      "stick": "STICK_HUAN_YA_REN",
+      "n_peeps": 3,
+      "A_pass": 14,
+      "B": "PASS_B",
+      "mutex": true,
+      "order_ind": true
+    },
+    "S_mecha": {
+      "preset": "synth_dual_mecha",
+      "stick": "STICK_WAI_LI_FAN_V2",
+      "n_peeps": 6,
+      "A_pass": 14,
+      "B": "PASS_B",
+      "mutex": true,
+      "order_ind": true
+    },
+    "S_3subj": {
+      "preset": "synth_3subj",
+      "stick": "STICK_HUI_CHE_DA_PAO",
+      "n_peeps": 9,
+      "A_pass": 14,
+      "B": "PASS_B",
+      "mutex": true,
+      "order_ind": true
+    }
+  },
+  "C": [
+    {
+      "scene_id": "S_cliff",
+      "stick_hint": "STICK_HUAN_YA_REN",
+      "A_n_pass": 14,
+      "A_n_fail_outside": 0,
+      "A_n_fail_ban": 4,
+      "B_status": "PASS_B"
+    },
+    {
+      "scene_id": "S_mecha",
+      "stick_hint": "STICK_WAI_LI_FAN_V2",
+      "A_n_pass": 14,
+      "A_n_fail_outside": 0,
+      "A_n_fail_ban": 4,
+      "B_status": "PASS_B"
+    },
+    {
+      "scene_id": "S_3subj",
+      "stick_hint": "STICK_HUI_CHE_DA_PAO",
+      "A_n_pass": 14,
+      "A_n_fail_outside": 0,
+      "A_n_fail_ban": 4,
+      "B_status": "PASS_B"
+    }
+  ],
+  "kill_01433": "INVALID_AS_METHOD_RANKING_AND_GEOMETRY_ACCEPTANCE"
+}

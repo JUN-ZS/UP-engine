@@ -1,0 +1,30 @@
+{
+  "write_id": "01466",
+  "formal": "WAI_LI_GROK_IMAGINE_EDIT_V1",
+  "canonical_name_zh": "外力GROK",
+  "STICK": "STICK_WAI_LI_GROK",
+  "definition": "Grok Imagine external EDIT functions per docs/GROK_IMAGINE_FUNCTION_CODES.md",
+  "section": "§22",
+  "invariants": [
+    "除/生/除背 must use Imagine tools",
+    "no OpenCV fake 除/生",
+    "no self-peep as CLIP",
+    "asset_id required per 外力 step",
+    "kou/hardpaste allowed only as 扣/回 contract"
+  ],
+  "consumers": [
+    "外力反 V1-V3",
+    "新女畫 V2",
+    "真四態 CLIP"
+  ],
+  "E_codes": [
+    "E-WLG-01",
+    "E-WLG-02",
+    "E-WLG-03",
+    "E-WLG-04",
+    "E-WLG-05",
+    "E-WLG-06"
+  ],
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-09T05:52:39.405563+00:00"
+}

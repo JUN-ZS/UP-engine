@@ -1,0 +1,30 @@
+{
+  "write_id": "01472",
+  "kills": "01433",
+  "formal_killed": "SHQ_RESET_EACH_RETURN_UNIQUE_SRC_01433",
+  "verdict": "INVALID_AS_METHOD_RANKING_AND_GEOMETRY_ACCEPTANCE",
+  "may_keep_as": "sample_policy_only: do not reuse same L0 subjects across methods (OK as sample hygiene)",
+  "must_not_cite_for": [
+    "22-method ranking",
+    "PASS_C2 geometry success",
+    "18-part completion",
+    "true REMOVE proof",
+    "native HD proof",
+    "ACCEPT_FULL_HD"
+  ],
+  "faults": [
+    "unique-src confounds method × scene × shape × mask × donor",
+    "band peeps overlap + sequential overwrite",
+    "at most 9 band peeps ≠ 18 semantic parts",
+    "Telea EMPTY ≠ true same-camera REMOVE",
+    "name ≠ code (R01/R02/R08/R21/R22 collapse; fake NEURAL/GUIDED)",
+    "outside uses method-grown union (permission self-expansion)",
+    "dens→resize-back + donor HF ≠ native densify",
+    "JPEG Q90 + whole-image NCC distorts report"
+  ],
+  "fix_first": [
+    "mutex peep ownership",
+    "frozen M_hole permission gate",
+    "true method independence (merge aliases)"
+  ]
+}

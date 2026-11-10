@@ -1,0 +1,16 @@
+{
+  "write_id": "01464",
+  "STICK": "STICK_XIN_NV_V2",
+  "canonical_name_zh": "\u65b0\u5973\u756bV2",
+  "a8b": "a8b78fe5-2654-4f6f-84e3-c1dfbee61004",
+  "verify_01463_FIX": {
+    "L0": "adc54e71-253c-4f81-b612-3ee22046f751",
+    "chu_bei": "e612344e-d360-4be6-be6e-26b37e9fd963",
+    "chu_tou": "54fbd7f8-0794-4e78-bdc0-34b67f205157",
+    "CLIP_vis": "b976c10b-7b54-4b31-8f08-e8256c074a80",
+    "plate": "a8a947f2-279c-45ae-8395-2872cf31ab34",
+    "R": "84b99e84-bf79-4578-a16e-a41dff032ec0",
+    "E_selfpeep": "b760ee50-2f31-4110-9a3a-350002796608",
+    "story": "51496473-50e2-4619-b9f8-262fc6745f60"
+  }
+}

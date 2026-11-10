@@ -1,0 +1,26 @@
+id                                       family       impl           distinct banned alias
+R01_HARDPASTE_ALPHA                      hardpaste    hardpaste      True    False  
+R02_HARDPASTE_ON_EMPTY                   hardpaste    hardpaste      False   False  R01_HARDPASTE_ALPHA
+R03_SOFT_FEATHER_2                       feather      feather2       True    False  
+R04_SOFT_FEATHER_5                       feather      feather5       True    False  
+R05_MULTIBAND_PYRAMID                    multiband    multiband      True    True   
+R06_ALPHA_ERODE1                         morph        erode1         True    False  
+R07_ALPHA_DILATE1                        morph        dilate1        True    False  
+R08_CORNERS4_CLIP                        hardpaste    hardpaste      False   False  R01_HARDPASTE_ALPHA
+R09_FULL_ROI_BLOAT                       bloat        bloat_roi      True    True   
+R10_EDGE_PRESERVE                        filter       edge_preserve  True    False  
+R11_ALPHA_GAUSS                          feather      gauss3         True    True   
+R12_HF_RESIDUAL                          hf           hf_only        True    False  
+R13_COPY_PEEP_NO_ELEV                    copy         copy_peep      True    False  
+R14_DENS_U_NO_MS                         dens         dens_u         True    False  
+R15_POISSON_APPROX                       poisson      poisson_approx True    True   
+R16_MAX_BLEND                            blend        max_blend      True    False  
+R17_MIN_BLEND                            blend        min_blend      True    False  
+R18_SCREEN_BLEND                         blend        screen         True    False  
+R19_OVERLAY_BLEND                        blend        overlay        True    False  
+R20_SOBEL_WEIGHT                         edge         sobel_w        True    False  
+R21_DOUBLE_HARDPASTE                     hardpaste    hardpaste      False   False  R01_HARDPASTE_ALPHA
+R22_ZERO_FEATHER                         hardpaste    hardpaste      False   False  R01_HARDPASTE_ALPHA
+
+Distinct runnable (not banned): 14
+01433 claimed 22; honest distinct families here: 14

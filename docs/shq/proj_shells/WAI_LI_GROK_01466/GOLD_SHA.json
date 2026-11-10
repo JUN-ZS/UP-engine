@@ -1,0 +1,25 @@
+{
+  "write_id": "01466",
+  "STICK": "STICK_WAI_LI_GROK",
+  "note": "外力GROK is Imagine EDIT contract; gold is process assets from consumers (新女畫V2 / 外力反), not a single poster",
+  "tools": [
+    "imagine_image_to_image",
+    "imagine_reference_to_image",
+    "imagine_extract_subject",
+    "imagine_region_edit"
+  ],
+  "example_consumer_assets": {
+    "from_XIN_NV_V2_verify_01463": {
+      "L0": "adc54e71-253c-4f81-b612-3ee22046f751",
+      "chu_bei": "e612344e-d360-4be6-be6e-26b37e9fd963",
+      "chu_tou": "54fbd7f8-0794-4e78-bdc0-34b67f205157",
+      "CLIP_vis": "b976c10b-7b54-4b31-8f08-e8256c074a80"
+    }
+  },
+  "invariants": [
+    "除/生/除背 must use Imagine tools",
+    "no OpenCV fake 除/生",
+    "no self-peep as CLIP",
+    "asset_id required per 外力 step"
+  ]
+}

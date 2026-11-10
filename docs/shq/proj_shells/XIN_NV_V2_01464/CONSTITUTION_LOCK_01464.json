@@ -1,0 +1,26 @@
+{
+  "write_id": "01464",
+  "formal": "SHQ_XIN_NV_V2_WLF3_TRUE_FOUR_ANTI",
+  "canonical_name_zh": "新女畫V2",
+  "STICK": "STICK_XIN_NV_V2",
+  "docs": [
+    "SHQ_XIN_NV_V2.md",
+    "SHQ_XIN_NV_V2_CALL.md"
+  ],
+  "invariants": [
+    "a8b identity only",
+    "CLIP from 外力除背 kou not self-peep",
+    "hole from 外力除头 kou same-frame",
+    "PATH1E plate native RATIO letterbox",
+    "生 only in hole seat",
+    "ERROR_TEXTBOOK required",
+    "(N)(X) layer MARK reverse"
+  ],
+  "E_codes_new": [
+    "E-XHN2-06",
+    "E-XHN2-07"
+  ],
+  "verify_project": "PROJ_SHQ_XHN_V2_VERIFY_01463/FIX_TRUE_FOUR_ANTI",
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-09T05:44:00.071614+00:00"
+}

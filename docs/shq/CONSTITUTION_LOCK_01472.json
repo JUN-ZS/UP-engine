@@ -1,0 +1,29 @@
+{
+  "write_id": "01472",
+  "formal": "SHQ_KILL01433_HARNESS_ABC_V1",
+  "zh": "KILL 01433 排名 + 方法驗收 A/B/C harness",
+  "kills": ["01433 ranking", "01433 PASS_C2 as geometry", "01433 18-part claim"],
+  "keeps_as_sample_policy_only": "EACH_RETURN_METHOD_USES_DIFFERENT_ORIGINAL_SUBJECTS",
+  "py": "shq_method_harness_abc.py",
+  "layers": ["A_single_method", "B_compose_mutex", "C_multi_scene_matrix"],
+  "hard_contracts": [
+    "frozen M_hole for outside gate",
+    "mutex peep ownership",
+    "shared SceneBundle within scene",
+    "name-impl honesty + alias collapse",
+    "A/B/C non-substitutable"
+  ],
+  "stick_refs": [
+    "STICK_HUAN_YA_REN",
+    "STICK_JI_ZHA_HUI",
+    "STICK_XIN_HUA_NV",
+    "STICK_HUI_CHE_DA_PAO",
+    "STICK_FOUR_ANTI_ARCH",
+    "STICK_WAI_LI_GROK",
+    "STICK_XIN_NV_V2",
+    "STICK_WAI_LI_FAN_V2"
+  ],
+  "selftest": "PASS",
+  "ACCEPT_FULL_HD": false,
+  "asof": "2026-11-10T00:20:00+08:00"
+}
