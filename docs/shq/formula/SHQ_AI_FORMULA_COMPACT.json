@@ -1,0 +1,198 @@
+{
+  "formal": "SHQ_TECHNIQUE_LINEAGE_FULL_PROJECT_V1",
+  "axioms": [
+    "風景擴容容納原生 donor，不是把 donor 縮小進風景",
+    "公式先於生成；hardpaste 只是最後像素操作",
+    "合眾 = N×SOLO 後 MULTI-RETURN，不是 Group Plate",
+    "fit method_id ≠ composition_mode ≠ production_candidate",
+    "質問為燈不為牆（除非 --strict / ACCEPT）",
+    "洞是形，除是態，扣是證，生是填；反是鏡子"
+  ],
+  "formulas": {
+    "DDXX_similarity_row": {
+      "math": "q = a * (p @ R) + t",
+      "inverse_scene": {
+        "A_scene": "R^{-1} / a",
+        "b_scene": "-t @ R^{-1} / a",
+        "v": "q @ A_scene + b_scene + c"
+      },
+      "S_star": "S = 1/a",
+      "py": "ddxx_pose_formula.py",
+      "locks": [
+        "E-36 no solver drift",
+        "E-37 semantic landmarks",
+        "E-38 no cross-model ACCEPT"
+      ]
+    },
+    "MULTI_RETURN": {
+      "flow": "N x SOLO(peep,anchors,donor,gates) -> EMPTY x S* -> HARDPASTE + slot_ratio",
+      "cli": "python3 shq_eval_pipeline.py --run-dir $RUN --multi --hd",
+      "forbid": [
+        "Group Plate E-25",
+        "soft gate claiming HD multi E-38"
+      ]
+    },
+    "HIERARCHICAL": {
+      "math": "T_world<-part = T_world<-robot * T_robot<-part",
+      "note": "部件=結構樹非 CUT band",
+      "py": [
+        "shq_hierarchy.py",
+        "shq_part_layer_pipeline.py"
+      ]
+    },
+    "PARTMAP_4CORNER": {
+      "return_key": "part_id + corners_4(TL,TR,BR,BL)",
+      "elev_remap": false,
+      "parent_frame": "image-edge 4 corners"
+    },
+    "HOLE_TO_HOLE": {
+      "states": {
+        "洞": "M_hole silhouette",
+        "除": "EDIT no-part L1",
+        "扣": "Diff(keep,remove)",
+        "生": "RGB only in hole",
+        "反": "paired reverse each state"
+      },
+      "scale_lock": "densify HF inject into peep; peep owns scale; canvas_ratio grow blocked",
+      "py": [
+        "shq_edit_hole_four_anti_debug.py",
+        "shq_edit_pair_differential_clip.py",
+        "shq_material_fill.py"
+      ],
+      "E": [
+        "E-99 RESET_DONOR",
+        "E-100 STEAL",
+        "E-105 HEAD_SCALE_GROW",
+        "E-106 FREEFRAME_AS_HOLE"
+      ]
+    },
+    "GEOMETRY_LOCKED_MATERIAL_FILL": {
+      "rule": "freeze alpha silhouette; AI only brushes RGB; alpha XOR = 0",
+      "forbid": "freeframe pose ownership"
+    }
+  },
+  "wrong_paths_index": [
+    {
+      "id": "W_GROUP_PLATE",
+      "epoch": "E2",
+      "hurt": "多機一次生成咬合錯"
+    },
+    {
+      "id": "W_LANDMARK_AUTO",
+      "epoch": "E2",
+      "hurt": "自動輪廓冒充語意關節"
+    },
+    {
+      "id": "W_CROSS_ACCEPT",
+      "epoch": "E2",
+      "hurt": "A 路徑 PASS 簽 B 路徑"
+    },
+    {
+      "id": "W_PART_CUT",
+      "epoch": "E3",
+      "hurt": "水平 band 當結構部件"
+    },
+    {
+      "id": "W_HARDFILL_ID",
+      "epoch": "E4",
+      "hurt": "能切像素≠認出部件"
+    },
+    {
+      "id": "W_TEACH_GT_DRIFT",
+      "epoch": "E5",
+      "hurt": "教學框≠執行框重疊"
+    },
+    {
+      "id": "W_OUTER_AS_HOLE",
+      "epoch": "E6",
+      "hurt": "矩形 peep 當剪影洞"
+    },
+    {
+      "id": "W_FREEFRAME_GROW",
+      "epoch": "E6",
+      "hurt": "densify 特写頭變大"
+    },
+    {
+      "id": "W_STEAL_MAP",
+      "epoch": "E6",
+      "hurt": "扣洞與生斷開 map 塞洞"
+    }
+  ],
+  "epochs": [
+    {
+      "id": "E0_ORIGIN",
+      "title": "意象與中景人回位",
+      "range_thumbs": [
+        0,
+        3
+      ]
+    },
+    {
+      "id": "E1_DDXX",
+      "title": "DDXX + 合眾金案 B",
+      "range_thumbs": [
+        4,
+        9
+      ]
+    },
+    {
+      "id": "E2_MULTI6",
+      "title": "六機失憶與公式鎖",
+      "range_thumbs": [
+        10,
+        14
+      ]
+    },
+    {
+      "id": "E3_NEST",
+      "title": "嵌套合眾部件樹",
+      "range_thumbs": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": "E4_NATIVE",
+      "title": "全描/辨識/退地",
+      "range_thumbs": [
+        17,
+        20
+      ]
+    },
+    {
+      "id": "E5_PARTMAP",
+      "title": "四角·邊整體·材質",
+      "range_thumbs": [
+        21,
+        24
+      ]
+    },
+    {
+      "id": "E6_HOLE",
+      "title": "洞除扣生鎖尺",
+      "range_thumbs": [
+        25,
+        33
+      ]
+    }
+  ],
+  "py_map": {
+    "ddxx_pose_formula.py": "Golden Umeyama + inverse scene",
+    "shq_eval_pipeline.py": "SOLO/MULTI CLI sole ACCEPT path",
+    "shq_hierarchy.py": "parent-child transforms",
+    "shq_part_layer_pipeline.py": "nested mecha parts",
+    "shq_material_fill.py": "freeze alpha RGB only",
+    "shq_native_pose_transfer.py": "native reverse scene hardpaste",
+    "shq_edit_pair_differential_clip.py": "EDIT pair differential clip",
+    "shq_edit_hole_four_anti_debug.py": "glossary+QA+scale-lock nonblocking",
+    "shq_e1_teach_reinterpret.py": "3D teach reinterpret"
+  },
+  "cli": {
+    "hezhong": "python3 shq_eval_pipeline.py --run-dir $RUN --multi --hd",
+    "four_anti_selftest": "python3 shq_edit_hole_four_anti_debug.py selftest",
+    "four_anti_diag": "python3 shq_edit_hole_four_anti_debug.py run-diag --run $RUN",
+    "check_size": "python3 shq_edit_hole_four_anti_debug.py check-size --peep P --densify D"
+  },
+  "ACCEPT_FULL_HD": false,
+  "n_thumbs": 34
+}

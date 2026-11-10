@@ -1,0 +1,602 @@
+{
+  "write_id": "01388",
+  "formal": "SHQ_TECHNIQUE_LINEAGE_FULL_PROJECT_V1",
+  "purpose": "AI-readable technique constitution: formulas, wrong-paths, questions, epoch mapping",
+  "ACCEPT_FULL_HD": false,
+  "debug_blocks_runtime_default": false,
+  "asof": "2026-11-07T16:52:34.644383+00:00",
+  "origin_asset": "64daf29a-53b6-47f6-bcd6-a1cd95c311eb",
+  "axioms": [
+    "風景擴容容納原生 donor，不是把 donor 縮小進風景",
+    "公式先於生成；hardpaste 只是最後像素操作",
+    "合眾 = N×SOLO 後 MULTI-RETURN，不是 Group Plate",
+    "fit method_id ≠ composition_mode ≠ production_candidate",
+    "質問為燈不為牆（除非 --strict / ACCEPT）",
+    "洞是形，除是態，扣是證，生是填；反是鏡子"
+  ],
+  "layers": {
+    "fit": {
+      "name": "method_id",
+      "is": "單機幾何求解",
+      "not": "共景拼法"
+    },
+    "composition": {
+      "name": "composition_mode",
+      "values": [
+        "SOLO_VM",
+        "INDEPENDENT_VM_ONLY",
+        "MULTI_RETURN"
+      ]
+    },
+    "production": {
+      "name": "production_candidate",
+      "values": [
+        "SOFT",
+        "HD_AI_DETAIL",
+        "NATIVE_HARDPASTE",
+        "HOLE_SCALELOCK_HF"
+      ]
+    }
+  },
+  "formulas": {
+    "DDXX_similarity_row": {
+      "math": "q = a * (p @ R) + t",
+      "inverse_scene": {
+        "A_scene": "R^{-1} / a",
+        "b_scene": "-t @ R^{-1} / a",
+        "v": "q @ A_scene + b_scene + c"
+      },
+      "S_star": "S = 1/a",
+      "py": "ddxx_pose_formula.py",
+      "locks": [
+        "E-36 no solver drift",
+        "E-37 semantic landmarks",
+        "E-38 no cross-model ACCEPT"
+      ]
+    },
+    "MULTI_RETURN": {
+      "flow": "N x SOLO(peep,anchors,donor,gates) -> EMPTY x S* -> HARDPASTE + slot_ratio",
+      "cli": "python3 shq_eval_pipeline.py --run-dir $RUN --multi --hd",
+      "forbid": [
+        "Group Plate E-25",
+        "soft gate claiming HD multi E-38"
+      ]
+    },
+    "HIERARCHICAL": {
+      "math": "T_world<-part = T_world<-robot * T_robot<-part",
+      "note": "部件=結構樹非 CUT band",
+      "py": [
+        "shq_hierarchy.py",
+        "shq_part_layer_pipeline.py"
+      ]
+    },
+    "PARTMAP_4CORNER": {
+      "return_key": "part_id + corners_4(TL,TR,BR,BL)",
+      "elev_remap": false,
+      "parent_frame": "image-edge 4 corners"
+    },
+    "HOLE_TO_HOLE": {
+      "states": {
+        "洞": "M_hole silhouette",
+        "除": "EDIT no-part L1",
+        "扣": "Diff(keep,remove)",
+        "生": "RGB only in hole",
+        "反": "paired reverse each state"
+      },
+      "scale_lock": "densify HF inject into peep; peep owns scale; canvas_ratio grow blocked",
+      "py": [
+        "shq_edit_hole_four_anti_debug.py",
+        "shq_edit_pair_differential_clip.py",
+        "shq_material_fill.py"
+      ],
+      "E": [
+        "E-99 RESET_DONOR",
+        "E-100 STEAL",
+        "E-105 HEAD_SCALE_GROW",
+        "E-106 FREEFRAME_AS_HOLE"
+      ]
+    },
+    "GEOMETRY_LOCKED_MATERIAL_FILL": {
+      "rule": "freeze alpha silhouette; AI only brushes RGB; alpha XOR = 0",
+      "forbid": "freeframe pose ownership"
+    }
+  },
+  "wrong_paths_index": [
+    {
+      "id": "W_GROUP_PLATE",
+      "epoch": "E2",
+      "hurt": "多機一次生成咬合錯"
+    },
+    {
+      "id": "W_LANDMARK_AUTO",
+      "epoch": "E2",
+      "hurt": "自動輪廓冒充語意關節"
+    },
+    {
+      "id": "W_CROSS_ACCEPT",
+      "epoch": "E2",
+      "hurt": "A 路徑 PASS 簽 B 路徑"
+    },
+    {
+      "id": "W_PART_CUT",
+      "epoch": "E3",
+      "hurt": "水平 band 當結構部件"
+    },
+    {
+      "id": "W_HARDFILL_ID",
+      "epoch": "E4",
+      "hurt": "能切像素≠認出部件"
+    },
+    {
+      "id": "W_TEACH_GT_DRIFT",
+      "epoch": "E5",
+      "hurt": "教學框≠執行框重疊"
+    },
+    {
+      "id": "W_OUTER_AS_HOLE",
+      "epoch": "E6",
+      "hurt": "矩形 peep 當剪影洞"
+    },
+    {
+      "id": "W_FREEFRAME_GROW",
+      "epoch": "E6",
+      "hurt": "densify 特写頭變大"
+    },
+    {
+      "id": "W_STEAL_MAP",
+      "epoch": "E6",
+      "hurt": "扣洞與生斷開 map 塞洞"
+    }
+  ],
+  "epochs": [
+    {
+      "id": "E0_ORIGIN",
+      "title": "意象與中景人回位",
+      "range_thumbs": [
+        0,
+        3
+      ]
+    },
+    {
+      "id": "E1_DDXX",
+      "title": "DDXX + 合眾金案 B",
+      "range_thumbs": [
+        4,
+        9
+      ]
+    },
+    {
+      "id": "E2_MULTI6",
+      "title": "六機失憶與公式鎖",
+      "range_thumbs": [
+        10,
+        14
+      ]
+    },
+    {
+      "id": "E3_NEST",
+      "title": "嵌套合眾部件樹",
+      "range_thumbs": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": "E4_NATIVE",
+      "title": "全描/辨識/退地",
+      "range_thumbs": [
+        17,
+        20
+      ]
+    },
+    {
+      "id": "E5_PARTMAP",
+      "title": "四角·邊整體·材質",
+      "range_thumbs": [
+        21,
+        24
+      ]
+    },
+    {
+      "id": "E6_HOLE",
+      "title": "洞除扣生鎖尺",
+      "range_thumbs": [
+        25,
+        33
+      ]
+    }
+  ],
+  "py_map": {
+    "ddxx_pose_formula.py": "Golden Umeyama + inverse scene",
+    "shq_eval_pipeline.py": "SOLO/MULTI CLI sole ACCEPT path",
+    "shq_hierarchy.py": "parent-child transforms",
+    "shq_part_layer_pipeline.py": "nested mecha parts",
+    "shq_material_fill.py": "freeze alpha RGB only",
+    "shq_native_pose_transfer.py": "native reverse scene hardpaste",
+    "shq_edit_pair_differential_clip.py": "EDIT pair differential clip",
+    "shq_edit_hole_four_anti_debug.py": "glossary+QA+scale-lock nonblocking",
+    "shq_e1_teach_reinterpret.py": "3D teach reinterpret"
+  },
+  "cli": {
+    "hezhong": "python3 shq_eval_pipeline.py --run-dir $RUN --multi --hd",
+    "four_anti_selftest": "python3 shq_edit_hole_four_anti_debug.py selftest",
+    "four_anti_diag": "python3 shq_edit_hole_four_anti_debug.py run-diag --run $RUN",
+    "check_size": "python3 shq_edit_hole_four_anti_debug.py check-size --peep P --densify D"
+  },
+  "lineage_entries": [
+    {
+      "idx": 0,
+      "epoch": "E0_ORIGIN",
+      "phase": "ORIGIN",
+      "id": "00_SPHERE_METAPHOR",
+      "path": "/workspace/artifacts/imagine_images/64daf29a-53b6-47f6-bcd6-a1cd95c311eb.jpg",
+      "caption": "意象起點：球裡世界／多層回位",
+      "question": "Q: 何謂層？物件能否獨立升清再回？",
+      "thumb": "thumbs/00_E0_ORIGIN_ORIGIN_00_SPHERE_METAPHOR.jpg",
+      "exists": true
+    },
+    {
+      "idx": 1,
+      "epoch": "E0_ORIGIN",
+      "phase": "ORIGIN",
+      "id": "01_MID_SCENE",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_MID_LEVEL_RETURN_V1/SHQ_RUN/00_MID_WITH.jpg",
+      "caption": "中景人升清回位金案起點",
+      "question": "Q: 風景擴容 vs 人縮小？",
+      "thumb": "thumbs/01_E0_ORIGIN_ORIGIN_01_MID_SCENE.jpg",
+      "exists": true
+    },
+    {
+      "idx": 2,
+      "epoch": "E0_ORIGIN",
+      "phase": "EXPLORE",
+      "id": "02_MID_PEEP_EMPTY",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_MID_LEVEL_RETURN_V1/SHQ_RUN/02_EMPTY.jpg",
+      "caption": "peep + EMPTY 風景擴容",
+      "question": "Q: S=1/a 是否先於生成？",
+      "thumb": "thumbs/02_E0_ORIGIN_EXPLORE_02_MID_PEEP_EMPTY.jpg",
+      "exists": true
+    },
+    {
+      "idx": 3,
+      "epoch": "E0_ORIGIN",
+      "phase": "LOCK",
+      "id": "03_MID_VM",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_MID_LEVEL_RETURN_V1/SHQ_RUN/04_VIRTUAL_MASTER_HALF.png",
+      "caption": "VM 硬貼 native 像素",
+      "question": "Q: 禁 Lanczos 冒充 HD？",
+      "thumb": "thumbs/03_E0_ORIGIN_LOCK_03_MID_VM.jpg",
+      "exists": true
+    },
+    {
+      "idx": 4,
+      "epoch": "E1_DDXX",
+      "phase": "EXPLORE",
+      "id": "04_G2_WITH",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM2_DUEL_TS_V1/SHQ_RUN_B_V1_SOLO/00_MID_WITH.jpg",
+      "caption": "雙機金案 B：WITH 原景",
+      "question": "Q: 他機=風景 單機 SOLO？",
+      "thumb": "thumbs/04_E1_DDXX_EXPLORE_04_G2_WITH.jpg",
+      "exists": true
+    },
+    {
+      "idx": 5,
+      "epoch": "E1_DDXX",
+      "phase": "EXPLORE",
+      "id": "05_G2_EMPTY",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM2_DUEL_TS_V1/SHQ_RUN_B_V1_SOLO/02_EMPTY.jpg",
+      "caption": "EMPTY 共景底",
+      "question": "Q: 合眾底是否唯一 EMPTY×S*？",
+      "thumb": "thumbs/05_E1_DDXX_EXPLORE_05_G2_EMPTY.jpg",
+      "exists": true
+    },
+    {
+      "idx": 6,
+      "epoch": "E1_DDXX",
+      "phase": "FAIL",
+      "id": "06_G2_SEG_DEBUG",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM2_DUEL_TS_V1/SHQ_RUN_B_V1_SOLO/00_SEG_DEBUG_V4_FULLBOUND.jpg",
+      "caption": "試錯：邊界不全 E40 前放大",
+      "question": "Q: 全機邊界未滿能否 GENFIT？",
+      "thumb": "thumbs/06_E1_DDXX_FAIL_06_G2_SEG_DEBUG.jpg",
+      "exists": true
+    },
+    {
+      "idx": 7,
+      "epoch": "E1_DDXX",
+      "phase": "FIX",
+      "id": "07_G2_E40",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM2_DUEL_TS_V1/SHQ_RUN_B_V1_SOLO/00_BOARD_E40_FIXED.jpg",
+      "caption": "E40 全機 peep 修正",
+      "question": "Q: peep 是否含腳／翼尖？",
+      "thumb": "thumbs/07_E1_DDXX_FIX_07_G2_E40.jpg",
+      "exists": true
+    },
+    {
+      "idx": 8,
+      "epoch": "E1_DDXX",
+      "phase": "LOCK",
+      "id": "08_G2_MULTI_HD",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM2_DUEL_TS_V1/SHQ_RUN_B_V1_SOLO/HD_V1/05_MULTI_HD_HALF.jpg",
+      "caption": "合眾 MULTI --hd 金案 B",
+      "question": "Q: N×SOLO 後才 MULTI？",
+      "thumb": "thumbs/08_E1_DDXX_LOCK_08_G2_MULTI_HD.jpg",
+      "exists": true
+    },
+    {
+      "idx": 9,
+      "epoch": "E1_DDXX",
+      "phase": "LOCK",
+      "id": "09_G2_HEZHONG_FULL",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM2_DUEL_TS_V1/SHQ_RUN_B_V1_SOLO/FINAL_FULL/01_MULTI_HEZHONG_HD_FULL.png",
+      "caption": "合眾 HD FULL 交付",
+      "question": "Q: slot_ratio 有報？",
+      "thumb": "thumbs/09_E1_DDXX_LOCK_09_G2_HEZHONG_FULL.jpg",
+      "exists": true
+    },
+    {
+      "idx": 10,
+      "epoch": "E2_MULTI6",
+      "phase": "FAIL",
+      "id": "10_G6_BOARD",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM6_RUIN_TS_V2/SHQ_RUN/00_BOARD.png",
+      "caption": "六機咬合錯／DONOR 圖層錯",
+      "question": "Q: 為何 1 機成、6 機敗？",
+      "thumb": "thumbs/10_E2_MULTI6_FAIL_10_G6_BOARD.jpg",
+      "exists": true
+    },
+    {
+      "idx": 11,
+      "epoch": "E2_MULTI6",
+      "phase": "FAIL",
+      "id": "11_G6_VS_SOLO",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM6_RUIN_TS_V2/SHQ_RUN/DEBUG_MULTI_VS_SOLO/STRIP_VS_SOLO2.png",
+      "caption": "DEBUG：MULTI vs SOLO 失憶",
+      "question": "Q: 是否把成功前提換掉？",
+      "thumb": "thumbs/11_E2_MULTI6_FAIL_11_G6_VS_SOLO.jpg",
+      "exists": true
+    },
+    {
+      "idx": 12,
+      "epoch": "E2_MULTI6",
+      "phase": "ASK",
+      "id": "12_G6_FORMULA",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM6_RUIN_TS_V2/SHQ_RUN_V5_MULTI_RETURN_FORMULA/00_COMPARE_WITHSxS_vs_MULTI.jpg",
+      "caption": "MULTI_RETURN 公式對照",
+      "question": "Q: composition ≠ fit method？",
+      "thumb": "thumbs/12_E2_MULTI6_ASK_12_G6_FORMULA.jpg",
+      "exists": true
+    },
+    {
+      "idx": 13,
+      "epoch": "E2_MULTI6",
+      "phase": "EXPLORE",
+      "id": "13_G6_6MECHA",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM6_RUIN_TS_V2/SHQ_RUN_V17_6MECHA_DDXX_CORE/00_BOARD_6MECHA.jpg",
+      "caption": "六機 DDXX core 探索",
+      "question": "Q: 11 點語意 vs 自動輪廓？",
+      "thumb": "thumbs/13_E2_MULTI6_EXPLORE_13_G6_6MECHA.jpg",
+      "exists": true
+    },
+    {
+      "idx": 14,
+      "epoch": "E2_MULTI6",
+      "phase": "FAIL",
+      "id": "14_G6_V16_LANDMARK",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM6_RUIN_TS_V2/SHQ_RUN_V19_U0_LANDMARK_REFINE/00_BOARD_U0_REFINE.jpg",
+      "caption": "V16 標點漂碎石／跨 ACCEPT",
+      "question": "Q: E-37 語意替換？E-38 跨閘？",
+      "thumb": "thumbs/14_E2_MULTI6_FAIL_14_G6_V16_LANDMARK.jpg",
+      "exists": true
+    },
+    {
+      "idx": 15,
+      "epoch": "E3_NEST",
+      "phase": "EXPLORE",
+      "id": "15_PART_LAYER",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM2_DUEL_TS_V1/SHQ_RUN_B_V1_SOLO/PART_LAYER_U0_V1/05_MULTI_PARTS_HI.png",
+      "caption": "機大·件小 嵌套合眾",
+      "question": "Q: 部件是結構樹還是 CUT？",
+      "thumb": "thumbs/15_E3_NEST_EXPLORE_15_PART_LAYER.jpg",
+      "exists": true
+    },
+    {
+      "idx": 16,
+      "epoch": "E3_NEST",
+      "phase": "EXPLORE",
+      "id": "16_EMPTY_MECHA",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_GUNDAM2_DUEL_TS_V1/SHQ_RUN_B_V1_SOLO/PART_LAYER_U0_V1/01_EMPTY_MECHA.png",
+      "caption": "EMPTY_MECHA 父框",
+      "question": "Q: T_world←robot · T_robot←part？",
+      "thumb": "thumbs/16_E3_NEST_EXPLORE_16_EMPTY_MECHA.jpg",
+      "exists": true
+    },
+    {
+      "idx": 17,
+      "epoch": "E4_NATIVE",
+      "phase": "EXPLORE",
+      "id": "17_RT_CALL",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_REALTEX_MIX_MECHA/SHQ_RUN_RT1/EXT_CALL_SUITE_V3/00_CALL_SUITE_BOARD.jpg",
+      "caption": "外部掃描/調用套件",
+      "question": "Q: HARDFILL 是否誤當辨識？",
+      "thumb": "thumbs/17_E4_NATIVE_EXPLORE_17_RT_CALL.jpg",
+      "exists": true
+    },
+    {
+      "idx": 18,
+      "epoch": "E4_NATIVE",
+      "phase": "EXPLORE",
+      "id": "18_FULLSCAN",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_REALTEX_MIX_MECHA/SHQ_RUN_RT1/GROK_IMAGINE_FULLSCAN_V1/00_FULLSCAN_SHEET_HD.jpg",
+      "caption": "Imagine 全描分件",
+      "question": "Q: 禁沿用舊 DONOR 底？",
+      "thumb": "thumbs/18_E4_NATIVE_EXPLORE_18_FULLSCAN.jpg",
+      "exists": true
+    },
+    {
+      "idx": 19,
+      "epoch": "E4_NATIVE",
+      "phase": "EXPLORE",
+      "id": "19_REASSY",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_REALTEX_MIX_MECHA/SHQ_RUN_RT1/GROK_IMAGINE_FULLSCAN_V1/02_REASSY_FULL.jpg",
+      "caption": "智能併回整機",
+      "question": "Q: 黑頭／缺覆蓋？",
+      "thumb": "thumbs/19_E4_NATIVE_EXPLORE_19_REASSY.jpg",
+      "exists": true
+    },
+    {
+      "idx": 20,
+      "epoch": "E4_NATIVE",
+      "phase": "FAIL",
+      "id": "20_GRID_AXIS",
+      "path": "/workspace/artifacts/SETS/PROJ_SHQ_REALTEX_MIX_MECHA/SHQ_RUN_RT1/IMAGE_EDGE_AXIS_LOCK_V1/02_AXIS_LOCK_REASSY_WHITE.jpg",
+      "caption": "框/軸 退地對位試錯",
+      "question": "Q: 圖邊四角 vs 機體框？",
+      "thumb": "thumbs/20_E4_NATIVE_FAIL_20_GRID_AXIS.jpg",
+      "exists": true
+    },
+    {
+      "idx": 21,
+      "epoch": "E5_PARTMAP",
+      "phase": "EXPLORE",
+      "id": "21_TEACH_PARTMAP",
+      "path": "/workspace/artifacts/SETS/PROJ_BOUNDARY_WALKER_PARTMAP/SHQ_RUN_BW1/PARTMAP_EXPLODE_4CORNER_V1/00_IMAGINE_TEACH_PARTMAP.jpg",
+      "caption": "教學圖→爆炸→四角",
+      "question": "Q: elev_remap 必須 false？",
+      "thumb": "thumbs/21_E5_PARTMAP_EXPLORE_21_TEACH_PARTMAP.jpg",
+      "exists": true
+    },
+    {
+      "idx": 22,
+      "epoch": "E5_PARTMAP",
+      "phase": "FAIL",
+      "id": "22_TEACH_VS_GT",
+      "path": "/workspace/artifacts/SETS/PROJ_BOUNDARY_WALKER_PARTMAP/SHQ_RUN_BW1/PARTMAP_BOX_GENMAT_GUIDED_V1/audit/05_TEACH_VS_GT_BOXES.jpg",
+      "caption": "教學框≠執行框 重疊",
+      "question": "Q: 互斥 IoU 閘？",
+      "thumb": "thumbs/22_E5_PARTMAP_FAIL_22_TEACH_VS_GT.jpg",
+      "exists": true
+    },
+    {
+      "idx": 23,
+      "epoch": "E5_PARTMAP",
+      "phase": "FIX",
+      "id": "23_EDGE_WHOLE",
+      "path": "/workspace/artifacts/SETS/PROJ_BOUNDARY_WALKER_PARTMAP/SHQ_RUN_BW1/PARTMAP_EDGE_WHOLE_ELEV_V1/teach/00_TEACH_EDGE_WHOLE_AXIOM.jpg",
+      "caption": "邊定整體·整體定回放",
+      "question": "Q: 碎邊能否 elev？",
+      "thumb": "thumbs/23_E5_PARTMAP_FIX_23_EDGE_WHOLE.jpg",
+      "exists": true
+    },
+    {
+      "idx": 24,
+      "epoch": "E5_PARTMAP",
+      "phase": "LOCK",
+      "id": "24_MAT_PIPELINE",
+      "path": "/workspace/artifacts/SETS/PROJ_BOUNDARY_WALKER_PARTMAP/SHQ_RUN_BW1/PARTMAP_MAT_GUIDED_RETURN_V1/00_PIPELINE.jpg",
+      "caption": "結構鎖材質引導回位",
+      "question": "Q: alpha XOR=0？",
+      "thumb": "thumbs/24_E5_PARTMAP_LOCK_24_MAT_PIPELINE.jpg",
+      "exists": true
+    },
+    {
+      "idx": 25,
+      "epoch": "E6_HOLE",
+      "phase": "EXPLORE",
+      "id": "25_SRC_MECHA",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/base/00_SRC_BASE_1920x1080.jpg",
+      "caption": "金網女×機甲 1920 測床",
+      "question": "Q: S0 BASE 凍結？",
+      "thumb": "thumbs/25_E6_HOLE_EXPLORE_25_SRC_MECHA.jpg",
+      "exists": true
+    },
+    {
+      "idx": 26,
+      "epoch": "E6_HOLE",
+      "phase": "FAIL",
+      "id": "26_OUTER_HOLLOW",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_pair_reverse/DEBUG_FRAME_VS_HOLLOW/DEBUG_OUTER_VS_HOLLOW.jpg",
+      "caption": "外框 reverse ≠ 鏤空洞",
+      "question": "Q: peep 框能當洞？",
+      "thumb": "thumbs/26_E6_HOLE_FAIL_26_OUTER_HOLLOW.jpg",
+      "exists": true
+    },
+    {
+      "idx": 27,
+      "epoch": "E6_HOLE",
+      "phase": "FAIL",
+      "id": "27_WORDS",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_pair_reverse/DEBUG_FRAME_VS_HOLLOW/DEBUG_WORDS_BOARD.jpg",
+      "caption": "字詞：框/洞/扣/生 混淆",
+      "question": "Q: 字詞鎖死？",
+      "thumb": "thumbs/27_E6_HOLE_FAIL_27_WORDS.jpg",
+      "exists": true
+    },
+    {
+      "idx": 28,
+      "epoch": "E6_HOLE",
+      "phase": "EXPLORE",
+      "id": "28_HOLE_CONCEPT",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/HOLE_TO_HOLE_01370/CONCEPT_BOARD.jpg",
+      "caption": "洞回洞概念",
+      "question": "Q: 洞回 vs 框回？",
+      "thumb": "thumbs/28_E6_HOLE_EXPLORE_28_HOLE_CONCEPT.jpg",
+      "exists": true
+    },
+    {
+      "idx": 29,
+      "epoch": "E6_HOLE",
+      "phase": "EXPLORE",
+      "id": "29_EDIT_MULTI",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/EDIT_MULTILAYER_HOLE_01381/RELATION_MATRIX.jpg",
+      "caption": "EDIT 多層有頭×無頭",
+      "question": "Q: 一生一除差分？",
+      "thumb": "thumbs/29_E6_HOLE_EXPLORE_29_EDIT_MULTI.jpg",
+      "exists": true
+    },
+    {
+      "idx": 30,
+      "epoch": "E6_HOLE",
+      "phase": "FAIL",
+      "id": "30_SIZE_GROW",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/SIZE_FAIL_VS_LOCK.jpg",
+      "caption": "freeframe densify 頭變大",
+      "question": "Q: E-105 HEAD_SCALE_GROW？",
+      "thumb": "thumbs/30_E6_HOLE_FAIL_30_SIZE_GROW.jpg",
+      "exists": true
+    },
+    {
+      "idx": 31,
+      "epoch": "E6_HOLE",
+      "phase": "ASK",
+      "id": "31_MATRIX4",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/anti/MATRIX_4_有無頭背.jpg",
+      "caption": "四態質問落盤",
+      "question": "Q0–Q9 燈不阻跑",
+      "thumb": "thumbs/31_E6_HOLE_ASK_31_MATRIX4.jpg",
+      "exists": true
+    },
+    {
+      "idx": 32,
+      "epoch": "E6_HOLE",
+      "phase": "FIX",
+      "id": "32_PEEP_LOCK",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/ref/peep_有背_洞框_LOCKED.jpg",
+      "caption": "洞框 peep 鎖尺",
+      "question": "尺度在 peep 不在 densify",
+      "thumb": "thumbs/32_E6_HOLE_FIX_32_PEEP_LOCK.jpg",
+      "exists": true
+    },
+    {
+      "idx": 33,
+      "epoch": "E6_HOLE",
+      "phase": "LOCK",
+      "id": "33_BEST_RETURN",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/BEST_RETURN.jpg",
+      "caption": "鎖尺洞內生 回位",
+      "question": "ACCEPT_FULL_HD=false · 技法成立",
+      "thumb": "thumbs/33_E6_HOLE_LOCK_33_BEST_RETURN.jpg",
+      "exists": true
+    }
+  ]
+}
