@@ -1,0 +1,228 @@
+{
+  "write_id": "01387",
+  "formal": "SHQ_TECHNIQUE_LINEAGE_FROM_ORIGIN_V1",
+  "origin_asset": "64daf29a-53b6-47f6-bcd6-a1cd95c311eb",
+  "n": 22,
+  "entries": [
+    {
+      "idx": 0,
+      "phase": "ORIGIN",
+      "id": "00_ORIGIN_SPHERE",
+      "path": "/workspace/artifacts/imagine_images/64daf29a-53b6-47f6-bcd6-a1cd95c311eb.jpg",
+      "caption": "起點：水晶球／多層世界",
+      "question": "Q: 層與回位？",
+      "thumb": "thumbs/00_ORIGIN_00_ORIGIN_SPHERE.jpg",
+      "exists": true
+    },
+    {
+      "idx": 1,
+      "phase": "EXPLORE",
+      "id": "01_SRC_MECHA_BASE",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/base/00_SRC_BASE_1920x1080.jpg",
+      "caption": "測床：金網女×機甲 1920 S0",
+      "question": "Q: BASE 凍結？",
+      "thumb": "thumbs/01_EXPLORE_01_SRC_MECHA_BASE.jpg",
+      "exists": true
+    },
+    {
+      "idx": 2,
+      "phase": "EXPLORE",
+      "id": "02_EMPTY",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/base/01_EMPTY_NO_SUBJECTS.jpg",
+      "caption": "S1 empty 探索",
+      "question": "Q: 同機位 empty？",
+      "thumb": "thumbs/02_EXPLORE_02_EMPTY.jpg",
+      "exists": true
+    },
+    {
+      "idx": 3,
+      "phase": "EXPLORE",
+      "id": "03_TEACH_CLIP",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_mask_elev/00_TEACH_CLIP_CHAIN.jpg",
+      "caption": "CLIP 教學鏈",
+      "question": "Q: clip=剪影or框？",
+      "thumb": "thumbs/03_EXPLORE_03_TEACH_CLIP.jpg",
+      "exists": true
+    },
+    {
+      "idx": 4,
+      "phase": "EXPLORE",
+      "id": "04_PAIR_REVERSE",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_pair_reverse/00_TEACH_PAIR_REVERSE.jpg",
+      "caption": "pair reverse 教學",
+      "question": "Q: iso×slot 配？",
+      "thumb": "thumbs/04_EXPLORE_04_PAIR_REVERSE.jpg",
+      "exists": true
+    },
+    {
+      "idx": 5,
+      "phase": "FAIL",
+      "id": "05_OUTER_VS_HOLLOW",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_pair_reverse/DEBUG_FRAME_VS_HOLLOW/DEBUG_OUTER_VS_HOLLOW.jpg",
+      "caption": "試錯：外框≠鏤空",
+      "question": "Q: peep框能當洞？",
+      "thumb": "thumbs/05_FAIL_05_OUTER_VS_HOLLOW.jpg",
+      "exists": true
+    },
+    {
+      "idx": 6,
+      "phase": "FAIL",
+      "id": "06_DEBUG_WORDS",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_pair_reverse/DEBUG_FRAME_VS_HOLLOW/DEBUG_WORDS_BOARD.jpg",
+      "caption": "字詞 DEBUG 板",
+      "question": "Q: 字詞鎖死？",
+      "thumb": "thumbs/06_FAIL_06_DEBUG_WORDS.jpg",
+      "exists": true
+    },
+    {
+      "idx": 7,
+      "phase": "EXPLORE",
+      "id": "07_CLIP_BA",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_mask_elev/06_BEFORE_AFTER.jpg",
+      "caption": "clip elev 前後",
+      "question": "Q: elev_remap？",
+      "thumb": "thumbs/07_EXPLORE_07_CLIP_BA.jpg",
+      "exists": true
+    },
+    {
+      "idx": 8,
+      "phase": "EXPLORE",
+      "id": "08_HEAD_ZOOM",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/clip_mask_elev/07_HEAD_ZOOM_BEFORE_AFTER.jpg",
+      "caption": "頭 zoom 前後",
+      "question": "Q: 銳度靠什麼？",
+      "thumb": "thumbs/08_EXPLORE_08_HEAD_ZOOM.jpg",
+      "exists": true
+    },
+    {
+      "idx": 9,
+      "phase": "EXPLORE",
+      "id": "09_HOLE_TO_HOLE",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/HOLE_TO_HOLE_01370/CONCEPT_BOARD.jpg",
+      "caption": "洞回洞概念",
+      "question": "Q: 洞回vs框回？",
+      "thumb": "thumbs/09_EXPLORE_09_HOLE_TO_HOLE.jpg",
+      "exists": true
+    },
+    {
+      "idx": 10,
+      "phase": "EXPLORE",
+      "id": "10_EDIT_MULTI",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/EDIT_MULTILAYER_HOLE_01381/RELATION_MATRIX.jpg",
+      "caption": "EDIT 多層關係",
+      "question": "Q: 魔棒代手剪影？",
+      "thumb": "thumbs/10_EXPLORE_10_EDIT_MULTI.jpg",
+      "exists": true
+    },
+    {
+      "idx": 11,
+      "phase": "EXPLORE",
+      "id": "11_HOLE_INPAINT",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/HOLE_INPAINT_ELEV_01382/U0_PIPELINE_BOARD.jpg",
+      "caption": "洞內 INPAINT",
+      "question": "Q: 生在洞座標？",
+      "thumb": "thumbs/11_EXPLORE_11_HOLE_INPAINT.jpg",
+      "exists": true
+    },
+    {
+      "idx": 12,
+      "phase": "FAIL",
+      "id": "12_REF_01384",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/GO_HOLE_INPAINT_REF_01384/return/PIPELINE_BOARD.jpg",
+      "caption": "01384 REF 後尺度漂",
+      "question": "Q: freeframe變大？",
+      "thumb": "thumbs/12_FAIL_12_REF_01384.jpg",
+      "exists": true
+    },
+    {
+      "idx": 13,
+      "phase": "FAIL",
+      "id": "13_SIZE_FAIL",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/SIZE_FAIL_VS_LOCK.jpg",
+      "caption": "標定：頭變大vs鎖尺",
+      "question": "Q: E-105？",
+      "thumb": "thumbs/13_FAIL_13_SIZE_FAIL.jpg",
+      "exists": true
+    },
+    {
+      "idx": 14,
+      "phase": "ASK",
+      "id": "14_MATRIX4",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/anti/MATRIX_4_有無頭背.jpg",
+      "caption": "四態質問落盤",
+      "question": "Q0-Q9 燈不阻跑",
+      "thumb": "thumbs/14_ASK_14_MATRIX4.jpg",
+      "exists": true
+    },
+    {
+      "idx": 15,
+      "phase": "ASK",
+      "id": "15_ANTI4",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/ANTI_4STATE_BOARD.jpg",
+      "caption": "洞除扣生反查條",
+      "question": "Q: 每態有反？",
+      "thumb": "thumbs/15_ASK_15_ANTI4.jpg",
+      "exists": true
+    },
+    {
+      "idx": 16,
+      "phase": "EXPLORE",
+      "id": "16_STRUCT",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/STRUCT_LOCK_HOLE_ELEV_01373/BOTH_BOARD.jpg",
+      "caption": "結構鎖探索",
+      "question": "Q: LF+HF？",
+      "thumb": "thumbs/16_EXPLORE_16_STRUCT.jpg",
+      "exists": true
+    },
+    {
+      "idx": 17,
+      "phase": "EXPLORE",
+      "id": "17_ROI",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/ROI_EDGE_WEIGHT_ELEV_01371/BOTH_BOARD.jpg",
+      "caption": "ROI邊弱試(後廢)",
+      "question": "Q: 邊弱凍低清？",
+      "thumb": "thumbs/17_EXPLORE_17_ROI.jpg",
+      "exists": true
+    },
+    {
+      "idx": 18,
+      "phase": "EXPLORE",
+      "id": "18_MATFILL",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/GEO_MATFILL_BOTH_01379/BOTH_BOARD.jpg",
+      "caption": "凍alpha matfill",
+      "question": "Q: XOR=0？",
+      "thumb": "thumbs/18_EXPLORE_18_MATFILL.jpg",
+      "exists": true
+    },
+    {
+      "idx": 19,
+      "phase": "FIX",
+      "id": "19_PEEP_LOCK",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/ref/peep_有背_洞框_LOCKED.jpg",
+      "caption": "終：洞框鎖尺 peep",
+      "question": "尺度在peep",
+      "thumb": "thumbs/19_FIX_19_PEEP_LOCK.jpg",
+      "exists": true
+    },
+    {
+      "idx": 20,
+      "phase": "FIX",
+      "id": "20_ZOOM",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/ZOOM_BEST.jpg",
+      "caption": "終：鎖尺HF回洞",
+      "question": "size_ok leak=0",
+      "thumb": "thumbs/20_FIX_20_ZOOM.jpg",
+      "exists": true
+    },
+    {
+      "idx": 21,
+      "phase": "LOCK",
+      "id": "21_BEST",
+      "path": "/workspace/artifacts/SETS/PROJ_POSEMATCH_1920_TEST/SHQ_RUN_P1920/edit_pair_diff_clip/FOUR_ANTI_HOLE_01385/return/BEST_RETURN.jpg",
+      "caption": "終案回位全圖(縮)",
+      "question": "技法鎖尺成立",
+      "thumb": "thumbs/21_LOCK_21_BEST.jpg",
+      "exists": true
+    }
+  ]
+}
